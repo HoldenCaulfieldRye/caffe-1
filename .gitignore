@@ -31,6 +31,9 @@
 # Batching DBs
 *_leveldb
 
+# mean image
+*mean.binaryphoto
+
 # Venv
 venv
 

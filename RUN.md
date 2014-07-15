@@ -72,9 +72,9 @@ clampdet_test.prototext
 # last layer 'loss' or 'accuracy' based on backprop or measure
 # performance
 
-# notice number of neurons per layer not specified
+# num_output is number of neurons per layer
 
-# make batch_size for val 
+# make batch_size for val (as large as possible?)
 
 
 8. solver
@@ -114,8 +114,20 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/homes/ad6813/.local/lib:/usr/local/cuda
 11.1 fine-tune
 =============
 
-examples/pascal-finetuner
+cf mezN's answer: bit.ly/1siq8Wz
 
+# need a dedicated source, even if dataset same as non finetune,
+# because eg batchsize can be different, and resource can be locked
+# for parallel training. make sure leveldb names are unique:
+./create_clampdet_finetune.sh
+
+# need a dedicated mean image
+./make_clampdet_finetune_mean.sh
+
+# go
+./finetune_clampdet.sh
+
+# save the nets to /data/ad6813/my-nets/saves/caffe for neatness
 
 11.2 train
 =========
@@ -144,11 +156,12 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 
 
-?. make use of
-==============
 
-resume_training.sh     # aka import pretrained?
-
-
+next steps:
+- push changes to repo (not huge files please)
+  push to caffe-1, you can merge into pipe-classification later if
+  you like
+- pull from graphic07
+- run finetuning on graphic07
 
 
