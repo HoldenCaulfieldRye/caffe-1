@@ -13699,3 +13699,6 @@ I0715 11:36:04.912451 13699 solver.cpp:237] Iteration 6514, lr = 0.001
 I0715 11:36:04.912830 13699 solver.cpp:87] Iteration 6514, loss = 0.258825
 Terminated
 Done.
+nohup: ignoring input
+./resume_training.sh: 5: ./resume_training.sh: ../../build/tools/train_net.bin: not found
+Done.
