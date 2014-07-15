@@ -1,0 +1,2 @@
+/usr/local/cuda/lib/libcurand.so.5.5
+/usr/local/cuda/lib64/libcurand.so.5.5
