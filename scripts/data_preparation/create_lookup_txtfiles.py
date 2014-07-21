@@ -75,14 +75,19 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
     read_file = open(ojoin(to_dir,'read.txt'), 'w')
   
   # get labels of classes to learn
-  labels_read = get_all_pipe_labels(data_dir,save=False)['labels']
+  read_labels = get_all_pipe_labels(data_dir,save=False)['labels']
   lookup = {}
-  for num,label in enumerate(labels_read):
+  # count has numbers rather than label names as lookup values, in
+  # order to deal with diffs betw read_labels and write_labels
+  count = {}
+  for num,label in enumerate(read_labels):
     lookup[label] = num
-  for elem in enumerate(labels_read): print elem
-  labels_read = [labels_read[int(num)] for num in raw_input("Numbers of labels to learn, separated by ' ': ").split()]
-  labels_write = labels_read[:]
-
+  for elem in enumerate(read_labels): print elem
+  read_labels = [read_labels[int(num)] for num in raw_input("Numbers of labels to learn, separated by ' ': ").split()]
+  labels_write = read_labels[:]
+  for label in read_labels:
+    count[label] = 0
+    
   lookup, labels_write = merge_classes(lookup, labels_write)
 
   label_default = raw_input("Default label for all images not containing any of given labels? (name/N) ")
@@ -90,6 +95,7 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
     lastLabelIsDefault = True
     lookup[label_default] = len(labels_write)
     labels_write.append(label_default)
+    count[label_default] = 0
             
   print 'sorting images by class label...'
   for fname in list_dir:
@@ -99,13 +105,16 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
     rootname = os.path.splitext(fname)[0]
     with open(fullname_dat) as f:
       content = [line.strip() for line in f.readlines()] 
-      img_labels = [label for label in labels_read if label in content]
+      img_labels = [label for label in read_labels
+                    if label in content]
 
-      # if last label is a normal label, images with no labels will
+      # last label is a normal label iif images with no labels will
       # not be batched
       if not img_labels: 
         if lastLabelIsDefault:
-          dump.append((fname.split('.')[0]+'.jpg',lookup[label_default]))
+          dump.append((fname.split('.')[0]+'.jpg',
+                       lookup[label_default]))
+          count[label_default] += 1
         else: tagless_count += 1
       else:
         # if image has multiple flags, it will appear in each flag
@@ -116,11 +125,15 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
           case_count += len(img_labels)-1
         for label in img_labels:
           dump.append((fname.split('.')[0]+'.jpg',lookup[label]))
+          count[label] += 1
 
   print "dump has %i elements, looking like %s and %s"%(len(dump),dump[0], dump[300])
+
+  dump = rebalance(dump, count, case_count)
+
   # write dump to train and val files
   # randomise!!
-  # 10% of dataset for validation, rest for training
+  # 80% of dataset for training, 7% for validation, 14% for testing
   # print "val_dump has %i elements, looking like %s and %s"%(len(val_dump),val_dump[0], val_dump[300])
   non_train_dump_size = int(0.2*len(dump))
   relative_val_size = int(0.34*non_train_dump_size)
@@ -153,6 +166,12 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
   print 'tagless_freq: %0.2f' % (float(tagless_count) / case_count)
 
   return train_dump, val_dump, test_dump
+
+
+# imbalance needs to be calculated from write_labels, not read_labels
+def rebalance(dump, count, case_count):
+  
+  return dump
 
 
 def update_labels(labels_write, merge, new_label):

@@ -155,13 +155,19 @@ if paused/crashed and need to resume training:
 should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 
+12. test
+========
+
+???
+
 
 
 next steps:
-- push changes to repo (not huge files please)
-  push to caffe-1, you can merge into pipe-classification later if
-  you like
-- pull from graphic07
-- run finetuning on graphic07
-
+- save net only if performance gain
+- train all tasks
+- F measure
+- data augmentation
+- Razvan: different batch contents at every epoch
+- Razvan: pre-process image, select patch of interest
+- look at new data fields sent by ControlPoint
 
