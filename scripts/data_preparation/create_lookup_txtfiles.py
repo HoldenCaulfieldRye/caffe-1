@@ -84,17 +84,16 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
     lookup[label] = num
   for elem in enumerate(read_labels): print elem
   read_labels = [read_labels[int(num)] for num in raw_input("Numbers of labels to learn, separated by ' ': ").split()]
-  labels_write = read_labels[:]
+  write_labels = read_labels[:]
   for label in read_labels:
-    count[label] = 0
     
-  lookup, labels_write = merge_classes(lookup, labels_write)
+  lookup, write_labels = merge_classes(lookup, write_labels)
 
   label_default = raw_input("Default label for all images not containing any of given labels? (name/N) ")
   if label_default is not 'N':
     lastLabelIsDefault = True
-    lookup[label_default] = len(labels_write)
-    labels_write.append(label_default)
+    lookup[label_default] = len(write_labels)
+    write_labels.append(label_default)
     count[label_default] = 0
             
   print 'sorting images by class label...'
@@ -134,7 +133,6 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
   # write dump to train and val files
   # randomise!!
   # 80% of dataset for training, 7% for validation, 14% for testing
-  # print "val_dump has %i elements, looking like %s and %s"%(len(val_dump),val_dump[0], val_dump[300])
   non_train_dump_size = int(0.2*len(dump))
   relative_val_size = int(0.34*non_train_dump_size)
   non_train_dump = random.sample(dump, non_train_dump_size)
@@ -154,7 +152,7 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
 
     # write to read file how to interpret values as classes
     read_file.writelines(["%i %s\n" % (lookup[label],label,)
-                           for label in labels_write])
+                           for label in write_labels])
     train_file.close()
     val_file.close()
     test_file.close()
@@ -174,27 +172,27 @@ def rebalance(dump, count, case_count):
   return dump
 
 
-def update_labels(labels_write, merge, new_label):
-  labels_write = [label for label in labels_write if label not in [labels_write[i] for i in merge]]
-  labels_write.append(new_label)
-  return labels_write
+def update_labels(write_labels, merge, new_label):
+  write_labels = [label for label in write_labels if label not in [write_labels[i] for i in merge]]
+  write_labels.append(new_label)
+  return write_labels
 
-def merge_classes(lookup, labels_write):
+def merge_classes(lookup, write_labels):
   more = 'Y'
   while more == 'Y':
-    print '%s' % (', '.join(map(str,labels_write)))
+    print '%s' % (', '.join(map(str,write_labels)))
     if raw_input('Merge (more) classes? (Y/N) ') == 'Y':
       merge = [-1]
-      while not all([idx in range(len(labels_write)) for idx in merge]):
-        for elem in enumerate(labels_write): print elem
+      while not all([idx in range(len(write_labels)) for idx in merge]):
+        for elem in enumerate(write_labels): print elem
         merge = [int(elem) for elem in raw_input("Name two class numbers from above, separated by ' ': ").split()]
       merge.sort()
       merge_label = raw_input("Name of merged class: ")
-      for label in [merge_label, labels_write[merge[0]], labels_write[merge[1]]]:
+      for label in [merge_label, write_labels[merge[0]], write_labels[merge[1]]]:
         lookup[label] = merge[0]        
-      labels_write = update_labels(labels_write, merge, merge_label)
+      write_labels = update_labels(write_labels, merge, merge_label)
     else: more = False
-  return lookup, labels_write 
+  return lookup, write_labels 
 
 
 if __name__ == '__main__':
