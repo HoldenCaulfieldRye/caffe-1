@@ -6,6 +6,7 @@ import numpy as np
 import os
 from os.path import join as ojoin
 from PIL import Image
+from operator import itemgetter
 import json, random
 
 
@@ -127,7 +128,7 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
 
   print "dump has %i elements, looking like %s and %s"%(len(dump),dump[0], dump[300])
 
-  dump = rebalance(dump, count, case_count)
+  dump = rebalance(dump, write_labels, count, lookup)
 
   # write dump to train and val files
   # randomise!!
@@ -166,8 +167,17 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
 
 
 # imbalance needs to be calculated from write_labels, not read_labels
-def rebalance(dump, count, case_count):
-  
+def rebalance(dump, write_labels, count, lookup):
+  min_class = min([(label, count[lookup[label]])
+                   for label in write_labels],
+                  key=itemgetter(1))[0]
+  max_class = max([(label, count[lookup[label]])
+                   for label in write_labels],
+                  key=itemgetter(1))[0]
+  target_ratio = raw_input("you have an imbalance ratio of %.2f, want to lower it? [num/N] " % (float(count[lookup[max_class]])/count[lookup[min_class]]))
+  if target_ratio is not 'N':
+    target_ratio = float(target_ratio)
+    dump = random_delete(dump, )    
   return dump
 
 

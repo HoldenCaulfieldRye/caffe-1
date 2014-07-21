@@ -167,6 +167,7 @@ next steps:
 - train all tasks
 - F measure
 - data augmentation
+- impose best possible class balance at every batch
 - Razvan: different batch contents at every epoch
 - Razvan: pre-process image, select patch of interest
 - look at new data fields sent by ControlPoint
