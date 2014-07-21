@@ -85,7 +85,6 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
   for elem in enumerate(read_labels): print elem
   read_labels = [read_labels[int(num)] for num in raw_input("Numbers of labels to learn, separated by ' ': ").split()]
   write_labels = read_labels[:]
-  for label in read_labels:
     
   lookup, write_labels = merge_classes(lookup, write_labels)
 
@@ -94,7 +93,6 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
     lastLabelIsDefault = True
     lookup[label_default] = len(write_labels)
     write_labels.append(label_default)
-    count[label_default] = 0
             
   print 'sorting images by class label...'
   for fname in list_dir:
@@ -113,7 +111,8 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
         if lastLabelIsDefault:
           dump.append((fname.split('.')[0]+'.jpg',
                        lookup[label_default]))
-          count[label_default] += 1
+          # len(write_labels) is lookup val for default label
+          count[lookup[label_default]] += 1 
         else: tagless_count += 1
       else:
         # if image has multiple flags, it will appear in each flag
@@ -124,7 +123,7 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
           case_count += len(img_labels)-1
         for label in img_labels:
           dump.append((fname.split('.')[0]+'.jpg',lookup[label]))
-          count[label] += 1
+          count[lookup[label]] += 1
 
   print "dump has %i elements, looking like %s and %s"%(len(dump),dump[0], dump[300])
 
