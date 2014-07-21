@@ -3,6 +3,7 @@ import os
 from os.path import join as ojoin
 from PIL import Image
 from operator import itemgetter as ig
+from itertools import chain
 import json, random
 
 
@@ -38,26 +39,52 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
   # merge_classes only after default label entry created
   Keep = default_class(All, Keep)
   Keep = merge_classes(Keep)
-  Keep = rebalance(Keep)
-    
+  Keep = shuffle_and_rebalance(Keep)
+
   if to_dir is not None:
-    train_file = open(ojoin(to_dir,'train.txt'), 'w')
-    val_file = open(ojoin(to_dir,'val.txt'), 'w')
-    test_file = open(ojoin(to_dir,'test.txt'), 'w')
-    read_file = open(ojoin(to_dir,'read.txt'), 'w')
+    dump_to_files(Keep)
 
+  return Keep
 
-def rebalance(Keep):
+def dump_to_files(Keep):
+  train_file = open(ojoin(to_dir,'train.txt'), 'w')
+  val_file = open(ojoin(to_dir,'val.txt'), 'w')
+  test_file = open(ojoin(to_dir,'test.txt'), 'w')
+  read_file = open(ojoin(to_dir,'read.txt'), 'w')
+
+  lookup, dump = {}, []
+  for (num,key) in enumerate(Keep.keys()):
+    lookup[key] = num
+    dump += ["%s %i\n" % (f,key) for f in Keep[key]]
+
+  train_file.writelines(["%s %i\n" % (fname,lookup[k])
+                         for (fname,num) in train_dump])
+  val_file.writelines(["%s %i\n" % (fname,num)
+                       for (fname,num) in val_dump])
+  test_file.writelines(["%s %i\n" % (fname,num)
+                        for (fname,num) in test_dump])
+
+  # write to read file how to interpret values as classes
+  read_file.writelines(["%i %s\n" % (lookup[label],label,)
+                        for label in write_labels])
+  train_file.close()
+  val_file.close()
+  test_file.close()
+  read_file.close()
+
+    
+def shuffle_and_rebalance(Keep):
   '''prompts user for a new imbalance ratio and implements it. '''
   s = [(key,len(Keep[key])) for key in Keep.keys()]
   minc, maxc = min(s,ig(1))[0], max(s,ig(1))[0]
   target_ratio = raw_input("you have imbalance ratio %.2f, what's your target? [num/N] "%(float(len(Keep[maxc])/len(Keep[minc]))))
   if target_ratio is not 'N':
     minlen = len(Key[minc])
-    for key in Keep.keys() if key is not minc:
-      print '%s has %i images so %i will be randomly removed'%(key, len(Keep[key]), len(Keep[key])-minlen*target_ratio)
+    for key in Keep.keys():
       random.shuffle(Keep[key])
-      del Keep[key][minlen*target_ratio:]
+      if key is not minc:
+        print '%s has %i images so %i will be randomly removed'%(key, len(Keep[key]), len(Keep[key])-minlen*target_ratio)
+        del Keep[key][minlen*target_ratio:]
   return Keep
 
 
@@ -70,8 +97,8 @@ def default_class(All, Keep):
     for key in All.keys() if key not in Keep.keys():
       # computationally inefficient. but so much more flexible to
       # have this dict.
-      Keep[label_default] += [fname in All[key]
-                              if fname not in All.values()]
+      Keep[label_default] += [fname in All[key] if fname not in
+                              set(chain(All.values()))]
   return Keep
 
 def merge_classes(Keep):
