@@ -163,7 +163,10 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 
 next steps:
-- save net only if performance gain
+- USA visa!
+- test rebalance (esp contents of dump files for no repetition and
+  correct numbers)
+- save net only if performance gain (cf pylearn2)
 - train all tasks
 - F measure
 - data augmentation

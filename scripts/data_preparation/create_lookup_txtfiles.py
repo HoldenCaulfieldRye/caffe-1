@@ -65,7 +65,7 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
   lastLabelIsDefault = False
   img_labels = [] # image's labels to train on
   dump = []       # contain text to write to .txt files
-  case_count = 0 # number of training cases
+  case_count = 0  # number of training cases
   tagless_count = 0 # n
   badcase_count = 0 # num of images with multiple flags to train on
 
@@ -177,9 +177,12 @@ def rebalance(dump, write_labels, count, lookup):
   target_ratio = raw_input("you have an imbalance ratio of %.2f, want to lower it? [num/N] " % (float(count[lookup[max_class]])/count[lookup[min_class]]))
   if target_ratio is not 'N':
     target_ratio = float(target_ratio)
-    dump = random_delete(dump, )    
+    dump = random_delete(dump,write_labels,target_ratio,count,lookup)
   return dump
 
+
+def random_delete(dump,write_labels,target_ratio,count,lookup):
+  
 
 def update_labels(write_labels, merge, new_label):
   write_labels = [label for label in write_labels if label not in [write_labels[i] for i in merge]]
