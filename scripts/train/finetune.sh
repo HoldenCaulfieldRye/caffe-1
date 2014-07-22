@@ -9,7 +9,13 @@
 
 
 # with 4, bad minimum provides 80% classification accuracy
-IMBALANCE_RATIO=4
+read -p "Imbalance ratio? (4 will get at most 80% accurate bad minima) " IMBALANCE_RATIO
+
+read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-finetune) " MAX_ITER
+
+# delete this one once you have cuda-convnet style snapshotting
+read -p "Network snapshot frequency? (2000) " SNAPSHOT
+
 
 for TASK_NAME in soil_risk; do
 
@@ -18,12 +24,13 @@ for TASK_NAME in soil_risk; do
 
     cd /data/ad6813/caffe/scripts/data_preparation
     echo "create_lookup_txtfiles..."
-    python create_lookup_txtfiles_2.py --data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump --to-dir=/data/ad6813/caffe/data_info/$TASK_NAME --imbalance-ratio=$IMBALANCE_RATIO
+    # NUM_OUTPUT is number of classes to learn
+    "python create_lookup_txtfiles_2.py --data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump --to-dir=/data/ad6813/caffe/data_info/"$TASK_NAME" --imbalance-ratio="$IMBALANCE_RATIO" 2>NUM_OUTPUT"
 
     
     # 2. move data (symlinks?) to train/ val/ test/ dirs
     echo "move_to_dirs..."
-    python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump /data/ad6813/caffe/data/controlpoint/$TASK_NAME /data/ad6813/caffe/data_info/$TASK_NAME
+    "python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump /data/ad6813/caffe/data/controlpoint/"$TASK_NAME" /data/ad6813/caffe/data_info/"$TASK_NAME
 
     # 3. resize images
     cd /data/ad6813/caffe/data/$TASK_NAME
@@ -55,7 +62,7 @@ for TASK_NAME in soil_risk; do
     # first make sure exists reference dir from which to cp and sed
     if [ -d clampdet-fine ]
     then
-	mkdir $TASK_NAME"-fine"
+	"mkdir "$TASK_NAME"-fine"
 	cd clampdet-fine
 	NEEDED_FILES="clampdet_fine_solver.prototxt create_clampdet_fine.sh clampdet_fine_test.prototxt fine_clampdet.sh clampdet_fine_train.prototxt make_clampdet_fine_mean.sh clampdet_fine_val.prototxt resume_training.sh"
 	for file in $NEEDED_FILES;
@@ -66,12 +73,42 @@ for TASK_NAME in soil_risk; do
 		echo "need it to create leveldb inputs for $TASK_NAME"
 		exit
 	    else
-		cp $file "../"$TASK_NAME"-fine/"
+		"cp $file ../"$TASK_NAME"-fine/"
 	    fi
 	done
     else
 	echo "directory clampdet-fine not found"
 	echo "need it to create leveldb inputs for $TASK_NAME"
+	exit
     fi
     
-       
+    # now adapt files to taskname
+    cd "../"$TASK_NAME"-fine"
+    "sed -i 's/clampdet/"$TASK_NAME"/g' *"
+    echo "deleting any previous leveldb inputs..."
+    rm -rf *leveldb
+    echo "creating new leveldb inputs..."
+    "./create_"$TASK_NAME"_fine.sh"
+
+
+    # 6. compute mean image
+    echo "computing mean image..."
+    "./make_"$TASK_NAME"_fine_mean.sh"
+
+    
+    # 7. network definition
+    # keeping batchsize 50
+    for TYPE in fine val test;
+    do
+	# change net name and num neurons in output layers
+	"sed -i "$TASK_NAME"_fine_"TYPE".prototxt -e '1s!Clamp!"$TASK_NAME"!' -e '300s!2!"$NUM_OUTPUT"!'";
+    done
+    
+
+    # 8. solver
+    "sed -i "$TASK_NAME"_fine_solver.prototxt -e '10s!20000!"$MAX_ITER"!' -e '13s!2000!"$SNAPSHOT"!'"
+    
+    
+    # 9. go!
+    "nohup ./finetune_"$TASK_NAME".sh >> train_output.txt 2>&1 &"
+

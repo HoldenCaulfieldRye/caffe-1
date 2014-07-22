@@ -32,11 +32,11 @@ def create_lookup_txtfiles(data_dir, target_ratio=None, to_dir=None):
   Keep = classes_to_learn(All)
   # merge_classes only after default label entry created
   Keep = default_class(All, Keep)
-  Keep = merge_classes(Keep)
+  Keep, num_output = merge_classes(Keep)
   Keep = shuffle_and_rebalance(Keep, target_ratio)
   if to_dir is not None:
     dump_to_files(Keep)
-  return Keep
+  return num_output
 
 
 def dump_to_files(Keep, to_dir):
@@ -91,6 +91,7 @@ def default_class(All, Keep):
                               set(chain(All.values()))]
   return Keep
 
+
 def merge_classes(Keep):
   more = 'Y'
   while more == 'Y':
@@ -109,7 +110,7 @@ def merge_classes(Keep):
         print "WARNING! merging these classes has made %i duplicates! Removing them." % (count_duplicates)
         Keep[merge_label] = set(Keep[merge_label])
     else: more = False
-  return Keep
+  return Keep, len(Keep.keys())
   
   
 def classes_to_learn(All):    
@@ -139,5 +140,5 @@ if __name__ == '__main__':
     print "ERROR: data_dir not given"
     exit
       
-  create_lookup_txtfiles(data_dir, target_ratio, to_dir)
-
+  num_output = create_lookup_txtfiles(data_dir, target_ratio, to_dir)
+  sys.exit(num_output)
