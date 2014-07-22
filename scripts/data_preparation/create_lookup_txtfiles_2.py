@@ -118,7 +118,8 @@ def classes_to_learn(All):
   for label in read_labels:
     Keep[label] = All[label]
   return Keep
-  
+
+
 if __name__ == '__main__':
   import sys
   create_lookup_txtfiles(sys.argv[1],sys.argv[2])

@@ -3,7 +3,7 @@
 ============================================
 
 cd caffe/scripts/data_preparation
-python create_lookup_txtfiles.py path/to/rawdata path/to/caffe/data_info/yourtask
+python create_lookup_txtfiles.py path/to/raw/data path/to/caffe/data_info/yourtask
 
 
 BE IN PYTHON VENV!
@@ -14,7 +14,7 @@ BE IN PYTHON VENV!
 
 # taskdata is where train/ val/ test/ dirs will be
 
-python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump/ /data/ad6813/caffe/data/controlpoint/clampdet /data/ad6813/caffe/data_info/controlpoint/clampdet
+python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump/ /data/ad6813/caffe/data/controlpoint/clampdet /data/ad6813/caffe/data_info/clampdet
 
 
 3. resize images
@@ -163,7 +163,7 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 
 next steps:
-- USA visa!
+- USA VISA!
 - test rebalance (esp contents of dump files for no repetition and
   correct numbers)
 - save net only if performance gain (cf pylearn2)
