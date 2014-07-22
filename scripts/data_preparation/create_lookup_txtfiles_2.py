@@ -25,7 +25,7 @@ def get_label_dict(data_dir):
   return d
 
 
-def create_lookup_txtfiles(data_dir, to_dir=None):
+def create_lookup_txtfiles(data_dir, target_ratio=None, to_dir=None):
   ''' data_dir: where raw data is
       to_dir: where to store .txt files. '''
   All = get_label_dict(data_dir)
@@ -33,7 +33,7 @@ def create_lookup_txtfiles(data_dir, to_dir=None):
   # merge_classes only after default label entry created
   Keep = default_class(All, Keep)
   Keep = merge_classes(Keep)
-  Keep = shuffle_and_rebalance(Keep)
+  Keep = shuffle_and_rebalance(Keep, target_ratio)
   if to_dir is not None:
     dump_to_files(Keep)
   return Keep
@@ -60,12 +60,15 @@ def dump_to_files(Keep, to_dir):
   read_file.close()
 
     
-def shuffle_and_rebalance(Keep):
-  '''prompts user for a new imbalance ratio and implements it. '''
+def shuffle_and_rebalance(Keep, target_ratio=None):
+  '''if target_ratio not given, prompts user for a new imbalance 
+  ratio; and implements it. '''
   s = [(key,len(Keep[key])) for key in Keep.keys()]
   minc, maxc = min(s,ig(1))[0], max(s,ig(1))[0]
-  target_ratio = raw_input("you have imbalance ratio %.2f, what's your target? [num/N] "%(float(len(Keep[maxc])/len(Keep[minc]))))
+  if target_ratio is None:
+    target_ratio = raw_input("you have imbalance ratio %.2f, what's your target? [num/N] "%(float(len(Keep[maxc])/len(Keep[minc]))))
   if target_ratio is not 'N':
+    target_ratio = float(target_ratio)
     minlen = len(Key[minc])
     for key in Keep.keys():
       random.shuffle(Keep[key])
@@ -122,5 +125,19 @@ def classes_to_learn(All):
 
 if __name__ == '__main__':
   import sys
-  create_lookup_txtfiles(sys.argv[1],sys.argv[2])
+  
+  target_ratio, data_dir, to_dir = None, None, None
+  for arg in argv:
+    if "--imbalance-ratio=" in arg:
+      target_ratio = float(arg.strip('=')[-1])
+    elif "--data-dir=" in arg:
+      data_dir = arg.strip('=')[-1]
+    elif "--to-dir=" in arg:
+      to_dir = arg.strip('=')[-1]
+
+  if data_dir is None:
+    print "ERROR: data_dir not given"
+    exit
+      
+  create_lookup_txtfiles(data_dir, target_ratio, to_dir)
 
