@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+# any subsequent command that fails will exit the script
 
 # NOTE!
 # selecting which labels to learn, whether to merge or rename is not
@@ -8,20 +10,26 @@
 # script is still useful, all you have to do is reply to prompts.
 
 
-# with 4, bad minimum provides 80% classification accuracy
-read -p "Imbalance ratio? (4 will get at most 80% accurate bad minima) " IMBALANCE_RATIO
-
-read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-finetune) " MAX_ITER
-
-# delete this one once you have cuda-convnet style snapshotting
-read -p "Network snapshot frequency? (2000) " SNAPSHOT
-
 
 for TASK_NAME in soil_risk; do
 
+    # with 4, bad minimum provides 80% classification accuracy
+    read -p "Imbalance ratio? (4 will get at most 80% accurate bad minima) " IMBALANCE_RATIO
+
+    read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-finetune) " MAX_ITER
+
+    # delete this one once you have cuda-convnet style snapshotting
+    read -p "Network snapshot frequency? (2000) " SNAPSHOT
+    
+    
     # 1. get labels and choose which ones to learn
     source /data/ad6813/caffe/python/venv/bin/activate
 
+    if [ ! -d /data/ad6813/caffe/data_info/$TASK_NAME ]
+    then
+	mkdir /data/ad6813/caffe/data_info/$TASK_NAME
+    fi
+    
     cd /data/ad6813/caffe/scripts/data_preparation
     echo "create_lookup_txtfiles..."
     # NUM_OUTPUT is number of classes to learn
@@ -111,4 +119,5 @@ for TASK_NAME in soil_risk; do
     
     # 9. go!
     "nohup ./finetune_"$TASK_NAME".sh >> train_output.txt 2>&1 &"
+    done
 

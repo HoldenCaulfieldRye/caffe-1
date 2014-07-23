@@ -1,0 +1,7 @@
+0 WaterContaminationLowRisk
+
+1 Good
+2 InadequateOrIncorrectClamping
+
+3 PhotoDoesNotShowEnoughOfScrapeZones
+
