@@ -101,7 +101,6 @@ for TASK_NAME in soil_risk; do
     done
     # modify contents of files
     sed -i 's/clampdet/'$TASK_NAME'/g' *
-    echo "creating new leveldb inputs..."
     './create_'$TASK_NAME'_fine.sh'
 
 

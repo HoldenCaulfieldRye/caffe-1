@@ -6,6 +6,22 @@ TOOLS=$CAFFE/build/tools
 DATA=$CAFFE/data/clampdet
 DATA_INFO=$CAFFE/data_info/clampdet
 
+for TYPE in train val test;
+do
+    if [ ! -f $DATA_INFO'/'$TYPE'.txt' ]
+    then
+	echo 'file '$DATA_INFO'/'$TYPE'.txt not found'
+	exit
+    else
+	if [ ! -d $DATA'/'$TYPE ]
+	then
+	    echo 'directory '$DATA'/'$TYPE' not found'
+	    exit
+	fi
+    fi
+done
+
+
 echo "deleting any previous leveldb inputs..."
 rm -rf *leveldb
 echo "Creating leveldb..."

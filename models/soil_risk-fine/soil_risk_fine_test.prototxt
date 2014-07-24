@@ -5,8 +5,8 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "soilrisk_fine_test_leveldb"
-    mean_file: "../../data/controlpoint/soilrisk/soilrisk_fine_mean.binaryproto"
+    source: "soil_risk_fine_test_leveldb"
+    mean_file: "../../data/controlpoint/soil_risk/soil_risk_fine_mean.binaryproto"
     batch_size: 256
     crop_size: 227
     mirror: false

@@ -3,8 +3,24 @@
 # n.B. set the path to the imagenet train + val data dirs
 CAFFE=/data/ad6813/caffe
 TOOLS=$CAFFE/build/tools
-DATA=$CAFFE/data/soilrisk
-DATA_INFO=$CAFFE/data_info/soilrisk
+DATA=$CAFFE/data/soil_risk
+DATA_INFO=$CAFFE/data_info/soil_risk
+
+for TYPE in train val test;
+do
+    if [ ! -f $DATA_INFO'/'$TYPE'.txt' ]
+    then
+	echo 'file '$DATA_INFO'/'$TYPE'.txt not found'
+	exit
+    else
+	if [ ! -d $DATA'/'$TYPE ]
+	then
+	    echo 'directory '$DATA'/'$TYPE' not found'
+	    exit
+	fi
+    fi
+done
+
 
 echo "deleting any previous leveldb inputs..."
 rm -rf *leveldb
@@ -13,16 +29,16 @@ echo "Creating leveldb..."
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/train/ \
     $DATA_INFO/train.txt \
-    soilrisk_finetrain_leveldb 1
+    soil_risk_finetrain_leveldb 1
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/val/ \
     $DATA_INFO/val.txt \
-    soilrisk_fineval_leveldb 1
+    soil_risk_fineval_leveldb 1
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/test/ \
     $DATA_INFO/test.txt \
-    soilrisk_finetest_leveldb 1
+    soil_risk_finetest_leveldb 1
 
 echo "Done."
