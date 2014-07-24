@@ -14,7 +14,7 @@ set -e
 for TASK_NAME in soil_risk; do
 
     # with 4, bad minimum provides 80% classification accuracy
-    read -p "Imbalance ratio? (4 will get at most 80% accurate bad minima) " IMBALANCE_RATIO
+    read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) " BAD_MIN
 
     read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-finetune) " MAX_ITER
 
@@ -33,7 +33,7 @@ for TASK_NAME in soil_risk; do
     cd /data/ad6813/caffe/scripts/data_preparation
     echo "create_lookup_txtfiles..."
     # NUM_OUTPUT is number of classes to learn
-    "python create_lookup_txtfiles_2.py --data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump --to-dir=/data/ad6813/caffe/data_info/"$TASK_NAME" --imbalance-ratio="$IMBALANCE_RATIO" 2>NUM_OUTPUT"
+    "python create_lookup_txtfiles_2.py --data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump --to-dir=/data/ad6813/caffe/data_info/"$TASK_NAME" --imbalance-ratio="$BAD_MIN" 2>NUM_OUTPUT"
 
     
     # 2. move data (symlinks?) to train/ val/ test/ dirs

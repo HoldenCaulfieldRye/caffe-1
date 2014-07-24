@@ -5,20 +5,22 @@ from PIL import Image
 from operator import itemgetter as ig
 from itertools import chain
 from datetime import date
-import json, random
+import json, yaml, random
 
 
 def get_label_dict(data_dir):
+  total_num_images = 0
   path = data_dir
   for fname in os.listdir(os.getcwd()):
     if not fname.startswith('label_dict'): continue
     else:
       if raw_input('found %s; use as label_dict? ([Y]/N) '%(fname)) in ['','Y']:
-        return json.load(open(fname,'r'))
+        return yaml.load(open(fname,'r'))
   d = {'Perfect': []}
   print 'generating dict of label:files from %s...'%(data_dir)
   for filename in os.listdir(path):
     if not filename.endswith('.dat'): continue
+    total_num_images += 1
     fullname = os.path.join(path, filename)
     with open(fullname) as f:
       content = [line.strip() for line in f.readlines()] 
@@ -28,19 +30,24 @@ def get_label_dict(data_dir):
         for label in content:
           if label not in d.keys(): d[label] = []
           d[label].append(filename.split('.')[0]+'.jpg')
-  json.dump(d, open('label_dict_'+str(date.today()),'w'))        
+  d['total_num_images'] = total_num_images
+  json.dump(d, open('label_dict_'+str(date.today()),'w'))
   return d
 
 
-def create_lookup_txtfiles(data_dir, target_ratio=None, to_dir=None):
+def create_lookup_txtfiles(data_dir, target_bad_min=None, to_dir=None):
   ''' data_dir: where raw data is
       to_dir: where to store .txt files. '''
   All = get_label_dict(data_dir)
+  total_num_images = All.pop('total_num_images')
   Keep = classes_to_learn(All)
   # merge_classes only after default label entry created
   Keep = default_class(All, Keep)
+  total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
+  if total_num_images <> total_num_check:
+    print "WARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
   Keep, num_output = merge_classes(Keep)
-  Keep = shuffle_and_rebalance(Keep, target_ratio)
+  Keep = shuffle_and_rebalance(Keep, target_bad_min)
   if to_dir is not None:
     dump_to_files(Keep, to_dir)
   return num_output
@@ -67,25 +74,30 @@ def dump_to_files(Keep, to_dir):
   read_file.close()
 
     
-def shuffle_and_rebalance(Keep, target_ratio=None):
-  '''if target_ratio not given, prompts user for a new imbalance 
-  ratio; and implements it. '''
-  s = [(key,len(Keep[key])) for key in Keep.keys()]
-  ordered = min(s,ig(1))
+def shuffle_and_rebalance(Keep, total_num_images, target_bad_min=None):
+  '''if target_bad_min not given, prompts user for one; 
+  and implements it. Note that with >2 classes, this can be 
+  implemented either by downsizing all non-minority classes by the
+  same factor in order to maintain their relative proportions, or 
+  by downsizing as few majority classes as possible until
+  target_bad_min achieved. We can assume that we care mostly about 
+  having as few small classes as possible, so the latter is 
+  implemented.'''
   # minc is class with minimum number of training cases
-  minc, maxc = ordered[-1][0], ordered[0][0]
-  if target_ratio is None:
-    target_ratio = raw_input("you have imbalance ratio %.2f, what's your target? [num/N] "%(float(len(Keep[maxc])/len(Keep[minc]))))
-  if target_ratio is not 'N':
-    target_ratio = float(target_ratio)
-    minlen = len(Keep[minc])
-    print "min class is %s with %i images, so other classes will have at most %i images, max class is %s"%(minc, minlen, int(minlen*target_ratio), maxc)
-    for key in Keep.keys():
-      random.shuffle(Keep[key])
-      if key is not minc:
-        delete_size = max(0, len(Keep[key])-int(minlen*target_ratio))
-        print '%s has %i images so %i will be randomly removed'%(key, len(Keep[key]), delete_size)
-        del Keep[key][:delete_size]
+  ascending_classes = sorted([(key,len(Keep[key]))
+                              for key in Keep.keys()],
+                             key=lambda x:x[1])
+  maxc, len_maxc = ascending_classes[-1][0], ascending_classes[-1][1]
+  maxc_proportion = float(len_maxc)/total_num_images)
+  if target_bad_min is None:
+    target_bad_min = raw_input("max class currently takes up %.2f, what's your target? [num/N] "%(maxc_proportion))))
+  if target_bad_min is not 'N':
+    target_bad_min = float(target_bad_min)
+    if maxc_proportion > target_bad_min:
+      delete_size = len_maxc - int(target_bad_min*total_num_images/(1+target_bad_min))
+      random.shuffle(Keep[maxc])
+      print '%s has %i images so %i will be randomly removed'%(maxc, len_maxc, delete_size)
+      del Keep[maxc][:delete_size]
   return Keep
 
 
@@ -96,7 +108,6 @@ def default_class(All, Keep):
     Keep[label_default] = All['Perfect']
     # no need to check for overlap between Perfect and Keep's other
     # labels because Perfect overlaps with no other label by def
-    already = set(chain(*Keep.values()))
     # below is why need to wait for merge_classes
     for key in All.keys():
       if key in Keep.keys()+['Perfect']: continue
@@ -104,6 +115,12 @@ def default_class(All, Keep):
         # computationally inefficient. but so much more flexible to
         # have this dict.
         # add fname if not in any
+        # ---
+        # updating 'already' is the expensive bit. must do it no less
+        # than after every key iteration because mutual exclusiveness
+        # between keys not guaranteed. no need to do it more freq
+        # because a key contains no duplicates
+        already = set(chain(*Keep.values()))
         print "%s getting images from %s..."%(label_default,key)
         Keep[label_default] += [fname for fname in All[key] if fname
                                 not in already]
@@ -147,10 +164,10 @@ def classes_to_learn(All):
 if __name__ == '__main__':
   import sys
   
-  target_ratio, data_dir, to_dir = None, None, None
+  target_bad_min, data_dir, to_dir = None, None, None
   for arg in sys.argv:
     if "imbalance-ratio=" in arg:
-      target_ratio = float(arg.split('=')[-1])
+      target_bad_min = float(arg.split('=')[-1])
     elif "data-dir=" in arg:
       data_dir = arg.split('=')[-1]
     elif "to-dir=" in arg:
@@ -160,5 +177,5 @@ if __name__ == '__main__':
     print "ERROR: data_dir not given"
     exit
       
-  num_output = create_lookup_txtfiles(data_dir, target_ratio, to_dir)
+  num_output = create_lookup_txtfiles(data_dir, target_bad_min, to_dir)
   sys.exit(num_output)
