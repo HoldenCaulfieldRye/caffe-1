@@ -22,7 +22,15 @@ python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump/ /data/ad681
 cd /data/ad6813/caffe/data/controlpoint/clampdet
 for name in */*.jpg; do convert -resize 256x256\! $name $name; done
 
+# troubleshoot:
+convert.im6: unable to open image `98411.jpg': No such file or directory @ error/blob.c/OpenBlob/2638.
+convert.im6: option requires an argument `-print' @
+error/convert.c/ConvertImageCommand/2220.
+# you forgot the /dev/null
+
+
 # check
+cd train
 convert 102003.jpg -print "Size: %wx%h\n" /dev/null
 
 
@@ -165,21 +173,14 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 next steps:
 - USA VISA!
 - script:
-  1) move_to_dirs no longer calls create_txtfiles properly.
-  fix it then TRAIN A NET! wasting too much time on these fucking
-  scripts, should have listened to Razvan.
-  
-     -> caffe doesn't have a dir per class, so images with multiple
-        class labels try to get symlinked multiple times in same dir
-	during move_to_dirs.
-	solution is to create symlinks before writing to txtfiles.
-	as soon as symlink clash, add chars to duplicate name in
-	symlink and in txt file, but make it point to same jpg.
-  
+  1) BETTER ALTERNATIVE: have list of enum(classes) at top of
+  finetune shell, or simply printed to screen from bash script, then
+  pass those as arg to setup.py
   2) python prompt via bash script bit.ly/1z5t6yE
   you should implement it, because alternative is to specify all
   params as args, and some of them are tricky to predict, such as
   class mutual exclusion. or is that the only one really?
+  
 - save net only if performance gain (cf pylearn2)
 - train all tasks
 - F measure
@@ -190,4 +191,6 @@ next steps:
 - look at new data fields sent by ControlPoint
 - actually break CAPTCHAs by reproducing Goodfellow's work, open
   source everything and say you are better than Vicarious
-
+- prove that we can scale (have developed a magic formula for doing
+  any kind of image classification) by publishing results on as many
+  Kaggle image classification challenges as possible

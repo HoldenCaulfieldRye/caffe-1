@@ -72,7 +72,7 @@ for TASK_NAME in soil_risk; do
     # first make sure exists reference dir from which to cp and sed
     if [ -d clampdet-fine ]
     then
-	"mkdir "$TASK_NAME"-fine"
+	mkdir $TASK_NAME'-fine'
 	cd clampdet-fine
 	NEEDED_FILES="clampdet_fine_solver.prototxt create_clampdet_fine.sh clampdet_fine_test.prototxt fine_clampdet.sh clampdet_fine_train.prototxt make_clampdet_fine_mean.sh clampdet_fine_val.prototxt resume_training.sh"
 	for file in $NEEDED_FILES;
@@ -83,7 +83,7 @@ for TASK_NAME in soil_risk; do
 		echo "need it to create leveldb inputs for $TASK_NAME"
 		exit
 	    else
-		"cp $file ../"$TASK_NAME"-fine/"
+		cp $file '../'$TASK_NAME'-fine/'
 	    fi
 	done
     else
@@ -93,35 +93,33 @@ for TASK_NAME in soil_risk; do
     fi
     
     # now adapt files to taskname
-    cd "../"$TASK_NAME"-fine"
+    cd ../$TASK_NAME-fine
     # rename files
     for file in *clampdet*;
     do mv $file ${file/clampdet/$TASK_NAME};
     done
     # modify contents of files
-    "sed -i 's/clampdet/"$TASK_NAME"/g' *"
-    echo "deleting any previous leveldb inputs..."
-    rm -rf *leveldb
+    sed -i 's/clampdet/'$TASK_NAME'/g' *
     echo "creating new leveldb inputs..."
-    "./create_"$TASK_NAME"_fine.sh"
+    ./create_"$TASK_NAME"_fine.sh
 
 
     # 6. compute mean image
     echo "computing mean image..."
-    "./make_"$TASK_NAME"_fine_mean.sh"
+    './make_'$TASK_NAME'_fine_mean.sh'
 
     
     # 7. network definition
     # keeping batchsize 50
-    for TYPE in fine val test;
+    for TYPE in train val test;
     do
 	# change net name and num neurons in output layers
-	"sed -i "$TASK_NAME"_fine_"TYPE".prototxt -e '1s!Clamp!"$TASK_NAME"!' -e '300s!2!"$NUM_OUTPUT"!'";
+	sed -i $TASK_NAME'_fine_'$TYPE'.prototxt' -e '1s/Clamp/'$TASK_NAME'/' -e '300s/2/'$NUM_OUTPUT'/';
     done
     
 
     # 8. solver
-    "sed -i "$TASK_NAME"_fine_solver.prototxt -e '10s!20000!"$MAX_ITER"!' -e '13s!2000!"$SNAPSHOT"!'"
+    sed -i $TASK_NAME'_fine_solver.prototxt' -e '10s/20000/'$MAX_ITER'/' -e '13s/2000/'$SNAPSHOT'/'
     
     
     # 9. go!

@@ -6,6 +6,8 @@ TOOLS=$CAFFE/build/tools
 DATA=$CAFFE/data/clampdet
 DATA_INFO=$CAFFE/data_info/clampdet
 
+echo "deleting any previous leveldb inputs..."
+rm -rf *leveldb
 echo "Creating leveldb..."
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \

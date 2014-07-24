@@ -1,5 +1,5 @@
-train_net: "soil_risk_finetune_train.prototxt"
-test_net: "soil_risk_finetune_val.prototxt"
+train_net: "$TASK_NAME_finetune_train.prototxt"
+test_net: "$TASK_NAME_finetune_val.prototxt"
 test_iter: 4
 test_interval: 100
 base_lr: 0.001
