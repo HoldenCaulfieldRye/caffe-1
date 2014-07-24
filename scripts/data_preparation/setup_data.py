@@ -18,7 +18,7 @@ def main(data_dir, data_info, to_dir, target_bad_min=None):
   # merge_classes only after default label entry created
   Keep = default_class(All, Keep)
   total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
-  if total_num_images is not total_num_check:
+  if total_num_images != total_num_check:
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
   Keep, num_output = merge_classes(Keep)
   Keep, num_output = check_mutual_exclusion(Keep, num_output)
@@ -83,7 +83,7 @@ def rebalance(Keep, total_num_images, target_bad_min=None):
     target_bad_min = float(target_bad_min)
     print 'maxc_proportion: %.2f, target_bad_min: %.2f'%(maxc_proportion, target_bad_min)
     if maxc_proportion > target_bad_min:
-      delete_size = len_maxc - int(target_bad_min*total_num_images/(1+target_bad_min))
+      delete_size = int((len_maxc - (target_bad_min*total_num_images))/(1-target_bad_min))
       random.shuffle(Keep[maxc])
       print '%s has %i images so %i will be randomly removed'%(maxc, len_maxc, delete_size)
       del Keep[maxc][:delete_size]
@@ -124,11 +124,13 @@ def merge_classes(Keep):
       merge = [10000]
       while not all([idx < len(Keep.keys()) for idx in merge]):
         for elem in enumerate(Keep.keys()): print elem
-        merge = [int(elem) for elem in raw_input("\nName two class numbers from above, separated by ' ': ").split()]
+        merge = [int(elem) for elem in raw_input("\nName class numbers from above, separated by ' ': ").split()]
       merge.sort()
       merge = [Keep.keys()[i] for i in merge]
       merge_label = raw_input("\nName of merged class: ")
-      Keep[merge_label] = Keep.pop(merge[1]) + Keep.pop(merge[0])
+      Keep[merge_label] = [f for key in merge
+                           for f in Keep.pop(key)]
+#[Keep.pop(m) for m in merge]
       count_duplicates = len(Keep[merge_label])-len(set(Keep[merge_label]))
       if count_duplicates > 0:
         print "\nWARNING! merging these classes has made %i duplicates! Removing them." % (count_duplicates)
@@ -188,6 +190,8 @@ def within_class_shuffle(Keep):
 def symlink_dataset(Keep, from_dir, to_dir):
   dump = []
   part = [0, 0.8, 0.87, 1] # partition into train val test
+  if os.path.isdir(to_dir): rmtree(to_dir)
+  os.mkdir(to_dir)
   for i in xrange(3):
     dump.append([])
     for [num,key] in enumerate(Keep.keys()):
@@ -200,7 +204,6 @@ def symlink_dataset(Keep, from_dir, to_dir):
   #              for d in dump]
   for d,dname in zip(dump,['train','val','test']):
     data_dst_dir = ojoin(to_dir,dname)
-    if os.path.isdir(data_dst_dir): rmtree(data_dst_dir)
     os.mkdir(data_dst_dir)
     for i in xrange(len(d)):
       if os.path.islink(ojoin(data_dst_dir,d[i][0])):
@@ -217,6 +220,8 @@ def symlink_dataset(Keep, from_dir, to_dir):
 
 
 def dump_to_files(Keep, dump, data_info):
+  if os.path.exists(data_info): rmtree(data_info)
+  os.mkdir(data_info)
   dump_fnames = ['train.txt','val.txt','test.txt']
   for i in xrange(3):
     dfile = open(ojoin(data_info,dump_fnames[i]),'w')
