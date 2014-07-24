@@ -14,13 +14,17 @@ set -e
 for TASK_NAME in soil_risk; do
 
     # with 4, bad minimum provides 80% classification accuracy
-    read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) " BAD_MIN
+    # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
+    BAD_MIN=0.8
 
-    read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-fine) " MAX_ITER
+    # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-fine) "
+    MAX_ITER=20000
 
     # delete this one once you have cuda-convnet style snapshotting
-    read -p "Network snapshot frequency? (2000) " SNAPSHOT
-    
+    # read -p "Network snapshot frequency? (2000) "
+    SNAPSHOT=2000
+
+    NUM_OUTPUT=2 #temp fix
     
     # # 1. & 2. get labels, choose which ones to learn, symlink dataset
     # source /data/ad6813/caffe/python/venv/bin/activate
@@ -40,7 +44,6 @@ for TASK_NAME in soil_risk; do
     # # NUM_OUTPUT is number of classes to learn
     # NUM_OUTPUT=$(python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=$BAD_MIN)
 
-    NUM_OUTPUT=2 #temp fix
     
     # echo "number of output neurons: "$NUM_OUPUT
 
@@ -126,6 +129,8 @@ for TASK_NAME in soil_risk; do
     
     # 9. go!
     chmod 755 ./fine_"$TASK_NAME".sh
-    "nohup ./fine_"$TASK_NAME".sh >> train_output.txt 2>&1 &"
+    echo "you're ready!"
+    echo "cd ../../models/"$TASK_NAME"-fine"
+    echo "nohup ./fine_"$TASK_NAME".sh >> train_output.txt 2>&1 &"
     done
 

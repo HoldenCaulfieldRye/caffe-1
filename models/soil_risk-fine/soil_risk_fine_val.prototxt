@@ -6,7 +6,7 @@ layers {
   top: "label"
   data_param {
     source: "soil_risk_fine_val_leveldb"
-    mean_file: "../../data/controlpoint/soil_risk/soil_risk_mean.binaryproto"
+    mean_file: "../../data/controlpoint/soil_risk/soil_risk_fine_mean.binaryproto"
     batch_size: 256
     crop_size: 227
     mirror: false
