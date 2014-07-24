@@ -176,6 +176,7 @@ next steps:
   1) BETTER ALTERNATIVE: have list of enum(classes) at top of
   finetune shell, or simply printed to screen from bash script, then
   pass those as arg to setup.py
+  
   2) python prompt via bash script bit.ly/1z5t6yE
   you should implement it, because alternative is to specify all
   params as args, and some of them are tricky to predict, such as

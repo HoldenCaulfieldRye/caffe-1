@@ -13,13 +13,13 @@ set -e
 
 for TASK_NAME in soil_risk; do
 
-    # # with 4, bad minimum provides 80% classification accuracy
-    # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) " BAD_MIN
+    # with 4, bad minimum provides 80% classification accuracy
+    read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) " BAD_MIN
 
-    # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-finetune) " MAX_ITER
+    read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-fine) " MAX_ITER
 
-    # # delete this one once you have cuda-convnet style snapshotting
-    # read -p "Network snapshot frequency? (2000) " SNAPSHOT
+    # delete this one once you have cuda-convnet style snapshotting
+    read -p "Network snapshot frequency? (2000) " SNAPSHOT
     
     
     # # 1. & 2. get labels, choose which ones to learn, symlink dataset
@@ -42,28 +42,28 @@ for TASK_NAME in soil_risk; do
 
     # echo "number of output neurons: "$NUM_OUPUT
 
-    # # 3. resize images
-    # cd /data/ad6813/caffe/data/$TASK_NAME
-    # CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
-    # if [ $CMD != "256x256" ]
-    # then
-    # 	echo "downsizing all images to 256x256..."
-    # 	for name in */*.jpg; do convert -resize 256x256\! $name $name; done
-    # else
-    # 	echo "images already downsized"
-    # fi
+    # 3. resize images
+    cd /data/ad6813/caffe/data/$TASK_NAME
+    CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
+    if [ $CMD != "256x256" ]
+    then
+    	echo "downsizing all images to 256x256..."
+    	for name in */*.jpg; do convert -resize 256x256\! $name $name; done
+    else
+    	echo "images already downsized"
+    fi
 
     
-    # # 4. download alexnet
-    # if [ -f /data/ad6813/caffe/data/models/alexnet/caffe_alexnet_model ];
-    # then echo "alexnet already downloaded"
-    # else
-    # 	cd /data/ad6813/caffe/examples/imagenet
-    # 	./get_caffe_alexnet_model.sh
-    # 	echo "repeat to check correct download:"
-    # 	./get_caffe_alexnet_model.sh
-    # 	echo "attention: look just above to check correct download"
-    # fi
+    # 4. download alexnet
+    if [ -f /data/ad6813/caffe/data/models/alexnet/caffe_alexnet_model ];
+    then echo "alexnet already downloaded"
+    else
+    	cd /data/ad6813/caffe/examples/imagenet
+    	./get_caffe_alexnet_model.sh
+    	echo "repeat to check correct download:"
+    	./get_caffe_alexnet_model.sh
+    	echo "attention: look just above to check correct download"
+    fi
 
 
     # 5. create leveldb inputs

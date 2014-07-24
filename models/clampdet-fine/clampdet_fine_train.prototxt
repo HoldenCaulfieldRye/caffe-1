@@ -5,8 +5,8 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_finetune_train_leveldb"
-    mean_file: "../../data/controlpoint/clampdet/clampdet_finetune_mean.binaryproto"
+    source: "soilrisk_fine_train_leveldb"
+    mean_file: "../../data/controlpoint/soilrisk/soilrisk_fine_mean.binaryproto"
     batch_size: 50
     crop_size: 227
     mirror: true
