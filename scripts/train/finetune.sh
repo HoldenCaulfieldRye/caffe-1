@@ -30,10 +30,10 @@ for TASK_NAME in soil_risk; do
 	mkdir /data/ad6813/caffe/data_info/$TASK_NAME
     fi
     
-    cd /data/ad6813/caffe/scripts/data_preparation
+    cd ../data_preparation
     echo "create_lookup_txtfiles..."
     # NUM_OUTPUT is number of classes to learn
-    NUM_OUTPUT=$("python create_lookup_txtfiles_2.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump to-dir=/data/ad6813/caffe/data_info/"$TASK_NAME" bad-min="$BAD_MIN)
+    NUM_OUTPUT=$(python -i create_lookup_txtfiles.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump to-dir=/data/ad6813/caffe/data_info/$TASK_NAME bad-min=$BAD_MIN)
 
     echo "number of output neurons: "$NUM_OUPUT
 

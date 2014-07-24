@@ -164,7 +164,12 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 next steps:
 - USA VISA!
-- WARNING! started off with 13790 images, now have 13841 distinct training cases
+- script:
+  1) move_to_dirs no longer calls create_txtfiles properly.
+  2) python prompt via bash script bit.ly/1z5t6yE
+  you should implement it, because alternative is to specify all
+  params as args, and some of them are tricky to predict, such as
+  class mutual exclusion. or is that the only one really?
 - save net only if performance gain (cf pylearn2)
 - train all tasks
 - F measure
