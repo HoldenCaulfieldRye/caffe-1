@@ -169,6 +169,13 @@ next steps:
   fix it then TRAIN A NET! wasting too much time on these fucking
   scripts, should have listened to Razvan.
   
+     -> caffe doesn't have a dir per class, so images with multiple
+        class labels try to get symlinked multiple times in same dir
+	during move_to_dirs.
+	solution is to create symlinks before writing to txtfiles.
+	as soon as symlink clash, add chars to duplicate name in
+	symlink and in txt file, but make it point to same jpg.
+  
   2) python prompt via bash script bit.ly/1z5t6yE
   you should implement it, because alternative is to specify all
   params as args, and some of them are tricky to predict, such as
@@ -181,4 +188,6 @@ next steps:
 - Razvan: different batch contents at every epoch
 - Razvan: pre-process image, select patch of interest
 - look at new data fields sent by ControlPoint
+- actually break CAPTCHAs by reproducing Goodfellow's work, open
+  source everything and say you are better than Vicarious
 

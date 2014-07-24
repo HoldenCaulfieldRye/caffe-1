@@ -5,10 +5,11 @@ from PIL import Image
 from operator import itemgetter as ig
 from itertools import chain
 from datetime import date
+from shutil import rmtree
 import json, yaml, random
 
 
-def main(data_dir, data_info, target_bad_min=None):
+def main(data_dir, data_info, to_dir, target_bad_min=None):
   ''' This is the master function. 
   data_dir: where raw data is. data_info: where to store .txt files. '''
   All = get_label_dict(data_dir)
@@ -21,14 +22,14 @@ def main(data_dir, data_info, target_bad_min=None):
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
   Keep, num_output = merge_classes(Keep)
   Keep, num_output = check_mutual_exclusion(Keep, num_output)
+  print "target bad min: %.2f" %(target_bad_min)
   Keep = rebalance(Keep, total_num_images, target_bad_min)
   print 'finished rebalancing'
   Keep = within_class_shuffle(Keep)
   print 'finished shuffling'
-  dump = []
+  dump = symlink_dataset(Keep, data_dir, to_dir)
   if data_info is not None:
-    dump = dump_to_files(Keep, data_info)
-  print 'num_output:', num_output
+    dump_to_files(Keep, dump, data_info)
   return num_output, dump
 
 
@@ -59,30 +60,6 @@ def get_label_dict(data_dir):
   return d
 
 
-def dump_to_files(Keep, data_info):
-  dump = []
-  dump_fnames = ['train.txt','val.txt','test.txt']
-  part = [0, 0.8, 0.87, 1] # partition into train val test
-  for i in xrange(3):
-    dump.append([])
-    dfile = open(ojoin(data_info,dump_fnames[i]),'w')
-    for (num,key) in enumerate(Keep.keys()):
-      l = len(Keep[key])
-      dump[i] += [(f,num) for f in
-                  Keep[key][int(part[i]*l):int(part[i+1]*l)]]
-    random.shuffle(dump[i])
-    dfile.writelines(["%s %i\n" % (f,num) for (f,num) in dump[i]])
-    dfile.close()
-    print 'closed', dump_fnames[i]
-    
-  # write to read file how to interpret values as classes      
-  read_file = open(ojoin(data_info,'read.txt'), 'w')    
-  read_file.writelines(["%i %s\n" % (num,label) for (num, label)
-                         in enumerate(Keep.keys())])
-  read_file.close()
-  return dump
-
-    
 def rebalance(Keep, total_num_images, target_bad_min=None):
   '''if target_bad_min not given, prompts user for one; 
   and implements it. Note that with >2 classes, this can be 
@@ -208,6 +185,51 @@ def within_class_shuffle(Keep):
   return Keep
 
 
+def symlink_dataset(Keep, from_dir, to_dir):
+  dump = []
+  part = [0, 0.8, 0.87, 1] # partition into train val test
+  for i in xrange(3):
+    dump.append([])
+    for (num,key) in enumerate(Keep.keys()):
+      l = len(Keep[key])
+      dump[i] += [(f,num) for f in
+                  Keep[key][int(part[i]*l):int(part[i+1]*l)]]
+    random.shuffle(dump[i])
+  
+  cross_val = [np.array(d, dtype=[('x',object),('y',int)])
+               for d in dump]
+  for d,dname in zip(cross_val,['train','val','test']):
+    data_dst_dir = ojoin(to_dir,dname)
+    if os.path.isdir(data_dst_dir): rmtree(data_dst_dir)
+    os.mkdir(data_dst_dir)
+    for i in xrange(len(d)):
+      if os.path.islink(ojoin(data_dst_dir,d[i][0])):
+        old = d[i][0]
+        while os.path.islink(ojoin(data_dst_dir,d[i][0])):
+          print '%s symlinked already, creating duplicate'%(d[i][0])
+          d[i][0] = d[i][0].split('.')[0]+'_.jpg'
+        os.symlink(ojoin(from_dir,old),
+                   ojoin(data_dst_dir,d[i][0]))
+        dump
+      else: os.symlink(ojoin(from_dir,d[i][0]),
+                       ojoin(data_dst_dir,d[i][0]))
+  return dump
+
+
+def dump_to_files(Keep, dump, data_info):
+  dump_fnames = ['train.txt','val.txt','test.txt']
+  for i in xrange(3):
+    dfile = open(ojoin(data_info,dump_fnames[i]),'w')
+    dfile.writelines(["%s %i\n" % (f,num) for (f,num) in dump[i]])
+    dfile.close()
+    
+  # write to read file how to interpret values as classes      
+  read_file = open(ojoin(data_info,'read.txt'), 'w')    
+  read_file.writelines(["%i %s\n" % (num,label) for (num, label)
+                         in enumerate(Keep.keys())])
+  read_file.close()
+
+    
 if __name__ == '__main__':
   import sys
   
@@ -215,16 +237,19 @@ if __name__ == '__main__':
   for arg in sys.argv:
     if "bad-min=" in arg:
       target_bad_min = float(arg.split('=')[-1])
+      print "target bad min: %.2f" %(target_bad_min)
     elif "data-dir=" in arg:
-      data_dir = arg.split('=')[-1]
+      data_dir = os.path.abspath(arg.split('=')[-1])
     elif "to-dir=" in arg:
-      data_info = arg.split('=')[-1]
+      to_dir = os.path.abspath(arg.split('=')[-1])
+    elif "data-info=" in arg:
+      data_info = os.path.abspath(arg.split('=')[-1])
 
   if data_dir is None:
     print "\nERROR: data_dir not given"
     exit
       
-  num_output, dump = main(data_dir, target_bad_min, data_info)
+  num_output,dump = main(data_dir, data_info, to_dir, target_bad_min)
   print "\nIt's going to say 'An exception has occured etc'"
-  print "but don't worry, that's just information for the training shell script to use\n"
+  print "but don't worry, that's num_output info for the training shell script to use\n"
   sys.exit(num_output)

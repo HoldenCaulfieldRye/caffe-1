@@ -22,25 +22,25 @@ for TASK_NAME in soil_risk; do
     read -p "Network snapshot frequency? (2000) " SNAPSHOT
     
     
-    # 1. get labels and choose which ones to learn
+    # 1. & 2. get labels, choose which ones to learn, symlink dataset
     source /data/ad6813/caffe/python/venv/bin/activate
 
     if [ ! -d /data/ad6813/caffe/data_info/$TASK_NAME ]
     then
 	mkdir /data/ad6813/caffe/data_info/$TASK_NAME
     fi
+
+    if [ ! -d /data/ad6813/caffe/data/$TASK_NAME ]
+    then
+	mkdir /data/ad6813/caffe/data/$TASK_NAME
+    fi
     
     cd ../data_preparation
-    echo "create_lookup_txtfiles..."
+    echo "main and move_to_dirs..."
     # NUM_OUTPUT is number of classes to learn
-    NUM_OUTPUT=$(python -i create_lookup_txtfiles.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump to-dir=/data/ad6813/caffe/data_info/$TASK_NAME bad-min=$BAD_MIN)
+    NUM_OUTPUT=$(python -i move_to_dirs.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=$BAD_MIN)
 
     echo "number of output neurons: "$NUM_OUPUT
-
-    
-    # 2. move data (symlinks?) to train/ val/ test/ dirs
-    echo "move_to_dirs..."
-    python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump /data/ad6813/caffe/data/controlpoint/$TASK_NAME /data/ad6813/caffe/data_info/$TASK_NAME
 
     # 3. resize images
     cd /data/ad6813/caffe/data/$TASK_NAME

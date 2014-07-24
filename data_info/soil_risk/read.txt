@@ -1,3 +1,4 @@
-0 SoilRisk
-1 NoRisk
-2 SoilContaminationRisk
+0 UnsuitableScrapingOrPeeling
+1 NoInsertionDepthMarkings
+2 Good
+3 InadequateOrIncorrectClamping
