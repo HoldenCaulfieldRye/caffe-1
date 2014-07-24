@@ -36,8 +36,8 @@ def get_label_dict(data_dir):
 
 
 def create_lookup_txtfiles(data_dir, target_bad_min=None, to_dir=None):
-  ''' data_dir: where raw data is
-      to_dir: where to store .txt files. '''
+  '''data_dir: where raw data is. to_dir: where to store .txt 
+  files. '''
   All = get_label_dict(data_dir)
   total_num_images = All.pop('total_num_images')
   Keep = classes_to_learn(All)
@@ -47,9 +47,13 @@ def create_lookup_txtfiles(data_dir, target_bad_min=None, to_dir=None):
   if total_num_images <> total_num_check:
     print "WARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
   Keep, num_output = merge_classes(Keep)
-  Keep = shuffle_and_rebalance(Keep, target_bad_min)
+  Keep = rebalance(Keep, total_num_images, target_bad_min)
+  print 'finished rebalancing'
+  Keep = within_class_shuffle(Keep)
+  print 'finished shuffling'
   if to_dir is not None:
     dump_to_files(Keep, to_dir)
+  print 'num_output:', num_output
   return num_output
 
 
@@ -66,6 +70,7 @@ def dump_to_files(Keep, to_dir):
     random.shuffle(dump)
     dfile.writelines(dump)
     dfile.close()
+    print 'closed', dump_fnames[i]
     
   # write to read file how to interpret values as classes      
   read_file = open(ojoin(to_dir,'read.txt'), 'w')    
@@ -74,7 +79,7 @@ def dump_to_files(Keep, to_dir):
   read_file.close()
 
     
-def shuffle_and_rebalance(Keep, total_num_images, target_bad_min=None):
+def rebalance(Keep, total_num_images, target_bad_min=None):
   '''if target_bad_min not given, prompts user for one; 
   and implements it. Note that with >2 classes, this can be 
   implemented either by downsizing all non-minority classes by the
@@ -88,11 +93,14 @@ def shuffle_and_rebalance(Keep, total_num_images, target_bad_min=None):
                               for key in Keep.keys()],
                              key=lambda x:x[1])
   maxc, len_maxc = ascending_classes[-1][0], ascending_classes[-1][1]
-  maxc_proportion = float(len_maxc)/total_num_images)
+  print "max class is %s with %i images"%(maxc, len_maxc)
+  print "total num images: %i"%(total_num_images)
+  maxc_proportion = float(len_maxc)/total_num_images
   if target_bad_min is None:
-    target_bad_min = raw_input("max class currently takes up %.2f, what's your target? [num/N] "%(maxc_proportion))))
+    target_bad_min = raw_input("max class currently takes up %.2f, what's your target? [num/N] "%(maxc_proportion))
   if target_bad_min is not 'N':
     target_bad_min = float(target_bad_min)
+    print 'maxc_proportion: %.2f, target_bad_min: %.2f'%(maxc_proportion, target_bad_min)
     if maxc_proportion > target_bad_min:
       delete_size = len_maxc - int(target_bad_min*total_num_images/(1+target_bad_min))
       random.shuffle(Keep[maxc])
@@ -161,12 +169,19 @@ def classes_to_learn(All):
   return Keep
 
 
+def within_class_shuffle(Keep):
+  ''' randomly shuffles the ordering of Keep[key] for each key. '''
+  for key in Keep.keys():
+    random.shuffle(Keep[key])
+  return Keep
+
+
 if __name__ == '__main__':
   import sys
   
   target_bad_min, data_dir, to_dir = None, None, None
   for arg in sys.argv:
-    if "imbalance-ratio=" in arg:
+    if "bad-min=" in arg:
       target_bad_min = float(arg.split('=')[-1])
     elif "data-dir=" in arg:
       data_dir = arg.split('=')[-1]
@@ -178,4 +193,5 @@ if __name__ == '__main__':
     exit
       
   num_output = create_lookup_txtfiles(data_dir, target_bad_min, to_dir)
+  print "It's going to say 'An exception has occured etc' but don't worry, that's just information for the training shell script to use"
   sys.exit(num_output)

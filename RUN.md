@@ -164,8 +164,7 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 next steps:
 - USA VISA!
-- test rebalance (esp contents of dump files for no repetition and
-  correct numbers)
+- WARNING! started off with 13790 images, now have 13841 distinct training cases
 - save net only if performance gain (cf pylearn2)
 - train all tasks
 - F measure
