@@ -166,6 +166,9 @@ next steps:
 - USA VISA!
 - script:
   1) move_to_dirs no longer calls create_txtfiles properly.
+  fix it then TRAIN A NET! wasting too much time on these fucking
+  scripts, should have listened to Razvan.
+  
   2) python prompt via bash script bit.ly/1z5t6yE
   you should implement it, because alternative is to specify all
   params as args, and some of them are tricky to predict, such as

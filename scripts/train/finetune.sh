@@ -40,7 +40,7 @@ for TASK_NAME in soil_risk; do
     
     # 2. move data (symlinks?) to train/ val/ test/ dirs
     echo "move_to_dirs..."
-    "python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump /data/ad6813/caffe/data/controlpoint/"$TASK_NAME" /data/ad6813/caffe/data_info/"$TASK_NAME
+    python move_to_dirs.py /data/ad6813/pipe-data/Bluebox/raw_data/dump /data/ad6813/caffe/data/controlpoint/$TASK_NAME /data/ad6813/caffe/data_info/$TASK_NAME
 
     # 3. resize images
     cd /data/ad6813/caffe/data/$TASK_NAME
