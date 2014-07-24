@@ -297,7 +297,7 @@ layers {
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
-    num_output: 
+    num_output: 2
     weight_filler {
       type: "gaussian"
       std: 0.01

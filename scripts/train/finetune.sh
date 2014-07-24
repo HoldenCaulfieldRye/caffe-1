@@ -40,6 +40,8 @@ for TASK_NAME in soil_risk; do
     # # NUM_OUTPUT is number of classes to learn
     # NUM_OUTPUT=$(python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=$BAD_MIN)
 
+    NUM_OUTPUT=2 #temp fix
+    
     # echo "number of output neurons: "$NUM_OUPUT
 
     # 3. resize images

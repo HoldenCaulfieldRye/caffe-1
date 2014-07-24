@@ -29,16 +29,16 @@ echo "Creating leveldb..."
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/train/ \
     $DATA_INFO/train.txt \
-    soil_risk_finetrain_leveldb 1
+    soil_risk_fine_train_leveldb 1
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/val/ \
     $DATA_INFO/val.txt \
-    soil_risk_fineval_leveldb 1
+    soil_risk_fine_val_leveldb 1
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/test/ \
     $DATA_INFO/test.txt \
-    soil_risk_finetest_leveldb 1
+    soil_risk_fine_test_leveldb 1
 
 echo "Done."
