@@ -1,12 +1,12 @@
-name: "ClampFineNet"
+name: "soil_riskFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "$TASK_NAME_finetune_val_leveldb"
-    mean_file: "../../data/controlpoint/$TASK_NAME/$TASK_NAME_mean.binaryproto"
+    source: "soil_risk_finetune_val_leveldb"
+    mean_file: "../../data/controlpoint/soil_risk/soil_risk_mean.binaryproto"
     batch_size: 256
     crop_size: 227
     mirror: false
@@ -297,7 +297,7 @@ layers {
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
-    num_output: 2
+    num_output: 
 	weight_filler {
       type: "gaussian"
       std: 0.01
