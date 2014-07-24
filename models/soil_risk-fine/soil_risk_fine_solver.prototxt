@@ -1,5 +1,5 @@
-train_net: "soil_risk_fine_train.prototxt"
-test_net: "soil_risk_fine_val.prototxt"
+train_net: "soilrisk_fine_train.prototxt"
+test_net: "soilrisk_fine_val.prototxt"
 test_iter: 4
 test_interval: 100
 base_lr: 0.001

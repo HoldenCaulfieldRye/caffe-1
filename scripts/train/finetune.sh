@@ -55,7 +55,7 @@ for TASK_NAME in soil_risk; do
 
     
     # 4. download alexnet
-    if [ -f /data/ad6813/caffe/data/models/alexnet/caffe_alexnet_model ];
+    if [ -f /data/ad6813/caffe/models/alexnet/caffe_alexnet_model ]
     then echo "alexnet already downloaded"
     else
     	cd /data/ad6813/caffe/examples/imagenet

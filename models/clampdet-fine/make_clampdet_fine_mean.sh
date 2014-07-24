@@ -3,8 +3,8 @@
 # N.B. this is available in data/ilsvrc12
 
 TOOLS=../../build/tools
-DATA=../../data/controlpoint/soilrisk
+DATA=../../data/controlpoint/clampdet
 
-$TOOLS/compute_image_mean.bin soilrisk_fine_train_leveldb $DATA/soilrisk_fine_mean.binaryproto
+$TOOLS/compute_image_mean.bin clampdet_fine_train_leveldb $DATA/clampdet_fine_mean.binaryproto
 
 echo "Done."
