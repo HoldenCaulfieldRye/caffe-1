@@ -38,14 +38,14 @@ for TASK_NAME in soil_risk; do
     cd ../data_preparation
     echo "main and move_to_dirs..."
     # NUM_OUTPUT is number of classes to learn
-    NUM_OUTPUT=$(python -i move_to_dirs.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=$BAD_MIN)
+    NUM_OUTPUT=$(python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=$BAD_MIN)
 
     echo "number of output neurons: "$NUM_OUPUT
 
     # 3. resize images
     cd /data/ad6813/caffe/data/$TASK_NAME
-    CMD=$(convert $(ls train | tail -1) -print "%wx%h") 
-    if [ "$CMD" != "256x256" ]
+    CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
+    if [ $CMD != "256x256" ]
     then
 	echo "downsizing all images to 256x256..."
 	for name in */*.jpg; do convert -resize 256x256\! $name $name; done
@@ -94,6 +94,11 @@ for TASK_NAME in soil_risk; do
     
     # now adapt files to taskname
     cd "../"$TASK_NAME"-fine"
+    # rename files
+    for file in *clampdet*;
+    do mv $file ${file/clampdet/$TASK_NAME};
+    done
+    # modify contents of files
     "sed -i 's/clampdet/"$TASK_NAME"/g' *"
     echo "deleting any previous leveldb inputs..."
     rm -rf *leveldb
