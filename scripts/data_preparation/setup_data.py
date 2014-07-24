@@ -190,15 +190,15 @@ def symlink_dataset(Keep, from_dir, to_dir):
   part = [0, 0.8, 0.87, 1] # partition into train val test
   for i in xrange(3):
     dump.append([])
-    for (num,key) in enumerate(Keep.keys()):
+    for [num,key] in enumerate(Keep.keys()):
       l = len(Keep[key])
-      dump[i] += [(f,num) for f in
+      dump[i] += [[f,num] for f in
                   Keep[key][int(part[i]*l):int(part[i+1]*l)]]
     random.shuffle(dump[i])
   
-  cross_val = [np.array(d, dtype=[('x',object),('y',int)])
-               for d in dump]
-  for d,dname in zip(cross_val,['train','val','test']):
+  # cross_val = [np.array(d, dtype=[('x',object),('y',int)])
+  #              for d in dump]
+  for d,dname in zip(dump,['train','val','test']):
     data_dst_dir = ojoin(to_dir,dname)
     if os.path.isdir(data_dst_dir): rmtree(data_dst_dir)
     os.mkdir(data_dst_dir)
