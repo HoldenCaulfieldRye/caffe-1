@@ -11,7 +11,11 @@ set -e
 
 
 
+<<<<<<< HEAD
 for TASK_NAME in ground_sheet; do
+=======
+for TASK_NAME in hatch_markings; do
+>>>>>>> 52505505a2bb892cc0c62f33cd9016391bd37ba3
 
     # with 4, bad minimum provides 80% classification accuracy
     # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
