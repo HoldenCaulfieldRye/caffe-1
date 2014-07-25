@@ -11,7 +11,7 @@ set -e
 
 
 
-for TASK_NAME in soil_risk; do
+for TASK_NAME in hatch_markings; do
 
     # with 4, bad minimum provides 80% classification accuracy
     # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
