@@ -63,7 +63,7 @@ for TASK_NAME in ground_sheet; do
     if [ -f /data/ad6813/caffe/models/alexnet/caffe_alexnet_model ]
     then echo "alexnet already downloaded"
     else
-    	cd /data/ad6813/caffe/examples/imagenet
+    	cd /data/ad6813/caffe/models/alexnet
     	./get_caffe_alexnet_model.sh
     	echo "repeat to check correct download:"
     	./get_caffe_alexnet_model.sh
