@@ -134,7 +134,7 @@ def merge_classes(Keep):
       count_duplicates = len(Keep[merge_label])-len(set(Keep[merge_label]))
       if count_duplicates > 0:
         print "\nWARNING! merging these classes has made %i duplicates! Removing them." % (count_duplicates)
-        Keep[merge_label] = set(Keep[merge_label])
+        Keep[merge_label] = list(set(Keep[merge_label]))
     else: more = False
   return Keep, len(Keep.keys())
   
