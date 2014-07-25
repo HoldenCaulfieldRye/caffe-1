@@ -183,7 +183,10 @@ def classes_to_learn(All):
 def within_class_shuffle(Keep):
   ''' randomly shuffles the ordering of Keep[key] for each key. '''
   for key in Keep.keys():
-    random.shuffle(Keep[key])
+    try:
+      random.shuffle(Keep[key])
+    except:
+      print 'warning, within class shuffle failed'
   return Keep
 
 
