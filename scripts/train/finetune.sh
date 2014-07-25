@@ -112,9 +112,9 @@ for TASK_NAME in markings; do
     # 6. compute mean image
     echo "computing mean image..."
     './make_'$TASK_NAME'_fine_mean.sh'
-    if [ ! -f ../../data/scrape_zone_peel/scrape_zone_peel_fine_mean.binaryproto ]
+    if [ ! -f '../../data/'$TASK_NAME'/'$TASK_NAME'_fine_mean.binaryproto' ]
     then
-	scp graphic06.doc.ic.ac.uk:/data/ad6813/caffe/data/clampdet/clampdet_mean.binaryproto ../../data/scrape_zone_peel/scrape_zone_peel_fine_mean.binaryproto
+	scp graphic06.doc.ic.ac.uk:/data/ad6813/caffe/data/clampdet/clampdet_mean.binaryproto '../../data/'$TASK_NAME'/'$TASK_NAME'_fine_mean.binaryproto'
     fi
     
     

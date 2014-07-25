@@ -1,4 +1,4 @@
-name: "ClampFineNet"
+name: "markingsFineNet"
 layers {
   name: "data"
   type: DATA
