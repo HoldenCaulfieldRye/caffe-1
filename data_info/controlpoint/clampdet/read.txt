@@ -1,2 +1,0 @@
-0 NoClamp
-1 Clamp
