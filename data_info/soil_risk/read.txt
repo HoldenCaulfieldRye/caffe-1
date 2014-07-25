@@ -1,3 +1,2 @@
 0 SoilRisk
 1 NoSoilRisk
-2 SoilContaminationRisk

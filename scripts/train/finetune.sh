@@ -15,7 +15,7 @@ for TASK_NAME in soil_risk; do
 
     # with 4, bad minimum provides 80% classification accuracy
     # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
-    BAD_MIN=0.8
+    BAD_MIN=0.5
 
     # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-fine) "
     MAX_ITER=20000
