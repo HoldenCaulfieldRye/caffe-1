@@ -11,7 +11,7 @@ set -e
 
 
 
-for TASK_NAME in ground_sheet; do
+for TASK_NAME in markings; do
 
     # with 4, bad minimum provides 80% classification accuracy
     # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
@@ -112,7 +112,11 @@ for TASK_NAME in ground_sheet; do
     # 6. compute mean image
     echo "computing mean image..."
     './make_'$TASK_NAME'_fine_mean.sh'
-
+    if [ ! -f '../../data/'$TASK_NAME'/'$TASK_NAME'_fine_mean.binaryproto' ]
+    then
+	scp graphic06.doc.ic.ac.uk:/data/ad6813/caffe/data/clampdet/clampdet_mean.binaryproto '../../data/'$TASK_NAME'/'$TASK_NAME'_fine_mean.binaryproto'
+    fi
+    
     
     # 7. network definition
     # keeping batchsize 50

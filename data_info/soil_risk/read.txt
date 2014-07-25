@@ -1,2 +1,0 @@
-0 SoilRisk
-1 NoSoilRisk

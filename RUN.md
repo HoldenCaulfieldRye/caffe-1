@@ -169,6 +169,8 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 ???
 
 
+currently training:
+- 06, 08, 09, 10
 
 next steps:
 - USA VISA!
