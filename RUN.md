@@ -165,27 +165,71 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 12. test
 ========
-
 ???
 
 
-currently training:
-- 06, 08, 09, 10
+
+CURRENTLY
+=========
+
+training:
+- 06:
+- 07:
+- 08:
+- 09:
+- 10:
+
+classifiers:
+- soil contamination risk
+  -> classes:   SoilContamination{Low,High,}Risk
+  -> trainsize: 2275
+  -> badmin:    0.8
+  -> val*:      0.83
+  -> iter:      100     (bad min?)
+- soil contamination risk
+  -> trainsize: 910
+  -> badmin:    0.5
+  -> val*:      0.66
+  -> iter:      3100
+- ground sheet
+  -> trainsize: 11031
+  -> badmin:    0.65    (natural)
+  -> val*:      0.87
+  -> iter:      15200
+- scrape_zone_peel
+  -> classes:   union CantSeeScrapeZones, UnsuitableScrapingPeeling, NoEvidenceScrapingPeeling
+  -> trainsize: 11031   (??groundsheet)
+  -> badmin:    0.71    
+  -> val*:      0.73    (bad min?)
+  -> val_100:   0.71
+  -> iter:      2100
+- (insertion depth) markings
+  -> trainsize: 3587
+  -> badmin:    0.8
+  -> val*:      0.89
+  -> val_100:   0.85    (wow! lower learning rate always?)
+  -> iter:      11200
+- hatch markings
+  -> trainsize: 6068
+  -> badmin:    0.5     (use more data, 0.5 maybe too strict)
+  -> val*:      0.78
+  -> val_100:   0.65
+  -> iter:      16500
+
 
 next steps:
+- thoughts above
+- are those really bad_mins: look at val error at every iteration
+- why do scrape_zone_peel and ground_sheet have same trainsize
+- need test error for true performance
+- larger minibatch for less noisy gradient
+- lower learning rate 
+- Redbox data
+- controlpoint extra metadata
+- google doc specified next steps
 - USA VISA!
-- script:
-  1) BETTER ALTERNATIVE: have list of enum(classes) at top of
-  finetune shell, or simply printed to screen from bash script, then
-  pass those as arg to setup.py
-  
-  2) python prompt via bash script bit.ly/1z5t6yE
-  you should implement it, because alternative is to specify all
-  params as args, and some of them are tricky to predict, such as
-  class mutual exclusion. or is that the only one really?
-  
+- script integrate python 
 - save net only if performance gain (cf pylearn2)
-- train all tasks
 - F measure
 - data augmentation
 - impose best possible class balance at every batch
