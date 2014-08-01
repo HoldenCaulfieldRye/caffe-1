@@ -402,6 +402,7 @@ class SplitLayer : public Layer<Dtype> {
 };
 
 /* ThresholdLayer
+Normalizes network output with priors of labels in minibatch.
 */
 template <typename Dtype>
 class ThresholdLayer : public Layer<Dtype> {
