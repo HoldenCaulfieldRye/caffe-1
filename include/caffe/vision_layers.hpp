@@ -401,6 +401,32 @@ class SplitLayer : public Layer<Dtype> {
   int count_;
 };
 
+/* ThresholdLayer
+*/
+template <typename Dtype>
+class ThresholdLayer : public Layer<Dtype> {
+ public:
+  explicit ThresholdLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void SetUp(const vector<Blob<Dtype>*>& bottom,
+      vector<Blob<Dtype>*>* top);
+
+ protected:
+  virtual Dtype Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      vector<Blob<Dtype>*>* top);
+  virtual Dtype Forward_gpu(const vector<Blob<Dtype>*>& bottom,
+      vector<Blob<Dtype>*>* top);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const bool propagate_down, vector<Blob<Dtype>*>* bottom);
+  virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
+      const bool propagate_down, vector<Blob<Dtype>*>* bottom);
+
+  // prior stores the prior probabilities of the labels in the current minibatch.
+  Blob<Dtype> prior_;
+  // intermediary blob to hold label counts
+  Blob<Dtype> labels_;
+};
+
 }  // namespace caffe
 
 #endif  // CAFFE_VISION_LAYERS_HPP_
