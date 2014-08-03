@@ -15,8 +15,10 @@ void ThresholdLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
   CHECK_EQ(bottom.size(), 2) << "Threshold Layer takes the parameters to modify and the labels from which to derive the priors as input.";
   CHECK_EQ(top->size(), 2) << "Softmax Layer gives the modified parameters and the unmodified labels as output.";
   CHECK_EQ(bottom[0]->num(), bottom[1]->num()) << "The data and label should have the same number.";
-  CHECK_EQ((*top)[0]->num(), (*top)[1]->num()) << "The data and label should have the same number.";
 
+  (*top)[0]->ReshapeLike(*bottom[0]);
+  (*top)[1]->ReshapeLike(*bottom[1]);
+  
   labels_.Reshape(1, bottom[0]->channels(),
       bottom[0]->height(), bottom[0]->width());
 
@@ -55,7 +57,7 @@ Dtype ThresholdLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   const int count = bottom[0]->count();
   caffe_mul(count, bottom_data, prior_data, top_data);
 
-  caffe_copy(count, bottom[1]->cpu_data(), (*top)[1]->mutable_cpu_data());
+  //caffe_copy(count, bottom[1]->cpu_data(), (*top)[1]->mutable_cpu_data());
   return Dtype(0);
 }
 
