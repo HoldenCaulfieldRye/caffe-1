@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 from os.path import join as ojoin
 
 
-def matplot(model_dir, train, val, start=-1, end=-1):
+def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   
   # if end == start == -1:
-  start, end = 0, len(error)
+  start, end = 0, len(train)
   print 'plotting entire training data'
     
   # elif start == -1:
@@ -27,30 +27,51 @@ def matplot(model_dir, train, val, start=-1, end=-1):
     
   x = np.array(range(len(train[start:end])))
   ytrain = np.array([el[1] for el in train[start:end]])
-  ytest = np.array([el[1] for el in val[start:end]])
-  plt.plot(x, ytrain, label='training train')
-  plt.plot(x, ytest, label='validation train')
+  ytest_acc = np.array([el[1] for el in val_acc[start:end]])
+  ytest_loss = np.array([el[1] for el in val_loss[start:end]])
+  plt.plot(x, ytrain, label='training loss')
+  plt.plot(x, ytest_acc, label='validation accuracy')
+  plt.plot(x, ytest_loss, label='validation loss')
   plt.legend(loc='upper left')
   plt.xlabel('Iters')
   plt.ylabel('TrainingLoss')
   # plt.title('Go on choose one')
   plt.grid(True)
-  plt.savefig(ojoin(model_dir,'plot.png'))
+  plt.savefig(ojoin(model_dir,'plot_'+model_dir.split('/')[-1]+'.png'))
   # plt.show()
 
 
-def get_caffe_train_errors():
-  get_caffe_errors(ojoin(model_dir,'train_output.log.train'))
+def get_caffe_train_errors(model_dir):
+  return get_caffe_errors(ojoin(model_dir,'train_output.log.train'),2)
 
-def get_caffe_val_errors():
-  get_caffe_errors(ojoin(model_dir,'train_output.log.test'))
+def get_caffe_val_acc(model_dir, test_interval):
+  original = get_caffe_errors(ojoin(model_dir,'train_output.log.test'),2)
+  stretch = []
+  for i in range(len(original)-1):
+    for k in range(test_interval):
+      stretch.append(original[i])
+  stretch.append(original[-1])
+  assert all([stretch[i] == stretch[0] for i in range(test_interval)])
+  assert stretch[-1] != stretch[-2]
+  return stretch
 
-def get_caffe_errors(error_file):
+def get_caffe_val_loss(model_dir, test_interval):
+  original = get_caffe_errors(ojoin(model_dir,'train_output.log.test'),3)
+  stretch = []
+  for i in range(len(original)-1):
+    for k in range(test_interval):
+      stretch.append(original[i])
+  stretch.append(original[-1])
+  assert all([stretch[i] == stretch[0] for i in range(test_interval)])
+  assert stretch[-1] != stretch[-2]
+  return stretch
+
+def get_caffe_errors(error_file, idx):
   content = open(error_file,'r').readlines()
   content = [' '.join(line.split()).split(' ') for line in content
              if not line.startswith('#')]
   print 'content looks like %s and %s'%(content[0], content[-1])
-  content = [(line[0],line[2]) for line in content]
+  content = [(line[0],line[idx]) for line in content]
   print 'content looks like %s and %s'%(content[0], content[-1])
   return content
 
@@ -58,7 +79,7 @@ def get_caffe_errors(error_file):
 
 if __name__ == '__main__':
 
-  print('Usage: python plot.py path/to/model [--start-epoch=..] [--end-epoch==..]')
+  print('Usage: python plot.py path/to/model [test-inter=..] [start-epoch=..] [end-epoch==..]')
 
   try: 
     os.environ['DISPLAY']
@@ -66,18 +87,25 @@ if __name__ == '__main__':
     print 'ERROR: X11 forwarding not enabled, cannot run script'
     sys.exit()
 
+  test_interval = [int(arg.split('=')[-1]) for arg in sys.argv
+                   if arg.startswith('test-inter=')]
+  if len(test_interval) != 1:
+      print 'ERROR: test-inter not properly given'
+      sys.exit()
+  else: test_interval = test_interval[0]
+  
   start,end = -1,-1
   for arg in sys.argv:
-    if arg.startswith("--start-epoch="):
+    if arg.startswith("start-epoch="):
       start = int(arg.split('=')[-1])
-    if arg.startswith("--end-epoch="):
+    if arg.startswith("end-epoch="):
       end = int(arg.split('=')[-1])
 
       
-  model_dir = os.path.abspath(model_dir)
+  model_dir = os.path.abspath(sys.argv[1])
 
-  train, val = get_caffe_train_errors(model_dir), get_caffe_val_errors(model_dir)
-  
-  matplot(model_dir, train, val, start, end)
+  train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
+  print 'train looks like %s and %s'%(train[0], train[-1])
+  matplot(model_dir, train, val_acc, val_loss, start, end)
 
   # ideal would be get layer names from cfg, and prompt for which ones

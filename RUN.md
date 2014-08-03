@@ -226,7 +226,7 @@ next steps:
 - Redbox data
 - controlpoint extra metadata
 - google doc specified next steps
-- USA VISA!
+- USA VISA!models/clampdet-fine/
 - script integrate python 
 - save net only if performance gain (cf pylearn2)
 - F measure
@@ -240,3 +240,14 @@ next steps:
 - prove that we can scale (have developed a magic formula for doing
   any kind of image classification) by publishing results on as many
   Kaggle image classification challenges as possible
+
+
+  
+Razvan recommends next:
+- main question is: is it working at all?
+  -> test interval 1 to see whether bad min all along (
+- what is the imbalance in each case?
+  -> if equal to accuracy, then doing nothing
+- if doing nothing, need to understand why
+  -> figure out how everything is working
+  -> properly evaluate accuracy (per class)
