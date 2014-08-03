@@ -11,25 +11,25 @@ from os.path import join as ojoin
 
 def matplot(model_dir, error, start=-1, end=-1):
   
-  if end == start == -1:
-    start, end = 0, len(error)
-    print 'plotting entire training data'
+  # if end == start == -1:
+  start, end = 0, len(error)
+  print 'plotting entire training data'
     
-  elif start == -1:
-    start = 0
-    print 'plotting from epoch %i to %i'%(start,end)
-    end *= 800
+  # elif start == -1:
+  #   start = 0
+  #   print 'plotting from epoch %i to %i'%(start,end)
+  #   end *= 800
     
-  elif end == -1:
-    print 'plotting from epoch %i to the end'%(start)
-    start, end = start*800, len(error)
+  # elif end == -1:
+  #   print 'plotting from epoch %i to the end'%(start)
+  #   start, end = start*800, len(error)
 
-  else:
-    print 'plotting from epoch %i to %i'%(start,end)
-    start, end = start*800, end*800
+  # else:
+  #   print 'plotting from epoch %i to %i'%(start,end)
+  #   start, end = start*800, end*800
     
   x = np.array(range(len(error[start:end])))
-  ytrain = np.array([train for (train,test) in error[start:end]])
+  ytrain = np.array([el[1] for el in error[start:end]])
   # ytest = np.array([test for (train,test) in error[start:end]])
   plt.plot(x, ytrain, label='training error')
   # plt.plot(x, ytest, label='validation error')
@@ -70,9 +70,12 @@ if __name__ == '__main__':
   os.chdir(back)
 
   content = open(ojoin(model_dir,'train_output.log.train'),'r').readlines()
-  content = [line.replace('  ',' ').split(' ') for line in content
-           if not line.startswith('#')]
+  content = [' '.join(line.split()).split(' ') for line in content
+             if not line.startswith('#')]
+  print 'content looks like %s and %s'%(content[0], content[-1])
   content = [(line[0],line[2]) for line in content]
+
+  print 'content looks like %s and %s'%(content[0], content[-1])
   
   matplot(model_dir, content, start, end)
 

@@ -1,0 +1,7 @@
+Cuda number of devices: 1
+Current device id: 0
+Note: Google Test filter = *Threshold*
+[==========] Running 2 tests from 2 test cases.
+[----------] Global test environment set-up.
+[----------] 1 test from ThresholdLayerTest/0, where TypeParam = float
+[ RUN      ] ThresholdLayerTest/0.TestGradientCPU
