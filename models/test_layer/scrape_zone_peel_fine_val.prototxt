@@ -308,12 +308,23 @@ layers {
     }
   }
 }
+
+layers {
+  name: "threshold"
+  type: THRESHOLD
+  bottom: "fc8_aero"
+  bottom: "label"
+  top: "fc8_aero_thresh"
+  top: "label"
+}
+
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_aero"
+  bottom: "fc8_aero_thresh"
   top: "prob"
 }
+
 layers {
   name: "accuracy"
   type: ACCURACY

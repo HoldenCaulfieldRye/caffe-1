@@ -1,0 +1,500 @@
+   32  mkdir ../../data_info
+   33  rmdir ../../datainfo
+   34  python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/markings to-dir=/data/ad6813/caffe/data/markings bad-min=0.8
+   35  cd ../train/
+   36  emacs finetune.sh 
+   37  ./finetune.sh 
+   38  ./finetune.sh 
+   39  git pull origin master
+   40  git commit -a -m "update"
+   41  git pull origin master
+   42  emacs finetune.sh 
+   43  git commit -a -m "update"
+   44  git status
+   45  git add ../../models/markings-fine/
+   46  git commit -a -m "update"
+   47  git push origin master
+   48  git remote set-url origin git@github.com:HoldenCaulfieldRye/caffe-1.git
+   49  git push origin master
+   50  ./finetune.sh 
+   51  emacs finetune.sh 
+   52  emacs finetune.sh 
+   53  ./finetune.sh 
+   54  emacs finetune.sh 
+   55  ./finetune.sh 
+   56  emacs finetune.sh 
+   57  ./finetune.sh 
+   58  cd ../../models/markings-fine/
+   59  echo "no insertion depth markings, badmin 0.8" >> README
+   60  git add README 
+   61  git status
+   62  git commit -a -m "better finetune.sh and update markings"
+   63  ./fine_markings.sh 
+   64  nohup ./fine_markings.sh >> train_output.txt 2>&1 &
+   65  git add train_output.txt 
+   66  git commit -a -m "update markings"
+   67  git push origin master
+   68  git commit -a -m "update"
+   69  git push
+   70  htop
+   71  cd /data/ad6813/
+   72  git clone https://github.com/HoldenCaulfieldRye/caffe-1 caffe
+   73  git remote set-url origin git@github.com:HoldenCaulfieldRye/caffe-1.git
+   74  cd caffe/
+   75  git remote set-url origin git@github.com:HoldenCaulfieldRye/caffe-1.git
+   76  make all
+   77  cd scripts/data_preparation/
+   78  python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/ground_sheet to-dir=/data/ad6813/caffe/data/ground_sheet bad-min=0.8
+   79  ls /data/ad6813/pipe-data/Bluebox/raw_data/
+   80  rm -rf *
+   81  scp -r graphic06.doc.ic.ac.uk:/data/ad6813/pipe-data/Bluebox/raw_data/dump .
+   82  python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/ground_sheet to-dir=/data/ad6813/caffe/data/ground_sheet bad-min=0.8
+   83  ls
+   84  mv dump/ /data/ad6813/pipe-data/Bluebox/raw_data/
+   85  cd ../../
+   86  cd ..
+   87  rm -rf caffe/
+   88  git clone https://github.com/HoldenCaulfieldRye/caffe-1 caffe
+   89  cd caffe/
+   90  make all
+   91  cd scripts/data_preparation/
+   92  python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/ground_sheet to-dir=/data/ad6813/caffe/data/ground_sheet bad-min=0.8
+   93  mkdir ../../data
+   94  python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/ground_sheet to-dir=/data/ad6813/caffe/data/ground_sheet bad-min=0.8
+   95  cd ../train/
+   96  emacs finetune.sh 
+   97  ./finetune.sh 
+   98  git pull origin master
+   99  git commit -a -m "update!
+  100  "
+  101  git pull origin master
+  102  ./finetune.sh 
+  103  cd ../../models/ground_sheet-fine/
+  104  scp graphic06.doc.ic.ac.uk:/data/ad6813/caffe/data/controlpoint/clampdet/clampdet_mean.binaryproto ground_sheet_mean.binaryproto
+  105  mv ground_sheet_mean.binaryproto ground_sheet_fine_mean.binaryproto 
+  106  mv ground_sheet_fine_mean.binaryproto ../../data/ground_sheet/
+  107  ./fine_ground_sheet.sh 
+  108  git commit -a -m "changes"
+  109  git add ../../data/ground_sheet/
+  110  git pull
+  111  ./fine_ground_sheet.sh 
+  112  mkdir ../../data/controlpoint
+  113  mkdir ../../data/controlpointground_sheet
+  114  mkdir ../../data/controlpoint/ground_sheet
+  115  rwdir ../../data/controlpointground_sheet
+  116  rmdir ../../data/controlpointground_sheet
+  117  mv ../../data/ground_sheet/ground_sheet_fine_mean.binaryproto ../../data/controlpoint/ground_sheet/
+  118  ./fine_ground_sheet.sh 
+  119  nohup ./fine_ground_sheet.sh >> train_output.txt
+  120  rm train_output.txt 
+  121  nohup ./fine_ground_sheet.sh >> train_output.txt 2>&1 &
+  122  cat train_output.txt 
+  123  echo "bad_min 0.8 I think" >> README
+  124  cat train_output.txt 
+  125  git status
+  126  git add .
+  127  git commit -a -m "adding ground sheet"
+  128  git push
+  129  git remote set-url origin git@github.com:HoldenCaulfieldRye/caffe-1.git
+  130  git push origin master
+  131  git pull
+  132  git commit -a -m "adding ground sheet"
+  133  emacs ../../scripts/train/finetune.sh 
+  134  git commit -a -m "finetune.sh conflict trivial"
+  135  git push
+  136  cat train_output.txt 
+  137  cd ../../data_info/ground_sheet/
+  138  cat train.txt | grep $0 | wc -l
+  139  cat train.txt | grep 0$ | wc -l
+  140  cat train.txt | grep 1$ | wc -l
+  141  echo "for some reason bad_min 0.6" >> README
+  142  cd ../../models/ground_sheet-fine/
+  143  cat train_output.txt 
+  144  git commit -a -m "update"
+  145  git push
+  146  git pull
+  147  git push
+  148  cat ../../data_info/ground_sheet/val.txt | grep 2$
+  149  cat ../../data_info/ground_sheet/val.txt | grep 1$
+  150  cat ../../data_info/ground_sheet/val.txt | grep 0$
+  151  ls ..
+  152  cd /data/
+  153  mkdir ad6813
+  154  who
+  155  htop
+  156  mkdir ad6813
+  157  cd ad6813/
+  158  ssh-graphic07.doc.ic.ac.uk
+  159  ssh graphic07.doc.ic.ac.uk
+  160  . /usr/local/cuda/setup.sh
+  161  source /usr/local/setup.sh
+  162  make all
+  163  la
+  164  ls
+  165  git set-url git remote set-url origin git@github.com:HoldenCaulfieldRye/caffe-1.git
+  166  git remote set-url origin git@github.com:HoldenCaulfieldRye/caffe-1.git
+  167  git pull
+  168  make all
+  169  echo $LD_LIBRARY_PATH
+  170  find /usr -name "libcblas.so*"
+  171  cd ~/.local/lib/
+  172  ls
+  173  ls /etc/alternatives/libcb*
+  174  ls /etc/alternatives/
+  175  ls /etc/alternatives/ | grep ^libcb
+  176  ls /etc/alternatives/ | grep ^lib
+  177  scp graphic06.doc.ic.ac.uk:/etc/alternatives/libcblas* .
+  178  echo $LD_LIBRARY_PATH
+  179  cd /data/ad6813/caffe/
+  180  scp graphic06.doc.ic.ac.uk:/etc/alternatives/libatlas* .
+  181  make all
+  182  ls ~/.local/lib/
+  183  ls
+  184  mv libatlas* ~/.local/lib/
+  185  make all
+  186  cd scripts/data_preparation/
+  187  python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/hatch_markings to-dir=/data/ad6813/caffe/data/hatch_markings bad-min=0.5
+  188  mkdir ../../data
+  189  python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/hatch_markings to-dir=/data/ad6813/caffe/data/hatch_markings bad-min=0.5
+  190  cd ../train/
+  191  emacs finetune.sh 
+  192  ls ../../models/
+  193  ls ../../data
+  194  emacs finetune.sh 
+  195  ./finetune.sh 
+  196  cd ../../models/alexnet/
+  197  ls
+  198  git pull origin master
+  199  git commit -a -m "changes"
+  200  git pull origin master
+  201  cd ../../scripts/train/
+  202  emacs finetune.sh 
+  203  ./finetune.sh 
+  204  cd ../../models/hatch_markings-fine/
+  205  ./fine_hatch_markings.sh 
+  206  git pull 
+  207  cd ../../scripts/train/
+  208  emacs finetune.sh 
+  209  ./finetune.sh 
+  210  cd ../../models/hatch_markings-fine/
+  211  ls
+  212  scp graphic06.doc.ic.ac.uk:/data/ad6813/caffe/data/controlpoint/clampdet/clampdet_mean.binaryproto hatch_markings_mean.binaryproto
+  213  ./fine_hatch_markings.sh 
+  214  mv hatch_markings_mean.binaryproto hatch_markings_fine_mean.binaryproto 
+  215  ./fine_hatch_markings.sh 
+  216  mv hatch_markings_fine_mean.binaryproto ../../data/hatch_markings/
+  217  ./fine_hatch_markings.sh 
+  218  nohup ./fine_hatch_markings.sh >> train_output.txt 2>&1 &
+  219  emacs ../../scripts/train/finetune.sh 
+  220  echo "can't remember the bad_min" >> README
+  221  cat train_output.txt 
+  222  git status
+  223  git push
+  224  git pull origin pull
+  225  git pull
+  226  git push
+  227  cat train_output.txt 
+  228  cat README 
+  229  emacs ~/.bash_history 
+  230  cd ../../data_info/
+  231  cd hatch_markings/
+  232  cat train.txt | grep 0$
+  233  cat train.txt | grep 0$ | wc -l
+  234  cat train.txt | grep 1$ | wc -l
+  235  cd ../../models/hatch_markings-fine/
+  236  cat README 
+  237  echo "0.5 it seems"sed -i 's/clampdet/"$TASK_NAME"/g' *" >> README 
+  238  echo "0.5 it seems" >> README 
+  239  cat train_output.txt 
+  240  git commit -a -m "update"
+  241  git add .
+  242  git commit -a -m "update"
+  243  git push
+  244  git pull 
+  245  git push
+  246  cat hatch_markings_fine_train.prototxt 
+  247  cd ../../data_info/hatch_markings/
+  248  cat val.txt | grep 2$
+  249  cat val.txt | grep 1$
+  250  cat val.txt | grep 0$
+  251  find . -name "*convnet*"
+  252  git status
+  253  htop
+  254  message user wh13
+  255  cd models/soil_risk-fine/
+  256  emacs train_output.txt 
+  257  cd ../../data_info/
+  258  ls
+  259  cd ../data/
+  260  cat ../models/soil_risk-fine/fine_soil_risk.sh 
+  261  cat ../models/soil_risk-fine/soil_risk_fine_solver.prototxt 
+  262  cat ../models/soil_risk-fine/soil_risk_fine_train.prototxt 
+  263  git status
+  264  git commit -a -m "snapshot name for clampdet regularised"
+  265  git push 
+  266  git pull origin master
+  267  git push 
+  268  cd soil_risk
+  269  ls
+  270  cd train/
+  271  ls | wc -l
+  272  ls ../../soil_risk2/train/ | wc -l
+  273  ls ../../../data_info/train.txt | wc -l
+  274  cd ../../
+  275  ls
+  276  cd soil_risk
+  277  ls
+  278  cd ../../data_info/
+  279  ls
+  280  cat train.txt | wc -l
+  281  cat read.txt 
+  282  git checkout master -- soil_risk
+  283  git log -- [data_info/soil_risk*]
+  284  git log -- [data_info/soil_risk]
+  285  git log -- [data_info/soil_risk/train.txt]
+  286  git log -- data_info/soil_risk/train.txt
+  287  git log -- finetune.sh
+  288  git log
+  289  git log -- [finetune.sh]
+  290  cd ../scripts/train/
+  291  git log -- [finetune.sh]
+  292  ls
+  293  git log -- [ /data/ad6813/caffe/scripts/train/finetune.sh ]
+  294  ls
+  295  cd ../../models/soil_risk-fine
+  296  ls
+  297  cd soil_risk_fine_train_leveldb/
+  298  ls
+  299  cat CURRENT 
+  300  cat LOCK 
+  301  cat LOG
+  302  ls -l
+  303  cat MANIFEST-000007 
+  304  cat 000005.sst 
+  305  62;9;cclear
+  306  clear
+  307  ls
+  308  cd ../../soil_risk-fine_0.8/
+  309  emacs train_output_0.8.txt 
+  310  echo "badmin 0.8" >> README
+  311  cd ../soil_risk-fine
+  312  cat README 
+  313  cd  ../soil_risk-fine_0.8/
+  314  emacs train_output_0.8.txt 
+  315  logout
+  316  htop
+  317  cd models/
+  318  ls
+  319  cd models/
+  320  ls
+  321  git pull
+  322  git pull
+  323  git status
+  324  git commit -a -m "markings train"
+  325  git push
+  326  git pull
+  327  git status
+  328  git commit -a -m "ground sheet train"
+  329  git push
+  330  git pull
+  331  git push
+  332  cd models/
+  333  git status
+  334  git commit -a -m "hatch_markings train"
+  335  git git pull
+  336  ggit pull
+  337  git pull
+  338  git push
+  339  git pull
+  340  git push
+  341  git pul
+  342  git pull
+  343  git pull origin master
+  344  cd models/ground_sheet-fine/
+  345  emacs train_output.txt 
+  346  git status
+  347  git add --all
+  348  git commit -a -m "data_info"
+  349  git pull origin master
+  350  git push
+  351  git add --all
+  352  git commit -a -m "datainfo"
+  353  git pull origin master
+  354  git puh
+  355  git push
+  356  git pull origin master
+  357  git add --all
+  358  git commit -a -m "datainfo"
+  359  git push origin master
+  360  git pull origin master
+  361  git add --all
+  362  git commit -a -m "datainfo"
+  363  git push origin master
+  364  git status
+  365  git add models/scrape_zone_peel-fine/train_output.txt 
+  366  git commit -a -m "scrape_zone_peel train"
+  367  git push
+  368  git pull
+  369  git push
+  370  git push
+  371  git pull
+  372  cd scripts/
+  373  ls
+  374  cd data_preparation/
+  375  python setup_data.py python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=0.8
+  376  cd ../../data
+  377  ls
+  378  ls scrape_zone_peel/train/ | wc -l
+  379  cd scrape_zone_peel/train/
+  380  ls | less
+  381  ls | wc -l
+  382  ls -l | wc -l
+  383  ls
+  384  cd data/ground_sheet/
+  385  ls -l train/ | wc -l
+  386  cd ../../models/
+  387  ls
+  388  cd hatch_markings-fine/
+  389  git pull origin master
+  390  cd data_info/ground_sheet/
+  391  cat train.txt | wc -l
+  392  cd ../../models/ground_sheet-fine/
+  393  echo README 
+  394  ls
+  395  cat README 
+  396  cd ../../data_info/ground_sheet/
+  397  cat train.txt | grep 0$ | wc -l
+  398  cat train.txt | grep 1$ | wc -l
+  399  cd ../../models/
+  400  ls
+  401  cd scrape_zone_peel-fine/
+  402  cat README 
+  403  cat ../../data_info/scrape_zone_peel/train.txt | wc -l
+  404  cat ../../data_info/ground_sheet/train.txt | wc -l
+  405  ls ../../data/ground_sheet/train | wc -l
+  406  emacs fine_scrape_zone_peel.sh 
+  407  emacs train_output.txt 
+  408  cat README 
+  409  emacs train_output.txt 
+  410  cd ../markings-fine/
+  411  cat README 
+  412  cat ../../data_info/markings/train.txt | wc -l
+  413  emacs train_output.txt 
+  414  cat README 
+  415  cd ../hatch_markings-fine/
+  416  cat README 
+  417  cat ../../data_info/hatch_markings/train.txt | grep 1$ | wc -l
+  418  cat ../../data_info/hatch_markings/train.txt | grep 0$ | wc -l
+  419  ech "yes 0.5" >> README 
+  420  echo "yes 0.5" >> README 
+  421  cat README 
+  422  emacs train_output.txt 
+  423  ls
+  424  cd raw_data/
+  425  ls
+  426  man bash
+  427  cd src/
+  428  ls
+  429  cd cad
+  430  cd caffe/
+  431  ls
+  432  cd util/
+  433  ls
+  434  emacs makefile 
+  435  rm makefile 
+  436  cd ..
+  437  cd models/test_layer/
+  438  ./fine_scrape_zone_peel.sh 
+  439  cd ../../
+  440  make all
+  441  ls
+  442  vim Makefile*
+  443  vim Makefile*
+  444  ls
+  445  grep -ir "make" .
+  446  ls -r
+  447  man ls
+  448  ls -AR
+  449  ls -AR | grep "Make"
+  450  ls -lAR | grep "Make"
+  451  man ls
+  452  man find
+  453  find -name "Make" .
+  454  find . -name "Make"
+  455  find . -name "Make*"
+  456  gedit glog-0.3.3/Makefile
+  457  vim glog-0.3.3/Makefile
+  458  vim Make*
+  459  find src/caffe/ ! -name "test_*.cpp" -name "*.cpp"
+  460  make all
+  461  vim srsrsssssss
+  462  ls
+  463  vim src/caffe/layers/threshold_layer.cpp 
+  464  make all
+  465  git status
+  466  git pull
+  467  vim src/caffe/layers/threshold_layer.cpp 
+  468  make all
+  469  vim src/caffe/layers/threshold_layer.cpp 
+  470  make all
+  471  vim src/caffe/layers/threshold_layer.cpp 
+  472  make all
+  473  vim include/caffe/vision_layers.hpp 
+  474  vim src/caffe/layers/threshold_layer.cpp 
+  475  make all
+  476  vim src/caffe/layers/threshold_layer.cpp 
+  477  make all
+  478  vim src/caffe/layers/threshold_layer.cpp 
+  479  make all
+  480  vim src/caffe/layers/threshold_layer.cpp 
+  481  make all
+  482  make all
+  483  vim src/caffe/layers/threshold_layer.cpp 
+  484  make all
+  485  vim src/caffe/layers/threshold_layer.cpp 
+  486  git pull
+  487  git pull origin
+  488  vim include/caffe/vision_layers.hpp 
+  489  vim src/caffe/layers/threshold_layer.cpp 
+  490  vim include/caffe/vision_layers.hpp 
+  491  vim src/caffe/layers/threshold_layer.cpp 
+  492  cd src/caffe/layers/
+  493  cp softmax_loss_layer.cu threshold.cu 
+  494  vim threshold*
+  495  cd ../../..
+  496  make all
+  497  mv src/caffe/layers/threshold.cu src/caffe/layers/threshold_layer.cu
+  498  make all
+  499  ls
+  500  ls
+  501  cd ..
+  502  ls
+  503  cd ..
+  504  ls
+  505  cd caffe/
+  506  ls
+  507  vim src/caffe/layers/threshold_layer.c*
+  508  make all
+  509  cd models/
+  510  ls
+  511  cd test_layer/
+  512  ls
+  513  cat train_output.txt 
+  514  ls
+  515  cat README 
+  516  cat scrape_zone_peel_fine_val.prototxt 
+  517  cat scrape_zone_peel_fine_train.prototxt 
+  518  cat scrape_zone_peel_fine_test.prototxt 
+  519  vim scrape_zone_peel_fine_test.prototxt 
+  520  ls
+  521  cat scrape_zone_peel_fine_solver.prototxt 
+  522  cat resume_training.sh 
+  523  ;s
+  524  ls
+  525  cat create_scrape_zone_peel_fine.sh 
+  526  cat fine_scrape_zone_peel.sh 
+  527  ls
+  528  cat fine_scrape_zone_peel.sh 
+  529  ./resume_training.sh 
+  530  history
+  531  history > bashHistory
