@@ -1,15 +1,12 @@
-import cPickle as pickle
-import sys, os, shutil, re
+import sys, os
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from math import ceil
-from subprocess import call
 from os.path import join as ojoin
 
 
-def matplot(model_dir, error, start=-1, end=-1):
+def matplot(model_dir, train, val, start=-1, end=-1):
   
   # if end == start == -1:
   start, end = 0, len(error)
@@ -22,25 +19,40 @@ def matplot(model_dir, error, start=-1, end=-1):
     
   # elif end == -1:
   #   print 'plotting from epoch %i to the end'%(start)
-  #   start, end = start*800, len(error)
+  #   start, end = start*800, len(train)
 
   # else:
   #   print 'plotting from epoch %i to %i'%(start,end)
   #   start, end = start*800, end*800
     
-  x = np.array(range(len(error[start:end])))
-  ytrain = np.array([el[1] for el in error[start:end]])
-  # ytest = np.array([test for (train,test) in error[start:end]])
-  plt.plot(x, ytrain, label='training error')
-  # plt.plot(x, ytest, label='validation error')
+  x = np.array(range(len(train[start:end])))
+  ytrain = np.array([el[1] for el in train[start:end]])
+  ytest = np.array([el[1] for el in val[start:end]])
+  plt.plot(x, ytrain, label='training train')
+  plt.plot(x, ytest, label='validation train')
   plt.legend(loc='upper left')
   plt.xlabel('Iters')
   plt.ylabel('TrainingLoss')
   # plt.title('Go on choose one')
   plt.grid(True)
-  plt.savefig(ojoin(model_dir,'plot_train.png'))
+  plt.savefig(ojoin(model_dir,'plot.png'))
   # plt.show()
 
+
+def get_caffe_train_errors():
+  get_caffe_errors(ojoin(model_dir,'train_output.log.train'))
+
+def get_caffe_val_errors():
+  get_caffe_errors(ojoin(model_dir,'train_output.log.test'))
+
+def get_caffe_errors(error_file):
+  content = open(error_file,'r').readlines()
+  content = [' '.join(line.split()).split(' ') for line in content
+             if not line.startswith('#')]
+  print 'content looks like %s and %s'%(content[0], content[-1])
+  content = [(line[0],line[2]) for line in content]
+  print 'content looks like %s and %s'%(content[0], content[-1])
+  return content
 
 
 
@@ -62,21 +74,10 @@ if __name__ == '__main__':
       end = int(arg.split('=')[-1])
 
       
-  model_dir = sys.argv[1]
-  # to use absolute path of model_dir, not relative
-  back = os.getcwd()
-  os.chdir(model_dir)
-  model_dir = os.getcwd()
-  os.chdir(back)
+  model_dir = os.path.abspath(model_dir)
 
-  content = open(ojoin(model_dir,'train_output.log.train'),'r').readlines()
-  content = [' '.join(line.split()).split(' ') for line in content
-             if not line.startswith('#')]
-  print 'content looks like %s and %s'%(content[0], content[-1])
-  content = [(line[0],line[2]) for line in content]
-
-  print 'content looks like %s and %s'%(content[0], content[-1])
+  train, val = get_caffe_train_errors(model_dir), get_caffe_val_errors(model_dir)
   
-  matplot(model_dir, content, start, end)
+  matplot(model_dir, train, val, start, end)
 
   # ideal would be get layer names from cfg, and prompt for which ones
