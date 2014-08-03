@@ -172,9 +172,8 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 CURRENTLY
 =========
 
-training:
-- 06:
-- 07:
+- 06: soil_risk, soil_risk2
+- 07: scrape_zone_peel
 - 08:
 - 09:
 - 10:

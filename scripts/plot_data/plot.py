@@ -38,7 +38,7 @@ def matplot(model_dir, error, start=-1, end=-1):
   plt.ylabel('TrainingLoss')
   # plt.title('Go on choose one')
   plt.grid(True)
-  plt.savefig(ojoin(model_dir,"/plot_train.png"))
+  plt.savefig(ojoin(model_dir,'plot_train.png'))
   # plt.show()
 
 
