@@ -1,0 +1,801 @@
+nohup: ignoring input
+I0804 14:55:44.810103 19230 finetune_net.cpp:25] Starting Optimization
+I0804 14:55:44.810189 19230 solver.cpp:41] Creating training net.
+I0804 14:55:44.810670 19230 net.cpp:75] Creating Layer data
+I0804 14:55:44.810678 19230 net.cpp:111] data -> data
+I0804 14:55:44.810688 19230 net.cpp:111] data -> label
+I0804 14:55:44.810709 19230 data_layer.cpp:145] Opening leveldb scrape_zone_peel_fine_train_leveldb
+F0804 14:55:44.810863 19230 data_layer.cpp:148] Check failed: status.ok() Failed to open leveldb scrape_zone_peel_fine_train_leveldb
+Invalid argument: scrape_zone_peel_fine_train_leveldb: does not exist (create_if_missing is false)
+*** Check failure stack trace: ***
+    @     0x7fdb9731ef9d  google::LogMessage::Fail()
+    @     0x7fdb973210af  google::LogMessage::SendToLog()
+    @     0x7fdb9731eb8c  google::LogMessage::Flush()
+    @     0x7fdb9732194d  google::LogMessageFatal::~LogMessageFatal()
+    @           0x48395c  caffe::DataLayer<>::SetUp()
+    @           0x4423ba  caffe::Net<>::Init()
+    @           0x443b73  caffe::Net<>::Net()
+    @           0x4449de  caffe::Solver<>::Init()
+    @           0x448a1a  caffe::Solver<>::Solver()
+    @           0x412686  main
+    @     0x7fdb94eb6ea5  (unknown)
+    @           0x4144e9  (unknown)
+Aborted
+Done.
+nohup: ignoring input
+I0804 14:57:01.072444 19263 finetune_net.cpp:25] Starting Optimization
+I0804 14:57:01.072530 19263 solver.cpp:41] Creating training net.
+I0804 14:57:01.073024 19263 net.cpp:75] Creating Layer data
+I0804 14:57:01.073035 19263 net.cpp:111] data -> data
+I0804 14:57:01.073046 19263 net.cpp:111] data -> label
+I0804 14:57:01.073066 19263 data_layer.cpp:145] Opening leveldb scrape_zone_peel_fine_train_leveldb
+I0804 14:57:08.578871 19263 data_layer.cpp:185] output data size: 50,3,227,227
+I0804 14:57:08.578899 19263 data_layer.cpp:204] Loading mean file from../../data/scrape_zone_peel/scrape_zone_peel_fine_mean.binaryproto
+I0804 14:57:08.891474 19263 net.cpp:126] Top shape: 50 3 227 227 (7729350)
+I0804 14:57:08.891505 19263 net.cpp:126] Top shape: 50 1 1 1 (50)
+I0804 14:57:08.891511 19263 net.cpp:157] data does not need backward computation.
+I0804 14:57:08.891523 19263 net.cpp:75] Creating Layer conv1
+I0804 14:57:08.891530 19263 net.cpp:85] conv1 <- data
+I0804 14:57:08.891542 19263 net.cpp:111] conv1 -> conv1
+I0804 14:57:08.892875 19263 net.cpp:126] Top shape: 50 96 55 55 (14520000)
+I0804 14:57:08.892887 19263 net.cpp:152] conv1 needs backward computation.
+I0804 14:57:08.892894 19263 net.cpp:75] Creating Layer relu1
+I0804 14:57:08.892899 19263 net.cpp:85] relu1 <- conv1
+I0804 14:57:08.892902 19263 net.cpp:99] relu1 -> conv1 (in-place)
+I0804 14:57:08.892910 19263 net.cpp:126] Top shape: 50 96 55 55 (14520000)
+I0804 14:57:08.892913 19263 net.cpp:152] relu1 needs backward computation.
+I0804 14:57:08.892918 19263 net.cpp:75] Creating Layer pool1
+I0804 14:57:08.892922 19263 net.cpp:85] pool1 <- conv1
+I0804 14:57:08.892926 19263 net.cpp:111] pool1 -> pool1
+I0804 14:57:08.892936 19263 net.cpp:126] Top shape: 50 96 27 27 (3499200)
+I0804 14:57:08.892940 19263 net.cpp:152] pool1 needs backward computation.
+I0804 14:57:08.892946 19263 net.cpp:75] Creating Layer norm1
+I0804 14:57:08.892951 19263 net.cpp:85] norm1 <- pool1
+I0804 14:57:08.892954 19263 net.cpp:111] norm1 -> norm1
+I0804 14:57:08.892961 19263 net.cpp:126] Top shape: 50 96 27 27 (3499200)
+I0804 14:57:08.892966 19263 net.cpp:152] norm1 needs backward computation.
+I0804 14:57:08.892971 19263 net.cpp:75] Creating Layer conv2
+I0804 14:57:08.892974 19263 net.cpp:85] conv2 <- norm1
+I0804 14:57:08.892978 19263 net.cpp:111] conv2 -> conv2
+I0804 14:57:08.903970 19263 net.cpp:126] Top shape: 50 256 27 27 (9331200)
+I0804 14:57:08.903995 19263 net.cpp:152] conv2 needs backward computation.
+I0804 14:57:08.904002 19263 net.cpp:75] Creating Layer relu2
+I0804 14:57:08.904007 19263 net.cpp:85] relu2 <- conv2
+I0804 14:57:08.904013 19263 net.cpp:99] relu2 -> conv2 (in-place)
+I0804 14:57:08.904019 19263 net.cpp:126] Top shape: 50 256 27 27 (9331200)
+I0804 14:57:08.904023 19263 net.cpp:152] relu2 needs backward computation.
+I0804 14:57:08.904028 19263 net.cpp:75] Creating Layer pool2
+I0804 14:57:08.904031 19263 net.cpp:85] pool2 <- conv2
+I0804 14:57:08.904036 19263 net.cpp:111] pool2 -> pool2
+I0804 14:57:08.904042 19263 net.cpp:126] Top shape: 50 256 13 13 (2163200)
+I0804 14:57:08.904045 19263 net.cpp:152] pool2 needs backward computation.
+I0804 14:57:08.904052 19263 net.cpp:75] Creating Layer norm2
+I0804 14:57:08.904057 19263 net.cpp:85] norm2 <- pool2
+I0804 14:57:08.904060 19263 net.cpp:111] norm2 -> norm2
+I0804 14:57:08.904065 19263 net.cpp:126] Top shape: 50 256 13 13 (2163200)
+I0804 14:57:08.904068 19263 net.cpp:152] norm2 needs backward computation.
+I0804 14:57:08.904073 19263 net.cpp:75] Creating Layer conv3
+I0804 14:57:08.904078 19263 net.cpp:85] conv3 <- norm2
+I0804 14:57:08.904081 19263 net.cpp:111] conv3 -> conv3
+I0804 14:57:08.935534 19263 net.cpp:126] Top shape: 50 384 13 13 (3244800)
+I0804 14:57:08.935557 19263 net.cpp:152] conv3 needs backward computation.
+I0804 14:57:08.935566 19263 net.cpp:75] Creating Layer relu3
+I0804 14:57:08.935571 19263 net.cpp:85] relu3 <- conv3
+I0804 14:57:08.935577 19263 net.cpp:99] relu3 -> conv3 (in-place)
+I0804 14:57:08.935582 19263 net.cpp:126] Top shape: 50 384 13 13 (3244800)
+I0804 14:57:08.935586 19263 net.cpp:152] relu3 needs backward computation.
+I0804 14:57:08.935591 19263 net.cpp:75] Creating Layer conv4
+I0804 14:57:08.935595 19263 net.cpp:85] conv4 <- conv3
+I0804 14:57:08.935600 19263 net.cpp:111] conv4 -> conv4
+I0804 14:57:08.959113 19263 net.cpp:126] Top shape: 50 384 13 13 (3244800)
+I0804 14:57:08.959125 19263 net.cpp:152] conv4 needs backward computation.
+I0804 14:57:08.959130 19263 net.cpp:75] Creating Layer relu4
+I0804 14:57:08.959133 19263 net.cpp:85] relu4 <- conv4
+I0804 14:57:08.959137 19263 net.cpp:99] relu4 -> conv4 (in-place)
+I0804 14:57:08.959141 19263 net.cpp:126] Top shape: 50 384 13 13 (3244800)
+I0804 14:57:08.959146 19263 net.cpp:152] relu4 needs backward computation.
+I0804 14:57:08.959151 19263 net.cpp:75] Creating Layer conv5
+I0804 14:57:08.959153 19263 net.cpp:85] conv5 <- conv4
+I0804 14:57:08.959157 19263 net.cpp:111] conv5 -> conv5
+I0804 14:57:08.974854 19263 net.cpp:126] Top shape: 50 256 13 13 (2163200)
+I0804 14:57:08.974865 19263 net.cpp:152] conv5 needs backward computation.
+I0804 14:57:08.974871 19263 net.cpp:75] Creating Layer relu5
+I0804 14:57:08.974875 19263 net.cpp:85] relu5 <- conv5
+I0804 14:57:08.974879 19263 net.cpp:99] relu5 -> conv5 (in-place)
+I0804 14:57:08.974884 19263 net.cpp:126] Top shape: 50 256 13 13 (2163200)
+I0804 14:57:08.974889 19263 net.cpp:152] relu5 needs backward computation.
+I0804 14:57:08.974894 19263 net.cpp:75] Creating Layer pool5
+I0804 14:57:08.974897 19263 net.cpp:85] pool5 <- conv5
+I0804 14:57:08.974901 19263 net.cpp:111] pool5 -> pool5
+I0804 14:57:08.974907 19263 net.cpp:126] Top shape: 50 256 6 6 (460800)
+I0804 14:57:08.974911 19263 net.cpp:152] pool5 needs backward computation.
+I0804 14:57:08.974918 19263 net.cpp:75] Creating Layer fc6
+I0804 14:57:08.974922 19263 net.cpp:85] fc6 <- pool5
+I0804 14:57:08.974926 19263 net.cpp:111] fc6 -> fc6
+I0804 14:57:10.636941 19263 net.cpp:126] Top shape: 50 4096 1 1 (204800)
+I0804 14:57:10.636966 19263 net.cpp:152] fc6 needs backward computation.
+I0804 14:57:10.636976 19263 net.cpp:75] Creating Layer relu6
+I0804 14:57:10.636981 19263 net.cpp:85] relu6 <- fc6
+I0804 14:57:10.636987 19263 net.cpp:99] relu6 -> fc6 (in-place)
+I0804 14:57:10.636992 19263 net.cpp:126] Top shape: 50 4096 1 1 (204800)
+I0804 14:57:10.636996 19263 net.cpp:152] relu6 needs backward computation.
+I0804 14:57:10.637001 19263 net.cpp:75] Creating Layer drop6
+I0804 14:57:10.637006 19263 net.cpp:85] drop6 <- fc6
+I0804 14:57:10.637009 19263 net.cpp:99] drop6 -> fc6 (in-place)
+I0804 14:57:10.637022 19263 net.cpp:126] Top shape: 50 4096 1 1 (204800)
+I0804 14:57:10.637025 19263 net.cpp:152] drop6 needs backward computation.
+I0804 14:57:10.637032 19263 net.cpp:75] Creating Layer fc7
+I0804 14:57:10.637035 19263 net.cpp:85] fc7 <- fc6
+I0804 14:57:10.637039 19263 net.cpp:111] fc7 -> fc7
+I0804 14:57:11.353013 19263 net.cpp:126] Top shape: 50 4096 1 1 (204800)
+I0804 14:57:11.353036 19263 net.cpp:152] fc7 needs backward computation.
+I0804 14:57:11.353045 19263 net.cpp:75] Creating Layer relu7
+I0804 14:57:11.353050 19263 net.cpp:85] relu7 <- fc7
+I0804 14:57:11.353057 19263 net.cpp:99] relu7 -> fc7 (in-place)
+I0804 14:57:11.353062 19263 net.cpp:126] Top shape: 50 4096 1 1 (204800)
+I0804 14:57:11.353066 19263 net.cpp:152] relu7 needs backward computation.
+I0804 14:57:11.353071 19263 net.cpp:75] Creating Layer drop7
+I0804 14:57:11.353075 19263 net.cpp:85] drop7 <- fc7
+I0804 14:57:11.353080 19263 net.cpp:99] drop7 -> fc7 (in-place)
+I0804 14:57:11.353083 19263 net.cpp:126] Top shape: 50 4096 1 1 (204800)
+I0804 14:57:11.353087 19263 net.cpp:152] drop7 needs backward computation.
+I0804 14:57:11.353092 19263 net.cpp:75] Creating Layer fc8_clamp
+I0804 14:57:11.353096 19263 net.cpp:85] fc8_clamp <- fc7
+I0804 14:57:11.353101 19263 net.cpp:111] fc8_clamp -> fc8_aero
+I0804 14:57:11.353469 19263 net.cpp:126] Top shape: 50 2 1 1 (100)
+I0804 14:57:11.353477 19263 net.cpp:152] fc8_clamp needs backward computation.
+I0804 14:57:11.353487 19263 net.cpp:75] Creating Layer loss
+I0804 14:57:11.353492 19263 net.cpp:85] loss <- fc8_aero
+I0804 14:57:11.353497 19263 net.cpp:85] loss <- label
+I0804 14:57:11.353504 19263 net.cpp:152] loss needs backward computation.
+I0804 14:57:11.353529 19263 net.cpp:181] Collecting Learning Rate and Weight Decay.
+I0804 14:57:11.353543 19263 net.cpp:174] Network initialization done.
+I0804 14:57:11.353549 19263 net.cpp:175] Memory required for Data 209714800
+I0804 14:57:11.353595 19263 solver.cpp:44] Creating testing net.
+I0804 14:57:11.354207 19263 net.cpp:75] Creating Layer data
+I0804 14:57:11.354218 19263 net.cpp:111] data -> data
+I0804 14:57:11.354224 19263 net.cpp:111] data -> label
+I0804 14:57:11.354230 19263 data_layer.cpp:145] Opening leveldb scrape_zone_peel_fine_val_leveldb
+I0804 14:57:13.889286 19263 data_layer.cpp:185] output data size: 256,3,227,227
+I0804 14:57:13.889308 19263 data_layer.cpp:204] Loading mean file from../../data/scrape_zone_peel/scrape_zone_peel_fine_mean.binaryproto
+I0804 14:57:13.906226 19263 net.cpp:126] Top shape: 256 3 227 227 (39574272)
+I0804 14:57:13.906239 19263 net.cpp:126] Top shape: 256 1 1 1 (256)
+I0804 14:57:13.906244 19263 net.cpp:157] data does not need backward computation.
+I0804 14:57:13.906255 19263 net.cpp:75] Creating Layer conv1
+I0804 14:57:13.906260 19263 net.cpp:85] conv1 <- data
+I0804 14:57:13.906265 19263 net.cpp:111] conv1 -> conv1
+I0804 14:57:13.907510 19263 net.cpp:126] Top shape: 256 96 55 55 (74342400)
+I0804 14:57:13.907519 19263 net.cpp:152] conv1 needs backward computation.
+I0804 14:57:13.907526 19263 net.cpp:75] Creating Layer relu1
+I0804 14:57:13.907529 19263 net.cpp:85] relu1 <- conv1
+I0804 14:57:13.907534 19263 net.cpp:99] relu1 -> conv1 (in-place)
+I0804 14:57:13.907538 19263 net.cpp:126] Top shape: 256 96 55 55 (74342400)
+I0804 14:57:13.907542 19263 net.cpp:152] relu1 needs backward computation.
+I0804 14:57:13.907547 19263 net.cpp:75] Creating Layer pool1
+I0804 14:57:13.907552 19263 net.cpp:85] pool1 <- conv1
+I0804 14:57:13.907555 19263 net.cpp:111] pool1 -> pool1
+I0804 14:57:13.907560 19263 net.cpp:126] Top shape: 256 96 27 27 (17915904)
+I0804 14:57:13.907564 19263 net.cpp:152] pool1 needs backward computation.
+I0804 14:57:13.907570 19263 net.cpp:75] Creating Layer norm1
+I0804 14:57:13.907574 19263 net.cpp:85] norm1 <- pool1
+I0804 14:57:13.907578 19263 net.cpp:111] norm1 -> norm1
+I0804 14:57:13.907584 19263 net.cpp:126] Top shape: 256 96 27 27 (17915904)
+I0804 14:57:13.907588 19263 net.cpp:152] norm1 needs backward computation.
+I0804 14:57:13.907593 19263 net.cpp:75] Creating Layer conv2
+I0804 14:57:13.907596 19263 net.cpp:85] conv2 <- norm1
+I0804 14:57:13.907600 19263 net.cpp:111] conv2 -> conv2
+I0804 14:57:13.918573 19263 net.cpp:126] Top shape: 256 256 27 27 (47775744)
+I0804 14:57:13.918597 19263 net.cpp:152] conv2 needs backward computation.
+I0804 14:57:13.918606 19263 net.cpp:75] Creating Layer relu2
+I0804 14:57:13.918612 19263 net.cpp:85] relu2 <- conv2
+I0804 14:57:13.918617 19263 net.cpp:99] relu2 -> conv2 (in-place)
+I0804 14:57:13.918623 19263 net.cpp:126] Top shape: 256 256 27 27 (47775744)
+I0804 14:57:13.918627 19263 net.cpp:152] relu2 needs backward computation.
+I0804 14:57:13.918633 19263 net.cpp:75] Creating Layer pool2
+I0804 14:57:13.918637 19263 net.cpp:85] pool2 <- conv2
+I0804 14:57:13.918642 19263 net.cpp:111] pool2 -> pool2
+I0804 14:57:13.918648 19263 net.cpp:126] Top shape: 256 256 13 13 (11075584)
+I0804 14:57:13.918651 19263 net.cpp:152] pool2 needs backward computation.
+I0804 14:57:13.918658 19263 net.cpp:75] Creating Layer norm2
+I0804 14:57:13.918663 19263 net.cpp:85] norm2 <- pool2
+I0804 14:57:13.918666 19263 net.cpp:111] norm2 -> norm2
+I0804 14:57:13.918671 19263 net.cpp:126] Top shape: 256 256 13 13 (11075584)
+I0804 14:57:13.918675 19263 net.cpp:152] norm2 needs backward computation.
+I0804 14:57:13.918680 19263 net.cpp:75] Creating Layer conv3
+I0804 14:57:13.918684 19263 net.cpp:85] conv3 <- norm2
+I0804 14:57:13.918689 19263 net.cpp:111] conv3 -> conv3
+I0804 14:57:13.950237 19263 net.cpp:126] Top shape: 256 384 13 13 (16613376)
+I0804 14:57:13.950261 19263 net.cpp:152] conv3 needs backward computation.
+I0804 14:57:13.950269 19263 net.cpp:75] Creating Layer relu3
+I0804 14:57:13.950275 19263 net.cpp:85] relu3 <- conv3
+I0804 14:57:13.950281 19263 net.cpp:99] relu3 -> conv3 (in-place)
+I0804 14:57:13.950286 19263 net.cpp:126] Top shape: 256 384 13 13 (16613376)
+I0804 14:57:13.950290 19263 net.cpp:152] relu3 needs backward computation.
+I0804 14:57:13.950296 19263 net.cpp:75] Creating Layer conv4
+I0804 14:57:13.950300 19263 net.cpp:85] conv4 <- conv3
+I0804 14:57:13.950304 19263 net.cpp:111] conv4 -> conv4
+I0804 14:57:13.973961 19263 net.cpp:126] Top shape: 256 384 13 13 (16613376)
+I0804 14:57:13.973987 19263 net.cpp:152] conv4 needs backward computation.
+I0804 14:57:13.973999 19263 net.cpp:75] Creating Layer relu4
+I0804 14:57:13.974004 19263 net.cpp:85] relu4 <- conv4
+I0804 14:57:13.974010 19263 net.cpp:99] relu4 -> conv4 (in-place)
+I0804 14:57:13.974016 19263 net.cpp:126] Top shape: 256 384 13 13 (16613376)
+I0804 14:57:13.974020 19263 net.cpp:152] relu4 needs backward computation.
+I0804 14:57:13.974026 19263 net.cpp:75] Creating Layer conv5
+I0804 14:57:13.974030 19263 net.cpp:85] conv5 <- conv4
+I0804 14:57:13.974035 19263 net.cpp:111] conv5 -> conv5
+I0804 14:57:13.989816 19263 net.cpp:126] Top shape: 256 256 13 13 (11075584)
+I0804 14:57:13.989841 19263 net.cpp:152] conv5 needs backward computation.
+I0804 14:57:13.989850 19263 net.cpp:75] Creating Layer relu5
+I0804 14:57:13.989856 19263 net.cpp:85] relu5 <- conv5
+I0804 14:57:13.989861 19263 net.cpp:99] relu5 -> conv5 (in-place)
+I0804 14:57:13.989866 19263 net.cpp:126] Top shape: 256 256 13 13 (11075584)
+I0804 14:57:13.989871 19263 net.cpp:152] relu5 needs backward computation.
+I0804 14:57:13.989876 19263 net.cpp:75] Creating Layer pool5
+I0804 14:57:13.989879 19263 net.cpp:85] pool5 <- conv5
+I0804 14:57:13.989883 19263 net.cpp:111] pool5 -> pool5
+I0804 14:57:13.989889 19263 net.cpp:126] Top shape: 256 256 6 6 (2359296)
+I0804 14:57:13.989893 19263 net.cpp:152] pool5 needs backward computation.
+I0804 14:57:13.989902 19263 net.cpp:75] Creating Layer fc6
+I0804 14:57:13.989905 19263 net.cpp:85] fc6 <- pool5
+I0804 14:57:13.989909 19263 net.cpp:111] fc6 -> fc6
+I0804 14:57:15.654371 19263 net.cpp:126] Top shape: 256 4096 1 1 (1048576)
+I0804 14:57:15.654397 19263 net.cpp:152] fc6 needs backward computation.
+I0804 14:57:15.654407 19263 net.cpp:75] Creating Layer relu6
+I0804 14:57:15.654412 19263 net.cpp:85] relu6 <- fc6
+I0804 14:57:15.654418 19263 net.cpp:99] relu6 -> fc6 (in-place)
+I0804 14:57:15.654423 19263 net.cpp:126] Top shape: 256 4096 1 1 (1048576)
+I0804 14:57:15.654428 19263 net.cpp:152] relu6 needs backward computation.
+I0804 14:57:15.654433 19263 net.cpp:75] Creating Layer drop6
+I0804 14:57:15.654436 19263 net.cpp:85] drop6 <- fc6
+I0804 14:57:15.654441 19263 net.cpp:99] drop6 -> fc6 (in-place)
+I0804 14:57:15.654446 19263 net.cpp:126] Top shape: 256 4096 1 1 (1048576)
+I0804 14:57:15.654450 19263 net.cpp:152] drop6 needs backward computation.
+I0804 14:57:15.654455 19263 net.cpp:75] Creating Layer fc7
+I0804 14:57:15.654459 19263 net.cpp:85] fc7 <- fc6
+I0804 14:57:15.654464 19263 net.cpp:111] fc7 -> fc7
+I0804 14:57:16.393326 19263 net.cpp:126] Top shape: 256 4096 1 1 (1048576)
+I0804 14:57:16.393352 19263 net.cpp:152] fc7 needs backward computation.
+I0804 14:57:16.393362 19263 net.cpp:75] Creating Layer relu7
+I0804 14:57:16.393368 19263 net.cpp:85] relu7 <- fc7
+I0804 14:57:16.393374 19263 net.cpp:99] relu7 -> fc7 (in-place)
+I0804 14:57:16.393379 19263 net.cpp:126] Top shape: 256 4096 1 1 (1048576)
+I0804 14:57:16.393383 19263 net.cpp:152] relu7 needs backward computation.
+I0804 14:57:16.393388 19263 net.cpp:75] Creating Layer drop7
+I0804 14:57:16.393393 19263 net.cpp:85] drop7 <- fc7
+I0804 14:57:16.393396 19263 net.cpp:99] drop7 -> fc7 (in-place)
+I0804 14:57:16.393400 19263 net.cpp:126] Top shape: 256 4096 1 1 (1048576)
+I0804 14:57:16.393404 19263 net.cpp:152] drop7 needs backward computation.
+I0804 14:57:16.393409 19263 net.cpp:75] Creating Layer fc8_clamp
+I0804 14:57:16.393414 19263 net.cpp:85] fc8_clamp <- fc7
+I0804 14:57:16.393417 19263 net.cpp:111] fc8_clamp -> fc8_aero
+I0804 14:57:16.393795 19263 net.cpp:126] Top shape: 256 2 1 1 (512)
+I0804 14:57:16.393805 19263 net.cpp:152] fc8_clamp needs backward computation.
+I0804 14:57:16.393811 19263 net.cpp:75] Creating Layer prob
+I0804 14:57:16.393815 19263 net.cpp:85] prob <- fc8_aero
+I0804 14:57:16.393821 19263 net.cpp:111] prob -> prob
+I0804 14:57:16.393826 19263 net.cpp:126] Top shape: 256 2 1 1 (512)
+I0804 14:57:16.393831 19263 net.cpp:152] prob needs backward computation.
+I0804 14:57:16.393836 19263 net.cpp:75] Creating Layer accuracy
+I0804 14:57:16.393839 19263 net.cpp:85] accuracy <- prob
+I0804 14:57:16.393843 19263 net.cpp:85] accuracy <- label
+I0804 14:57:16.393848 19263 net.cpp:111] accuracy -> accuracy
+I0804 14:57:16.393862 19263 net.cpp:126] Top shape: 1 2 1 1 (2)
+I0804 14:57:16.393867 19263 net.cpp:152] accuracy needs backward computation.
+I0804 14:57:16.393870 19263 net.cpp:163] This network produces output accuracy
+I0804 14:57:16.393887 19263 net.cpp:181] Collecting Learning Rate and Weight Decay.
+I0804 14:57:16.393896 19263 net.cpp:174] Network initialization done.
+I0804 14:57:16.393899 19263 net.cpp:175] Memory required for Data 1073741832
+I0804 14:57:16.393936 19263 solver.cpp:49] Solver scaffolding done.
+I0804 14:57:16.393944 19263 finetune_net.cpp:27] Loading from ../alexnet/caffe_alexnet_model
+I0804 14:57:17.124912 19263 solver.cpp:61] Solving scrape_zone_peelFineNet
+I0804 14:57:17.124953 19263 solver.cpp:106] Iteration 0, Testing net
+I0804 14:57:18.964162 19263 solver.cpp:142] Test score #0: 0.614258
+I0804 14:57:18.964221 19263 solver.cpp:142] Test score #1: 0.66266
+I0804 14:57:19.205911 19263 solver.cpp:237] Iteration 1, lr = 0.001
+I0804 14:57:19.207574 19263 solver.cpp:87] Iteration 1, loss = 0.746374
+I0804 14:57:19.207592 19263 solver.cpp:106] Iteration 1, Testing net
+I0804 14:57:20.948243 19263 solver.cpp:142] Test score #0: 0.662109
+I0804 14:57:20.948278 19263 solver.cpp:142] Test score #1: 0.647172
+I0804 14:57:21.177927 19263 solver.cpp:237] Iteration 2, lr = 0.001
+I0804 14:57:21.178403 19263 solver.cpp:87] Iteration 2, loss = 0.59838
+I0804 14:57:21.178416 19263 solver.cpp:106] Iteration 2, Testing net
+I0804 14:57:22.919899 19263 solver.cpp:142] Test score #0: 0.685547
+I0804 14:57:22.919935 19263 solver.cpp:142] Test score #1: 0.637994
+I0804 14:57:23.149279 19263 solver.cpp:237] Iteration 3, lr = 0.001
+I0804 14:57:23.149757 19263 solver.cpp:87] Iteration 3, loss = 0.56824
+I0804 14:57:23.149780 19263 solver.cpp:106] Iteration 3, Testing net
+I0804 14:57:24.892122 19263 solver.cpp:142] Test score #0: 0.693359
+I0804 14:57:24.892156 19263 solver.cpp:142] Test score #1: 0.675434
+I0804 14:57:25.121608 19263 solver.cpp:237] Iteration 4, lr = 0.001
+I0804 14:57:25.122089 19263 solver.cpp:87] Iteration 4, loss = 0.569385
+I0804 14:57:25.122103 19263 solver.cpp:106] Iteration 4, Testing net
+I0804 14:57:26.863901 19263 solver.cpp:142] Test score #0: 0.702148
+I0804 14:57:26.863936 19263 solver.cpp:142] Test score #1: 0.677398
+I0804 14:57:27.093852 19263 solver.cpp:237] Iteration 5, lr = 0.001
+I0804 14:57:27.094324 19263 solver.cpp:87] Iteration 5, loss = 0.803227
+I0804 14:57:27.094337 19263 solver.cpp:106] Iteration 5, Testing net
+I0804 14:57:28.835427 19263 solver.cpp:142] Test score #0: 0.701172
+I0804 14:57:28.835459 19263 solver.cpp:142] Test score #1: 0.649971
+I0804 14:57:29.065253 19263 solver.cpp:237] Iteration 6, lr = 0.001
+I0804 14:57:29.065731 19263 solver.cpp:87] Iteration 6, loss = 0.915294
+I0804 14:57:29.065743 19263 solver.cpp:106] Iteration 6, Testing net
+I0804 14:57:30.805135 19263 solver.cpp:142] Test score #0: 0.660156
+I0804 14:57:30.805168 19263 solver.cpp:142] Test score #1: 0.634763
+I0804 14:57:31.034700 19263 solver.cpp:237] Iteration 7, lr = 0.001
+I0804 14:57:31.035179 19263 solver.cpp:87] Iteration 7, loss = 0.70562
+I0804 14:57:31.035193 19263 solver.cpp:106] Iteration 7, Testing net
+I0804 14:57:32.777477 19263 solver.cpp:142] Test score #0: 0.550781
+I0804 14:57:32.777511 19263 solver.cpp:142] Test score #1: 0.71764
+I0804 14:57:33.007220 19263 solver.cpp:237] Iteration 8, lr = 0.001
+I0804 14:57:33.007699 19263 solver.cpp:87] Iteration 8, loss = 0.739613
+I0804 14:57:33.007711 19263 solver.cpp:106] Iteration 8, Testing net
+I0804 14:57:34.748597 19263 solver.cpp:142] Test score #0: 0.462891
+I0804 14:57:34.748631 19263 solver.cpp:142] Test score #1: 0.841551
+I0804 14:57:34.977957 19263 solver.cpp:237] Iteration 9, lr = 0.001
+I0804 14:57:34.978435 19263 solver.cpp:87] Iteration 9, loss = 0.901085
+I0804 14:57:34.978447 19263 solver.cpp:106] Iteration 9, Testing net
+I0804 14:57:36.718798 19263 solver.cpp:142] Test score #0: 0.458984
+I0804 14:57:36.718832 19263 solver.cpp:142] Test score #1: 0.840199
+I0804 14:57:36.948478 19263 solver.cpp:237] Iteration 10, lr = 0.001
+I0804 14:57:36.948954 19263 solver.cpp:87] Iteration 10, loss = 0.785518
+I0804 14:57:36.948967 19263 solver.cpp:106] Iteration 10, Testing net
+I0804 14:57:38.688045 19263 solver.cpp:142] Test score #0: 0.583984
+I0804 14:57:38.688079 19263 solver.cpp:142] Test score #1: 0.690313
+I0804 14:57:38.917105 19263 solver.cpp:237] Iteration 11, lr = 0.001
+I0804 14:57:38.917582 19263 solver.cpp:87] Iteration 11, loss = 0.776861
+I0804 14:57:38.917594 19263 solver.cpp:106] Iteration 11, Testing net
+I0804 14:57:40.657873 19263 solver.cpp:142] Test score #0: 0.680664
+I0804 14:57:40.657908 19263 solver.cpp:142] Test score #1: 0.645794
+I0804 14:57:40.887161 19263 solver.cpp:237] Iteration 12, lr = 0.001
+I0804 14:57:40.887640 19263 solver.cpp:87] Iteration 12, loss = 0.63462
+I0804 14:57:40.887652 19263 solver.cpp:106] Iteration 12, Testing net
+I0804 14:57:42.627419 19263 solver.cpp:142] Test score #0: 0.708008
+I0804 14:57:42.627454 19263 solver.cpp:142] Test score #1: 0.678355
+I0804 14:57:42.856657 19263 solver.cpp:237] Iteration 13, lr = 0.001
+I0804 14:57:42.857134 19263 solver.cpp:87] Iteration 13, loss = 0.615882
+I0804 14:57:42.857147 19263 solver.cpp:106] Iteration 13, Testing net
+I0804 14:57:44.597396 19263 solver.cpp:142] Test score #0: 0.703125
+I0804 14:57:44.597430 19263 solver.cpp:142] Test score #1: 0.768204
+I0804 14:57:44.826498 19263 solver.cpp:237] Iteration 14, lr = 0.001
+I0804 14:57:44.826982 19263 solver.cpp:87] Iteration 14, loss = 1.03938
+I0804 14:57:44.826994 19263 solver.cpp:106] Iteration 14, Testing net
+I0804 14:57:46.568198 19263 solver.cpp:142] Test score #0: 0.709961
+I0804 14:57:46.568233 19263 solver.cpp:142] Test score #1: 0.747093
+I0804 14:57:46.797708 19263 solver.cpp:237] Iteration 15, lr = 0.001
+I0804 14:57:46.798189 19263 solver.cpp:87] Iteration 15, loss = 0.907309
+I0804 14:57:46.798203 19263 solver.cpp:106] Iteration 15, Testing net
+I0804 14:57:48.539629 19263 solver.cpp:142] Test score #0: 0.705078
+I0804 14:57:48.539664 19263 solver.cpp:142] Test score #1: 0.69268
+I0804 14:57:48.768882 19263 solver.cpp:237] Iteration 16, lr = 0.001
+I0804 14:57:48.769354 19263 solver.cpp:87] Iteration 16, loss = 0.66879
+I0804 14:57:48.769367 19263 solver.cpp:106] Iteration 16, Testing net
+I0804 14:57:50.509223 19263 solver.cpp:142] Test score #0: 0.704102
+I0804 14:57:50.509258 19263 solver.cpp:142] Test score #1: 0.643006
+I0804 14:57:50.738445 19263 solver.cpp:237] Iteration 17, lr = 0.001
+I0804 14:57:50.738924 19263 solver.cpp:87] Iteration 17, loss = 0.531181
+I0804 14:57:50.738935 19263 solver.cpp:106] Iteration 17, Testing net
+I0804 14:57:52.480626 19263 solver.cpp:142] Test score #0: 0.68457
+I0804 14:57:52.480661 19263 solver.cpp:142] Test score #1: 0.630567
+I0804 14:57:52.709764 19263 solver.cpp:237] Iteration 18, lr = 0.001
+I0804 14:57:52.710253 19263 solver.cpp:87] Iteration 18, loss = 0.718819
+I0804 14:57:52.710264 19263 solver.cpp:106] Iteration 18, Testing net
+I0804 14:57:54.450963 19263 solver.cpp:142] Test score #0: 0.608398
+I0804 14:57:54.450996 19263 solver.cpp:142] Test score #1: 0.662108
+I0804 14:57:54.680536 19263 solver.cpp:237] Iteration 19, lr = 0.001
+I0804 14:57:54.681012 19263 solver.cpp:87] Iteration 19, loss = 0.600823
+I0804 14:57:54.681025 19263 solver.cpp:106] Iteration 19, Testing net
+I0804 14:57:56.419158 19263 solver.cpp:142] Test score #0: 0.573242
+I0804 14:57:56.419193 19263 solver.cpp:142] Test score #1: 0.682881
+I0804 14:57:56.648506 19263 solver.cpp:237] Iteration 20, lr = 0.001
+I0804 14:57:56.648985 19263 solver.cpp:87] Iteration 20, loss = 0.72903
+I0804 14:57:56.648998 19263 solver.cpp:106] Iteration 20, Testing net
+I0804 14:57:58.389376 19263 solver.cpp:142] Test score #0: 0.603516
+I0804 14:57:58.389410 19263 solver.cpp:142] Test score #1: 0.65568
+I0804 14:57:58.618772 19263 solver.cpp:237] Iteration 21, lr = 0.001
+I0804 14:57:58.619248 19263 solver.cpp:87] Iteration 21, loss = 0.752423
+I0804 14:57:58.619261 19263 solver.cpp:106] Iteration 21, Testing net
+I0804 14:58:00.370525 19263 solver.cpp:142] Test score #0: 0.665039
+I0804 14:58:00.370560 19263 solver.cpp:142] Test score #1: 0.627035
+I0804 14:58:00.602112 19263 solver.cpp:237] Iteration 22, lr = 0.001
+I0804 14:58:00.602604 19263 solver.cpp:87] Iteration 22, loss = 0.820507
+I0804 14:58:00.602617 19263 solver.cpp:106] Iteration 22, Testing net
+I0804 14:58:02.365480 19263 solver.cpp:142] Test score #0: 0.669922
+I0804 14:58:02.365514 19263 solver.cpp:142] Test score #1: 0.621756
+I0804 14:58:02.596941 19263 solver.cpp:237] Iteration 23, lr = 0.001
+I0804 14:58:02.597430 19263 solver.cpp:87] Iteration 23, loss = 0.641588
+I0804 14:58:02.597442 19263 solver.cpp:106] Iteration 23, Testing net
+I0804 14:58:04.359616 19263 solver.cpp:142] Test score #0: 0.6875
+I0804 14:58:04.359649 19263 solver.cpp:142] Test score #1: 0.607973
+I0804 14:58:04.590862 19263 solver.cpp:237] Iteration 24, lr = 0.001
+I0804 14:58:04.591341 19263 solver.cpp:87] Iteration 24, loss = 0.662876
+I0804 14:58:04.591353 19263 solver.cpp:106] Iteration 24, Testing net
+I0804 14:58:06.353345 19263 solver.cpp:142] Test score #0: 0.703125
+I0804 14:58:06.353379 19263 solver.cpp:142] Test score #1: 0.600885
+I0804 14:58:06.584880 19263 solver.cpp:237] Iteration 25, lr = 0.001
+I0804 14:58:06.585363 19263 solver.cpp:87] Iteration 25, loss = 0.581505
+I0804 14:58:06.585376 19263 solver.cpp:106] Iteration 25, Testing net
+I0804 14:58:08.348178 19263 solver.cpp:142] Test score #0: 0.708008
+I0804 14:58:08.348212 19263 solver.cpp:142] Test score #1: 0.604023
+I0804 14:58:08.579447 19263 solver.cpp:237] Iteration 26, lr = 0.001
+I0804 14:58:08.579927 19263 solver.cpp:87] Iteration 26, loss = 0.690756
+I0804 14:58:08.579941 19263 solver.cpp:106] Iteration 26, Testing net
+I0804 14:58:10.343001 19263 solver.cpp:142] Test score #0: 0.712891
+I0804 14:58:10.343034 19263 solver.cpp:142] Test score #1: 0.597994
+I0804 14:58:10.574321 19263 solver.cpp:237] Iteration 27, lr = 0.001
+I0804 14:58:10.574802 19263 solver.cpp:87] Iteration 27, loss = 0.767193
+I0804 14:58:10.574815 19263 solver.cpp:106] Iteration 27, Testing net
+I0804 14:58:12.337226 19263 solver.cpp:142] Test score #0: 0.703125
+I0804 14:58:12.337261 19263 solver.cpp:142] Test score #1: 0.597692
+I0804 14:58:12.568567 19263 solver.cpp:237] Iteration 28, lr = 0.001
+I0804 14:58:12.569103 19263 solver.cpp:87] Iteration 28, loss = 0.467277
+I0804 14:58:12.569116 19263 solver.cpp:106] Iteration 28, Testing net
+I0804 14:58:14.332978 19263 solver.cpp:142] Test score #0: 0.708008
+I0804 14:58:14.333012 19263 solver.cpp:142] Test score #1: 0.591635
+I0804 14:58:14.563596 19263 solver.cpp:237] Iteration 29, lr = 0.001
+I0804 14:58:14.564102 19263 solver.cpp:87] Iteration 29, loss = 0.638196
+I0804 14:58:14.564116 19263 solver.cpp:106] Iteration 29, Testing net
+I0804 14:58:16.327167 19263 solver.cpp:142] Test score #0: 0.703125
+I0804 14:58:16.327201 19263 solver.cpp:142] Test score #1: 0.597489
+I0804 14:58:16.557764 19263 solver.cpp:237] Iteration 30, lr = 0.001
+I0804 14:58:16.558275 19263 solver.cpp:87] Iteration 30, loss = 0.540702
+I0804 14:58:16.558289 19263 solver.cpp:106] Iteration 30, Testing net
+I0804 14:58:18.322206 19263 solver.cpp:142] Test score #0: 0.707031
+I0804 14:58:18.322242 19263 solver.cpp:142] Test score #1: 0.59279
+I0804 14:58:18.552860 19263 solver.cpp:237] Iteration 31, lr = 0.001
+I0804 14:58:18.553364 19263 solver.cpp:87] Iteration 31, loss = 0.568146
+I0804 14:58:18.553376 19263 solver.cpp:106] Iteration 31, Testing net
+I0804 14:58:20.316110 19263 solver.cpp:142] Test score #0: 0.706055
+I0804 14:58:20.316143 19263 solver.cpp:142] Test score #1: 0.587877
+I0804 14:58:20.546898 19263 solver.cpp:237] Iteration 32, lr = 0.001
+I0804 14:58:20.547404 19263 solver.cpp:87] Iteration 32, loss = 0.574009
+I0804 14:58:20.547416 19263 solver.cpp:106] Iteration 32, Testing net
+I0804 14:58:22.308439 19263 solver.cpp:142] Test score #0: 0.705078
+I0804 14:58:22.308472 19263 solver.cpp:142] Test score #1: 0.587727
+I0804 14:58:22.539232 19263 solver.cpp:237] Iteration 33, lr = 0.001
+I0804 14:58:22.539736 19263 solver.cpp:87] Iteration 33, loss = 0.750158
+I0804 14:58:22.539751 19263 solver.cpp:106] Iteration 33, Testing net
+I0804 14:58:24.304456 19263 solver.cpp:142] Test score #0: 0.707031
+I0804 14:58:24.304491 19263 solver.cpp:142] Test score #1: 0.587568
+I0804 14:58:24.534626 19263 solver.cpp:237] Iteration 34, lr = 0.001
+I0804 14:58:24.535130 19263 solver.cpp:87] Iteration 34, loss = 0.576059
+I0804 14:58:24.535142 19263 solver.cpp:106] Iteration 34, Testing net
+I0804 14:58:26.295878 19263 solver.cpp:142] Test score #0: 0.694336
+I0804 14:58:26.295910 19263 solver.cpp:142] Test score #1: 0.593472
+I0804 14:58:26.526538 19263 solver.cpp:237] Iteration 35, lr = 0.001
+I0804 14:58:26.527048 19263 solver.cpp:87] Iteration 35, loss = 0.635588
+I0804 14:58:26.527061 19263 solver.cpp:106] Iteration 35, Testing net
+I0804 14:58:28.288867 19263 solver.cpp:142] Test score #0: 0.699219
+I0804 14:58:28.288900 19263 solver.cpp:142] Test score #1: 0.588151
+I0804 14:58:28.519362 19263 solver.cpp:237] Iteration 36, lr = 0.001
+I0804 14:58:28.519870 19263 solver.cpp:87] Iteration 36, loss = 0.526367
+I0804 14:58:28.519882 19263 solver.cpp:106] Iteration 36, Testing net
+I0804 14:58:30.281015 19263 solver.cpp:142] Test score #0: 0.702148
+I0804 14:58:30.281049 19263 solver.cpp:142] Test score #1: 0.595011
+I0804 14:58:30.511415 19263 solver.cpp:237] Iteration 37, lr = 0.001
+I0804 14:58:30.511917 19263 solver.cpp:87] Iteration 37, loss = 0.512129
+I0804 14:58:30.511929 19263 solver.cpp:106] Iteration 37, Testing net
+I0804 14:58:32.273152 19263 solver.cpp:142] Test score #0: 0.701172
+I0804 14:58:32.273185 19263 solver.cpp:142] Test score #1: 0.599994
+I0804 14:58:32.503917 19263 solver.cpp:237] Iteration 38, lr = 0.001
+I0804 14:58:32.504426 19263 solver.cpp:87] Iteration 38, loss = 0.693052
+I0804 14:58:32.504439 19263 solver.cpp:106] Iteration 38, Testing net
+I0804 14:58:34.265203 19263 solver.cpp:142] Test score #0: 0.707031
+I0804 14:58:34.265236 19263 solver.cpp:142] Test score #1: 0.598979
+I0804 14:58:34.495884 19263 solver.cpp:237] Iteration 39, lr = 0.001
+I0804 14:58:34.496387 19263 solver.cpp:87] Iteration 39, loss = 0.558764
+I0804 14:58:34.496399 19263 solver.cpp:106] Iteration 39, Testing net
+I0804 14:58:36.258070 19263 solver.cpp:142] Test score #0: 0.708008
+I0804 14:58:36.258102 19263 solver.cpp:142] Test score #1: 0.600011
+I0804 14:58:36.488610 19263 solver.cpp:237] Iteration 40, lr = 0.001
+I0804 14:58:36.489114 19263 solver.cpp:87] Iteration 40, loss = 0.739975
+I0804 14:58:36.489126 19263 solver.cpp:106] Iteration 40, Testing net
+I0804 14:58:38.250202 19263 solver.cpp:142] Test score #0: 0.706055
+I0804 14:58:38.250236 19263 solver.cpp:142] Test score #1: 0.594697
+I0804 14:58:38.480818 19263 solver.cpp:237] Iteration 41, lr = 0.001
+I0804 14:58:38.481315 19263 solver.cpp:87] Iteration 41, loss = 0.650127
+I0804 14:58:38.481328 19263 solver.cpp:106] Iteration 41, Testing net
+I0804 14:58:40.243247 19263 solver.cpp:142] Test score #0: 0.709961
+I0804 14:58:40.243280 19263 solver.cpp:142] Test score #1: 0.584601
+I0804 14:58:40.473682 19263 solver.cpp:237] Iteration 42, lr = 0.001
+I0804 14:58:40.474184 19263 solver.cpp:87] Iteration 42, loss = 0.693103
+I0804 14:58:40.474197 19263 solver.cpp:106] Iteration 42, Testing net
+I0804 14:58:42.235349 19263 solver.cpp:142] Test score #0: 0.707031
+I0804 14:58:42.235383 19263 solver.cpp:142] Test score #1: 0.589162
+I0804 14:58:42.466109 19263 solver.cpp:237] Iteration 43, lr = 0.001
+I0804 14:58:42.466620 19263 solver.cpp:87] Iteration 43, loss = 0.593754
+I0804 14:58:42.466634 19263 solver.cpp:106] Iteration 43, Testing net
+I0804 14:58:44.228332 19263 solver.cpp:142] Test score #0: 0.705078
+I0804 14:58:44.228363 19263 solver.cpp:142] Test score #1: 0.590966
+I0804 14:58:44.458715 19263 solver.cpp:237] Iteration 44, lr = 0.001
+I0804 14:58:44.459223 19263 solver.cpp:87] Iteration 44, loss = 0.552696
+I0804 14:58:44.459236 19263 solver.cpp:106] Iteration 44, Testing net
+I0804 14:58:46.218742 19263 solver.cpp:142] Test score #0: 0.709961
+I0804 14:58:46.218773 19263 solver.cpp:142] Test score #1: 0.591551
+I0804 14:58:46.449211 19263 solver.cpp:237] Iteration 45, lr = 0.001
+I0804 14:58:46.449712 19263 solver.cpp:87] Iteration 45, loss = 0.652569
+I0804 14:58:46.449726 19263 solver.cpp:106] Iteration 45, Testing net
+I0804 14:58:48.210804 19263 solver.cpp:142] Test score #0: 0.710938
+I0804 14:58:48.210841 19263 solver.cpp:142] Test score #1: 0.593168
+I0804 14:58:48.442343 19263 solver.cpp:237] Iteration 46, lr = 0.001
+I0804 14:58:48.442849 19263 solver.cpp:87] Iteration 46, loss = 0.637484
+I0804 14:58:48.442862 19263 solver.cpp:106] Iteration 46, Testing net
+I0804 14:58:50.201149 19263 solver.cpp:142] Test score #0: 0.709961
+I0804 14:58:50.201181 19263 solver.cpp:142] Test score #1: 0.591662
+I0804 14:58:50.431354 19263 solver.cpp:237] Iteration 47, lr = 0.001
+I0804 14:58:50.431855 19263 solver.cpp:87] Iteration 47, loss = 0.608957
+I0804 14:58:50.431869 19263 solver.cpp:106] Iteration 47, Testing net
+I0804 14:58:52.191508 19263 solver.cpp:142] Test score #0: 0.717773
+I0804 14:58:52.191540 19263 solver.cpp:142] Test score #1: 0.588938
+I0804 14:58:52.421433 19263 solver.cpp:237] Iteration 48, lr = 0.001
+I0804 14:58:52.421944 19263 solver.cpp:87] Iteration 48, loss = 0.750411
+I0804 14:58:52.421958 19263 solver.cpp:106] Iteration 48, Testing net
+I0804 14:58:54.180340 19263 solver.cpp:142] Test score #0: 0.717773
+I0804 14:58:54.180371 19263 solver.cpp:142] Test score #1: 0.590036
+I0804 14:58:54.410399 19263 solver.cpp:237] Iteration 49, lr = 0.001
+I0804 14:58:54.410905 19263 solver.cpp:87] Iteration 49, loss = 0.798446
+I0804 14:58:54.410918 19263 solver.cpp:106] Iteration 49, Testing net
+I0804 14:58:56.171068 19263 solver.cpp:142] Test score #0: 0.709961
+I0804 14:58:56.171100 19263 solver.cpp:142] Test score #1: 0.59329
+I0804 14:58:56.401284 19263 solver.cpp:237] Iteration 50, lr = 0.001
+I0804 14:58:56.401804 19263 solver.cpp:87] Iteration 50, loss = 0.668994
+I0804 14:58:56.401818 19263 solver.cpp:106] Iteration 50, Testing net
+I0804 14:58:58.161939 19263 solver.cpp:142] Test score #0: 0.713867
+I0804 14:58:58.161972 19263 solver.cpp:142] Test score #1: 0.592457
+I0804 14:58:58.392513 19263 solver.cpp:237] Iteration 51, lr = 0.001
+I0804 14:58:58.393164 19263 solver.cpp:87] Iteration 51, loss = 0.629866
+I0804 14:58:58.393177 19263 solver.cpp:106] Iteration 51, Testing net
+I0804 14:59:00.151679 19263 solver.cpp:142] Test score #0: 0.698242
+I0804 14:59:00.151711 19263 solver.cpp:142] Test score #1: 0.599786
+I0804 14:59:00.382074 19263 solver.cpp:237] Iteration 52, lr = 0.001
+I0804 14:59:00.382580 19263 solver.cpp:87] Iteration 52, loss = 0.630131
+I0804 14:59:00.382594 19263 solver.cpp:106] Iteration 52, Testing net
+I0804 14:59:02.142930 19263 solver.cpp:142] Test score #0: 0.703125
+I0804 14:59:02.142962 19263 solver.cpp:142] Test score #1: 0.592887
+I0804 14:59:02.373299 19263 solver.cpp:237] Iteration 53, lr = 0.001
+I0804 14:59:02.373813 19263 solver.cpp:87] Iteration 53, loss = 0.853954
+I0804 14:59:02.373827 19263 solver.cpp:106] Iteration 53, Testing net
+I0804 14:59:04.132253 19263 solver.cpp:142] Test score #0: 0.669922
+I0804 14:59:04.132285 19263 solver.cpp:142] Test score #1: 0.612103
+I0804 14:59:04.362682 19263 solver.cpp:237] Iteration 54, lr = 0.001
+I0804 14:59:04.363186 19263 solver.cpp:87] Iteration 54, loss = 0.651343
+I0804 14:59:04.363199 19263 solver.cpp:106] Iteration 54, Testing net
+I0804 14:59:06.123646 19263 solver.cpp:142] Test score #0: 0.669922
+I0804 14:59:06.123678 19263 solver.cpp:142] Test score #1: 0.61502
+I0804 14:59:06.353940 19263 solver.cpp:237] Iteration 55, lr = 0.001
+I0804 14:59:06.354441 19263 solver.cpp:87] Iteration 55, loss = 0.660938
+I0804 14:59:06.354454 19263 solver.cpp:106] Iteration 55, Testing net
+I0804 14:59:08.114867 19263 solver.cpp:142] Test score #0: 0.634766
+I0804 14:59:08.114900 19263 solver.cpp:142] Test score #1: 0.635379
+I0804 14:59:08.345083 19263 solver.cpp:237] Iteration 56, lr = 0.001
+I0804 14:59:08.345592 19263 solver.cpp:87] Iteration 56, loss = 0.643143
+I0804 14:59:08.345604 19263 solver.cpp:106] Iteration 56, Testing net
+I0804 14:59:10.103445 19263 solver.cpp:142] Test score #0: 0.658203
+I0804 14:59:10.103477 19263 solver.cpp:142] Test score #1: 0.629643
+I0804 14:59:10.333631 19263 solver.cpp:237] Iteration 57, lr = 0.001
+I0804 14:59:10.334149 19263 solver.cpp:87] Iteration 57, loss = 0.631348
+I0804 14:59:10.334163 19263 solver.cpp:106] Iteration 57, Testing net
+I0804 14:59:12.093910 19263 solver.cpp:142] Test score #0: 0.674805
+I0804 14:59:12.093942 19263 solver.cpp:142] Test score #1: 0.611891
+I0804 14:59:12.324614 19263 solver.cpp:237] Iteration 58, lr = 0.001
+I0804 14:59:12.325119 19263 solver.cpp:87] Iteration 58, loss = 0.589726
+I0804 14:59:12.325132 19263 solver.cpp:106] Iteration 58, Testing net
+I0804 14:59:14.083871 19263 solver.cpp:142] Test score #0: 0.68457
+I0804 14:59:14.083904 19263 solver.cpp:142] Test score #1: 0.600065
+I0804 14:59:14.314002 19263 solver.cpp:237] Iteration 59, lr = 0.001
+I0804 14:59:14.314510 19263 solver.cpp:87] Iteration 59, loss = 0.609167
+I0804 14:59:14.314524 19263 solver.cpp:106] Iteration 59, Testing net
+I0804 14:59:16.074246 19263 solver.cpp:142] Test score #0: 0.700195
+I0804 14:59:16.074277 19263 solver.cpp:142] Test score #1: 0.59084
+I0804 14:59:16.304599 19263 solver.cpp:237] Iteration 60, lr = 0.001
+I0804 14:59:16.305102 19263 solver.cpp:87] Iteration 60, loss = 0.658377
+I0804 14:59:16.305115 19263 solver.cpp:106] Iteration 60, Testing net
+I0804 14:59:18.064769 19263 solver.cpp:142] Test score #0: 0.709961
+I0804 14:59:18.064801 19263 solver.cpp:142] Test score #1: 0.586865
+I0804 14:59:18.295558 19263 solver.cpp:237] Iteration 61, lr = 0.001
+I0804 14:59:18.296061 19263 solver.cpp:87] Iteration 61, loss = 0.70792
+I0804 14:59:18.296074 19263 solver.cpp:106] Iteration 61, Testing net
+I0804 14:59:20.053979 19263 solver.cpp:142] Test score #0: 0.704102
+I0804 14:59:20.054011 19263 solver.cpp:142] Test score #1: 0.591262
+I0804 14:59:20.284320 19263 solver.cpp:237] Iteration 62, lr = 0.001
+I0804 14:59:20.284823 19263 solver.cpp:87] Iteration 62, loss = 0.780785
+I0804 14:59:20.284837 19263 solver.cpp:106] Iteration 62, Testing net
+I0804 14:59:22.044522 19263 solver.cpp:142] Test score #0: 0.703125
+I0804 14:59:22.044554 19263 solver.cpp:142] Test score #1: 0.591396
+I0804 14:59:22.274828 19263 solver.cpp:237] Iteration 63, lr = 0.001
+I0804 14:59:22.275336 19263 solver.cpp:87] Iteration 63, loss = 0.742674
+I0804 14:59:22.275349 19263 solver.cpp:106] Iteration 63, Testing net
+I0804 14:59:24.035266 19263 solver.cpp:142] Test score #0: 0.700195
+I0804 14:59:24.035298 19263 solver.cpp:142] Test score #1: 0.590259
+I0804 14:59:24.265359 19263 solver.cpp:237] Iteration 64, lr = 0.001
+I0804 14:59:24.265872 19263 solver.cpp:87] Iteration 64, loss = 0.828925
+I0804 14:59:24.265887 19263 solver.cpp:106] Iteration 64, Testing net
+I0804 14:59:26.023759 19263 solver.cpp:142] Test score #0: 0.716797
+I0804 14:59:26.023792 19263 solver.cpp:142] Test score #1: 0.585254
+I0804 14:59:26.254220 19263 solver.cpp:237] Iteration 65, lr = 0.001
+I0804 14:59:26.254725 19263 solver.cpp:87] Iteration 65, loss = 0.581328
+I0804 14:59:26.254739 19263 solver.cpp:106] Iteration 65, Testing net
+I0804 14:59:28.013142 19263 solver.cpp:142] Test score #0: 0.716797
+I0804 14:59:28.013173 19263 solver.cpp:142] Test score #1: 0.592574
+I0804 14:59:28.243638 19263 solver.cpp:237] Iteration 66, lr = 0.001
+I0804 14:59:28.244138 19263 solver.cpp:87] Iteration 66, loss = 0.660691
+I0804 14:59:28.244149 19263 solver.cpp:106] Iteration 66, Testing net
+I0804 14:59:30.002347 19263 solver.cpp:142] Test score #0: 0.708984
+I0804 14:59:30.002380 19263 solver.cpp:142] Test score #1: 0.596883
+I0804 14:59:30.232740 19263 solver.cpp:237] Iteration 67, lr = 0.001
+I0804 14:59:30.233243 19263 solver.cpp:87] Iteration 67, loss = 0.593419
+I0804 14:59:30.233257 19263 solver.cpp:106] Iteration 67, Testing net
+I0804 14:59:31.992692 19263 solver.cpp:142] Test score #0: 0.689453
+I0804 14:59:31.992724 19263 solver.cpp:142] Test score #1: 0.606247
+I0804 14:59:32.222996 19263 solver.cpp:237] Iteration 68, lr = 0.001
+I0804 14:59:32.223498 19263 solver.cpp:87] Iteration 68, loss = 0.550219
+I0804 14:59:32.223511 19263 solver.cpp:106] Iteration 68, Testing net
+I0804 14:59:33.983119 19263 solver.cpp:142] Test score #0: 0.692383
+I0804 14:59:33.983155 19263 solver.cpp:142] Test score #1: 0.605208
+I0804 14:59:34.213376 19263 solver.cpp:237] Iteration 69, lr = 0.001
+I0804 14:59:34.213888 19263 solver.cpp:87] Iteration 69, loss = 0.707489
+I0804 14:59:34.213902 19263 solver.cpp:106] Iteration 69, Testing net
+I0804 14:59:35.972703 19263 solver.cpp:142] Test score #0: 0.700195
+I0804 14:59:35.972738 19263 solver.cpp:142] Test score #1: 0.60364
+I0804 14:59:36.203145 19263 solver.cpp:237] Iteration 70, lr = 0.001
+I0804 14:59:36.203644 19263 solver.cpp:87] Iteration 70, loss = 0.548027
+I0804 14:59:36.203657 19263 solver.cpp:106] Iteration 70, Testing net
+I0804 14:59:37.964417 19263 solver.cpp:142] Test score #0: 0.704102
+I0804 14:59:37.964452 19263 solver.cpp:142] Test score #1: 0.601918
+I0804 14:59:38.194753 19263 solver.cpp:237] Iteration 71, lr = 0.001
+I0804 14:59:38.195255 19263 solver.cpp:87] Iteration 71, loss = 0.674499
+I0804 14:59:38.195268 19263 solver.cpp:106] Iteration 71, Testing net
+I0804 14:59:39.954921 19263 solver.cpp:142] Test score #0: 0.705078
+I0804 14:59:39.954956 19263 solver.cpp:142] Test score #1: 0.59309
+I0804 14:59:40.185139 19263 solver.cpp:237] Iteration 72, lr = 0.001
+I0804 14:59:40.185641 19263 solver.cpp:87] Iteration 72, loss = 0.567768
+I0804 14:59:40.185653 19263 solver.cpp:106] Iteration 72, Testing net
+I0804 14:59:41.944264 19263 solver.cpp:142] Test score #0: 0.706055
+I0804 14:59:41.944298 19263 solver.cpp:142] Test score #1: 0.59582
+I0804 14:59:42.174710 19263 solver.cpp:237] Iteration 73, lr = 0.001
+I0804 14:59:42.175209 19263 solver.cpp:87] Iteration 73, loss = 0.813837
+I0804 14:59:42.175220 19263 solver.cpp:106] Iteration 73, Testing net
+I0804 14:59:43.941308 19263 solver.cpp:142] Test score #0: 0.708984
+I0804 14:59:43.941344 19263 solver.cpp:142] Test score #1: 0.593504
+I0804 14:59:44.171439 19263 solver.cpp:237] Iteration 74, lr = 0.001
+I0804 14:59:44.171938 19263 solver.cpp:87] Iteration 74, loss = 0.612149
+I0804 14:59:44.171952 19263 solver.cpp:106] Iteration 74, Testing net
+I0804 14:59:45.956990 19263 solver.cpp:142] Test score #0: 0.705078
+I0804 14:59:45.957031 19263 solver.cpp:142] Test score #1: 0.595246
+I0804 14:59:46.192008 19263 solver.cpp:237] Iteration 75, lr = 0.001
+I0804 14:59:46.192503 19263 solver.cpp:87] Iteration 75, loss = 0.631222
+I0804 14:59:46.192515 19263 solver.cpp:106] Iteration 75, Testing net
+I0804 14:59:47.976418 19263 solver.cpp:142] Test score #0: 0.700195
+I0804 14:59:47.976455 19263 solver.cpp:142] Test score #1: 0.600237
+I0804 14:59:48.210304 19263 solver.cpp:237] Iteration 76, lr = 0.001
+I0804 14:59:48.210811 19263 solver.cpp:87] Iteration 76, loss = 0.603394
+I0804 14:59:48.210824 19263 solver.cpp:106] Iteration 76, Testing net
+I0804 14:59:49.995254 19263 solver.cpp:142] Test score #0: 0.699219
+I0804 14:59:49.995285 19263 solver.cpp:142] Test score #1: 0.599804
+I0804 14:59:50.227134 19263 solver.cpp:237] Iteration 77, lr = 0.001
+I0804 14:59:50.227650 19263 solver.cpp:87] Iteration 77, loss = 0.528876
+I0804 14:59:50.227663 19263 solver.cpp:106] Iteration 77, Testing net
+I0804 14:59:52.057340 19263 solver.cpp:142] Test score #0: 0.691406
+I0804 14:59:52.057373 19263 solver.cpp:142] Test score #1: 0.603082
+I0804 14:59:52.293220 19263 solver.cpp:237] Iteration 78, lr = 0.001
+I0804 14:59:52.293746 19263 solver.cpp:87] Iteration 78, loss = 0.64351
+I0804 14:59:52.293759 19263 solver.cpp:106] Iteration 78, Testing net
+I0804 14:59:54.142879 19263 solver.cpp:142] Test score #0: 0.701172
+I0804 14:59:54.142910 19263 solver.cpp:142] Test score #1: 0.601509
+I0804 14:59:54.377724 19263 solver.cpp:237] Iteration 79, lr = 0.001
+I0804 14:59:54.378252 19263 solver.cpp:87] Iteration 79, loss = 0.681085
+I0804 14:59:54.378267 19263 solver.cpp:106] Iteration 79, Testing net
+I0804 14:59:56.206017 19263 solver.cpp:142] Test score #0: 0.694336
+I0804 14:59:56.206048 19263 solver.cpp:142] Test score #1: 0.602937
+I0804 14:59:56.440407 19263 solver.cpp:237] Iteration 80, lr = 0.001
+I0804 14:59:56.440930 19263 solver.cpp:87] Iteration 80, loss = 0.587371
+I0804 14:59:56.440943 19263 solver.cpp:106] Iteration 80, Testing net
+I0804 14:59:58.261338 19263 solver.cpp:142] Test score #0: 0.695312
+I0804 14:59:58.261373 19263 solver.cpp:142] Test score #1: 0.60021
+I0804 14:59:58.496153 19263 solver.cpp:237] Iteration 81, lr = 0.001
+I0804 14:59:58.496680 19263 solver.cpp:87] Iteration 81, loss = 0.598327
+I0804 14:59:58.496692 19263 solver.cpp:106] Iteration 81, Testing net
+I0804 15:00:00.317569 19263 solver.cpp:142] Test score #0: 0.697266
+I0804 15:00:00.317601 19263 solver.cpp:142] Test score #1: 0.601884
+I0804 15:00:00.552054 19263 solver.cpp:237] Iteration 82, lr = 0.001
+I0804 15:00:00.552583 19263 solver.cpp:87] Iteration 82, loss = 0.620907
+I0804 15:00:00.552597 19263 solver.cpp:106] Iteration 82, Testing net
+I0804 15:00:02.372527 19263 solver.cpp:142] Test score #0: 0.688477
+I0804 15:00:02.372560 19263 solver.cpp:142] Test score #1: 0.603244
+I0804 15:00:02.607897 19263 solver.cpp:237] Iteration 83, lr = 0.001
+I0804 15:00:02.608413 19263 solver.cpp:87] Iteration 83, loss = 0.681069
+I0804 15:00:02.608427 19263 solver.cpp:106] Iteration 83, Testing net
+I0804 15:00:04.427220 19263 solver.cpp:142] Test score #0: 0.697266
+I0804 15:00:04.427253 19263 solver.cpp:142] Test score #1: 0.60068
+I0804 15:00:04.661833 19263 solver.cpp:237] Iteration 84, lr = 0.001
+I0804 15:00:04.662359 19263 solver.cpp:87] Iteration 84, loss = 0.752587
+I0804 15:00:04.662372 19263 solver.cpp:106] Iteration 84, Testing net
+I0804 15:00:06.482141 19263 solver.cpp:142] Test score #0: 0.69043
+I0804 15:00:06.482174 19263 solver.cpp:142] Test score #1: 0.605453
+I0804 15:00:06.718652 19263 solver.cpp:237] Iteration 85, lr = 0.001
+I0804 15:00:06.719167 19263 solver.cpp:87] Iteration 85, loss = 0.55809
+I0804 15:00:06.719180 19263 solver.cpp:106] Iteration 85, Testing net
+I0804 15:00:08.533845 19263 solver.cpp:142] Test score #0: 0.699219
+I0804 15:00:08.533876 19263 solver.cpp:142] Test score #1: 0.601734
+I0804 15:00:08.767099 19263 solver.cpp:237] Iteration 86, lr = 0.001
+I0804 15:00:08.767611 19263 solver.cpp:87] Iteration 86, loss = 0.587912
+I0804 15:00:08.767623 19263 solver.cpp:106] Iteration 86, Testing net
+I0804 15:00:10.563738 19263 solver.cpp:142] Test score #0: 0.688477
+I0804 15:00:10.563771 19263 solver.cpp:142] Test score #1: 0.608716
+I0804 15:00:10.796689 19263 solver.cpp:237] Iteration 87, lr = 0.001
+I0804 15:00:10.797204 19263 solver.cpp:87] Iteration 87, loss = 0.702736
+I0804 15:00:10.797217 19263 solver.cpp:106] Iteration 87, Testing net
+I0804 15:00:12.596424 19263 solver.cpp:142] Test score #0: 0.699219
+I0804 15:00:12.596457 19263 solver.cpp:142] Test score #1: 0.605524
+I0804 15:00:12.829399 19263 solver.cpp:237] Iteration 88, lr = 0.001
+I0804 15:00:12.829933 19263 solver.cpp:87] Iteration 88, loss = 0.558588
+I0804 15:00:12.829947 19263 solver.cpp:106] Iteration 88, Testing net
+I0804 15:00:14.634760 19263 solver.cpp:142] Test score #0: 0.705078
+I0804 15:00:14.634794 19263 solver.cpp:142] Test score #1: 0.605338
+I0804 15:00:14.867568 19263 solver.cpp:237] Iteration 89, lr = 0.001
+I0804 15:00:14.868082 19263 solver.cpp:87] Iteration 89, loss = 0.622058
+I0804 15:00:14.868094 19263 solver.cpp:106] Iteration 89, Testing net
+I0804 15:00:16.687504 19263 solver.cpp:142] Test score #0: 0.708984
+I0804 15:00:16.687536 19263 solver.cpp:142] Test score #1: 0.596019
+I0804 15:00:16.924173 19263 solver.cpp:237] Iteration 90, lr = 0.001
+I0804 15:00:16.924710 19263 solver.cpp:87] Iteration 90, loss = 0.586388
+I0804 15:00:16.924724 19263 solver.cpp:106] Iteration 90, Testing net
+I0804 15:00:18.737803 19263 solver.cpp:142] Test score #0: 0.701172
+I0804 15:00:18.737834 19263 solver.cpp:142] Test score #1: 0.595053
+I0804 15:00:18.973332 19263 solver.cpp:237] Iteration 91, lr = 0.001
+I0804 15:00:18.973862 19263 solver.cpp:87] Iteration 91, loss = 0.695312
+I0804 15:00:18.973876 19263 solver.cpp:106] Iteration 91, Testing net
+I0804 15:00:20.780503 19263 solver.cpp:142] Test score #0: 0.700195
+I0804 15:00:20.780532 19263 solver.cpp:142] Test score #1: 0.59132
+I0804 15:00:21.014083 19263 solver.cpp:237] Iteration 92, lr = 0.001
+I0804 15:00:21.014606 19263 solver.cpp:87] Iteration 92, loss = 0.634458
+I0804 15:00:21.014619 19263 solver.cpp:106] Iteration 92, Testing net
+I0804 15:00:22.821813 19263 solver.cpp:142] Test score #0: 0.707031
+I0804 15:00:22.821848 19263 solver.cpp:142] Test score #1: 0.590837
+I0804 15:00:23.055213 19263 solver.cpp:237] Iteration 93, lr = 0.001
+I0804 15:00:23.055727 19263 solver.cpp:87] Iteration 93, loss = 0.669487
+I0804 15:00:23.055740 19263 solver.cpp:106] Iteration 93, Testing net
+I0804 15:00:24.853711 19263 solver.cpp:142] Test score #0: 0.716797
+I0804 15:00:24.853744 19263 solver.cpp:142] Test score #1: 0.583899
+I0804 15:00:25.086769 19263 solver.cpp:237] Iteration 94, lr = 0.001
+I0804 15:00:25.087285 19263 solver.cpp:87] Iteration 94, loss = 0.575517
+I0804 15:00:25.087297 19263 solver.cpp:106] Iteration 94, Testing net
+I0804 15:00:26.885762 19263 solver.cpp:142] Test score #0: 0.709961
+I0804 15:00:26.885798 19263 solver.cpp:142] Test score #1: 0.588019
+I0804 15:00:27.119272 19263 solver.cpp:237] Iteration 95, lr = 0.001
+I0804 15:00:27.119783 19263 solver.cpp:87] Iteration 95, loss = 0.635286
+I0804 15:00:27.119796 19263 solver.cpp:106] Iteration 95, Testing net
+I0804 15:00:28.917176 19263 solver.cpp:142] Test score #0: 0.703125
+I0804 15:00:28.917208 19263 solver.cpp:142] Test score #1: 0.58846
+I0804 15:00:29.150621 19263 solver.cpp:237] Iteration 96, lr = 0.001
+I0804 15:00:29.151136 19263 solver.cpp:87] Iteration 96, loss = 0.577517
+I0804 15:00:29.151149 19263 solver.cpp:106] Iteration 96, Testing net
+I0804 15:00:30.947731 19263 solver.cpp:142] Test score #0: 0.700195
+I0804 15:00:30.947762 19263 solver.cpp:142] Test score #1: 0.589626
+I0804 15:00:31.181257 19263 solver.cpp:237] Iteration 97, lr = 0.001
+I0804 15:00:31.181782 19263 solver.cpp:87] Iteration 97, loss = 0.599076
+I0804 15:00:31.181794 19263 solver.cpp:106] Iteration 97, Testing net
+I0804 15:00:32.978732 19263 solver.cpp:142] Test score #0: 0.713867
+I0804 15:00:32.978765 19263 solver.cpp:142] Test score #1: 0.583636
+I0804 15:00:33.211845 19263 solver.cpp:237] Iteration 98, lr = 0.001
+I0804 15:00:33.212354 19263 solver.cpp:87] Iteration 98, loss = 0.59415
+I0804 15:00:33.212368 19263 solver.cpp:106] Iteration 98, Testing net
+I0804 15:00:35.009176 19263 solver.cpp:142] Test score #0: 0.71582
+I0804 15:00:35.009209 19263 solver.cpp:142] Test score #1: 0.584581
+I0804 15:00:35.242437 19263 solver.cpp:237] Iteration 99, lr = 0.001
+I0804 15:00:35.242959 19263 solver.cpp:87] Iteration 99, loss = 0.77338
+I0804 15:00:35.242971 19263 solver.cpp:106] Iteration 99, Testing net
+I0804 15:00:37.039695 19263 solver.cpp:142] Test score #0: 0.713867
+I0804 15:00:37.039727 19263 solver.cpp:142] Test score #1: 0.584836
+I0804 15:00:37.272605 19263 solver.cpp:237] Iteration 100, lr = 0.001
+I0804 15:00:37.273124 19263 solver.cpp:87] Iteration 100, loss = 0.529845
+I0804 15:00:37.273138 19263 solver.cpp:106] Iteration 100, Testing net
+I0804 15:00:39.070917 19263 solver.cpp:142] Test score #0: 0.716797
+I0804 15:00:39.070950 19263 solver.cpp:142] Test score #1: 0.578975
+I0804 15:00:39.454865 19263 solver.cpp:159] Snapshotting to scrape_zone_peel_train_iter_100
+I0804 15:00:40.251656 19263 solver.cpp:166] Snapshotting solver state to scrape_zone_peel_train_iter_100.solverstate
+I0804 15:00:40.957031 19263 solver.cpp:159] Snapshotting to scrape_zone_peel_train_iter_100
+I0804 15:00:42.503697 19263 solver.cpp:166] Snapshotting solver state to scrape_zone_peel_train_iter_100.solverstate
+I0804 15:00:44.207684 19263 solver.cpp:100] Optimization Done.
+I0804 15:00:44.207715 19263 finetune_net.cpp:30] Optimization Done.
+Done.
