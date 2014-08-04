@@ -5,6 +5,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from os.path import join as ojoin
 
+# Usage: python plot.py path/to/model test-inter=.. [start-epoch=..] [end-epoch==..]
 
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   
@@ -79,7 +80,7 @@ def get_caffe_errors(error_file, idx):
 
 if __name__ == '__main__':
 
-  print('Usage: python plot.py path/to/model [test-inter=..] [start-epoch=..] [end-epoch==..]')
+  print('Usage: python plot.py path/to/model test-inter=.. [start-epoch=..] [end-epoch==..]')
 
   try: 
     os.environ['DISPLAY']
