@@ -1,0 +1,122 @@
+Cuda number of devices: 1
+Current device id: 0
+Note: Google Test filter = **
+[==========] Running 403 tests from 76 test cases.
+[----------] Global test environment set-up.
+[----------] 10 tests from BenchmarkTest
+[ RUN      ] BenchmarkTest.TestTimerConstructorCPU
+[       OK ] BenchmarkTest.TestTimerConstructorCPU (205 ms)
+[ RUN      ] BenchmarkTest.TestTimerConstructorGPU
+[       OK ] BenchmarkTest.TestTimerConstructorGPU (6 ms)
+[ RUN      ] BenchmarkTest.TestTimerStartCPU
+[       OK ] BenchmarkTest.TestTimerStartCPU (0 ms)
+[ RUN      ] BenchmarkTest.TestTimerStartGPU
+[       OK ] BenchmarkTest.TestTimerStartGPU (0 ms)
+[ RUN      ] BenchmarkTest.TestTimerStopCPU
+[       OK ] BenchmarkTest.TestTimerStopCPU (0 ms)
+[ RUN      ] BenchmarkTest.TestTimerStopGPU
+[       OK ] BenchmarkTest.TestTimerStopGPU (0 ms)
+[ RUN      ] BenchmarkTest.TestTimerMilliSecondsCPU
+[       OK ] BenchmarkTest.TestTimerMilliSecondsCPU (300 ms)
+[ RUN      ] BenchmarkTest.TestTimerMilliSecondsGPU
+[       OK ] BenchmarkTest.TestTimerMilliSecondsGPU (301 ms)
+[ RUN      ] BenchmarkTest.TestTimerSecondsCPU
+[       OK ] BenchmarkTest.TestTimerSecondsCPU (300 ms)
+[ RUN      ] BenchmarkTest.TestTimerSecondsGPU
+[       OK ] BenchmarkTest.TestTimerSecondsGPU (300 ms)
+[----------] 10 tests from BenchmarkTest (1412 ms total)
+
+[----------] 3 tests from BlobSimpleTest/0, where TypeParam = float
+[ RUN      ] BlobSimpleTest/0.TestInitialization
+[       OK ] BlobSimpleTest/0.TestInitialization (0 ms)
+[ RUN      ] BlobSimpleTest/0.TestPointers
+[       OK ] BlobSimpleTest/0.TestPointers (0 ms)
+[ RUN      ] BlobSimpleTest/0.TestReshape
+[       OK ] BlobSimpleTest/0.TestReshape (0 ms)
+[----------] 3 tests from BlobSimpleTest/0 (1 ms total)
+
+[----------] 3 tests from BlobSimpleTest/1, where TypeParam = double
+[ RUN      ] BlobSimpleTest/1.TestInitialization
+[       OK ] BlobSimpleTest/1.TestInitialization (0 ms)
+[ RUN      ] BlobSimpleTest/1.TestPointers
+[       OK ] BlobSimpleTest/1.TestPointers (0 ms)
+[ RUN      ] BlobSimpleTest/1.TestReshape
+[       OK ] BlobSimpleTest/1.TestReshape (0 ms)
+[----------] 3 tests from BlobSimpleTest/1 (0 ms total)
+
+[----------] 5 tests from CommonTest
+[ RUN      ] CommonTest.TestCublasHandler
+[       OK ] CommonTest.TestCublasHandler (0 ms)
+[ RUN      ] CommonTest.TestBrewMode
+[       OK ] CommonTest.TestBrewMode (0 ms)
+[ RUN      ] CommonTest.TestPhase
+[       OK ] CommonTest.TestPhase (0 ms)
+[ RUN      ] CommonTest.TestRandSeedCPU
+[       OK ] CommonTest.TestRandSeedCPU (0 ms)
+[ RUN      ] CommonTest.TestRandSeedGPU
+[       OK ] CommonTest.TestRandSeedGPU (18 ms)
+[----------] 5 tests from CommonTest (18 ms total)
+
+[----------] 5 tests from ConcatLayerTest/0, where TypeParam = float
+[ RUN      ] ConcatLayerTest/0.TestSetupNum
+[       OK ] ConcatLayerTest/0.TestSetupNum (0 ms)
+[ RUN      ] ConcatLayerTest/0.TestSetupChannels
+[       OK ] ConcatLayerTest/0.TestSetupChannels (0 ms)
+[ RUN      ] ConcatLayerTest/0.TestCPUNum
+[       OK ] ConcatLayerTest/0.TestCPUNum (0 ms)
+[ RUN      ] ConcatLayerTest/0.TestCPUGradient
+[       OK ] ConcatLayerTest/0.TestCPUGradient (23 ms)
+[ RUN      ] ConcatLayerTest/0.TestGPUGradient
+[       OK ] ConcatLayerTest/0.TestGPUGradient (79 ms)
+[----------] 5 tests from ConcatLayerTest/0 (102 ms total)
+
+[----------] 5 tests from ConcatLayerTest/1, where TypeParam = double
+[ RUN      ] ConcatLayerTest/1.TestSetupNum
+[       OK ] ConcatLayerTest/1.TestSetupNum (0 ms)
+[ RUN      ] ConcatLayerTest/1.TestSetupChannels
+[       OK ] ConcatLayerTest/1.TestSetupChannels (0 ms)
+[ RUN      ] ConcatLayerTest/1.TestCPUNum
+[       OK ] ConcatLayerTest/1.TestCPUNum (0 ms)
+[ RUN      ] ConcatLayerTest/1.TestCPUGradient
+[       OK ] ConcatLayerTest/1.TestCPUGradient (24 ms)
+[ RUN      ] ConcatLayerTest/1.TestGPUGradient
+[       OK ] ConcatLayerTest/1.TestGPUGradient (80 ms)
+[----------] 5 tests from ConcatLayerTest/1 (104 ms total)
+
+[----------] 9 tests from ConvolutionLayerTest/0, where TypeParam = float
+[ RUN      ] ConvolutionLayerTest/0.TestSetup
+[       OK ] ConvolutionLayerTest/0.TestSetup (0 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestCPUSimpleConvolution
+[       OK ] ConvolutionLayerTest/0.TestCPUSimpleConvolution (0 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestGPUSimpleConvolution
+[       OK ] ConvolutionLayerTest/0.TestGPUSimpleConvolution (0 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestCPUSimpleConvolutionGroup
+[       OK ] ConvolutionLayerTest/0.TestCPUSimpleConvolutionGroup (0 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestGPUSimpleConvolutionGroup
+[       OK ] ConvolutionLayerTest/0.TestGPUSimpleConvolutionGroup (0 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestCPUGradient
+[       OK ] ConvolutionLayerTest/0.TestCPUGradient (80 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestCPUGradientGroup
+[       OK ] ConvolutionLayerTest/0.TestCPUGradientGroup (107 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestGPUGradient
+[       OK ] ConvolutionLayerTest/0.TestGPUGradient (339 ms)
+[ RUN      ] ConvolutionLayerTest/0.TestGPUGradientGroup
+[       OK ] ConvolutionLayerTest/0.TestGPUGradientGroup (541 ms)
+[----------] 9 tests from ConvolutionLayerTest/0 (1067 ms total)
+
+[----------] 9 tests from ConvolutionLayerTest/1, where TypeParam = double
+[ RUN      ] ConvolutionLayerTest/1.TestSetup
+[       OK ] ConvolutionLayerTest/1.TestSetup (0 ms)
+[ RUN      ] ConvolutionLayerTest/1.TestCPUSimpleConvolution
+[       OK ] ConvolutionLayerTest/1.TestCPUSimpleConvolution (0 ms)
+[ RUN      ] ConvolutionLayerTest/1.TestGPUSimpleConvolution
+[       OK ] ConvolutionLayerTest/1.TestGPUSimpleConvolution (0 ms)
+[ RUN      ] ConvolutionLayerTest/1.TestCPUSimpleConvolutionGroup
+[       OK ] ConvolutionLayerTest/1.TestCPUSimpleConvolutionGroup (0 ms)
+[ RUN      ] ConvolutionLayerTest/1.TestGPUSimpleConvolutionGroup
+[       OK ] ConvolutionLayerTest/1.TestGPUSimpleConvolutionGroup (1 ms)
+[ RUN      ] ConvolutionLayerTest/1.TestCPUGradient
+[       OK ] ConvolutionLayerTest/1.TestCPUGradient (80 ms)
+[ RUN      ] ConvolutionLayerTest/1.TestCPUGradientGroup
+[       OK ] ConvolutionLayerTest/1.TestCPUGradientGroup (106 ms)
+[ RUN      ] ConvolutionLayerTest/1.TestGPUGradient
