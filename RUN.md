@@ -197,8 +197,8 @@ supposed to be a pb though.
 CURRENTLY
 =========
 
-- 06: soil_risk, soil_risk2, test_layer
-- 07: scrape_zone_peel
+- 06: soil_risk, soil_risk2, scrape_zone_peel
+- 07: test_layer
 - 08:
 - 09:
 - 10:
