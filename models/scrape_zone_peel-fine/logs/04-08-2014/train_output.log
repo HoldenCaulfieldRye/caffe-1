@@ -1,4 +1,3 @@
-nohup: ignoring input
 I0804 15:47:50.292312 27703 finetune_net.cpp:25] Starting Optimization
 I0804 15:47:50.292413 27703 solver.cpp:41] Creating training net.
 I0804 15:47:50.292989 27703 net.cpp:75] Creating Layer data
@@ -2782,4 +2781,3 @@ I0804 16:05:22.358108 27703 solver.cpp:159] Snapshotting to scrape_zone_peel_tra
 I0804 16:05:23.885733 27703 solver.cpp:166] Snapshotting solver state to scrape_zone_peel_train_iter_500.solverstate
 I0804 16:05:25.059053 27703 solver.cpp:100] Optimization Done.
 I0804 16:05:25.059085 27703 finetune_net.cpp:30] Optimization Done.
-Done.
