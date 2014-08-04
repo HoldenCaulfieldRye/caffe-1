@@ -169,10 +169,35 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 
 
+
+DEBUG TROUBLESHOOT
+==================
+# during make all:
+/usr/bin/ld: cannot find -lcblas
+/usr/bin/ld: cannot find -latlas
+# solution:
+scp graphic06.doc.ic.ac.uk:/etc/alternatives/lib*las* ~/.local/lib
+
+# create image mean:
+Check failed: proto.SerializeToOStream(&output)
+# solution:
+just a sufficiently similar, previously computed image mean
+
+# threshold layer:
+Check failed: (*top)[0]->num() == (*top)[1]->num() (0 vs. 50) The data and label should have the same number.
+# solution:
+you'd scp -r 'ed the data from another graphic machine, symlinks were
+followed, and actual images were in the data dir. that's not really
+supposed to be a pb though.
+
+
+
+
+
 CURRENTLY
 =========
 
-- 06: soil_risk, soil_risk2
+- 06: soil_risk, soil_risk2, test_layer
 - 07: scrape_zone_peel
 - 08:
 - 09:
