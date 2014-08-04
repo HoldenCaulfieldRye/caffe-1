@@ -1,2 +1,2 @@
-0 ScrapeBad
-1 ScrapeGood
+0 BadScrape
+1 GoodScrape
