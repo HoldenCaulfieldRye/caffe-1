@@ -25,8 +25,8 @@ class ThresholdLayerTest : public ::testing::Test {
   ThresholdLayerTest()
       : blob_bottom_data_(new Blob<Dtype>(10, 5, 1, 1)),
         blob_bottom_label_(new Blob<Dtype>(10, 5, 1, 1)),
-        blob_top_data_(new Blob<Dtype>()),
-        blob_top_label_(new Blob<Dtype>()) {
+        blob_top_data_(new Blob<Dtype>(10,5,1,1)),
+        blob_top_label_(new Blob<Dtype>(10,5,1,1)) {
     // fill the values
     FillerParameter filler_param;
     GaussianFiller<Dtype> filler(filler_param);
@@ -37,12 +37,12 @@ class ThresholdLayerTest : public ::testing::Test {
     blob_top_vec_.push_back(blob_top_data_);
     blob_top_vec_.push_back(blob_top_label_);
 }
-  virtual ~ThresholdLayerTest() {
+  /*virtual ~ThresholdLayerTest() {
     delete blob_bottom_data_;
     delete blob_bottom_label_;
     delete blob_top_data_;
     delete blob_top_label_;
- }
+ }*/
   Blob<Dtype>* const blob_bottom_data_;
   Blob<Dtype>* const blob_bottom_label_;
   Blob<Dtype>* const blob_top_data_;
@@ -58,10 +58,9 @@ TYPED_TEST(ThresholdLayerTest, TestGradientCPU) {
   LayerParameter layer_param;
   Caffe::set_mode(Caffe::CPU);
   ThresholdLayer<TypeParam> layer(layer_param);
-  layer.SetUp(this->blob_bottom_vec_, &this->blob_top_vec_);
+  layer.SetUp(this->blob_bottom_vec_, &(this->blob_top_vec_));
   GradientChecker<TypeParam> checker(1e-2, 1e-2, 1701);
-  checker.CheckGradientEltwise(&layer, &(this->blob_bottom_vec_),
-      &(this->blob_top_vec_));
+  checker.CheckGradientEltwise(&layer, &(this->blob_bottom_vec_), &(this->blob_top_vec_));
 }
 
 }  // namespace caffe
