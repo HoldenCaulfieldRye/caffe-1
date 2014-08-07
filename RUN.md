@@ -255,7 +255,8 @@ next steps:
 - script integrate python 
 - save net only if performance gain (cf pylearn2)
 - F measure
-- data augmentation
+- data augmentation: crop and flip already implemented in caffe,
+  under 'crop_size' and 'mirror' in *_train.prototxt, but can do more
 - impose best possible class balance at every batch
 - Razvan: different batch contents at every epoch
 - Razvan: pre-process image, select patch of interest
@@ -265,12 +266,22 @@ next steps:
 - prove that we can scale (have developed a magic formula for doing
   any kind of image classification) by publishing results on as many
   Kaggle image classification challenges as possible
-
+- preprocess: local constrast normalisation: bit.ly/UZ3p3E
+  code in Razvan/preproc.py
+- preprocess: divide images by the image standard deviation and apply
+  "subtractive/divisive normalization"
+- preprocess: stoch pooling paper finds 'subtracting per-pixel mean
+  from each
+  image did not really modify stats of the images and left large
+  variations of brightness and color' so used per-channel LCN instead
+- "using axiliary pseudo tasks to regularise the system" (big
+  improvement cited in Jarrett et al 2009)
+- stochastic pooling... but no published imagenet benchmark yet!
 
   
 Razvan recommends next:
 - main question is: is it working at all?
-  -> test interval 1 to see whether bad min all along (
+  -> test interval 1 to see whether bad min all along
 - what is the imbalance in each case?
   -> if equal to accuracy, then doing nothing
 - if doing nothing, need to understand why
