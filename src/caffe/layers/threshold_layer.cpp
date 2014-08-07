@@ -23,10 +23,10 @@ void ThresholdLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
       bottom[0]->height(), bottom[0]->width());
 
   int label_count = bottom[1]->count();
-  Dtype* labels_data = labels_.mutable_cpu_data();
+  Dtype* labels_data = labels_.mutable_cpu_data(); //ad: is this just initialising to specific vector size?
   const Dtype* bottom_data = bottom[1]->cpu_data();
 
-  caffe_set(labels_.count(), Dtype(0), labels_data); // is this neccesary? Why isn't caffe_set using cblas in general? (doesn't matter for 0 case)
+  caffe_set(labels_.count(), Dtype(0), labels_data); // is this neccesary? Why isn't caffe_set using cblas in general? (doesn't matter for 0 case) 
   for (int i = 0; i < label_count; ++i) { // assumes labels are integers starting from 0
     labels_data[int(bottom_data[i])] += 1;
   }
