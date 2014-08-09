@@ -12,7 +12,7 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   # if end == start == -1:
   start, end = 0, len(train)
   print 'plotting entire training data'
-    
+  
   # elif start == -1:
   #   start = 0
   #   print 'plotting from epoch %i to %i'%(start,end)
@@ -43,10 +43,10 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
 
 
 def get_caffe_train_errors(model_dir):
-  return get_caffe_errors(ojoin(model_dir,'train_output.log.train'),2)
+  return get_caffe_errors(model_dir,2)
 
 def get_caffe_val_acc(model_dir, test_interval):
-  original = get_caffe_errors(ojoin(model_dir,'train_output.log.test'),2)
+  original = get_caffe_errors(model_dir,2)
   stretch = []
   for i in range(len(original)-1):
     for k in range(test_interval):
@@ -57,7 +57,7 @@ def get_caffe_val_acc(model_dir, test_interval):
   return stretch
 
 def get_caffe_val_loss(model_dir, test_interval):
-  original = get_caffe_errors(ojoin(model_dir,'train_output.log.test'),3)
+  original = get_caffe_errors(model_dir,3)
   stretch = []
   for i in range(len(original)-1):
     for k in range(test_interval):
@@ -67,8 +67,14 @@ def get_caffe_val_loss(model_dir, test_interval):
   assert stretch[-1] != stretch[-2]
   return stretch
 
-def get_caffe_errors(error_file, idx):
-  content = open(error_file,'r').readlines()
+def get_caffe_errors(model_dir, idx):
+  data_files = []
+  for fname in os.listdir(model_dir):
+    if 'train_output' in fname: data_files.append(fname)
+  if len(data_files) != 1:
+    print 'there is not exactly 1 file with substring \'train_output\' in given directory'
+    sys.exit()
+  content = open(ojoin(model_dir,data_files[0]),'r').readlines()
   content = [' '.join(line.split()).split(' ') for line in content
              if not line.startswith('#')]
   print 'content looks like %s and %s'%(content[0], content[-1])
