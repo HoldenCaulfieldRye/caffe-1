@@ -60,6 +60,8 @@ Layer<Dtype>* GetLayer(const LayerParameter& param) {
     return new MemoryDataLayer<Dtype>(param);
   case LayerParameter_LayerType_MULTINOMIAL_LOGISTIC_LOSS:
     return new MultinomialLogisticLossLayer<Dtype>(param);
+  case LayerParameter_LayerType_PER_CLASS_ACCURACY:
+    return new PerClassAccuracyLayer<Dtype>(param);
   case LayerParameter_LayerType_POOLING:
     return new PoolingLayer<Dtype>(param);
   case LayerParameter_LayerType_POWER:

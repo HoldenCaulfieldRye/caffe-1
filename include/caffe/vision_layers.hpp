@@ -422,7 +422,7 @@ class ThresholdLayer : public Layer<Dtype> {
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
       const bool propagate_down, vector<Blob<Dtype>*>* bottom);
 
-  // prior stores the prior probabilities of the labels in the current minibatch.
+  // stores the prior probabilities of the labels in the current minibatch.
   Blob<Dtype> prior_;
   // intermediary blob to hold label counts
   Blob<Dtype> labels_;

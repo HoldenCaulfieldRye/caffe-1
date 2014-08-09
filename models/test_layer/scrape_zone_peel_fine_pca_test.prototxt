@@ -5,9 +5,9 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "scrape_zone_peel_fine_val_leveldb"
+    source: "scrape_zone_peel_fine_test_leveldb"
     mean_file: "../../data/scrape_zone_peel/scrape_zone_peel_fine_mean.binaryproto"
-    batch_size: 1024 
+    batch_size: 256
     crop_size: 227
     mirror: false
   }
@@ -309,11 +309,21 @@ layers {
   }
 }
 layers {
+  name: "threshold"
+  type: THRESHOLD
+  bottom: "fc8_aero"
+  bottom: "label"
+  top: "fc8_aero_thresh"
+  top: "label"
+}
+
+layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_aero"
+  bottom: "fc8_aero_thresh"
   top: "prob"
 }
+
 layers {
   name: "accuracy"
   type: PER_CLASS_ACCURACY

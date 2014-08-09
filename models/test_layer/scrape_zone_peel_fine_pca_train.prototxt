@@ -5,11 +5,11 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "scrape_zone_peel_fine_val_leveldb"
+    source: "scrape_zone_peel_fine_train_leveldb"
     mean_file: "../../data/scrape_zone_peel/scrape_zone_peel_fine_mean.binaryproto"
-    batch_size: 1024 
+    batch_size: 50
     crop_size: 227
-    mirror: false
+    mirror: true
   }
 }
 layers {
@@ -298,7 +298,7 @@ layers {
   weight_decay: 0
   inner_product_param {
     num_output: 2
-	weight_filler {
+    weight_filler {
       type: "gaussian"
       std: 0.01
     }
@@ -308,16 +308,19 @@ layers {
     }
   }
 }
+
 layers {
-  name: "prob"
-  type: SOFTMAX
+  name: "threshold"
+  type: THRESHOLD
   bottom: "fc8_aero"
-  top: "prob"
-}
-layers {
-  name: "accuracy"
-  type: PER_CLASS_ACCURACY
-  bottom: "prob"
   bottom: "label"
-  top: "accuracy"
+  top: "fc8_aero_thresh"
+  top: "label"
+}
+
+layers {
+  name: "loss"
+  type: SOFTMAX_LOSS
+  bottom: "fc8_aero_thresh"
+  bottom: "label"
 }
