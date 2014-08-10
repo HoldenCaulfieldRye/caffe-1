@@ -1,12 +1,12 @@
-name: "ClampFineNet"
+name: "threshFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_fine_train_leveldb"
-    mean_file: "../../data/clampdet/clampdet_fine_mean.binaryproto"
+    source: "thresh_fine_train_leveldb"
+    mean_file: "../../data/thresh/thresh_fine_mean.binaryproto"
     batch_size: 128
     crop_size: 227
     mirror: true
@@ -308,9 +308,19 @@ layers {
     }
   }
 }
+
+layers {
+  name: "threshold"
+  type: THRESHOLD
+  bottom: "fc8_aero"
+  bottom: "label"
+  top: "fc8_aero_thresh"
+  top: "label"
+}
+
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc8_aero"
+  bottom: "fc8_aero_thresh"
   bottom: "label"
 }
