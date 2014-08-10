@@ -317,10 +317,10 @@ layers {
   top: "fc8_aero_thresh"
   top: "label"
 }
-
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
   bottom: "fc8_aero_thresh"
   bottom: "label"
 }
+

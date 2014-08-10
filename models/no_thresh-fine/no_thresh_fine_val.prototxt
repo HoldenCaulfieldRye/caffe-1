@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "no_thresh_fine_val_leveldb"
     mean_file: "../../data/no_thresh/no_thresh_fine_mean.binaryproto"
-    batch_size: 1024
+    batch_size: 512
     crop_size: 227
     mirror: false
   }
