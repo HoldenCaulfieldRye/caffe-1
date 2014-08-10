@@ -279,11 +279,11 @@ next steps:
 - stochastic pooling... but no published imagenet benchmark yet!
 
   
-Razvan recommends next:
-- main question is: is it working at all?
-  -> test interval 1 to see whether bad min all along
-- what is the imbalance in each case?
-  -> if equal to accuracy, then doing nothing
-- if doing nothing, need to understand why
-  -> figure out how everything is working
-  -> properly evaluate accuracy (per class)
+Next:
+- train with bayesian softmax loss:
+  -> abstract class BayesianLayer which computes prior
+  -> ThresholdLayer and BayesianSoftmaxLoss inherit from it
+  -> BayesianSoftmaxLoss computes like SoftmaxLoss but divides by
+     prior
+- read paper on finetuning:
+  -> 

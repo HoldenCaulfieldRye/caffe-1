@@ -401,11 +401,31 @@ class SplitLayer : public Layer<Dtype> {
   int count_;
 };
 
+/* Bayesian Layer
+Abstract class to compute prior
+*/
+template <typename Dtype>
+class BayesianLayer : public Layer<Dtype> {
+ public:
+  explicit BayesianLayer(const LayerParameter& param)
+    : Layer<Dtype>(param) {}
+  virtual void SetUp(const vector<Blob<Dtype>*>& bottom,
+		     vector<Blob<Dtype>*>* top);
+ protected:
+  virtual void ComputePrior(const vector<Blob<Dtype>*>& bottom,
+      vector<Blob<Dtype>*>* top);
+
+  // stores the prior probabilities of the labels in the current minibatch.
+  Blob<Dtype> prior_;
+  // intermediary blob to hold label counts
+  Blob<Dtype> labels_;
+};
+  
 /* ThresholdLayer
 Normalizes network output with priors of labels in minibatch.
 */
 template <typename Dtype>
-class ThresholdLayer : public Layer<Dtype> {
+class ThresholdLayer : public BayesianLayer<Dtype> {
  public:
   explicit ThresholdLayer(const LayerParameter& param)
       : Layer<Dtype>(param) {}
@@ -421,11 +441,6 @@ class ThresholdLayer : public Layer<Dtype> {
       const bool propagate_down, vector<Blob<Dtype>*>* bottom);
   virtual void Backward_gpu(const vector<Blob<Dtype>*>& top,
       const bool propagate_down, vector<Blob<Dtype>*>* bottom);
-
-  // stores the prior probabilities of the labels in the current minibatch.
-  Blob<Dtype> prior_;
-  // intermediary blob to hold label counts
-  Blob<Dtype> labels_;
 };
 
 }  // namespace caffe

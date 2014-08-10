@@ -11,7 +11,7 @@ using std::max;
 namespace caffe {
 
 template <typename Dtype>
-void ThresholdLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
+void BayesianLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
       vector<Blob<Dtype>*>* top) { // create prior counts here. Not sure if it's the right place. When is setup called?
   CHECK_EQ(bottom.size(), 2) << "Threshold Layer takes the parameters to modify and the labels from which to derive the priors as input.";
   CHECK_EQ(top->size(), 2) << "Softmax Layer gives the modified parameters and the unmodified labels as output.";
@@ -24,7 +24,7 @@ void ThresholdLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
 
 }
 template <typename Dtype>
-Dtype ThresholdLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+Dtype BayesianLayer<Dtype>::ComputePrior(const vector<Blob<Dtype>*>& bottom,
     vector<Blob<Dtype>*>* top) {
   int label_count = bottom[1]->count();
   Dtype* labels_data = labels_.mutable_cpu_data(); //ad: is this just initialising to specific vector size?
@@ -52,16 +52,16 @@ Dtype ThresholdLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
 
   caffe_cpu_scale(count, Dtype(1.0 / label_count), prior_data, prior_data);
 
-  const Dtype* bottom_data = bottom[0]->cpu_data();
-  Dtype* top_data = (*top)[0]->mutable_cpu_data();
-  caffe_mul(bottom[0]->count(), bottom_data, prior_.cpu_data(), top_data);
+  // const Dtype* bottom_data = bottom[0]->cpu_data();
+  // Dtype* top_data = (*top)[0]->mutable_cpu_data();
+  // caffe_mul(bottom[0]->count(), bottom_data, prior_.cpu_data(), top_data);
 
-  caffe_copy(bottom[0]->count(), bottom[1]->cpu_data(), (*top)[1]->mutable_cpu_data());
+  // caffe_copy(bottom[0]->count(), bottom[1]->cpu_data(), (*top)[1]->mutable_cpu_data());
   return Dtype(0);
 }
 
 template <typename Dtype>
-void ThresholdLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top, //not sure if you need to do anything for the label layer
+void BayesianLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top, //not sure if you need to do anything for the label layer
     const bool propagate_down,
     vector<Blob<Dtype>*>* bottom) {
   if (propagate_down) {
@@ -75,6 +75,6 @@ void ThresholdLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top, //not 
   }
 }
 
-INSTANTIATE_CLASS(ThresholdLayer);
+INSTANTIATE_CLASS(BayesianLayer);
 
 }  // namespace caffe
