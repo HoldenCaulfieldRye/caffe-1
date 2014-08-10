@@ -1,12 +1,12 @@
-name: "ClampFineNet"
+name: "no_threshFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_fine_train_leveldb"
-    mean_file: "../../data/clampdet/clampdet_fine_mean.binaryproto"
+    source: "no_thresh_fine_train_leveldb"
+    mean_file: "../../data/no_thresh/no_thresh_fine_mean.binaryproto"
     batch_size: 128
     crop_size: 227
     mirror: true

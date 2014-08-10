@@ -12,7 +12,7 @@ import json, yaml, random
 def main(data_dir, data_info, to_dir, target_bad_min=None):
   ''' This is the master function. 
   data_dir: where raw data is. data_info: where to store .txt files. '''
-  All = get_label_dict(data_dir, use_old_dic)
+  All = get_label_dict(data_dir)
   total_num_images = All.pop('total_num_images')
   Keep = classes_to_learn(All)
   # merge_classes only after default label entry created
@@ -33,12 +33,13 @@ def main(data_dir, data_info, to_dir, target_bad_min=None):
   return num_output, dump
 
 
-def get_label_dict(data_dir, use_old_dic=True):
+def get_label_dict(data_dir):
   total_num_images = 0
   path = data_dir
   for fname in os.listdir(os.getcwd()):
-    if fname.startswith('label_dict'):
-      if use_old_dic == True:
+    if not fname.startswith('label_dict'): continue
+    else:
+      if raw_input('\nfound %s; use as label_dict? ([Y]/N) '%(fname)) in ['','Y']:
         return yaml.load(open(fname,'r'))
   d = {'Perfect': []}
   print 'generating dict of label:files from %s...'%(data_dir)

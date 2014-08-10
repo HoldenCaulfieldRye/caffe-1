@@ -10,7 +10,7 @@ set -e
 # script is still useful, all you have to do is reply to prompts.
 
 # 
-TASK_NAME=no_thresh
+TASK_NAME=thresh
 
 # with 4, bad minimum provides 80% classification accuracy
 # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
@@ -29,24 +29,24 @@ NUM_OUTPUT=2 #temp fix
 USE_FIRST_LOCAL_DICT=Y
 
 
-# 1. & 2. get labels, choose which ones to learn, symlink dataset
-source /data/ad6813/caffe/python/venv/bin/activate
+# # 1. & 2. get labels, choose which ones to learn, symlink dataset
+# source /data/ad6813/caffe/python/venv/bin/activate
 
-if [ ! -d /data/ad6813/caffe/data_info/$TASK_NAME ]
-then
-    mkdir /data/ad6813/caffe/data_info/$TASK_NAME
-fi
+# if [ ! -d /data/ad6813/caffe/data_info/$TASK_NAME ]
+# then
+#     mkdir /data/ad6813/caffe/data_info/$TASK_NAME
+# fi
 
-if [ ! -d /data/ad6813/caffe/data/$TASK_NAME ]
-then
-    mkdir /data/ad6813/caffe/data/$TASK_NAME
-fi
+# if [ ! -d /data/ad6813/caffe/data/$TASK_NAME ]
+# then
+#     mkdir /data/ad6813/caffe/data/$TASK_NAME
+# fi
 
-cd ../data_preparation
-echo "main and move_to_dirs..."
-# NUM_OUTPUT is number of classes to learn
-NUM_OUTPUT=$(python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=$BAD_MIN)
-echo "number of output neurons: "$NUM_OUPUT
+# cd ../data_preparation
+# echo "main and move_to_dirs..."
+# # NUM_OUTPUT is number of classes to learn
+# NUM_OUTPUT=$(python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME use-old-dic=$USE_FIRST_LOCAL_DICT bad-min=$BAD_MIN)
+# echo "number of output neurons: "$NUM_OUPUT
 
 # 3. resize images
 cd /data/ad6813/caffe/data/$TASK_NAME
@@ -78,8 +78,8 @@ cd /data/ad6813/caffe/models
 # first make sure exists reference dir from which to cp and sed
 if [ -d clampdet-fine ]
 then
-    rm -rf $TASK_NAME'-fine'
-    mkdir $TASK_NAME'-fine'
+    rm -rf $TASK_NAME''
+    mkdir $TASK_NAME''
     cd clampdet-fine
     NEEDED_FILES="clampdet_fine_solver.prototxt create_clampdet_fine.sh clampdet_fine_test.prototxt fine_clampdet.sh clampdet_fine_train.prototxt make_clampdet_fine_mean.sh clampdet_fine_val.prototxt resume_training.sh"
     for file in $NEEDED_FILES;
@@ -90,7 +90,7 @@ then
 	    echo "need it to create leveldb inputs for $TASK_NAME"
 	    exit
 	else
-	    cp $file '../'$TASK_NAME'-fine/'
+	    cp $file '../'$TASK_NAME'/'
 	fi
     done
 else
@@ -100,7 +100,7 @@ else
 fi
 
 # now adapt files to taskname
-cd ../$TASK_NAME-fine
+cd ../$TASK_NAME
 # rename files
 for file in *clampdet*;
 do mv $file ${file/clampdet/$TASK_NAME};
@@ -137,5 +137,4 @@ chmod 755 ./fine_"$TASK_NAME".sh
 echo "you're ready!"
 echo "cd ../../models/"$TASK_NAME"-fine"
 echo "nohup ./fine_"$TASK_NAME".sh >> train_output.txt 2>&1 &"
-done
 
