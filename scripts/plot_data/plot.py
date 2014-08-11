@@ -4,6 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from os.path import join as ojoin
+from subprocess import call
 
 # Usage: python plot.py path/to/model test-inter=.. [start-epoch=..] [end-epoch==..]
 
@@ -27,7 +28,6 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   #   start, end = start*800, end*800
 
   plt.ylim([0,1.2])
-  
   x = np.array(range(len(train[start:end])))
   ytrain = np.array([el[1] for el in train[start:end]])
   ytest_acc = np.array([el[1] for el in val_acc[start:end]])
@@ -77,11 +77,12 @@ def get_caffe_errors(model_dir, typ, idx):
     print 'there is not exactly 1 filename otf \'*train_output*.log.%s\' in given directory'%(typ)
     sys.exit()
   content = open(ojoin(model_dir,data_files[0]),'r').readlines()
+  legit_length = len(content[1])
   content = [' '.join(line.split()).split(' ') for line in content
              if not line.startswith('#')]
-  print 'content looks like %s and %s'%(content[0], content[-1])
+  print 'raw content looked like %s and %s'%(content[0], content[-1])
   content = [(line[0],line[idx]) for line in content]
-  print 'content looks like %s and %s'%(content[0], content[-1])
+  print 'selected content looks like %s and %s'%(content[0], content[-1])
   return content
 
 
@@ -96,6 +97,13 @@ if __name__ == '__main__':
     print 'ERROR: X11 forwarding not enabled, cannot run script'
     sys.exit()
 
+  model_dir = os.path.abspath(sys.argv[1])
+
+  # command = "./parselog.sh %s"%(ojoin(model_dir,'train_output.log'))
+  # print os.path.isfile(ojoin(model_dir,'train_output.log'))
+  # print 'command:', command
+  # call(command)
+    
   test_interval = [int(arg.split('=')[-1]) for arg in sys.argv
                    if arg.startswith('test-inter=')]
   if len(test_interval) != 1:
@@ -109,10 +117,7 @@ if __name__ == '__main__':
       start = int(arg.split('=')[-1])
     if arg.startswith("end-epoch="):
       end = int(arg.split('=')[-1])
-
       
-  model_dir = os.path.abspath(sys.argv[1])
-
   train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
   print 'train looks like %s and %s'%(train[0], train[-1])
   matplot(model_dir, train, val_acc, val_loss, start, end)
