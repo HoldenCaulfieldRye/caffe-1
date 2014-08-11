@@ -1,5 +1,5 @@
 // Copyright 2014 BVLC and contributors.
-#include <iostream>
+// #include <iostream>
 #include <algorithm>
 #include <cmath>
 #include <cfloat>
@@ -39,7 +39,7 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
   Dtype accuracy = 0;
   Dtype logprob = 0;
   const Dtype* bottom_data = bottom[0]->cpu_data();
-  const Dtype* bottom_label = bottom[1]->cpu_data(); //Razvan calls this bottom_data
+  const Dtype* bottom_label = bottom[1]->cpu_data(); //threshold_layer calls this bottom_data
   int num = bottom[0]->num();
   int dim = bottom[0]->count() / bottom[0]->num();
 
@@ -48,10 +48,10 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
   Dtype* labels_count = labels_.mutable_cpu_data();
   caffe_set(labels_.count(), Dtype(FLT_MIN), labels_count);
   //std::cout << "label_count" << labels_.count();
-  for (int i = 0; i < label_count; ++i){
+  for (int i = 0; i < label_count; ++i) {
     labels_count[static_cast<int>(bottom_label[i])] += 1.0;
     //std::cout << "bottom_label" << i << " " << bottom_label[i];
- } 
+  } 
   for (int i = 0; i < num; ++i) {
     // Accuracy
     Dtype maxval = -FLT_MAX;
