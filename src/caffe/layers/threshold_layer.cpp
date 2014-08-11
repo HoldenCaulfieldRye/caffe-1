@@ -20,7 +20,7 @@ void ThresholdLayer<Dtype>::SetUp(const vector<Blob<Dtype>*>& bottom,
   (*top)[0]->ReshapeLike(*bottom[0]);
   (*top)[1]->ReshapeLike(*bottom[1]);
   
-  labels_.Reshape(bottom[1]->num(),1,1,1); 
+  labels_.Reshape(2,1,1,1); // make this generic so it work with >2 labels
 
 }
 template <typename Dtype>
@@ -38,9 +38,9 @@ Dtype ThresholdLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   prior_.Reshape(bottom[0]->num(), bottom[0]->channels(),
       bottom[0]->height(), bottom[0]->width());
   
-  int num = prior_.num();    //batchSize
-  int count = prior_.count();//input(?) values to layer across batch
-  int dim = count / num;     //layer's input(?) dimensionality
+  int num = prior_.num();
+  int count = prior_.count();
+  int dim = count / num;
 
   //std::cout << dim << "\n";
   Dtype* prior_data = prior_.mutable_cpu_data();
