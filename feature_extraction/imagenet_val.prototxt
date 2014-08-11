@@ -1,15 +1,17 @@
-name: "threshFineNet"
+name: "CaffeNet"
 layers {
   name: "data"
-  type: DATA
+  type: IMAGE_DATA
   top: "data"
   top: "label"
-  data_param {
-    source: "thresh_fine_val_leveldb"
-    mean_file: "../../data/thresh/thresh_fine_mean.binaryproto"
-    batch_size: 256
+  image_data_param {
+    source: "$CAFFE_DIR/examples/_temp/file_list.txt"
+    mean_file: "$CAFFE_DIR/data/ilsvrc12/imagenet_mean.binaryproto"
+    batch_size: 50
     crop_size: 227
     mirror: false
+    new_height: 256
+    new_width: 256
   }
 }
 layers {
@@ -17,22 +19,10 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
   convolution_param {
     num_output: 96
     kernel_size: 11
     stride: 4
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
   }
 }
 layers {
@@ -68,23 +58,11 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
   convolution_param {
     num_output: 256
     pad: 2
     kernel_size: 5
     group: 2
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
   }
 }
 layers {
@@ -120,22 +98,10 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
   convolution_param {
     num_output: 384
     pad: 1
     kernel_size: 3
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
   }
 }
 layers {
@@ -149,23 +115,11 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
   convolution_param {
     num_output: 384
     pad: 1
     kernel_size: 3
     group: 2
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
   }
 }
 layers {
@@ -179,23 +133,11 @@ layers {
   type: CONVOLUTION
   bottom: "conv4"
   top: "conv5"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
   convolution_param {
     num_output: 256
     pad: 1
     kernel_size: 3
     group: 2
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
   }
 }
 layers {
@@ -220,20 +162,8 @@ layers {
   type: INNER_PRODUCT
   bottom: "pool5"
   top: "fc6"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
   inner_product_param {
     num_output: 4096
-    weight_filler {
-      type: "gaussian"
-      std: 0.005
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
   }
 }
 layers {
@@ -256,20 +186,8 @@ layers {
   type: INNER_PRODUCT
   bottom: "fc6"
   top: "fc7"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
   inner_product_param {
     num_output: 4096
-    weight_filler {
-      type: "gaussian"
-      std: 0.005
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
   }
 }
 layers {
@@ -288,44 +206,31 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_aero"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
+  top: "fc8"
   inner_product_param {
-    num_output: 2
-	weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
+    num_output: 1000
   }
-}
-layers {
-  name: "threshold"
-  type: THRESHOLD
-  bottom: "fc8_aero"
-  bottom: "label"
-  top: "fc8_aero_thresh"
-  top: "label"
 }
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_aero_thresh"
+  bottom: "fc8"
   top: "prob"
 }
 layers {
   name: "accuracy"
-  type: PER_CLASS_ACCURACY
+  type: ACCURACY
   bottom: "prob"
   bottom: "label"
   top: "accuracy"
+}
+layers {
+  name: "loss"
+  type: SOFTMAX_LOSS
+  bottom: "fc8"
+  bottom: "label"
+  top: "loss"
 }
