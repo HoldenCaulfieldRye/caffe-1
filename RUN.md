@@ -205,8 +205,8 @@ CURRENTLY
 
 - 06: soil_risk, soil_risk2, scrape_zone_peel, thresh, freeze6
 - 07: test_layer, no_thresh, freeze7
-- 08: 
-- 09: freeze5.5
+- 08: freeze5.5
+- 09: 
 - 10:
 
 classifiers:
@@ -290,8 +290,13 @@ Next:
   -> abstract class BayesianLayer which computes prior
   -> ThresholdLayer and BayesianSoftmaxLoss inherit from it
   -> BayesianSoftmaxLoss computes like SoftmaxLoss but divides by
-     prior
-- read paper on finetuning:
-  ->
+     prior, AND multiplies by 0.5 (normalise to not affect lr)
+- read paper 'CNN features off-the-shelf':
+  -> optimising CNN features for specific tasks
+     29, 15, 51, 43, 41
 - extract features with caffe
-- add dropout to nets
+- add RedBox data
+- false pos worse than fals neg:
+  -> rebalance loss even more
+  -> on test set, use a lower sig level than 0.5
+     (eg flag noclamp when confidence > 0.3)
