@@ -203,9 +203,9 @@ supposed to be a pb though.
 CURRENTLY
 =========
 
-- 06: soil_risk, soil_risk2, scrape_zone_peel, thresh
-- 07: test_layer, no_thresh
-- 08:
+- 06: soil_risk, soil_risk2, scrape_zone_peel, thresh, freeze6
+- 07: test_layer, no_thresh, freeze7
+- 08: freeze5.5
 - 09:
 - 10:
 
