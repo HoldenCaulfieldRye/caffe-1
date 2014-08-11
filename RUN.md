@@ -73,9 +73,9 @@ NOTE: train_leveldb val_leveldb test_leveldb should not exist before this execut
 7. network definition
 =====================
 
-clampdet_train.prototext
-clampdet_val.prototext
-clampdet_test.prototext
+clampdet_train.prototxt
+clampdet_val.prototxt
+clampdet_test.prototxt
 
 # last layer 'loss' or 'accuracy' based on backprop or measure
 # performance
@@ -83,6 +83,12 @@ clampdet_test.prototext
 # num_output is number of neurons per layer
 
 # make batch_size for val (as large as possible?)
+
+# the number of blobs_lr's in a layer "should be 0 or same as num of
+  layer's parameter blobs" - (??)
+
+# blobs_lr, there are usually 2: one for weight lr, other for bias.
+# it is to be multiplied by lr given in solver.
 
 
 8. solver
