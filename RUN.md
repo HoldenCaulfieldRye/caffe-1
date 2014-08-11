@@ -205,8 +205,8 @@ CURRENTLY
 
 - 06: soil_risk, soil_risk2, scrape_zone_peel, thresh, freeze6
 - 07: test_layer, no_thresh, freeze7
-- 08: freeze5.5
-- 09:
+- 08: 
+- 09: freeze5.5
 - 10:
 
 classifiers:
@@ -292,4 +292,6 @@ Next:
   -> BayesianSoftmaxLoss computes like SoftmaxLoss but divides by
      prior
 - read paper on finetuning:
-  -> 
+  ->
+- extract features with caffe
+- add dropout to nets
