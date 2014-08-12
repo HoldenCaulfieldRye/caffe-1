@@ -309,3 +309,11 @@ PRIORITY next:
 - train all
 - include |Redbox
 - sig level
+
+
+Meeting topics:
+- multiple image query:
+  -> do all imgs have same flags? (if so, bad for training!)
+  -> do you keep track of query number?
+- qualitative understanding:
+  -> caffe/visual_inspect/confusing
