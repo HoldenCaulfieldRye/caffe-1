@@ -37,7 +37,7 @@ if __name__ == '__main__':
   d = get_label_dict(data_dir)
   os.chdir(here)
   for label in d.keys():
-    if type(label) == list:
+    if type(d[label]) == list:
       if not os.path.isdir(label): os.mkdir(label)
       length = min(20,len(d[label]))
       for f in d[label][:length]:
