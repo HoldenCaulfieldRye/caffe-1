@@ -13,3 +13,8 @@ weight_decay: 0.0005
 snapshot: 2000
 snapshot_prefix: "thresh_fine_train"
 solver_mode: GPU
+
+min_lr: 10^(-6)
+base_lr: 10^(-4)
+gamma: 0.9995
+# max(min_lr, base_lr*gamma^(iter))

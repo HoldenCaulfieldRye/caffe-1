@@ -185,7 +185,7 @@ void Solver<Dtype>::Restore(const char* state_file) {
 // policies are as follows:
 //    - fixed: always return base_lr.
 //    - step: return base_lr * gamma ^ (floor(iter / step))
-//    - exp: return base_lr * gamma ^ iter
+//    - exp: return max(0.000001, base_lr * gamma ^ iter)
 //    - inv: return base_lr * (1 + gamma * iter) ^ (- power)
 // where base_lr, gamma, step and power are defined in the solver parameter
 // protocol buffer, and iter is the current iteration.
@@ -199,8 +199,10 @@ Dtype SGDSolver<Dtype>::GetLearningRate() {
     int current_step = this->iter_ / this->param_.stepsize();
     rate = this->param_.base_lr() *
         pow(this->param_.gamma(), current_step);
-  } else if (lr_policy == "exp") {
+  } else if (lr_policy == "exp") {    
     rate = this->param_.base_lr() * pow(this->param_.gamma(), this->iter_);
+    if (0.000001 > rate)
+      rate = 0.000001;
   } else if (lr_policy == "inv") {
     rate = this->param_.base_lr() *
         pow(Dtype(1) + this->param_.gamma() * this->iter_,
