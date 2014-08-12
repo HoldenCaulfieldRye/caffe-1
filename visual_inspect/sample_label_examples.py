@@ -35,7 +35,8 @@ if __name__ == '__main__':
   os.chdir('../scripts/data_preparation')
   d = get_label_dict(data_dir)
   for label in d.keys():
-    if not os.path.isdir(label): os.mkdir(label)
-    length = min(20,len(d[label]))
-    for f in d[label][:length]:
-      shutil.copy(ojoin(data_dir,f),ojoin(ojoin(label,f)))
+    if type(d[label]) == list:
+      if not os.path.isdir(label): os.mkdir(label)
+      length = min(20,len(d[label]))
+      for f in d[label][:length]:
+        shutil.copy(ojoin(data_dir,f),ojoin(ojoin(label,f)))
