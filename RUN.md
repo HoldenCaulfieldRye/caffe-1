@@ -204,6 +204,10 @@ supposed to be a pb though.
 # plot.py: list index out of range
 look at log.{train,test} and see if last line pathogenic
 
+# python wrappers:
+ImportError: No module named _caffe
+# solution
+make pycaffe
 
 50k lines ong raphic06
 
@@ -257,41 +261,28 @@ classifiers:
 
 
 next steps:
-- thoughts above
-- are those really bad_mins: look at val error at every iteration
-- why do scrape_zone_peel and ground_sheet have same trainsize
 - need test error for true performance
-- larger minibatch for less noisy gradient
-- lower learning rate 
 - Redbox data
 - controlpoint extra metadata
-- google doc specified next steps
-- USA VISA!models/clampdet-fine/
-- script integrate python 
 - save net only if performance gain (cf pylearn2)
-- F measure
-- data augmentation: crop and flip already implemented in caffe,
-  under 'crop_size' and 'mirror' in *_train.prototxt, but can do more
+- re-initialise weights in backpropping layers
+- data augmentation: rotations, light adjustments bit.ly/UZ3p3E
+  use scikit-image (see also code in Razvan/preproc.py)
 - impose best possible class balance at every batch
 - Razvan: different batch contents at every epoch
 - Razvan: pre-process image, select patch of interest
-- look at new data fields sent by ControlPoint
-- actually break CAPTCHAs by reproducing Goodfellow's work, open
-  source everything and say you are better than Vicarious
-- prove that we can scale (have developed a magic formula for doing
-  any kind of image classification) by publishing results on as many
-  Kaggle image classification challenges as possible
-- preprocess: local constrast normalisation: bit.ly/UZ3p3E
-  code in Razvan/preproc.py
 - preprocess: divide images by the image standard deviation and apply
   "subtractive/divisive normalization"
 - preprocess: stoch pooling paper finds 'subtracting per-pixel mean
-  from each
-  image did not really modify stats of the images and left large
-  variations of brightness and color' so used per-channel LCN instead
+  from each image did not really modify stats of the images and left
+  large variations of brightness and color' so used per-channel LCN
+  instead
 - "using axiliary pseudo tasks to regularise the system" (big
   improvement cited in Jarrett et al 2009)
-- stochastic pooling... but no published imagenet benchmark yet!
+- ensemble network, bagging
+- 'CNN features off-the-shelf', optimising CNN features for specific
+  tasks: 29, 15, 51, 43, 41
+- stochastic pooling?
 
   
 Next:
@@ -300,9 +291,6 @@ Next:
   -> ThresholdLayer and BayesianSoftmaxLoss inherit from it
   -> BayesianSoftmaxLoss computes like SoftmaxLoss but divides by
      prior, AND multiplies by 0.5 (normalise to not affect lr)
-- read paper 'CNN features off-the-shelf':
-  -> optimising CNN features for specific tasks
-     29, 15, 51, 43, 41
 - extract features with caffe
 - add RedBox data
 - false pos worse than fals neg:
@@ -323,5 +311,10 @@ Meeting topics:
   -> do you keep track of query number?
 - qualitative understanding:
   -> caffe/visual_inspect/confusing
+  -> FILL IN WITH RAZVAN DURING TRIP!
   -> explanation: all imgs of a query have same flags?
+  -> we need a document with detailed explanation of each flag and
+     examples (for each joint type?)
+- sig level:
+  -> in visual_inspect
   
