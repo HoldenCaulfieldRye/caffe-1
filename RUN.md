@@ -196,7 +196,11 @@ you'd scp -r 'ed the data from another graphic machine, symlinks were
 followed, and actual images were in the data dir. that's not really
 supposed to be a pb though.
 
+# plot.py: list index out of range
+look at log.{train,test} and see if last line pathogenic
 
+
+50k lines ong raphic06
 
 
 
@@ -300,3 +304,16 @@ Next:
   -> rebalance loss even more
   -> on test set, use a lower sig level than 0.5
      (eg flag noclamp when confidence > 0.3)
+
+PRIORITY next:
+- train all
+- include |Redbox
+- sig level
+
+
+Meeting topics:
+- multiple image query:
+  -> do all imgs have same flags? (if so, bad for training!)
+  -> do you keep track of query number?
+- qualitative understanding:
+  -> caffe/visual_inspect/confusing
