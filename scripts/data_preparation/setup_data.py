@@ -253,6 +253,8 @@ if __name__ == '__main__':
     elif "data-info=" in arg:
       data_info = os.path.abspath(arg.split('=')[-1])
 
+  # data_dir = /data/ad6813/pipe-data/Bluebox/raw_data/dump
+  # data_info = /data/ad6813/caffe/data_info
   if data_dir is None:
     print "\nERROR: data_dir not given"
     exit

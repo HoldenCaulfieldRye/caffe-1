@@ -308,7 +308,6 @@ layers {
     }
   }
 }
-
 layers {
   name: "threshold"
   type: THRESHOLD
