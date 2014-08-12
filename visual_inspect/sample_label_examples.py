@@ -31,11 +31,14 @@ def get_label_dict(data_dir):
   return d
 
 if __name__ == '__main__':
+  here = os.getcwd()
   data_dir = '/data/ad6813/pipe-data/Bluebox/raw_data/dump'
   os.chdir('../scripts/data_preparation')
   d = get_label_dict(data_dir)
+  os.chdir(here)
   for label in d.keys():
-    if not os.path.isdir(label): os.mkdir(label)
-    length = min(20,len(d[label]))
-    for f in d[label][:length]:
-      shutil.copy(ojoin(data_dir,f),ojoin(ojoin(label,f)))
+    if type(label) == list:
+      if not os.path.isdir(label): os.mkdir(label)
+      length = min(20,len(d[label]))
+      for f in d[label][:length]:
+        shutil.copy(ojoin(data_dir,f),ojoin(ojoin(label,f)))
