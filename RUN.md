@@ -143,6 +143,11 @@ cf mezN's answer: bit.ly/1siq8Wz
 
 # save the nets to /data/ad6813/my-nets/saves/caffe for neatness
 
+# set blobs_lr to 0 if you want to freeze backprop on them
+
+# change layer name not to match alexnet's to re-initialize weights
+
+
 11.2 train
 =========
 
@@ -309,6 +314,7 @@ PRIORITY next:
 - train all
 - include |Redbox
 - sig level
+- Soumith: set weights back to zero
 
 
 Meeting topics:
@@ -317,3 +323,5 @@ Meeting topics:
   -> do you keep track of query number?
 - qualitative understanding:
   -> caffe/visual_inspect/confusing
+  -> explanation: all imgs of a query have same flags?
+  
