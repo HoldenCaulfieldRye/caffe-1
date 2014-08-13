@@ -6,26 +6,24 @@ import matplotlib.pyplot as plt
 from os.path import join as ojoin
 from subprocess import call
 
-# Usage: python plot.py path/to/model test-inter=.. [start-epoch=..] [end-epoch==..]
+# Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
 
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   
-  # if end == start == -1:
-  start, end = 0, len(train)
-  print 'plotting entire training data'
+  if end == start == -1:
+    start, end = 0, len(train)
+    print 'plotting entire training data'
   
-  # elif start == -1:
-  #   start = 0
-  #   print 'plotting from epoch %i to %i'%(start,end)
-  #   end *= 800
+  elif start == -1:
+    start = 0
+    print 'plotting from iter %i to %i'%(start,end)
     
-  # elif end == -1:
-  #   print 'plotting from epoch %i to the end'%(start)
-  #   start, end = start*800, len(train)
+  elif end == -1:
+    print 'plotting from iter %i to the end'%(start)
+    end = len(train)
 
-  # else:
-  #   print 'plotting from epoch %i to %i'%(start,end)
-  #   start, end = start*800, end*800
+  else:
+    print 'plotting from iter %i to %i'%(start,end)
 
   plt.ylim([0,1.2])
   x = np.array(range(len(train[start:end])))
@@ -113,9 +111,9 @@ if __name__ == '__main__':
   
   start,end = -1,-1
   for arg in sys.argv:
-    if arg.startswith("start-epoch="):
+    if arg.startswith("start-iter="):
       start = int(arg.split('=')[-1])
-    if arg.startswith("end-epoch="):
+    if arg.startswith("end-iter="):
       end = int(arg.split('=')[-1])
       
   train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
