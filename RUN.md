@@ -218,9 +218,11 @@ make pycaffe
 CURRENTLY
 =========
 
-- 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones
-- 07: test_layer, no_thresh, freeze7, hatch_markings READY
-- 08: freeze5.5 READY
+- 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones,
+      freeze5/13
+- 07: test_layer, no_thresh, freeze7, hatch_markings READY,
+      
+- 08: freeze5.5 READY, freeze5/14
 - 09: 
 - 10:
 
@@ -330,6 +332,7 @@ Meeting topics:
      examples (for each joint type?)
   -> scrape zones hard, always bad_min, need more understanding,
      check examples
+  -> hatch markings 
 - sig level:
   -> in visual_inspect
   
