@@ -143,7 +143,7 @@ cf mezN's answer: bit.ly/1siq8Wz
 
 # save the nets to /data/ad6813/my-nets/saves/caffe for neatness
 
-# set blobs_lr to 0 if you want to freeze backprop on them
+# set blobs_lr AND weight_decay to 0 if you want to freeze backprop on them
 
 # change layer name not to match alexnet's to re-initialize weights
 
@@ -217,8 +217,8 @@ CURRENTLY
 =========
 
 - 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones
-- 07: test_layer, no_thresh, freeze7
-- 08: freeze5.5
+- 07: test_layer, no_thresh, freeze7, hatch_markings READY
+- 08: freeze5.5 READY
 - 09: 
 - 10:
 
@@ -292,12 +292,22 @@ Next:
   -> ThresholdLayer and BayesianSoftmaxLoss inherit from it
   -> BayesianSoftmaxLoss computes like SoftmaxLoss but divides by
      prior, AND multiplies by 0.5 (normalise to not affect lr)
+  -> normalise by 1/K (eg (10,90) renormalised must sum to 100)
+  -> modify cost function should be different to threshold:
+     if we were to put threshold after softmax, (0.1,0.9) would get
+     normalised to (0.5,0.5) but false neg would not be more
+     penalised, so net would still be less inclined to learn minority
+     class. so, with thresh before softmax, things are even more
+     uncertain.
+  -> 
 - extract features with caffe
 - add RedBox data
 - false pos worse than fals neg:
   -> rebalance loss even more
   -> on test set, use a lower sig level than 0.5
      (eg flag noclamp when confidence > 0.3)
+- why the fuck does accuracy not go down with overfit
+
 
 PRIORITY next:
 - train all
@@ -316,6 +326,8 @@ Meeting topics:
   -> explanation: all imgs of a query have same flags?
   -> we need a document with detailed explanation of each flag and
      examples (for each joint type?)
+  -> scrape zones hard, always bad_min, need more understanding,
+     check examples
 - sig level:
   -> in visual_inspect
   
