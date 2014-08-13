@@ -1,12 +1,12 @@
 train_net: "thresh_fine_train.prototxt"
 test_net: "thresh_fine_val.prototxt"
-test_iter: 1
-test_interval: 1
+test_iter: 2
+test_interval: 200
 base_lr: 0.0001
 lr_policy: "exp"
 gamma: 0.9995
 display: 1
-max_iter: 20000
+max_iter: 100000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 2000
