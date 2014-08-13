@@ -90,6 +90,8 @@ clampdet_test.prototxt
 # blobs_lr, there are usually 2: one for weight lr, other for bias.
 # it is to be multiplied by lr given in solver.
 
+# name and top of a layer need not have same name, makes no diff really.
+
 
 8. solver
 =========
