@@ -5,7 +5,7 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "hatch_markings_fine_train_leveldb"
+    source: "hatch_markings_fine_val_leveldb"
     mean_file: "../../data/hatch_markings/hatch_markings_fine_mean.binaryproto"
     batch_size: 256
     crop_size: 227
@@ -376,7 +376,7 @@ layers {
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_aero_thresh"
+  bottom: "fc9_thresh"
   top: "prob"
 }
 layers {
