@@ -219,9 +219,15 @@ layers {
   name: "fc6_new"
   type: INNER_PRODUCT
   bottom: "pool5"
+<<<<<<< HEAD
   top: "fc6_new"
   blobs_lr: 1
   blobs_lr: 2
+=======
+  top: "fc6"
+  blobs_lr: 0
+  blobs_lr: 0
+>>>>>>> 8c010151cbbcc2437b35a8dab39db1e8a7777d57
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
@@ -290,8 +296,54 @@ layers {
 layers {
   name: "fc8_new"
   type: INNER_PRODUCT
+<<<<<<< HEAD
   bottom: "fc7_new"
+=======
+  bottom: "fc7"
   top: "fc8_new"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layers {
+  name: "relu8"
+  type: RELU
+  bottom: "fc8_new"
+>>>>>>> 8c010151cbbcc2437b35a8dab39db1e8a7777d57
+  top: "fc8_new"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
+  name: "fc10"
+  type: INNER_PRODUCT
+  bottom: "fc9"
+  top: "fc10"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -311,15 +363,25 @@ layers {
 layers {
   name: "threshold"
   type: THRESHOLD
+<<<<<<< HEAD
   bottom: "fc8_new"
   bottom: "label"
   top: "fc8_new_thresh"
+=======
+  bottom: "fc10"
+  bottom: "label"
+  top: "fc10_thresh"
+>>>>>>> 8c010151cbbcc2437b35a8dab39db1e8a7777d57
   top: "label"
 }
 layers {
   name: "prob"
   type: SOFTMAX
+<<<<<<< HEAD
   bottom: "fc8_new_thresh"
+=======
+  bottom: "fc10_thresh"
+>>>>>>> 8c010151cbbcc2437b35a8dab39db1e8a7777d57
   top: "prob"
 }
 layers {
