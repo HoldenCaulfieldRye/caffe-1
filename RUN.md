@@ -182,47 +182,26 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 
 
-
 DEBUG TROUBLESHOOT
 ==================
-# during make all:
-/usr/bin/ld: cannot find -lcblas
-/usr/bin/ld: cannot find -latlas
-# solution:
-scp graphic06.doc.ic.ac.uk:/etc/alternatives/lib*las* ~/.local/lib
-
-# create image mean:
-Check failed: proto.SerializeToOStream(&output)
-# solution:
-just a sufficiently similar, previously computed image mean
-
-# threshold layer:
-Check failed: (*top)[0]->num() == (*top)[1]->num() (0 vs. 50) The data and label should have the same number.
-# solution:
-you'd scp -r 'ed the data from another graphic machine, symlinks were
-followed, and actual images were in the data dir. that's not really
-supposed to be a pb though.
-
-# plot.py: list index out of range
-look at log.{train,test} and see if last line pathogenic
-
-# python wrappers:
-ImportError: No module named _caffe
-# solution
-make pycaffe
-
-
-
+see TROUBLESHOOT.md
 
 
 CURRENTLY
 =========
 
-- 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones
-- 07: test_layer, no_thresh, freeze7, hatch_markings READY
-- 08: freeze5.5 READY
+"hatch markings 14-*/{train,val}.prototxt work, but not 16. why?"
+
+
+- 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones,
+      freeze5/13(new)
+- 07: test_layer, no_thresh, freeze7, 
+- 08: freeze5.5 READY, freeze5/14(alexnet)
 - 09: 
 - 10:
+
+waitlist: hatch_markings/16 , hatch_markings/15
+
 
 classifiers:
 - soil contamination risk
@@ -263,6 +242,8 @@ classifiers:
 
 
 next steps:
+- to show how difficult task is, t-SNE alexnet/fc7 on ImageNet vs
+  ControlPoint
 - need test error for true performance
 - Redbox data
 - controlpoint extra metadata
@@ -330,6 +311,7 @@ Meeting topics:
      examples (for each joint type?)
   -> scrape zones hard, always bad_min, need more understanding,
      check examples
+  -> hatch markings 
 - sig level:
   -> in visual_inspect
   
