@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "hatch_markings_fine_val_leveldb"
     mean_file: "../../data/hatch_markings/hatch_markings_fine_mean.binaryproto"
-    batch_size: 512
+    batch_size: 256
     crop_size: 227
     mirror: false
   }
@@ -221,7 +221,7 @@ layers {
   bottom: "pool5"
   top: "fc6"
   blobs_lr: 0
-  blobs_lr: 1
+  blobs_lr: 0
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
@@ -297,7 +297,7 @@ layers {
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
-    num_output: 512
+    num_output: 4096
     weight_filler {
       type: "gaussian"
       std: 0.005
@@ -333,6 +333,27 @@ layers {
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
+  name: "fc10"
+  type: INNER_PRODUCT
+  bottom: "fc9"
+  top: "fc10"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param {
     num_output: 2
     weight_filler {
       type: "gaussian"
@@ -347,15 +368,15 @@ layers {
 layers {
   name: "threshold"
   type: THRESHOLD
-  bottom: "fc9"
+  bottom: "fc10"
   bottom: "label"
-  top: "fc9_thresh"
+  top: "fc10_thresh"
   top: "label"
 }
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc9_thresh"
+  bottom: "fc10_thresh"
   top: "prob"
 }
 layers {

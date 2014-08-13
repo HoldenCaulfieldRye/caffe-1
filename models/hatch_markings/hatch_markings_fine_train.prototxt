@@ -297,7 +297,7 @@ layers {
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
-    num_output: 512
+    num_output: 4096
     weight_filler {
       type: "gaussian"
       std: 0.005
@@ -333,6 +333,27 @@ layers {
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
+    num_output: 4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+}
+layers {
+  name: "fc10"
+  type: INNER_PRODUCT
+  bottom: "fc9"
+  top: "fc10"
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
+  weight_decay: 0
+  inner_product_param {
     num_output: 2
     weight_filler {
       type: "gaussian"
@@ -347,14 +368,14 @@ layers {
 layers {
   name: "threshold"
   type: THRESHOLD
-  bottom: "fc9"
+  bottom: "fc10"
   bottom: "label"
-  top: "fc9_thresh"
+  top: "fc10_thresh"
   top: "label"
 }
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc9_thresh"
+  bottom: "fc10_thresh"
   bottom: "label"
 }
