@@ -211,6 +211,13 @@ ImportError: No module named _caffe
 # solution
 make pycaffe
 
+# leveldb locked:
+IO error: lock *_leveldb/LOCK: already held by process
+# solution 1
+rm -rf *leveldb
+./create
+# solution 2
+{train,val}.prototxt data_param { source: reference correct? }
 
 
 
@@ -219,12 +226,14 @@ CURRENTLY
 =========
 
 - 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones,
-      freeze5/13
-- 07: test_layer, no_thresh, freeze7, hatch_markings READY,
-      
-- 08: freeze5.5 READY, freeze5/14
+      freeze5/13(new)
+- 07: test_layer, no_thresh, freeze7, hatch_markings/16 
+- 08: freeze5.5 READY, freeze5/14(alexnet)
 - 09: 
 - 10:
+
+waitlist: hatch_markings/15
+
 
 classifiers:
 - soil contamination risk
