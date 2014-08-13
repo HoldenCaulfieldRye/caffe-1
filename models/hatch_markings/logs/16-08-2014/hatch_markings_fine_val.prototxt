@@ -9,7 +9,7 @@ layers {
     mean_file: "../../data/hatch_markings/hatch_markings_fine_mean.binaryproto"
     batch_size: 256
     crop_size: 227
-    mirror: true
+    mirror: false
   }
 }
 layers {
