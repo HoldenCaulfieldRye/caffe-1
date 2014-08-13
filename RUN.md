@@ -225,14 +225,17 @@ rm -rf *leveldb
 CURRENTLY
 =========
 
+"hatch markings {train,val}.prototxt work, but not 16. why?"
+
+
 - 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones,
       freeze5/13(new)
-- 07: test_layer, no_thresh, freeze7, hatch_markings/16 
+- 07: test_layer, no_thresh, freeze7, 
 - 08: freeze5.5 READY, freeze5/14(alexnet)
 - 09: 
 - 10:
 
-waitlist: hatch_markings/15
+waitlist: hatch_markings/16 , hatch_markings/15
 
 
 classifiers:
@@ -274,6 +277,8 @@ classifiers:
 
 
 next steps:
+- to show how difficult task is, t-SNE alexnet/fc7 on ImageNet vs
+  ControlPoint
 - need test error for true performance
 - Redbox data
 - controlpoint extra metadata
