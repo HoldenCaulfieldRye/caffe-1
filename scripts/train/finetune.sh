@@ -10,7 +10,7 @@ set -e
 # script is still useful, all you have to do is reply to prompts.
 
 # 
-TASK_NAME=thresh
+TASK_NAME=scrape_zones
 
 # with 4, bad minimum provides 80% classification accuracy
 # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
