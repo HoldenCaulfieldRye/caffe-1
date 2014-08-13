@@ -209,14 +209,14 @@ ImportError: No module named _caffe
 # solution
 make pycaffe
 
-50k lines ong raphic06
+
 
 
 
 CURRENTLY
 =========
 
-- 06: soil_risk, soil_risk2, scrape_zone_peel, thresh, freeze6
+- 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones
 - 07: test_layer, no_thresh, freeze7
 - 08: freeze5.5
 - 09: 
@@ -282,6 +282,7 @@ next steps:
 - ensemble network, bagging
 - 'CNN features off-the-shelf', optimising CNN features for specific
   tasks: 29, 15, 51, 43, 41
+- import solverstate, larger minibatch
 - stochastic pooling?
 
   
@@ -317,4 +318,28 @@ Meeting topics:
      examples (for each joint type?)
 - sig level:
   -> in visual_inspect
+  
+
+
+START WRITING SIG LEVEL SCRIPT
+
+take a look at partially trained freeze6 with re-initialised weights
+(I think it was)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
