@@ -368,15 +368,15 @@ layers {
 layers {
   name: "threshold"
   type: THRESHOLD
-  bottom: "fc9"
+  bottom: "fc10"
   bottom: "label"
-  top: "fc9_thresh"
+  top: "fc10_thresh"
   top: "label"
 }
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc9_thresh"
+  bottom: "fc10_thresh"
   top: "prob"
 }
 layers {

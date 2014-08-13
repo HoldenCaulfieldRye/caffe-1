@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "hatch_markings_fine_train_leveldb"
     mean_file: "../../data/hatch_markings/hatch_markings_fine_mean.binaryproto"
-    batch_size: 256
+    batch_size: 128
     crop_size: 227
     mirror: true
   }
@@ -368,14 +368,14 @@ layers {
 layers {
   name: "threshold"
   type: THRESHOLD
-  bottom: "fc9"
+  bottom: "fc10"
   bottom: "label"
-  top: "fc9_thresh"
+  top: "fc10_thresh"
   top: "label"
 }
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc9_thresh"
+  bottom: "fc10_thresh"
   bottom: "label"
 }
