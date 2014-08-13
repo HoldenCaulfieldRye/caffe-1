@@ -1,0 +1,24 @@
+nohup: ignoring input
+I0813 12:19:33.998744 26399 finetune_net.cpp:25] Starting Optimization
+I0813 12:19:33.998828 26399 solver.cpp:41] Creating training net.
+I0813 12:19:33.999325 26399 net.cpp:75] Creating Layer data
+I0813 12:19:33.999336 26399 net.cpp:111] data -> data
+I0813 12:19:33.999347 26399 net.cpp:111] data -> label
+I0813 12:19:33.999367 26399 data_layer.cpp:145] Opening leveldb scrape_zones_fine_train_leveldb
+F0813 12:19:33.999573 26399 data_layer.cpp:148] Check failed: status.ok() Failed to open leveldb scrape_zones_fine_train_leveldb
+IO error: lock scrape_zones_fine_train_leveldb/LOCK: Resource temporarily unavailable
+*** Check failure stack trace: ***
+    @     0x7f6d237f5f9d  google::LogMessage::Fail()
+    @     0x7f6d237f80af  google::LogMessage::SendToLog()
+    @     0x7f6d237f5b8c  google::LogMessage::Flush()
+    @     0x7f6d237f894d  google::LogMessageFatal::~LogMessageFatal()
+    @           0x483f3c  caffe::DataLayer<>::SetUp()
+    @           0x44266a  caffe::Net<>::Init()
+    @           0x443e23  caffe::Net<>::Net()
+    @           0x444cae  caffe::Solver<>::Init()
+    @           0x448cea  caffe::Solver<>::Solver()
+    @           0x412766  main
+    @     0x7f6d2138dea5  (unknown)
+    @           0x4145f9  (unknown)
+Aborted
+Done.

@@ -6,9 +6,9 @@ base_lr: 0.0001
 lr_policy: "exp"
 gamma: 0.9995
 display: 1
-max_iter: 100000
+max_iter: 20000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 20000
+snapshot: 10000
 snapshot_prefix: "scrape_zones_fine_train"
 solver_mode: GPU
