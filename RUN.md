@@ -190,17 +190,21 @@ see TROUBLESHOOT.md
 CURRENTLY
 =========
 
-"hatch markings 14-*/{train,val}.prototxt work, but not 16. why?"
-
-
+training:
 - 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones,
       freeze5/13(new)
-- 07: test_layer, no_thresh, freeze7, hatch_markings/17
+- 07: test_layer, no_thresh, freeze7, hatch_markings/17, READY
 - 08: freeze5.5 READY, freeze5/14(alexnet)
-- 09: hatch_markings/18
+- 09: hatch_markings/18, READY
 - 10:
 
-waitlist: hatch_markings/18
+wait_list:
+
+ready_to_analyse: 
+- 06: 
+- 07: hatch/17
+- 08: 
+- 09: hatch/18
 
 
 classifiers:
