@@ -195,12 +195,12 @@ CURRENTLY
 
 - 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones,
       freeze5/13(new)
-- 07: test_layer, no_thresh, freeze7, hatch_markings/16 
+- 07: test_layer, no_thresh, freeze7, hatch_markings/17
 - 08: freeze5.5 READY, freeze5/14(alexnet)
-- 09: hatch_markings/15
+- 09: hatch_markings/18
 - 10:
 
-waitlist:
+waitlist: hatch_markings/18
 
 
 classifiers:
