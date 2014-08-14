@@ -191,11 +191,10 @@ CURRENTLY
 =========
 
 training:
-- 06: soil_risk, scrape_zone_peel, thresh, freeze6, scrape_zones,
-      freeze5/13(new)
-- 07: test_layer, no_thresh, freeze7, hatch_markings/17, READY
-- 08: freeze5.5 READY, freeze5/14(alexnet)
-- 09: hatch_markings/18, READY
+- 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13(new)
+- 07: freeze5.5/14
+- 08: freeze5.5, freeze5/14(alexnet)
+- 09: hatch_markings/18, READY freeze5.5/15
 - 10:
 
 wait_list:
@@ -270,6 +269,7 @@ next steps:
 - 'CNN features off-the-shelf', optimising CNN features for specific
   tasks: 29, 15, 51, 43, 41
 - import solverstate, larger minibatch
+- partial re-initialisation of conv layer: bit.ly/1BfKVwL
 - stochastic pooling?
 
   
