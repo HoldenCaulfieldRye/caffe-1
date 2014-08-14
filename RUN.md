@@ -282,14 +282,12 @@ Next:
      penalised, so net would still be less inclined to learn minority
      class. so, with thresh before softmax, things are even more
      uncertain.
-  -> 
 - extract features with caffe
 - add RedBox data
 - false pos worse than fals neg:
-  -> rebalance loss even more
-  -> on test set, use a lower sig level than 0.5
-     (eg flag noclamp when confidence > 0.3)
+  -> sig level script
 - why the fuck does accuracy not go down with overfit
+- benchmark: Torch, CNN features off the shelf
 
 
 PRIORITY next:
