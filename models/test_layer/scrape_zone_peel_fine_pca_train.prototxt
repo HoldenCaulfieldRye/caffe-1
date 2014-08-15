@@ -320,7 +320,7 @@ layers {
 
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
+  type: SOFTMAX_BAYESIAN_LOSS
   bottom: "fc8_aero_thresh"
   bottom: "label"
 }

@@ -74,6 +74,8 @@ Layer<Dtype>* GetLayer(const LayerParameter& param) {
     return new SigmoidCrossEntropyLossLayer<Dtype>(param);
   case LayerParameter_LayerType_SOFTMAX:
     return new SoftmaxLayer<Dtype>(param);
+  case LayerParameter_LayerType_SOFTMAX_BAYESIAN_LOSS:
+    return new SoftmaxWithBayesianLossLayer<Dtype>(param);
   case LayerParameter_LayerType_SOFTMAX_LOSS:
     return new SoftmaxWithLossLayer<Dtype>(param);
   case LayerParameter_LayerType_SPLIT:
