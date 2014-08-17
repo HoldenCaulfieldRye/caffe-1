@@ -1,0 +1,2 @@
+0 PhotoDoesNotShowEnoughOfScrapeZones
+1 PhotoShowsScrapeZones
