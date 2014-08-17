@@ -71,10 +71,10 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   for (int i = 0; i < num; ++i) {
     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
   }
-  for (int i = 0; i < num; ++i) 
-    for (int j = 0; j < dim; ++j) {
-      bottom_diff[i * dim + j] /= static_cast<float>(prior[i]);
-    } 
+  for (int i = 0; i < num; ++i)  {
+    for (int j = 0; j < dim; ++j) 
+      bottom_diff[i * dim + j] /= static_cast<float>(prior[i])*static_case<float>(dim);
+  }
   // Scale down gradient
   caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
 }
