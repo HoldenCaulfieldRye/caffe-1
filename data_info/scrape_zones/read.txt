@@ -1,2 +1,0 @@
-0 PhotoDoesNotShowEnoughOfScrapeZones
-1 ScrapeZones

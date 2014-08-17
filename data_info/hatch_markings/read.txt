@@ -1,2 +1,0 @@
-0 NoVisibleHatchMarkings
-1 HtachMarkings

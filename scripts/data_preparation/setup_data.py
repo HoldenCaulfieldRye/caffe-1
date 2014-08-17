@@ -247,7 +247,7 @@ if __name__ == '__main__':
   for arg in sys.argv:
     if "bad-min=" in arg:
       target_bad_min = arg.split('=')[-1]
-      print "target bad min: %.2f" %(target_bad_min)
+      print "target bad min: %s" %(target_bad_min)
     elif "data-dir=" in arg:
       data_dir = os.path.abspath(arg.split('=')[-1])
     elif "to-dir=" in arg:
