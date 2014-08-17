@@ -311,7 +311,7 @@ layers {
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_new_thresh"
+  bottom: "fc8_new"
   top: "prob"
 }
 layers {
