@@ -255,7 +255,7 @@ layers {
   name: "fc7_new"
   type: INNER_PRODUCT
   bottom: "fc6_new"
-  top: "fc7_new_new"
+  top: "fc7_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -275,14 +275,14 @@ layers {
 layers {
   name: "relu7"
   type: RELU
-  bottom: "fc7_new_new"
-  top: "fc7_new_new"
+  bottom: "fc7_new"
+  top: "fc7_new"
 }
 layers {
   name: "drop7"
   type: DROPOUT
-  bottom: "fc7_new_new"
-  top: "fc7_new_new"
+  bottom: "fc7_new"
+  top: "fc7_new"
   dropout_param {
     dropout_ratio: 0.5
   }
@@ -290,7 +290,7 @@ layers {
 layers {
   name: "fc8_new"
   type: INNER_PRODUCT
-  bottom: "fc7_new_new"
+  bottom: "fc7_new"
   top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
@@ -310,7 +310,7 @@ layers {
 }
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
+  type: SOFTMAX_BAYESIAN_LOSS
   bottom: "fc8_new_thresh"
   bottom: "label"
 }

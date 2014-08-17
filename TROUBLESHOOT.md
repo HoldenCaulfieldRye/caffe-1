@@ -56,4 +56,8 @@ Iteration 1, loss = nan
 # you have a layer L linking to layer L+1 and L+2 or smth like that
 
 
+# adding new layer
+# need to modify this crazy
+"\0011\"\351\001\n\024ConvolutionParameter\"
+stuff in build/src/caffe/proto/caffe.pb.cc ?
 
