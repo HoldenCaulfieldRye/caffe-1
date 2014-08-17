@@ -252,10 +252,10 @@ layers {
   }
 }
 layers {
-  name: "fc7"
+  name: "fc7_new"
   type: INNER_PRODUCT
   bottom: "fc6_new"
-  top: "fc7"
+  top: "fc7_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1

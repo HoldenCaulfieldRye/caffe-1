@@ -252,7 +252,7 @@ layers {
   }
 }
 layers {
-  name: "fc7"
+  name: "fc7_new"
   type: INNER_PRODUCT
   bottom: "fc6_new"
   top: "fc7_new"
