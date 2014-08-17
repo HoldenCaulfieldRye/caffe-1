@@ -311,6 +311,6 @@ layers {
 layers {
   name: "loss"
   type: SOFTMAX_BAYESIAN_LOSS
-  bottom: "fc8_new_thresh"
+  bottom: "fc8_new"
   bottom: "label"
 }

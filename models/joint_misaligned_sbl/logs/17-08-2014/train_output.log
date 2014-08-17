@@ -1,0 +1,32 @@
+nohup: ignoring input
+F0817 20:34:02.185179 23948 io.cpp:43] Check failed: fd != -1 (-1 vs. -1) File not found: joint_misaligned_fine_solver.prototxt
+*** Check failure stack trace: ***
+    @     0x7f4e8b85af9d  google::LogMessage::Fail()
+    @     0x7f4e8b85d0af  google::LogMessage::SendToLog()
+    @     0x7f4e8b85ab8c  google::LogMessage::Flush()
+    @     0x7f4e8b85d94d  google::LogMessageFatal::~LogMessageFatal()
+    @           0x44d2c4  caffe::ReadProtoFromTextFile()
+    @           0x412713  main
+    @     0x7f4e893f2ea5  (unknown)
+    @           0x4145f9  (unknown)
+Aborted
+Done.
+nohup: ignoring input
+I0817 20:34:19.783980 23994 finetune_net.cpp:25] Starting Optimization
+I0817 20:34:19.784087 23994 solver.cpp:41] Creating training net.
+libprotobuf ERROR google/protobuf/text_format.cc:172] Error parsing text-format caffe.NetParameter: 314:3: Unknown enumeration value of "SOFTMAX_BAYESIAN_LOSS" for field "type".
+F0817 20:34:19.797556 23994 upgrade_proto.cpp:571] Check failed: ReadProtoFromTextFile(param_file, param) Failed to parse NetParameter file: joint_misaligned_train.prototxt
+*** Check failure stack trace: ***
+    @     0x7fde6775af9d  google::LogMessage::Fail()
+    @     0x7fde6775d0af  google::LogMessage::SendToLog()
+    @     0x7fde6775ab8c  google::LogMessage::Flush()
+    @     0x7fde6775d94d  google::LogMessageFatal::~LogMessageFatal()
+    @           0x45f484  caffe::ReadNetParamsFromTextFileOrDie()
+    @           0x443e18  caffe::Net<>::Net()
+    @           0x444cae  caffe::Solver<>::Init()
+    @           0x448cea  caffe::Solver<>::Solver()
+    @           0x412766  main
+    @     0x7fde652f2ea5  (unknown)
+    @           0x4145f9  (unknown)
+Aborted
+Done.
