@@ -1,2 +1,2 @@
 0 NoVisibleHatchMarkings
-1 HtachMarkings
+1 HatchMarkingsVisible

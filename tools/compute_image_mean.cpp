@@ -81,6 +81,7 @@ int main(int argc, char** argv) {
   LOG(INFO) << "Write to " << argv[2];
   WriteProtoToBinaryFile(sum_blob, argv[2]);
 
+  delete it;
   delete db;
   return 0;
 }
