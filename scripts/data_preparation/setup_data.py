@@ -9,7 +9,7 @@ from shutil import rmtree
 import json, yaml, random
 
 
-def main(data_dir, data_info, to_dir, target_bad_min=None):
+def main(data_dir, data_info, to_dir, target_bad_min):
   ''' This is the master function. 
   data_dir: where raw data is. data_info: where to store .txt files. '''
   All = get_label_dict(data_dir)
@@ -22,7 +22,7 @@ def main(data_dir, data_info, to_dir, target_bad_min=None):
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
   Keep, num_output = merge_classes(Keep)
   Keep, num_output = check_mutual_exclusion(Keep, num_output)
-  print "target bad min: %.2f" %(target_bad_min)
+  print "target bad min: %s" %(target_bad_min)
   Keep = rebalance(Keep, total_num_images, target_bad_min)
   print 'finished rebalancing'
   Keep = within_class_shuffle(Keep)
@@ -60,7 +60,7 @@ def get_label_dict(data_dir):
   return d
 
 
-def rebalance(Keep, total_num_images, target_bad_min=None):
+def rebalance(Keep, total_num_images, target_bad_min):
   '''if target_bad_min not given, prompts user for one; 
   and implements it. Note that with >2 classes, this can be 
   implemented either by downsizing all non-minority classes by the
@@ -69,6 +69,8 @@ def rebalance(Keep, total_num_images, target_bad_min=None):
   target_bad_min achieved. We can assume that we care mostly about 
   having as few small classes as possible, so the latter is 
   implemented.'''
+  if target_bad_min == 'N': return Keep
+  else: target_bad_min = float(target_bad_min)
   # minc is class with minimum number of training cases
   ascending_classes = sorted([(key,len(Keep[key]))
                               for key in Keep.keys()],
@@ -244,7 +246,7 @@ if __name__ == '__main__':
   target_bad_min, data_dir, data_info = None, None, None
   for arg in sys.argv:
     if "bad-min=" in arg:
-      target_bad_min = float(arg.split('=')[-1])
+      target_bad_min = arg.split('=')[-1]
       print "target bad min: %.2f" %(target_bad_min)
     elif "data-dir=" in arg:
       data_dir = os.path.abspath(arg.split('=')[-1])

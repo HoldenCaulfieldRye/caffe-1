@@ -9,12 +9,15 @@ set -e
 # as you have a single task ie a single string in TASK_NAME, this
 # script is still useful, all you have to do is reply to prompts.
 
+SIZE="expr $(cat ../../data_info/$TASK_NAME/train.txt | wc -l) + $(cat ../../data_info/$TASK_NAME/val.txt | wc -l) + $(cat ../../data_info/$TASK_NAME/test.txt | wc -l)"
+# echo $($SIZE)
+
 # 
 TASK_NAME=scrape_zones
 
 # with 4, bad minimum provides 80% classification accuracy
 # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
-BAD_MIN=0.99
+BAD_MIN=N
 
 # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet-fine) "
 MAX_ITER=20000

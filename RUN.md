@@ -190,6 +190,9 @@ see TROUBLESHOOT.md
 CURRENTLY
 =========
 
+downloading metadata:
+wget graphic07
+
 training:
 - 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13(new)
 - 07: freeze5.5/14
@@ -197,13 +200,19 @@ training:
 - 09: hatch_markings/18, READY freeze5.5/15
 - 10:
 
-wait_list:
+wait_list: hatch/17, hatch/18
+           redo because terrible data destruction:
+	   -> scrape_zones
+	   -> hatch_markings
+	   -> ground_sheet
+	   prev moved to *_3501, do modify data_info and data for
+	   these guys with setup.py
 
 ready_to_analyse: 
 - 06: 
-- 07: hatch/17
+- 07: 
 - 08: 
-- 09: hatch/18
+- 09: 
 
 
 classifiers:
@@ -245,91 +254,55 @@ classifiers:
 
 
 next steps:
-- to show how difficult task is, t-SNE alexnet/fc7 on ImageNet vs
-  ControlPoint
-- need test error for true performance
+- bayesian softmax loss
+- write up different approaches to dealing with imbalance
 - Redbox data
+  -> best date
+  -> best guys
+- data augmentation: rotations & PCA
+  -> McCormac's code
+  -> bit.ly/UZ3p3E
+  -> scikit-image
+  -> Razvan/preproc.py
+- t-SNE   
+- test error script
 - controlpoint extra metadata
 - save net only if performance gain (cf pylearn2)
-- re-initialise weights in backpropping layers
-- data augmentation: rotations, light adjustments bit.ly/UZ3p3E
-  use scikit-image (see also code in Razvan/preproc.py)
 - impose best possible class balance at every batch
-- Razvan: different batch contents at every epoch
-- Razvan: pre-process image, select patch of interest
+- different batch contents at every epoch
 - preprocess: divide images by the image standard deviation and apply
   "subtractive/divisive normalization"
-- preprocess: stoch pooling paper finds 'subtracting per-pixel mean
-  from each image did not really modify stats of the images and left
-  large variations of brightness and color' so used per-channel LCN
-  instead
-- "using axiliary pseudo tasks to regularise the system" (big
-  improvement cited in Jarrett et al 2009)
 - ensemble network, bagging
 - 'CNN features off-the-shelf', optimising CNN features for specific
   tasks: 29, 15, 51, 43, 41
 - import solverstate, larger minibatch
 - partial re-initialisation of conv layer: bit.ly/1BfKVwL
 - stochastic pooling?
-
-  
-Next:
-- train with bayesian softmax loss:
-  -> abstract class BayesianLayer which computes prior
-  -> ThresholdLayer and BayesianSoftmaxLoss inherit from it
-  -> BayesianSoftmaxLoss computes like SoftmaxLoss but divides by
-     prior, AND multiplies by 0.5 (normalise to not affect lr)
-  -> normalise by 1/K (eg (10,90) renormalised must sum to 100)
-  -> modify cost function should be different to threshold:
-     if we were to put threshold after softmax, (0.1,0.9) would get
-     normalised to (0.5,0.5) but false neg would not be more
-     penalised, so net would still be less inclined to learn minority
-     class. so, with thresh before softmax, things are even more
-     uncertain.
 - extract features with caffe
 - add RedBox data
-- false pos worse than fals neg:
-  -> sig level script
+- sig level script
 - why the fuck does accuracy not go down with overfit
-- benchmark: Torch, CNN features off the shelf
-
-
-PRIORITY next:
-- train all
-- include |Redbox
-- sig level
-- Soumith: set weights back to zero
-
-
-Meeting topics:
-- multiple image query:
-  -> do all imgs have same flags? (if so, bad for training!)
-  -> do you keep track of query number?
-- qualitative understanding:
-  -> caffe/visual_inspect/confusing
-  -> FILL IN WITH RAZVAN DURING TRIP!
-  -> explanation: all imgs of a query have same flags?
-  -> we need a document with detailed explanation of each flag and
-     examples (for each joint type?)
-  -> scrape zones hard, always bad_min, need more understanding,
-     check examples
-  -> hatch markings 
-- sig level:
-  -> in visual_inspect
+- switch to OverFeat
+- embed qualitative understanding
+- multi-image query issue:
+  -> concatenate images, or
+  -> cross-image pooling after conv5
+- cropping component:
+  -> can it be trained with backprop
+     -> read LeNet StreetView papers
+  -> how does it learn where to crop
+     -> localised clampdet
+     -> crop conditional on clampdet location & joint type
+- MSE
+  -> Brebisson reports different predictions
+  -> just to show off improvement
   
 
+to see droplets and soil marks on joint
+  
 
-START WRITING SIG LEVEL SCRIPT
-
-take a look at partially trained freeze6 with re-initialised weights
-(I think it was)
-
-
-
-
-
-
-
+  
+ 
 
 
 
