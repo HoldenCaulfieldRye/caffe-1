@@ -8,6 +8,6 @@ display: 1
 max_iter: 10000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 20000
+snapshot: 10000
 snapshot_prefix: "joint_misaligned_fine_train"
 solver_mode: GPU
