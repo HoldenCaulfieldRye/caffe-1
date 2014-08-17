@@ -5,8 +5,8 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_fine_val_leveldb"
-    mean_file: "../../data/clampdet/clampdet_fine_mean.binaryproto"
+    source: "clampdet_val_leveldb"
+    mean_file: "../../data/clampdet/clampdet_mean.binaryproto"
     batch_size: 256
     crop_size: 227
     mirror: false

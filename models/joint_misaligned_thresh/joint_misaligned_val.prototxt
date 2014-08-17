@@ -5,7 +5,7 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "joint_misaligned_fine_val_leveldb"
+    source: "joint_misaligned_val_leveldb"
     mean_file: "../../data/joint_misaligned/joint_misaligned_fine_mean.binaryproto"
     batch_size: 256
     crop_size: 227
