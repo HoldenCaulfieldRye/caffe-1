@@ -207,6 +207,8 @@ wait_list: hatch/17, hatch/18
 	   -> ground_sheet
 	   prev moved to *_3501, do modify data_info and data for
 	   these guys with setup.py
+	   -> joint_misaligned_bayesian_loss
+	      joint_misaligned
 
 ready_to_analyse: 
 - 06: 

@@ -11,8 +11,10 @@ scp graphic06.doc.ic.ac.uk:/etc/alternatives/lib*las* ~/.local/lib
 
 # create image mean:
 Check failed: proto.SerializeToOStream(&output)
+# hack solution:
+use a sufficiently similar, previously computed image mean
 # solution:
-just a sufficiently similar, previously computed image mean
+paths specified in make_*_image_mean.sh do not exist, fix
 
 
 # threshold layer:
