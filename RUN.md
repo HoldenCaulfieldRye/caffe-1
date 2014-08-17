@@ -205,10 +205,12 @@ wait_list: hatch/17, hatch/18
 	   -> scrape_zones
 	   -> hatch_markings
 	   -> ground_sheet
-	   prev moved to *_3501, do modify data_info and data for
-	   these guys with setup.py
+	     prev moved to *_3501, do modify data_info and data
+	     for these guys with setup.py
+	   evaluate bayesian softmax loss
 	   -> joint_misaligned_bayesian_loss
-	      joint_misaligned
+	   -> joint_misaligned
+	      
 
 ready_to_analyse: 
 - 06: 

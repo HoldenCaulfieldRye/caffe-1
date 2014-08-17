@@ -17,8 +17,8 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0
+  blobs_lr: 0
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -68,8 +68,8 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0
+  blobs_lr: 0
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -120,8 +120,8 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0
+  blobs_lr: 0
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -149,8 +149,8 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
+  blobs_lr: 0
+  blobs_lr: 0
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -219,7 +219,7 @@ layers {
   name: "fc6"
   type: INNER_PRODUCT
   bottom: "pool5"
-  top: "fc6"
+  top: "fc6_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -239,14 +239,14 @@ layers {
 layers {
   name: "relu6"
   type: RELU
-  bottom: "fc6"
-  top: "fc6"
+  bottom: "fc6_new"
+  top: "fc6_new"
 }
 layers {
   name: "drop6"
   type: DROPOUT
-  bottom: "fc6"
-  top: "fc6"
+  bottom: "fc6_new"
+  top: "fc6_new"
   dropout_param {
     dropout_ratio: 0.5
   }
@@ -254,8 +254,8 @@ layers {
 layers {
   name: "fc7_new"
   type: INNER_PRODUCT
-  bottom: "fc6"
-  top: "fc7_new"
+  bottom: "fc6_new"
+  top: "fc7_new_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -275,14 +275,14 @@ layers {
 layers {
   name: "relu7"
   type: RELU
-  bottom: "fc7_new"
-  top: "fc7_new"
+  bottom: "fc7_new_new"
+  top: "fc7_new_new"
 }
 layers {
   name: "drop7"
   type: DROPOUT
-  bottom: "fc7_new"
-  top: "fc7_new"
+  bottom: "fc7_new_new"
+  top: "fc7_new_new"
   dropout_param {
     dropout_ratio: 0.5
   }
@@ -290,7 +290,7 @@ layers {
 layers {
   name: "fc8_new"
   type: INNER_PRODUCT
-  bottom: "fc7_new"
+  bottom: "fc7_new_new"
   top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
@@ -307,14 +307,6 @@ layers {
       value: 0
     }
   }
-}
-layers {
-  name: "threshold"
-  type: THRESHOLD
-  bottom: "fc8_new"
-  bottom: "label"
-  top: "fc8_new_thresh"
-  top: "label"
 }
 layers {
   name: "loss"
