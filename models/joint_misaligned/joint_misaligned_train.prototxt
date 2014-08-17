@@ -6,7 +6,7 @@ layers {
   top: "label"
   data_param {
     source: "joint_misaligned_train_leveldb"
-    mean_file: "../../data/joint_misaligned/joint_misaligned_fine_mean.binaryproto"
+    mean_file: "../../data/joint_misaligned/joint_misaligned_mean.binaryproto"
     batch_size: 128
     crop_size: 227
     mirror: true
