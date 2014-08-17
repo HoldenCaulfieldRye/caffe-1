@@ -41,10 +41,11 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   
   Dtype* prior = labels_.mutable_cpu_data();
   caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
-  //std::cout << "label_count" << labels_.count();
+  LOG(INFO) << "label_count" << labels_.count();
   for (int i = 0; i < label_count; ++i) {
     prior[static_cast<int>(label[i])] += 1.0 / label_count;
-    //std::cout << "bottom_label" << i << " " << bottom_label[i];
+    LOG(INFO) << "the prior for label" << i << "is" << prior[static_cast<int>(label[i])];
+    LOG(INFO) << "bottom_label" << i << " " << bottom_label[i];
   } 
 
   Dtype loss = 0;
