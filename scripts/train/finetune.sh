@@ -108,6 +108,7 @@ cd ../$BASE_NAME
 for file in *clampdet*;
 do mv $file ${file/clampdet/$BASE_NAME};
 done
+mkdir logs
 # modify contents of files
 sed -i 's/clampdet/'$BASE_NAME'/g' *
 './create_'$BASE_NAME'.sh'
