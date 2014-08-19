@@ -38,14 +38,18 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
   int dim = prob_.count() / num;
-  int label_count = bottom[1]->count();
+  // int label_count = bottom[1]->count();
   
   Dtype* prior = labels_.mutable_cpu_data();
   //std::cout << "label_count" << labels_.count();
-  for (int i = 0; i < label_count; ++i) {
-    prior[static_cast<int>(label[i])] += 1.0 / label_count;
+  for (int i = 0; i < num; ++i) {
+    prior[static_cast<int>(label[i])] += 1.0 / num;
     //std::cout << "bottom_label" << i << " " << bottom_label[i];
   } 
+  std::cout << "prior for this batch is: ";
+  for (int i = 0; i < dim; ++i)
+    std::cout << prior[i] << ", ";
+  std::cout << std::endl;
   caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
   Dtype loss = 0;
@@ -58,6 +62,8 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
 }
 
 template <typename Dtype>
+// computes dE/dz for every neuron input vector z = <x,w>+b
+// this does NOT update the weights, it merely calculates dy/dz
 void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
     const bool propagate_down,
     vector<Blob<Dtype>*>* bottom) {
@@ -65,12 +71,16 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   Dtype* bottom_diff = (*bottom)[0]->mutable_cpu_diff();
   const Dtype* prior = labels_.cpu_data();
   const Dtype* prob_data = prob_.cpu_data();
+  //bottom_diff starts off as the outputted probabilities, not the loss!
+  //loss actually never backpropped... wtf
   memcpy(bottom_diff, prob_data, sizeof(Dtype) * prob_.count());
   const Dtype* label = (*bottom)[1]->cpu_data();
-  int num = prob_.num();
-  int dim = prob_.count() / num;
+  int num = prob_.num();         //batchSize, num imgs
+  int dim = prob_.count() / num; //num neurons, dimensionality
   
-  std::cout << "bottom_diff before backward_pass:" << std::endl;
+  std::cout << "bottom_diff before backward_pass is the outputted probabilities:" << std::endl;
+  //for some reason, computing a gradient for each case; I guess they get averaged in the code
+  //for weight update
   for (int i = 0; i < num; ++i)  {
     for (int j = 0; j < dim; ++j) 
       std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
@@ -79,6 +89,7 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   std::cout << std::endl;
   
   for (int i = 0; i < num; ++i) {
+    // softmax gradient: bit.ly/1tmehE9
     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
     // bottom_diff[i * dim + static_cast<int>(label[i])] /= static_cast<float>(prior[i])*dim;
   }

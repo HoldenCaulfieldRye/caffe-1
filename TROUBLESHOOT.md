@@ -76,6 +76,9 @@ bottom[1]->count()          |
 labels_                     |
 labels_.count()             |
 
+###
+bottom_diff[case*dimensionality+neuron]
+###
 
 questions:
 - should label_count be assigned bottom[1]->count() ?
