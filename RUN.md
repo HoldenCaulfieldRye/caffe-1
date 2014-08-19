@@ -193,6 +193,8 @@ CURRENTLY
 downloading metadata:
 wget graphic07
 
+check that weight_decay 0 for all frozen backprops!
+
 training:
 - 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13(new)
 - 07: freeze5.5/14
