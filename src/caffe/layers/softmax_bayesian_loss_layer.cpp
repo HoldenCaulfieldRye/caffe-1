@@ -40,12 +40,12 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   int label_count = bottom[1]->count();
   
   Dtype* prior = labels_.mutable_cpu_data();
-  caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
   //std::cout << "label_count" << labels_.count();
   for (int i = 0; i < label_count; ++i) {
     prior[static_cast<int>(label[i])] += 1.0 / label_count;
     //std::cout << "bottom_label" << i << " " << bottom_label[i];
   } 
+  caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
   Dtype loss = 0;
   for (int i = 0; i < num; ++i) {
@@ -70,12 +70,13 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   int dim = prob_.count() / num;
   for (int i = 0; i < num; ++i) {
     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
+    bottom_diff[i * dim + static_cast<int>(label[i])] /= static_cast<float>(prior[i])*dim;
   }
   // for (int i = 0; i < num; ++i)  {
   //   for (int j = 0; j < dim; ++j) 
   //     bottom_diff[i * dim + j] /= static_cast<float>(prior[i])*dim;
   // }
-  // Scale down gradient
+  Scale down gradient
   caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
 }
 /*
