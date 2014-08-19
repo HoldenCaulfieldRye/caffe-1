@@ -179,6 +179,7 @@ void caffe_gpu_copy<double>(const int N, const double* X, double* Y) {
 }
 
 template <>
+//multiply X[0], .., X[N-1] by alpha
 void caffe_scal<float>(const int N, const float alpha, float *X) {
   cblas_sscal(N, alpha, X, 1);
 }
