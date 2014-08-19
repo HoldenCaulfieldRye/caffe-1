@@ -121,6 +121,7 @@ void caffe_gpu_axpy<double>(const int N, const double alpha, const double* X,
 }
 
 template <>
+//set Y[0], .., Y[N-1] to alpha
 void caffe_set(const int N, const float alpha, float* Y) {
   if (alpha == 0) {
     memset(Y, 0, sizeof(float) * N);
@@ -132,6 +133,7 @@ void caffe_set(const int N, const float alpha, float* Y) {
 }
 
 template <>
+//set Y[0], .., Y[N-1] to alpha
 void caffe_set(const int N, const double alpha, double* Y) {
   if (alpha == 0) {
     memset(Y, 0, sizeof(double) * N);
