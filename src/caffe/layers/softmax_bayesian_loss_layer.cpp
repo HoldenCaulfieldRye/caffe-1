@@ -62,7 +62,6 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
     vector<Blob<Dtype>*>* bottom) {
   // Compute the diff
   Dtype* bottom_diff = (*bottom)[0]->mutable_cpu_diff();
-  const Dtype* prior = labels_.cpu_data();
   const Dtype* prob_data = prob_.cpu_data();
   memcpy(bottom_diff, prob_data, sizeof(Dtype) * prob_.count());
   const Dtype* label = (*bottom)[1]->cpu_data();
@@ -70,17 +69,45 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   int dim = prob_.count() / num;
   for (int i = 0; i < num; ++i) {
     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
-    bottom_diff[i * dim + static_cast<int>(label[i])] /= static_cast<float>(prior[static_cast<int>(label[i])])*static_cast<float>(dim);
   }
+  // Scale down gradient
+  caffe_scal(prob_.count(), Dtype(1) / num, bottom_diff);
+  // Bayesian stuff
   // for (int i = 0; i < num; ++i)  {
   //   for (int j = 0; j < dim; ++j) {
   //     bottom_diff[i * dim + j] /= static_cast<float>(prior[i])*static_cast<float>(dim);
   //   }
   // }
-  // Scale down gradient
-  caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
+
 }
+
+
+// template <typename Dtype>
+// void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
+//     const bool propagate_down,
+//     vector<Blob<Dtype>*>* bottom) {
+//   // Compute the diff
+//   Dtype* bottom_diff = (*bottom)[0]->mutable_cpu_diff();
+//   const Dtype* prior = labels_.cpu_data();
+//   const Dtype* prob_data = prob_.cpu_data();
+//   memcpy(bottom_diff, prob_data, sizeof(Dtype) * prob_.count());
+//   const Dtype* label = (*bottom)[1]->cpu_data();
+//   int num = prob_.num();
+//   int dim = prob_.count() / num;
+//   for (int i = 0; i < num; ++i) {
+//     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
+//     //    bottom_diff[i * dim + static_cast<int>(label[i])] /= static_cast<float>(prior[static_cast<int>(label[i])])*static_cast<float>(dim);
+//   }
+//   // for (int i = 0; i < num; ++i)  {
+//   //   for (int j = 0; j < dim; ++j) {
+//   //     bottom_diff[i * dim + j] /= static_cast<float>(prior[i])*static_cast<float>(dim);
+//   //   }
+//   // }
+//   // Scale down gradient
+//   caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
+// }
 /*
+
 template <typename Dtype>
 void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu_old(const vector<Blob<Dtype>*>& top,
     const bool propagate_down,
