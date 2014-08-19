@@ -61,3 +61,28 @@ Iteration 1, loss = nan
 "\0011\"\351\001\n\024ConvolutionParameter\"
 stuff in build/src/caffe/proto/caffe.pb.cc ?
 
+
+# DEVELOPMENT
+
+attrib                      |  varname       |  meaning
+
+prob_.num()                 |  num           |  batchSize
+prob_.count()               |                |
+prob_.cpu_data()            |  prob_data     |
+
+bottom[1]                   |  
+bottom[1]->count()          |
+
+labels_                     |
+labels_.count()             |
+
+
+questions:
+- should label_count be assigned bottom[1]->count() ?
+- is the formula for calculating prior correct?
+  -> yes if label_count is batchSize
+  -> in that case, use num instead don't want ambiguity
+
+shit, joint_misaligned has only 35 cases. laisse tomber.  
+
+make use of joint_misaligned_sbl/debug.log 

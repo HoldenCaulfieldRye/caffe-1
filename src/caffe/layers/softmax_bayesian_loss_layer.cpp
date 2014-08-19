@@ -53,7 +53,7 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
     //FLT_MIN is smallest nonzero float (don't want to give 0 to log)
     loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / static_cast<float>(prior[static_cast<int>(label[i])]);
   }
-  return loss / static_cast<float>(dim);
+  return loss / (dim*num);
 }
 
 template <typename Dtype>
@@ -73,7 +73,7 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   }
   for (int i = 0; i < num; ++i) 
     for (int j = 0; j < dim; ++j) {
-      bottom_diff[i * dim + j] /= static_cast<float>(prior[i]);
+      bottom_diff[i * dim + j] /= static_cast<float>(prior[i])*dim;
     } 
   // Scale down gradient
   caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
