@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cfloat>
 #include <vector>
-#include<iostream>
+//#include<iostream>
 
 #include "caffe/layer.hpp"
 #include "caffe/vision_layers.hpp"
@@ -41,15 +41,15 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   // int label_count = bottom[1]->count();
   
   Dtype* prior = labels_.mutable_cpu_data();
-  std::cout << "labels for this batch: ";
+  //std::cout << "labels for this batch: ";
   for (int i = 0; i < num; ++i) {
     prior[static_cast<int>(label[i])] += 1.0 / num;
-    std::cout << label[i] << " ";
+    //std::cout << label[i] << " ";
   } 
-  std::cout << std::endl << std::endl << "prior for this batch is: ";
-  for (int i = 0; i < dim; ++i)
-    std::cout << prior[i] << ", ";
-  std::cout << std::endl;
+  //std::cout << std::endl << std::endl << "prior for this batch is: ";
+  // for (int i = 0; i < dim; ++i)
+  //   std::cout << prior[i] << ", ";
+  // std::cout << std::endl;
   caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
   Dtype loss = 0;
@@ -72,61 +72,61 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   const Dtype* prob_data = prob_.cpu_data();
   //bottom_diff starts off as the outputted probabilities, not the loss!
   //loss actually never backpropped... wtf
+  //I guess proper backprop takes place wherever weights are updated, and 
+  //bottom_diffs found at various layers are multiplied together (along with 
+  //weight or unit output values)
   memcpy(bottom_diff, prob_data, sizeof(Dtype) * prob_.count());
   const Dtype* label = (*bottom)[1]->cpu_data();
   int num = prob_.num();         //batchSize, num imgs
   int dim = prob_.count() / num; //num neurons, dimensionality
   
-  std::cout << "bottom_diff before backward_pass is the outputted probabilities:" << std::endl;
+  // std::cout << "bottom_diff before backward_pass is the outputted probabilities:" << std::endl;
   //for some reason, computing a gradient for each case; I guess they get averaged in the code
   //for weight update
-  for (int i = 0; i < num; ++i)  {
-    for (int j = 0; j < dim; ++j) 
-      std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
+  // for (int i = 0; i < 5; ++i)  {
+  //   for (int j = 0; j < dim; ++j) 
+  //     std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
+  //   std::cout << std::endl;
+  // }
+  // std::cout << std::endl;
   
   for (int i = 0; i < num; ++i) {
     // softmax gradient: bit.ly/1tmehE9
     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
-    // bottom_diff[i * dim + static_cast<int>(label[i])] /= static_cast<float>(prior[i])*dim;
   }
   // Scale down gradient
   // multiply the 1st prob_.count() elements of bottom_diff by 1/dim
   caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
 
-  std::cout << "bottom_diff after backward_pass:" << std::endl;
-  for (int i = 0; i < num; ++i)  {
-    for (int j = 0; j < dim; ++j) 
-      std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
+  // std::cout << "bottom_diff after backward_pass:" << std::endl;
+  // for (int i = 0; i < 20; ++i)  {
+  //   for (int j = 0; j < dim; ++j) 
+  //     std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
+  //   std::cout << std::endl;
+  // }
+  // std::cout << std::endl;
 
   Dtype* prior = labels_.mutable_cpu_data();
-  std::cout << "labels for this batch: ";
-  for (int i = 0; i < num; ++i) {
+  for (int i = 0; i < num; ++i)
     prior[static_cast<int>(label[i])] += 1.0 / num;
-    std::cout << label[i] << " ";
-  } 
-  std::cout << std::endl << std::endl << "prior for this batch is: ";
-  for (int i = 0; i < dim; ++i)
-    std::cout << prior[i] << ", ";
-  std::cout << std::endl;
+
+  // std::cout << std::endl << std::endl << "prior for this batch is: ";
+  // for (int i = 0; i < dim; ++i)
+  //   std::cout << prior[i] << ", ";
+  // std::cout << std::endl;
 
   for (int i = 0; i < num; ++i)  {
     for (int j = 0; j < dim; ++j) 
-      bottom_diff[i * dim + j] /= static_cast<float>(prior[static_cast<int>(label[i])]); //*dim;
+      bottom_diff[i * dim + j] /= static_cast<float>(prior[static_cast<int>(label[i])])*dim;
   }
   
-  std::cout << "bottom_diff after bayesian stuff:" << std::endl;
-  for (int i = 0; i < num; ++i)  {
-    for (int j = 0; j < dim; ++j) 
-      std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
+  // std::cout << "bottom_diff after bayesian stuff:" << std::endl;
+  // for (int i = 0; i < 20; ++i)  {
+  //   for (int j = 0; j < dim; ++j) 
+  //     std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
+  //   std::cout << std::endl;
+  // }
+  // std::cout << std::endl;
 }
 /*
 template <typename Dtype>
