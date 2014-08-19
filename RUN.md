@@ -199,8 +199,8 @@ training:
 - 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13(new)
       scrape_zones_sbl
 - 07: freeze5.5/14
-- 08: freeze5.5, freeze5/14(alexnet), scrape_zones(sbl benchmark)
-- 09: hatch_markings/18, freeze5.5/15
+- 08: freeze5.5, freeze5/14(alexnet), CUDA_OUT_OF_MEM
+- 09: hatch_markings/18, freeze5.5/15, scrape_zones(sbl benchmark)
 - 10:
 
 wait_list: hatch/17, hatch/18
