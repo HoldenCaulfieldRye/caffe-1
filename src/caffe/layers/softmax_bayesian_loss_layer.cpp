@@ -40,23 +40,23 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   int dim = prob_.count() / num;
   // int label_count = bottom[1]->count();
   
-  Dtype* prior = labels_.mutable_cpu_data();
+  _prior = labels_.mutable_cpu_data();
   std::cout << "labels for this batch: ";
   for (int i = 0; i < num; ++i) {
-    prior[static_cast<int>(label[i])] += 1.0 / num;
+    _prior[static_cast<int>(label[i])] += 1.0 / num;
     std::cout << label[i] << " ";
   } 
-  std::cout << std::endl << std::endl << "prior for this batch is: ";
+  std::cout << std::endl << std::endl << "_prior for this batch is: ";
   for (int i = 0; i < dim; ++i)
-    std::cout << prior[i] << ", ";
+    std::cout << _prior[i] << ", ";
   std::cout << std::endl;
-  caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
+  caffe_set(labels_.count(), Dtype(FLT_MIN), _prior);
 
   Dtype loss = 0;
   for (int i = 0; i < num; ++i) {
     //taking from prob_data the outputted probability of the correct label
     //FLT_MIN is smallest nonzero float (don't want to give 0 to log)
-    loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / static_cast<float>(prior[static_cast<int>(label[i])]);
+    loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / static_cast<float>(_prior[static_cast<int>(label[i])]);
   }
   return loss / (dim*num);
 }
@@ -69,7 +69,7 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
     vector<Blob<Dtype>*>* bottom) {
   // Compute the diff
   Dtype* bottom_diff = (*bottom)[0]->mutable_cpu_diff();
-  const Dtype* prior = labels_.cpu_data();
+  // const Dtype* _prior = labels_.cpu_data();
   const Dtype* prob_data = prob_.cpu_data();
   //bottom_diff starts off as the outputted probabilities, not the loss!
   //loss actually never backpropped... wtf
@@ -91,7 +91,7 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   for (int i = 0; i < num; ++i) {
     // softmax gradient: bit.ly/1tmehE9
     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
-    // bottom_diff[i * dim + static_cast<int>(label[i])] /= static_cast<float>(prior[i])*dim;
+    // bottom_diff[i * dim + static_cast<int>(label[i])] /= static_cast<float>(_prior[i])*dim;
   }
   // Scale down gradient
   // multiply the 1st prob_.count() elements of bottom_diff by 1/dim
@@ -105,14 +105,14 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   }
   std::cout << std::endl;
 
-  std::cout << std::endl << std::endl << "prior for this batch is: ";
+  std::cout << std::endl << std::endl << "_prior for this batch is: ";
   for (int i = 0; i < dim; ++i)
-    std::cout << prior[i] << ", ";
+    std::cout << _prior[i] << ", ";
   std::cout << std::endl;
 
   for (int i = 0; i < num; ++i)  {
     for (int j = 0; j < dim; ++j) 
-      bottom_diff[i * dim + j] /= static_cast<float>(prior[static_cast<int>(label[i])]); //*dim;
+      bottom_diff[i * dim + j] /= static_cast<float>(_prior[static_cast<int>(label[i])]); //*dim;
   }
   
   std::cout << "bottom_diff after bayesian stuff:" << std::endl;
