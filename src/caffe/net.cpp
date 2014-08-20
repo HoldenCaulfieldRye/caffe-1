@@ -266,8 +266,27 @@ template <typename Dtype>
 void Net<Dtype>::Backward() {
   for (int i = layers_.size() - 1; i >= 0; --i) {
     if (layer_need_backward_[i]) {
-      std::cout << ;
+      
+      int num = layers_[i]->prob_.num();
+      int dim = layers_[i]->prob_.count() / num;  
+      std::cout << "(net.cpp) cpu_diff b4 backward_cpu:" << std::endl;
+      for (int i = 0; i < 50; ++i)  {
+	for (int j = 0; j < dim; ++j) 
+	  std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << layers_[i]->(*bottom)[0]->mutable_cpu_diff()[i*dim+j]<< ",  ";
+	std::cout << std::endl;
+      }
+      std::cout << std::endl;
+
       layers_[i]->Backward(top_vecs_[i], true, &bottom_vecs_[i]);
+
+      std::cout << "(net.cpp) cpu_diff after backward_cpu:" << std::endl;
+      for (int i = 0; i < 50; ++i)  {
+	for (int j = 0; j < dim; ++j) 
+	  std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
+	std::cout << std::endl;
+      }
+      std::cout << std::endl;
+      
     }
   }
 }
