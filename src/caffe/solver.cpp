@@ -82,6 +82,8 @@ void Solver<Dtype>::Solve(const char* resume_file) {
   while (iter_++ < param_.max_iter()) {
     Dtype loss = net_->ForwardBackward(bottom_vec);
 
+    std::cout << "loss just after ForwardBackward: " << loss << std::endl;
+    
     std::cout << "net_params->cpu_diff just after ForwardBackward: " << std::endl;
     
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
@@ -105,7 +107,7 @@ void Solver<Dtype>::Solve(const char* resume_file) {
 
     std::cout << "net_params->cpu_diff just after Update(): " << std::endl;
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
-      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      std::cout << "caca boudin net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<100; i++)
     	std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
       std::cout << std::endl;

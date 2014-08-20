@@ -108,7 +108,20 @@ debug SBL:
      	-> solver::net_->Update() calls
 	     net::Update calls
 	       blob::Update
-
+	-> compare logs
+	   -> PROB1: layer[10] is 0 for sbl only
+	      -> should be 
+	   ->        sbl max       benchmark max
+	   net_15    e+34          e+31
+	   net_14    0.92          0.99
+	   net_13    0.015         0.009
+	   net_12    0    !        0.013 (but no neg values!)
+	   net_11    0.0055        0.0027 
+	   
+	   EF CONF CALL THIS AFTERNOON
+	   SET UP REMINDERS
+	   TELL DAD ETC
+	   
 		 
 the main functions from which net is trained:
 ":Solve("  	       in src/caffe/solver.cpp
