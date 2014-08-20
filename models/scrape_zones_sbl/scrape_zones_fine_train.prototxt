@@ -220,9 +220,9 @@ layers {
   type: INNER_PRODUCT
   bottom: "pool5"
   top: "fc6_new"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -256,9 +256,9 @@ layers {
   type: INNER_PRODUCT
   bottom: "fc6_new"
   top: "fc7_new"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   inner_product_param {
     num_output: 4096
