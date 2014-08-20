@@ -53,12 +53,12 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
   Dtype loss = 0;
-  std::cout << "loss += ";
+  std::cout << "loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / prior[static_cast<int>(label[i])]" << std::endl;
   for (int i = 0; i < num; ++i) {
     //taking from prob_data the outputted probability of the correct label
     //FLT_MIN is smallest nonzero float (don't want to give 0 to log)
     std::cout << "max(" << prob_data[i * dim + static_cast<int>(label[i])] << ", " << Dtype(FLT_MIN) << ")) / " << static_cast<float>(prior[static_cast<int>(label[i])]) << std::endl;//",    ";
-    loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / static_cast<float>(prior[static_cast<int>(label[i])]);
+    loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / prior[static_cast<int>(label[i])];
   }
   std::cout << "SBL, loss before scale down: " << loss << std::endl;
   std::cout << "SBL, loss after scale down: " << loss/ (dim*num) << std::endl;

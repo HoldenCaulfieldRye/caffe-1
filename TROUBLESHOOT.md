@@ -131,6 +131,9 @@ debug SBL:
      -> occurs inside net.hpp::Forward() or before
      -> 
 
+
+IDENTIFIED PROBS & SOLS:
+-> what if prior is (1,0)
     
 	   EF CONF CALL THIS AFTERNOON
 	   SET UP REMINDERS
