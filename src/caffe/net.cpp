@@ -223,12 +223,16 @@ const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
   for (int i = 0; i < layers_.size(); ++i) {
     // LOG(ERROR) << "Forwarding " << layer_names_[i];
 
-    //think bottom_vecs is type vector<vector<Blob<Dtype>*>>& 
+    //bottom_vecs is type vector<vector<Blob<Dtype>*>>& 
+    //bottom_vecs[i][0] is the blob (aka data structure with num, channels, 
+    //height, width) for carrying img data in layer i
+    //bottom_vecs[i][0] carries the labels in layer i
     if (i==23) { //layer number I want in this specific case
-      std::cout << "bottom_vecs_[" << i << "]: ";
+      std::cout << "bottom_vecs_[" << i << "][0]->cpu_data(): ";
       for (int j=0; j<bottom_vecs_[i].size(); j++) {
 	for (int k=0; j<50; j++) { 
-	  std::cout << bottom_vecs_[i][j][k] << ", ";
+	  std::cout << bottom_vecs_[i][0]->cpu_data()[j] << ", ";
+	}
       }
       std::cout << std::endl << "top_vecs_[" << i << "]: ";
       for (int j=0; j<top_vecs_[i].size(); j++) {
