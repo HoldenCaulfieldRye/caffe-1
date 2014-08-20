@@ -227,7 +227,7 @@ const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
     if (i==23) { //layer number I want in this specific case
       std::cout << "bottom_vecs_[" << i << "]: ";
       for (int j=0; j<bottom_vecs_[i].size(); j++) {
-	for (int k=0; j<bottom_vecs_[i][j].size(); j++) { 
+	for (int k=0; j<50; j++) { 
 	  std::cout << bottom_vecs_[i][j][k] << ", ";
       }
       std::cout << std::endl << "top_vecs_[" << i << "]: ";
