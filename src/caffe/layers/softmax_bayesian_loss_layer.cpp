@@ -123,7 +123,7 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   std::cout << "bottom_diff after bayesian stuff:" << std::endl;
   for (int i = 0; i < 50; ++i)  {
     for (int j = 0; j < dim; ++j) 
-      std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
+      std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << (*bottom)[0]->mutable_cpu_diff()[i*dim+j]<< ",  ";
     std::cout << std::endl;
   }
   std::cout << std::endl;

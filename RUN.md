@@ -190,10 +190,10 @@ see TROUBLESHOOT.md
 CURRENTLY
 =========
 
+figure out who is making cpu_diff() explode/vanish 
+
 downloading metadata:
 wget graphic07
-
-check that weight_decay 0 for all frozen backprops!
 
 training:
 - 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13(new)
