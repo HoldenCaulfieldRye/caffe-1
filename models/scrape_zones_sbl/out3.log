@@ -1,351 +1,351 @@
-I0820 05:31:34.773365 30357 finetune_net.cpp:25] Starting Optimization
-I0820 05:31:34.773455 30357 solver.cpp:42] Creating training net.
-I0820 05:31:34.773944 30357 net.cpp:76] Creating Layer data
-I0820 05:31:34.773958 30357 net.cpp:112] data -> data
-I0820 05:31:34.773968 30357 net.cpp:112] data -> label
-I0820 05:31:34.773988 30357 data_layer.cpp:145] Opening leveldb scrape_zones_fine_train_leveldb
-I0820 05:31:34.829026 30357 data_layer.cpp:185] output data size: 128,3,227,227
-I0820 05:31:34.829062 30357 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
-I0820 05:31:35.074266 30357 net.cpp:127] Top shape: 128 3 227 227 (19787136)
-I0820 05:31:35.074296 30357 net.cpp:127] Top shape: 128 1 1 1 (128)
-I0820 05:31:35.074303 30357 net.cpp:158] data does not need backward computation.
-I0820 05:31:35.074316 30357 net.cpp:76] Creating Layer conv1
-I0820 05:31:35.074322 30357 net.cpp:86] conv1 <- data
-I0820 05:31:35.074336 30357 net.cpp:112] conv1 -> conv1
-I0820 05:31:35.075641 30357 net.cpp:127] Top shape: 128 96 55 55 (37171200)
-I0820 05:31:35.075654 30357 net.cpp:158] conv1 does not need backward computation.
-I0820 05:31:35.075660 30357 net.cpp:76] Creating Layer relu1
-I0820 05:31:35.075664 30357 net.cpp:86] relu1 <- conv1
-I0820 05:31:35.075670 30357 net.cpp:100] relu1 -> conv1 (in-place)
-I0820 05:31:35.075676 30357 net.cpp:127] Top shape: 128 96 55 55 (37171200)
-I0820 05:31:35.075680 30357 net.cpp:158] relu1 does not need backward computation.
-I0820 05:31:35.075685 30357 net.cpp:76] Creating Layer pool1
-I0820 05:31:35.075690 30357 net.cpp:86] pool1 <- conv1
-I0820 05:31:35.075693 30357 net.cpp:112] pool1 -> pool1
-I0820 05:31:35.075703 30357 net.cpp:127] Top shape: 128 96 27 27 (8957952)
-I0820 05:31:35.075711 30357 net.cpp:158] pool1 does not need backward computation.
-I0820 05:31:35.075719 30357 net.cpp:76] Creating Layer norm1
-I0820 05:31:35.075724 30357 net.cpp:86] norm1 <- pool1
-I0820 05:31:35.075728 30357 net.cpp:112] norm1 -> norm1
-I0820 05:31:35.075736 30357 net.cpp:127] Top shape: 128 96 27 27 (8957952)
-I0820 05:31:35.075739 30357 net.cpp:158] norm1 does not need backward computation.
-I0820 05:31:35.075744 30357 net.cpp:76] Creating Layer conv2
-I0820 05:31:35.075748 30357 net.cpp:86] conv2 <- norm1
-I0820 05:31:35.075752 30357 net.cpp:112] conv2 -> conv2
-I0820 05:31:35.086719 30357 net.cpp:127] Top shape: 128 256 27 27 (23887872)
-I0820 05:31:35.086745 30357 net.cpp:158] conv2 does not need backward computation.
-I0820 05:31:35.086752 30357 net.cpp:76] Creating Layer relu2
-I0820 05:31:35.086757 30357 net.cpp:86] relu2 <- conv2
-I0820 05:31:35.086763 30357 net.cpp:100] relu2 -> conv2 (in-place)
-I0820 05:31:35.086768 30357 net.cpp:127] Top shape: 128 256 27 27 (23887872)
-I0820 05:31:35.086772 30357 net.cpp:158] relu2 does not need backward computation.
-I0820 05:31:35.086777 30357 net.cpp:76] Creating Layer pool2
-I0820 05:31:35.086781 30357 net.cpp:86] pool2 <- conv2
-I0820 05:31:35.086786 30357 net.cpp:112] pool2 -> pool2
-I0820 05:31:35.086791 30357 net.cpp:127] Top shape: 128 256 13 13 (5537792)
-I0820 05:31:35.086794 30357 net.cpp:158] pool2 does not need backward computation.
-I0820 05:31:35.086802 30357 net.cpp:76] Creating Layer norm2
-I0820 05:31:35.086807 30357 net.cpp:86] norm2 <- pool2
-I0820 05:31:35.086810 30357 net.cpp:112] norm2 -> norm2
-I0820 05:31:35.086817 30357 net.cpp:127] Top shape: 128 256 13 13 (5537792)
-I0820 05:31:35.086820 30357 net.cpp:158] norm2 does not need backward computation.
-I0820 05:31:35.086825 30357 net.cpp:76] Creating Layer conv3
-I0820 05:31:35.086833 30357 net.cpp:86] conv3 <- norm2
-I0820 05:31:35.086837 30357 net.cpp:112] conv3 -> conv3
-I0820 05:31:35.118785 30357 net.cpp:127] Top shape: 128 384 13 13 (8306688)
-I0820 05:31:35.118813 30357 net.cpp:158] conv3 does not need backward computation.
-I0820 05:31:35.118820 30357 net.cpp:76] Creating Layer relu3
-I0820 05:31:35.118824 30357 net.cpp:86] relu3 <- conv3
-I0820 05:31:35.118831 30357 net.cpp:100] relu3 -> conv3 (in-place)
-I0820 05:31:35.118837 30357 net.cpp:127] Top shape: 128 384 13 13 (8306688)
-I0820 05:31:35.118841 30357 net.cpp:158] relu3 does not need backward computation.
-I0820 05:31:35.118847 30357 net.cpp:76] Creating Layer conv4
-I0820 05:31:35.118850 30357 net.cpp:86] conv4 <- conv3
-I0820 05:31:35.118854 30357 net.cpp:112] conv4 -> conv4
-I0820 05:31:35.142838 30357 net.cpp:127] Top shape: 128 384 13 13 (8306688)
-I0820 05:31:35.142861 30357 net.cpp:158] conv4 does not need backward computation.
-I0820 05:31:35.142869 30357 net.cpp:76] Creating Layer relu4
-I0820 05:31:35.142874 30357 net.cpp:86] relu4 <- conv4
-I0820 05:31:35.142881 30357 net.cpp:100] relu4 -> conv4 (in-place)
-I0820 05:31:35.142937 30357 net.cpp:127] Top shape: 128 384 13 13 (8306688)
-I0820 05:31:35.142951 30357 net.cpp:158] relu4 does not need backward computation.
-I0820 05:31:35.142961 30357 net.cpp:76] Creating Layer conv5
-I0820 05:31:35.142966 30357 net.cpp:86] conv5 <- conv4
-I0820 05:31:35.142971 30357 net.cpp:112] conv5 -> conv5
-I0820 05:31:35.158956 30357 net.cpp:127] Top shape: 128 256 13 13 (5537792)
-I0820 05:31:35.158980 30357 net.cpp:158] conv5 does not need backward computation.
-I0820 05:31:35.158988 30357 net.cpp:76] Creating Layer relu5
-I0820 05:31:35.158994 30357 net.cpp:86] relu5 <- conv5
-I0820 05:31:35.159001 30357 net.cpp:100] relu5 -> conv5 (in-place)
-I0820 05:31:35.159006 30357 net.cpp:127] Top shape: 128 256 13 13 (5537792)
-I0820 05:31:35.159010 30357 net.cpp:158] relu5 does not need backward computation.
-I0820 05:31:35.159015 30357 net.cpp:76] Creating Layer pool5
-I0820 05:31:35.159019 30357 net.cpp:86] pool5 <- conv5
-I0820 05:31:35.159024 30357 net.cpp:112] pool5 -> pool5
-I0820 05:31:35.159029 30357 net.cpp:127] Top shape: 128 256 6 6 (1179648)
-I0820 05:31:35.159034 30357 net.cpp:158] pool5 does not need backward computation.
-I0820 05:31:35.159041 30357 net.cpp:76] Creating Layer fc6_new
-I0820 05:31:35.159045 30357 net.cpp:86] fc6_new <- pool5
-I0820 05:31:35.159049 30357 net.cpp:112] fc6_new -> fc6_new
-I0820 05:31:36.514346 30357 net.cpp:127] Top shape: 128 4096 1 1 (524288)
-I0820 05:31:36.514374 30357 net.cpp:153] fc6_new needs backward computation.
-I0820 05:31:36.514384 30357 net.cpp:76] Creating Layer relu6
-I0820 05:31:36.514389 30357 net.cpp:86] relu6 <- fc6_new
-I0820 05:31:36.514394 30357 net.cpp:100] relu6 -> fc6_new (in-place)
-I0820 05:31:36.514400 30357 net.cpp:127] Top shape: 128 4096 1 1 (524288)
-I0820 05:31:36.514405 30357 net.cpp:153] relu6 needs backward computation.
-I0820 05:31:36.514410 30357 net.cpp:76] Creating Layer drop6
-I0820 05:31:36.514413 30357 net.cpp:86] drop6 <- fc6_new
-I0820 05:31:36.514417 30357 net.cpp:100] drop6 -> fc6_new (in-place)
-I0820 05:31:36.514428 30357 net.cpp:127] Top shape: 128 4096 1 1 (524288)
-I0820 05:31:36.514433 30357 net.cpp:153] drop6 needs backward computation.
-I0820 05:31:36.514438 30357 net.cpp:76] Creating Layer fc7_new
-I0820 05:31:36.514442 30357 net.cpp:86] fc7_new <- fc6_new
-I0820 05:31:36.514446 30357 net.cpp:112] fc7_new -> fc7_new
-I0820 05:31:37.116583 30357 net.cpp:127] Top shape: 128 4096 1 1 (524288)
-I0820 05:31:37.116606 30357 net.cpp:153] fc7_new needs backward computation.
-I0820 05:31:37.116616 30357 net.cpp:76] Creating Layer relu7
-I0820 05:31:37.116621 30357 net.cpp:86] relu7 <- fc7_new
-I0820 05:31:37.116627 30357 net.cpp:100] relu7 -> fc7_new (in-place)
-I0820 05:31:37.116632 30357 net.cpp:127] Top shape: 128 4096 1 1 (524288)
-I0820 05:31:37.116636 30357 net.cpp:153] relu7 needs backward computation.
-I0820 05:31:37.116641 30357 net.cpp:76] Creating Layer drop7
-I0820 05:31:37.116646 30357 net.cpp:86] drop7 <- fc7_new
-I0820 05:31:37.116649 30357 net.cpp:100] drop7 -> fc7_new (in-place)
-I0820 05:31:37.116653 30357 net.cpp:127] Top shape: 128 4096 1 1 (524288)
-I0820 05:31:37.116657 30357 net.cpp:153] drop7 needs backward computation.
-I0820 05:31:37.116662 30357 net.cpp:76] Creating Layer fc8_clamp
-I0820 05:31:37.116667 30357 net.cpp:86] fc8_clamp <- fc7_new
-I0820 05:31:37.116670 30357 net.cpp:112] fc8_clamp -> fc8_aero
-I0820 05:31:37.116973 30357 net.cpp:127] Top shape: 128 2 1 1 (256)
-I0820 05:31:37.116981 30357 net.cpp:153] fc8_clamp needs backward computation.
-I0820 05:31:37.116987 30357 net.cpp:76] Creating Layer loss
-I0820 05:31:37.116991 30357 net.cpp:86] loss <- fc8_aero
-I0820 05:31:37.116996 30357 net.cpp:86] loss <- label
-I0820 05:31:37.117007 30357 net.cpp:153] loss needs backward computation.
-I0820 05:31:37.117034 30357 net.cpp:182] Collecting Learning Rate and Weight Decay.
-I0820 05:31:37.117045 30357 net.cpp:175] Network initialization done.
-I0820 05:31:37.117048 30357 net.cpp:176] Memory required for Data 536869888
-I0820 05:31:37.117086 30357 solver.cpp:45] Creating testing net.
-I0820 05:31:37.117640 30357 net.cpp:76] Creating Layer data
-I0820 05:31:37.117651 30357 net.cpp:112] data -> data
-I0820 05:31:37.117658 30357 net.cpp:112] data -> label
-I0820 05:31:37.117665 30357 data_layer.cpp:145] Opening leveldb scrape_zones_fine_val_leveldb
-I0820 05:31:37.170445 30357 data_layer.cpp:185] output data size: 5,3,227,227
-I0820 05:31:37.170476 30357 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
-I0820 05:31:37.176728 30357 net.cpp:127] Top shape: 5 3 227 227 (772935)
-I0820 05:31:37.176753 30357 net.cpp:127] Top shape: 5 1 1 1 (5)
-I0820 05:31:37.176764 30357 net.cpp:158] data does not need backward computation.
-I0820 05:31:37.176781 30357 net.cpp:76] Creating Layer conv1
-I0820 05:31:37.176790 30357 net.cpp:86] conv1 <- data
-I0820 05:31:37.176801 30357 net.cpp:112] conv1 -> conv1
-I0820 05:31:37.179529 30357 net.cpp:127] Top shape: 5 96 55 55 (1452000)
-I0820 05:31:37.179554 30357 net.cpp:158] conv1 does not need backward computation.
-I0820 05:31:37.179569 30357 net.cpp:76] Creating Layer relu1
-I0820 05:31:37.179577 30357 net.cpp:86] relu1 <- conv1
-I0820 05:31:37.179589 30357 net.cpp:100] relu1 -> conv1 (in-place)
-I0820 05:31:37.179599 30357 net.cpp:127] Top shape: 5 96 55 55 (1452000)
-I0820 05:31:37.179606 30357 net.cpp:158] relu1 does not need backward computation.
-I0820 05:31:37.179623 30357 net.cpp:76] Creating Layer pool1
-I0820 05:31:37.179638 30357 net.cpp:86] pool1 <- conv1
-I0820 05:31:37.179656 30357 net.cpp:112] pool1 -> pool1
-I0820 05:31:37.179677 30357 net.cpp:127] Top shape: 5 96 27 27 (349920)
-I0820 05:31:37.179693 30357 net.cpp:158] pool1 does not need backward computation.
-I0820 05:31:37.179716 30357 net.cpp:76] Creating Layer norm1
-I0820 05:31:37.179733 30357 net.cpp:86] norm1 <- pool1
-I0820 05:31:37.179750 30357 net.cpp:112] norm1 -> norm1
-I0820 05:31:37.179774 30357 net.cpp:127] Top shape: 5 96 27 27 (349920)
-I0820 05:31:37.179790 30357 net.cpp:158] norm1 does not need backward computation.
-I0820 05:31:37.179811 30357 net.cpp:76] Creating Layer conv2
-I0820 05:31:37.179826 30357 net.cpp:86] conv2 <- norm1
-I0820 05:31:37.179847 30357 net.cpp:112] conv2 -> conv2
-I0820 05:31:37.192237 30357 net.cpp:127] Top shape: 5 256 27 27 (933120)
-I0820 05:31:37.192250 30357 net.cpp:158] conv2 does not need backward computation.
-I0820 05:31:37.192255 30357 net.cpp:76] Creating Layer relu2
-I0820 05:31:37.192260 30357 net.cpp:86] relu2 <- conv2
-I0820 05:31:37.192265 30357 net.cpp:100] relu2 -> conv2 (in-place)
-I0820 05:31:37.192270 30357 net.cpp:127] Top shape: 5 256 27 27 (933120)
-I0820 05:31:37.192273 30357 net.cpp:158] relu2 does not need backward computation.
-I0820 05:31:37.192278 30357 net.cpp:76] Creating Layer pool2
-I0820 05:31:37.192281 30357 net.cpp:86] pool2 <- conv2
-I0820 05:31:37.192286 30357 net.cpp:112] pool2 -> pool2
-I0820 05:31:37.192291 30357 net.cpp:127] Top shape: 5 256 13 13 (216320)
-I0820 05:31:37.192296 30357 net.cpp:158] pool2 does not need backward computation.
-I0820 05:31:37.192301 30357 net.cpp:76] Creating Layer norm2
-I0820 05:31:37.192306 30357 net.cpp:86] norm2 <- pool2
-I0820 05:31:37.192311 30357 net.cpp:112] norm2 -> norm2
-I0820 05:31:37.192316 30357 net.cpp:127] Top shape: 5 256 13 13 (216320)
-I0820 05:31:37.192319 30357 net.cpp:158] norm2 does not need backward computation.
-I0820 05:31:37.192324 30357 net.cpp:76] Creating Layer conv3
-I0820 05:31:37.192328 30357 net.cpp:86] conv3 <- norm2
-I0820 05:31:37.192332 30357 net.cpp:112] conv3 -> conv3
-I0820 05:31:37.224131 30357 net.cpp:127] Top shape: 5 384 13 13 (324480)
-I0820 05:31:37.224143 30357 net.cpp:158] conv3 does not need backward computation.
-I0820 05:31:37.224148 30357 net.cpp:76] Creating Layer relu3
-I0820 05:31:37.224153 30357 net.cpp:86] relu3 <- conv3
-I0820 05:31:37.224158 30357 net.cpp:100] relu3 -> conv3 (in-place)
-I0820 05:31:37.224163 30357 net.cpp:127] Top shape: 5 384 13 13 (324480)
-I0820 05:31:37.224165 30357 net.cpp:158] relu3 does not need backward computation.
-I0820 05:31:37.224171 30357 net.cpp:76] Creating Layer conv4
-I0820 05:31:37.224174 30357 net.cpp:86] conv4 <- conv3
-I0820 05:31:37.224179 30357 net.cpp:112] conv4 -> conv4
-I0820 05:31:37.248018 30357 net.cpp:127] Top shape: 5 384 13 13 (324480)
-I0820 05:31:37.248028 30357 net.cpp:158] conv4 does not need backward computation.
-I0820 05:31:37.248033 30357 net.cpp:76] Creating Layer relu4
-I0820 05:31:37.248036 30357 net.cpp:86] relu4 <- conv4
-I0820 05:31:37.248041 30357 net.cpp:100] relu4 -> conv4 (in-place)
-I0820 05:31:37.248045 30357 net.cpp:127] Top shape: 5 384 13 13 (324480)
-I0820 05:31:37.248049 30357 net.cpp:158] relu4 does not need backward computation.
-I0820 05:31:37.248054 30357 net.cpp:76] Creating Layer conv5
-I0820 05:31:37.248059 30357 net.cpp:86] conv5 <- conv4
-I0820 05:31:37.248062 30357 net.cpp:112] conv5 -> conv5
-I0820 05:31:37.263983 30357 net.cpp:127] Top shape: 5 256 13 13 (216320)
-I0820 05:31:37.263993 30357 net.cpp:158] conv5 does not need backward computation.
-I0820 05:31:37.263998 30357 net.cpp:76] Creating Layer relu5
-I0820 05:31:37.264001 30357 net.cpp:86] relu5 <- conv5
-I0820 05:31:37.264006 30357 net.cpp:100] relu5 -> conv5 (in-place)
-I0820 05:31:37.264010 30357 net.cpp:127] Top shape: 5 256 13 13 (216320)
-I0820 05:31:37.264014 30357 net.cpp:158] relu5 does not need backward computation.
-I0820 05:31:37.264019 30357 net.cpp:76] Creating Layer pool5
-I0820 05:31:37.264024 30357 net.cpp:86] pool5 <- conv5
-I0820 05:31:37.264029 30357 net.cpp:112] pool5 -> pool5
-I0820 05:31:37.264034 30357 net.cpp:127] Top shape: 5 256 6 6 (46080)
-I0820 05:31:37.264037 30357 net.cpp:158] pool5 does not need backward computation.
-I0820 05:31:37.264045 30357 net.cpp:76] Creating Layer fc6_new
-I0820 05:31:37.264049 30357 net.cpp:86] fc6_new <- pool5
-I0820 05:31:37.264053 30357 net.cpp:112] fc6_new -> fc6_new
-I0820 05:31:38.618660 30357 net.cpp:127] Top shape: 5 4096 1 1 (20480)
-I0820 05:31:38.618688 30357 net.cpp:158] fc6_new does not need backward computation.
-I0820 05:31:38.618697 30357 net.cpp:76] Creating Layer relu6
-I0820 05:31:38.618703 30357 net.cpp:86] relu6 <- fc6_new
-I0820 05:31:38.618710 30357 net.cpp:100] relu6 -> fc6_new (in-place)
-I0820 05:31:38.618716 30357 net.cpp:127] Top shape: 5 4096 1 1 (20480)
-I0820 05:31:38.618720 30357 net.cpp:158] relu6 does not need backward computation.
-I0820 05:31:38.618724 30357 net.cpp:76] Creating Layer drop6
-I0820 05:31:38.618728 30357 net.cpp:86] drop6 <- fc6_new
-I0820 05:31:38.618732 30357 net.cpp:100] drop6 -> fc6_new (in-place)
-I0820 05:31:38.618736 30357 net.cpp:127] Top shape: 5 4096 1 1 (20480)
-I0820 05:31:38.618741 30357 net.cpp:158] drop6 does not need backward computation.
-I0820 05:31:38.618746 30357 net.cpp:76] Creating Layer fc7_new
-I0820 05:31:38.618749 30357 net.cpp:86] fc7_new <- fc6_new
-I0820 05:31:38.618754 30357 net.cpp:112] fc7_new -> fc7_new
-I0820 05:31:39.220854 30357 net.cpp:127] Top shape: 5 4096 1 1 (20480)
-I0820 05:31:39.220877 30357 net.cpp:158] fc7_new does not need backward computation.
-I0820 05:31:39.220886 30357 net.cpp:76] Creating Layer relu7
-I0820 05:31:39.220891 30357 net.cpp:86] relu7 <- fc7_new
-I0820 05:31:39.220897 30357 net.cpp:100] relu7 -> fc7_new (in-place)
-I0820 05:31:39.220904 30357 net.cpp:127] Top shape: 5 4096 1 1 (20480)
-I0820 05:31:39.220908 30357 net.cpp:158] relu7 does not need backward computation.
-I0820 05:31:39.220913 30357 net.cpp:76] Creating Layer drop7
-I0820 05:31:39.220917 30357 net.cpp:86] drop7 <- fc7_new
-I0820 05:31:39.220921 30357 net.cpp:100] drop7 -> fc7_new (in-place)
-I0820 05:31:39.220926 30357 net.cpp:127] Top shape: 5 4096 1 1 (20480)
-I0820 05:31:39.220929 30357 net.cpp:158] drop7 does not need backward computation.
-I0820 05:31:39.220935 30357 net.cpp:76] Creating Layer fc8_clamp
-I0820 05:31:39.220939 30357 net.cpp:86] fc8_clamp <- fc7_new
-I0820 05:31:39.220943 30357 net.cpp:112] fc8_clamp -> fc8_aero
-I0820 05:31:39.221237 30357 net.cpp:127] Top shape: 5 2 1 1 (10)
-I0820 05:31:39.221245 30357 net.cpp:153] fc8_clamp needs backward computation.
-I0820 05:31:39.221251 30357 net.cpp:76] Creating Layer prob
-I0820 05:31:39.221254 30357 net.cpp:86] prob <- fc8_aero
-I0820 05:31:39.221259 30357 net.cpp:112] prob -> prob
-I0820 05:31:39.221266 30357 net.cpp:127] Top shape: 5 2 1 1 (10)
-I0820 05:31:39.221269 30357 net.cpp:153] prob needs backward computation.
-I0820 05:31:39.221273 30357 net.cpp:76] Creating Layer accuracy
-I0820 05:31:39.221277 30357 net.cpp:86] accuracy <- prob
-I0820 05:31:39.221282 30357 net.cpp:86] accuracy <- label
-I0820 05:31:39.221287 30357 net.cpp:112] accuracy -> accuracy
-I0820 05:31:39.221302 30357 net.cpp:127] Top shape: 1 2 1 1 (2)
-I0820 05:31:39.221305 30357 net.cpp:153] accuracy needs backward computation.
-I0820 05:31:39.221309 30357 net.cpp:164] This network produces output accuracy
-I0820 05:31:39.221326 30357 net.cpp:182] Collecting Learning Rate and Weight Decay.
-I0820 05:31:39.221336 30357 net.cpp:175] Network initialization done.
-I0820 05:31:39.221340 30357 net.cpp:176] Memory required for Data 20971528
-I0820 05:31:39.221379 30357 solver.cpp:50] Solver scaffolding done.
-I0820 05:31:39.221386 30357 finetune_net.cpp:27] Loading from ../alexnet/caffe_alexnet_model
-I0820 05:31:39.797894 30357 net.cpp:342] Copying source layer data
-I0820 05:31:39.797920 30357 net.cpp:342] Copying source layer conv1
-I0820 05:31:39.797981 30357 net.cpp:342] Copying source layer relu1
-I0820 05:31:39.797987 30357 net.cpp:342] Copying source layer norm1
-I0820 05:31:39.797991 30357 net.cpp:342] Copying source layer pool1
-I0820 05:31:39.797996 30357 net.cpp:342] Copying source layer conv2
-I0820 05:31:39.798476 30357 net.cpp:342] Copying source layer relu2
-I0820 05:31:39.798486 30357 net.cpp:342] Copying source layer norm2
-I0820 05:31:39.798490 30357 net.cpp:342] Copying source layer pool2
-I0820 05:31:39.798493 30357 net.cpp:342] Copying source layer conv3
-I0820 05:31:39.799815 30357 net.cpp:342] Copying source layer relu3
-I0820 05:31:39.799826 30357 net.cpp:342] Copying source layer conv4
-I0820 05:31:39.800803 30357 net.cpp:342] Copying source layer relu4
-I0820 05:31:39.800812 30357 net.cpp:342] Copying source layer conv5
-I0820 05:31:39.801492 30357 net.cpp:342] Copying source layer relu5
-I0820 05:31:39.801502 30357 net.cpp:342] Copying source layer pool5
-I0820 05:31:39.801506 30357 net.cpp:339] Ignoring source layer fc6
-I0820 05:31:39.801511 30357 net.cpp:342] Copying source layer relu6
-I0820 05:31:39.801514 30357 net.cpp:342] Copying source layer drop6
-I0820 05:31:39.801517 30357 net.cpp:339] Ignoring source layer fc7
-I0820 05:31:39.801522 30357 net.cpp:342] Copying source layer relu7
-I0820 05:31:39.801524 30357 net.cpp:342] Copying source layer drop7
-I0820 05:31:39.801528 30357 net.cpp:339] Ignoring source layer fc8
-I0820 05:31:39.801532 30357 net.cpp:342] Copying source layer loss
-I0820 05:31:39.813482 30357 solver.cpp:62] Solving scrape_zonesFineNet
-I0820 05:31:39.813503 30357 solver.cpp:134] Iteration 0, Testing net
-I0820 05:31:39.906517 30357 solver.cpp:170] Test score #0: 0.4375
-I0820 05:31:39.906571 30357 solver.cpp:170] Test score #1: 0.52583
+I0820 09:53:07.499734 11893 finetune_net.cpp:25] Starting Optimization
+I0820 09:53:07.499825 11893 solver.cpp:42] Creating training net.
+I0820 09:53:07.500311 11893 net.cpp:76] Creating Layer data
+I0820 09:53:07.500325 11893 net.cpp:112] data -> data
+I0820 09:53:07.500336 11893 net.cpp:112] data -> label
+I0820 09:53:07.500355 11893 data_layer.cpp:145] Opening leveldb scrape_zones_fine_train_leveldb
+I0820 09:53:07.535886 11893 data_layer.cpp:185] output data size: 5,3,227,227
+I0820 09:53:07.535919 11893 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
+I0820 09:53:07.768857 11893 net.cpp:127] Top shape: 5 3 227 227 (772935)
+I0820 09:53:07.768888 11893 net.cpp:127] Top shape: 5 1 1 1 (5)
+I0820 09:53:07.768894 11893 net.cpp:158] data does not need backward computation.
+I0820 09:53:07.768906 11893 net.cpp:76] Creating Layer conv1
+I0820 09:53:07.768913 11893 net.cpp:86] conv1 <- data
+I0820 09:53:07.768925 11893 net.cpp:112] conv1 -> conv1
+I0820 09:53:07.770226 11893 net.cpp:127] Top shape: 5 96 55 55 (1452000)
+I0820 09:53:07.770237 11893 net.cpp:158] conv1 does not need backward computation.
+I0820 09:53:07.770244 11893 net.cpp:76] Creating Layer relu1
+I0820 09:53:07.770248 11893 net.cpp:86] relu1 <- conv1
+I0820 09:53:07.770253 11893 net.cpp:100] relu1 -> conv1 (in-place)
+I0820 09:53:07.770259 11893 net.cpp:127] Top shape: 5 96 55 55 (1452000)
+I0820 09:53:07.770263 11893 net.cpp:158] relu1 does not need backward computation.
+I0820 09:53:07.770268 11893 net.cpp:76] Creating Layer pool1
+I0820 09:53:07.770272 11893 net.cpp:86] pool1 <- conv1
+I0820 09:53:07.770277 11893 net.cpp:112] pool1 -> pool1
+I0820 09:53:07.770287 11893 net.cpp:127] Top shape: 5 96 27 27 (349920)
+I0820 09:53:07.770290 11893 net.cpp:158] pool1 does not need backward computation.
+I0820 09:53:07.770299 11893 net.cpp:76] Creating Layer norm1
+I0820 09:53:07.770303 11893 net.cpp:86] norm1 <- pool1
+I0820 09:53:07.770308 11893 net.cpp:112] norm1 -> norm1
+I0820 09:53:07.770315 11893 net.cpp:127] Top shape: 5 96 27 27 (349920)
+I0820 09:53:07.770319 11893 net.cpp:158] norm1 does not need backward computation.
+I0820 09:53:07.770324 11893 net.cpp:76] Creating Layer conv2
+I0820 09:53:07.770328 11893 net.cpp:86] conv2 <- norm1
+I0820 09:53:07.770333 11893 net.cpp:112] conv2 -> conv2
+I0820 09:53:07.781319 11893 net.cpp:127] Top shape: 5 256 27 27 (933120)
+I0820 09:53:07.781332 11893 net.cpp:158] conv2 does not need backward computation.
+I0820 09:53:07.781338 11893 net.cpp:76] Creating Layer relu2
+I0820 09:53:07.781342 11893 net.cpp:86] relu2 <- conv2
+I0820 09:53:07.781347 11893 net.cpp:100] relu2 -> conv2 (in-place)
+I0820 09:53:07.781352 11893 net.cpp:127] Top shape: 5 256 27 27 (933120)
+I0820 09:53:07.781357 11893 net.cpp:158] relu2 does not need backward computation.
+I0820 09:53:07.781360 11893 net.cpp:76] Creating Layer pool2
+I0820 09:53:07.781364 11893 net.cpp:86] pool2 <- conv2
+I0820 09:53:07.781368 11893 net.cpp:112] pool2 -> pool2
+I0820 09:53:07.781373 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:07.781378 11893 net.cpp:158] pool2 does not need backward computation.
+I0820 09:53:07.781384 11893 net.cpp:76] Creating Layer norm2
+I0820 09:53:07.781388 11893 net.cpp:86] norm2 <- pool2
+I0820 09:53:07.781393 11893 net.cpp:112] norm2 -> norm2
+I0820 09:53:07.781396 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:07.781400 11893 net.cpp:158] norm2 does not need backward computation.
+I0820 09:53:07.781405 11893 net.cpp:76] Creating Layer conv3
+I0820 09:53:07.781409 11893 net.cpp:86] conv3 <- norm2
+I0820 09:53:07.781414 11893 net.cpp:112] conv3 -> conv3
+I0820 09:53:07.813324 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:07.813338 11893 net.cpp:158] conv3 does not need backward computation.
+I0820 09:53:07.813344 11893 net.cpp:76] Creating Layer relu3
+I0820 09:53:07.813349 11893 net.cpp:86] relu3 <- conv3
+I0820 09:53:07.813354 11893 net.cpp:100] relu3 -> conv3 (in-place)
+I0820 09:53:07.813359 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:07.813362 11893 net.cpp:158] relu3 does not need backward computation.
+I0820 09:53:07.813367 11893 net.cpp:76] Creating Layer conv4
+I0820 09:53:07.813371 11893 net.cpp:86] conv4 <- conv3
+I0820 09:53:07.813375 11893 net.cpp:112] conv4 -> conv4
+I0820 09:53:07.837333 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:07.837344 11893 net.cpp:158] conv4 does not need backward computation.
+I0820 09:53:07.837350 11893 net.cpp:76] Creating Layer relu4
+I0820 09:53:07.837354 11893 net.cpp:86] relu4 <- conv4
+I0820 09:53:07.837359 11893 net.cpp:100] relu4 -> conv4 (in-place)
+I0820 09:53:07.837363 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:07.837368 11893 net.cpp:158] relu4 does not need backward computation.
+I0820 09:53:07.837373 11893 net.cpp:76] Creating Layer conv5
+I0820 09:53:07.837376 11893 net.cpp:86] conv5 <- conv4
+I0820 09:53:07.837380 11893 net.cpp:112] conv5 -> conv5
+I0820 09:53:07.853353 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:07.853365 11893 net.cpp:158] conv5 does not need backward computation.
+I0820 09:53:07.853370 11893 net.cpp:76] Creating Layer relu5
+I0820 09:53:07.853374 11893 net.cpp:86] relu5 <- conv5
+I0820 09:53:07.853379 11893 net.cpp:100] relu5 -> conv5 (in-place)
+I0820 09:53:07.853384 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:07.853387 11893 net.cpp:158] relu5 does not need backward computation.
+I0820 09:53:07.853392 11893 net.cpp:76] Creating Layer pool5
+I0820 09:53:07.853395 11893 net.cpp:86] pool5 <- conv5
+I0820 09:53:07.853400 11893 net.cpp:112] pool5 -> pool5
+I0820 09:53:07.853405 11893 net.cpp:127] Top shape: 5 256 6 6 (46080)
+I0820 09:53:07.853410 11893 net.cpp:158] pool5 does not need backward computation.
+I0820 09:53:07.853417 11893 net.cpp:76] Creating Layer fc6_new
+I0820 09:53:07.853421 11893 net.cpp:86] fc6_new <- pool5
+I0820 09:53:07.853425 11893 net.cpp:112] fc6_new -> fc6_new
+I0820 09:53:09.209363 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:09.209393 11893 net.cpp:153] fc6_new needs backward computation.
+I0820 09:53:09.209401 11893 net.cpp:76] Creating Layer relu6
+I0820 09:53:09.209408 11893 net.cpp:86] relu6 <- fc6_new
+I0820 09:53:09.209414 11893 net.cpp:100] relu6 -> fc6_new (in-place)
+I0820 09:53:09.209419 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:09.209424 11893 net.cpp:153] relu6 needs backward computation.
+I0820 09:53:09.209429 11893 net.cpp:76] Creating Layer drop6
+I0820 09:53:09.209432 11893 net.cpp:86] drop6 <- fc6_new
+I0820 09:53:09.209436 11893 net.cpp:100] drop6 -> fc6_new (in-place)
+I0820 09:53:09.209449 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:09.209452 11893 net.cpp:153] drop6 needs backward computation.
+I0820 09:53:09.209457 11893 net.cpp:76] Creating Layer fc7_new
+I0820 09:53:09.209461 11893 net.cpp:86] fc7_new <- fc6_new
+I0820 09:53:09.209465 11893 net.cpp:112] fc7_new -> fc7_new
+I0820 09:53:09.812474 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:09.812501 11893 net.cpp:153] fc7_new needs backward computation.
+I0820 09:53:09.812510 11893 net.cpp:76] Creating Layer relu7
+I0820 09:53:09.812516 11893 net.cpp:86] relu7 <- fc7_new
+I0820 09:53:09.812522 11893 net.cpp:100] relu7 -> fc7_new (in-place)
+I0820 09:53:09.812528 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:09.812531 11893 net.cpp:153] relu7 needs backward computation.
+I0820 09:53:09.812536 11893 net.cpp:76] Creating Layer drop7
+I0820 09:53:09.812541 11893 net.cpp:86] drop7 <- fc7_new
+I0820 09:53:09.812544 11893 net.cpp:100] drop7 -> fc7_new (in-place)
+I0820 09:53:09.812548 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:09.812552 11893 net.cpp:153] drop7 needs backward computation.
+I0820 09:53:09.812557 11893 net.cpp:76] Creating Layer fc8_clamp
+I0820 09:53:09.812561 11893 net.cpp:86] fc8_clamp <- fc7_new
+I0820 09:53:09.812566 11893 net.cpp:112] fc8_clamp -> fc8_aero
+I0820 09:53:09.812887 11893 net.cpp:127] Top shape: 5 2 1 1 (10)
+I0820 09:53:09.812896 11893 net.cpp:153] fc8_clamp needs backward computation.
+I0820 09:53:09.812901 11893 net.cpp:76] Creating Layer loss
+I0820 09:53:09.812906 11893 net.cpp:86] loss <- fc8_aero
+I0820 09:53:09.812911 11893 net.cpp:86] loss <- label
+I0820 09:53:09.812922 11893 net.cpp:153] loss needs backward computation.
+I0820 09:53:09.812947 11893 net.cpp:182] Collecting Learning Rate and Weight Decay.
+I0820 09:53:09.812958 11893 net.cpp:175] Network initialization done.
+I0820 09:53:09.812962 11893 net.cpp:176] Memory required for Data 20971480
+I0820 09:53:09.813000 11893 solver.cpp:45] Creating testing net.
+I0820 09:53:09.813623 11893 net.cpp:76] Creating Layer data
+I0820 09:53:09.813634 11893 net.cpp:112] data -> data
+I0820 09:53:09.813640 11893 net.cpp:112] data -> label
+I0820 09:53:09.813648 11893 data_layer.cpp:145] Opening leveldb scrape_zones_fine_val_leveldb
+I0820 09:53:09.952304 11893 data_layer.cpp:185] output data size: 5,3,227,227
+I0820 09:53:09.952339 11893 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
+I0820 09:53:09.958235 11893 net.cpp:127] Top shape: 5 3 227 227 (772935)
+I0820 09:53:09.958261 11893 net.cpp:127] Top shape: 5 1 1 1 (5)
+I0820 09:53:09.958271 11893 net.cpp:158] data does not need backward computation.
+I0820 09:53:09.958288 11893 net.cpp:76] Creating Layer conv1
+I0820 09:53:09.958297 11893 net.cpp:86] conv1 <- data
+I0820 09:53:09.958308 11893 net.cpp:112] conv1 -> conv1
+I0820 09:53:09.959686 11893 net.cpp:127] Top shape: 5 96 55 55 (1452000)
+I0820 09:53:09.959696 11893 net.cpp:158] conv1 does not need backward computation.
+I0820 09:53:09.959702 11893 net.cpp:76] Creating Layer relu1
+I0820 09:53:09.959705 11893 net.cpp:86] relu1 <- conv1
+I0820 09:53:09.959710 11893 net.cpp:100] relu1 -> conv1 (in-place)
+I0820 09:53:09.959715 11893 net.cpp:127] Top shape: 5 96 55 55 (1452000)
+I0820 09:53:09.959719 11893 net.cpp:158] relu1 does not need backward computation.
+I0820 09:53:09.959723 11893 net.cpp:76] Creating Layer pool1
+I0820 09:53:09.959728 11893 net.cpp:86] pool1 <- conv1
+I0820 09:53:09.959731 11893 net.cpp:112] pool1 -> pool1
+I0820 09:53:09.959738 11893 net.cpp:127] Top shape: 5 96 27 27 (349920)
+I0820 09:53:09.959741 11893 net.cpp:158] pool1 does not need backward computation.
+I0820 09:53:09.959746 11893 net.cpp:76] Creating Layer norm1
+I0820 09:53:09.959750 11893 net.cpp:86] norm1 <- pool1
+I0820 09:53:09.959755 11893 net.cpp:112] norm1 -> norm1
+I0820 09:53:09.959761 11893 net.cpp:127] Top shape: 5 96 27 27 (349920)
+I0820 09:53:09.959765 11893 net.cpp:158] norm1 does not need backward computation.
+I0820 09:53:09.959770 11893 net.cpp:76] Creating Layer conv2
+I0820 09:53:09.959774 11893 net.cpp:86] conv2 <- norm1
+I0820 09:53:09.959779 11893 net.cpp:112] conv2 -> conv2
+I0820 09:53:09.972865 11893 net.cpp:127] Top shape: 5 256 27 27 (933120)
+I0820 09:53:09.972879 11893 net.cpp:158] conv2 does not need backward computation.
+I0820 09:53:09.972887 11893 net.cpp:76] Creating Layer relu2
+I0820 09:53:09.972890 11893 net.cpp:86] relu2 <- conv2
+I0820 09:53:09.972895 11893 net.cpp:100] relu2 -> conv2 (in-place)
+I0820 09:53:09.972899 11893 net.cpp:127] Top shape: 5 256 27 27 (933120)
+I0820 09:53:09.972903 11893 net.cpp:158] relu2 does not need backward computation.
+I0820 09:53:09.972908 11893 net.cpp:76] Creating Layer pool2
+I0820 09:53:09.972913 11893 net.cpp:86] pool2 <- conv2
+I0820 09:53:09.972916 11893 net.cpp:112] pool2 -> pool2
+I0820 09:53:09.972921 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:09.972925 11893 net.cpp:158] pool2 does not need backward computation.
+I0820 09:53:09.972931 11893 net.cpp:76] Creating Layer norm2
+I0820 09:53:09.972935 11893 net.cpp:86] norm2 <- pool2
+I0820 09:53:09.972940 11893 net.cpp:112] norm2 -> norm2
+I0820 09:53:09.972945 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:09.972949 11893 net.cpp:158] norm2 does not need backward computation.
+I0820 09:53:09.972954 11893 net.cpp:76] Creating Layer conv3
+I0820 09:53:09.972959 11893 net.cpp:86] conv3 <- norm2
+I0820 09:53:09.972962 11893 net.cpp:112] conv3 -> conv3
+I0820 09:53:10.004803 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:10.004814 11893 net.cpp:158] conv3 does not need backward computation.
+I0820 09:53:10.004820 11893 net.cpp:76] Creating Layer relu3
+I0820 09:53:10.004824 11893 net.cpp:86] relu3 <- conv3
+I0820 09:53:10.004829 11893 net.cpp:100] relu3 -> conv3 (in-place)
+I0820 09:53:10.004833 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:10.004837 11893 net.cpp:158] relu3 does not need backward computation.
+I0820 09:53:10.004842 11893 net.cpp:76] Creating Layer conv4
+I0820 09:53:10.004847 11893 net.cpp:86] conv4 <- conv3
+I0820 09:53:10.004850 11893 net.cpp:112] conv4 -> conv4
+I0820 09:53:10.028717 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:10.028728 11893 net.cpp:158] conv4 does not need backward computation.
+I0820 09:53:10.028733 11893 net.cpp:76] Creating Layer relu4
+I0820 09:53:10.028738 11893 net.cpp:86] relu4 <- conv4
+I0820 09:53:10.028743 11893 net.cpp:100] relu4 -> conv4 (in-place)
+I0820 09:53:10.028748 11893 net.cpp:127] Top shape: 5 384 13 13 (324480)
+I0820 09:53:10.028750 11893 net.cpp:158] relu4 does not need backward computation.
+I0820 09:53:10.028756 11893 net.cpp:76] Creating Layer conv5
+I0820 09:53:10.028759 11893 net.cpp:86] conv5 <- conv4
+I0820 09:53:10.028764 11893 net.cpp:112] conv5 -> conv5
+I0820 09:53:10.044684 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:10.044695 11893 net.cpp:158] conv5 does not need backward computation.
+I0820 09:53:10.044700 11893 net.cpp:76] Creating Layer relu5
+I0820 09:53:10.044704 11893 net.cpp:86] relu5 <- conv5
+I0820 09:53:10.044708 11893 net.cpp:100] relu5 -> conv5 (in-place)
+I0820 09:53:10.044713 11893 net.cpp:127] Top shape: 5 256 13 13 (216320)
+I0820 09:53:10.044718 11893 net.cpp:158] relu5 does not need backward computation.
+I0820 09:53:10.044721 11893 net.cpp:76] Creating Layer pool5
+I0820 09:53:10.044725 11893 net.cpp:86] pool5 <- conv5
+I0820 09:53:10.044730 11893 net.cpp:112] pool5 -> pool5
+I0820 09:53:10.044735 11893 net.cpp:127] Top shape: 5 256 6 6 (46080)
+I0820 09:53:10.044739 11893 net.cpp:158] pool5 does not need backward computation.
+I0820 09:53:10.044746 11893 net.cpp:76] Creating Layer fc6_new
+I0820 09:53:10.044750 11893 net.cpp:86] fc6_new <- pool5
+I0820 09:53:10.044754 11893 net.cpp:112] fc6_new -> fc6_new
+I0820 09:53:11.400287 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:11.400313 11893 net.cpp:153] fc6_new needs backward computation.
+I0820 09:53:11.400322 11893 net.cpp:76] Creating Layer relu6
+I0820 09:53:11.400328 11893 net.cpp:86] relu6 <- fc6_new
+I0820 09:53:11.400334 11893 net.cpp:100] relu6 -> fc6_new (in-place)
+I0820 09:53:11.400341 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:11.400344 11893 net.cpp:153] relu6 needs backward computation.
+I0820 09:53:11.400349 11893 net.cpp:76] Creating Layer drop6
+I0820 09:53:11.400353 11893 net.cpp:86] drop6 <- fc6_new
+I0820 09:53:11.400357 11893 net.cpp:100] drop6 -> fc6_new (in-place)
+I0820 09:53:11.400362 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:11.400365 11893 net.cpp:153] drop6 needs backward computation.
+I0820 09:53:11.400372 11893 net.cpp:76] Creating Layer fc7_new
+I0820 09:53:11.400375 11893 net.cpp:86] fc7_new <- fc6_new
+I0820 09:53:11.400379 11893 net.cpp:112] fc7_new -> fc7_new
+I0820 09:53:12.002974 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:12.002996 11893 net.cpp:153] fc7_new needs backward computation.
+I0820 09:53:12.003005 11893 net.cpp:76] Creating Layer relu7
+I0820 09:53:12.003010 11893 net.cpp:86] relu7 <- fc7_new
+I0820 09:53:12.003016 11893 net.cpp:100] relu7 -> fc7_new (in-place)
+I0820 09:53:12.003022 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:12.003026 11893 net.cpp:153] relu7 needs backward computation.
+I0820 09:53:12.003032 11893 net.cpp:76] Creating Layer drop7
+I0820 09:53:12.003036 11893 net.cpp:86] drop7 <- fc7_new
+I0820 09:53:12.003041 11893 net.cpp:100] drop7 -> fc7_new (in-place)
+I0820 09:53:12.003044 11893 net.cpp:127] Top shape: 5 4096 1 1 (20480)
+I0820 09:53:12.003048 11893 net.cpp:153] drop7 needs backward computation.
+I0820 09:53:12.003054 11893 net.cpp:76] Creating Layer fc8_clamp
+I0820 09:53:12.003058 11893 net.cpp:86] fc8_clamp <- fc7_new
+I0820 09:53:12.003062 11893 net.cpp:112] fc8_clamp -> fc8_aero
+I0820 09:53:12.003357 11893 net.cpp:127] Top shape: 5 2 1 1 (10)
+I0820 09:53:12.003365 11893 net.cpp:153] fc8_clamp needs backward computation.
+I0820 09:53:12.003370 11893 net.cpp:76] Creating Layer prob
+I0820 09:53:12.003373 11893 net.cpp:86] prob <- fc8_aero
+I0820 09:53:12.003378 11893 net.cpp:112] prob -> prob
+I0820 09:53:12.003386 11893 net.cpp:127] Top shape: 5 2 1 1 (10)
+I0820 09:53:12.003388 11893 net.cpp:153] prob needs backward computation.
+I0820 09:53:12.003393 11893 net.cpp:76] Creating Layer accuracy
+I0820 09:53:12.003397 11893 net.cpp:86] accuracy <- prob
+I0820 09:53:12.003401 11893 net.cpp:86] accuracy <- label
+I0820 09:53:12.003407 11893 net.cpp:112] accuracy -> accuracy
+I0820 09:53:12.003420 11893 net.cpp:127] Top shape: 1 2 1 1 (2)
+I0820 09:53:12.003424 11893 net.cpp:153] accuracy needs backward computation.
+I0820 09:53:12.003427 11893 net.cpp:164] This network produces output accuracy
+I0820 09:53:12.003445 11893 net.cpp:182] Collecting Learning Rate and Weight Decay.
+I0820 09:53:12.003454 11893 net.cpp:175] Network initialization done.
+I0820 09:53:12.003458 11893 net.cpp:176] Memory required for Data 20971528
+I0820 09:53:12.003500 11893 solver.cpp:50] Solver scaffolding done.
+I0820 09:53:12.003507 11893 finetune_net.cpp:27] Loading from ../alexnet/caffe_alexnet_model
+I0820 09:53:12.580193 11893 net.cpp:342] Copying source layer data
+I0820 09:53:12.580219 11893 net.cpp:342] Copying source layer conv1
+I0820 09:53:12.580281 11893 net.cpp:342] Copying source layer relu1
+I0820 09:53:12.580286 11893 net.cpp:342] Copying source layer norm1
+I0820 09:53:12.580291 11893 net.cpp:342] Copying source layer pool1
+I0820 09:53:12.580293 11893 net.cpp:342] Copying source layer conv2
+I0820 09:53:12.580780 11893 net.cpp:342] Copying source layer relu2
+I0820 09:53:12.580788 11893 net.cpp:342] Copying source layer norm2
+I0820 09:53:12.580792 11893 net.cpp:342] Copying source layer pool2
+I0820 09:53:12.580796 11893 net.cpp:342] Copying source layer conv3
+I0820 09:53:12.582129 11893 net.cpp:342] Copying source layer relu3
+I0820 09:53:12.582140 11893 net.cpp:342] Copying source layer conv4
+I0820 09:53:12.583164 11893 net.cpp:342] Copying source layer relu4
+I0820 09:53:12.583175 11893 net.cpp:342] Copying source layer conv5
+I0820 09:53:12.583873 11893 net.cpp:342] Copying source layer relu5
+I0820 09:53:12.583883 11893 net.cpp:342] Copying source layer pool5
+I0820 09:53:12.583886 11893 net.cpp:339] Ignoring source layer fc6
+I0820 09:53:12.583889 11893 net.cpp:342] Copying source layer relu6
+I0820 09:53:12.583894 11893 net.cpp:342] Copying source layer drop6
+I0820 09:53:12.583896 11893 net.cpp:339] Ignoring source layer fc7
+I0820 09:53:12.583899 11893 net.cpp:342] Copying source layer relu7
+I0820 09:53:12.583904 11893 net.cpp:342] Copying source layer drop7
+I0820 09:53:12.583906 11893 net.cpp:339] Ignoring source layer fc8
+I0820 09:53:12.583910 11893 net.cpp:342] Copying source layer loss
+I0820 09:53:12.595856 11893 solver.cpp:62] Solving scrape_zonesFineNet
+I0820 09:53:12.595877 11893 solver.cpp:134] Iteration 0, Testing net
+I0820 09:53:12.688837 11893 solver.cpp:170] Test score #0: 0.75
+I0820 09:53:12.688890 11893 solver.cpp:170] Test score #1: 0.731204
 bottom_diff after bayesian stuff:
-bottom_diff[0*2+0]: 0.0409067,  bottom_diff[0*2+1]: -0.0409067,  
-bottom_diff[1*2+0]: 0.00677755,  bottom_diff[1*2+1]: -0.00677756,  
-bottom_diff[2*2+0]: 0.0233924,  bottom_diff[2*2+1]: -0.0233924,  
-bottom_diff[3*2+0]: 0.15712,  bottom_diff[3*2+1]: -0.15712,  
-bottom_diff[4*2+0]: 0.182139,  bottom_diff[4*2+1]: -0.182139,  
-bottom_diff[5*2+0]: 0.0066249,  bottom_diff[5*2+1]: -0.00662492,  
-bottom_diff[6*2+0]: 0.00310939,  bottom_diff[6*2+1]: -0.00310939,  
-bottom_diff[7*2+0]: 0.248149,  bottom_diff[7*2+1]: -0.248149,  
-bottom_diff[8*2+0]: 0.0392964,  bottom_diff[8*2+1]: -0.0392964,  
-bottom_diff[9*2+0]: -0.316813,  bottom_diff[9*2+1]: 0.316813,  
-bottom_diff[10*2+0]: 0.201887,  bottom_diff[10*2+1]: -0.201887,  
-bottom_diff[11*2+0]: 0.00783592,  bottom_diff[11*2+1]: -0.00783592,  
-bottom_diff[12*2+0]: 0.282014,  bottom_diff[12*2+1]: -0.282014,  
-bottom_diff[13*2+0]: -1.05721,  bottom_diff[13*2+1]: 1.05721,  
-bottom_diff[14*2+0]: -0.974597,  bottom_diff[14*2+1]: 0.974597,  
-bottom_diff[15*2+0]: 0.00540222,  bottom_diff[15*2+1]: -0.00540222,  
-bottom_diff[16*2+0]: -1.10816,  bottom_diff[16*2+1]: 1.10816,  
-bottom_diff[17*2+0]: 0.142595,  bottom_diff[17*2+1]: -0.142595,  
-bottom_diff[18*2+0]: 0.0289661,  bottom_diff[18*2+1]: -0.0289661,  
-bottom_diff[19*2+0]: 0.00150887,  bottom_diff[19*2+1]: -0.00150888,  
-bottom_diff[20*2+0]: 0.176647,  bottom_diff[20*2+1]: -0.176647,  
-bottom_diff[21*2+0]: 0.0102099,  bottom_diff[21*2+1]: -0.0102099,  
-bottom_diff[22*2+0]: 0.0849473,  bottom_diff[22*2+1]: -0.0849473,  
-bottom_diff[23*2+0]: 0.00276276,  bottom_diff[23*2+1]: -0.00276277,  
-bottom_diff[24*2+0]: 0.139179,  bottom_diff[24*2+1]: -0.139179,  
-bottom_diff[25*2+0]: 0.0043017,  bottom_diff[25*2+1]: -0.00430171,  
-bottom_diff[26*2+0]: 0.00404682,  bottom_diff[26*2+1]: -0.00404681,  
-bottom_diff[27*2+0]: 0.112213,  bottom_diff[27*2+1]: -0.112213,  
-bottom_diff[28*2+0]: 0.170885,  bottom_diff[28*2+1]: -0.170885,  
-bottom_diff[29*2+0]: 0.124543,  bottom_diff[29*2+1]: -0.124543,  
-bottom_diff[30*2+0]: 0.0739037,  bottom_diff[30*2+1]: -0.0739036,  
-bottom_diff[31*2+0]: 0.0104496,  bottom_diff[31*2+1]: -0.0104496,  
-bottom_diff[32*2+0]: 0.0780231,  bottom_diff[32*2+1]: -0.0780231,  
-bottom_diff[33*2+0]: 9.29056e-05,  bottom_diff[33*2+1]: -9.29313e-05,  
-bottom_diff[34*2+0]: -0.487132,  bottom_diff[34*2+1]: 0.487132,  
-bottom_diff[35*2+0]: 0.0829147,  bottom_diff[35*2+1]: -0.0829147,  
-bottom_diff[36*2+0]: 0.00935955,  bottom_diff[36*2+1]: -0.00935955,  
-bottom_diff[37*2+0]: 0.0166394,  bottom_diff[37*2+1]: -0.0166394,  
-bottom_diff[38*2+0]: 0.127673,  bottom_diff[38*2+1]: -0.127673,  
-bottom_diff[39*2+0]: 0.0113162,  bottom_diff[39*2+1]: -0.0113161,  
-bottom_diff[40*2+0]: 0.0235566,  bottom_diff[40*2+1]: -0.0235567,  
-bottom_diff[41*2+0]: 0.114868,  bottom_diff[41*2+1]: -0.114868,  
-bottom_diff[42*2+0]: 0.149603,  bottom_diff[42*2+1]: -0.149603,  
-bottom_diff[43*2+0]: -1.11199,  bottom_diff[43*2+1]: 1.11199,  
-bottom_diff[44*2+0]: -0.846451,  bottom_diff[44*2+1]: 0.846451,  
-bottom_diff[45*2+0]: 0.095092,  bottom_diff[45*2+1]: -0.095092,  
-bottom_diff[46*2+0]: 0.00167621,  bottom_diff[46*2+1]: -0.0016762,  
-bottom_diff[47*2+0]: 0.0235156,  bottom_diff[47*2+1]: -0.0235156,  
-bottom_diff[48*2+0]: 0.00855316,  bottom_diff[48*2+1]: -0.00855316,  
-bottom_diff[49*2+0]: 0.184772,  bottom_diff[49*2+1]: -0.184772,  
+bottom_diff[0*2+0]: 0.0615943,  bottom_diff[0*2+1]: -0.0615943,  
+bottom_diff[1*2+0]: 0.133512,  bottom_diff[1*2+1]: -0.133512,  
+bottom_diff[2*2+0]: 0.184933,  bottom_diff[2*2+1]: -0.184933,  
+bottom_diff[3*2+0]: 0.0106509,  bottom_diff[3*2+1]: -0.0106509,  
+bottom_diff[4*2+0]: 0.0762035,  bottom_diff[4*2+1]: -0.0762035,  
+bottom_diff[5*2+0]: 6.86636e-44,  bottom_diff[5*2+1]: 0,  
+bottom_diff[6*2+0]: 0,  bottom_diff[6*2+1]: 0,  
+bottom_diff[7*2+0]: 0,  bottom_diff[7*2+1]: 0,  
+bottom_diff[8*2+0]: 4.59177e-41,  bottom_diff[8*2+1]: 0,  
+bottom_diff[9*2+0]: 0,  bottom_diff[9*2+1]: 0,  
+bottom_diff[10*2+0]: 0,  bottom_diff[10*2+1]: 0,  
+bottom_diff[11*2+0]: 4.62428e-44,  bottom_diff[11*2+1]: 0,  
+bottom_diff[12*2+0]: 1.18825e-38,  bottom_diff[12*2+1]: 0,  
+bottom_diff[13*2+0]: 1.4013e-45,  bottom_diff[13*2+1]: 1.4013e-45,  
+bottom_diff[14*2+0]: 2.8859e-35,  bottom_diff[14*2+1]: 0,  
+bottom_diff[15*2+0]: 4.62428e-44,  bottom_diff[15*2+1]: 0,  
+bottom_diff[16*2+0]: 1.18769e-38,  bottom_diff[16*2+1]: 0,  
+bottom_diff[17*2+0]: 2.8026e-45,  bottom_diff[17*2+1]: 1.4013e-45,  
+bottom_diff[18*2+0]: 2.88586e-35,  bottom_diff[18*2+1]: 0,  
+bottom_diff[19*2+0]: 4.62428e-44,  bottom_diff[19*2+1]: 0,  
+bottom_diff[20*2+0]: 2.88574e-35,  bottom_diff[20*2+1]: 0,  
+bottom_diff[21*2+0]: -5.79297e-36,  bottom_diff[21*2+1]: 4.56823e-41,  
+bottom_diff[22*2+0]: 0,  bottom_diff[22*2+1]: 0,  
+bottom_diff[23*2+0]: 4.62428e-44,  bottom_diff[23*2+1]: 0,  
+bottom_diff[24*2+0]: 1.96182e-44,  bottom_diff[24*2+1]: 4.56823e-41,  
+bottom_diff[25*2+0]: -5.79296e-36,  bottom_diff[25*2+1]: 4.56823e-41,  
+bottom_diff[26*2+0]: 0.01,  bottom_diff[26*2+1]: -nan,  
+bottom_diff[27*2+0]: 4.62428e-44,  bottom_diff[27*2+1]: 0,  
+bottom_diff[28*2+0]: 1.18769e-38,  bottom_diff[28*2+1]: 0,  
+bottom_diff[29*2+0]: 1.4013e-45,  bottom_diff[29*2+1]: 1.4013e-45,  
+bottom_diff[30*2+0]: 2.89546e-35,  bottom_diff[30*2+1]: 0,  
+bottom_diff[31*2+0]: 4.62428e-44,  bottom_diff[31*2+1]: 0,  
+bottom_diff[32*2+0]: 1,  bottom_diff[32*2+1]: 1,  
+bottom_diff[33*2+0]: 1,  bottom_diff[33*2+1]: 1,  
+bottom_diff[34*2+0]: 1,  bottom_diff[34*2+1]: 0,  
+bottom_diff[35*2+0]: 4.62428e-44,  bottom_diff[35*2+1]: 0,  
+bottom_diff[36*2+0]: 1.18825e-38,  bottom_diff[36*2+1]: 0,  
+bottom_diff[37*2+0]: 1.4013e-45,  bottom_diff[37*2+1]: 1.4013e-45,  
+bottom_diff[38*2+0]: 2.89551e-35,  bottom_diff[38*2+1]: 0,  
+bottom_diff[39*2+0]: 3.82554e-43,  bottom_diff[39*2+1]: 0,  
+bottom_diff[40*2+0]: 5.60519e-45,  bottom_diff[40*2+1]: 0,  
+bottom_diff[41*2+0]: 0,  bottom_diff[41*2+1]: 5.60519e-45,  
+bottom_diff[42*2+0]: 0,  bottom_diff[42*2+1]: 0,  
+bottom_diff[43*2+0]: 0,  bottom_diff[43*2+1]: 0,  
+bottom_diff[44*2+0]: 0,  bottom_diff[44*2+1]: 0,  
+bottom_diff[45*2+0]: 0,  bottom_diff[45*2+1]: 0,  
+bottom_diff[46*2+0]: 0,  bottom_diff[46*2+1]: 0,  
+bottom_diff[47*2+0]: 0,  bottom_diff[47*2+1]: 0,  
+bottom_diff[48*2+0]: 5.60519e-45,  bottom_diff[48*2+1]: 0,  
+bottom_diff[49*2+0]: 1.12104e-44,  bottom_diff[49*2+1]: 1.12104e-44,  
 
 net_params->cpu_diff just after ForwardBackward: 
 net_params[0]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
-net_params[1]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     7.19048e-41,     0,     
+net_params[1]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     7.85414e-41,     0,     
 net_params[2]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[3]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[4]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
@@ -354,13 +354,13 @@ net_params[6]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,  
 net_params[7]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[8]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[9]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
-net_params[10]->cpu_diff(): -0.0829362,     -0.0513281,     -1.34993e-06,     -1.34993e-06,     0,     0,     -0.0829362,     -0.0107117,     -4.14864e-06,     0,     0,     -1.47669e-05,     -0.024396,     -0.000333378,     -9.30161e-05,     0,     -1.11657e-05,     -3.59534e-05,     -4.64856e-06,     -4.64856e-06,     -4.51987e-06,     0,     -0.0128993,     -0.0129273,     -4.64856e-06,     -4.64856e-06,     0,     0,     -0.0128913,     -0.0128913,     0,     0,     -0.00101971,     -0.00101971,     0,     -5.35549e-07,     -0.0111416,     -7.72453e-06,     -1.9594e-06,     -1.25533e-06,     0,     0,     -0.00365218,     -6.46771e-06,     -6.4737e-06,     -6.4737e-06,     0,     0,     -0.0214775,     0,     0,     -0.00712287,     -0.000244708,     0,     -0.0570449,     -0.0482737,     -0.0488352,     -0.0248239,     -0.000244708,     -0.000598644,     -0.0559948,     -0.0482737,     -0.0488352,     -0.0079606,     0,     -0.000599828,     -0.000144824,     -0.018365,     -0.018365,     0,     0,     -0.000382055,     -0.0222154,     -0.0161907,     -0.0161907,     -0.0288954,     -0.0288954,     -3.97135e-06,     -0.000363568,     -0.00446772,     -0.00446772,     -1.01344e-05,     -1.01344e-05,     0,     -0.00843397,     -0.000690224,     0,     -0.00599842,     -0.00600316,     -8.17891e-06,     -0.00843397,     0,     0,     -3.4612e-06,     -1.00544e-05,     -0.00691421,     0,     0,     0,     0,     
-net_params[11]->cpu_diff(): -0.00171547,     0.0644354,     -0.0144302,     -0.00280634,     -0.012508,     -0.0319593,     0.00775942,     0.0441094,     0.0191412,     0.00541873,     -0.153813,     -0.0228955,     -0.00587467,     -0.0228309,     -0.00938473,     0.02337,     0.0212859,     0.0556212,     -0.001551,     -0.0101487,     -0.0155768,     0.0391312,     -0.0360076,     -0.00712685,     0.00876763,     0.0277515,     0.0502932,     -0.0421293,     0.0870971,     -0.0539596,     -0.012347,     -0.0177305,     -0.0011968,     -0.0129924,     -0.00759088,     0.011709,     -0.0421489,     0.0481047,     0.0243425,     0.0117612,     0.0544825,     -0.0216214,     0.0478816,     0.091342,     0.0318122,     -0.0091565,     0.0029924,     -0.0302717,     -0.035282,     -0.0488019,     -0.0143281,     0.00184382,     0.0306158,     -0.101962,     -0.0107245,     -0.0222577,     -0.0061614,     0.0263256,     0.0113061,     -0.00037708,     -0.0909544,     0.00092565,     0.0140478,     0.0049159,     -0.0510316,     0.13069,     0.0489883,     -0.00554141,     0.0537571,     0.0440554,     0.035049,     0.0209107,     0.00728157,     0.0067083,     0.0603894,     0.0399289,     0.0446705,     0.0030352,     0.00910479,     0.0118132,     -0.00451547,     0.0761407,     0.0464705,     -0.0149253,     0.0252751,     0.0156366,     0.0174801,     0.0299919,     -0.00564422,     0.0138929,     0.00535318,     -0.0166783,     -0.0199624,     0.00656463,     0.0026249,     0.0104715,     0.031437,     0.137844,     0.0353993,     -0.0905893,     
-net_params[12]->cpu_diff(): 0,     -0.559804,     -0.480219,     -0.179401,     -1.09983,     -0.384019,     -0.619072,     -0.614984,     -0.745708,     -0.314111,     -1.99509,     0.103391,     0.273016,     -1.61987,     0.14783,     -0.059597,     -0.288751,     -0.523987,     0.00426207,     -1.20943,     0.167121,     -0.78485,     -0.52119,     -0.13625,     -0.440922,     -1.32434,     -0.634935,     -1.03841,     -0.393279,     -2.89407,     -0.0750444,     -0.0278423,     -0.277775,     -0.314003,     0.00373528,     -0.951719,     -0.573254,     0.0296452,     -1.9662,     -0.728501,     0.0234921,     -0.247689,     2.26129e-05,     -1.71463,     -0.427232,     -0.337201,     -0.282451,     -0.684435,     -0.483487,     -0.6501,     -0.232098,     -0.651255,     -1.41107,     -1.06984,     -0.745264,     0.106506,     0.108802,     -0.241172,     -1.15214,     0.0101171,     0.0252393,     -0.758671,     -0.786361,     -0.820277,     -0.304518,     -2.11403,     -2.59611,     0.165405,     -0.0397881,     -1.01129,     -0.335004,     -0.988772,     -0.096587,     0.0139022,     -0.431063,     -2.27164,     -1.75096,     0.00940798,     -0.191421,     -0.933626,     -0.310146,     -0.0349343,     -1.23958,     -1.10752,     -0.905511,     -0.352993,     -0.183086,     -0.219288,     -0.789335,     -0.781053,     0.0866062,     -0.555353,     0.0117577,     -0.255436,     -0.0411954,     -0.155323,     -0.806382,     -0.60482,     -0.768788,     -1.09731,     
-net_params[13]->cpu_diff(): -0.176724,     -0.0608122,     -0.0474408,     0.0885314,     0.116199,     0.0246934,     0.0266807,     -0.120674,     -0.0435076,     -0.0860759,     0.145813,     -0.0709077,     -0.0986967,     -0.0732097,     -0.279943,     0.453934,     -0.0144428,     0.00970968,     -0.122199,     -0.216852,     -0.0534082,     -0.0706999,     -0.0814393,     0.123169,     0.152909,     0.210577,     -0.0575934,     -0.112944,     0.0392983,     -0.115198,     0.00632066,     0.0160705,     -0.129131,     0.0343353,     0.256566,     -0.0111313,     0.440512,     0.163791,     -0.038947,     -0.00108408,     -0.0430074,     -0.452832,     0.300732,     -0.345744,     0.119702,     0.0433274,     -0.182925,     -0.154034,     -0.362671,     -0.0194237,     -0.302698,     0.0154071,     0.0720802,     -0.189224,     0.124066,     0.0114559,     0.404056,     -0.367474,     0.620122,     -0.0765377,     -0.146848,     0.0282697,     0.206465,     -0.488579,     -0.117197,     0.028463,     -0.0539789,     -0.0127092,     0.0152913,     0.0430986,     0.0323942,     0.0215579,     -0.202796,     0.152193,     -0.033296,     0.330672,     -4.77689e-05,     -0.0753831,     -0.191457,     -0.266827,     0.0102445,     0.13234,     -0.0672865,     0.305351,     0.0524141,     -0.0115482,     0.210248,     -0.00420677,     0.144004,     -0.106665,     0.00300437,     0.0356347,     0.0203254,     -0.0284263,     0.000242772,     0.375805,     -0.0832096,     0.126387,     -0.0746546,     0.0637983,     
-net_params[14]->cpu_diff(): -34.9271,     -11.6422,     -9.61014,     -23.4774,     -7.51232,     -22.193,     0.199526,     -67.6602,     -36.0152,     -33.8949,     -25.1603,     -34.004,     -11.3298,     -6.76397,     -26.8406,     -14.6639,     -3.20546,     -38.0396,     -29.228,     -49.2611,     -22.9432,     -26.9673,     -9.65507,     -20.3987,     -43.357,     -14.5531,     -38.8697,     -22.5399,     -0.126893,     -106.56,     -9.47443,     -2.08134,     -11.4511,     -19.1818,     -55.6334,     -18.5155,     -49.0051,     -43.2591,     -25.6681,     -8.74575,     -54.7795,     -27.1977,     -61.5036,     -23.6208,     -37.5918,     -31.8807,     -22.5375,     -20.1438,     -22.241,     -15.6359,     -35.5671,     0.689563,     -16.4349,     -16.3954,     -35.4389,     -43.8092,     -38.209,     -19.9951,     -45.6731,     -30.7214,     -10.8987,     -26.8094,     -17.2168,     -34.074,     -11.6417,     -5.3603,     -8.26065,     -1.21766,     -16.0007,     -30.2508,     -22.68,     -7.49852,     -16.8171,     -22.8176,     -43.0931,     -31.0208,     0.660138,     -8.54781,     -10.1923,     -19.2236,     -31.6815,     -48.8226,     -5.47175,     -35.2485,     -29.4133,     -13.6739,     -21.2533,     -5.50557,     -12.1521,     -75.4145,     -1.1829,     -20.3616,     -14.393,     -3.93305,     -24.5507,     -70.7333,     -7.85385,     -24.6232,     -13.8514,     -9.34474,     
-net_params[15]->cpu_diff(): -16.1353,     16.1353,     6.6552e-36,     0,     0.113891,     0,     6.63294e-36,     0,     6.72623e-44,     0,     6.86636e-44,     0,     0,     0,     0,     0,     2.47956e-39,     0,     0,     0,     2.5207e-35,     1.03073e-08,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     6.63639e-36,     0,     4.62428e-44,     0,     1.18769e-38,     0,     2.8026e-45,     1.4013e-45,     6.63629e-36,     0,     4.62428e-44,     0,     6.63311e-36,     0,     3.69408e+06,     4.58435e-41,     0,     0,     4.62428e-44,     0,     1.4013e-44,     4.58435e-41,     3.69405e+06,     4.58435e-41,     0.01,     -nan,     4.62428e-44,     0,     6.63311e-36,     0,     3.69407e+06,     4.58435e-41,     -4.73623e+33,     1.9554e+19,     4.62428e-44,     0,     1.4013e-44,     4.58435e-41,     3.69405e+06,     4.58435e-41,     4.48416e-44,     0,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     6.63762e-36,     0,     9.10844e-44,     0,     4.41718e-38,     0,     4.41719e-38,     0,     6.63669e-36,     0,     6.63672e-36,     0,     1.4013e-45,     1.4013e-45,     1.4013e-45,     3.58732e-43,     3.58732e-43,     3.18224e+29,     4.62428e-44,     0,     8.28823e-36,     0,     8.28854e-36,     0,     
-I0820 05:31:40.300791 30357 solver.cpp:267] Iteration 1, lr = 0.0001
+net_params[10]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
+net_params[11]->cpu_diff(): 0,     -0.00255749,     -0.000603086,     -0.00186193,     0.000519814,     -0.00129082,     0,     -0.00378052,     -0.000796972,     -0.00266901,     0,     0.000146827,     0,     0,     -0.000153154,     -0.000987987,     0,     0,     0,     -0.00160793,     -0.000378224,     0.00127214,     0.000307399,     0.00123658,     -0.000322079,     0.0030296,     -0.000305604,     0,     0,     -0.00020557,     0.0018628,     0.000335297,     0.000995556,     -0.000642033,     0.00368081,     -0.00255127,     -0.00369204,     0,     0.000328747,     0,     0,     -0.00167426,     -0.000253163,     0.000623387,     -0.00127415,     0,     0.00238771,     0,     0.00162791,     -0.000260009,     -0.0023085,     -5.37152e-05,     0.00944959,     0.000901027,     0,     0.00187516,     0,     0.000101686,     0,     0.00216283,     0.000206906,     -0.000119936,     -0.000179501,     0.000861592,     0,     0.000422369,     -0.00186149,     0.000518431,     -0.000501473,     0.000394872,     0,     0,     -0.00247271,     0,     0,     -0.000535632,     -0.000100782,     0.000821528,     -0.00112417,     0.00108249,     0.00277473,     0.000389819,     0.000255806,     2.14262e-05,     -0.00137504,     -0.00182248,     0.000964741,     0.000972817,     0,     0,     0,     -6.39184e-05,     0.00551145,     0.00282572,     0,     -0.000552103,     -0.000300786,     0.00199019,     0,     0.000159195,     
+net_params[12]->cpu_diff(): 0,     -0.0547156,     0,     -0.0393038,     -0.0209454,     -0.0225588,     0,     0,     -0.143488,     -0.0874303,     0,     0,     0,     0,     0,     -0.0868803,     0,     0,     0,     -0.0216476,     0,     -0.0801635,     0,     -0.0429813,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     -0.00919035,     -0.0237566,     -0.0298412,     0,     0,     0,     0,     0,     0,     -0.0352693,     -0.0669858,     0,     0,     0,     0,     0,     0,     0,     -0.0678736,     0,     0,     0,     0,     0,     0,     -0.0536546,     0,     0,     0,     0,     0,     0,     -0.0786952,     0,     0,     0,     0,     0,     -0.0444444,     0,     0,     0,     0,     0,     -0.0737593,     -0.0671469,     -0.039648,     0,     0,     0,     0,     -0.0387041,     -0.077026,     -0.0669552,     0,     0,     0,     -0.012775,     -0.0446243,     -0.0424029,     0,     0,     -0.0205393,     0,     0,     0,     
+net_params[13]->cpu_diff(): -0.0050774,     0,     0.00213812,     0.00441483,     -0.0159441,     -0.000935509,     -0.000450455,     0.0147218,     0,     0,     -0.00220607,     -0.00050472,     -0.0102133,     0.00455831,     0,     0.0027196,     -0.000987266,     -0.00750315,     0.000165619,     0,     0,     -0.00197454,     0,     0.000864501,     -0.00275483,     -0.000317782,     -0.000128671,     -0.00106637,     0.00294538,     -0.00101513,     0,     0,     0.0055296,     -0.000311259,     0,     0.00174253,     -9.52398e-05,     0.00336304,     0.00149752,     -0.00428694,     -0.00920826,     0.00654779,     0,     -0.0010018,     0.00431436,     0,     -0.00763277,     -6.80218e-05,     0.00030251,     0,     0.00284805,     0.00487486,     0.00115029,     0.00185536,     0.00949676,     -0.00271437,     0.00251373,     -0.00908315,     -0.00281116,     -0.000209616,     -0.0150547,     0.000129537,     -0.00114629,     0.00166384,     0.00742874,     0,     0.00254961,     9.32388e-05,     0,     0.000516133,     0,     -0.000741931,     0,     -0.00347149,     -0.00218489,     -0.00621394,     0.000158941,     0.000331205,     0.0030801,     0.00169559,     0,     0.00556688,     0.0061721,     -0.00994358,     -0.00100279,     0.00186886,     0.0101521,     0.00352693,     0.000289191,     -0.00765445,     0.000891979,     -0.0007737,     0,     0.000758411,     -0.00274385,     -0.00812535,     0.0135937,     0.00339395,     -0.00290583,     -0.000265971,     
+net_params[14]->cpu_diff(): 1.01929,     0,     0.285966,     1.33784,     1.1233,     0.271937,     0.103958,     1.06662,     0,     0,     0.471487,     0.453431,     0.738155,     0.919018,     0,     1.24807,     0.703237,     0.849504,     0.0102602,     0,     0,     0.00950437,     0,     0.786038,     0.65197,     0.0105153,     0.00329239,     0.527113,     0.371185,     0.0599934,     0,     0,     1.96236,     0.0546573,     0,     0.283145,     0.303868,     1.05283,     1.08238,     0.157017,     0.771078,     2.02836,     0,     0.896219,     0.463918,     0,     1.74442,     0.0424711,     0.0195877,     0,     2.31268,     0.0432894,     0.311655,     0.19504,     0.825027,     0.214579,     0.268269,     1.92285,     2.18623,     0.900415,     2.38227,     0.337343,     0.275079,     0.411381,     3.33934,     0,     0.3089,     0.288703,     0,     0.162262,     0,     0.260956,     0,     0.531592,     0.379163,     0.686753,     0.0128814,     0.167339,     0.162428,     0.370862,     0,     0.128813,     0.229753,     3.01378,     0.332667,     0.391685,     0.307457,     0.138839,     0.626399,     0.271566,     1.66994,     0.0912761,     0,     0.234773,     0.599449,     0.332157,     0.445875,     0.405083,     1.00558,     0.0179538,     
+net_params[15]->cpu_diff(): 0.466894,     -0.466894,     2.8082e-35,     0,     -2.26551e+19,     0,     1.75515e-37,     0,     6.72623e-44,     0,     6.86636e-44,     0,     1.12104e-44,     0,     1.4013e-44,     0,     0,     0,     1.9441e+31,     1.74404e+28,     9.31915e-39,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     2.8026e-45,     0,     1.20901e+33,     3.12248e-39,     1.05056e-38,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     2.8026e-45,     0,     1.20901e+33,     2.53532e+30,     1.21969e-41,     0,     4.62428e-44,     0,     1.18769e-38,     0,     1.4013e-45,     1.4013e-45,     1.85268e-37,     0,     6.86636e-44,     0,     9.80909e-45,     0,     1.26117e-44,     0,     2.8026e-45,     0,     1.31425e+19,     1.09648e-38,     7.31427e+34,     0,     6.86636e-44,     0,     0,     0,     0,     0,     1.9533e-40,     0,     0,     4.5559e-41,     6.72623e-44,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     0,     0,     1.20901e+33,     3.65933e+12,     7.19161e-39,     4.2039e-45,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     2.8148e-35,     0,     6.86636e-44,     0,     
+I0820 09:53:12.844744 11893 solver.cpp:267] Iteration 1, lr = 0.0001
 net_params[0]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 net_params[1]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 net_params[2]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
@@ -371,12 +371,12 @@ net_params[6]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 net_params[7]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 net_params[8]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 net_params[9]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-net_params[10]->cpu_diff(): -0.0829362, -0.0513281, -1.34993e-06, -1.34993e-06, 0, 0, -0.0829362, -0.0107117, -4.14864e-06, 0, 0, -1.47669e-05, -0.024396, -0.000333378, -9.30161e-05, 0, -1.11657e-05, -3.59534e-05, -4.64856e-06, -4.64856e-06, -4.51987e-06, 0, -0.0128993, -0.0129273, -4.64856e-06, -4.64856e-06, 0, 0, -0.0128913, -0.0128913, 0, 0, -0.00101971, -0.00101971, 0, -5.35549e-07, -0.0111416, -7.72453e-06, -1.9594e-06, -1.25533e-06, 0, 0, -0.00365218, -6.46771e-06, -6.4737e-06, -6.4737e-06, 0, 0, -0.0214775, 0, 
-net_params[11]->cpu_diff(): -0.00171547, 0.0644354, -0.0144302, -0.00280634, -0.012508, -0.0319593, 0.00775942, 0.0441094, 0.0191412, 0.00541873, -0.153813, -0.0228955, -0.00587467, -0.0228309, -0.00938473, 0.02337, 0.0212859, 0.0556212, -0.001551, -0.0101487, -0.0155768, 0.0391312, -0.0360076, -0.00712685, 0.00876763, 0.0277515, 0.0502932, -0.0421293, 0.0870971, -0.0539596, -0.012347, -0.0177305, -0.0011968, -0.0129924, -0.00759088, 0.011709, -0.0421489, 0.0481047, 0.0243425, 0.0117612, 0.0544825, -0.0216214, 0.0478816, 0.091342, 0.0318122, -0.0091565, 0.0029924, -0.0302717, -0.035282, -0.0488019, 
-net_params[12]->cpu_diff(): 0, -0.559804, -0.480219, -0.179401, -1.09983, -0.384019, -0.619072, -0.614984, -0.745708, -0.314111, -1.99509, 0.103391, 0.273016, -1.61987, 0.14783, -0.059597, -0.288751, -0.523987, 0.00426207, -1.20943, 0.167121, -0.78485, -0.52119, -0.13625, -0.440922, -1.32434, -0.634935, -1.03841, -0.393279, -2.89407, -0.0750444, -0.0278423, -0.277775, -0.314003, 0.00373528, -0.951719, -0.573254, 0.0296452, -1.9662, -0.728501, 0.0234921, -0.247689, 2.26129e-05, -1.71463, -0.427232, -0.337201, -0.282451, -0.684435, -0.483487, -0.6501, 
-net_params[13]->cpu_diff(): -0.176724, -0.0608122, -0.0474408, 0.0885314, 0.116199, 0.0246934, 0.0266807, -0.120674, -0.0435076, -0.0860759, 0.145813, -0.0709077, -0.0986967, -0.0732097, -0.279943, 0.453934, -0.0144428, 0.00970968, -0.122199, -0.216852, -0.0534082, -0.0706999, -0.0814393, 0.123169, 0.152909, 0.210577, -0.0575934, -0.112944, 0.0392983, -0.115198, 0.00632066, 0.0160705, -0.129131, 0.0343353, 0.256566, -0.0111313, 0.440512, 0.163791, -0.038947, -0.00108408, -0.0430074, -0.452832, 0.300732, -0.345744, 0.119702, 0.0433274, -0.182925, -0.154034, -0.362671, -0.0194237, 
-net_params[14]->cpu_diff(): -34.9271, -11.6422, -9.61014, -23.4774, -7.51232, -22.193, 0.199526, -67.6602, -36.0152, -33.8949, -25.1603, -34.004, -11.3298, -6.76397, -26.8406, -14.6639, -3.20546, -38.0396, -29.228, -49.2611, -22.9432, -26.9673, -9.65507, -20.3987, -43.357, -14.5531, -38.8697, -22.5399, -0.126893, -106.56, -9.47443, -2.08134, -11.4511, -19.1818, -55.6334, -18.5155, -49.0051, -43.2591, -25.6681, -8.74575, -54.7795, -27.1977, -61.5036, -23.6208, -37.5918, -31.8807, -22.5375, -20.1438, -22.241, -15.6359, 
-net_params[15]->cpu_diff(): -16.1353, 16.1353, 6.6552e-36, 0, 0.113891, 0, 6.63294e-36, 0, 6.72623e-44, 0, 6.86636e-44, 0, 0, 0, 0, 0, 2.47956e-39, 0, 0, 0, 2.5207e-35, 1.03073e-08, 4.62428e-44, 0, 1.18825e-38, 0, 1.4013e-45, 1.4013e-45, 6.63639e-36, 0, 4.62428e-44, 0, 1.18769e-38, 0, 2.8026e-45, 1.4013e-45, 6.63629e-36, 0, 4.62428e-44, 0, 6.63311e-36, 0, 3.69408e+06, 4.58435e-41, 0, 0, 4.62428e-44, 0, 1.4013e-44, 4.58435e-41, 
+net_params[10]->cpu_diff(): 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+net_params[11]->cpu_diff(): 0, -0.00255749, -0.000603086, -0.00186193, 0.000519814, -0.00129082, 0, -0.00378052, -0.000796972, -0.00266901, 0, 0.000146827, 0, 0, -0.000153154, -0.000987987, 0, 0, 0, -0.00160793, -0.000378224, 0.00127214, 0.000307399, 0.00123658, -0.000322079, 0.0030296, -0.000305604, 0, 0, -0.00020557, 0.0018628, 0.000335297, 0.000995556, -0.000642033, 0.00368081, -0.00255127, -0.00369204, 0, 0.000328747, 0, 0, -0.00167426, -0.000253163, 0.000623387, -0.00127415, 0, 0.00238771, 0, 0.00162791, -0.000260009, 
+net_params[12]->cpu_diff(): 0, -0.0547156, 0, -0.0393038, -0.0209454, -0.0225588, 0, 0, -0.143488, -0.0874303, 0, 0, 0, 0, 0, -0.0868803, 0, 0, 0, -0.0216476, 0, -0.0801635, 0, -0.0429813, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.00919035, -0.0237566, -0.0298412, 0, 0, 0, 0, 0, 0, -0.0352693, -0.0669858, 0, 0, 0, 0, 0, 
+net_params[13]->cpu_diff(): -0.0050774, 0, 0.00213812, 0.00441483, -0.0159441, -0.000935509, -0.000450455, 0.0147218, 0, 0, -0.00220607, -0.00050472, -0.0102133, 0.00455831, 0, 0.0027196, -0.000987266, -0.00750315, 0.000165619, 0, 0, -0.00197454, 0, 0.000864501, -0.00275483, -0.000317782, -0.000128671, -0.00106637, 0.00294538, -0.00101513, 0, 0, 0.0055296, -0.000311259, 0, 0.00174253, -9.52398e-05, 0.00336304, 0.00149752, -0.00428694, -0.00920826, 0.00654779, 0, -0.0010018, 0.00431436, 0, -0.00763277, -6.80218e-05, 0.00030251, 0, 
+net_params[14]->cpu_diff(): 1.01929, 0, 0.285966, 1.33784, 1.1233, 0.271937, 0.103958, 1.06662, 0, 0, 0.471487, 0.453431, 0.738155, 0.919018, 0, 1.24807, 0.703237, 0.849504, 0.0102602, 0, 0, 0.00950437, 0, 0.786038, 0.65197, 0.0105153, 0.00329239, 0.527113, 0.371185, 0.0599934, 0, 0, 1.96236, 0.0546573, 0, 0.283145, 0.303868, 1.05283, 1.08238, 0.157017, 0.771078, 2.02836, 0, 0.896219, 0.463918, 0, 1.74442, 0.0424711, 0.0195877, 0, 
+net_params[15]->cpu_diff(): 0.466894, -0.466894, 2.8082e-35, 0, -2.26551e+19, 0, 1.75515e-37, 0, 6.72623e-44, 0, 6.86636e-44, 0, 1.12104e-44, 0, 1.4013e-44, 0, 0, 0, 1.9441e+31, 1.74404e+28, 9.31915e-39, 0, 6.86636e-44, 0, 7.00649e-45, 0, 9.80909e-45, 0, 2.8026e-45, 0, 1.20901e+33, 3.12248e-39, 1.05056e-38, 0, 6.86636e-44, 0, 7.00649e-45, 0, 9.80909e-45, 0, 2.8026e-45, 0, 1.20901e+33, 2.53532e+30, 1.21969e-41, 0, 4.62428e-44, 0, 1.18769e-38, 0, 
 net_params->cpu_diff just after ComputeUpdateValue(): 
 net_params[0]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[1]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     1.45875e-42,     0,     
@@ -388,12 +388,12 @@ net_params[6]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,  
 net_params[7]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[8]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[9]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
-net_params[10]->cpu_diff(): -8.29391e-06,     -5.13237e-06,     1.13903e-11,     -1.57552e-10,     2.2702e-13,     9.67395e-11,     -8.29314e-06,     -1.07142e-06,     -2.73564e-10,     -2.57089e-10,     -5.00724e-10,     -1.09388e-09,     -2.43952e-06,     -3.32053e-08,     -9.50291e-09,     -4.18337e-10,     -1.10475e-09,     -3.63513e-09,     -1.68076e-10,     -3.70816e-10,     -4.28296e-10,     -1.26106e-11,     -1.28929e-06,     -1.29226e-06,     -1.15006e-09,     -4.47724e-10,     3.05928e-11,     -4.62733e-10,     -1.28905e-06,     -1.28921e-06,     -2.61803e-10,     3.94429e-10,     -1.01812e-07,     -1.01736e-07,     3.00051e-11,     9.13562e-11,     -1.11402e-06,     -5.46232e-10,     -1.18404e-10,     -3.12759e-10,     -4.05042e-10,     -2.00879e-10,     -3.65368e-07,     -7.18124e-10,     -7.78699e-10,     -3.09666e-10,     5.53686e-10,     4.42544e-10,     -2.14743e-06,     4.14154e-10,     -3.93666e-10,     -7.12002e-07,     -2.46233e-08,     -5.10111e-10,     -5.70459e-06,     -4.82754e-06,     -4.8833e-06,     -2.48248e-06,     -2.49732e-08,     -5.97341e-08,     -5.59952e-06,     -4.82693e-06,     -4.88335e-06,     -7.96404e-07,     3.01728e-10,     -6.01372e-08,     -1.40815e-08,     -1.83635e-06,     -1.83692e-06,     6.05448e-10,     -9.63754e-11,     -3.8051e-08,     -2.22173e-06,     -1.61932e-06,     -1.61908e-06,     -2.88953e-06,     -2.88939e-06,     -2.20301e-10,     -3.6358e-08,     -4.46784e-07,     -4.46711e-07,     -1.15172e-09,     -1.17211e-09,     -1.94722e-10,     -8.43375e-07,     -6.8894e-08,     4.04143e-10,     -6.0034e-07,     -5.99805e-07,     -9.33944e-10,     -8.43472e-07,     -3.86915e-12,     -1.26716e-10,     -3.58125e-10,     -7.14981e-10,     -6.91661e-07,     -5.0736e-10,     3.5658e-10,     -2.63759e-10,     -4.80144e-10,     
-net_params[11]->cpu_diff(): -3.43094e-07,     1.28871e-05,     -2.88605e-06,     -5.61267e-07,     -2.50159e-06,     -6.39185e-06,     1.55188e-06,     8.82187e-06,     3.82825e-06,     1.08375e-06,     -3.07627e-05,     -4.5791e-06,     -1.17493e-06,     -4.56618e-06,     -1.87695e-06,     4.674e-06,     4.25719e-06,     1.11242e-05,     -3.10201e-07,     -2.02973e-06,     -3.11536e-06,     7.82625e-06,     -7.20152e-06,     -1.42537e-06,     1.75353e-06,     5.5503e-06,     1.00586e-05,     -8.42587e-06,     1.74194e-05,     -1.07919e-05,     -2.4694e-06,     -3.5461e-06,     -2.39359e-07,     -2.59848e-06,     -1.51818e-06,     2.3418e-06,     -8.42978e-06,     9.62094e-06,     4.8685e-06,     2.35223e-06,     1.08965e-05,     -4.32427e-06,     9.57633e-06,     1.82684e-05,     6.36243e-06,     -1.8313e-06,     5.9848e-07,     -6.05435e-06,     -7.05641e-06,     -9.76037e-06,     -2.86561e-06,     3.68764e-07,     6.12315e-06,     -2.03924e-05,     -2.14491e-06,     -4.45154e-06,     -1.23228e-06,     5.26512e-06,     2.26122e-06,     -7.54159e-08,     -1.81909e-05,     1.8513e-07,     2.80955e-06,     9.83179e-07,     -1.02063e-05,     2.6138e-05,     9.79765e-06,     -1.10828e-06,     1.07514e-05,     8.81108e-06,     7.00979e-06,     4.18213e-06,     1.45631e-06,     1.34166e-06,     1.20779e-05,     7.98577e-06,     8.9341e-06,     6.0704e-07,     1.82096e-06,     2.36265e-06,     -9.03094e-07,     1.52281e-05,     9.29409e-06,     -2.98507e-06,     5.05502e-06,     3.12733e-06,     3.49602e-06,     5.99839e-06,     -1.12884e-06,     2.77859e-06,     1.07064e-06,     -3.33567e-06,     -3.99248e-06,     1.31293e-06,     5.24979e-07,     2.0943e-06,     6.2874e-06,     2.75689e-05,     7.07986e-06,     -1.81179e-05,     
-net_params[12]->cpu_diff(): -2.09872e-10,     -5.59807e-05,     -4.80221e-05,     -1.79403e-05,     -0.000109983,     -3.84022e-05,     -6.19067e-05,     -6.14985e-05,     -7.4571e-05,     -3.14112e-05,     -0.000199509,     1.03394e-05,     2.73019e-05,     -0.000161988,     1.4783e-05,     -5.95978e-06,     -2.88751e-05,     -5.23985e-05,     4.26256e-07,     -0.000120943,     1.67124e-05,     -7.8485e-05,     -5.2119e-05,     -1.36251e-05,     -4.40919e-05,     -0.000132433,     -6.34932e-05,     -0.000103841,     -3.9328e-05,     -0.000289407,     -7.50461e-06,     -2.78429e-06,     -2.77773e-05,     -3.14005e-05,     3.73209e-07,     -9.51718e-05,     -5.73253e-05,     2.96447e-06,     -0.00019662,     -7.28502e-05,     2.34953e-06,     -2.47687e-05,     2.02102e-09,     -0.000171463,     -4.27227e-05,     -3.37196e-05,     -2.82451e-05,     -6.84436e-05,     -4.83483e-05,     -6.50106e-05,     -2.32098e-05,     -6.51254e-05,     -0.000141107,     -0.000106984,     -7.45266e-05,     1.06508e-05,     1.08806e-05,     -2.41173e-05,     -0.000115214,     1.01164e-06,     2.52406e-06,     -7.5867e-05,     -7.86359e-05,     -8.20271e-05,     -3.04523e-05,     -0.000211403,     -0.000259611,     1.65402e-05,     -3.97879e-06,     -0.000101129,     -3.35004e-05,     -9.88772e-05,     -9.65871e-06,     1.39032e-06,     -4.31065e-05,     -0.000227165,     -0.000175096,     9.40729e-07,     -1.91424e-05,     -9.33628e-05,     -3.10146e-05,     -3.49352e-06,     -0.000123958,     -0.000110752,     -9.05508e-05,     -3.52995e-05,     -1.83083e-05,     -2.19287e-05,     -7.89335e-05,     -7.81052e-05,     8.66046e-06,     -5.55352e-05,     1.1755e-06,     -2.55436e-05,     -4.11944e-06,     -1.55326e-05,     -8.06385e-05,     -6.04824e-05,     -7.68788e-05,     -0.000109731,     
-net_params[13]->cpu_diff(): -3.53448e-05,     -1.21624e-05,     -9.48815e-06,     1.77063e-05,     2.32398e-05,     4.93868e-06,     5.33615e-06,     -2.41347e-05,     -8.70152e-06,     -1.72152e-05,     2.91626e-05,     -1.41815e-05,     -1.97393e-05,     -1.46419e-05,     -5.59886e-05,     9.07868e-05,     -2.88856e-06,     1.94194e-06,     -2.44398e-05,     -4.33703e-05,     -1.06816e-05,     -1.414e-05,     -1.62879e-05,     2.46338e-05,     3.05818e-05,     4.21153e-05,     -1.15187e-05,     -2.25887e-05,     7.85965e-06,     -2.30395e-05,     1.26413e-06,     3.2141e-06,     -2.58262e-05,     6.86706e-06,     5.13133e-05,     -2.22627e-06,     8.81025e-05,     3.27582e-05,     -7.7894e-06,     -2.16815e-07,     -8.60147e-06,     -9.05665e-05,     6.01465e-05,     -6.91489e-05,     2.39404e-05,     8.66548e-06,     -3.65851e-05,     -3.08068e-05,     -7.25343e-05,     -3.88474e-06,     -6.05397e-05,     3.08141e-06,     1.4416e-05,     -3.78449e-05,     2.48131e-05,     2.29117e-06,     8.08113e-05,     -7.34947e-05,     0.000124024,     -1.53075e-05,     -2.93697e-05,     5.65394e-06,     4.12931e-05,     -9.77158e-05,     -2.34394e-05,     5.6926e-06,     -1.07958e-05,     -2.54184e-06,     3.05825e-06,     8.61971e-06,     6.47884e-06,     4.31159e-06,     -4.05591e-05,     3.04386e-05,     -6.65921e-06,     6.61345e-05,     -9.55379e-09,     -1.50766e-05,     -3.82914e-05,     -5.33654e-05,     2.04891e-06,     2.6468e-05,     -1.34573e-05,     6.10702e-05,     1.04828e-05,     -2.30965e-06,     4.20495e-05,     -8.41355e-07,     2.88007e-05,     -2.1333e-05,     6.00875e-07,     7.12694e-06,     4.06507e-06,     -5.68527e-06,     4.85544e-08,     7.5161e-05,     -1.66419e-05,     2.52775e-05,     -1.49309e-05,     1.27597e-05,     
-net_params[14]->cpu_diff(): -0.00349271,     -0.00116422,     -0.000961014,     -0.00234774,     -0.000751233,     -0.0022193,     1.99519e-05,     -0.00676602,     -0.00360152,     -0.00338949,     -0.00251603,     -0.0034004,     -0.00113298,     -0.000676396,     -0.00268406,     -0.00146639,     -0.000320546,     -0.00380396,     -0.0029228,     -0.00492611,     -0.00229432,     -0.00269673,     -0.000965506,     -0.00203987,     -0.0043357,     -0.00145531,     -0.00388697,     -0.00225399,     -1.26899e-05,     -0.010656,     -0.000947443,     -0.000208134,     -0.0011451,     -0.00191818,     -0.00556334,     -0.00185155,     -0.00490051,     -0.00432591,     -0.00256681,     -0.000874575,     -0.00547795,     -0.00271977,     -0.00615036,     -0.00236208,     -0.00375918,     -0.00318807,     -0.00225374,     -0.00201438,     -0.0022241,     -0.00156359,     -0.00355671,     6.89559e-05,     -0.00164349,     -0.00163954,     -0.00354389,     -0.00438092,     -0.0038209,     -0.00199951,     -0.00456731,     -0.00307214,     -0.00108987,     -0.00268094,     -0.00172168,     -0.0034074,     -0.00116417,     -0.00053603,     -0.000826064,     -0.000121766,     -0.00160007,     -0.00302508,     -0.002268,     -0.000749852,     -0.00168171,     -0.00228176,     -0.00430931,     -0.00310208,     6.60141e-05,     -0.000854781,     -0.00101923,     -0.00192236,     -0.00316815,     -0.00488226,     -0.000547174,     -0.00352485,     -0.00294133,     -0.00136739,     -0.00212533,     -0.000550556,     -0.00121521,     -0.00754144,     -0.00011829,     -0.00203616,     -0.0014393,     -0.000393305,     -0.00245507,     -0.00707333,     -0.000785385,     -0.00246232,     -0.00138514,     -0.000934474,     
-net_params[15]->cpu_diff(): -0.00322706,     0.00322706,     6.6552e-36,     0,     0.113891,     0,     6.63294e-36,     0,     6.72623e-44,     0,     6.86636e-44,     0,     0,     0,     0,     0,     2.47956e-39,     0,     0,     0,     2.5207e-35,     1.03073e-08,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     6.63639e-36,     0,     4.62428e-44,     0,     1.18769e-38,     0,     2.8026e-45,     1.4013e-45,     6.63629e-36,     0,     4.62428e-44,     0,     6.63311e-36,     0,     3.69408e+06,     4.58435e-41,     0,     0,     4.62428e-44,     0,     1.4013e-44,     4.58435e-41,     3.69405e+06,     4.58435e-41,     0.01,     -nan,     4.62428e-44,     0,     6.63311e-36,     0,     3.69407e+06,     4.58435e-41,     -4.73623e+33,     1.9554e+19,     4.62428e-44,     0,     1.4013e-44,     4.58435e-41,     3.69405e+06,     4.58435e-41,     4.48416e-44,     0,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     6.63762e-36,     0,     9.10844e-44,     0,     4.41718e-38,     0,     4.41719e-38,     0,     6.63669e-36,     0,     6.63672e-36,     0,     1.4013e-45,     1.4013e-45,     1.4013e-45,     3.58732e-43,     3.58732e-43,     3.18224e+29,     4.62428e-44,     0,     8.28823e-36,     0,     8.28854e-36,     0,     
+net_params[10]->cpu_diff(): 5.53946e-10,     3.92189e-11,     -3.09824e-10,     -1.80501e-10,     -2.96644e-10,     -2.25963e-10,     1.0783e-10,     -1.37855e-10,     -2.39143e-11,     -3.53706e-10,     -1.48147e-10,     4.12373e-11,     3.60291e-10,     6.47441e-11,     -3.26025e-10,     3.29606e-10,     -8.03287e-10,     3.5889e-10,     -3.77355e-11,     1.0286e-10,     -8.76536e-12,     -2.59751e-11,     9.46777e-12,     2.33216e-10,     2.34524e-10,     -5.66563e-11,     -3.75344e-10,     -1.67612e-10,     1.48247e-10,     1.42995e-10,     -1.08495e-10,     4.50609e-10,     1.05148e-10,     1.98813e-10,     1.51387e-10,     -1.47647e-10,     -3.1759e-10,     5.74462e-10,     -9.67935e-12,     -1.5141e-10,     1.01511e-10,     -3.8842e-10,     5.43972e-10,     2.55433e-11,     -3.0746e-11,     3.78184e-11,     4.83386e-11,     8.81238e-11,     4.7765e-10,     9.85891e-11,     2.15937e-10,     -9.67223e-12,     -1.64402e-10,     1.23371e-10,     1.86996e-10,     2.50025e-10,     -2.53252e-10,     -5.05091e-10,     5.90157e-11,     -1.11038e-10,     -3.65217e-10,     4.09474e-10,     -1.01243e-10,     1.4731e-10,     -2.27435e-11,     2.05441e-10,     7.19699e-11,     -7.7779e-11,     1.39906e-10,     1.04561e-10,     3.0825e-10,     1.23602e-10,     1.46166e-10,     1.66991e-10,     1.52175e-11,     8.44466e-11,     1.66967e-10,     -8.63543e-11,     -1.50513e-10,     -6.49992e-11,     -5.78766e-11,     1.81062e-10,     2.04796e-10,     2.18889e-10,     -8.99229e-11,     -2.14155e-10,     -2.51021e-10,     -2.41309e-11,     1.51777e-10,     1.65246e-10,     4.12492e-11,     -2.86495e-11,     -9.53723e-11,     2.03387e-10,     -2.70686e-10,     2.34212e-10,     -6.03307e-10,     1.36277e-10,     -1.25792e-10,     -5.63018e-11,     
+net_params[11]->cpu_diff(): 0,     -5.11498e-07,     -1.20617e-07,     -3.72387e-07,     1.03963e-07,     -2.58164e-07,     0,     -7.56105e-07,     -1.59394e-07,     -5.33801e-07,     0,     2.93654e-08,     0,     0,     -3.06309e-08,     -1.97597e-07,     0,     0,     0,     -3.21585e-07,     -7.56449e-08,     2.54428e-07,     6.14797e-08,     2.47317e-07,     -6.44158e-08,     6.05919e-07,     -6.11209e-08,     0,     0,     -4.11139e-08,     3.72561e-07,     6.70593e-08,     1.99111e-07,     -1.28407e-07,     7.36163e-07,     -5.10254e-07,     -7.38407e-07,     0,     6.57494e-08,     0,     0,     -3.34851e-07,     -5.06327e-08,     1.24677e-07,     -2.54829e-07,     0,     4.77542e-07,     0,     3.25582e-07,     -5.20018e-08,     -4.61699e-07,     -1.0743e-08,     1.88992e-06,     1.80205e-07,     0,     3.75032e-07,     0,     2.03371e-08,     0,     4.32566e-07,     4.13811e-08,     -2.39872e-08,     -3.59001e-08,     1.72318e-07,     0,     8.44738e-08,     -3.72299e-07,     1.03686e-07,     -1.00295e-07,     7.89744e-08,     0,     0,     -4.94541e-07,     0,     0,     -1.07126e-07,     -2.01564e-08,     1.64306e-07,     -2.24835e-07,     2.16498e-07,     5.54945e-07,     7.79638e-08,     5.11611e-08,     4.28525e-09,     -2.75007e-07,     -3.64496e-07,     1.92948e-07,     1.94563e-07,     0,     0,     0,     -1.27837e-08,     1.10229e-06,     5.65144e-07,     0,     -1.10421e-07,     -6.01573e-08,     3.98037e-07,     0,     3.1839e-08,     
+net_params[12]->cpu_diff(): 3.6095e-10,     -5.47168e-06,     9.41365e-11,     -3.93062e-06,     -2.09451e-06,     -2.25574e-06,     -3.41797e-10,     -2.54836e-10,     -1.43492e-05,     -8.74296e-06,     -3.86922e-11,     7.13942e-11,     3.57709e-10,     -9.58683e-11,     3.16813e-10,     -8.68788e-06,     2.44582e-11,     -3.0718e-10,     2.12808e-10,     -2.16481e-06,     9.54259e-11,     -8.0165e-06,     -1.2825e-10,     -4.29837e-06,     -3.61717e-12,     1.14066e-10,     1.52693e-10,     7.75691e-11,     1.11729e-10,     -6.73312e-11,     -4.1866e-12,     1.5265e-10,     -3.09099e-10,     1.73771e-10,     -9.19052e-07,     -2.37562e-06,     -2.98408e-06,     -7.32299e-10,     -2.40278e-10,     -1.1299e-10,     2.66486e-11,     -3.15646e-10,     -1.28219e-10,     -3.52693e-06,     -6.6986e-06,     -1.76782e-10,     1.72013e-10,     -2.52649e-10,     1.51522e-10,     -3.39188e-10,     -4.52625e-10,     1.86714e-10,     -6.78703e-06,     5.95263e-11,     -1.95553e-10,     -3.16458e-10,     3.02862e-10,     1.84375e-10,     1.31691e-10,     -5.36598e-06,     -2.29776e-10,     -7.36641e-11,     -1.14433e-10,     -1.92937e-10,     2.39294e-10,     2.2125e-10,     -7.86938e-06,     2.23363e-10,     1.65523e-10,     1.49272e-10,     3.06449e-10,     4.05127e-10,     -4.44392e-06,     3.1667e-10,     4.81726e-10,     -8.11242e-11,     2.8955e-10,     -1.95079e-10,     -7.37625e-06,     -6.71476e-06,     -3.96475e-06,     -8.07559e-11,     2.14177e-12,     -3.0876e-10,     -2.12609e-10,     -3.87034e-06,     -7.70283e-06,     -6.69517e-06,     2.03221e-10,     -1.33213e-10,     1.50127e-11,     -1.27714e-06,     -4.46258e-06,     -4.24022e-06,     -4.44133e-10,     2.97926e-11,     -2.05449e-06,     1.0371e-10,     2.46621e-10,     -2.47426e-10,     
+net_params[13]->cpu_diff(): -1.01548e-06,     0,     4.27624e-07,     8.82966e-07,     -3.18883e-06,     -1.87102e-07,     -9.00909e-08,     2.94437e-06,     0,     0,     -4.41214e-07,     -1.00944e-07,     -2.04267e-06,     9.11661e-07,     0,     5.4392e-07,     -1.97453e-07,     -1.50063e-06,     3.31239e-08,     0,     0,     -3.94909e-07,     0,     1.729e-07,     -5.50966e-07,     -6.35564e-08,     -2.57342e-08,     -2.13273e-07,     5.89077e-07,     -2.03025e-07,     0,     0,     1.10592e-06,     -6.22518e-08,     0,     3.48507e-07,     -1.9048e-08,     6.72609e-07,     2.99504e-07,     -8.57387e-07,     -1.84165e-06,     1.30956e-06,     0,     -2.00359e-07,     8.62872e-07,     0,     -1.52655e-06,     -1.36044e-08,     6.05021e-08,     0,     5.69611e-07,     9.74973e-07,     2.30057e-07,     3.71072e-07,     1.89935e-06,     -5.42874e-07,     5.02746e-07,     -1.81663e-06,     -5.62233e-07,     -4.19233e-08,     -3.01094e-06,     2.59075e-08,     -2.29258e-07,     3.32767e-07,     1.48575e-06,     0,     5.09922e-07,     1.86478e-08,     0,     1.03227e-07,     0,     -1.48386e-07,     0,     -6.94297e-07,     -4.36978e-07,     -1.24279e-06,     3.17882e-08,     6.62409e-08,     6.1602e-07,     3.39118e-07,     0,     1.11338e-06,     1.23442e-06,     -1.98872e-06,     -2.00558e-07,     3.73772e-07,     2.03043e-06,     7.05387e-07,     5.78382e-08,     -1.53089e-06,     1.78396e-07,     -1.5474e-07,     0,     1.51682e-07,     -5.4877e-07,     -1.62507e-06,     2.71874e-06,     6.78789e-07,     -5.81167e-07,     -5.31941e-08,     
+net_params[14]->cpu_diff(): 0.000101928,     1.37176e-10,     2.85971e-05,     0.000133784,     0.000112329,     2.71936e-05,     1.03948e-05,     0.000106663,     9.20522e-11,     1.15196e-10,     4.71474e-05,     4.5343e-05,     7.38152e-05,     9.19024e-05,     -5.5368e-10,     0.000124807,     7.03232e-05,     8.49502e-05,     1.02661e-06,     -4.22988e-10,     -5.81111e-10,     9.49978e-07,     6.49952e-10,     7.86035e-05,     6.51957e-05,     1.05137e-06,     3.29279e-07,     5.2711e-05,     3.71187e-05,     5.9994e-06,     3.24099e-10,     5.05075e-10,     0.000196235,     5.46559e-06,     -5.36077e-10,     2.83144e-05,     3.03866e-05,     0.000105283,     0.000108238,     1.57009e-05,     7.7107e-05,     0.000202837,     -5.96096e-10,     8.96219e-05,     4.63918e-05,     -8.76705e-11,     0.000174442,     4.24673e-06,     1.95877e-06,     1.70053e-10,     0.000231268,     4.3288e-06,     3.11653e-05,     1.95042e-05,     8.2503e-05,     2.14575e-05,     2.68276e-05,     0.000192285,     0.000218623,     9.00415e-05,     0.000238226,     3.37345e-05,     2.75075e-05,     4.11379e-05,     0.000333934,     5.24936e-10,     3.08906e-05,     2.88702e-05,     5.16631e-10,     1.6226e-05,     5.5095e-10,     2.60962e-05,     -3.93954e-10,     5.3159e-05,     3.79163e-05,     6.86748e-05,     1.28917e-06,     1.67337e-05,     1.62429e-05,     3.70864e-05,     -2.02934e-10,     1.28812e-05,     2.2976e-05,     0.000301378,     3.32663e-05,     3.91691e-05,     3.07468e-05,     1.38842e-05,     6.26406e-05,     2.71561e-05,     0.000166994,     9.12739e-06,     9.89033e-11,     2.34776e-05,     5.99443e-05,     3.32164e-05,     4.45884e-05,     4.05085e-05,     0.000100558,     1.79549e-06,     
+net_params[15]->cpu_diff(): 9.33789e-05,     -9.33789e-05,     2.8082e-35,     0,     -2.26551e+19,     0,     1.75515e-37,     0,     6.72623e-44,     0,     6.86636e-44,     0,     1.12104e-44,     0,     1.4013e-44,     0,     0,     0,     1.9441e+31,     1.74404e+28,     9.31915e-39,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     2.8026e-45,     0,     1.20901e+33,     3.12248e-39,     1.05056e-38,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     2.8026e-45,     0,     1.20901e+33,     2.53532e+30,     1.21969e-41,     0,     4.62428e-44,     0,     1.18769e-38,     0,     1.4013e-45,     1.4013e-45,     1.85268e-37,     0,     6.86636e-44,     0,     9.80909e-45,     0,     1.26117e-44,     0,     2.8026e-45,     0,     1.31425e+19,     1.09648e-38,     7.31427e+34,     0,     6.86636e-44,     0,     0,     0,     0,     0,     1.9533e-40,     0,     0,     4.5559e-41,     6.72623e-44,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     0,     0,     1.20901e+33,     3.65933e+12,     7.19161e-39,     4.2039e-45,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     2.8148e-35,     0,     6.86636e-44,     0,     
 perform computation on GPU
 current params: 
 -0.0283153,	-0.00676263,	0.0169465,	0.0279619,	0.0252091,	0.00700436,	-0.0154874,	-0.0178255,	-0.0189594,	-0.0102252,	0.00616484,	-0.0329505,	-0.0128041,	0.0136566,	0.0270956,	0.0309874,	0.01245,	-0.01557,	-0.0241192,	-0.0206015,	-0.000366761,	0.0251943,	-0.0383225,	-0.0163374,	0.0171794,	0.0243261,	0.0327872,	0.00734081,	-0.024797,	-0.0262898,	-0.0237888,	0.0019377,	0.0310343,	-0.0346768,	-0.0161329,	0.0193577,	0.0340412,	0.0396827,	-0.00174357,	-0.0334546,	-0.0404648,	-0.0295096,	0.00346535,	0.0377399,	-0.0299847,	-0.00743553,	0.0200367,	0.0398455,	0.0328733,	-0.00549637,	-0.0443722,	-0.0434321,	-0.0242313,	0.0141281,	0.0361911,	-0.0257927,	-0.00165071,	0.027069,	0.0435968,	0.0283449,	-0.0109215,	-0.0401625,	-0.0397515,	-0.0205905,	0.011438,	0.0406787,	-0.0261329,	0.00436352,	0.0216908,	0.0353462,	0.0206327,	-0.00992143,	-0.0383014,	-0.0333339,	-0.0191899,	0.0105484,	0.0364877,	-0.0208572,	0.00395882,	0.0246532,	0.0271401,	0.0133798,	-0.0170206,	-0.0289386,	-0.032806,	-0.0126226,	0.0115389,	0.0380868,	-0.0132519,	0.0120312,	0.0148219,	0.0204949,	0.00812132,	-0.016285,	-0.0282186,	-0.0215217,	-0.0109309,	0.0110639,	0.0324864,	-0.012207,	
@@ -476,51 +476,51 @@ new params:
 
 perform computation on GPU
 current params: 
--0.00577844,	0.00881627,	0.00292766,	-0.000451179,	4.5404e-06,	0.00193479,	0.00968885,	-0.00504582,	0.002826,	-0.00514178,	-0.0100145,	0.0076562,	0.00174132,	0.00265022,	-0.00402603,	-0.00836673,	0.000236477,	-0.000795849,	0.00593559,	0.0018808,	0.000473818,	-0.000252211,	0.0127278,	0.00928307,	-0.0137041,	0.000342639,	0.000611856,	-0.00925467,	0.00159399,	-0.00159518,	-0.00523607,	0.00788859,	0.0031834,	0.00471311,	0.000600102,	0.00289822,	0.00276809,	0.00452442,	0.00155071,	-0.00374452,	-0.00810084,	-0.00401757,	-0.00301915,	-0.00142705,	-0.00262659,	0.00675407,	0.0110737,	0.00885087,	0.00633596,	0.00828309,	-0.00787332,	0.00568425,	-0.0030487,	-0.0102022,	-0.00190696,	-0.00344266,	0.0044579,	-0.00184161,	-0.0100473,	0.00260691,	-0.000833524,	0.00878312,	0.00336277,	-0.00687278,	0.00603457,	-0.00308816,	0.00801752,	0.00305141,	-0.00842384,	0.012109,	-0.00192751,	0.00308876,	-0.00383284,	-0.00483092,	-0.000171384,	0.000286112,	0.00313961,	0.00353668,	-2.54605e-05,	-0.000244859,	0.00120646,	-0.00276574,	-0.00317341,	-0.00389445,	0.000438052,	0.00256809,	0.00808287,	-0.00996326,	0.0102178,	-0.00232107,	-0.00149546,	-7.7383e-05,	-0.00253433,	-0.000240116,	0.0058091,	-0.00479927,	-0.0101472,	0.00713159,	-0.00527519,	-0.00960289,	
-diff: -8.29391e-06,	-5.13237e-06,	1.13903e-11,	-1.57552e-10,	2.2702e-13,	9.67395e-11,	-8.29314e-06,	-1.07142e-06,	-2.73564e-10,	-2.57089e-10,	-5.00724e-10,	-1.09388e-09,	-2.43952e-06,	-3.32053e-08,	-9.50291e-09,	-4.18337e-10,	-1.10475e-09,	-3.63513e-09,	-1.68076e-10,	-3.70816e-10,	-4.28296e-10,	-1.26106e-11,	-1.28929e-06,	-1.29226e-06,	-1.15006e-09,	-4.47724e-10,	3.05928e-11,	-4.62733e-10,	-1.28905e-06,	-1.28921e-06,	-2.61803e-10,	3.94429e-10,	-1.01812e-07,	-1.01736e-07,	3.00051e-11,	9.13562e-11,	-1.11402e-06,	-5.46232e-10,	-1.18404e-10,	-3.12759e-10,	-4.05042e-10,	-2.00879e-10,	-3.65368e-07,	-7.18124e-10,	-7.78699e-10,	-3.09666e-10,	5.53686e-10,	4.42544e-10,	-2.14743e-06,	4.14154e-10,	-3.93666e-10,	-7.12002e-07,	-2.46233e-08,	-5.10111e-10,	-5.70459e-06,	-4.82754e-06,	-4.8833e-06,	-2.48248e-06,	-2.49732e-08,	-5.97341e-08,	-5.59952e-06,	-4.82693e-06,	-4.88335e-06,	-7.96404e-07,	3.01728e-10,	-6.01372e-08,	-1.40815e-08,	-1.83635e-06,	-1.83692e-06,	6.05448e-10,	-9.63754e-11,	-3.8051e-08,	-2.22173e-06,	-1.61932e-06,	-1.61908e-06,	-2.88953e-06,	-2.88939e-06,	-2.20301e-10,	-3.6358e-08,	-4.46784e-07,	-4.46711e-07,	-1.15172e-09,	-1.17211e-09,	-1.94722e-10,	-8.43375e-07,	-6.8894e-08,	4.04143e-10,	-6.0034e-07,	-5.99805e-07,	-9.33944e-10,	-8.43472e-07,	-3.86915e-12,	-1.26716e-10,	-3.58125e-10,	-7.14981e-10,	-6.91661e-07,	-5.0736e-10,	3.5658e-10,	-2.63759e-10,	-4.80144e-10,	
+0.0110789,	0.000784377,	-0.00619649,	-0.00361002,	-0.00593288,	-0.00451927,	0.00215659,	-0.0027571,	-0.000478285,	-0.00707413,	-0.00296295,	0.000824747,	0.00720582,	0.00129488,	-0.00652049,	0.00659212,	-0.0160657,	0.00717781,	-0.000754711,	0.00205721,	-0.000175307,	-0.000519502,	0.000189355,	0.00466432,	0.00469048,	-0.00113313,	-0.00750688,	-0.00335224,	0.00296495,	0.0028599,	-0.00216989,	0.00901218,	0.00210296,	0.00397626,	0.00302774,	-0.00295295,	-0.00635179,	0.0114892,	-0.000193587,	-0.00302819,	0.00203023,	-0.00776839,	0.0108794,	0.000510866,	-0.000614921,	0.000756367,	0.000966771,	0.00176248,	0.00955301,	0.00197178,	0.00431874,	-0.000193445,	-0.00328804,	0.00246741,	0.00373992,	0.0050005,	-0.00506504,	-0.0101018,	0.00118031,	-0.00222075,	-0.00730435,	0.00818948,	-0.00202486,	0.00294619,	-0.00045487,	0.00410881,	0.0014394,	-0.00155558,	0.00279812,	0.00209121,	0.00616499,	0.00247204,	0.00292331,	0.00333983,	0.000304351,	0.00168893,	0.00333935,	-0.00172709,	-0.00301026,	-0.00129998,	-0.00115753,	0.00362125,	0.00409591,	0.00437778,	-0.00179846,	-0.00428311,	-0.00502041,	-0.000482618,	0.00303553,	0.00330493,	0.000824985,	-0.00057299,	-0.00190745,	0.00406774,	-0.00541371,	0.00468423,	-0.0120661,	0.00272555,	-0.00251584,	-0.00112604,	
+diff: 5.53946e-10,	3.92189e-11,	-3.09824e-10,	-1.80501e-10,	-2.96644e-10,	-2.25963e-10,	1.0783e-10,	-1.37855e-10,	-2.39143e-11,	-3.53706e-10,	-1.48147e-10,	4.12373e-11,	3.60291e-10,	6.47441e-11,	-3.26025e-10,	3.29606e-10,	-8.03287e-10,	3.5889e-10,	-3.77355e-11,	1.0286e-10,	-8.76536e-12,	-2.59751e-11,	9.46777e-12,	2.33216e-10,	2.34524e-10,	-5.66563e-11,	-3.75344e-10,	-1.67612e-10,	1.48247e-10,	1.42995e-10,	-1.08495e-10,	4.50609e-10,	1.05148e-10,	1.98813e-10,	1.51387e-10,	-1.47647e-10,	-3.1759e-10,	5.74462e-10,	-9.67935e-12,	-1.5141e-10,	1.01511e-10,	-3.8842e-10,	5.43972e-10,	2.55433e-11,	-3.0746e-11,	3.78184e-11,	4.83386e-11,	8.81238e-11,	4.7765e-10,	9.85891e-11,	2.15937e-10,	-9.67223e-12,	-1.64402e-10,	1.23371e-10,	1.86996e-10,	2.50025e-10,	-2.53252e-10,	-5.05091e-10,	5.90157e-11,	-1.11038e-10,	-3.65217e-10,	4.09474e-10,	-1.01243e-10,	1.4731e-10,	-2.27435e-11,	2.05441e-10,	7.19699e-11,	-7.7779e-11,	1.39906e-10,	1.04561e-10,	3.0825e-10,	1.23602e-10,	1.46166e-10,	1.66991e-10,	1.52175e-11,	8.44466e-11,	1.66967e-10,	-8.63543e-11,	-1.50513e-10,	-6.49992e-11,	-5.78766e-11,	1.81062e-10,	2.04796e-10,	2.18889e-10,	-8.99229e-11,	-2.14155e-10,	-2.51021e-10,	-2.41309e-11,	1.51777e-10,	1.65246e-10,	4.12492e-11,	-2.86495e-11,	-9.53723e-11,	2.03387e-10,	-2.70686e-10,	2.34212e-10,	-6.03307e-10,	1.36277e-10,	-1.25792e-10,	-5.63018e-11,	
 
 new params: 
--0.00577015,	0.0088214,	0.00292766,	-0.000451179,	4.5404e-06,	0.00193479,	0.00969715,	-0.00504475,	0.002826,	-0.00514178,	-0.0100145,	0.0076562,	0.00174376,	0.00265025,	-0.00402602,	-0.00836673,	0.000236478,	-0.000795846,	0.00593559,	0.0018808,	0.000473818,	-0.000252211,	0.0127291,	0.00928436,	-0.0137041,	0.000342639,	0.000611856,	-0.00925467,	0.00159528,	-0.00159389,	-0.00523607,	0.00788859,	0.00318351,	0.00471321,	0.000600102,	0.00289822,	0.0027692,	0.00452442,	0.00155071,	-0.00374452,	-0.00810084,	-0.00401757,	-0.00301878,	-0.00142705,	-0.00262659,	0.00675407,	0.0110737,	0.00885087,	0.00633811,	0.00828309,	-0.00787332,	0.00568496,	-0.00304868,	-0.0102022,	-0.00190126,	-0.00343784,	0.00446279,	-0.00183913,	-0.0100473,	0.00260697,	-0.000827925,	0.00878794,	0.00336766,	-0.00687199,	0.00603457,	-0.0030881,	0.00801753,	0.00305324,	-0.008422,	0.012109,	-0.00192751,	0.00308879,	-0.00383062,	-0.0048293,	-0.000169765,	0.000289002,	0.0031425,	0.00353668,	-2.54241e-05,	-0.000244412,	0.0012069,	-0.00276574,	-0.0031734,	-0.00389445,	0.000438895,	0.00256816,	0.00808287,	-0.00996266,	0.0102184,	-0.00232107,	-0.00149462,	-7.7383e-05,	-0.00253433,	-0.000240115,	0.0058091,	-0.00479858,	-0.0101472,	0.00713159,	-0.00527519,	-0.00960289,	
+0.0110789,	0.000784377,	-0.00619649,	-0.00361002,	-0.00593288,	-0.00451927,	0.00215659,	-0.0027571,	-0.000478285,	-0.00707413,	-0.00296295,	0.000824747,	0.00720582,	0.00129488,	-0.00652049,	0.00659212,	-0.0160657,	0.00717781,	-0.000754711,	0.00205721,	-0.000175307,	-0.000519502,	0.000189355,	0.00466432,	0.00469048,	-0.00113313,	-0.00750688,	-0.00335224,	0.00296495,	0.0028599,	-0.00216989,	0.00901218,	0.00210296,	0.00397626,	0.00302774,	-0.00295295,	-0.00635179,	0.0114892,	-0.000193587,	-0.00302819,	0.00203023,	-0.00776839,	0.0108794,	0.000510866,	-0.000614921,	0.000756367,	0.000966771,	0.00176248,	0.009553,	0.00197178,	0.00431874,	-0.000193445,	-0.00328804,	0.00246741,	0.00373992,	0.0050005,	-0.00506504,	-0.0101018,	0.00118031,	-0.00222075,	-0.00730435,	0.00818948,	-0.00202486,	0.00294619,	-0.00045487,	0.00410881,	0.0014394,	-0.00155558,	0.00279812,	0.00209121,	0.00616499,	0.00247204,	0.00292331,	0.00333983,	0.000304351,	0.00168893,	0.00333935,	-0.00172709,	-0.00301026,	-0.00129998,	-0.00115753,	0.00362125,	0.00409591,	0.00437778,	-0.00179846,	-0.00428311,	-0.00502041,	-0.000482618,	0.00303553,	0.00330493,	0.000824985,	-0.00057299,	-0.00190745,	0.00406774,	-0.00541371,	0.00468423,	-0.0120661,	0.00272555,	-0.00251584,	-0.00112604,	
 
 perform computation on GPU
 current params: 
 1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	
-diff: -3.43094e-07,	1.28871e-05,	-2.88605e-06,	-5.61267e-07,	-2.50159e-06,	-6.39185e-06,	1.55188e-06,	8.82187e-06,	3.82825e-06,	1.08375e-06,	-3.07627e-05,	-4.5791e-06,	-1.17493e-06,	-4.56618e-06,	-1.87695e-06,	4.674e-06,	4.25719e-06,	1.11242e-05,	-3.10201e-07,	-2.02973e-06,	-3.11536e-06,	7.82625e-06,	-7.20152e-06,	-1.42537e-06,	1.75353e-06,	5.5503e-06,	1.00586e-05,	-8.42587e-06,	1.74194e-05,	-1.07919e-05,	-2.4694e-06,	-3.5461e-06,	-2.39359e-07,	-2.59848e-06,	-1.51818e-06,	2.3418e-06,	-8.42978e-06,	9.62094e-06,	4.8685e-06,	2.35223e-06,	1.08965e-05,	-4.32427e-06,	9.57633e-06,	1.82684e-05,	6.36243e-06,	-1.8313e-06,	5.9848e-07,	-6.05435e-06,	-7.05641e-06,	-9.76037e-06,	-2.86561e-06,	3.68764e-07,	6.12315e-06,	-2.03924e-05,	-2.14491e-06,	-4.45154e-06,	-1.23228e-06,	5.26512e-06,	2.26122e-06,	-7.54159e-08,	-1.81909e-05,	1.8513e-07,	2.80955e-06,	9.83179e-07,	-1.02063e-05,	2.6138e-05,	9.79765e-06,	-1.10828e-06,	1.07514e-05,	8.81108e-06,	7.00979e-06,	4.18213e-06,	1.45631e-06,	1.34166e-06,	1.20779e-05,	7.98577e-06,	8.9341e-06,	6.0704e-07,	1.82096e-06,	2.36265e-06,	-9.03094e-07,	1.52281e-05,	9.29409e-06,	-2.98507e-06,	5.05502e-06,	3.12733e-06,	3.49602e-06,	5.99839e-06,	-1.12884e-06,	2.77859e-06,	1.07064e-06,	-3.33567e-06,	-3.99248e-06,	1.31293e-06,	5.24979e-07,	2.0943e-06,	6.2874e-06,	2.75689e-05,	7.07986e-06,	-1.81179e-05,	
+diff: 0,	-5.11498e-07,	-1.20617e-07,	-3.72387e-07,	1.03963e-07,	-2.58164e-07,	0,	-7.56105e-07,	-1.59394e-07,	-5.33801e-07,	0,	2.93654e-08,	0,	0,	-3.06309e-08,	-1.97597e-07,	0,	0,	0,	-3.21585e-07,	-7.56449e-08,	2.54428e-07,	6.14797e-08,	2.47317e-07,	-6.44158e-08,	6.05919e-07,	-6.11209e-08,	0,	0,	-4.11139e-08,	3.72561e-07,	6.70593e-08,	1.99111e-07,	-1.28407e-07,	7.36163e-07,	-5.10254e-07,	-7.38407e-07,	0,	6.57494e-08,	0,	0,	-3.34851e-07,	-5.06327e-08,	1.24677e-07,	-2.54829e-07,	0,	4.77542e-07,	0,	3.25582e-07,	-5.20018e-08,	-4.61699e-07,	-1.0743e-08,	1.88992e-06,	1.80205e-07,	0,	3.75032e-07,	0,	2.03371e-08,	0,	4.32566e-07,	4.13811e-08,	-2.39872e-08,	-3.59001e-08,	1.72318e-07,	0,	8.44738e-08,	-3.72299e-07,	1.03686e-07,	-1.00295e-07,	7.89744e-08,	0,	0,	-4.94541e-07,	0,	0,	-1.07126e-07,	-2.01564e-08,	1.64306e-07,	-2.24835e-07,	2.16498e-07,	5.54945e-07,	7.79638e-08,	5.11611e-08,	4.28525e-09,	-2.75007e-07,	-3.64496e-07,	1.92948e-07,	1.94563e-07,	0,	0,	0,	-1.27837e-08,	1.10229e-06,	5.65144e-07,	0,	-1.10421e-07,	-6.01573e-08,	3.98037e-07,	0,	3.1839e-08,	
 
 new params: 
-1,	0.999987,	1,	1,	1,	1.00001,	0.999998,	0.999991,	0.999996,	0.999999,	1.00003,	1,	1,	1,	1,	0.999995,	0.999996,	0.999989,	1,	1,	1,	0.999992,	1.00001,	1,	0.999998,	0.999994,	0.99999,	1.00001,	0.999983,	1.00001,	1,	1,	1,	1,	1,	0.999998,	1.00001,	0.99999,	0.999995,	0.999998,	0.999989,	1,	0.99999,	0.999982,	0.999994,	1,	0.999999,	1.00001,	1.00001,	1.00001,	1,	1,	0.999994,	1.00002,	1,	1,	1,	0.999995,	0.999998,	1,	1.00002,	1,	0.999997,	0.999999,	1.00001,	0.999974,	0.99999,	1,	0.999989,	0.999991,	0.999993,	0.999996,	0.999999,	0.999999,	0.999988,	0.999992,	0.999991,	0.999999,	0.999998,	0.999998,	1,	0.999985,	0.999991,	1,	0.999995,	0.999997,	0.999996,	0.999994,	1,	0.999997,	0.999999,	1,	1,	0.999999,	0.999999,	0.999998,	0.999994,	0.999972,	0.999993,	1.00002,	
+1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0.999999,	1,	1,	1,	1,	1,	1,	1,	1,	0.999999,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0.999998,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0.999999,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0.999999,	0.999999,	1,	1,	1,	1,	1,	1,	
 
 perform computation on GPU
 current params: 
--0.00419745,	-0.00595101,	-0.00273414,	-0.00353658,	0.00552724,	-0.00453832,	0.0104668,	-0.0025139,	-0.00452267,	-0.00304943,	0.0029569,	0.00544247,	0.00493776,	-0.00447351,	0.00103879,	-0.00151495,	0.000364939,	0.0038766,	0.000979731,	0.0052978,	0.00554272,	-0.00145176,	-0.00101852,	-0.000115129,	0.00603413,	0.0147642,	0.00706972,	0.00610069,	-0.0015614,	-0.00253925,	-0.003295,	-0.00133296,	0.003546,	-0.00353954,	-0.00638076,	0.00306483,	0.003374,	-0.000985199,	0.000754976,	-0.00102038,	0.00627553,	0.00336809,	-0.00480536,	-0.00201553,	0.00957906,	0.010297,	2.04881e-05,	-0.00263836,	0.00765062,	-0.0103938,	0.000370103,	0.00251646,	0.00489419,	-0.00710121,	-0.00400476,	0.00325646,	0.00729343,	-0.000669523,	0.00187805,	-0.00155343,	0.00261382,	0.00203009,	0.00395201,	0.0126029,	-0.00975462,	0.00344636,	0.00163809,	-0.00511305,	0.000473912,	-0.00221879,	0.000149478,	0.00163178,	-0.00017057,	0.00200443,	-0.00364497,	-0.0102485,	-0.00309802,	-0.0013812,	-0.00723399,	-0.00344448,	-0.000902936,	-0.00187074,	-0.00422432,	0.00365808,	0.00734357,	-0.00509315,	0.00536645,	0.00242329,	-0.00089312,	0.00203942,	-0.00321346,	0.00162599,	-0.00541977,	0.000783952,	0.00211347,	-0.0052955,	-0.00512765,	-0.00707141,	0.000201083,	-0.00057888,	
-diff: -2.09872e-10,	-5.59807e-05,	-4.80221e-05,	-1.79403e-05,	-0.000109983,	-3.84022e-05,	-6.19067e-05,	-6.14985e-05,	-7.4571e-05,	-3.14112e-05,	-0.000199509,	1.03394e-05,	2.73019e-05,	-0.000161988,	1.4783e-05,	-5.95978e-06,	-2.88751e-05,	-5.23985e-05,	4.26256e-07,	-0.000120943,	1.67124e-05,	-7.8485e-05,	-5.2119e-05,	-1.36251e-05,	-4.40919e-05,	-0.000132433,	-6.34932e-05,	-0.000103841,	-3.9328e-05,	-0.000289407,	-7.50461e-06,	-2.78429e-06,	-2.77773e-05,	-3.14005e-05,	3.73209e-07,	-9.51718e-05,	-5.73253e-05,	2.96447e-06,	-0.00019662,	-7.28502e-05,	2.34953e-06,	-2.47687e-05,	2.02102e-09,	-0.000171463,	-4.27227e-05,	-3.37196e-05,	-2.82451e-05,	-6.84436e-05,	-4.83483e-05,	-6.50106e-05,	-2.32098e-05,	-6.51254e-05,	-0.000141107,	-0.000106984,	-7.45266e-05,	1.06508e-05,	1.08806e-05,	-2.41173e-05,	-0.000115214,	1.01164e-06,	2.52406e-06,	-7.5867e-05,	-7.86359e-05,	-8.20271e-05,	-3.04523e-05,	-0.000211403,	-0.000259611,	1.65402e-05,	-3.97879e-06,	-0.000101129,	-3.35004e-05,	-9.88772e-05,	-9.65871e-06,	1.39032e-06,	-4.31065e-05,	-0.000227165,	-0.000175096,	9.40729e-07,	-1.91424e-05,	-9.33628e-05,	-3.10146e-05,	-3.49352e-06,	-0.000123958,	-0.000110752,	-9.05508e-05,	-3.52995e-05,	-1.83083e-05,	-2.19287e-05,	-7.89335e-05,	-7.81052e-05,	8.66046e-06,	-5.55352e-05,	1.1755e-06,	-2.55436e-05,	-4.11944e-06,	-1.55326e-05,	-8.06385e-05,	-6.04824e-05,	-7.68788e-05,	-0.000109731,	
+0.00721899,	-0.00245371,	0.00188273,	-0.00485084,	0.000760553,	0.00273118,	-0.00683593,	-0.00509672,	-0.00745934,	0.00134087,	-0.000773844,	0.00142788,	0.00715417,	-0.00191737,	0.00633626,	0.00301362,	0.000489164,	-0.00614361,	0.00425615,	-0.00101758,	0.00190852,	-0.00308587,	-0.00256499,	-0.004859,	-7.23433e-05,	0.00228132,	0.00305386,	0.00155138,	0.00223458,	-0.00134662,	-8.3732e-05,	0.003053,	-0.00618198,	0.00347542,	-0.000352679,	0.00077718,	0.000826047,	-0.014646,	-0.00480556,	-0.0022598,	0.000532971,	-0.00631292,	-0.00256439,	-0.000131331,	-0.000409444,	-0.00353563,	0.00344026,	-0.00505298,	0.00303044,	-0.00678375,	-0.00905251,	0.00373428,	0.00670876,	0.00119053,	-0.00391105,	-0.00632915,	0.00605724,	0.00368749,	0.00263382,	-0.010349,	-0.00459551,	-0.00147328,	-0.00228867,	-0.00385874,	0.00478589,	0.004425,	0.00270526,	0.00446727,	0.00331047,	0.00298544,	0.00612899,	0.00810255,	0.0104192,	0.0063334,	0.00963451,	-0.00162248,	0.00579101,	-0.00390158,	-0.0065482,	-0.00146787,	0.00104855,	-0.00161512,	4.28353e-05,	-0.0061752,	-0.00425218,	0.00154313,	-0.00461658,	0.0070559,	0.00406442,	-0.00266426,	0.000300254,	0.00720212,	-0.00315123,	0.00149781,	-0.00888266,	0.000595852,	-0.011303,	0.00207419,	0.00493243,	-0.00494851,	
+diff: 3.6095e-10,	-5.47168e-06,	9.41365e-11,	-3.93062e-06,	-2.09451e-06,	-2.25574e-06,	-3.41797e-10,	-2.54836e-10,	-1.43492e-05,	-8.74296e-06,	-3.86922e-11,	7.13942e-11,	3.57709e-10,	-9.58683e-11,	3.16813e-10,	-8.68788e-06,	2.44582e-11,	-3.0718e-10,	2.12808e-10,	-2.16481e-06,	9.54259e-11,	-8.0165e-06,	-1.2825e-10,	-4.29837e-06,	-3.61717e-12,	1.14066e-10,	1.52693e-10,	7.75691e-11,	1.11729e-10,	-6.73312e-11,	-4.1866e-12,	1.5265e-10,	-3.09099e-10,	1.73771e-10,	-9.19052e-07,	-2.37562e-06,	-2.98408e-06,	-7.32299e-10,	-2.40278e-10,	-1.1299e-10,	2.66486e-11,	-3.15646e-10,	-1.28219e-10,	-3.52693e-06,	-6.6986e-06,	-1.76782e-10,	1.72013e-10,	-2.52649e-10,	1.51522e-10,	-3.39188e-10,	-4.52625e-10,	1.86714e-10,	-6.78703e-06,	5.95263e-11,	-1.95553e-10,	-3.16458e-10,	3.02862e-10,	1.84375e-10,	1.31691e-10,	-5.36598e-06,	-2.29776e-10,	-7.36641e-11,	-1.14433e-10,	-1.92937e-10,	2.39294e-10,	2.2125e-10,	-7.86938e-06,	2.23363e-10,	1.65523e-10,	1.49272e-10,	3.06449e-10,	4.05127e-10,	-4.44392e-06,	3.1667e-10,	4.81726e-10,	-8.11242e-11,	2.8955e-10,	-1.95079e-10,	-7.37625e-06,	-6.71476e-06,	-3.96475e-06,	-8.07559e-11,	2.14177e-12,	-3.0876e-10,	-2.12609e-10,	-3.87034e-06,	-7.70283e-06,	-6.69517e-06,	2.03221e-10,	-1.33213e-10,	1.50127e-11,	-1.27714e-06,	-4.46258e-06,	-4.24022e-06,	-4.44133e-10,	2.97926e-11,	-2.05449e-06,	1.0371e-10,	2.46621e-10,	-2.47426e-10,	
 
 new params: 
--0.00419745,	-0.00589503,	-0.00268612,	-0.00351864,	0.00563722,	-0.00449992,	0.0105287,	-0.0024524,	-0.0044481,	-0.00301802,	0.00315641,	0.00543213,	0.00491046,	-0.00431152,	0.00102401,	-0.00150899,	0.000393814,	0.003929,	0.000979304,	0.00541874,	0.005526,	-0.00137328,	-0.000966402,	-0.000101504,	0.00607822,	0.0148967,	0.00713321,	0.00620453,	-0.00152208,	-0.00224984,	-0.00328749,	-0.00133017,	0.00357377,	-0.00350814,	-0.00638114,	0.00316,	0.00343133,	-0.000988164,	0.000951595,	-0.000947534,	0.00627318,	0.00339286,	-0.00480536,	-0.00184407,	0.00962179,	0.0103307,	4.87331e-05,	-0.00256991,	0.00769897,	-0.0103287,	0.000393313,	0.00258159,	0.0050353,	-0.00699423,	-0.00393024,	0.00324581,	0.00728255,	-0.000645406,	0.00199326,	-0.00155444,	0.0026113,	0.00210596,	0.00403065,	0.0126849,	-0.00972417,	0.00365777,	0.0018977,	-0.00512959,	0.000477891,	-0.00211766,	0.000182979,	0.00173065,	-0.000160911,	0.00200304,	-0.00360187,	-0.0100213,	-0.00292292,	-0.00138214,	-0.00721485,	-0.00335111,	-0.000871922,	-0.00186725,	-0.00410036,	0.00376883,	0.00743412,	-0.00505785,	0.00538476,	0.00244522,	-0.000814186,	0.00211753,	-0.00322212,	0.00168152,	-0.00542095,	0.000809496,	0.00211759,	-0.00527997,	-0.00504701,	-0.00701093,	0.000277962,	-0.000469149,	
+0.00721899,	-0.00244824,	0.00188273,	-0.00484691,	0.000762648,	0.00273343,	-0.00683593,	-0.00509672,	-0.00744499,	0.00134961,	-0.000773844,	0.00142788,	0.00715417,	-0.00191737,	0.00633626,	0.00302231,	0.000489164,	-0.00614361,	0.00425615,	-0.00101541,	0.00190852,	-0.00307785,	-0.00256499,	-0.0048547,	-7.23433e-05,	0.00228132,	0.00305386,	0.00155138,	0.00223458,	-0.00134662,	-8.3732e-05,	0.003053,	-0.00618198,	0.00347542,	-0.00035176,	0.000779556,	0.000829031,	-0.014646,	-0.00480556,	-0.0022598,	0.000532971,	-0.00631292,	-0.00256439,	-0.000127804,	-0.000402746,	-0.00353563,	0.00344026,	-0.00505298,	0.00303044,	-0.00678375,	-0.00905251,	0.00373428,	0.00671555,	0.00119053,	-0.00391105,	-0.00632915,	0.00605724,	0.00368749,	0.00263382,	-0.0103436,	-0.00459551,	-0.00147328,	-0.00228867,	-0.00385874,	0.00478588,	0.004425,	0.00271313,	0.00446727,	0.00331047,	0.00298544,	0.00612899,	0.00810255,	0.0104236,	0.0063334,	0.00963451,	-0.00162248,	0.00579101,	-0.00390158,	-0.00654082,	-0.00146116,	0.00105251,	-0.00161512,	4.28353e-05,	-0.0061752,	-0.00425218,	0.001547,	-0.00460887,	0.0070626,	0.00406442,	-0.00266426,	0.000300254,	0.00720339,	-0.00314677,	0.00150205,	-0.00888266,	0.000595852,	-0.011301,	0.00207419,	0.00493243,	-0.00494851,	
 
 perform computation on GPU
 current params: 
 1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	
-diff: -3.53448e-05,	-1.21624e-05,	-9.48815e-06,	1.77063e-05,	2.32398e-05,	4.93868e-06,	5.33615e-06,	-2.41347e-05,	-8.70152e-06,	-1.72152e-05,	2.91626e-05,	-1.41815e-05,	-1.97393e-05,	-1.46419e-05,	-5.59886e-05,	9.07868e-05,	-2.88856e-06,	1.94194e-06,	-2.44398e-05,	-4.33703e-05,	-1.06816e-05,	-1.414e-05,	-1.62879e-05,	2.46338e-05,	3.05818e-05,	4.21153e-05,	-1.15187e-05,	-2.25887e-05,	7.85965e-06,	-2.30395e-05,	1.26413e-06,	3.2141e-06,	-2.58262e-05,	6.86706e-06,	5.13133e-05,	-2.22627e-06,	8.81025e-05,	3.27582e-05,	-7.7894e-06,	-2.16815e-07,	-8.60147e-06,	-9.05665e-05,	6.01465e-05,	-6.91489e-05,	2.39404e-05,	8.66548e-06,	-3.65851e-05,	-3.08068e-05,	-7.25343e-05,	-3.88474e-06,	-6.05397e-05,	3.08141e-06,	1.4416e-05,	-3.78449e-05,	2.48131e-05,	2.29117e-06,	8.08113e-05,	-7.34947e-05,	0.000124024,	-1.53075e-05,	-2.93697e-05,	5.65394e-06,	4.12931e-05,	-9.77158e-05,	-2.34394e-05,	5.6926e-06,	-1.07958e-05,	-2.54184e-06,	3.05825e-06,	8.61971e-06,	6.47884e-06,	4.31159e-06,	-4.05591e-05,	3.04386e-05,	-6.65921e-06,	6.61345e-05,	-9.55379e-09,	-1.50766e-05,	-3.82914e-05,	-5.33654e-05,	2.04891e-06,	2.6468e-05,	-1.34573e-05,	6.10702e-05,	1.04828e-05,	-2.30965e-06,	4.20495e-05,	-8.41355e-07,	2.88007e-05,	-2.1333e-05,	6.00875e-07,	7.12694e-06,	4.06507e-06,	-5.68527e-06,	4.85544e-08,	7.5161e-05,	-1.66419e-05,	2.52775e-05,	-1.49309e-05,	1.27597e-05,	
+diff: -1.01548e-06,	0,	4.27624e-07,	8.82966e-07,	-3.18883e-06,	-1.87102e-07,	-9.00909e-08,	2.94437e-06,	0,	0,	-4.41214e-07,	-1.00944e-07,	-2.04267e-06,	9.11661e-07,	0,	5.4392e-07,	-1.97453e-07,	-1.50063e-06,	3.31239e-08,	0,	0,	-3.94909e-07,	0,	1.729e-07,	-5.50966e-07,	-6.35564e-08,	-2.57342e-08,	-2.13273e-07,	5.89077e-07,	-2.03025e-07,	0,	0,	1.10592e-06,	-6.22518e-08,	0,	3.48507e-07,	-1.9048e-08,	6.72609e-07,	2.99504e-07,	-8.57387e-07,	-1.84165e-06,	1.30956e-06,	0,	-2.00359e-07,	8.62872e-07,	0,	-1.52655e-06,	-1.36044e-08,	6.05021e-08,	0,	5.69611e-07,	9.74973e-07,	2.30057e-07,	3.71072e-07,	1.89935e-06,	-5.42874e-07,	5.02746e-07,	-1.81663e-06,	-5.62233e-07,	-4.19233e-08,	-3.01094e-06,	2.59075e-08,	-2.29258e-07,	3.32767e-07,	1.48575e-06,	0,	5.09922e-07,	1.86478e-08,	0,	1.03227e-07,	0,	-1.48386e-07,	0,	-6.94297e-07,	-4.36978e-07,	-1.24279e-06,	3.17882e-08,	6.62409e-08,	6.1602e-07,	3.39118e-07,	0,	1.11338e-06,	1.23442e-06,	-1.98872e-06,	-2.00558e-07,	3.73772e-07,	2.03043e-06,	7.05387e-07,	5.78382e-08,	-1.53089e-06,	1.78396e-07,	-1.5474e-07,	0,	1.51682e-07,	-5.4877e-07,	-1.62507e-06,	2.71874e-06,	6.78789e-07,	-5.81167e-07,	-5.31941e-08,	
 
 new params: 
-1.00004,	1.00001,	1.00001,	0.999982,	0.999977,	0.999995,	0.999995,	1.00002,	1.00001,	1.00002,	0.999971,	1.00001,	1.00002,	1.00001,	1.00006,	0.999909,	1,	0.999998,	1.00002,	1.00004,	1.00001,	1.00001,	1.00002,	0.999975,	0.999969,	0.999958,	1.00001,	1.00002,	0.999992,	1.00002,	0.999999,	0.999997,	1.00003,	0.999993,	0.999949,	1,	0.999912,	0.999967,	1.00001,	1,	1.00001,	1.00009,	0.99994,	1.00007,	0.999976,	0.999991,	1.00004,	1.00003,	1.00007,	1,	1.00006,	0.999997,	0.999986,	1.00004,	0.999975,	0.999998,	0.999919,	1.00007,	0.999876,	1.00002,	1.00003,	0.999994,	0.999959,	1.0001,	1.00002,	0.999994,	1.00001,	1,	0.999997,	0.999991,	0.999994,	0.999996,	1.00004,	0.99997,	1.00001,	0.999934,	1,	1.00002,	1.00004,	1.00005,	0.999998,	0.999974,	1.00001,	0.999939,	0.99999,	1,	0.999958,	1,	0.999971,	1.00002,	0.999999,	0.999993,	0.999996,	1.00001,	1,	0.999925,	1.00002,	0.999975,	1.00001,	0.999987,	
+1,	1,	1,	0.999999,	1,	1,	1,	0.999997,	1,	1,	1,	1,	1,	0.999999,	1,	0.999999,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0.999999,	1,	1,	1,	0.999999,	1,	1,	1,	1,	0.999999,	1,	1,	1,	0.999999,	1,	1,	0.999999,	1,	1,	1,	1,	1,	0.999999,	0.999999,	1,	1,	0.999998,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0.999999,	1,	0.999999,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	0.999999,	1,	1,	0.999999,	0.999999,	1,	1,	1,	0.999998,	0.999999,	1,	1,	1,	1,	1,	1,	1,	1,	0.999997,	0.999999,	1,	1,	
 
 perform computation on GPU
 current params: 
-0.0130798,	0.00652136,	0.0120704,	-0.00570776,	-0.0199851,	-0.0110334,	-0.0140268,	0.00532508,	-0.0051699,	0.0162783,	-0.0110214,	0.00415221,	0.00428409,	0.0219479,	0.0173261,	-0.0143126,	0.00509072,	-0.0116152,	0.00655067,	0.00969095,	-0.00470245,	0.0150793,	0.00409836,	-0.0147733,	0.00200057,	-0.0190662,	0.00775204,	0.00180597,	-0.0125705,	-0.00672713,	0.00522633,	-0.00149535,	0.012305,	-0.00642801,	-0.015306,	-0.00080714,	-0.00716148,	-0.0126697,	0.00644475,	3.4226e-05,	0.0036731,	0.0291317,	-0.00306462,	0.0231215,	-0.0116258,	-0.00111464,	0.0115698,	0.0185617,	0.010385,	0.00139079,	0.0105178,	-0.00760698,	-0.0114313,	0.00905739,	0.00423842,	-0.0137648,	-0.0163078,	0.00928217,	-0.0160414,	-4.21329e-05,	0.0249367,	-0.00606432,	-0.00742141,	0.0156373,	0.000602261,	0.00342061,	0.0141788,	-0.00488086,	4.89555e-05,	-0.00127007,	0.0118045,	-0.00149649,	0.0178373,	0.00312028,	0.00555188,	-0.0104352,	0.00550784,	-0.00138452,	0.000757917,	0.0203134,	-0.00218043,	-0.0109529,	0.0181447,	-0.0147308,	0.00271331,	0.00200848,	-0.00351423,	0.0064377,	-0.00502287,	0.00661482,	-0.0112231,	-0.0039766,	0.00443891,	0.00313973,	0.0058829,	-0.00540217,	0.00877854,	-0.00129666,	-0.00396059,	-0.0157229,	
-diff: -0.00349271,	-0.00116422,	-0.000961014,	-0.00234774,	-0.000751233,	-0.0022193,	1.99519e-05,	-0.00676602,	-0.00360152,	-0.00338949,	-0.00251603,	-0.0034004,	-0.00113298,	-0.000676396,	-0.00268406,	-0.00146639,	-0.000320546,	-0.00380396,	-0.0029228,	-0.00492611,	-0.00229432,	-0.00269673,	-0.000965506,	-0.00203987,	-0.0043357,	-0.00145531,	-0.00388697,	-0.00225399,	-1.26899e-05,	-0.010656,	-0.000947443,	-0.000208134,	-0.0011451,	-0.00191818,	-0.00556334,	-0.00185155,	-0.00490051,	-0.00432591,	-0.00256681,	-0.000874575,	-0.00547795,	-0.00271977,	-0.00615036,	-0.00236208,	-0.00375918,	-0.00318807,	-0.00225374,	-0.00201438,	-0.0022241,	-0.00156359,	-0.00355671,	6.89559e-05,	-0.00164349,	-0.00163954,	-0.00354389,	-0.00438092,	-0.0038209,	-0.00199951,	-0.00456731,	-0.00307214,	-0.00108987,	-0.00268094,	-0.00172168,	-0.0034074,	-0.00116417,	-0.00053603,	-0.000826064,	-0.000121766,	-0.00160007,	-0.00302508,	-0.002268,	-0.000749852,	-0.00168171,	-0.00228176,	-0.00430931,	-0.00310208,	6.60141e-05,	-0.000854781,	-0.00101923,	-0.00192236,	-0.00316815,	-0.00488226,	-0.000547174,	-0.00352485,	-0.00294133,	-0.00136739,	-0.00212533,	-0.000550556,	-0.00121521,	-0.00754144,	-0.00011829,	-0.00203616,	-0.0014393,	-0.000393305,	-0.00245507,	-0.00707333,	-0.000785385,	-0.00246232,	-0.00138514,	-0.000934474,	
+-0.019454,	0.00274352,	0.0102126,	0.00265035,	-0.0179771,	-0.00275246,	-0.0189232,	0.0137997,	0.00184104,	0.00230392,	-0.0257711,	-0.00216381,	-0.00665967,	0.0122384,	-0.0110736,	-0.00674075,	-0.00988074,	-0.0042954,	0.0117659,	-0.00845975,	-0.0116222,	-0.00918515,	0.012999,	-0.00461623,	-0.0247189,	-0.0033232,	0.000794631,	-0.00545325,	0.00503133,	0.00107961,	0.00648199,	0.0101015,	-0.00730139,	-0.00292226,	-0.0107215,	-0.00249189,	-0.00405045,	-0.00210795,	0.00109445,	-0.017097,	-0.0169451,	0.0123481,	-0.0119219,	-0.00066362,	-0.000290197,	-0.00175341,	-7.88179e-05,	-0.00774508,	2.46457e-05,	0.00340106,	0.00837768,	-0.00281657,	-0.00331528,	0.00242491,	0.00635793,	-0.00733465,	0.0129948,	-0.00833205,	-0.00464611,	0.000796336,	-0.0176474,	0.00446073,	-0.00810115,	-0.00377098,	0.00208531,	0.0104987,	0.0119629,	-0.00219072,	0.0103326,	-0.00407873,	0.011019,	0.0129086,	-0.00787908,	-0.00319012,	0.000586087,	-0.0115228,	0.0206496,	-0.00379589,	0.00232793,	0.00444088,	-0.00405868,	-0.00184164,	0.0139631,	-0.00566409,	-0.0066691,	0.0128612,	0.0215408,	0.00660027,	0.0126417,	-0.00910593,	0.00667608,	-0.00455548,	0.00197807,	0.00607246,	-0.0127826,	0.0136507,	0.0181808,	0.00492418,	-0.00414968,	0.00231716,	
+diff: 0.000101928,	1.37176e-10,	2.85971e-05,	0.000133784,	0.000112329,	2.71936e-05,	1.03948e-05,	0.000106663,	9.20522e-11,	1.15196e-10,	4.71474e-05,	4.5343e-05,	7.38152e-05,	9.19024e-05,	-5.5368e-10,	0.000124807,	7.03232e-05,	8.49502e-05,	1.02661e-06,	-4.22988e-10,	-5.81111e-10,	9.49978e-07,	6.49952e-10,	7.86035e-05,	6.51957e-05,	1.05137e-06,	3.29279e-07,	5.2711e-05,	3.71187e-05,	5.9994e-06,	3.24099e-10,	5.05075e-10,	0.000196235,	5.46559e-06,	-5.36077e-10,	2.83144e-05,	3.03866e-05,	0.000105283,	0.000108238,	1.57009e-05,	7.7107e-05,	0.000202837,	-5.96096e-10,	8.96219e-05,	4.63918e-05,	-8.76705e-11,	0.000174442,	4.24673e-06,	1.95877e-06,	1.70053e-10,	0.000231268,	4.3288e-06,	3.11653e-05,	1.95042e-05,	8.2503e-05,	2.14575e-05,	2.68276e-05,	0.000192285,	0.000218623,	9.00415e-05,	0.000238226,	3.37345e-05,	2.75075e-05,	4.11379e-05,	0.000333934,	5.24936e-10,	3.08906e-05,	2.88702e-05,	5.16631e-10,	1.6226e-05,	5.5095e-10,	2.60962e-05,	-3.93954e-10,	5.3159e-05,	3.79163e-05,	6.86748e-05,	1.28917e-06,	1.67337e-05,	1.62429e-05,	3.70864e-05,	-2.02934e-10,	1.28812e-05,	2.2976e-05,	0.000301378,	3.32663e-05,	3.91691e-05,	3.07468e-05,	1.38842e-05,	6.26406e-05,	2.71561e-05,	0.000166994,	9.12739e-06,	9.89033e-11,	2.34776e-05,	5.99443e-05,	3.32164e-05,	4.45884e-05,	4.05085e-05,	0.000100558,	1.79549e-06,	
 
 new params: 
-0.0165725,	0.00768558,	0.0130315,	-0.00336002,	-0.0192338,	-0.00881407,	-0.0140468,	0.0120911,	-0.00156838,	0.0196678,	-0.00850535,	0.00755261,	0.00541707,	0.0226243,	0.0200102,	-0.0128462,	0.00541127,	-0.00781126,	0.00947347,	0.0146171,	-0.00240814,	0.017776,	0.00506387,	-0.0127334,	0.00633627,	-0.0176109,	0.011639,	0.00405995,	-0.0125578,	0.00392888,	0.00617377,	-0.00128722,	0.0134501,	-0.00450983,	-0.00974262,	0.00104441,	-0.00226097,	-0.00834377,	0.00901156,	0.000908801,	0.00915105,	0.0318515,	0.00308574,	0.0254836,	-0.00786666,	0.00207343,	0.0138235,	0.0205761,	0.0126091,	0.00295438,	0.0140746,	-0.00767593,	-0.00978786,	0.0106969,	0.00778231,	-0.00938392,	-0.0124869,	0.0112817,	-0.0114741,	0.00303001,	0.0260265,	-0.00338339,	-0.00569973,	0.0190447,	0.00176643,	0.00395664,	0.0150049,	-0.0047591,	0.00164903,	0.00175502,	0.0140726,	-0.000746641,	0.019519,	0.00540203,	0.00986119,	-0.00733312,	0.00544183,	-0.000529744,	0.00177715,	0.0222358,	0.00098771,	-0.00607067,	0.0186919,	-0.011206,	0.00565463,	0.00337587,	-0.00138891,	0.00698826,	-0.00380766,	0.0141563,	-0.0111048,	-0.00194044,	0.00587821,	0.00353304,	0.00833797,	0.00167116,	0.00956393,	0.00116566,	-0.00257545,	-0.0147885,	
+-0.0195559,	0.00274352,	0.010184,	0.00251657,	-0.0180894,	-0.00277966,	-0.0189335,	0.013693,	0.00184104,	0.00230392,	-0.0258183,	-0.00220915,	-0.00673348,	0.0121465,	-0.0110736,	-0.00686556,	-0.00995107,	-0.00438035,	0.0117649,	-0.00845975,	-0.0116222,	-0.0091861,	0.012999,	-0.00469483,	-0.0247841,	-0.00332426,	0.000794302,	-0.00550596,	0.00499421,	0.00107361,	0.00648199,	0.0101015,	-0.00749763,	-0.00292773,	-0.0107215,	-0.00252021,	-0.00408084,	-0.00221323,	0.000986216,	-0.0171127,	-0.0170222,	0.0121452,	-0.0119219,	-0.000753242,	-0.000336589,	-0.00175341,	-0.00025326,	-0.00774932,	2.26869e-05,	0.00340106,	0.00814641,	-0.0028209,	-0.00334645,	0.00240541,	0.00627543,	-0.00735611,	0.0129679,	-0.00852433,	-0.00486473,	0.000706295,	-0.0178856,	0.004427,	-0.00812865,	-0.00381212,	0.00175138,	0.0104987,	0.011932,	-0.00221959,	0.0103326,	-0.00409496,	0.011019,	0.0128825,	-0.00787908,	-0.00324328,	0.000548171,	-0.0115915,	0.0206483,	-0.00381262,	0.00231169,	0.00440379,	-0.00405868,	-0.00185452,	0.0139402,	-0.00596547,	-0.00670237,	0.0128221,	0.02151,	0.00658639,	0.0125791,	-0.00913309,	0.00650908,	-0.00456461,	0.00197807,	0.00604898,	-0.0128426,	0.0136175,	0.0181362,	0.00488367,	-0.00425024,	0.00231537,	
 
 perform computation on GPU
 current params: 
-0,	0,	3.69405e+06,	4.58435e-41,	0,	0,	6.86636e-44,	0,	4.4305e-38,	0,	5.90187e-39,	9.80909e-45,	7.17465e-43,	0,	4.2039e-45,	1.4013e-45,	5.05354e+10,	1.36008e+16,	7.41287e-43,	0,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	
-diff: -0.00322706,	0.00322706,	6.6552e-36,	0,	0.113891,	0,	6.63294e-36,	0,	6.72623e-44,	0,	6.86636e-44,	0,	0,	0,	0,	0,	2.47956e-39,	0,	0,	0,	2.5207e-35,	1.03073e-08,	4.62428e-44,	0,	1.18825e-38,	0,	1.4013e-45,	1.4013e-45,	6.63639e-36,	0,	4.62428e-44,	0,	1.18769e-38,	0,	2.8026e-45,	1.4013e-45,	6.63629e-36,	0,	4.62428e-44,	0,	6.63311e-36,	0,	3.69408e+06,	4.58435e-41,	0,	0,	4.62428e-44,	0,	1.4013e-44,	4.58435e-41,	3.69405e+06,	4.58435e-41,	0.01,	-nan,	4.62428e-44,	0,	6.63311e-36,	0,	3.69407e+06,	4.58435e-41,	-4.73623e+33,	1.9554e+19,	4.62428e-44,	0,	1.4013e-44,	4.58435e-41,	3.69405e+06,	4.58435e-41,	4.48416e-44,	0,	4.62428e-44,	0,	1.18825e-38,	0,	1.4013e-45,	1.4013e-45,	6.63762e-36,	0,	9.10844e-44,	0,	4.41718e-38,	0,	4.41719e-38,	0,	6.63669e-36,	0,	6.63672e-36,	0,	1.4013e-45,	1.4013e-45,	1.4013e-45,	3.58732e-43,	3.58732e-43,	3.18224e+29,	4.62428e-44,	0,	8.28823e-36,	0,	8.28854e-36,	0,	
+0,	0,	-5.79295e-36,	4.56823e-41,	0,	0,	6.86636e-44,	0,	1.85742e-37,	0,	5.90115e-39,	9.80909e-45,	2.8026e-44,	0,	4.2039e-45,	1.4013e-45,	4.94168e+15,	2.34053e+23,	8.75812e-43,	0,	1.18881e-38,	0,	1.18723e-38,	0,	0,	0,	1.85749e-37,	0,	2.8026e-45,	2.8026e-45,	5.60519e-45,	2.14399e-43,	1.85756e-37,	0,	1.85756e-37,	0,	0,	0,	2.09923e+12,	0,	1.8575e-37,	0,	0,	0,	5.60519e-45,	1.59748e-43,	4.2039e-45,	3.237e-43,	1.4013e-45,	-103322,	5.04467e-42,	0,	1.75186e-37,	0,	1.85756e-37,	0,	1.8575e-37,	0,	0,	0,	5.60519e-45,	0,	7.12528e-39,	0,	1.49157e-10,	1.35947e+16,	2.02474e-41,	0,	-5.79295e-36,	4.56823e-41,	1.85751e-37,	0,	0,	5.60519e-45,	0,	0,	0,	0,	1.85751e-37,	0,	0,	5.60519e-45,	2.81267e-35,	0,	-1.16864e-35,	4.56823e-41,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	
+diff: 9.33789e-05,	-9.33789e-05,	2.8082e-35,	0,	-2.26551e+19,	0,	1.75515e-37,	0,	6.72623e-44,	0,	6.86636e-44,	0,	1.12104e-44,	0,	1.4013e-44,	0,	0,	0,	1.9441e+31,	1.74404e+28,	9.31915e-39,	0,	6.86636e-44,	0,	7.00649e-45,	0,	9.80909e-45,	0,	2.8026e-45,	0,	1.20901e+33,	3.12248e-39,	1.05056e-38,	0,	6.86636e-44,	0,	7.00649e-45,	0,	9.80909e-45,	0,	2.8026e-45,	0,	1.20901e+33,	2.53532e+30,	1.21969e-41,	0,	4.62428e-44,	0,	1.18769e-38,	0,	1.4013e-45,	1.4013e-45,	1.85268e-37,	0,	6.86636e-44,	0,	9.80909e-45,	0,	1.26117e-44,	0,	2.8026e-45,	0,	1.31425e+19,	1.09648e-38,	7.31427e+34,	0,	6.86636e-44,	0,	0,	0,	0,	0,	1.9533e-40,	0,	0,	4.5559e-41,	6.72623e-44,	0,	6.86636e-44,	0,	7.00649e-45,	0,	9.80909e-45,	0,	0,	0,	1.20901e+33,	3.65933e+12,	7.19161e-39,	4.2039e-45,	4.62428e-44,	0,	1.18825e-38,	0,	1.4013e-45,	1.4013e-45,	2.8148e-35,	0,	6.86636e-44,	0,	
 
 new params: 
-0.00322706,	-0.00322706,	3.69405e+06,	4.58435e-41,	0,	0,	6.86636e-44,	0,	4.4305e-38,	0,	5.90187e-39,	9.80909e-45,	7.17465e-43,	0,	4.2039e-45,	1.4013e-45,	5.05354e+10,	1.36008e+16,	7.41287e-43,	0,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	
+-9.33789e-05,	9.33789e-05,	-5.79295e-36,	4.56823e-41,	0,	0,	6.86636e-44,	0,	1.85742e-37,	0,	5.90115e-39,	9.80909e-45,	2.8026e-44,	0,	4.2039e-45,	1.4013e-45,	4.94168e+15,	2.34053e+23,	8.75812e-43,	0,	1.18881e-38,	0,	1.18723e-38,	0,	0,	0,	1.85749e-37,	0,	2.8026e-45,	2.8026e-45,	5.60519e-45,	2.14399e-43,	1.85756e-37,	0,	1.85756e-37,	0,	0,	0,	2.09923e+12,	0,	1.8575e-37,	0,	0,	0,	5.60519e-45,	1.59748e-43,	4.2039e-45,	3.237e-43,	1.4013e-45,	-103322,	5.04467e-42,	0,	1.75186e-37,	0,	1.85756e-37,	0,	1.8575e-37,	0,	0,	0,	5.60519e-45,	0,	7.12528e-39,	0,	1.49157e-10,	1.35947e+16,	2.02474e-41,	0,	-5.79295e-36,	4.56823e-41,	1.85751e-37,	0,	0,	5.60519e-45,	0,	0,	0,	0,	1.85751e-37,	0,	0,	5.60519e-45,	2.81267e-35,	0,	-1.16864e-35,	4.56823e-41,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	
 
 net_params->cpu_diff just after Update(): 
 net_params[0]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
@@ -533,15 +533,15 @@ net_params[6]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,  
 net_params[7]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[8]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
 net_params[9]->cpu_diff(): 0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     0,     
-net_params[10]->cpu_diff(): -8.29391e-06,     -5.13237e-06,     1.13903e-11,     -1.57552e-10,     2.2702e-13,     9.67395e-11,     -8.29314e-06,     -1.07142e-06,     -2.73564e-10,     -2.57089e-10,     -5.00724e-10,     -1.09388e-09,     -2.43952e-06,     -3.32053e-08,     -9.50291e-09,     -4.18337e-10,     -1.10475e-09,     -3.63513e-09,     -1.68076e-10,     -3.70816e-10,     -4.28296e-10,     -1.26106e-11,     -1.28929e-06,     -1.29226e-06,     -1.15006e-09,     -4.47724e-10,     3.05928e-11,     -4.62733e-10,     -1.28905e-06,     -1.28921e-06,     -2.61803e-10,     3.94429e-10,     -1.01812e-07,     -1.01736e-07,     3.00051e-11,     9.13562e-11,     -1.11402e-06,     -5.46232e-10,     -1.18404e-10,     -3.12759e-10,     -4.05042e-10,     -2.00879e-10,     -3.65368e-07,     -7.18124e-10,     -7.78699e-10,     -3.09666e-10,     5.53686e-10,     4.42544e-10,     -2.14743e-06,     4.14154e-10,     -3.93666e-10,     -7.12002e-07,     -2.46233e-08,     -5.10111e-10,     -5.70459e-06,     -4.82754e-06,     -4.8833e-06,     -2.48248e-06,     -2.49732e-08,     -5.97341e-08,     -5.59952e-06,     -4.82693e-06,     -4.88335e-06,     -7.96404e-07,     3.01728e-10,     -6.01372e-08,     -1.40815e-08,     -1.83635e-06,     -1.83692e-06,     6.05448e-10,     -9.63754e-11,     -3.8051e-08,     -2.22173e-06,     -1.61932e-06,     -1.61908e-06,     -2.88953e-06,     -2.88939e-06,     -2.20301e-10,     -3.6358e-08,     -4.46784e-07,     -4.46711e-07,     -1.15172e-09,     -1.17211e-09,     -1.94722e-10,     -8.43375e-07,     -6.8894e-08,     4.04143e-10,     -6.0034e-07,     -5.99805e-07,     -9.33944e-10,     -8.43472e-07,     -3.86915e-12,     -1.26716e-10,     -3.58125e-10,     -7.14981e-10,     -6.91661e-07,     -5.0736e-10,     3.5658e-10,     -2.63759e-10,     -4.80144e-10,     
-net_params[11]->cpu_diff(): -3.43094e-07,     1.28871e-05,     -2.88605e-06,     -5.61267e-07,     -2.50159e-06,     -6.39185e-06,     1.55188e-06,     8.82187e-06,     3.82825e-06,     1.08375e-06,     -3.07627e-05,     -4.5791e-06,     -1.17493e-06,     -4.56618e-06,     -1.87695e-06,     4.674e-06,     4.25719e-06,     1.11242e-05,     -3.10201e-07,     -2.02973e-06,     -3.11536e-06,     7.82625e-06,     -7.20152e-06,     -1.42537e-06,     1.75353e-06,     5.5503e-06,     1.00586e-05,     -8.42587e-06,     1.74194e-05,     -1.07919e-05,     -2.4694e-06,     -3.5461e-06,     -2.39359e-07,     -2.59848e-06,     -1.51818e-06,     2.3418e-06,     -8.42978e-06,     9.62094e-06,     4.8685e-06,     2.35223e-06,     1.08965e-05,     -4.32427e-06,     9.57633e-06,     1.82684e-05,     6.36243e-06,     -1.8313e-06,     5.9848e-07,     -6.05435e-06,     -7.05641e-06,     -9.76037e-06,     -2.86561e-06,     3.68764e-07,     6.12315e-06,     -2.03924e-05,     -2.14491e-06,     -4.45154e-06,     -1.23228e-06,     5.26512e-06,     2.26122e-06,     -7.54159e-08,     -1.81909e-05,     1.8513e-07,     2.80955e-06,     9.83179e-07,     -1.02063e-05,     2.6138e-05,     9.79765e-06,     -1.10828e-06,     1.07514e-05,     8.81108e-06,     7.00979e-06,     4.18213e-06,     1.45631e-06,     1.34166e-06,     1.20779e-05,     7.98577e-06,     8.9341e-06,     6.0704e-07,     1.82096e-06,     2.36265e-06,     -9.03094e-07,     1.52281e-05,     9.29409e-06,     -2.98507e-06,     5.05502e-06,     3.12733e-06,     3.49602e-06,     5.99839e-06,     -1.12884e-06,     2.77859e-06,     1.07064e-06,     -3.33567e-06,     -3.99248e-06,     1.31293e-06,     5.24979e-07,     2.0943e-06,     6.2874e-06,     2.75689e-05,     7.07986e-06,     -1.81179e-05,     
-net_params[12]->cpu_diff(): -2.09872e-10,     -5.59807e-05,     -4.80221e-05,     -1.79403e-05,     -0.000109983,     -3.84022e-05,     -6.19067e-05,     -6.14985e-05,     -7.4571e-05,     -3.14112e-05,     -0.000199509,     1.03394e-05,     2.73019e-05,     -0.000161988,     1.4783e-05,     -5.95978e-06,     -2.88751e-05,     -5.23985e-05,     4.26256e-07,     -0.000120943,     1.67124e-05,     -7.8485e-05,     -5.2119e-05,     -1.36251e-05,     -4.40919e-05,     -0.000132433,     -6.34932e-05,     -0.000103841,     -3.9328e-05,     -0.000289407,     -7.50461e-06,     -2.78429e-06,     -2.77773e-05,     -3.14005e-05,     3.73209e-07,     -9.51718e-05,     -5.73253e-05,     2.96447e-06,     -0.00019662,     -7.28502e-05,     2.34953e-06,     -2.47687e-05,     2.02102e-09,     -0.000171463,     -4.27227e-05,     -3.37196e-05,     -2.82451e-05,     -6.84436e-05,     -4.83483e-05,     -6.50106e-05,     -2.32098e-05,     -6.51254e-05,     -0.000141107,     -0.000106984,     -7.45266e-05,     1.06508e-05,     1.08806e-05,     -2.41173e-05,     -0.000115214,     1.01164e-06,     2.52406e-06,     -7.5867e-05,     -7.86359e-05,     -8.20271e-05,     -3.04523e-05,     -0.000211403,     -0.000259611,     1.65402e-05,     -3.97879e-06,     -0.000101129,     -3.35004e-05,     -9.88772e-05,     -9.65871e-06,     1.39032e-06,     -4.31065e-05,     -0.000227165,     -0.000175096,     9.40729e-07,     -1.91424e-05,     -9.33628e-05,     -3.10146e-05,     -3.49352e-06,     -0.000123958,     -0.000110752,     -9.05508e-05,     -3.52995e-05,     -1.83083e-05,     -2.19287e-05,     -7.89335e-05,     -7.81052e-05,     8.66046e-06,     -5.55352e-05,     1.1755e-06,     -2.55436e-05,     -4.11944e-06,     -1.55326e-05,     -8.06385e-05,     -6.04824e-05,     -7.68788e-05,     -0.000109731,     
-net_params[13]->cpu_diff(): -3.53448e-05,     -1.21624e-05,     -9.48815e-06,     1.77063e-05,     2.32398e-05,     4.93868e-06,     5.33615e-06,     -2.41347e-05,     -8.70152e-06,     -1.72152e-05,     2.91626e-05,     -1.41815e-05,     -1.97393e-05,     -1.46419e-05,     -5.59886e-05,     9.07868e-05,     -2.88856e-06,     1.94194e-06,     -2.44398e-05,     -4.33703e-05,     -1.06816e-05,     -1.414e-05,     -1.62879e-05,     2.46338e-05,     3.05818e-05,     4.21153e-05,     -1.15187e-05,     -2.25887e-05,     7.85965e-06,     -2.30395e-05,     1.26413e-06,     3.2141e-06,     -2.58262e-05,     6.86706e-06,     5.13133e-05,     -2.22627e-06,     8.81025e-05,     3.27582e-05,     -7.7894e-06,     -2.16815e-07,     -8.60147e-06,     -9.05665e-05,     6.01465e-05,     -6.91489e-05,     2.39404e-05,     8.66548e-06,     -3.65851e-05,     -3.08068e-05,     -7.25343e-05,     -3.88474e-06,     -6.05397e-05,     3.08141e-06,     1.4416e-05,     -3.78449e-05,     2.48131e-05,     2.29117e-06,     8.08113e-05,     -7.34947e-05,     0.000124024,     -1.53075e-05,     -2.93697e-05,     5.65394e-06,     4.12931e-05,     -9.77158e-05,     -2.34394e-05,     5.6926e-06,     -1.07958e-05,     -2.54184e-06,     3.05825e-06,     8.61971e-06,     6.47884e-06,     4.31159e-06,     -4.05591e-05,     3.04386e-05,     -6.65921e-06,     6.61345e-05,     -9.55379e-09,     -1.50766e-05,     -3.82914e-05,     -5.33654e-05,     2.04891e-06,     2.6468e-05,     -1.34573e-05,     6.10702e-05,     1.04828e-05,     -2.30965e-06,     4.20495e-05,     -8.41355e-07,     2.88007e-05,     -2.1333e-05,     6.00875e-07,     7.12694e-06,     4.06507e-06,     -5.68527e-06,     4.85544e-08,     7.5161e-05,     -1.66419e-05,     2.52775e-05,     -1.49309e-05,     1.27597e-05,     
-net_params[14]->cpu_diff(): -0.00349271,     -0.00116422,     -0.000961014,     -0.00234774,     -0.000751233,     -0.0022193,     1.99519e-05,     -0.00676602,     -0.00360152,     -0.00338949,     -0.00251603,     -0.0034004,     -0.00113298,     -0.000676396,     -0.00268406,     -0.00146639,     -0.000320546,     -0.00380396,     -0.0029228,     -0.00492611,     -0.00229432,     -0.00269673,     -0.000965506,     -0.00203987,     -0.0043357,     -0.00145531,     -0.00388697,     -0.00225399,     -1.26899e-05,     -0.010656,     -0.000947443,     -0.000208134,     -0.0011451,     -0.00191818,     -0.00556334,     -0.00185155,     -0.00490051,     -0.00432591,     -0.00256681,     -0.000874575,     -0.00547795,     -0.00271977,     -0.00615036,     -0.00236208,     -0.00375918,     -0.00318807,     -0.00225374,     -0.00201438,     -0.0022241,     -0.00156359,     -0.00355671,     6.89559e-05,     -0.00164349,     -0.00163954,     -0.00354389,     -0.00438092,     -0.0038209,     -0.00199951,     -0.00456731,     -0.00307214,     -0.00108987,     -0.00268094,     -0.00172168,     -0.0034074,     -0.00116417,     -0.00053603,     -0.000826064,     -0.000121766,     -0.00160007,     -0.00302508,     -0.002268,     -0.000749852,     -0.00168171,     -0.00228176,     -0.00430931,     -0.00310208,     6.60141e-05,     -0.000854781,     -0.00101923,     -0.00192236,     -0.00316815,     -0.00488226,     -0.000547174,     -0.00352485,     -0.00294133,     -0.00136739,     -0.00212533,     -0.000550556,     -0.00121521,     -0.00754144,     -0.00011829,     -0.00203616,     -0.0014393,     -0.000393305,     -0.00245507,     -0.00707333,     -0.000785385,     -0.00246232,     -0.00138514,     -0.000934474,     
-net_params[15]->cpu_diff(): -0.00322706,     0.00322706,     6.6552e-36,     0,     0.113891,     0,     6.63294e-36,     0,     6.72623e-44,     0,     6.86636e-44,     0,     0,     0,     0,     0,     2.47956e-39,     0,     0,     0,     2.5207e-35,     1.03073e-08,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     6.63639e-36,     0,     4.62428e-44,     0,     1.18769e-38,     0,     2.8026e-45,     1.4013e-45,     6.63629e-36,     0,     4.62428e-44,     0,     6.63311e-36,     0,     3.69408e+06,     4.58435e-41,     0,     0,     4.62428e-44,     0,     1.4013e-44,     4.58435e-41,     3.69405e+06,     4.58435e-41,     0.01,     -nan,     4.62428e-44,     0,     6.63311e-36,     0,     3.69407e+06,     4.58435e-41,     -4.73623e+33,     1.9554e+19,     4.62428e-44,     0,     1.4013e-44,     4.58435e-41,     3.69405e+06,     4.58435e-41,     4.48416e-44,     0,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     6.63762e-36,     0,     9.10844e-44,     0,     4.41718e-38,     0,     4.41719e-38,     0,     6.63669e-36,     0,     6.63672e-36,     0,     1.4013e-45,     1.4013e-45,     1.4013e-45,     3.58732e-43,     3.58732e-43,     3.18224e+29,     4.62428e-44,     0,     8.28823e-36,     0,     8.28854e-36,     0,     
-I0820 05:31:40.450247 30357 solver.cpp:115] Iteration 1, loss = inf
-I0820 05:31:40.794855 30357 solver.cpp:187] Snapshotting to scrape_zones_fine_train_iter_1
-I0820 05:31:42.474720 30357 solver.cpp:194] Snapshotting solver state to scrape_zones_fine_train_iter_1.solverstate
-I0820 05:31:43.666481 30357 solver.cpp:128] Optimization Done.
-I0820 05:31:43.666510 30357 finetune_net.cpp:30] Optimization Done.
+net_params[10]->cpu_diff(): 5.53946e-10,     3.92189e-11,     -3.09824e-10,     -1.80501e-10,     -2.96644e-10,     -2.25963e-10,     1.0783e-10,     -1.37855e-10,     -2.39143e-11,     -3.53706e-10,     -1.48147e-10,     4.12373e-11,     3.60291e-10,     6.47441e-11,     -3.26025e-10,     3.29606e-10,     -8.03287e-10,     3.5889e-10,     -3.77355e-11,     1.0286e-10,     -8.76536e-12,     -2.59751e-11,     9.46777e-12,     2.33216e-10,     2.34524e-10,     -5.66563e-11,     -3.75344e-10,     -1.67612e-10,     1.48247e-10,     1.42995e-10,     -1.08495e-10,     4.50609e-10,     1.05148e-10,     1.98813e-10,     1.51387e-10,     -1.47647e-10,     -3.1759e-10,     5.74462e-10,     -9.67935e-12,     -1.5141e-10,     1.01511e-10,     -3.8842e-10,     5.43972e-10,     2.55433e-11,     -3.0746e-11,     3.78184e-11,     4.83386e-11,     8.81238e-11,     4.7765e-10,     9.85891e-11,     2.15937e-10,     -9.67223e-12,     -1.64402e-10,     1.23371e-10,     1.86996e-10,     2.50025e-10,     -2.53252e-10,     -5.05091e-10,     5.90157e-11,     -1.11038e-10,     -3.65217e-10,     4.09474e-10,     -1.01243e-10,     1.4731e-10,     -2.27435e-11,     2.05441e-10,     7.19699e-11,     -7.7779e-11,     1.39906e-10,     1.04561e-10,     3.0825e-10,     1.23602e-10,     1.46166e-10,     1.66991e-10,     1.52175e-11,     8.44466e-11,     1.66967e-10,     -8.63543e-11,     -1.50513e-10,     -6.49992e-11,     -5.78766e-11,     1.81062e-10,     2.04796e-10,     2.18889e-10,     -8.99229e-11,     -2.14155e-10,     -2.51021e-10,     -2.41309e-11,     1.51777e-10,     1.65246e-10,     4.12492e-11,     -2.86495e-11,     -9.53723e-11,     2.03387e-10,     -2.70686e-10,     2.34212e-10,     -6.03307e-10,     1.36277e-10,     -1.25792e-10,     -5.63018e-11,     
+net_params[11]->cpu_diff(): 0,     -5.11498e-07,     -1.20617e-07,     -3.72387e-07,     1.03963e-07,     -2.58164e-07,     0,     -7.56105e-07,     -1.59394e-07,     -5.33801e-07,     0,     2.93654e-08,     0,     0,     -3.06309e-08,     -1.97597e-07,     0,     0,     0,     -3.21585e-07,     -7.56449e-08,     2.54428e-07,     6.14797e-08,     2.47317e-07,     -6.44158e-08,     6.05919e-07,     -6.11209e-08,     0,     0,     -4.11139e-08,     3.72561e-07,     6.70593e-08,     1.99111e-07,     -1.28407e-07,     7.36163e-07,     -5.10254e-07,     -7.38407e-07,     0,     6.57494e-08,     0,     0,     -3.34851e-07,     -5.06327e-08,     1.24677e-07,     -2.54829e-07,     0,     4.77542e-07,     0,     3.25582e-07,     -5.20018e-08,     -4.61699e-07,     -1.0743e-08,     1.88992e-06,     1.80205e-07,     0,     3.75032e-07,     0,     2.03371e-08,     0,     4.32566e-07,     4.13811e-08,     -2.39872e-08,     -3.59001e-08,     1.72318e-07,     0,     8.44738e-08,     -3.72299e-07,     1.03686e-07,     -1.00295e-07,     7.89744e-08,     0,     0,     -4.94541e-07,     0,     0,     -1.07126e-07,     -2.01564e-08,     1.64306e-07,     -2.24835e-07,     2.16498e-07,     5.54945e-07,     7.79638e-08,     5.11611e-08,     4.28525e-09,     -2.75007e-07,     -3.64496e-07,     1.92948e-07,     1.94563e-07,     0,     0,     0,     -1.27837e-08,     1.10229e-06,     5.65144e-07,     0,     -1.10421e-07,     -6.01573e-08,     3.98037e-07,     0,     3.1839e-08,     
+net_params[12]->cpu_diff(): 3.6095e-10,     -5.47168e-06,     9.41365e-11,     -3.93062e-06,     -2.09451e-06,     -2.25574e-06,     -3.41797e-10,     -2.54836e-10,     -1.43492e-05,     -8.74296e-06,     -3.86922e-11,     7.13942e-11,     3.57709e-10,     -9.58683e-11,     3.16813e-10,     -8.68788e-06,     2.44582e-11,     -3.0718e-10,     2.12808e-10,     -2.16481e-06,     9.54259e-11,     -8.0165e-06,     -1.2825e-10,     -4.29837e-06,     -3.61717e-12,     1.14066e-10,     1.52693e-10,     7.75691e-11,     1.11729e-10,     -6.73312e-11,     -4.1866e-12,     1.5265e-10,     -3.09099e-10,     1.73771e-10,     -9.19052e-07,     -2.37562e-06,     -2.98408e-06,     -7.32299e-10,     -2.40278e-10,     -1.1299e-10,     2.66486e-11,     -3.15646e-10,     -1.28219e-10,     -3.52693e-06,     -6.6986e-06,     -1.76782e-10,     1.72013e-10,     -2.52649e-10,     1.51522e-10,     -3.39188e-10,     -4.52625e-10,     1.86714e-10,     -6.78703e-06,     5.95263e-11,     -1.95553e-10,     -3.16458e-10,     3.02862e-10,     1.84375e-10,     1.31691e-10,     -5.36598e-06,     -2.29776e-10,     -7.36641e-11,     -1.14433e-10,     -1.92937e-10,     2.39294e-10,     2.2125e-10,     -7.86938e-06,     2.23363e-10,     1.65523e-10,     1.49272e-10,     3.06449e-10,     4.05127e-10,     -4.44392e-06,     3.1667e-10,     4.81726e-10,     -8.11242e-11,     2.8955e-10,     -1.95079e-10,     -7.37625e-06,     -6.71476e-06,     -3.96475e-06,     -8.07559e-11,     2.14177e-12,     -3.0876e-10,     -2.12609e-10,     -3.87034e-06,     -7.70283e-06,     -6.69517e-06,     2.03221e-10,     -1.33213e-10,     1.50127e-11,     -1.27714e-06,     -4.46258e-06,     -4.24022e-06,     -4.44133e-10,     2.97926e-11,     -2.05449e-06,     1.0371e-10,     2.46621e-10,     -2.47426e-10,     
+net_params[13]->cpu_diff(): -1.01548e-06,     0,     4.27624e-07,     8.82966e-07,     -3.18883e-06,     -1.87102e-07,     -9.00909e-08,     2.94437e-06,     0,     0,     -4.41214e-07,     -1.00944e-07,     -2.04267e-06,     9.11661e-07,     0,     5.4392e-07,     -1.97453e-07,     -1.50063e-06,     3.31239e-08,     0,     0,     -3.94909e-07,     0,     1.729e-07,     -5.50966e-07,     -6.35564e-08,     -2.57342e-08,     -2.13273e-07,     5.89077e-07,     -2.03025e-07,     0,     0,     1.10592e-06,     -6.22518e-08,     0,     3.48507e-07,     -1.9048e-08,     6.72609e-07,     2.99504e-07,     -8.57387e-07,     -1.84165e-06,     1.30956e-06,     0,     -2.00359e-07,     8.62872e-07,     0,     -1.52655e-06,     -1.36044e-08,     6.05021e-08,     0,     5.69611e-07,     9.74973e-07,     2.30057e-07,     3.71072e-07,     1.89935e-06,     -5.42874e-07,     5.02746e-07,     -1.81663e-06,     -5.62233e-07,     -4.19233e-08,     -3.01094e-06,     2.59075e-08,     -2.29258e-07,     3.32767e-07,     1.48575e-06,     0,     5.09922e-07,     1.86478e-08,     0,     1.03227e-07,     0,     -1.48386e-07,     0,     -6.94297e-07,     -4.36978e-07,     -1.24279e-06,     3.17882e-08,     6.62409e-08,     6.1602e-07,     3.39118e-07,     0,     1.11338e-06,     1.23442e-06,     -1.98872e-06,     -2.00558e-07,     3.73772e-07,     2.03043e-06,     7.05387e-07,     5.78382e-08,     -1.53089e-06,     1.78396e-07,     -1.5474e-07,     0,     1.51682e-07,     -5.4877e-07,     -1.62507e-06,     2.71874e-06,     6.78789e-07,     -5.81167e-07,     -5.31941e-08,     
+net_params[14]->cpu_diff(): 0.000101928,     1.37176e-10,     2.85971e-05,     0.000133784,     0.000112329,     2.71936e-05,     1.03948e-05,     0.000106663,     9.20522e-11,     1.15196e-10,     4.71474e-05,     4.5343e-05,     7.38152e-05,     9.19024e-05,     -5.5368e-10,     0.000124807,     7.03232e-05,     8.49502e-05,     1.02661e-06,     -4.22988e-10,     -5.81111e-10,     9.49978e-07,     6.49952e-10,     7.86035e-05,     6.51957e-05,     1.05137e-06,     3.29279e-07,     5.2711e-05,     3.71187e-05,     5.9994e-06,     3.24099e-10,     5.05075e-10,     0.000196235,     5.46559e-06,     -5.36077e-10,     2.83144e-05,     3.03866e-05,     0.000105283,     0.000108238,     1.57009e-05,     7.7107e-05,     0.000202837,     -5.96096e-10,     8.96219e-05,     4.63918e-05,     -8.76705e-11,     0.000174442,     4.24673e-06,     1.95877e-06,     1.70053e-10,     0.000231268,     4.3288e-06,     3.11653e-05,     1.95042e-05,     8.2503e-05,     2.14575e-05,     2.68276e-05,     0.000192285,     0.000218623,     9.00415e-05,     0.000238226,     3.37345e-05,     2.75075e-05,     4.11379e-05,     0.000333934,     5.24936e-10,     3.08906e-05,     2.88702e-05,     5.16631e-10,     1.6226e-05,     5.5095e-10,     2.60962e-05,     -3.93954e-10,     5.3159e-05,     3.79163e-05,     6.86748e-05,     1.28917e-06,     1.67337e-05,     1.62429e-05,     3.70864e-05,     -2.02934e-10,     1.28812e-05,     2.2976e-05,     0.000301378,     3.32663e-05,     3.91691e-05,     3.07468e-05,     1.38842e-05,     6.26406e-05,     2.71561e-05,     0.000166994,     9.12739e-06,     9.89033e-11,     2.34776e-05,     5.99443e-05,     3.32164e-05,     4.45884e-05,     4.05085e-05,     0.000100558,     1.79549e-06,     
+net_params[15]->cpu_diff(): 9.33789e-05,     -9.33789e-05,     2.8082e-35,     0,     -2.26551e+19,     0,     1.75515e-37,     0,     6.72623e-44,     0,     6.86636e-44,     0,     1.12104e-44,     0,     1.4013e-44,     0,     0,     0,     1.9441e+31,     1.74404e+28,     9.31915e-39,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     2.8026e-45,     0,     1.20901e+33,     3.12248e-39,     1.05056e-38,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     2.8026e-45,     0,     1.20901e+33,     2.53532e+30,     1.21969e-41,     0,     4.62428e-44,     0,     1.18769e-38,     0,     1.4013e-45,     1.4013e-45,     1.85268e-37,     0,     6.86636e-44,     0,     9.80909e-45,     0,     1.26117e-44,     0,     2.8026e-45,     0,     1.31425e+19,     1.09648e-38,     7.31427e+34,     0,     6.86636e-44,     0,     0,     0,     0,     0,     1.9533e-40,     0,     0,     4.5559e-41,     6.72623e-44,     0,     6.86636e-44,     0,     7.00649e-45,     0,     9.80909e-45,     0,     0,     0,     1.20901e+33,     3.65933e+12,     7.19161e-39,     4.2039e-45,     4.62428e-44,     0,     1.18825e-38,     0,     1.4013e-45,     1.4013e-45,     2.8148e-35,     0,     6.86636e-44,     0,     
+I0820 09:53:12.994601 11893 solver.cpp:115] Iteration 1, loss = 2.38172e+37
+I0820 09:53:13.339356 11893 solver.cpp:187] Snapshotting to scrape_zones_fine_train_iter_1
+I0820 09:53:15.014518 11893 solver.cpp:194] Snapshotting solver state to scrape_zones_fine_train_iter_1.solverstate
+I0820 09:53:16.246868 11893 solver.cpp:128] Optimization Done.
+I0820 09:53:16.246903 11893 finetune_net.cpp:30] Optimization Done.
 Done.
