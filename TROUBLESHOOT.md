@@ -95,7 +95,7 @@ debug SBL:
 	   -> which stage outscales the cpu_diff()? none!
 	      what happens to cpu_diff() b4/after bwd pass?
 	      add couts in net.cpp l.269
-	      -> solver::ForwardBackward calls
+	      -> net.hpp::ForwardBackward calls
 	          net::Backward calls
 		   layer::Backward calls
 		    specific_layer::Backward_cpu
@@ -104,20 +104,33 @@ debug SBL:
 	   -> compared w/ benchmark throughout an iteration, similar
 	      values (also outscale for benchmark)
 	      
-     -> actual parameter values might be where PROB is
-     	-> solver::net_->Update() calls
+   -> actual parameter values might be where PROB is
+      -> solver::net_->Update() calls
 	     net::Update calls
 	       blob::Update
-	-> compare logs
+      -> compare logs
 	   -> PROB1: layer[10] is 0 for sbl only
-	      -> should be 
-	   ->        sbl max       benchmark max
+	      -> should be ..?
+	   -> loss just after ForwardBackward:
+	   already fucked up
+	   -> cpu_diff just after ForwardBackward: 
+		     sbl max       benchmark max
 	   net_15    e+34          e+31
 	   net_14    0.92          0.99
 	   net_13    0.015         0.009
 	   net_12    0    !        0.013 (but no neg values!)
-	   net_11    0.0055        0.0027 
+	   net_11    0.0055        0.0027
+	   -> cpu_diff just after ComputeUpdateValue():
+	   fine
+	   -> current params, diff, new params:
+	   fine
+	   -> cpu_diff just after Update():
+	   fine
 	   
+  -> so the fucked up stuff occurs inside ForwardBackward()
+     -> 
+  
+    
 	   EF CONF CALL THIS AFTERNOON
 	   SET UP REMINDERS
 	   TELL DAD ETC

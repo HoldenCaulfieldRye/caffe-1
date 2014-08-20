@@ -386,10 +386,10 @@ template <typename Dtype>
 void Net<Dtype>::Update() {
   for (int i = 0; i < params_.size(); ++i) {
     
-    std::cout << "param[" << i << "] values b4 Update():" << std::endl;
-    for (int i = 0; i < 50; ++i) 
-      std::cout << params_ << ",     ";
-    std::cout << std::endl;
+    // std::cout << "param[" << i << "] values b4 Update():" << std::endl;
+    // for (int i = 0; i < 50; ++i) 
+    //   std::cout << params_ << ",     ";
+    // std::cout << std::endl;
     
     params_[i]->Update();
   }
