@@ -219,10 +219,12 @@ template <typename Dtype>
 const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
   if (loss != NULL) {
     *loss = Dtype(0.);
-  }
+  }std::cout << "forwardprefilled, ";
   for (int i = 0; i < layers_.size(); ++i) {
     // LOG(ERROR) << "Forwarding " << layer_names_[i];
+
     Dtype layer_loss = layers_[i]->Forward(bottom_vecs_[i], &top_vecs_[i]);
+    std::cout << "loss for layer[" << i << "]: " << layer_loss << std::endl;
     if (loss != NULL) {
       *loss += layer_loss;
     }
@@ -234,15 +236,18 @@ template <typename Dtype>
 const vector<Blob<Dtype>*>& Net<Dtype>::Forward(
     const vector<Blob<Dtype>*> & bottom, Dtype* loss) {
   // Copy bottom to internal bottom
+  std::cout << "using net.cpp::Forward1" << std::endl;
   for (int i = 0; i < bottom.size(); ++i) {
     net_input_blobs_[i]->CopyFrom(*bottom[i]);
   }
+  std::cout << "loss before ForwardPrefilled: " << loss << std::endl;
   return ForwardPrefilled(loss);
 }
 
 template <typename Dtype>
 string Net<Dtype>::Forward(const string& input_blob_protos, Dtype* loss) {
   BlobProtoVector blob_proto_vec;
+  std::cout << "using net.cpp::Forward2" << std::endl;
   if (net_input_blobs_.size()) {
     blob_proto_vec.ParseFromString(input_blob_protos);
     CHECK_EQ(blob_proto_vec.blobs_size(), net_input_blobs_.size())
@@ -251,7 +256,9 @@ string Net<Dtype>::Forward(const string& input_blob_protos, Dtype* loss) {
       net_input_blobs_[i]->FromProto(blob_proto_vec.blobs(i));
     }
   }
+  std::cout << "loss before ForwardPrefilled: " << loss << std::endl;
   ForwardPrefilled(loss);
+  std::cout << "loss after ForwardPrefilled: " << loss << std::endl;
   blob_proto_vec.Clear();
   for (int i = 0; i < net_output_blobs_.size(); ++i) {
     net_output_blobs_[i]->ToProto(blob_proto_vec.add_blobs());
