@@ -90,13 +90,15 @@ debug SBL:
      -> cpu_diff() might be where PROB is
      	-> only for param_id = {14,15} do we have nonzero diff, why??
 	   -> because backprop accidentally active on fc8 only
-	-> woah! exploding/vanishing gradient with SBL
-	   -> what happens to cpu_diff() b4/after bwd pass?
+	-> woah! exploding/vanishing cpu_diff() with SBL
+	   -> which stage outscales the cpu_diff()?
+	      what happens to cpu_diff() b4/after bwd pass?
 	      add couts in net.cpp l.269
-	      -> Solver::ForwardBackward calls
+	      -> solver::ForwardBackward calls
 	         net::Backward calls
 		 layer::Backward calls
-		 Backward_cpu on specific layer type
+		 specific_layer::Backward_cpu on specific layer type
+		 where to put the couts?
 
 the main functions from which net is trained:
 ":Solve("  	   	in src/caffe/solver.cpp
