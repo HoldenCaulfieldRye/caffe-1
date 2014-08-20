@@ -159,6 +159,7 @@ void caffe_add_scalar(const int N, const double alpha, double* Y) {
 }
 
 template <>
+//copy source X to dest Y
 void caffe_copy<float>(const int N, const float* X, float* Y) {
   cblas_scopy(N, X, 1, Y, 1);
 }
@@ -217,7 +218,7 @@ template <>
 void caffe_cpu_axpby<float>(const int N, const float alpha, const float* X,
                             const float beta, float* Y) {
   cblas_saxpby(N, alpha, X, 1, beta, Y, 1);
-  //replaces ? with alpha.X + beta.Y
+  //replaces Y with alpha.X + beta.Y
   // i.e. "a*X plus b*Y" hence the name of the function
 }
 
