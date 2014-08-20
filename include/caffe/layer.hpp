@@ -4,7 +4,6 @@
 #define CAFFE_LAYER_H_
 
 #include <vector>
-#include <iostream>
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
 #include "caffe/proto/caffe.pb.h"
@@ -110,25 +109,8 @@ inline void Layer<Dtype>::Backward(const vector<Blob<Dtype>*>& top,
   switch (Caffe::mode()) {
   case Caffe::CPU:
 
-  int num = prob_.num();
-  int dim = prob_.count() / num;  
-  std::cout << "(layer.hpp) cpu_diff b4 backward_cpu:" << std::endl;
-  for (int i = 0; i < 50; ++i)  {
-    for (int j = 0; j < dim; ++j) 
-      std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
     
     Backward_cpu(top, propagate_down, bottom);
-
-  std::cout << "(layer.hpp) cpu_diff after backward_cpu:" << std::endl;
-  for (int i = 0; i < 50; ++i)  {
-    for (int j = 0; j < dim; ++j) 
-      std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
 
     break;
   case Caffe::GPU:
