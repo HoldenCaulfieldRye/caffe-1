@@ -4,7 +4,7 @@
 #include <set>
 #include <string>
 #include <vector>
-#include <iostream>
+//#include <iostream>
 
 #include "caffe/common.hpp"
 #include "caffe/proto/caffe.pb.h"
@@ -219,7 +219,7 @@ template <typename Dtype>
 const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
   if (loss != NULL) {
     *loss = Dtype(0.);
-  }std::cout << "forwardprefilled, ";
+  }//std::cout << "forwardprefilled, ";
   for (int i = 0; i < layers_.size(); ++i) {
     // LOG(ERROR) << "Forwarding " << layer_names_[i];
 
@@ -228,20 +228,20 @@ const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
     //height, width) for carrying img data in layer i
     //bottom_vecs[i][0] carries the labels in layer i
     if (i==23) { //layer number I want in this specific case
-      std::cout << "bottom_vecs_[" << i << "][0]->cpu_data(): ";
+      //std::cout << "bottom_vecs_[" << i << "][0]->cpu_data(): ";
       for (int j=0; j<bottom_vecs_[i].size(); j++) {
 	for (int k=0; j<50; j++) { 
-	  std::cout << bottom_vecs_[i][0]->cpu_data()[j] << ", ";
+	  //std::cout << bottom_vecs_[i][0]->cpu_data()[j] << ", ";
 	}
       }
-      std::cout << std::endl << "top_vecs_[" << i << "]: ";
+      //std::cout << std::endl << "top_vecs_[" << i << "]: ";
       for (int j=0; j<top_vecs_[i].size(); j++) {
-	std::cout << top_vecs_[i][j] << ", ";
+	//std::cout << top_vecs_[i][j] << ", ";
       }
-      std::cout << std::endl;
+      //std::cout << std::endl;
     }
     Dtype layer_loss = layers_[i]->Forward(bottom_vecs_[i], &top_vecs_[i]);
-    std::cout << "loss for layer[" << i << "]: " << layer_loss << std::endl;
+    //std::cout << "loss for layer[" << i << "]: " << layer_loss << std::endl;
     if (loss != NULL) {
       *loss += layer_loss;
     }
@@ -253,18 +253,18 @@ template <typename Dtype>
 const vector<Blob<Dtype>*>& Net<Dtype>::Forward(
     const vector<Blob<Dtype>*> & bottom, Dtype* loss) {
   // Copy bottom to internal bottom
-  std::cout << "using net.cpp::Forward1" << std::endl;
+  //std::cout << "using net.cpp::Forward1" << std::endl;
   for (int i = 0; i < bottom.size(); ++i) {
     net_input_blobs_[i]->CopyFrom(*bottom[i]);
   }
-  std::cout << "loss before ForwardPrefilled: " << loss << std::endl;
+  //std::cout << "loss before ForwardPrefilled: " << loss << std::endl;
   return ForwardPrefilled(loss);
 }
 
 template <typename Dtype>
 string Net<Dtype>::Forward(const string& input_blob_protos, Dtype* loss) {
   BlobProtoVector blob_proto_vec;
-  std::cout << "using net.cpp::Forward2" << std::endl;
+  //std::cout << "using net.cpp::Forward2" << std::endl;
   if (net_input_blobs_.size()) {
     blob_proto_vec.ParseFromString(input_blob_protos);
     CHECK_EQ(blob_proto_vec.blobs_size(), net_input_blobs_.size())
@@ -273,9 +273,9 @@ string Net<Dtype>::Forward(const string& input_blob_protos, Dtype* loss) {
       net_input_blobs_[i]->FromProto(blob_proto_vec.blobs(i));
     }
   }
-  std::cout << "loss before ForwardPrefilled: " << loss << std::endl;
+  //std::cout << "loss before ForwardPrefilled: " << loss << std::endl;
   ForwardPrefilled(loss);
-  std::cout << "loss after ForwardPrefilled: " << loss << std::endl;
+  //std::cout << "loss after ForwardPrefilled: " << loss << std::endl;
   blob_proto_vec.Clear();
   for (int i = 0; i < net_output_blobs_.size(); ++i) {
     net_output_blobs_[i]->ToProto(blob_proto_vec.add_blobs());
@@ -294,24 +294,24 @@ void Net<Dtype>::Backward() {
       // // this won't compile
       // int num = layers_[i]->prob_.num();
       // int dim = layers_[i]->prob_.count() / num;  
-      // std::cout << "(net.cpp) cpu_diff b4 backward_cpu:" << std::endl;
+      // //std::cout << "(net.cpp) cpu_diff b4 backward_cpu:" << std::endl;
       // for (int i = 0; i < 50; ++i)  {
       // 	for (int j = 0; j < dim; ++j) {
-      // 	  std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << layers_[i]->(*bottom)[0]->mutable_cpu_diff()[i*dim+j]<< ",  ";
-      // 	std::cout << std::endl;
+      // 	  //std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << layers_[i]->(*bottom)[0]->mutable_cpu_diff()[i*dim+j]<< ",  ";
+      // 	//std::cout << std::endl;
       // }
-      // std::cout << std::endl;
+      // //std::cout << std::endl;
 
       layers_[i]->Backward(top_vecs_[i], true, &bottom_vecs_[i]);
 
       // // this won't compile
-      // std::cout << "(net.cpp) cpu_diff after backward_cpu:" << std::endl;
+      // //std::cout << "(net.cpp) cpu_diff after backward_cpu:" << std::endl;
       // for (int i = 0; i < 50; ++i)  {
       // 	for (int j = 0; j < dim; ++j) 
-      // 	  std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-      // 	std::cout << std::endl;
+      // 	  //std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
+      // 	//std::cout << std::endl;
       // }
-      // std::cout << std::endl;
+      // //std::cout << std::endl;
       
     }
   }
@@ -410,10 +410,10 @@ template <typename Dtype>
 void Net<Dtype>::Update() {
   for (int i = 0; i < params_.size(); ++i) {
     
-    // std::cout << "param[" << i << "] values b4 Update():" << std::endl;
+    // //std::cout << "param[" << i << "] values b4 Update():" << std::endl;
     // for (int i = 0; i < 50; ++i) 
-    //   std::cout << params_ << ",     ";
-    // std::cout << std::endl;
+    //   //std::cout << params_ << ",     ";
+    // //std::cout << std::endl;
     
     params_[i]->Update();
   }

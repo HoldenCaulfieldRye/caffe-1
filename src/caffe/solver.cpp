@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <iostream>
+//#include <iostream>
 
 #include "caffe/net.hpp"
 #include "caffe/proto/caffe.pb.h"
@@ -82,35 +82,35 @@ void Solver<Dtype>::Solve(const char* resume_file) {
   while (iter_++ < param_.max_iter()) {
     Dtype loss = net_->ForwardBackward(bottom_vec);
 
-    std::cout << "loss just after ForwardBackward: " << loss << std::endl;
+    //std::cout << "loss just after ForwardBackward: " << loss << std::endl;
     
-    std::cout << "net_params->cpu_diff just after ForwardBackward: " << std::endl;
+    //std::cout << "net_params->cpu_diff just after ForwardBackward: " << std::endl;
     
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
-      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      //std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<100; i++)
-    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
-      std::cout << std::endl;
+    	//std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
+      //std::cout << std::endl;
     }
       
     ComputeUpdateValue();
 
-    std::cout << "net_params->cpu_diff just after ComputeUpdateValue(): " << std::endl;
+    //std::cout << "net_params->cpu_diff just after ComputeUpdateValue(): " << std::endl;
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
-      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      //std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<100; i++)
-    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
-      std::cout << std::endl;
+    	//std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
+      //std::cout << std::endl;
     }
     
     net_->Update();
 
-    std::cout << "net_params->cpu_diff just after Update(): " << std::endl;
+    //std::cout << "net_params->cpu_diff just after Update(): " << std::endl;
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
-      std::cout << "caca boudin net_params["<<param_id<<"]->cpu_diff(): ";
+      //std::cout << "caca boudin net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<100; i++)
-    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
-      std::cout << std::endl;
+    	//std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
+      //std::cout << std::endl;
     }    
     
     if (param_.display() && iter_ % param_.display() == 0) {
@@ -278,10 +278,10 @@ void SGDSolver<Dtype>::ComputeUpdateValue() {
       Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
       //local_rate.net_params[param_id]->cpu_diff() + momentum.history_[param_id]->mutable_cpu_data(), result in history_
       
-      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      //std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<50; i++)
-	std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
-      std::cout << std::endl;
+	//std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
+      //std::cout << std::endl;
       
       caffe_cpu_axpby(net_params[param_id]->count(), local_rate,
           net_params[param_id]->cpu_diff(), momentum,
@@ -305,10 +305,10 @@ void SGDSolver<Dtype>::ComputeUpdateValue() {
       Dtype local_rate = rate * net_params_lr[param_id];
       Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
       
-      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      //std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<50; i++)
-	std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
-      std::cout << std::endl;
+	//std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
+      //std::cout << std::endl;
       
       caffe_gpu_axpby(net_params[param_id]->count(), local_rate,
           net_params[param_id]->gpu_diff(), momentum,

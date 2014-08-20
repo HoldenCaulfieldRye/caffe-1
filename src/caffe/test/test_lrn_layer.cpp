@@ -167,7 +167,7 @@ TYPED_TEST(LRNLayerTest, TestCPUGradientAcrossChannels) {
   }
   layer.Backward(this->blob_top_vec_, true, &(this->blob_bottom_vec_));
   // for (int i = 0; i < this->blob_bottom_->count(); ++i) {
-  //   std::cout << "CPU diff " << this->blob_bottom_->cpu_diff()[i]
+  //   //std::cout << "CPU diff " << this->blob_bottom_->cpu_diff()[i]
   //       << std::endl;
   // }
   checker.CheckGradientExhaustive(&layer, &(this->blob_bottom_vec_),
@@ -186,7 +186,7 @@ TYPED_TEST(LRNLayerTest, TestGPUGradientAcrossChannels) {
   }
   layer.Backward(this->blob_top_vec_, true, &(this->blob_bottom_vec_));
   // for (int i = 0; i < this->blob_bottom_->count(); ++i) {
-  //   std::cout << "GPU diff " << this->blob_bottom_->cpu_diff()[i]
+  //   //std::cout << "GPU diff " << this->blob_bottom_->cpu_diff()[i]
   //       << std::endl;
   // }
   checker.CheckGradientExhaustive(&layer, &(this->blob_bottom_vec_),

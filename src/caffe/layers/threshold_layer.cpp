@@ -42,7 +42,7 @@ Dtype ThresholdLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   int count = prior_.count();
   int dim = count / num;
 
-  //std::cout << dim << "\n";
+  ////std::cout << dim << "\n";
   Dtype* prior_data = prior_.mutable_cpu_data();
   for (int i = 0; i < num; ++i) {
     for (int j = 0; j < dim; ++j) {
