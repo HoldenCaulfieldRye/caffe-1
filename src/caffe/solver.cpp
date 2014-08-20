@@ -87,7 +87,7 @@ void Solver<Dtype>::Solve(const char* resume_file) {
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
       std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<100; i++)
-    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ", ";
+    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
       std::cout << std::endl;
     }
       
@@ -97,7 +97,7 @@ void Solver<Dtype>::Solve(const char* resume_file) {
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
       std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<100; i++)
-    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ", ";
+    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
       std::cout << std::endl;
     }
     
@@ -107,7 +107,7 @@ void Solver<Dtype>::Solve(const char* resume_file) {
     for (int param_id=0; param_id < net_->params().size(); param_id++) {      
       std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
       for (int i=0; i<100; i++)
-    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ", ";
+    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ",     ";
       std::cout << std::endl;
     }    
     
