@@ -274,7 +274,8 @@ next steps:
 - t-SNE   
 - test error script
 - controlpoint extra metadata
-- save net only if performance gain (cf pylearn2)
+- save net only if performance gain
+  -> solver.cpp l.114 approx
 - impose best possible class balance at every batch
 - different batch contents at every epoch
 - preprocess: divide images by the image standard deviation and apply

@@ -82,16 +82,31 @@ void Solver<Dtype>::Solve(const char* resume_file) {
   while (iter_++ < param_.max_iter()) {
     Dtype loss = net_->ForwardBackward(bottom_vec);
 
-    // for (param_id=0; param_id < net_->params().size(); param_id++) {
-    //   std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
-    //   for (int i=0; i<100; i++)
-    // 	std::cout << net_->params()[param_id]->cpu_diff()[i] << ", ";
-    //   std::cout << std::endl;
-    // }
+    std::cout << "net_params->cpu_diff just after ForwardBackward: " << std::endl;
+    
+    for (int param_id=0; param_id < net_->params().size(); param_id++) {
+      
+      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      for (int i=0; i<100; i++)
+    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ", ";
+      std::cout << std::endl;
+    }
       
     ComputeUpdateValue();
+
+    std::cout << "net_params->cpu_diff just after ComputeUpdateValue(): " << std::endl;
+      for (int i=0; i<100; i++)
+    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ", ";
+      std::cout << std::endl;
+    
     net_->Update();
 
+    std::cout << "net_params->cpu_diff just after Update(): " << std::endl;
+      for (int i=0; i<100; i++)
+    	std::cout << net_->params()[param_id]->cpu_diff()[i] << ", ";
+      std::cout << std::endl;
+    
+    
     if (param_.display() && iter_ % param_.display() == 0) {
       LOG(INFO) << "Iteration " << iter_ << ", loss = " << loss;
     }
