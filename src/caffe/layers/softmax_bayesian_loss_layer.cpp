@@ -58,6 +58,7 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
     //FLT_MIN is smallest nonzero float (don't want to give 0 to log)
     loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / static_cast<float>(prior[static_cast<int>(label[i])]);
   }
+  std::cout << """SBL, loss: " << loss << std::endl;
   return loss / (dim*num);
 }
 
