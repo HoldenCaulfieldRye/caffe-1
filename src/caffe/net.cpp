@@ -4,6 +4,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "caffe/common.hpp"
 #include "caffe/proto/caffe.pb.h"
@@ -265,6 +266,7 @@ template <typename Dtype>
 void Net<Dtype>::Backward() {
   for (int i = layers_.size() - 1; i >= 0; --i) {
     if (layer_need_backward_[i]) {
+      std::cout << ;
       layers_[i]->Backward(top_vecs_[i], true, &bottom_vecs_[i]);
     }
   }

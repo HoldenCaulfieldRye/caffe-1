@@ -88,11 +88,23 @@ debug SBL:
           net_params[param_id]->cpu_diff(), momentum,
           history_[param_id]->mutable_cpu_data());
      -> cpu_diff() might be where PROB is
+     	-> only for param_id = {14,15} do we have nonzero diff, why??
+	   -> because backprop accidentally active on fc8 only
+	-> woah! exploding/vanishing gradient with SBL
+	   -> what happens to cpu_diff() b4/after bwd pass?
+	      add couts in net.cpp l.269
+	      -> Solver::ForwardBackward calls
+	         net::Backward calls
+		 layer::Backward calls
+		 Backward_cpu on specific layer type
 
 the main functions from which net is trained:
-"::Solve("  	   	in src/caffe/solver.cpp
-"::ComputeUpdateValue(" in src/caffe/solver.cpp
-"::Update(" 		in src/caffe/
+":Solve("  	   	in src/caffe/solver.cpp
+":Forward("            in src/caffe/net.cpp
+":Backward("           in src/caffe/net.cpp
+":Backward(const"      in src/caffe/layer.hpp
+":ComputeUpdateValue(" in src/caffe/solver.cpp
+":Update(" 		in src/caffe/
 "void caffe_cpu_axpby(" in src/caffe/util/math_functions.cpp
 
 
