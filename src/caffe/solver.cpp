@@ -249,8 +249,8 @@ void SGDSolver<Dtype>::ComputeUpdateValue() {
       Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
       //local_rate.net_params[param_id]->cpu_diff() + momentum.history_[param_id]->mutable_cpu_data(), result in history_
       
-      std::cout << "net_params[param_id]->cpu_diff(): ";
-      for (int i=0; i<net_params[param_id]->count(); i++)
+      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      for (int i=0; i<100; i++)
 	std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
       std::cout << std::endl;
       
@@ -276,8 +276,8 @@ void SGDSolver<Dtype>::ComputeUpdateValue() {
       Dtype local_rate = rate * net_params_lr[param_id];
       Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
       
-      std::cout << "net_params[param_id]->cpu_diff(): ";
-      for (int i=0; i<net_params[param_id]->count(); i++)
+      std::cout << "net_params["<<param_id<<"]->cpu_diff(): ";
+      for (int i=0; i<100; i++)
 	std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
       std::cout << std::endl;
       
