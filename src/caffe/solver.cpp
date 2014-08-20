@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "caffe/net.hpp"
 #include "caffe/proto/caffe.pb.h"
