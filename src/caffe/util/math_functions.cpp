@@ -217,6 +217,8 @@ template <>
 void caffe_cpu_axpby<float>(const int N, const float alpha, const float* X,
                             const float beta, float* Y) {
   cblas_saxpby(N, alpha, X, 1, beta, Y, 1);
+  //replaces ? with alpha.X + beta.Y
+  // i.e. "a*X plus b*Y" hence the name of the function
 }
 
 template <>

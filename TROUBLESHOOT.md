@@ -65,7 +65,7 @@ stuff in build/src/caffe/proto/caffe.pb.cc ?
 # DEVELOPMENT
 
 attrib                      |  varname       |  meaning
-
+---------------------------------------------------------
 prob_.num()                 |  num           |  batchSize
 prob_.count()               |                |
 prob_.cpu_data()            |  prob_data     |
@@ -76,16 +76,14 @@ bottom[1]->count()          |
 labels_                     |
 labels_.count()             |
 
-###
 bottom_diff[case*dimensionality+neuron]
-###
+---------------------------------------------------------
 
-questions:
-- should label_count be assigned bottom[1]->count() ?
-- is the formula for calculating prior correct?
-  -> yes if label_count is batchSize
-  -> in that case, use num instead don't want ambiguity
+the main functions from which net is trained:
+"::Solve("  	   	in src/caffe/solver.cpp
+"::ComputeUpdateValue(" in src/caffe/solver.cpp
+"::Update(" 		in src/caffe/
+"void caffe_cpu_axpby(" in src/caffe/util/math_functions.cpp
 
-shit, joint_misaligned has only 35 cases. laisse tomber.  
 
-make use of joint_misaligned_sbl/debug.log 
+
