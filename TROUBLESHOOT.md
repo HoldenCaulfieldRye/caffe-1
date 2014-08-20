@@ -99,6 +99,12 @@ debug SBL:
 		 layer::Backward calls
 		 specific_layer::Backward_cpu on specific layer type
 		 where to put the couts?
+	      -> wait a sec.
+	      	 nice diffs are (*bottom)[0]->mutable_cpu_diff()
+		 crazy diffs are net_->params()[param_id]->cpu_diff()
+		 from solver.cpp
+		 are those two vars really the same?
+		 solution is to use gdb: bit.ly/1pJh8Yn
 
 		 
 the main functions from which net is trained:
