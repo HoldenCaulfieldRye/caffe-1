@@ -247,6 +247,12 @@ void SGDSolver<Dtype>::ComputeUpdateValue() {
       Dtype local_rate = rate * net_params_lr[param_id];
       Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
       //local_rate.net_params[param_id]->cpu_diff() + momentum.history_[param_id]->mutable_cpu_data(), result in history_
+      
+      std::cout << "net_params[param_id]->cpu_diff(): ";
+      for (int i=0; i<net_params[param_id]->count(); i++)
+	std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
+      std::cout << std::endl;
+      
       caffe_cpu_axpby(net_params[param_id]->count(), local_rate,
           net_params[param_id]->cpu_diff(), momentum,
           history_[param_id]->mutable_cpu_data());
@@ -268,6 +274,12 @@ void SGDSolver<Dtype>::ComputeUpdateValue() {
       // Compute the value to history, and then copy them to the blob's diff.
       Dtype local_rate = rate * net_params_lr[param_id];
       Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
+      
+      std::cout << "net_params[param_id]->cpu_diff(): ";
+      for (int i=0; i<net_params[param_id]->count(); i++)
+	std::cout << net_params[param_id]->cpu_diff()[i] << ", ";
+      std::cout << std::endl;
+      
       caffe_gpu_axpby(net_params[param_id]->count(), local_rate,
           net_params[param_id]->gpu_diff(), momentum,
           history_[param_id]->mutable_gpu_data());
