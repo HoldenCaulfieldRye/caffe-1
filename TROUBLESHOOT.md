@@ -87,34 +87,39 @@ debug SBL:
      caffe_cpu_axpby(net_params[param_id]->count(), local_rate,
           net_params[param_id]->cpu_diff(), momentum,
           history_[param_id]->mutable_cpu_data());
+	  
      -> cpu_diff() might be where PROB is
      	-> only for param_id = {14,15} do we have nonzero diff, why??
 	   -> because backprop accidentally active on fc8 only
 	-> woah! exploding/vanishing cpu_diff() with SBL
-	   -> which stage outscales the cpu_diff()?
+	   -> which stage outscales the cpu_diff()? none!
 	      what happens to cpu_diff() b4/after bwd pass?
 	      add couts in net.cpp l.269
 	      -> solver::ForwardBackward calls
-	         net::Backward calls
-		 layer::Backward calls
-		 specific_layer::Backward_cpu on specific layer type
-		 where to put the couts?
-	      -> wait a sec.
-	      	 nice diffs are (*bottom)[0]->mutable_cpu_diff()
-		 crazy diffs are net_->params()[param_id]->cpu_diff()
-		 from solver.cpp
-		 are those two vars really the same?
-		 solution is to use gdb: bit.ly/1pJh8Yn
+	          net::Backward calls
+		   layer::Backward calls
+		    specific_layer::Backward_cpu
+		 solver::ComputeUpdateValue
+    		 solver::net_->Update()
+	   -> compared w/ benchmark throughout an iteration, similar
+	      values (also outscale for benchmark)
+	      
+     -> actual parameter values might be where PROB is
+     	-> solver::net_->Update() calls
+	     net::Update calls
+	       blob::Update
 
 		 
 the main functions from which net is trained:
-":Solve("  	   	in src/caffe/solver.cpp
+":Solve("  	       in src/caffe/solver.cpp
 ":Forward("            in src/caffe/net.cpp
 ":Backward("           in src/caffe/net.cpp
 ":Backward(const"      in src/caffe/layer.hpp
 ":ComputeUpdateValue(" in src/caffe/solver.cpp
-":Update(" 		in src/caffe/
+":Update(" 	       in src/caffe/
+":Update("             in src/caffe/blob.cpp     (crux)
 "void caffe_cpu_axpby(" in src/caffe/util/math_functions.cpp
+
 
 
 

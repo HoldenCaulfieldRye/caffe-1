@@ -2,6 +2,7 @@
 
 #include <cuda_runtime.h>
 #include <cublas_v2.h>
+#include <iostream>
 
 #include "caffe/blob.hpp"
 #include "caffe/common.hpp"
@@ -114,13 +115,27 @@ void Blob<Dtype>::Update() {
   switch (data_->head()) {
   case SyncedMemory::HEAD_AT_CPU:
     // perform computation on CPU
+    std::cout << "perform computation on CPU" << std::endl;
+    std::cout << "current params: " << std::endl;
+    for (int i=0; i<100; i++)
+      std::cout << data_->mutable_cpu_data()[i] << ",\t";
+    std::cout  << std::endl ;
+    std::cout << "diff: ";
+    for (int i=0; i<100; i++)
+      std::cout << diff_->cpu_data()[i] << ",\t";
+    std::cout  << std::endl << std::endl;
     caffe_axpy<Dtype>(count_, Dtype(-1),
         reinterpret_cast<const Dtype*>(diff_->cpu_data()),
         reinterpret_cast<Dtype*>(data_->mutable_cpu_data()));
+    std::cout << "new params: " << std::endl;
+    for (int i=0; i<100; i++)
+      std::cout << data_->mutable_cpu_data()[i] << ",\t";
+    std::cout << std::endl << std::endl;
     break;
   case SyncedMemory::HEAD_AT_GPU:
   case SyncedMemory::SYNCED:
     // perform computation on GPU
+    std::cout << "perform computation on GPU" << std::endl;
     caffe_gpu_axpy<Dtype>(count_, Dtype(-1),
         reinterpret_cast<const Dtype*>(diff_->gpu_data()),
         reinterpret_cast<Dtype*>(data_->mutable_gpu_data()));
