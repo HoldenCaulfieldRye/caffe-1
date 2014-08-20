@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cfloat>
 #include <vector>
-//#include<iostream>
+#include<iostream>
 
 #include "caffe/layer.hpp"
 #include "caffe/vision_layers.hpp"
