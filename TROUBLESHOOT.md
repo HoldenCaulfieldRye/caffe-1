@@ -128,8 +128,9 @@ debug SBL:
 	   fine
 	   
   -> so the fucked up stuff occurs inside ForwardBackward()
+     -> occurs inside net.hpp::Forward() or before
      -> 
-  
+
     
 	   EF CONF CALL THIS AFTERNOON
 	   SET UP REMINDERS
