@@ -100,6 +100,7 @@ debug SBL:
 		 specific_layer::Backward_cpu on specific layer type
 		 where to put the couts?
 
+		 
 the main functions from which net is trained:
 ":Solve("  	   	in src/caffe/solver.cpp
 ":Forward("            in src/caffe/net.cpp
