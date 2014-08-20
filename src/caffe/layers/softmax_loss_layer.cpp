@@ -41,6 +41,7 @@ Dtype SoftmaxWithLossLayer<Dtype>::Forward_cpu(
     loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])],
                      Dtype(FLT_MIN)));
   }
+  std::cout << "SL, loss: " << loss << std::endl;
   return loss / num;
 }
 

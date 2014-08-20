@@ -37,6 +37,8 @@ class Layer {
   // Forward and backward wrappers. You should implement the cpu and
   // gpu specific implementations instead, and should not change these
   // functions.
+  // having inline return type is trick to change line content so it
+  // can be Forward_cpu or Forward_gpu. pretty badass
   inline Dtype Forward(const vector<Blob<Dtype>*>& bottom,
       vector<Blob<Dtype>*>* top);
   inline void Backward(const vector<Blob<Dtype>*>& top,
