@@ -79,6 +79,16 @@ labels_.count()             |
 bottom_diff[case*dimensionality+neuron]
 ---------------------------------------------------------
 
+debug SBL:
+- fwd pass: OK
+- bwd pass: OK
+- update: PROB
+  -> solver.cpp l.250:
+     caffe_cpu_axpby(net_params[param_id]->count(), local_rate,
+          net_params[param_id]->cpu_diff(), momentum,
+          history_[param_id]->mutable_cpu_data());
+     -> cpu_diff() might be where PROB is
+
 the main functions from which net is trained:
 "::Solve("  	   	in src/caffe/solver.cpp
 "::ComputeUpdateValue(" in src/caffe/solver.cpp
