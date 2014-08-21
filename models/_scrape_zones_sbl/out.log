@@ -1,0 +1,947 @@
+I0821 21:11:41.559492 25250 finetune_net.cpp:25] Starting Optimization
+I0821 21:11:41.559591 25250 solver.cpp:42] Creating training net.
+I0821 21:11:41.560226 25250 net.cpp:76] Creating Layer data
+I0821 21:11:41.560241 25250 net.cpp:112] data -> data
+I0821 21:11:41.560252 25250 net.cpp:112] data -> label
+I0821 21:11:41.560274 25250 data_layer.cpp:145] Opening leveldb scrape_zones_fine_train_leveldb
+I0821 21:11:49.885421 25250 data_layer.cpp:185] output data size: 256,3,227,227
+I0821 21:11:49.885449 25250 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
+I0821 21:11:50.107025 25250 net.cpp:127] Top shape: 256 3 227 227 (39574272)
+I0821 21:11:50.107069 25250 net.cpp:127] Top shape: 256 1 1 1 (256)
+I0821 21:11:50.107075 25250 net.cpp:158] data does not need backward computation.
+I0821 21:11:50.107089 25250 net.cpp:76] Creating Layer conv1
+I0821 21:11:50.107096 25250 net.cpp:86] conv1 <- data
+I0821 21:11:50.107111 25250 net.cpp:112] conv1 -> conv1
+I0821 21:11:50.108618 25250 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0821 21:11:50.108633 25250 net.cpp:158] conv1 does not need backward computation.
+I0821 21:11:50.108640 25250 net.cpp:76] Creating Layer relu1
+I0821 21:11:50.108645 25250 net.cpp:86] relu1 <- conv1
+I0821 21:11:50.108650 25250 net.cpp:100] relu1 -> conv1 (in-place)
+I0821 21:11:50.108657 25250 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0821 21:11:50.108662 25250 net.cpp:158] relu1 does not need backward computation.
+I0821 21:11:50.108667 25250 net.cpp:76] Creating Layer pool1
+I0821 21:11:50.108674 25250 net.cpp:86] pool1 <- conv1
+I0821 21:11:50.108682 25250 net.cpp:112] pool1 -> pool1
+I0821 21:11:50.108698 25250 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0821 21:11:50.108706 25250 net.cpp:158] pool1 does not need backward computation.
+I0821 21:11:50.108718 25250 net.cpp:76] Creating Layer norm1
+I0821 21:11:50.108727 25250 net.cpp:86] norm1 <- pool1
+I0821 21:11:50.108736 25250 net.cpp:112] norm1 -> norm1
+I0821 21:11:50.108750 25250 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0821 21:11:50.108759 25250 net.cpp:158] norm1 does not need backward computation.
+I0821 21:11:50.108770 25250 net.cpp:76] Creating Layer conv2
+I0821 21:11:50.108778 25250 net.cpp:86] conv2 <- norm1
+I0821 21:11:50.108788 25250 net.cpp:112] conv2 -> conv2
+I0821 21:11:50.121311 25250 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0821 21:11:50.121335 25250 net.cpp:158] conv2 does not need backward computation.
+I0821 21:11:50.121343 25250 net.cpp:76] Creating Layer relu2
+I0821 21:11:50.121348 25250 net.cpp:86] relu2 <- conv2
+I0821 21:11:50.121356 25250 net.cpp:100] relu2 -> conv2 (in-place)
+I0821 21:11:50.121361 25250 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0821 21:11:50.121366 25250 net.cpp:158] relu2 does not need backward computation.
+I0821 21:11:50.121371 25250 net.cpp:76] Creating Layer pool2
+I0821 21:11:50.121376 25250 net.cpp:86] pool2 <- conv2
+I0821 21:11:50.121381 25250 net.cpp:112] pool2 -> pool2
+I0821 21:11:50.121390 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:50.121397 25250 net.cpp:158] pool2 does not need backward computation.
+I0821 21:11:50.121409 25250 net.cpp:76] Creating Layer norm2
+I0821 21:11:50.121417 25250 net.cpp:86] norm2 <- pool2
+I0821 21:11:50.121425 25250 net.cpp:112] norm2 -> norm2
+I0821 21:11:50.121433 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:50.121441 25250 net.cpp:158] norm2 does not need backward computation.
+I0821 21:11:50.121451 25250 net.cpp:76] Creating Layer conv3
+I0821 21:11:50.121459 25250 net.cpp:86] conv3 <- norm2
+I0821 21:11:50.121466 25250 net.cpp:112] conv3 -> conv3
+I0821 21:11:50.157812 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:50.157837 25250 net.cpp:158] conv3 does not need backward computation.
+I0821 21:11:50.157846 25250 net.cpp:76] Creating Layer relu3
+I0821 21:11:50.157851 25250 net.cpp:86] relu3 <- conv3
+I0821 21:11:50.157858 25250 net.cpp:100] relu3 -> conv3 (in-place)
+I0821 21:11:50.157863 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:50.157867 25250 net.cpp:158] relu3 does not need backward computation.
+I0821 21:11:50.157874 25250 net.cpp:76] Creating Layer conv4
+I0821 21:11:50.157878 25250 net.cpp:86] conv4 <- conv3
+I0821 21:11:50.157882 25250 net.cpp:112] conv4 -> conv4
+I0821 21:11:50.185195 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:50.185220 25250 net.cpp:158] conv4 does not need backward computation.
+I0821 21:11:50.185228 25250 net.cpp:76] Creating Layer relu4
+I0821 21:11:50.185235 25250 net.cpp:86] relu4 <- conv4
+I0821 21:11:50.185240 25250 net.cpp:100] relu4 -> conv4 (in-place)
+I0821 21:11:50.185246 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:50.185250 25250 net.cpp:158] relu4 does not need backward computation.
+I0821 21:11:50.185257 25250 net.cpp:76] Creating Layer conv5
+I0821 21:11:50.185261 25250 net.cpp:86] conv5 <- conv4
+I0821 21:11:50.185266 25250 net.cpp:112] conv5 -> conv5
+I0821 21:11:50.203536 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:50.203559 25250 net.cpp:158] conv5 does not need backward computation.
+I0821 21:11:50.203567 25250 net.cpp:76] Creating Layer relu5
+I0821 21:11:50.203573 25250 net.cpp:86] relu5 <- conv5
+I0821 21:11:50.203580 25250 net.cpp:100] relu5 -> conv5 (in-place)
+I0821 21:11:50.203587 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:50.203590 25250 net.cpp:158] relu5 does not need backward computation.
+I0821 21:11:50.203595 25250 net.cpp:76] Creating Layer pool5
+I0821 21:11:50.203599 25250 net.cpp:86] pool5 <- conv5
+I0821 21:11:50.203605 25250 net.cpp:112] pool5 -> pool5
+I0821 21:11:50.203615 25250 net.cpp:127] Top shape: 256 256 6 6 (2359296)
+I0821 21:11:50.203624 25250 net.cpp:158] pool5 does not need backward computation.
+I0821 21:11:50.203637 25250 net.cpp:76] Creating Layer fc6_new
+I0821 21:11:50.203645 25250 net.cpp:86] fc6_new <- pool5
+I0821 21:11:50.203654 25250 net.cpp:112] fc6_new -> fc6_new
+I0821 21:11:51.746330 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:51.746358 25250 net.cpp:153] fc6_new needs backward computation.
+I0821 21:11:51.746368 25250 net.cpp:76] Creating Layer relu6
+I0821 21:11:51.746376 25250 net.cpp:86] relu6 <- fc6_new
+I0821 21:11:51.746382 25250 net.cpp:100] relu6 -> fc6_new (in-place)
+I0821 21:11:51.746387 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:51.746392 25250 net.cpp:153] relu6 needs backward computation.
+I0821 21:11:51.746397 25250 net.cpp:76] Creating Layer drop6
+I0821 21:11:51.746402 25250 net.cpp:86] drop6 <- fc6_new
+I0821 21:11:51.746407 25250 net.cpp:100] drop6 -> fc6_new (in-place)
+I0821 21:11:51.746419 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:51.746424 25250 net.cpp:153] drop6 needs backward computation.
+I0821 21:11:51.746435 25250 net.cpp:76] Creating Layer fc7_new
+I0821 21:11:51.746440 25250 net.cpp:86] fc7_new <- fc6_new
+I0821 21:11:51.746445 25250 net.cpp:112] fc7_new -> fc7_new
+I0821 21:11:52.428709 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:52.428737 25250 net.cpp:153] fc7_new needs backward computation.
+I0821 21:11:52.428746 25250 net.cpp:76] Creating Layer relu7
+I0821 21:11:52.428752 25250 net.cpp:86] relu7 <- fc7_new
+I0821 21:11:52.428760 25250 net.cpp:100] relu7 -> fc7_new (in-place)
+I0821 21:11:52.428764 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:52.428769 25250 net.cpp:153] relu7 needs backward computation.
+I0821 21:11:52.428774 25250 net.cpp:76] Creating Layer drop7
+I0821 21:11:52.428777 25250 net.cpp:86] drop7 <- fc7_new
+I0821 21:11:52.428782 25250 net.cpp:100] drop7 -> fc7_new (in-place)
+I0821 21:11:52.428786 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:52.428791 25250 net.cpp:153] drop7 needs backward computation.
+I0821 21:11:52.428797 25250 net.cpp:76] Creating Layer fc8_clamp
+I0821 21:11:52.428800 25250 net.cpp:86] fc8_clamp <- fc7_new
+I0821 21:11:52.428805 25250 net.cpp:112] fc8_clamp -> fc8_aero
+I0821 21:11:52.429200 25250 net.cpp:127] Top shape: 256 2 1 1 (512)
+I0821 21:11:52.429213 25250 net.cpp:153] fc8_clamp needs backward computation.
+I0821 21:11:52.429224 25250 net.cpp:76] Creating Layer loss
+I0821 21:11:52.429229 25250 net.cpp:86] loss <- fc8_aero
+I0821 21:11:52.429234 25250 net.cpp:86] loss <- label
+I0821 21:11:52.429244 25250 net.cpp:153] loss needs backward computation.
+I0821 21:11:52.429273 25250 net.cpp:182] Collecting Learning Rate and Weight Decay.
+I0821 21:11:52.429291 25250 net.cpp:175] Network initialization done.
+I0821 21:11:52.429299 25250 net.cpp:176] Memory required for Data 1073739776
+I0821 21:11:52.429376 25250 solver.cpp:45] Creating testing net.
+I0821 21:11:52.430063 25250 net.cpp:76] Creating Layer data
+I0821 21:11:52.430075 25250 net.cpp:112] data -> data
+I0821 21:11:52.430083 25250 net.cpp:112] data -> label
+I0821 21:11:52.430090 25250 data_layer.cpp:145] Opening leveldb scrape_zones_fine_val_leveldb
+I0821 21:11:55.696918 25250 data_layer.cpp:185] output data size: 256,3,227,227
+I0821 21:11:55.696943 25250 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
+I0821 21:11:55.716085 25250 net.cpp:127] Top shape: 256 3 227 227 (39574272)
+I0821 21:11:55.716099 25250 net.cpp:127] Top shape: 256 1 1 1 (256)
+I0821 21:11:55.716105 25250 net.cpp:158] data does not need backward computation.
+I0821 21:11:55.716116 25250 net.cpp:76] Creating Layer conv1
+I0821 21:11:55.716121 25250 net.cpp:86] conv1 <- data
+I0821 21:11:55.716128 25250 net.cpp:112] conv1 -> conv1
+I0821 21:11:55.717501 25250 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0821 21:11:55.717511 25250 net.cpp:158] conv1 does not need backward computation.
+I0821 21:11:55.717519 25250 net.cpp:76] Creating Layer relu1
+I0821 21:11:55.717524 25250 net.cpp:86] relu1 <- conv1
+I0821 21:11:55.717527 25250 net.cpp:100] relu1 -> conv1 (in-place)
+I0821 21:11:55.717533 25250 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0821 21:11:55.717537 25250 net.cpp:158] relu1 does not need backward computation.
+I0821 21:11:55.717542 25250 net.cpp:76] Creating Layer pool1
+I0821 21:11:55.717546 25250 net.cpp:86] pool1 <- conv1
+I0821 21:11:55.717550 25250 net.cpp:112] pool1 -> pool1
+I0821 21:11:55.717556 25250 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0821 21:11:55.717561 25250 net.cpp:158] pool1 does not need backward computation.
+I0821 21:11:55.717567 25250 net.cpp:76] Creating Layer norm1
+I0821 21:11:55.717576 25250 net.cpp:86] norm1 <- pool1
+I0821 21:11:55.717581 25250 net.cpp:112] norm1 -> norm1
+I0821 21:11:55.717586 25250 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0821 21:11:55.717591 25250 net.cpp:158] norm1 does not need backward computation.
+I0821 21:11:55.717597 25250 net.cpp:76] Creating Layer conv2
+I0821 21:11:55.717600 25250 net.cpp:86] conv2 <- norm1
+I0821 21:11:55.717604 25250 net.cpp:112] conv2 -> conv2
+I0821 21:11:55.729856 25250 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0821 21:11:55.729881 25250 net.cpp:158] conv2 does not need backward computation.
+I0821 21:11:55.729889 25250 net.cpp:76] Creating Layer relu2
+I0821 21:11:55.729897 25250 net.cpp:86] relu2 <- conv2
+I0821 21:11:55.729904 25250 net.cpp:100] relu2 -> conv2 (in-place)
+I0821 21:11:55.729910 25250 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0821 21:11:55.729914 25250 net.cpp:158] relu2 does not need backward computation.
+I0821 21:11:55.729919 25250 net.cpp:76] Creating Layer pool2
+I0821 21:11:55.729924 25250 net.cpp:86] pool2 <- conv2
+I0821 21:11:55.729928 25250 net.cpp:112] pool2 -> pool2
+I0821 21:11:55.729935 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:55.729939 25250 net.cpp:158] pool2 does not need backward computation.
+I0821 21:11:55.729948 25250 net.cpp:76] Creating Layer norm2
+I0821 21:11:55.729951 25250 net.cpp:86] norm2 <- pool2
+I0821 21:11:55.729956 25250 net.cpp:112] norm2 -> norm2
+I0821 21:11:55.729961 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:55.729966 25250 net.cpp:158] norm2 does not need backward computation.
+I0821 21:11:55.729972 25250 net.cpp:76] Creating Layer conv3
+I0821 21:11:55.729976 25250 net.cpp:86] conv3 <- norm2
+I0821 21:11:55.729980 25250 net.cpp:112] conv3 -> conv3
+I0821 21:11:55.764770 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:55.764796 25250 net.cpp:158] conv3 does not need backward computation.
+I0821 21:11:55.764804 25250 net.cpp:76] Creating Layer relu3
+I0821 21:11:55.764809 25250 net.cpp:86] relu3 <- conv3
+I0821 21:11:55.764816 25250 net.cpp:100] relu3 -> conv3 (in-place)
+I0821 21:11:55.764822 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:55.764825 25250 net.cpp:158] relu3 does not need backward computation.
+I0821 21:11:55.764832 25250 net.cpp:76] Creating Layer conv4
+I0821 21:11:55.764835 25250 net.cpp:86] conv4 <- conv3
+I0821 21:11:55.764839 25250 net.cpp:112] conv4 -> conv4
+I0821 21:11:55.790966 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:55.790992 25250 net.cpp:158] conv4 does not need backward computation.
+I0821 21:11:55.790999 25250 net.cpp:76] Creating Layer relu4
+I0821 21:11:55.791005 25250 net.cpp:86] relu4 <- conv4
+I0821 21:11:55.791013 25250 net.cpp:100] relu4 -> conv4 (in-place)
+I0821 21:11:55.791018 25250 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0821 21:11:55.791023 25250 net.cpp:158] relu4 does not need backward computation.
+I0821 21:11:55.791029 25250 net.cpp:76] Creating Layer conv5
+I0821 21:11:55.791033 25250 net.cpp:86] conv5 <- conv4
+I0821 21:11:55.791038 25250 net.cpp:112] conv5 -> conv5
+I0821 21:11:55.808508 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:55.808533 25250 net.cpp:158] conv5 does not need backward computation.
+I0821 21:11:55.808542 25250 net.cpp:76] Creating Layer relu5
+I0821 21:11:55.808547 25250 net.cpp:86] relu5 <- conv5
+I0821 21:11:55.808554 25250 net.cpp:100] relu5 -> conv5 (in-place)
+I0821 21:11:55.808560 25250 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0821 21:11:55.808564 25250 net.cpp:158] relu5 does not need backward computation.
+I0821 21:11:55.808569 25250 net.cpp:76] Creating Layer pool5
+I0821 21:11:55.808573 25250 net.cpp:86] pool5 <- conv5
+I0821 21:11:55.808578 25250 net.cpp:112] pool5 -> pool5
+I0821 21:11:55.808585 25250 net.cpp:127] Top shape: 256 256 6 6 (2359296)
+I0821 21:11:55.808589 25250 net.cpp:158] pool5 does not need backward computation.
+I0821 21:11:55.808598 25250 net.cpp:76] Creating Layer fc6_new
+I0821 21:11:55.808603 25250 net.cpp:86] fc6_new <- pool5
+I0821 21:11:55.808608 25250 net.cpp:112] fc6_new -> fc6_new
+I0821 21:11:57.348245 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:57.348275 25250 net.cpp:153] fc6_new needs backward computation.
+I0821 21:11:57.348285 25250 net.cpp:76] Creating Layer relu6
+I0821 21:11:57.348292 25250 net.cpp:86] relu6 <- fc6_new
+I0821 21:11:57.348299 25250 net.cpp:100] relu6 -> fc6_new (in-place)
+I0821 21:11:57.348304 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:57.348309 25250 net.cpp:153] relu6 needs backward computation.
+I0821 21:11:57.348315 25250 net.cpp:76] Creating Layer drop6
+I0821 21:11:57.348320 25250 net.cpp:86] drop6 <- fc6_new
+I0821 21:11:57.348325 25250 net.cpp:100] drop6 -> fc6_new (in-place)
+I0821 21:11:57.348330 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:57.348335 25250 net.cpp:153] drop6 needs backward computation.
+I0821 21:11:57.348342 25250 net.cpp:76] Creating Layer fc7_new
+I0821 21:11:57.348346 25250 net.cpp:86] fc7_new <- fc6_new
+I0821 21:11:57.348351 25250 net.cpp:112] fc7_new -> fc7_new
+I0821 21:11:58.031798 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:58.031827 25250 net.cpp:153] fc7_new needs backward computation.
+I0821 21:11:58.031836 25250 net.cpp:76] Creating Layer relu7
+I0821 21:11:58.031842 25250 net.cpp:86] relu7 <- fc7_new
+I0821 21:11:58.031849 25250 net.cpp:100] relu7 -> fc7_new (in-place)
+I0821 21:11:58.031855 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:58.031859 25250 net.cpp:153] relu7 needs backward computation.
+I0821 21:11:58.031865 25250 net.cpp:76] Creating Layer drop7
+I0821 21:11:58.031869 25250 net.cpp:86] drop7 <- fc7_new
+I0821 21:11:58.031873 25250 net.cpp:100] drop7 -> fc7_new (in-place)
+I0821 21:11:58.031878 25250 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0821 21:11:58.031883 25250 net.cpp:153] drop7 needs backward computation.
+I0821 21:11:58.031889 25250 net.cpp:76] Creating Layer fc8_clamp
+I0821 21:11:58.031893 25250 net.cpp:86] fc8_clamp <- fc7_new
+I0821 21:11:58.031898 25250 net.cpp:112] fc8_clamp -> fc8_aero
+I0821 21:11:58.032232 25250 net.cpp:127] Top shape: 256 2 1 1 (512)
+I0821 21:11:58.032238 25250 net.cpp:153] fc8_clamp needs backward computation.
+I0821 21:11:58.032244 25250 net.cpp:76] Creating Layer prob
+I0821 21:11:58.032249 25250 net.cpp:86] prob <- fc8_aero
+I0821 21:11:58.032254 25250 net.cpp:112] prob -> prob
+I0821 21:11:58.032263 25250 net.cpp:127] Top shape: 256 2 1 1 (512)
+I0821 21:11:58.032268 25250 net.cpp:153] prob needs backward computation.
+I0821 21:11:58.032274 25250 net.cpp:76] Creating Layer accuracy
+I0821 21:11:58.032277 25250 net.cpp:86] accuracy <- prob
+I0821 21:11:58.032281 25250 net.cpp:86] accuracy <- label
+I0821 21:11:58.032287 25250 net.cpp:112] accuracy -> accuracy
+I0821 21:11:58.032304 25250 net.cpp:127] Top shape: 1 2 1 1 (2)
+I0821 21:11:58.032309 25250 net.cpp:153] accuracy needs backward computation.
+I0821 21:11:58.032312 25250 net.cpp:164] This network produces output accuracy
+I0821 21:11:58.032331 25250 net.cpp:182] Collecting Learning Rate and Weight Decay.
+I0821 21:11:58.032344 25250 net.cpp:175] Network initialization done.
+I0821 21:11:58.032351 25250 net.cpp:176] Memory required for Data 1073741832
+I0821 21:11:58.032390 25250 solver.cpp:50] Solver scaffolding done.
+I0821 21:11:58.032397 25250 finetune_net.cpp:27] Loading from ../alexnet/caffe_alexnet_model
+I0821 21:11:58.677201 25250 net.cpp:366] Copying source layer data
+I0821 21:11:58.677225 25250 net.cpp:366] Copying source layer conv1
+I0821 21:11:58.677294 25250 net.cpp:366] Copying source layer relu1
+I0821 21:11:58.677304 25250 net.cpp:366] Copying source layer norm1
+I0821 21:11:58.677307 25250 net.cpp:366] Copying source layer pool1
+I0821 21:11:58.677311 25250 net.cpp:366] Copying source layer conv2
+I0821 21:11:58.677739 25250 net.cpp:366] Copying source layer relu2
+I0821 21:11:58.677748 25250 net.cpp:366] Copying source layer norm2
+I0821 21:11:58.677752 25250 net.cpp:366] Copying source layer pool2
+I0821 21:11:58.677757 25250 net.cpp:366] Copying source layer conv3
+I0821 21:11:58.678994 25250 net.cpp:366] Copying source layer relu3
+I0821 21:11:58.679005 25250 net.cpp:366] Copying source layer conv4
+I0821 21:11:58.679931 25250 net.cpp:366] Copying source layer relu4
+I0821 21:11:58.679941 25250 net.cpp:366] Copying source layer conv5
+I0821 21:11:58.680559 25250 net.cpp:366] Copying source layer relu5
+I0821 21:11:58.680568 25250 net.cpp:366] Copying source layer pool5
+I0821 21:11:58.680572 25250 net.cpp:363] Ignoring source layer fc6
+I0821 21:11:58.680577 25250 net.cpp:366] Copying source layer relu6
+I0821 21:11:58.680580 25250 net.cpp:366] Copying source layer drop6
+I0821 21:11:58.680584 25250 net.cpp:363] Ignoring source layer fc7
+I0821 21:11:58.680588 25250 net.cpp:366] Copying source layer relu7
+I0821 21:11:58.680595 25250 net.cpp:366] Copying source layer drop7
+I0821 21:11:58.680599 25250 net.cpp:363] Ignoring source layer fc8
+I0821 21:11:58.680603 25250 net.cpp:366] Copying source layer loss
+I0821 21:11:58.697685 25250 solver.cpp:62] Solving scrape_zonesFineNet
+I0821 21:11:58.697717 25250 solver.cpp:136] Iteration 0, Testing net
+I0821 21:12:00.538555 25250 solver.cpp:172] Test score #0: 0.503606
+I0821 21:12:00.538617 25250 solver.cpp:172] Test score #1: 1.60252
+output probs:
+0.995774, 0.00422581, 
+0.975671, 0.024329, 
+0.753278, 0.246722, 
+0.658659, 0.341341, 
+0.747679, 0.252321, 
+0.82746, 0.17254, 
+0.839115, 0.160885, 
+0.401117, 0.598883, 
+0.955962, 0.0440382, 
+0.964925, 0.0350755, 
+0.926854, 0.0731459, 
+0.0261449, 0.973855, 
+0.925826, 0.0741737, 
+0.9253, 0.0746997, 
+0.952629, 0.047371, 
+0.94903, 0.0509697, 
+0.0539873, 0.946013, 
+0.987719, 0.0122809, 
+0.119401, 0.880599, 
+0.988153, 0.0118468, 
+0.842595, 0.157405, 
+0.932339, 0.0676608, 
+0.826691, 0.173309, 
+0.924607, 0.0753932, 
+0.879277, 0.120723, 
+0.936381, 0.063619, 
+0.922429, 0.0775713, 
+0.504881, 0.495119, 
+0.788266, 0.211734, 
+0.998353, 0.00164749, 
+0.91337, 0.0866297, 
+0.999691, 0.000308623, 
+0.920667, 0.0793332, 
+0.344532, 0.655468, 
+0.966107, 0.0338929, 
+0.984437, 0.0155627, 
+0.961273, 0.0387273, 
+0.974011, 0.0259886, 
+0.984633, 0.0153673, 
+0.862044, 0.137956, 
+0.110485, 0.889515, 
+0.452284, 0.547716, 
+0.900489, 0.0995107, 
+0.738959, 0.261041, 
+0.744424, 0.255576, 
+0.988488, 0.011512, 
+0.534379, 0.465621, 
+0.561681, 0.438319, 
+0.499924, 0.500076, 
+0.524859, 0.475141, 
+SBL loss: 1.4312
+SL loss: 2.10325
+loss after net.hpp:Forward(): 1.4312
+SL bottom_diff:
+bottom_diff[0*2+0]: 0.497887,  bottom_diff[0*2+1]: -0.497887,  
+bottom_diff[1*2+0]: 0.487836,  bottom_diff[1*2+1]: -0.487835,  
+bottom_diff[2*2+0]: 0.376639,  bottom_diff[2*2+1]: -0.376639,  
+bottom_diff[3*2+0]: 0.32933,  bottom_diff[3*2+1]: -0.32933,  
+bottom_diff[4*2+0]: 0.373839,  bottom_diff[4*2+1]: -0.373839,  
+bottom_diff[5*2+0]: 0.41373,  bottom_diff[5*2+1]: -0.41373,  
+bottom_diff[6*2+0]: 0.419557,  bottom_diff[6*2+1]: -0.419557,  
+bottom_diff[7*2+0]: 0.200558,  bottom_diff[7*2+1]: -0.200558,  
+bottom_diff[8*2+0]: 0.477981,  bottom_diff[8*2+1]: -0.477981,  
+bottom_diff[9*2+0]: -0.0175377,  bottom_diff[9*2+1]: 0.0175378,  
+bottom_diff[10*2+0]: 0.463427,  bottom_diff[10*2+1]: -0.463427,  
+bottom_diff[11*2+0]: 0.0130725,  bottom_diff[11*2+1]: -0.0130724,  
+bottom_diff[12*2+0]: 0.462913,  bottom_diff[12*2+1]: -0.462913,  
+bottom_diff[13*2+0]: -0.0373498,  bottom_diff[13*2+1]: 0.0373499,  
+bottom_diff[14*2+0]: -0.0236855,  bottom_diff[14*2+1]: 0.0236855,  
+bottom_diff[15*2+0]: 0.474515,  bottom_diff[15*2+1]: -0.474515,  
+bottom_diff[16*2+0]: -0.473006,  bottom_diff[16*2+1]: 0.473006,  
+bottom_diff[17*2+0]: 0.49386,  bottom_diff[17*2+1]: -0.49386,  
+bottom_diff[18*2+0]: 0.0597005,  bottom_diff[18*2+1]: -0.0597005,  
+bottom_diff[19*2+0]: 0.494077,  bottom_diff[19*2+1]: -0.494077,  
+
+SBL bottom_diff:
+bottom_diff[0*2+0]: 0.146842,  bottom_diff[0*2+1]: -0.146842,  
+bottom_diff[1*2+0]: 0.143878,  bottom_diff[1*2+1]: -0.143878,  
+bottom_diff[2*2+0]: 0.111082,  bottom_diff[2*2+1]: -0.111082,  
+bottom_diff[3*2+0]: 0.0971294,  bottom_diff[3*2+1]: -0.0971294,  
+bottom_diff[4*2+0]: 0.110257,  bottom_diff[4*2+1]: -0.110257,  
+bottom_diff[5*2+0]: 0.122022,  bottom_diff[5*2+1]: -0.122022,  
+bottom_diff[6*2+0]: 0.12374,  bottom_diff[6*2+1]: -0.12374,  
+bottom_diff[7*2+0]: 0.0591509,  bottom_diff[7*2+1]: -0.0591509,  
+bottom_diff[8*2+0]: 0.140971,  bottom_diff[8*2+1]: -0.140971,  
+bottom_diff[9*2+0]: -0.0287799,  bottom_diff[9*2+1]: 0.0287799,  
+bottom_diff[10*2+0]: 0.136679,  bottom_diff[10*2+1]: -0.136679,  
+bottom_diff[11*2+0]: 0.00385547,  bottom_diff[11*2+1]: -0.00385546,  
+bottom_diff[12*2+0]: 0.136527,  bottom_diff[12*2+1]: -0.136527,  
+bottom_diff[13*2+0]: -0.0612921,  bottom_diff[13*2+1]: 0.0612921,  
+bottom_diff[14*2+0]: -0.0388685,  bottom_diff[14*2+1]: 0.0388685,  
+bottom_diff[15*2+0]: 0.139949,  bottom_diff[15*2+1]: -0.139949,  
+bottom_diff[16*2+0]: -0.776216,  bottom_diff[16*2+1]: 0.776216,  
+bottom_diff[17*2+0]: 0.145654,  bottom_diff[17*2+1]: -0.145654,  
+bottom_diff[18*2+0]: 0.0176075,  bottom_diff[18*2+1]: -0.0176075,  
+bottom_diff[19*2+0]: 0.145718,  bottom_diff[19*2+1]: -0.145718,  
+bottom_diff[20*2+0]: 0.124254,  bottom_diff[20*2+1]: -0.124254,  
+bottom_diff[21*2+0]: 0.137488,  bottom_diff[21*2+1]: -0.137488,  
+bottom_diff[22*2+0]: 0.121908,  bottom_diff[22*2+1]: -0.121908,  
+bottom_diff[23*2+0]: 0.136348,  bottom_diff[23*2+1]: -0.136348,  
+bottom_diff[24*2+0]: 0.129663,  bottom_diff[24*2+1]: -0.129663,  
+bottom_diff[25*2+0]: 0.138084,  bottom_diff[25*2+1]: -0.138084,  
+bottom_diff[26*2+0]: 0.136026,  bottom_diff[26*2+1]: -0.136026,  
+bottom_diff[27*2+0]: 0.0744525,  bottom_diff[27*2+1]: -0.0744525,  
+bottom_diff[28*2+0]: 0.116242,  bottom_diff[28*2+1]: -0.116242,  
+bottom_diff[29*2+0]: 0.147222,  bottom_diff[29*2+1]: -0.147222,  
+bottom_diff[30*2+0]: 0.134691,  bottom_diff[30*2+1]: -0.134691,  
+bottom_diff[31*2+0]: 0.14742,  bottom_diff[31*2+1]: -0.14742,  
+bottom_diff[32*2+0]: 0.135767,  bottom_diff[32*2+1]: -0.135767,  
+bottom_diff[33*2+0]: 0.0508065,  bottom_diff[33*2+1]: -0.0508065,  
+bottom_diff[34*2+0]: -0.0278095,  bottom_diff[34*2+1]: 0.0278095,  
+bottom_diff[35*2+0]: 0.14517,  bottom_diff[35*2+1]: -0.14517,  
+bottom_diff[36*2+0]: 0.141754,  bottom_diff[36*2+1]: -0.141754,  
+bottom_diff[37*2+0]: 0.143633,  bottom_diff[37*2+1]: -0.143633,  
+bottom_diff[38*2+0]: 0.145199,  bottom_diff[38*2+1]: -0.145199,  
+bottom_diff[39*2+0]: 0.127122,  bottom_diff[39*2+1]: -0.127122,  
+bottom_diff[40*2+0]: 0.0162927,  bottom_diff[40*2+1]: -0.0162927,  
+bottom_diff[41*2+0]: 0.0666962,  bottom_diff[41*2+1]: -0.0666962,  
+bottom_diff[42*2+0]: 0.132791,  bottom_diff[42*2+1]: -0.132791,  
+bottom_diff[43*2+0]: -0.214187,  bottom_diff[43*2+1]: 0.214187,  
+bottom_diff[44*2+0]: -0.209703,  bottom_diff[44*2+1]: 0.209703,  
+bottom_diff[45*2+0]: 0.145768,  bottom_diff[45*2+1]: -0.145768,  
+bottom_diff[46*2+0]: 0.0788025,  bottom_diff[46*2+1]: -0.0788025,  
+bottom_diff[47*2+0]: 0.0828285,  bottom_diff[47*2+1]: -0.0828285,  
+bottom_diff[48*2+0]: 0.0737215,  bottom_diff[48*2+1]: -0.0737215,  
+bottom_diff[49*2+0]: 0.0773986,  bottom_diff[49*2+1]: -0.0773986,  
+
+loss after net.hpp:Backward(): 1.4312
+I0821 21:12:00.986696 25250 solver.cpp:269] Iteration 1, lr = 0.0001
+I0821 21:12:27.152076 25250 solver.cpp:117] Iteration 1, loss = 1.4312
+output probs:
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+0, 1, 
+SBL loss: 14.8028
+SL loss: 13.6463
+loss after net.hpp:Forward(): 14.8028
+SL bottom_diff:
+bottom_diff[0*2+0]: 0,  bottom_diff[0*2+1]: 0,  
+bottom_diff[1*2+0]: 0,  bottom_diff[1*2+1]: 0,  
+bottom_diff[2*2+0]: 0,  bottom_diff[2*2+1]: 0,  
+bottom_diff[3*2+0]: 0,  bottom_diff[3*2+1]: 0,  
+bottom_diff[4*2+0]: 0,  bottom_diff[4*2+1]: 0,  
+bottom_diff[5*2+0]: 0,  bottom_diff[5*2+1]: 0,  
+bottom_diff[6*2+0]: 0,  bottom_diff[6*2+1]: 0,  
+bottom_diff[7*2+0]: 0,  bottom_diff[7*2+1]: 0,  
+bottom_diff[8*2+0]: 0,  bottom_diff[8*2+1]: 0,  
+bottom_diff[9*2+0]: 0,  bottom_diff[9*2+1]: 0,  
+bottom_diff[10*2+0]: 0,  bottom_diff[10*2+1]: 0,  
+bottom_diff[11*2+0]: 0,  bottom_diff[11*2+1]: 0,  
+bottom_diff[12*2+0]: -0.5,  bottom_diff[12*2+1]: 0.5,  
+bottom_diff[13*2+0]: 0,  bottom_diff[13*2+1]: 0,  
+bottom_diff[14*2+0]: 0,  bottom_diff[14*2+1]: 0,  
+bottom_diff[15*2+0]: 0,  bottom_diff[15*2+1]: 0,  
+bottom_diff[16*2+0]: -0.5,  bottom_diff[16*2+1]: 0.5,  
+bottom_diff[17*2+0]: 0,  bottom_diff[17*2+1]: 0,  
+bottom_diff[18*2+0]: 0,  bottom_diff[18*2+1]: 0,  
+bottom_diff[19*2+0]: 0,  bottom_diff[19*2+1]: 0,  
+
+SBL bottom_diff:
+bottom_diff[0*2+0]: 0,  bottom_diff[0*2+1]: 0,  
+bottom_diff[1*2+0]: 0,  bottom_diff[1*2+1]: 0,  
+bottom_diff[2*2+0]: 0,  bottom_diff[2*2+1]: 0,  
+bottom_diff[3*2+0]: 0,  bottom_diff[3*2+1]: 0,  
+bottom_diff[4*2+0]: 0,  bottom_diff[4*2+1]: 0,  
+bottom_diff[5*2+0]: 0,  bottom_diff[5*2+1]: 0,  
+bottom_diff[6*2+0]: 0,  bottom_diff[6*2+1]: 0,  
+bottom_diff[7*2+0]: 0,  bottom_diff[7*2+1]: 0,  
+bottom_diff[8*2+0]: 0,  bottom_diff[8*2+1]: 0,  
+bottom_diff[9*2+0]: 0,  bottom_diff[9*2+1]: 0,  
+bottom_diff[10*2+0]: 0,  bottom_diff[10*2+1]: 0,  
+bottom_diff[11*2+0]: 0,  bottom_diff[11*2+1]: 0,  
+bottom_diff[12*2+0]: -0.405063,  bottom_diff[12*2+1]: 0.405063,  
+bottom_diff[13*2+0]: 0,  bottom_diff[13*2+1]: 0,  
+bottom_diff[14*2+0]: 0,  bottom_diff[14*2+1]: 0,  
+bottom_diff[15*2+0]: 0,  bottom_diff[15*2+1]: 0,  
+bottom_diff[16*2+0]: -0.405063,  bottom_diff[16*2+1]: 0.405063,  
+bottom_diff[17*2+0]: 0,  bottom_diff[17*2+1]: 0,  
+bottom_diff[18*2+0]: 0,  bottom_diff[18*2+1]: 0,  
+bottom_diff[19*2+0]: 0,  bottom_diff[19*2+1]: 0,  
+bottom_diff[20*2+0]: 0,  bottom_diff[20*2+1]: 0,  
+bottom_diff[21*2+0]: 0,  bottom_diff[21*2+1]: 0,  
+bottom_diff[22*2+0]: 0,  bottom_diff[22*2+1]: 0,  
+bottom_diff[23*2+0]: 0,  bottom_diff[23*2+1]: 0,  
+bottom_diff[24*2+0]: 0,  bottom_diff[24*2+1]: 0,  
+bottom_diff[25*2+0]: 0,  bottom_diff[25*2+1]: 0,  
+bottom_diff[26*2+0]: 0,  bottom_diff[26*2+1]: 0,  
+bottom_diff[27*2+0]: -0.405063,  bottom_diff[27*2+1]: 0.405063,  
+bottom_diff[28*2+0]: 0,  bottom_diff[28*2+1]: 0,  
+bottom_diff[29*2+0]: 0,  bottom_diff[29*2+1]: 0,  
+bottom_diff[30*2+0]: 0,  bottom_diff[30*2+1]: 0,  
+bottom_diff[31*2+0]: 0,  bottom_diff[31*2+1]: 0,  
+bottom_diff[32*2+0]: 0,  bottom_diff[32*2+1]: 0,  
+bottom_diff[33*2+0]: 0,  bottom_diff[33*2+1]: 0,  
+bottom_diff[34*2+0]: 0,  bottom_diff[34*2+1]: 0,  
+bottom_diff[35*2+0]: 0,  bottom_diff[35*2+1]: 0,  
+bottom_diff[36*2+0]: 0,  bottom_diff[36*2+1]: 0,  
+bottom_diff[37*2+0]: 0,  bottom_diff[37*2+1]: 0,  
+bottom_diff[38*2+0]: 0,  bottom_diff[38*2+1]: 0,  
+bottom_diff[39*2+0]: 0,  bottom_diff[39*2+1]: 0,  
+bottom_diff[40*2+0]: 0,  bottom_diff[40*2+1]: 0,  
+bottom_diff[41*2+0]: -0.405063,  bottom_diff[41*2+1]: 0.405063,  
+bottom_diff[42*2+0]: 0,  bottom_diff[42*2+1]: 0,  
+bottom_diff[43*2+0]: 0,  bottom_diff[43*2+1]: 0,  
+bottom_diff[44*2+0]: -0.405063,  bottom_diff[44*2+1]: 0.405063,  
+bottom_diff[45*2+0]: 0,  bottom_diff[45*2+1]: 0,  
+bottom_diff[46*2+0]: 0,  bottom_diff[46*2+1]: 0,  
+bottom_diff[47*2+0]: 0,  bottom_diff[47*2+1]: 0,  
+bottom_diff[48*2+0]: -0.405063,  bottom_diff[48*2+1]: 0.405063,  
+bottom_diff[49*2+0]: 0,  bottom_diff[49*2+1]: 0,  
+
+loss after net.hpp:Backward(): 14.8028
+I0821 21:12:27.585677 25250 solver.cpp:269] Iteration 2, lr = 0.0001
+I0821 21:12:53.747709 25250 solver.cpp:117] Iteration 2, loss = 14.8028
+output probs:
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+0, 1, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+1, 0, 
+SBL loss: 8.67716
+SL loss: 73.3491
+loss after net.hpp:Forward(): 8.67716
+SL bottom_diff:
+bottom_diff[0*2+0]: 0.5,  bottom_diff[0*2+1]: -0.5,  
+bottom_diff[1*2+0]: 0.5,  bottom_diff[1*2+1]: -0.5,  
+bottom_diff[2*2+0]: 0.5,  bottom_diff[2*2+1]: -0.5,  
+bottom_diff[3*2+0]: 0.5,  bottom_diff[3*2+1]: -0.5,  
+bottom_diff[4*2+0]: 0,  bottom_diff[4*2+1]: 0,  
+bottom_diff[5*2+0]: 0.5,  bottom_diff[5*2+1]: -0.5,  
+bottom_diff[6*2+0]: 0.5,  bottom_diff[6*2+1]: -0.5,  
+bottom_diff[7*2+0]: 0.5,  bottom_diff[7*2+1]: -0.5,  
+bottom_diff[8*2+0]: 0.5,  bottom_diff[8*2+1]: -0.5,  
+bottom_diff[9*2+0]: 0.5,  bottom_diff[9*2+1]: -0.5,  
+bottom_diff[10*2+0]: 0.5,  bottom_diff[10*2+1]: -0.5,  
+bottom_diff[11*2+0]: 0.5,  bottom_diff[11*2+1]: -0.5,  
+bottom_diff[12*2+0]: 0,  bottom_diff[12*2+1]: 0,  
+bottom_diff[13*2+0]: 0.5,  bottom_diff[13*2+1]: -0.5,  
+bottom_diff[14*2+0]: 0.5,  bottom_diff[14*2+1]: -0.5,  
+bottom_diff[15*2+0]: 0.5,  bottom_diff[15*2+1]: -0.5,  
+bottom_diff[16*2+0]: 0.5,  bottom_diff[16*2+1]: -0.5,  
+bottom_diff[17*2+0]: 0.5,  bottom_diff[17*2+1]: -0.5,  
+bottom_diff[18*2+0]: 0,  bottom_diff[18*2+1]: 0,  
+bottom_diff[19*2+0]: 0.5,  bottom_diff[19*2+1]: -0.5,  
+
+SBL bottom_diff:
+bottom_diff[0*2+0]: 0.0493066,  bottom_diff[0*2+1]: -0.0493066,  
+bottom_diff[1*2+0]: 0.0493066,  bottom_diff[1*2+1]: -0.0493066,  
+bottom_diff[2*2+0]: 0.0493066,  bottom_diff[2*2+1]: -0.0493066,  
+bottom_diff[3*2+0]: 0.0493066,  bottom_diff[3*2+1]: -0.0493066,  
+bottom_diff[4*2+0]: 0,  bottom_diff[4*2+1]: 0,  
+bottom_diff[5*2+0]: 0.0493066,  bottom_diff[5*2+1]: -0.0493066,  
+bottom_diff[6*2+0]: 0.0493066,  bottom_diff[6*2+1]: -0.0493066,  
+bottom_diff[7*2+0]: 0.0493066,  bottom_diff[7*2+1]: -0.0493066,  
+bottom_diff[8*2+0]: 0.0493066,  bottom_diff[8*2+1]: -0.0493066,  
+bottom_diff[9*2+0]: 0.0493066,  bottom_diff[9*2+1]: -0.0493066,  
+bottom_diff[10*2+0]: 0.0493066,  bottom_diff[10*2+1]: -0.0493066,  
+bottom_diff[11*2+0]: 0.0493066,  bottom_diff[11*2+1]: -0.0493066,  
+bottom_diff[12*2+0]: 0,  bottom_diff[12*2+1]: 0,  
+bottom_diff[13*2+0]: 0.0493066,  bottom_diff[13*2+1]: -0.0493066,  
+bottom_diff[14*2+0]: 0.0493066,  bottom_diff[14*2+1]: -0.0493066,  
+bottom_diff[15*2+0]: 0.0493066,  bottom_diff[15*2+1]: -0.0493066,  
+bottom_diff[16*2+0]: 0.0493066,  bottom_diff[16*2+1]: -0.0493066,  
+bottom_diff[17*2+0]: 0.0493066,  bottom_diff[17*2+1]: -0.0493066,  
+bottom_diff[18*2+0]: 0,  bottom_diff[18*2+1]: 0,  
+bottom_diff[19*2+0]: 0.0493066,  bottom_diff[19*2+1]: -0.0493066,  
+bottom_diff[20*2+0]: 0,  bottom_diff[20*2+1]: 0,  
+bottom_diff[21*2+0]: 0.0493066,  bottom_diff[21*2+1]: -0.0493066,  
+bottom_diff[22*2+0]: 0,  bottom_diff[22*2+1]: 0,  
+bottom_diff[23*2+0]: 0.0493066,  bottom_diff[23*2+1]: -0.0493066,  
+bottom_diff[24*2+0]: 0.0493066,  bottom_diff[24*2+1]: -0.0493066,  
+bottom_diff[25*2+0]: 0.0493066,  bottom_diff[25*2+1]: -0.0493066,  
+bottom_diff[26*2+0]: 0.0493066,  bottom_diff[26*2+1]: -0.0493066,  
+bottom_diff[27*2+0]: 0.0493066,  bottom_diff[27*2+1]: -0.0493066,  
+bottom_diff[28*2+0]: 0.0493066,  bottom_diff[28*2+1]: -0.0493066,  
+bottom_diff[29*2+0]: 0,  bottom_diff[29*2+1]: 0,  
+bottom_diff[30*2+0]: 0.0493066,  bottom_diff[30*2+1]: -0.0493066,  
+bottom_diff[31*2+0]: 0.0493066,  bottom_diff[31*2+1]: -0.0493066,  
+bottom_diff[32*2+0]: 0,  bottom_diff[32*2+1]: 0,  
+bottom_diff[33*2+0]: 0.0493066,  bottom_diff[33*2+1]: -0.0493066,  
+bottom_diff[34*2+0]: 0,  bottom_diff[34*2+1]: 0,  
+bottom_diff[35*2+0]: 0,  bottom_diff[35*2+1]: 0,  
+bottom_diff[36*2+0]: 0.0493066,  bottom_diff[36*2+1]: -0.0493066,  
+bottom_diff[37*2+0]: 0.0493066,  bottom_diff[37*2+1]: -0.0493066,  
+bottom_diff[38*2+0]: 0.0493066,  bottom_diff[38*2+1]: -0.0493066,  
+bottom_diff[39*2+0]: 0.0493066,  bottom_diff[39*2+1]: -0.0493066,  
+bottom_diff[40*2+0]: 0.0493066,  bottom_diff[40*2+1]: -0.0493066,  
+bottom_diff[41*2+0]: 0.0493066,  bottom_diff[41*2+1]: -0.0493066,  
+bottom_diff[42*2+0]: 0.0493066,  bottom_diff[42*2+1]: -0.0493066,  
+bottom_diff[43*2+0]: 0.0493066,  bottom_diff[43*2+1]: -0.0493066,  
+bottom_diff[44*2+0]: 0.0493066,  bottom_diff[44*2+1]: -0.0493066,  
+bottom_diff[45*2+0]: 0.0493066,  bottom_diff[45*2+1]: -0.0493066,  
+bottom_diff[46*2+0]: 0.0493066,  bottom_diff[46*2+1]: -0.0493066,  
+bottom_diff[47*2+0]: 0.0493066,  bottom_diff[47*2+1]: -0.0493066,  
+bottom_diff[48*2+0]: 0.0493066,  bottom_diff[48*2+1]: -0.0493066,  
+bottom_diff[49*2+0]: 0.0493066,  bottom_diff[49*2+1]: -0.0493066,  
+
+loss after net.hpp:Backward(): 8.67716
+I0821 21:12:54.181673 25250 solver.cpp:269] Iteration 3, lr = 0.0001
+I0821 21:13:20.340631 25250 solver.cpp:117] Iteration 3, loss = 8.67716
+output probs:
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+SBL loss: -nan
+SL loss: nan
+loss after net.hpp:Forward(): -nan
+SL bottom_diff:
+bottom_diff[0*2+0]: nan,  bottom_diff[0*2+1]: nan,  
+bottom_diff[1*2+0]: nan,  bottom_diff[1*2+1]: nan,  
+bottom_diff[2*2+0]: nan,  bottom_diff[2*2+1]: nan,  
+bottom_diff[3*2+0]: nan,  bottom_diff[3*2+1]: nan,  
+bottom_diff[4*2+0]: nan,  bottom_diff[4*2+1]: nan,  
+bottom_diff[5*2+0]: nan,  bottom_diff[5*2+1]: nan,  
+bottom_diff[6*2+0]: nan,  bottom_diff[6*2+1]: nan,  
+bottom_diff[7*2+0]: nan,  bottom_diff[7*2+1]: nan,  
+bottom_diff[8*2+0]: nan,  bottom_diff[8*2+1]: nan,  
+bottom_diff[9*2+0]: nan,  bottom_diff[9*2+1]: nan,  
+bottom_diff[10*2+0]: nan,  bottom_diff[10*2+1]: nan,  
+bottom_diff[11*2+0]: nan,  bottom_diff[11*2+1]: nan,  
+bottom_diff[12*2+0]: nan,  bottom_diff[12*2+1]: nan,  
+bottom_diff[13*2+0]: nan,  bottom_diff[13*2+1]: nan,  
+bottom_diff[14*2+0]: nan,  bottom_diff[14*2+1]: nan,  
+bottom_diff[15*2+0]: nan,  bottom_diff[15*2+1]: nan,  
+bottom_diff[16*2+0]: nan,  bottom_diff[16*2+1]: nan,  
+bottom_diff[17*2+0]: nan,  bottom_diff[17*2+1]: nan,  
+bottom_diff[18*2+0]: nan,  bottom_diff[18*2+1]: nan,  
+bottom_diff[19*2+0]: nan,  bottom_diff[19*2+1]: nan,  
+
+SBL bottom_diff:
+bottom_diff[0*2+0]: nan,  bottom_diff[0*2+1]: nan,  
+bottom_diff[1*2+0]: nan,  bottom_diff[1*2+1]: nan,  
+bottom_diff[2*2+0]: nan,  bottom_diff[2*2+1]: nan,  
+bottom_diff[3*2+0]: nan,  bottom_diff[3*2+1]: nan,  
+bottom_diff[4*2+0]: nan,  bottom_diff[4*2+1]: nan,  
+bottom_diff[5*2+0]: nan,  bottom_diff[5*2+1]: nan,  
+bottom_diff[6*2+0]: nan,  bottom_diff[6*2+1]: nan,  
+bottom_diff[7*2+0]: nan,  bottom_diff[7*2+1]: nan,  
+bottom_diff[8*2+0]: nan,  bottom_diff[8*2+1]: nan,  
+bottom_diff[9*2+0]: nan,  bottom_diff[9*2+1]: nan,  
+bottom_diff[10*2+0]: nan,  bottom_diff[10*2+1]: nan,  
+bottom_diff[11*2+0]: nan,  bottom_diff[11*2+1]: nan,  
+bottom_diff[12*2+0]: nan,  bottom_diff[12*2+1]: nan,  
+bottom_diff[13*2+0]: nan,  bottom_diff[13*2+1]: nan,  
+bottom_diff[14*2+0]: nan,  bottom_diff[14*2+1]: nan,  
+bottom_diff[15*2+0]: nan,  bottom_diff[15*2+1]: nan,  
+bottom_diff[16*2+0]: nan,  bottom_diff[16*2+1]: nan,  
+bottom_diff[17*2+0]: nan,  bottom_diff[17*2+1]: nan,  
+bottom_diff[18*2+0]: nan,  bottom_diff[18*2+1]: nan,  
+bottom_diff[19*2+0]: nan,  bottom_diff[19*2+1]: nan,  
+bottom_diff[20*2+0]: nan,  bottom_diff[20*2+1]: nan,  
+bottom_diff[21*2+0]: nan,  bottom_diff[21*2+1]: nan,  
+bottom_diff[22*2+0]: nan,  bottom_diff[22*2+1]: nan,  
+bottom_diff[23*2+0]: nan,  bottom_diff[23*2+1]: nan,  
+bottom_diff[24*2+0]: nan,  bottom_diff[24*2+1]: nan,  
+bottom_diff[25*2+0]: nan,  bottom_diff[25*2+1]: nan,  
+bottom_diff[26*2+0]: nan,  bottom_diff[26*2+1]: nan,  
+bottom_diff[27*2+0]: nan,  bottom_diff[27*2+1]: nan,  
+bottom_diff[28*2+0]: nan,  bottom_diff[28*2+1]: nan,  
+bottom_diff[29*2+0]: nan,  bottom_diff[29*2+1]: nan,  
+bottom_diff[30*2+0]: nan,  bottom_diff[30*2+1]: nan,  
+bottom_diff[31*2+0]: nan,  bottom_diff[31*2+1]: nan,  
+bottom_diff[32*2+0]: nan,  bottom_diff[32*2+1]: nan,  
+bottom_diff[33*2+0]: nan,  bottom_diff[33*2+1]: nan,  
+bottom_diff[34*2+0]: nan,  bottom_diff[34*2+1]: nan,  
+bottom_diff[35*2+0]: nan,  bottom_diff[35*2+1]: nan,  
+bottom_diff[36*2+0]: nan,  bottom_diff[36*2+1]: nan,  
+bottom_diff[37*2+0]: nan,  bottom_diff[37*2+1]: nan,  
+bottom_diff[38*2+0]: nan,  bottom_diff[38*2+1]: nan,  
+bottom_diff[39*2+0]: nan,  bottom_diff[39*2+1]: nan,  
+bottom_diff[40*2+0]: nan,  bottom_diff[40*2+1]: nan,  
+bottom_diff[41*2+0]: nan,  bottom_diff[41*2+1]: nan,  
+bottom_diff[42*2+0]: nan,  bottom_diff[42*2+1]: nan,  
+bottom_diff[43*2+0]: nan,  bottom_diff[43*2+1]: nan,  
+bottom_diff[44*2+0]: nan,  bottom_diff[44*2+1]: nan,  
+bottom_diff[45*2+0]: nan,  bottom_diff[45*2+1]: nan,  
+bottom_diff[46*2+0]: nan,  bottom_diff[46*2+1]: nan,  
+bottom_diff[47*2+0]: nan,  bottom_diff[47*2+1]: nan,  
+bottom_diff[48*2+0]: nan,  bottom_diff[48*2+1]: nan,  
+bottom_diff[49*2+0]: nan,  bottom_diff[49*2+1]: nan,  
+
+loss after net.hpp:Backward(): -nan
+I0821 21:13:20.773270 25250 solver.cpp:269] Iteration 4, lr = 0.0001
+I0821 21:13:46.925096 25250 solver.cpp:117] Iteration 4, loss = -nan
+output probs:
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+nan, nan, 
+SBL loss: -nan
+SL loss: nan
+loss after net.hpp:Forward(): -nan
+SL bottom_diff:
+bottom_diff[0*2+0]: nan,  bottom_diff[0*2+1]: nan,  
+bottom_diff[1*2+0]: nan,  bottom_diff[1*2+1]: nan,  
+bottom_diff[2*2+0]: nan,  bottom_diff[2*2+1]: nan,  
+bottom_diff[3*2+0]: nan,  bottom_diff[3*2+1]: nan,  
+bottom_diff[4*2+0]: nan,  bottom_diff[4*2+1]: nan,  
+bottom_diff[5*2+0]: nan,  bottom_diff[5*2+1]: nan,  
+bottom_diff[6*2+0]: nan,  bottom_diff[6*2+1]: nan,  
+bottom_diff[7*2+0]: nan,  bottom_diff[7*2+1]: nan,  
+bottom_diff[8*2+0]: nan,  bottom_diff[8*2+1]: nan,  
+bottom_diff[9*2+0]: nan,  bottom_diff[9*2+1]: nan,  
+bottom_diff[10*2+0]: nan,  bottom_diff[10*2+1]: nan,  
+bottom_diff[11*2+0]: nan,  bottom_diff[11*2+1]: nan,  
+bottom_diff[12*2+0]: nan,  bottom_diff[12*2+1]: nan,  
+bottom_diff[13*2+0]: nan,  bottom_diff[13*2+1]: nan,  
+bottom_diff[14*2+0]: nan,  bottom_diff[14*2+1]: nan,  
+bottom_diff[15*2+0]: nan,  bottom_diff[15*2+1]: nan,  
+bottom_diff[16*2+0]: nan,  bottom_diff[16*2+1]: nan,  
+bottom_diff[17*2+0]: nan,  bottom_diff[17*2+1]: nan,  
+bottom_diff[18*2+0]: nan,  bottom_diff[18*2+1]: nan,  
+bottom_diff[19*2+0]: nan,  bottom_diff[19*2+1]: nan,  
+
+SBL bottom_diff:
+bottom_diff[0*2+0]: nan,  bottom_diff[0*2+1]: nan,  
+bottom_diff[1*2+0]: nan,  bottom_diff[1*2+1]: nan,  
+bottom_diff[2*2+0]: nan,  bottom_diff[2*2+1]: nan,  
+bottom_diff[3*2+0]: nan,  bottom_diff[3*2+1]: nan,  
+bottom_diff[4*2+0]: nan,  bottom_diff[4*2+1]: nan,  
+bottom_diff[5*2+0]: nan,  bottom_diff[5*2+1]: nan,  
+bottom_diff[6*2+0]: nan,  bottom_diff[6*2+1]: nan,  
+bottom_diff[7*2+0]: nan,  bottom_diff[7*2+1]: nan,  
+bottom_diff[8*2+0]: nan,  bottom_diff[8*2+1]: nan,  
+bottom_diff[9*2+0]: nan,  bottom_diff[9*2+1]: nan,  
+bottom_diff[10*2+0]: nan,  bottom_diff[10*2+1]: nan,  
+bottom_diff[11*2+0]: nan,  bottom_diff[11*2+1]: nan,  
+bottom_diff[12*2+0]: nan,  bottom_diff[12*2+1]: nan,  
+bottom_diff[13*2+0]: nan,  bottom_diff[13*2+1]: nan,  
+bottom_diff[14*2+0]: nan,  bottom_diff[14*2+1]: nan,  
+bottom_diff[15*2+0]: nan,  bottom_diff[15*2+1]: nan,  
+bottom_diff[16*2+0]: nan,  bottom_diff[16*2+1]: nan,  
+bottom_diff[17*2+0]: nan,  bottom_diff[17*2+1]: nan,  
+bottom_diff[18*2+0]: nan,  bottom_diff[18*2+1]: nan,  
+bottom_diff[19*2+0]: nan,  bottom_diff[19*2+1]: nan,  
+bottom_diff[20*2+0]: nan,  bottom_diff[20*2+1]: nan,  
+bottom_diff[21*2+0]: nan,  bottom_diff[21*2+1]: nan,  
+bottom_diff[22*2+0]: nan,  bottom_diff[22*2+1]: nan,  
+bottom_diff[23*2+0]: nan,  bottom_diff[23*2+1]: nan,  
+bottom_diff[24*2+0]: nan,  bottom_diff[24*2+1]: nan,  
+bottom_diff[25*2+0]: nan,  bottom_diff[25*2+1]: nan,  
+bottom_diff[26*2+0]: nan,  bottom_diff[26*2+1]: nan,  
+bottom_diff[27*2+0]: nan,  bottom_diff[27*2+1]: nan,  
+bottom_diff[28*2+0]: nan,  bottom_diff[28*2+1]: nan,  
+bottom_diff[29*2+0]: nan,  bottom_diff[29*2+1]: nan,  
+bottom_diff[30*2+0]: nan,  bottom_diff[30*2+1]: nan,  
+bottom_diff[31*2+0]: nan,  bottom_diff[31*2+1]: nan,  
+bottom_diff[32*2+0]: nan,  bottom_diff[32*2+1]: nan,  
+bottom_diff[33*2+0]: nan,  bottom_diff[33*2+1]: nan,  
+bottom_diff[34*2+0]: nan,  bottom_diff[34*2+1]: nan,  
+bottom_diff[35*2+0]: nan,  bottom_diff[35*2+1]: nan,  
+bottom_diff[36*2+0]: nan,  bottom_diff[36*2+1]: nan,  
+bottom_diff[37*2+0]: nan,  bottom_diff[37*2+1]: nan,  
+bottom_diff[38*2+0]: nan,  bottom_diff[38*2+1]: nan,  
+bottom_diff[39*2+0]: nan,  bottom_diff[39*2+1]: nan,  
+bottom_diff[40*2+0]: nan,  bottom_diff[40*2+1]: nan,  
+bottom_diff[41*2+0]: nan,  bottom_diff[41*2+1]: nan,  
+bottom_diff[42*2+0]: nan,  bottom_diff[42*2+1]: nan,  
+bottom_diff[43*2+0]: nan,  bottom_diff[43*2+1]: nan,  
+bottom_diff[44*2+0]: nan,  bottom_diff[44*2+1]: nan,  
+bottom_diff[45*2+0]: nan,  bottom_diff[45*2+1]: nan,  
+bottom_diff[46*2+0]: nan,  bottom_diff[46*2+1]: nan,  
+bottom_diff[47*2+0]: nan,  bottom_diff[47*2+1]: nan,  
+bottom_diff[48*2+0]: nan,  bottom_diff[48*2+1]: nan,  
+bottom_diff[49*2+0]: nan,  bottom_diff[49*2+1]: nan,  
+
+loss after net.hpp:Backward(): -nan
+I0821 21:13:47.358166 25250 solver.cpp:269] Iteration 5, lr = 0.0001

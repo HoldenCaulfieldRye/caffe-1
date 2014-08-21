@@ -53,13 +53,14 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   //caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
   std::cout << "output probs:" << std::endl;
-  for (int i=0; i<50; i++) {
+  for (int i=0; i<20; i++) {
     for (int neur = 0; neur < dim; neur++)
       std::cout << prob_data[i*dim + neur] << ", ";
     std::cout << std::endl;
   }
   
-  Dtype loss = 0, loss_nb = 0;
+  Dtype loss = 0;
+  Dtype loss_nb = 0;
   //std::cout << "loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / prior[static_cast<int>(label[i])]" << std::endl;
   for (int i = 0; i < num; ++i) {
     //taking from prob_data the outputted probability of the correct label
@@ -114,6 +115,8 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
 
   std::cout << "SL bottom_diff:" << std::endl;
   for (int i = 0; i < 20; ++i)  {
+    if (static_cast<int>(label[i]) == 0)
+      std::cout << "min class case ";
     for (int j = 0; j < dim; ++j) 
       std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
     std::cout << std::endl;
