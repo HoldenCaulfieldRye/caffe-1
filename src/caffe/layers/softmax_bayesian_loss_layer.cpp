@@ -54,6 +54,7 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
 
   std::cout << "output probs:" << std::endl;
   for (int i=0; i<20; i++) {
+    std::cout << "case " << i << ": ";
     for (int neur = 0; neur < dim; neur++)
       std::cout << prob_data[i*dim + neur] << ", ";
     std::cout << std::endl;
@@ -138,7 +139,9 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   }
   
   std::cout << "SBL bottom_diff:" << std::endl;
-  for (int i = 0; i < 50; ++i)  {
+  for (int i = 0; i < 20; ++i)  {
+    if (static_cast<int>(label[i]) == 0)
+      std::cout << "min class case ";
     for (int j = 0; j < dim; ++j) 
       std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << (*bottom)[0]->mutable_cpu_diff()[i*dim+j]<< ",  ";
     std::cout << std::endl;

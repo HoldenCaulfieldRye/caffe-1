@@ -223,17 +223,17 @@ const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
   for (int i = 0; i < layers_.size(); ++i) {
     // LOG(ERROR) << "Forwarding " << layer_names_[i];
 
-    //bottom_vecs is type vector<vector<Blob<Dtype>*>>& 
-    //bottom_vecs[i][0] is the blob (aka data structure with num, channels, 
-    //height, width) for carrying img data in layer i
-    //bottom_vecs[i][0] carries the labels in layer i
-    if (i==23) { //layer number I want in this specific case
+    // // bottom_vecs is type vector<vector<Blob<Dtype>*>>& 
+    // // bottom_vecs[i][0] is the blob (aka data structure with num, channels, 
+    // // height, width) for carrying img data in layer i
+    // //bottom_vecs[i][0] carries the labels in layer i
+    // if (i==layers_.size()-1) { //interested in final layer only
       //std::cout << "bottom_vecs_[" << i << "][0]->cpu_data(): ";
-      for (int j=0; j<bottom_vecs_[i].size(); j++) {
-	for (int k=0; j<50; j++) { 
+      // for (int j=0; j<bottom_vecs_[i].size(); j++) {
+      // 	for (int k=0; j<50; j++) { 
 	  //std::cout << bottom_vecs_[i][0]->cpu_data()[j] << ", ";
-	}
-      }
+      // 	}
+      // }
       //std::cout << std::endl << "top_vecs_[" << i << "]: ";
       for (int j=0; j<top_vecs_[i].size(); j++) {
 	//std::cout << top_vecs_[i][j] << ", ";
@@ -409,11 +409,19 @@ void Net<Dtype>::ToProto(NetParameter* param, bool write_diff) {
 template <typename Dtype>
 void Net<Dtype>::Update() {
   for (int i = 0; i < params_.size(); ++i) {
-    
-    // //std::cout << "param[" << i << "] values b4 Update():" << std::endl;
-    // for (int i = 0; i < 50; ++i) 
-    //   //std::cout << params_ << ",     ";
-    // //std::cout << std::endl;
+
+    if (i==layers_.size()-1) { //interested in final layer only
+      std::cout << "params_[" << i << "] dimensions:" << std::endl;
+      std::cout << "num: " << params_[i]->num() << std::endl;
+      std::cout << "channels: " << params_[i]->channels() << std::endl;
+      std::cout << "height: " << params_[i]->height() << std::endl;
+      std::cout << "width: " << params_[i]->width() << std::endl;
+      std::cout << "count: " << params_[i]->count() << std::endl;
+      // std::cout << "params_[" << i << "] values b4 Update():" << std::endl;
+      // for (int i = 0; i < 50; ++i) 
+      // 	std::cout << params_[i]->data_at(n,c,h,w) << ", ";
+      // std::cout << std::endl;
+    }
     
     params_[i]->Update();
   }
