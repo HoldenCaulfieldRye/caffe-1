@@ -239,7 +239,7 @@ const vector<Blob<Dtype>*>& Net<Dtype>::ForwardPrefilled(Dtype* loss) {
 	//std::cout << top_vecs_[i][j] << ", ";
       }
       //std::cout << std::endl;
-    }
+    
     Dtype layer_loss = layers_[i]->Forward(bottom_vecs_[i], &top_vecs_[i]);
     //std::cout << "loss for layer[" << i << "]: " << layer_loss << std::endl;
     if (loss != NULL) {
