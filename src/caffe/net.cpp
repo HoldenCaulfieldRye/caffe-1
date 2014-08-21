@@ -408,22 +408,39 @@ void Net<Dtype>::ToProto(NetParameter* param, bool write_diff) {
 
 template <typename Dtype>
 void Net<Dtype>::Update() {
+  
+  // std::cout << "params_.size(): " << params_.size() << std::endl;
+  // std::cout << "layers_.size(): " << layers_.size() << std::endl;
+  // int width = 20;
   for (int i = 0; i < params_.size(); ++i) {
 
-    if (i==layers_.size()-1) { //interested in final layer only
-      std::cout << "params_[" << i << "] dimensions:" << std::endl;
-      std::cout << "num: " << params_[i]->num() << std::endl;
-      std::cout << "channels: " << params_[i]->channels() << std::endl;
-      std::cout << "height: " << params_[i]->height() << std::endl;
-      std::cout << "width: " << params_[i]->width() << std::endl;
-      std::cout << "count: " << params_[i]->count() << std::endl;
-      // std::cout << "params_[" << i << "] values b4 Update():" << std::endl;
-      // for (int i = 0; i < 50; ++i) 
-      // 	std::cout << params_[i]->data_at(n,c,h,w) << ", ";
-      // std::cout << std::endl;
-    }
+    // if (i==params_.size()-2) { //softmax weights I believe
+    //   // std::cout << "params_[" << i << "] dimensions:" << std::endl;
+    //   // std::cout << "num: " << params_[i]->num() << std::endl;
+    //   // std::cout << "channels: " << params_[i]->channels() << std::endl;
+    //   // std::cout << "height: " << params_[i]->height() << std::endl;
+    //   // std::cout << "width: " << params_[i]->width() << std::endl;
+    //   // std::cout << "count: " << params_[i]->count() << std::endl;
+    //   std::cout << "softmax weights before Update():" << std::endl;
+    //   for (int h = 0; h < params_[i]->height(); ++i) {
+    // 	std::cout << "softmax neuron " << h << ", first " << width << " weights:" << std::endl;
+    // 	for (int w = 0; w < width; ++i) 
+    // 	  std::cout << params_[i]->data_at(0,0,h,w) << ", ";
+    // 	std::cout << std::endl;
+    //   }
+    // }
     
     params_[i]->Update();
+
+    // if (i==params_.size()-2) { //softmax weights I believe
+    //   std::cout << "softmax weights after Update():" << std::endl;
+    //   for (int h = 0; h < params_[i]->height(); ++i) {
+    // 	std::cout << "softmax neuron " << h << ", first " << width << " weights:" << std::endl;
+    // 	for (int w = 0; w < width; ++i) 
+    // 	  std::cout << params_[i]->data_at(0,0,h,w) << ", ";
+    // 	std::cout << std::endl;
+    //   }
+    // }
   }
 }
 
