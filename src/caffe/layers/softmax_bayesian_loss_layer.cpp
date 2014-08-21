@@ -52,6 +52,11 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   //std::cout << std::endl;
   //caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
+  std::cout << "output probs:" << std::endl;
+  for (int i=0; i<num; i++) {
+    std::cout << prob_data
+  }
+  
   Dtype loss = 0, loss_nb = 0;
   //std::cout << "loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / prior[static_cast<int>(label[i])]" << std::endl;
   for (int i = 0; i < num; ++i) {

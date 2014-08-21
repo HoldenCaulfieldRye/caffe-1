@@ -79,6 +79,11 @@ labels_.count()             |
 bottom_diff[case*dimensionality+neuron]
 ---------------------------------------------------------
 
+STEP 1
+======
+
+solved. you were wrong, fwd pass not ok. move to step 2
+
 debug SBL:
 - fwd pass: OK
 - bwd pass: OK
@@ -132,8 +137,24 @@ debug SBL:
      -> 
 
 
+STEP 2
+======
+
+issue with the update. after 1 iteration, next loss is 14
+for SBL, 73 for SL. bottom_diff takes on rubbish values.
+
+so:
+- bwd pass is wrong
+- weight update is wrong
+
+
+
+
 IDENTIFIED PROBS & SOLS:
 -> what if prior is (1,0)
+-> at bottom diff iteration 0, SBL consistently less than
+   SL. should this be?
+   
     
 	   EF CONF CALL THIS AFTERNOON
 	   SET UP REMINDERS
