@@ -53,8 +53,10 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   //caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
   std::cout << "output probs:" << std::endl;
-  for (int i=0; i<num; i++) {
-    std::cout << prob_data
+  for (int i=0; i<50; i++) {
+    for (int neur = 0; neur < dim; neur++)
+      std::cout << prob_data[i*dim + neur] << ", ";
+    std::cout << std::endl;
   }
   
   Dtype loss = 0, loss_nb = 0;
