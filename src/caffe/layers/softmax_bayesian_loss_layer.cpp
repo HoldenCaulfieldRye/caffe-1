@@ -35,18 +35,18 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   softmax_bottom_vec_[0] = bottom[0];
   softmax_layer_->Forward(softmax_bottom_vec_, &softmax_top_vec_);
   const Dtype* prob_data = prob_.cpu_data();
-  const Dtype* bottom_data = bottom[0].cpu_data();
+  const Dtype* bottom_data = bottom[0]->cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
   int dim = prob_.count() / num;
   // int label_count = bottom[1]->count();
 
-  std::cout << "prob_data dimensions:" << std::endl;
-  std::cout << "num: " << prob_data->num() << std::endl;
-  std::cout << "channels: " << prob_data->channels() << std::endl;
-  std::cout << "height: " << prob_data->height() << std::endl;
-  std::cout << "width: " << prob_data->width() << std::endl;
-  std::cout << "count: " << prob_data->count() << std::endl;
+  std::cout << "prob_ dimensions:" << std::endl;
+  std::cout << "num: " << prob_.num() << std::endl;
+  std::cout << "channels: " << prob_.channels() << std::endl;
+  std::cout << "height: " << prob_.height() << std::endl;
+  std::cout << "width: " << prob_.width() << std::endl;
+  std::cout << "count: " << prob_.count() << std::endl;
 
   std::cout << std::endl;
   
