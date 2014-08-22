@@ -4,6 +4,7 @@
 #include <cmath>
 #include <cfloat>
 #include <vector>
+#include <iostream>
 
 #include "caffe/layer.hpp"
 #include "caffe/vision_layers.hpp"
@@ -52,6 +53,19 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
     labels_count[static_cast<int>(bottom_label[i])] += 1.0;
     ////std::cout << "bottom_label" << i << " " << bottom_label[i];
   } 
+
+  // const Dtype* prob_data = prob_.cpu_data();
+  const Dtype* label = bottom[1]->cpu_data();
+  std::cout << "output probs:" << std::endl;
+  for (int i=0; i<20; i++) {
+    if (static_cast<int>(label[i]) == 0)
+      std::cout << "min class ";
+   std::cout << "case " << i << ": ";
+    for (int neur = 0; neur < dim; neur++)
+      std::cout << bottom_data[i*dim + neur] << ", ";
+    std::cout << std::endl;
+  }  
+  
   for (int i = 0; i < num; ++i) {
     // Accuracy
     Dtype maxval = -FLT_MAX;

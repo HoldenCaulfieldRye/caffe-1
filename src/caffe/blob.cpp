@@ -141,7 +141,7 @@ void Blob<Dtype>::Update() {
 
     // perform computation on GPU
     if (count() == 8192) { //only softmax layer has this count
-      std::cout << "perform computation on GPU" << std::endl;
+      std::cout << "perform computation on GPU" << std::endl << std::endl;
       
       std::cout << "current params: " << std::endl;
       std::cout << "softmax 0: " << std::endl;
@@ -152,13 +152,13 @@ void Blob<Dtype>::Update() {
       std::cout << "softmax 1: " << std::endl;
       for (int i=4096; i<4116; i++)
 	std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
-      std::cout  << std::endl ;
+      std::cout  << std::endl << std::endl;
       
-      std::cout << "diff: ";
+      std::cout << "diff: " << std::endl;
       std::cout << "softmax 0: " << std::endl;
       for (int i=0; i<20; i++)
 	std::cout << reinterpret_cast<const Dtype*>(diff_->cpu_data())[i] << ", ";
-      std::cout  << std::endl << std::endl;
+      std::cout  << std::endl;
 
       std::cout << "softmax 1: " << std::endl;
       for (int i=4096; i<4116; i++)
@@ -176,7 +176,7 @@ void Blob<Dtype>::Update() {
       std::cout << "softmax 0: " << std::endl;
       for (int i=0; i<20; i++)
 	std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
-      std::cout << std::endl << std::endl;
+      std::cout << std::endl;
 
       std::cout << "softmax 1: " << std::endl;
       for (int i=4096; i<4116; i++)

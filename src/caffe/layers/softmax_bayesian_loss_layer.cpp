@@ -54,7 +54,9 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
 
   std::cout << "output probs:" << std::endl;
   for (int i=0; i<20; i++) {
-    std::cout << "case " << i << ": ";
+    if (static_cast<int>(label[i]) == 0)
+      std::cout << "min class ";
+   std::cout << "case " << i << ": ";
     for (int neur = 0; neur < dim; neur++)
       std::cout << prob_data[i*dim + neur] << ", ";
     std::cout << std::endl;
