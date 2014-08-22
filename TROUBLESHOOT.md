@@ -79,6 +79,129 @@ labels_.count()             |
 bottom_diff[case*dimensionality+neuron]
 ---------------------------------------------------------
 
+# conv1
+params_[0] dimensions:
+num: 96
+channels: 3
+height: 11
+width: 11
+count: 34848
+
+params_[1] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 96
+count: 96
+
+# conv2?
+params_[2] dimensions:
+num: 256
+channels: 48
+height: 5
+width: 5
+count: 307200
+
+params_[3] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 256
+count: 256
+
+# conv3?
+params_[4] dimensions:
+num: 384
+channels: 256
+height: 3
+width: 3
+count: 884736
+
+params_[5] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 384
+count: 384
+
+# conv4?
+params_[6] dimensions:
+num: 384
+channels: 192
+height: 3
+width: 3
+count: 663552
+
+params_[7] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 384
+count: 384
+
+# conv5?
+params_[8] dimensions:
+num: 256
+channels: 192
+height: 3
+width: 3
+count: 442368
+
+params_[9] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 256
+count: 256
+
+# fc6?
+params_[10] dimensions:
+num: 1
+channels: 1
+height: 4096
+width: 9216
+count: 37748736
+
+params_[11] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 4096
+count: 4096
+
+# fc7?
+params_[12] dimensions:
+num: 1
+channels: 1
+height: 4096
+width: 4096
+count: 16777216
+
+params_[13] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 4096
+count: 4096
+
+# fc8?
+# softmax weights!
+params_[14] dimensions:
+num: 1
+channels: 1
+height: 2   # one for each softmax neuron
+width: 4096 # one for each neuron below
+count: 8192
+
+params_[15] dimensions:
+num: 1
+channels: 1
+height: 1
+width: 2
+count: 2
+
+
+
 STEP 1
 ======
 
@@ -146,6 +269,9 @@ for SBL, 73 for SL. bottom_diff takes on rubbish values.
 so:
 - bwd pass is wrong
 - weight update is wrong
+
+-> after 1 iteration, net only outputs 1s or 0s!
+   -> so z = <x,w> + b can easily = 0 ? how?
 
 
 

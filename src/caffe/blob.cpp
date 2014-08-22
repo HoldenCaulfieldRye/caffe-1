@@ -141,8 +141,7 @@ void Blob<Dtype>::Update() {
 
     // perform computation on GPU
     if (count() == 8192) { //only softmax layer has this count
-      std::cout << "perform computation on GPU" << std::endl << std::endl;
-      
+      std::cout << "perform computation on GPU" << std::endl << std::endl;      
       std::cout << "current params: " << std::endl;
       std::cout << "softmax 0: " << std::endl;
       for (int i=0; i<20; i++)

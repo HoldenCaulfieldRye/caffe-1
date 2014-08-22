@@ -1,1201 +1,1469 @@
-I0822 00:46:39.120393 14017 finetune_net.cpp:25] Starting Optimization
-I0822 00:46:39.120491 14017 solver.cpp:42] Creating training net.
-I0822 00:46:39.121047 14017 net.cpp:76] Creating Layer data
-I0822 00:46:39.121062 14017 net.cpp:112] data -> data
-I0822 00:46:39.121073 14017 net.cpp:112] data -> label
-I0822 00:46:39.121094 14017 data_layer.cpp:145] Opening leveldb scrape_zones_fine_train_leveldb
-I0822 00:46:39.158857 14017 data_layer.cpp:185] output data size: 256,3,227,227
-I0822 00:46:39.158893 14017 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
-I0822 00:46:39.483249 14017 net.cpp:127] Top shape: 256 3 227 227 (39574272)
-I0822 00:46:39.483281 14017 net.cpp:127] Top shape: 256 1 1 1 (256)
-I0822 00:46:39.483289 14017 net.cpp:158] data does not need backward computation.
-I0822 00:46:39.483302 14017 net.cpp:76] Creating Layer conv1
-I0822 00:46:39.483309 14017 net.cpp:86] conv1 <- data
-I0822 00:46:39.483325 14017 net.cpp:112] conv1 -> conv1
-I0822 00:46:39.484813 14017 net.cpp:127] Top shape: 256 96 55 55 (74342400)
-I0822 00:46:39.484827 14017 net.cpp:158] conv1 does not need backward computation.
-I0822 00:46:39.484834 14017 net.cpp:76] Creating Layer relu1
-I0822 00:46:39.484839 14017 net.cpp:86] relu1 <- conv1
-I0822 00:46:39.484845 14017 net.cpp:100] relu1 -> conv1 (in-place)
-I0822 00:46:39.484853 14017 net.cpp:127] Top shape: 256 96 55 55 (74342400)
-I0822 00:46:39.484858 14017 net.cpp:158] relu1 does not need backward computation.
-I0822 00:46:39.484863 14017 net.cpp:76] Creating Layer pool1
-I0822 00:46:39.484868 14017 net.cpp:86] pool1 <- conv1
-I0822 00:46:39.484872 14017 net.cpp:112] pool1 -> pool1
-I0822 00:46:39.484884 14017 net.cpp:127] Top shape: 256 96 27 27 (17915904)
-I0822 00:46:39.484889 14017 net.cpp:158] pool1 does not need backward computation.
-I0822 00:46:39.484899 14017 net.cpp:76] Creating Layer norm1
-I0822 00:46:39.484902 14017 net.cpp:86] norm1 <- pool1
-I0822 00:46:39.484907 14017 net.cpp:112] norm1 -> norm1
-I0822 00:46:39.484916 14017 net.cpp:127] Top shape: 256 96 27 27 (17915904)
-I0822 00:46:39.484921 14017 net.cpp:158] norm1 does not need backward computation.
-I0822 00:46:39.484926 14017 net.cpp:76] Creating Layer conv2
-I0822 00:46:39.484930 14017 net.cpp:86] conv2 <- norm1
-I0822 00:46:39.484935 14017 net.cpp:112] conv2 -> conv2
-I0822 00:46:39.497519 14017 net.cpp:127] Top shape: 256 256 27 27 (47775744)
-I0822 00:46:39.497545 14017 net.cpp:158] conv2 does not need backward computation.
-I0822 00:46:39.497553 14017 net.cpp:76] Creating Layer relu2
-I0822 00:46:39.497560 14017 net.cpp:86] relu2 <- conv2
-I0822 00:46:39.497565 14017 net.cpp:100] relu2 -> conv2 (in-place)
-I0822 00:46:39.497572 14017 net.cpp:127] Top shape: 256 256 27 27 (47775744)
-I0822 00:46:39.497577 14017 net.cpp:158] relu2 does not need backward computation.
-I0822 00:46:39.497582 14017 net.cpp:76] Creating Layer pool2
-I0822 00:46:39.497586 14017 net.cpp:86] pool2 <- conv2
-I0822 00:46:39.497591 14017 net.cpp:112] pool2 -> pool2
-I0822 00:46:39.497598 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:39.497602 14017 net.cpp:158] pool2 does not need backward computation.
-I0822 00:46:39.497611 14017 net.cpp:76] Creating Layer norm2
-I0822 00:46:39.497616 14017 net.cpp:86] norm2 <- pool2
-I0822 00:46:39.497620 14017 net.cpp:112] norm2 -> norm2
-I0822 00:46:39.497627 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:39.497632 14017 net.cpp:158] norm2 does not need backward computation.
-I0822 00:46:39.497637 14017 net.cpp:76] Creating Layer conv3
-I0822 00:46:39.497642 14017 net.cpp:86] conv3 <- norm2
-I0822 00:46:39.497647 14017 net.cpp:112] conv3 -> conv3
-I0822 00:46:39.534265 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:39.534292 14017 net.cpp:158] conv3 does not need backward computation.
-I0822 00:46:39.534301 14017 net.cpp:76] Creating Layer relu3
-I0822 00:46:39.534307 14017 net.cpp:86] relu3 <- conv3
-I0822 00:46:39.534314 14017 net.cpp:100] relu3 -> conv3 (in-place)
-I0822 00:46:39.534319 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:39.534324 14017 net.cpp:158] relu3 does not need backward computation.
-I0822 00:46:39.534330 14017 net.cpp:76] Creating Layer conv4
-I0822 00:46:39.534334 14017 net.cpp:86] conv4 <- conv3
-I0822 00:46:39.534339 14017 net.cpp:112] conv4 -> conv4
-I0822 00:46:39.561821 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:39.561847 14017 net.cpp:158] conv4 does not need backward computation.
-I0822 00:46:39.561856 14017 net.cpp:76] Creating Layer relu4
-I0822 00:46:39.561861 14017 net.cpp:86] relu4 <- conv4
-I0822 00:46:39.561868 14017 net.cpp:100] relu4 -> conv4 (in-place)
-I0822 00:46:39.561874 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:39.561878 14017 net.cpp:158] relu4 does not need backward computation.
-I0822 00:46:39.561885 14017 net.cpp:76] Creating Layer conv5
-I0822 00:46:39.561889 14017 net.cpp:86] conv5 <- conv4
-I0822 00:46:39.561894 14017 net.cpp:112] conv5 -> conv5
-I0822 00:46:39.580282 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:39.580309 14017 net.cpp:158] conv5 does not need backward computation.
-I0822 00:46:39.580318 14017 net.cpp:76] Creating Layer relu5
-I0822 00:46:39.580325 14017 net.cpp:86] relu5 <- conv5
-I0822 00:46:39.580332 14017 net.cpp:100] relu5 -> conv5 (in-place)
-I0822 00:46:39.580338 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:39.580343 14017 net.cpp:158] relu5 does not need backward computation.
-I0822 00:46:39.580348 14017 net.cpp:76] Creating Layer pool5
-I0822 00:46:39.580353 14017 net.cpp:86] pool5 <- conv5
-I0822 00:46:39.580358 14017 net.cpp:112] pool5 -> pool5
-I0822 00:46:39.580364 14017 net.cpp:127] Top shape: 256 256 6 6 (2359296)
-I0822 00:46:39.580368 14017 net.cpp:158] pool5 does not need backward computation.
-I0822 00:46:39.580377 14017 net.cpp:76] Creating Layer fc6
-I0822 00:46:39.580381 14017 net.cpp:86] fc6 <- pool5
-I0822 00:46:39.580386 14017 net.cpp:112] fc6 -> fc6
-I0822 00:46:41.116953 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:41.116984 14017 net.cpp:153] fc6 needs backward computation.
-I0822 00:46:41.116994 14017 net.cpp:76] Creating Layer relu6
-I0822 00:46:41.117002 14017 net.cpp:86] relu6 <- fc6
-I0822 00:46:41.117008 14017 net.cpp:100] relu6 -> fc6 (in-place)
-I0822 00:46:41.117015 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:41.117019 14017 net.cpp:153] relu6 needs backward computation.
-I0822 00:46:41.117025 14017 net.cpp:76] Creating Layer drop6
-I0822 00:46:41.117029 14017 net.cpp:86] drop6 <- fc6
-I0822 00:46:41.117034 14017 net.cpp:100] drop6 -> fc6 (in-place)
-I0822 00:46:41.117048 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:41.117053 14017 net.cpp:153] drop6 needs backward computation.
-I0822 00:46:41.117058 14017 net.cpp:76] Creating Layer fc7
-I0822 00:46:41.117063 14017 net.cpp:86] fc7 <- fc6
-I0822 00:46:41.117068 14017 net.cpp:112] fc7 -> fc7
-I0822 00:46:41.799077 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:41.799106 14017 net.cpp:153] fc7 needs backward computation.
-I0822 00:46:41.799116 14017 net.cpp:76] Creating Layer relu7
-I0822 00:46:41.799123 14017 net.cpp:86] relu7 <- fc7
-I0822 00:46:41.799129 14017 net.cpp:100] relu7 -> fc7 (in-place)
-I0822 00:46:41.799135 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:41.799139 14017 net.cpp:153] relu7 needs backward computation.
-I0822 00:46:41.799145 14017 net.cpp:76] Creating Layer drop7
-I0822 00:46:41.799149 14017 net.cpp:86] drop7 <- fc7
-I0822 00:46:41.799154 14017 net.cpp:100] drop7 -> fc7 (in-place)
-I0822 00:46:41.799160 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:41.799163 14017 net.cpp:153] drop7 needs backward computation.
-I0822 00:46:41.799170 14017 net.cpp:76] Creating Layer fc8_clamp
-I0822 00:46:41.799173 14017 net.cpp:86] fc8_clamp <- fc7
-I0822 00:46:41.799178 14017 net.cpp:112] fc8_clamp -> fc8_aero
-I0822 00:46:41.799542 14017 net.cpp:127] Top shape: 256 2 1 1 (512)
-I0822 00:46:41.799552 14017 net.cpp:153] fc8_clamp needs backward computation.
-I0822 00:46:41.799558 14017 net.cpp:76] Creating Layer loss
-I0822 00:46:41.799563 14017 net.cpp:86] loss <- fc8_aero
-I0822 00:46:41.799568 14017 net.cpp:86] loss <- label
-I0822 00:46:41.799582 14017 net.cpp:153] loss needs backward computation.
-I0822 00:46:41.799612 14017 net.cpp:182] Collecting Learning Rate and Weight Decay.
-I0822 00:46:41.799624 14017 net.cpp:175] Network initialization done.
-I0822 00:46:41.799628 14017 net.cpp:176] Memory required for Data 1073739776
-I0822 00:46:41.799672 14017 solver.cpp:45] Creating testing net.
-I0822 00:46:41.800374 14017 net.cpp:76] Creating Layer data
-I0822 00:46:41.800384 14017 net.cpp:112] data -> data
-I0822 00:46:41.800392 14017 net.cpp:112] data -> label
-I0822 00:46:41.800400 14017 data_layer.cpp:145] Opening leveldb scrape_zones_fine_val_leveldb
-I0822 00:46:41.858250 14017 data_layer.cpp:185] output data size: 256,3,227,227
-I0822 00:46:41.858283 14017 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
-I0822 00:46:41.941813 14017 net.cpp:127] Top shape: 256 3 227 227 (39574272)
-I0822 00:46:41.941833 14017 net.cpp:127] Top shape: 256 1 1 1 (256)
-I0822 00:46:41.941839 14017 net.cpp:158] data does not need backward computation.
-I0822 00:46:41.941853 14017 net.cpp:76] Creating Layer conv1
-I0822 00:46:41.941858 14017 net.cpp:86] conv1 <- data
-I0822 00:46:41.941865 14017 net.cpp:112] conv1 -> conv1
-I0822 00:46:41.943300 14017 net.cpp:127] Top shape: 256 96 55 55 (74342400)
-I0822 00:46:41.943311 14017 net.cpp:158] conv1 does not need backward computation.
-I0822 00:46:41.943318 14017 net.cpp:76] Creating Layer relu1
-I0822 00:46:41.943323 14017 net.cpp:86] relu1 <- conv1
-I0822 00:46:41.943328 14017 net.cpp:100] relu1 -> conv1 (in-place)
-I0822 00:46:41.943334 14017 net.cpp:127] Top shape: 256 96 55 55 (74342400)
-I0822 00:46:41.943339 14017 net.cpp:158] relu1 does not need backward computation.
-I0822 00:46:41.943344 14017 net.cpp:76] Creating Layer pool1
-I0822 00:46:41.943348 14017 net.cpp:86] pool1 <- conv1
-I0822 00:46:41.943353 14017 net.cpp:112] pool1 -> pool1
-I0822 00:46:41.943361 14017 net.cpp:127] Top shape: 256 96 27 27 (17915904)
-I0822 00:46:41.943364 14017 net.cpp:158] pool1 does not need backward computation.
-I0822 00:46:41.943372 14017 net.cpp:76] Creating Layer norm1
-I0822 00:46:41.943377 14017 net.cpp:86] norm1 <- pool1
-I0822 00:46:41.943380 14017 net.cpp:112] norm1 -> norm1
-I0822 00:46:41.943387 14017 net.cpp:127] Top shape: 256 96 27 27 (17915904)
-I0822 00:46:41.943392 14017 net.cpp:158] norm1 does not need backward computation.
-I0822 00:46:41.943398 14017 net.cpp:76] Creating Layer conv2
-I0822 00:46:41.943403 14017 net.cpp:86] conv2 <- norm1
-I0822 00:46:41.943408 14017 net.cpp:112] conv2 -> conv2
-I0822 00:46:41.955757 14017 net.cpp:127] Top shape: 256 256 27 27 (47775744)
-I0822 00:46:41.955781 14017 net.cpp:158] conv2 does not need backward computation.
-I0822 00:46:41.955790 14017 net.cpp:76] Creating Layer relu2
-I0822 00:46:41.955796 14017 net.cpp:86] relu2 <- conv2
-I0822 00:46:41.955803 14017 net.cpp:100] relu2 -> conv2 (in-place)
-I0822 00:46:41.955808 14017 net.cpp:127] Top shape: 256 256 27 27 (47775744)
-I0822 00:46:41.955813 14017 net.cpp:158] relu2 does not need backward computation.
-I0822 00:46:41.955818 14017 net.cpp:76] Creating Layer pool2
-I0822 00:46:41.955822 14017 net.cpp:86] pool2 <- conv2
-I0822 00:46:41.955827 14017 net.cpp:112] pool2 -> pool2
-I0822 00:46:41.955835 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:41.955839 14017 net.cpp:158] pool2 does not need backward computation.
-I0822 00:46:41.955847 14017 net.cpp:76] Creating Layer norm2
-I0822 00:46:41.955852 14017 net.cpp:86] norm2 <- pool2
-I0822 00:46:41.955857 14017 net.cpp:112] norm2 -> norm2
-I0822 00:46:41.955863 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:41.955868 14017 net.cpp:158] norm2 does not need backward computation.
-I0822 00:46:41.955874 14017 net.cpp:76] Creating Layer conv3
-I0822 00:46:41.955878 14017 net.cpp:86] conv3 <- norm2
-I0822 00:46:41.955883 14017 net.cpp:112] conv3 -> conv3
-I0822 00:46:41.992676 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:41.992703 14017 net.cpp:158] conv3 does not need backward computation.
-I0822 00:46:41.992712 14017 net.cpp:76] Creating Layer relu3
-I0822 00:46:41.992718 14017 net.cpp:86] relu3 <- conv3
-I0822 00:46:41.992725 14017 net.cpp:100] relu3 -> conv3 (in-place)
-I0822 00:46:41.992733 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:41.992737 14017 net.cpp:158] relu3 does not need backward computation.
-I0822 00:46:41.992745 14017 net.cpp:76] Creating Layer conv4
-I0822 00:46:41.992750 14017 net.cpp:86] conv4 <- conv3
-I0822 00:46:41.992755 14017 net.cpp:112] conv4 -> conv4
-I0822 00:46:42.020336 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:42.020364 14017 net.cpp:158] conv4 does not need backward computation.
-I0822 00:46:42.020371 14017 net.cpp:76] Creating Layer relu4
-I0822 00:46:42.020377 14017 net.cpp:86] relu4 <- conv4
-I0822 00:46:42.020385 14017 net.cpp:100] relu4 -> conv4 (in-place)
-I0822 00:46:42.020390 14017 net.cpp:127] Top shape: 256 384 13 13 (16613376)
-I0822 00:46:42.020395 14017 net.cpp:158] relu4 does not need backward computation.
-I0822 00:46:42.020401 14017 net.cpp:76] Creating Layer conv5
-I0822 00:46:42.020406 14017 net.cpp:86] conv5 <- conv4
-I0822 00:46:42.020411 14017 net.cpp:112] conv5 -> conv5
-I0822 00:46:42.038700 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:42.038724 14017 net.cpp:158] conv5 does not need backward computation.
-I0822 00:46:42.038733 14017 net.cpp:76] Creating Layer relu5
-I0822 00:46:42.038739 14017 net.cpp:86] relu5 <- conv5
-I0822 00:46:42.038746 14017 net.cpp:100] relu5 -> conv5 (in-place)
-I0822 00:46:42.038753 14017 net.cpp:127] Top shape: 256 256 13 13 (11075584)
-I0822 00:46:42.038758 14017 net.cpp:158] relu5 does not need backward computation.
-I0822 00:46:42.038763 14017 net.cpp:76] Creating Layer pool5
-I0822 00:46:42.038768 14017 net.cpp:86] pool5 <- conv5
-I0822 00:46:42.038771 14017 net.cpp:112] pool5 -> pool5
-I0822 00:46:42.038779 14017 net.cpp:127] Top shape: 256 256 6 6 (2359296)
-I0822 00:46:42.038784 14017 net.cpp:158] pool5 does not need backward computation.
-I0822 00:46:42.038792 14017 net.cpp:76] Creating Layer fc6
-I0822 00:46:42.038797 14017 net.cpp:86] fc6 <- pool5
-I0822 00:46:42.038802 14017 net.cpp:112] fc6 -> fc6
-I0822 00:46:43.576717 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:43.576747 14017 net.cpp:153] fc6 needs backward computation.
-I0822 00:46:43.576756 14017 net.cpp:76] Creating Layer relu6
-I0822 00:46:43.576763 14017 net.cpp:86] relu6 <- fc6
-I0822 00:46:43.576771 14017 net.cpp:100] relu6 -> fc6 (in-place)
-I0822 00:46:43.576776 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:43.576781 14017 net.cpp:153] relu6 needs backward computation.
-I0822 00:46:43.576786 14017 net.cpp:76] Creating Layer drop6
-I0822 00:46:43.576792 14017 net.cpp:86] drop6 <- fc6
-I0822 00:46:43.576796 14017 net.cpp:100] drop6 -> fc6 (in-place)
-I0822 00:46:43.576802 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:43.576805 14017 net.cpp:153] drop6 needs backward computation.
-I0822 00:46:43.576812 14017 net.cpp:76] Creating Layer fc7_new
-I0822 00:46:43.576815 14017 net.cpp:86] fc7_new <- fc6
-I0822 00:46:43.576820 14017 net.cpp:112] fc7_new -> fc7
-I0822 00:46:44.259516 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:44.259542 14017 net.cpp:153] fc7_new needs backward computation.
-I0822 00:46:44.259552 14017 net.cpp:76] Creating Layer relu7
-I0822 00:46:44.259557 14017 net.cpp:86] relu7 <- fc7
-I0822 00:46:44.259564 14017 net.cpp:100] relu7 -> fc7 (in-place)
-I0822 00:46:44.259570 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:44.259575 14017 net.cpp:153] relu7 needs backward computation.
-I0822 00:46:44.259582 14017 net.cpp:76] Creating Layer drop7
-I0822 00:46:44.259585 14017 net.cpp:86] drop7 <- fc7
-I0822 00:46:44.259590 14017 net.cpp:100] drop7 -> fc7 (in-place)
-I0822 00:46:44.259595 14017 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
-I0822 00:46:44.259600 14017 net.cpp:153] drop7 needs backward computation.
-I0822 00:46:44.259606 14017 net.cpp:76] Creating Layer fc8_clamp
-I0822 00:46:44.259610 14017 net.cpp:86] fc8_clamp <- fc7
-I0822 00:46:44.259615 14017 net.cpp:112] fc8_clamp -> fc8_aero
-I0822 00:46:44.259948 14017 net.cpp:127] Top shape: 256 2 1 1 (512)
-I0822 00:46:44.259958 14017 net.cpp:153] fc8_clamp needs backward computation.
-I0822 00:46:44.259963 14017 net.cpp:76] Creating Layer prob
-I0822 00:46:44.259968 14017 net.cpp:86] prob <- fc8_aero
-I0822 00:46:44.259973 14017 net.cpp:112] prob -> prob
-I0822 00:46:44.259979 14017 net.cpp:127] Top shape: 256 2 1 1 (512)
-I0822 00:46:44.259984 14017 net.cpp:153] prob needs backward computation.
-I0822 00:46:44.259989 14017 net.cpp:76] Creating Layer accuracy
-I0822 00:46:44.259994 14017 net.cpp:86] accuracy <- prob
-I0822 00:46:44.259999 14017 net.cpp:86] accuracy <- label
-I0822 00:46:44.260004 14017 net.cpp:112] accuracy -> accuracy
-I0822 00:46:44.260020 14017 net.cpp:127] Top shape: 1 2 1 1 (2)
-I0822 00:46:44.260025 14017 net.cpp:153] accuracy needs backward computation.
-I0822 00:46:44.260027 14017 net.cpp:164] This network produces output accuracy
-I0822 00:46:44.260047 14017 net.cpp:182] Collecting Learning Rate and Weight Decay.
-I0822 00:46:44.260059 14017 net.cpp:175] Network initialization done.
-I0822 00:46:44.260063 14017 net.cpp:176] Memory required for Data 1073741832
-I0822 00:46:44.260102 14017 solver.cpp:50] Solver scaffolding done.
-I0822 00:46:44.260109 14017 finetune_net.cpp:27] Loading from ../alexnet/caffe_alexnet_model
-I0822 00:46:44.933799 14017 net.cpp:366] Copying source layer data
-I0822 00:46:44.933823 14017 net.cpp:366] Copying source layer conv1
-I0822 00:46:44.933890 14017 net.cpp:366] Copying source layer relu1
-I0822 00:46:44.933902 14017 net.cpp:366] Copying source layer norm1
-I0822 00:46:44.933910 14017 net.cpp:366] Copying source layer pool1
-I0822 00:46:44.933917 14017 net.cpp:366] Copying source layer conv2
-I0822 00:46:44.934494 14017 net.cpp:366] Copying source layer relu2
-I0822 00:46:44.934507 14017 net.cpp:366] Copying source layer norm2
-I0822 00:46:44.934512 14017 net.cpp:366] Copying source layer pool2
-I0822 00:46:44.934516 14017 net.cpp:366] Copying source layer conv3
-I0822 00:46:44.936058 14017 net.cpp:366] Copying source layer relu3
-I0822 00:46:44.936071 14017 net.cpp:366] Copying source layer conv4
-I0822 00:46:44.937227 14017 net.cpp:366] Copying source layer relu4
-I0822 00:46:44.937238 14017 net.cpp:366] Copying source layer conv5
-I0822 00:46:44.938035 14017 net.cpp:366] Copying source layer relu5
-I0822 00:46:44.938045 14017 net.cpp:366] Copying source layer pool5
-I0822 00:46:44.938050 14017 net.cpp:366] Copying source layer fc6
-I0822 00:46:45.060353 14017 net.cpp:366] Copying source layer relu6
-I0822 00:46:45.060381 14017 net.cpp:366] Copying source layer drop6
-I0822 00:46:45.060386 14017 net.cpp:366] Copying source layer fc7
-I0822 00:46:45.114531 14017 net.cpp:366] Copying source layer relu7
-I0822 00:46:45.114557 14017 net.cpp:366] Copying source layer drop7
-I0822 00:46:45.114562 14017 net.cpp:363] Ignoring source layer fc8
-I0822 00:46:45.114567 14017 net.cpp:366] Copying source layer loss
-I0822 00:46:45.128758 14017 solver.cpp:62] Solving scrape_zonesFineNet
-I0822 00:46:45.128788 14017 solver.cpp:136] Iteration 0, Testing net
-I0822 00:46:46.958933 14017 solver.cpp:172] Test score #0: 0.528934
-I0822 00:46:46.958995 14017 solver.cpp:172] Test score #1: 0.921818
+I0822 01:28:26.066514 16458 finetune_net.cpp:25] Starting Optimization
+I0822 01:28:26.066615 16458 solver.cpp:42] Creating training net.
+I0822 01:28:26.067174 16458 net.cpp:76] Creating Layer data
+I0822 01:28:26.067188 16458 net.cpp:112] data -> data
+I0822 01:28:26.067198 16458 net.cpp:112] data -> label
+I0822 01:28:26.067221 16458 data_layer.cpp:145] Opening leveldb scrape_zones_fine_train_leveldb
+I0822 01:28:26.103368 16458 data_layer.cpp:185] output data size: 256,3,227,227
+I0822 01:28:26.103386 16458 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
+I0822 01:28:26.403940 16458 net.cpp:127] Top shape: 256 3 227 227 (39574272)
+I0822 01:28:26.403992 16458 net.cpp:127] Top shape: 256 1 1 1 (256)
+I0822 01:28:26.404000 16458 net.cpp:158] data does not need backward computation.
+I0822 01:28:26.404017 16458 net.cpp:76] Creating Layer conv1
+I0822 01:28:26.404023 16458 net.cpp:86] conv1 <- data
+I0822 01:28:26.404038 16458 net.cpp:112] conv1 -> conv1
+I0822 01:28:26.405493 16458 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0822 01:28:26.405503 16458 net.cpp:158] conv1 does not need backward computation.
+I0822 01:28:26.405511 16458 net.cpp:76] Creating Layer relu1
+I0822 01:28:26.405516 16458 net.cpp:86] relu1 <- conv1
+I0822 01:28:26.405521 16458 net.cpp:100] relu1 -> conv1 (in-place)
+I0822 01:28:26.405529 16458 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0822 01:28:26.405534 16458 net.cpp:158] relu1 does not need backward computation.
+I0822 01:28:26.405539 16458 net.cpp:76] Creating Layer pool1
+I0822 01:28:26.405544 16458 net.cpp:86] pool1 <- conv1
+I0822 01:28:26.405549 16458 net.cpp:112] pool1 -> pool1
+I0822 01:28:26.405560 16458 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0822 01:28:26.405565 16458 net.cpp:158] pool1 does not need backward computation.
+I0822 01:28:26.405576 16458 net.cpp:76] Creating Layer norm1
+I0822 01:28:26.405581 16458 net.cpp:86] norm1 <- pool1
+I0822 01:28:26.405586 16458 net.cpp:112] norm1 -> norm1
+I0822 01:28:26.405594 16458 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0822 01:28:26.405599 16458 net.cpp:158] norm1 does not need backward computation.
+I0822 01:28:26.405606 16458 net.cpp:76] Creating Layer conv2
+I0822 01:28:26.405611 16458 net.cpp:86] conv2 <- norm1
+I0822 01:28:26.405614 16458 net.cpp:112] conv2 -> conv2
+I0822 01:28:26.418319 16458 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0822 01:28:26.418342 16458 net.cpp:158] conv2 does not need backward computation.
+I0822 01:28:26.418351 16458 net.cpp:76] Creating Layer relu2
+I0822 01:28:26.418357 16458 net.cpp:86] relu2 <- conv2
+I0822 01:28:26.418365 16458 net.cpp:100] relu2 -> conv2 (in-place)
+I0822 01:28:26.418370 16458 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0822 01:28:26.418375 16458 net.cpp:158] relu2 does not need backward computation.
+I0822 01:28:26.418380 16458 net.cpp:76] Creating Layer pool2
+I0822 01:28:26.418385 16458 net.cpp:86] pool2 <- conv2
+I0822 01:28:26.418390 16458 net.cpp:112] pool2 -> pool2
+I0822 01:28:26.418396 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:26.418401 16458 net.cpp:158] pool2 does not need backward computation.
+I0822 01:28:26.418408 16458 net.cpp:76] Creating Layer norm2
+I0822 01:28:26.418413 16458 net.cpp:86] norm2 <- pool2
+I0822 01:28:26.418418 16458 net.cpp:112] norm2 -> norm2
+I0822 01:28:26.418424 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:26.418442 16458 net.cpp:158] norm2 does not need backward computation.
+I0822 01:28:26.418448 16458 net.cpp:76] Creating Layer conv3
+I0822 01:28:26.418452 16458 net.cpp:86] conv3 <- norm2
+I0822 01:28:26.418457 16458 net.cpp:112] conv3 -> conv3
+I0822 01:28:26.455517 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:26.455539 16458 net.cpp:158] conv3 does not need backward computation.
+I0822 01:28:26.455548 16458 net.cpp:76] Creating Layer relu3
+I0822 01:28:26.455554 16458 net.cpp:86] relu3 <- conv3
+I0822 01:28:26.455560 16458 net.cpp:100] relu3 -> conv3 (in-place)
+I0822 01:28:26.455565 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:26.455570 16458 net.cpp:158] relu3 does not need backward computation.
+I0822 01:28:26.455576 16458 net.cpp:76] Creating Layer conv4
+I0822 01:28:26.455581 16458 net.cpp:86] conv4 <- conv3
+I0822 01:28:26.455585 16458 net.cpp:112] conv4 -> conv4
+I0822 01:28:26.483465 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:26.483489 16458 net.cpp:158] conv4 does not need backward computation.
+I0822 01:28:26.483497 16458 net.cpp:76] Creating Layer relu4
+I0822 01:28:26.483503 16458 net.cpp:86] relu4 <- conv4
+I0822 01:28:26.483510 16458 net.cpp:100] relu4 -> conv4 (in-place)
+I0822 01:28:26.483515 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:26.483520 16458 net.cpp:158] relu4 does not need backward computation.
+I0822 01:28:26.483526 16458 net.cpp:76] Creating Layer conv5
+I0822 01:28:26.483530 16458 net.cpp:86] conv5 <- conv4
+I0822 01:28:26.483536 16458 net.cpp:112] conv5 -> conv5
+I0822 01:28:26.502077 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:26.502100 16458 net.cpp:158] conv5 does not need backward computation.
+I0822 01:28:26.502110 16458 net.cpp:76] Creating Layer relu5
+I0822 01:28:26.502115 16458 net.cpp:86] relu5 <- conv5
+I0822 01:28:26.502122 16458 net.cpp:100] relu5 -> conv5 (in-place)
+I0822 01:28:26.502128 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:26.502132 16458 net.cpp:158] relu5 does not need backward computation.
+I0822 01:28:26.502137 16458 net.cpp:76] Creating Layer pool5
+I0822 01:28:26.502142 16458 net.cpp:86] pool5 <- conv5
+I0822 01:28:26.502147 16458 net.cpp:112] pool5 -> pool5
+I0822 01:28:26.502154 16458 net.cpp:127] Top shape: 256 256 6 6 (2359296)
+I0822 01:28:26.502158 16458 net.cpp:158] pool5 does not need backward computation.
+I0822 01:28:26.502168 16458 net.cpp:76] Creating Layer fc6
+I0822 01:28:26.502172 16458 net.cpp:86] fc6 <- pool5
+I0822 01:28:26.502177 16458 net.cpp:112] fc6 -> fc6
+I0822 01:28:28.062341 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:28.062369 16458 net.cpp:153] fc6 needs backward computation.
+I0822 01:28:28.062379 16458 net.cpp:76] Creating Layer relu6
+I0822 01:28:28.062386 16458 net.cpp:86] relu6 <- fc6
+I0822 01:28:28.062393 16458 net.cpp:100] relu6 -> fc6 (in-place)
+I0822 01:28:28.062399 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:28.062404 16458 net.cpp:153] relu6 needs backward computation.
+I0822 01:28:28.062410 16458 net.cpp:76] Creating Layer drop6
+I0822 01:28:28.062414 16458 net.cpp:86] drop6 <- fc6
+I0822 01:28:28.062418 16458 net.cpp:100] drop6 -> fc6 (in-place)
+I0822 01:28:28.062443 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:28.062448 16458 net.cpp:153] drop6 needs backward computation.
+I0822 01:28:28.062455 16458 net.cpp:76] Creating Layer fc7
+I0822 01:28:28.062460 16458 net.cpp:86] fc7 <- fc6
+I0822 01:28:28.062465 16458 net.cpp:112] fc7 -> fc7
+I0822 01:28:28.755457 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:28.755486 16458 net.cpp:153] fc7 needs backward computation.
+I0822 01:28:28.755496 16458 net.cpp:76] Creating Layer relu7
+I0822 01:28:28.755501 16458 net.cpp:86] relu7 <- fc7
+I0822 01:28:28.755508 16458 net.cpp:100] relu7 -> fc7 (in-place)
+I0822 01:28:28.755514 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:28.755519 16458 net.cpp:153] relu7 needs backward computation.
+I0822 01:28:28.755524 16458 net.cpp:76] Creating Layer drop7
+I0822 01:28:28.755528 16458 net.cpp:86] drop7 <- fc7
+I0822 01:28:28.755533 16458 net.cpp:100] drop7 -> fc7 (in-place)
+I0822 01:28:28.755538 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:28.755542 16458 net.cpp:153] drop7 needs backward computation.
+I0822 01:28:28.755548 16458 net.cpp:76] Creating Layer fc8_clamp
+I0822 01:28:28.755553 16458 net.cpp:86] fc8_clamp <- fc7
+I0822 01:28:28.755558 16458 net.cpp:112] fc8_clamp -> fc8_aero
+I0822 01:28:28.755913 16458 net.cpp:127] Top shape: 256 2 1 1 (512)
+I0822 01:28:28.755923 16458 net.cpp:153] fc8_clamp needs backward computation.
+I0822 01:28:28.755929 16458 net.cpp:76] Creating Layer loss
+I0822 01:28:28.755934 16458 net.cpp:86] loss <- fc8_aero
+I0822 01:28:28.755939 16458 net.cpp:86] loss <- label
+I0822 01:28:28.755952 16458 net.cpp:153] loss needs backward computation.
+I0822 01:28:28.755981 16458 net.cpp:182] Collecting Learning Rate and Weight Decay.
+I0822 01:28:28.755995 16458 net.cpp:175] Network initialization done.
+I0822 01:28:28.755998 16458 net.cpp:176] Memory required for Data 1073739776
+I0822 01:28:28.756039 16458 solver.cpp:45] Creating testing net.
+I0822 01:28:28.756660 16458 net.cpp:76] Creating Layer data
+I0822 01:28:28.756672 16458 net.cpp:112] data -> data
+I0822 01:28:28.756680 16458 net.cpp:112] data -> label
+I0822 01:28:28.756687 16458 data_layer.cpp:145] Opening leveldb scrape_zones_fine_val_leveldb
+I0822 01:28:28.803244 16458 data_layer.cpp:185] output data size: 256,3,227,227
+I0822 01:28:28.803261 16458 data_layer.cpp:204] Loading mean file from../../data/scrape_zones/scrape_zones_fine_mean.binaryproto
+I0822 01:28:28.890663 16458 net.cpp:127] Top shape: 256 3 227 227 (39574272)
+I0822 01:28:28.890682 16458 net.cpp:127] Top shape: 256 1 1 1 (256)
+I0822 01:28:28.890688 16458 net.cpp:158] data does not need backward computation.
+I0822 01:28:28.890700 16458 net.cpp:76] Creating Layer conv1
+I0822 01:28:28.890707 16458 net.cpp:86] conv1 <- data
+I0822 01:28:28.890714 16458 net.cpp:112] conv1 -> conv1
+I0822 01:28:28.892125 16458 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0822 01:28:28.892135 16458 net.cpp:158] conv1 does not need backward computation.
+I0822 01:28:28.892143 16458 net.cpp:76] Creating Layer relu1
+I0822 01:28:28.892148 16458 net.cpp:86] relu1 <- conv1
+I0822 01:28:28.892153 16458 net.cpp:100] relu1 -> conv1 (in-place)
+I0822 01:28:28.892158 16458 net.cpp:127] Top shape: 256 96 55 55 (74342400)
+I0822 01:28:28.892163 16458 net.cpp:158] relu1 does not need backward computation.
+I0822 01:28:28.892168 16458 net.cpp:76] Creating Layer pool1
+I0822 01:28:28.892173 16458 net.cpp:86] pool1 <- conv1
+I0822 01:28:28.892176 16458 net.cpp:112] pool1 -> pool1
+I0822 01:28:28.892184 16458 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0822 01:28:28.892187 16458 net.cpp:158] pool1 does not need backward computation.
+I0822 01:28:28.892194 16458 net.cpp:76] Creating Layer norm1
+I0822 01:28:28.892199 16458 net.cpp:86] norm1 <- pool1
+I0822 01:28:28.892204 16458 net.cpp:112] norm1 -> norm1
+I0822 01:28:28.892210 16458 net.cpp:127] Top shape: 256 96 27 27 (17915904)
+I0822 01:28:28.892215 16458 net.cpp:158] norm1 does not need backward computation.
+I0822 01:28:28.892220 16458 net.cpp:76] Creating Layer conv2
+I0822 01:28:28.892225 16458 net.cpp:86] conv2 <- norm1
+I0822 01:28:28.892230 16458 net.cpp:112] conv2 -> conv2
+I0822 01:28:28.904666 16458 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0822 01:28:28.904690 16458 net.cpp:158] conv2 does not need backward computation.
+I0822 01:28:28.904700 16458 net.cpp:76] Creating Layer relu2
+I0822 01:28:28.904705 16458 net.cpp:86] relu2 <- conv2
+I0822 01:28:28.904711 16458 net.cpp:100] relu2 -> conv2 (in-place)
+I0822 01:28:28.904717 16458 net.cpp:127] Top shape: 256 256 27 27 (47775744)
+I0822 01:28:28.904721 16458 net.cpp:158] relu2 does not need backward computation.
+I0822 01:28:28.904727 16458 net.cpp:76] Creating Layer pool2
+I0822 01:28:28.904731 16458 net.cpp:86] pool2 <- conv2
+I0822 01:28:28.904736 16458 net.cpp:112] pool2 -> pool2
+I0822 01:28:28.904742 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:28.904747 16458 net.cpp:158] pool2 does not need backward computation.
+I0822 01:28:28.904755 16458 net.cpp:76] Creating Layer norm2
+I0822 01:28:28.904760 16458 net.cpp:86] norm2 <- pool2
+I0822 01:28:28.904765 16458 net.cpp:112] norm2 -> norm2
+I0822 01:28:28.904772 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:28.904777 16458 net.cpp:158] norm2 does not need backward computation.
+I0822 01:28:28.904783 16458 net.cpp:76] Creating Layer conv3
+I0822 01:28:28.904788 16458 net.cpp:86] conv3 <- norm2
+I0822 01:28:28.904793 16458 net.cpp:112] conv3 -> conv3
+I0822 01:28:28.941898 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:28.941925 16458 net.cpp:158] conv3 does not need backward computation.
+I0822 01:28:28.941933 16458 net.cpp:76] Creating Layer relu3
+I0822 01:28:28.941939 16458 net.cpp:86] relu3 <- conv3
+I0822 01:28:28.941946 16458 net.cpp:100] relu3 -> conv3 (in-place)
+I0822 01:28:28.941952 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:28.941957 16458 net.cpp:158] relu3 does not need backward computation.
+I0822 01:28:28.941963 16458 net.cpp:76] Creating Layer conv4
+I0822 01:28:28.941968 16458 net.cpp:86] conv4 <- conv3
+I0822 01:28:28.941972 16458 net.cpp:112] conv4 -> conv4
+I0822 01:28:28.969789 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:28.969815 16458 net.cpp:158] conv4 does not need backward computation.
+I0822 01:28:28.969823 16458 net.cpp:76] Creating Layer relu4
+I0822 01:28:28.969830 16458 net.cpp:86] relu4 <- conv4
+I0822 01:28:28.969837 16458 net.cpp:100] relu4 -> conv4 (in-place)
+I0822 01:28:28.969843 16458 net.cpp:127] Top shape: 256 384 13 13 (16613376)
+I0822 01:28:28.969848 16458 net.cpp:158] relu4 does not need backward computation.
+I0822 01:28:28.969854 16458 net.cpp:76] Creating Layer conv5
+I0822 01:28:28.969858 16458 net.cpp:86] conv5 <- conv4
+I0822 01:28:28.969863 16458 net.cpp:112] conv5 -> conv5
+I0822 01:28:28.988409 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:28.988435 16458 net.cpp:158] conv5 does not need backward computation.
+I0822 01:28:28.988442 16458 net.cpp:76] Creating Layer relu5
+I0822 01:28:28.988448 16458 net.cpp:86] relu5 <- conv5
+I0822 01:28:28.988454 16458 net.cpp:100] relu5 -> conv5 (in-place)
+I0822 01:28:28.988461 16458 net.cpp:127] Top shape: 256 256 13 13 (11075584)
+I0822 01:28:28.988464 16458 net.cpp:158] relu5 does not need backward computation.
+I0822 01:28:28.988471 16458 net.cpp:76] Creating Layer pool5
+I0822 01:28:28.988476 16458 net.cpp:86] pool5 <- conv5
+I0822 01:28:28.988481 16458 net.cpp:112] pool5 -> pool5
+I0822 01:28:28.988487 16458 net.cpp:127] Top shape: 256 256 6 6 (2359296)
+I0822 01:28:28.988492 16458 net.cpp:158] pool5 does not need backward computation.
+I0822 01:28:28.988500 16458 net.cpp:76] Creating Layer fc6
+I0822 01:28:28.988504 16458 net.cpp:86] fc6 <- pool5
+I0822 01:28:28.988509 16458 net.cpp:112] fc6 -> fc6
+I0822 01:28:30.543849 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:30.543877 16458 net.cpp:153] fc6 needs backward computation.
+I0822 01:28:30.543887 16458 net.cpp:76] Creating Layer relu6
+I0822 01:28:30.543894 16458 net.cpp:86] relu6 <- fc6
+I0822 01:28:30.543900 16458 net.cpp:100] relu6 -> fc6 (in-place)
+I0822 01:28:30.543906 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:30.543911 16458 net.cpp:153] relu6 needs backward computation.
+I0822 01:28:30.543916 16458 net.cpp:76] Creating Layer drop6
+I0822 01:28:30.543920 16458 net.cpp:86] drop6 <- fc6
+I0822 01:28:30.543926 16458 net.cpp:100] drop6 -> fc6 (in-place)
+I0822 01:28:30.543931 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:30.543936 16458 net.cpp:153] drop6 needs backward computation.
+I0822 01:28:30.543941 16458 net.cpp:76] Creating Layer fc7_new
+I0822 01:28:30.543946 16458 net.cpp:86] fc7_new <- fc6
+I0822 01:28:30.543951 16458 net.cpp:112] fc7_new -> fc7
+I0822 01:28:31.234834 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:31.234863 16458 net.cpp:153] fc7_new needs backward computation.
+I0822 01:28:31.234874 16458 net.cpp:76] Creating Layer relu7
+I0822 01:28:31.234879 16458 net.cpp:86] relu7 <- fc7
+I0822 01:28:31.234886 16458 net.cpp:100] relu7 -> fc7 (in-place)
+I0822 01:28:31.234894 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:31.234897 16458 net.cpp:153] relu7 needs backward computation.
+I0822 01:28:31.234904 16458 net.cpp:76] Creating Layer drop7
+I0822 01:28:31.234907 16458 net.cpp:86] drop7 <- fc7
+I0822 01:28:31.234912 16458 net.cpp:100] drop7 -> fc7 (in-place)
+I0822 01:28:31.234917 16458 net.cpp:127] Top shape: 256 4096 1 1 (1048576)
+I0822 01:28:31.234922 16458 net.cpp:153] drop7 needs backward computation.
+I0822 01:28:31.234928 16458 net.cpp:76] Creating Layer fc8_clamp
+I0822 01:28:31.234932 16458 net.cpp:86] fc8_clamp <- fc7
+I0822 01:28:31.234937 16458 net.cpp:112] fc8_clamp -> fc8_aero
+I0822 01:28:31.235276 16458 net.cpp:127] Top shape: 256 2 1 1 (512)
+I0822 01:28:31.235285 16458 net.cpp:153] fc8_clamp needs backward computation.
+I0822 01:28:31.235291 16458 net.cpp:76] Creating Layer prob
+I0822 01:28:31.235296 16458 net.cpp:86] prob <- fc8_aero
+I0822 01:28:31.235301 16458 net.cpp:112] prob -> prob
+I0822 01:28:31.235307 16458 net.cpp:127] Top shape: 256 2 1 1 (512)
+I0822 01:28:31.235312 16458 net.cpp:153] prob needs backward computation.
+I0822 01:28:31.235317 16458 net.cpp:76] Creating Layer accuracy
+I0822 01:28:31.235321 16458 net.cpp:86] accuracy <- prob
+I0822 01:28:31.235327 16458 net.cpp:86] accuracy <- label
+I0822 01:28:31.235332 16458 net.cpp:112] accuracy -> accuracy
+I0822 01:28:31.235348 16458 net.cpp:127] Top shape: 1 2 1 1 (2)
+I0822 01:28:31.235353 16458 net.cpp:153] accuracy needs backward computation.
+I0822 01:28:31.235357 16458 net.cpp:164] This network produces output accuracy
+I0822 01:28:31.235378 16458 net.cpp:182] Collecting Learning Rate and Weight Decay.
+I0822 01:28:31.235388 16458 net.cpp:175] Network initialization done.
+I0822 01:28:31.235393 16458 net.cpp:176] Memory required for Data 1073741832
+I0822 01:28:31.235431 16458 solver.cpp:50] Solver scaffolding done.
+I0822 01:28:31.235436 16458 finetune_net.cpp:27] Loading from ../alexnet/caffe_alexnet_model
+I0822 01:28:31.885596 16458 net.cpp:366] Copying source layer data
+I0822 01:28:31.885620 16458 net.cpp:366] Copying source layer conv1
+I0822 01:28:31.885689 16458 net.cpp:366] Copying source layer relu1
+I0822 01:28:31.885695 16458 net.cpp:366] Copying source layer norm1
+I0822 01:28:31.885699 16458 net.cpp:366] Copying source layer pool1
+I0822 01:28:31.885704 16458 net.cpp:366] Copying source layer conv2
+I0822 01:28:31.886251 16458 net.cpp:366] Copying source layer relu2
+I0822 01:28:31.886263 16458 net.cpp:366] Copying source layer norm2
+I0822 01:28:31.886267 16458 net.cpp:366] Copying source layer pool2
+I0822 01:28:31.886271 16458 net.cpp:366] Copying source layer conv3
+I0822 01:28:31.887826 16458 net.cpp:366] Copying source layer relu3
+I0822 01:28:31.887840 16458 net.cpp:366] Copying source layer conv4
+I0822 01:28:31.888998 16458 net.cpp:366] Copying source layer relu4
+I0822 01:28:31.889010 16458 net.cpp:366] Copying source layer conv5
+I0822 01:28:31.889793 16458 net.cpp:366] Copying source layer relu5
+I0822 01:28:31.889804 16458 net.cpp:366] Copying source layer pool5
+I0822 01:28:31.889809 16458 net.cpp:366] Copying source layer fc6
+I0822 01:28:32.012176 16458 net.cpp:366] Copying source layer relu6
+I0822 01:28:32.012203 16458 net.cpp:366] Copying source layer drop6
+I0822 01:28:32.012208 16458 net.cpp:366] Copying source layer fc7
+I0822 01:28:32.066392 16458 net.cpp:366] Copying source layer relu7
+I0822 01:28:32.066419 16458 net.cpp:366] Copying source layer drop7
+I0822 01:28:32.066424 16458 net.cpp:363] Ignoring source layer fc8
+I0822 01:28:32.066438 16458 net.cpp:366] Copying source layer loss
+I0822 01:28:32.082344 16458 solver.cpp:62] Solving scrape_zonesFineNet
+I0822 01:28:32.082378 16458 solver.cpp:136] Iteration 0, Testing net
 output probs:
-case 0: 0.66397, 0.33603, 
-case 1: 0.344595, 0.655405, 
-case 2: 0.699745, 0.300255, 
-case 3: 0.267216, 0.732784, 
-case 4: 0.147838, 0.852162, 
-case 5: 0.505866, 0.494134, 
-case 6: 0.518825, 0.481175, 
-case 7: 0.649006, 0.350994, 
-case 8: 0.967861, 0.0321387, 
-case 9: 0.764504, 0.235496, 
-case 10: 0.103033, 0.896967, 
-case 11: 0.270194, 0.729806, 
-case 12: 0.878338, 0.121662, 
-case 13: 0.705202, 0.294798, 
-case 14: 0.62793, 0.37207, 
-case 15: 0.0281004, 0.9719, 
-case 16: 0.789519, 0.210481, 
-case 17: 0.234894, 0.765106, 
-case 18: 0.377506, 0.622494, 
-case 19: 0.313007, 0.686993, 
-SBL loss: 0.861291
-SL loss: 0.929973
-loss after net.hpp:Forward(): 0.861291
+case 0: 0.240718, 0.759282, 
+case 1: 0.224396, 0.775604, 
+case 2: 0.0312957, 0.968704, 
+min class case 3: 0.0559743, 0.944026, 
+case 4: 0.298525, 0.701475, 
+min class case 5: 0.100015, 0.899985, 
+case 6: 0.102498, 0.897502, 
+case 7: 0.18446, 0.81554, 
+case 8: 0.31156, 0.68844, 
+case 9: 0.127002, 0.872998, 
+min class case 10: 0.100828, 0.899172, 
+case 11: 0.0516249, 0.948375, 
+case 12: 0.192351, 0.807649, 
+case 13: 0.129425, 0.870575, 
+min class case 14: 0.243545, 0.756455, 
+case 15: 0.218172, 0.781828, 
+min class case 16: 0.148872, 0.851128, 
+case 17: 0.0861559, 0.913844, 
+case 18: 0.290668, 0.709332, 
+case 19: 0.0741689, 0.925831, 
+I0822 01:28:32.611508 16458 solver.cpp:172] Test score #0: 0.500001
+I0822 01:28:32.611526 16458 solver.cpp:172] Test score #1: 0.518441
+output probs:
+case 0: 0.483773, 0.516227, 
+case 1: 0.497015, 0.502985, 
+case 2: 0.406861, 0.593139, 
+case 3: 0.543099, 0.456901, 
+case 4: 0.309698, 0.690302, 
+case 5: 0.892194, 0.107806, 
+case 6: 0.427469, 0.572531, 
+case 7: 0.684241, 0.315759, 
+case 8: 0.309465, 0.690535, 
+min class case 9: 0.243316, 0.756684, 
+case 10: 0.0908263, 0.909174, 
+case 11: 0.576985, 0.423015, 
+case 12: 0.137301, 0.862699, 
+min class case 13: 0.411084, 0.588916, 
+min class case 14: 0.12222, 0.87778, 
+case 15: 0.31322, 0.686779, 
+min class case 16: 0.0761982, 0.923802, 
+case 17: 0.186617, 0.813383, 
+case 18: 0.187083, 0.812917, 
+case 19: 0.0683147, 0.931685, 
+SBL loss: 0.941054
+SL loss: 0.678861
+loss after net.hpp:Forward(): 0.941054
 SL bottom_diff:
-bottom_diff[0*2+0]: 0.331985,  bottom_diff[0*2+1]: -0.331985,  
-bottom_diff[1*2+0]: 0.172297,  bottom_diff[1*2+1]: -0.172297,  
-bottom_diff[2*2+0]: 0.349873,  bottom_diff[2*2+1]: -0.349873,  
-bottom_diff[3*2+0]: 0.133608,  bottom_diff[3*2+1]: -0.133608,  
-bottom_diff[4*2+0]: 0.0739191,  bottom_diff[4*2+1]: -0.0739191,  
-bottom_diff[5*2+0]: 0.252933,  bottom_diff[5*2+1]: -0.252933,  
-bottom_diff[6*2+0]: 0.259412,  bottom_diff[6*2+1]: -0.259412,  
-bottom_diff[7*2+0]: 0.324503,  bottom_diff[7*2+1]: -0.324503,  
-bottom_diff[8*2+0]: 0.483931,  bottom_diff[8*2+1]: -0.483931,  
-min class case bottom_diff[9*2+0]: -0.117748,  bottom_diff[9*2+1]: 0.117748,  
-bottom_diff[10*2+0]: 0.0515166,  bottom_diff[10*2+1]: -0.0515166,  
-bottom_diff[11*2+0]: 0.135097,  bottom_diff[11*2+1]: -0.135097,  
-bottom_diff[12*2+0]: 0.439169,  bottom_diff[12*2+1]: -0.439169,  
-min class case bottom_diff[13*2+0]: -0.147399,  bottom_diff[13*2+1]: 0.147399,  
-min class case bottom_diff[14*2+0]: -0.186035,  bottom_diff[14*2+1]: 0.186035,  
-bottom_diff[15*2+0]: 0.0140502,  bottom_diff[15*2+1]: -0.0140502,  
-min class case bottom_diff[16*2+0]: -0.105241,  bottom_diff[16*2+1]: 0.105241,  
-bottom_diff[17*2+0]: 0.117447,  bottom_diff[17*2+1]: -0.117447,  
-bottom_diff[18*2+0]: 0.188753,  bottom_diff[18*2+1]: -0.188753,  
-bottom_diff[19*2+0]: 0.156504,  bottom_diff[19*2+1]: -0.156504,  
+bottom_diff[0*2+0]: 0.241886,  bottom_diff[0*2+1]: -0.241886,  
+bottom_diff[1*2+0]: 0.248507,  bottom_diff[1*2+1]: -0.248507,  
+bottom_diff[2*2+0]: 0.20343,  bottom_diff[2*2+1]: -0.20343,  
+bottom_diff[3*2+0]: 0.271549,  bottom_diff[3*2+1]: -0.271549,  
+bottom_diff[4*2+0]: 0.154849,  bottom_diff[4*2+1]: -0.154849,  
+bottom_diff[5*2+0]: 0.446097,  bottom_diff[5*2+1]: -0.446097,  
+bottom_diff[6*2+0]: 0.213735,  bottom_diff[6*2+1]: -0.213735,  
+bottom_diff[7*2+0]: 0.342121,  bottom_diff[7*2+1]: -0.342121,  
+bottom_diff[8*2+0]: 0.154733,  bottom_diff[8*2+1]: -0.154733,  
+min class case bottom_diff[9*2+0]: -0.378342,  bottom_diff[9*2+1]: 0.378342,  
+bottom_diff[10*2+0]: 0.0454132,  bottom_diff[10*2+1]: -0.0454132,  
+bottom_diff[11*2+0]: 0.288493,  bottom_diff[11*2+1]: -0.288493,  
+bottom_diff[12*2+0]: 0.0686504,  bottom_diff[12*2+1]: -0.0686504,  
+min class case bottom_diff[13*2+0]: -0.294458,  bottom_diff[13*2+1]: 0.294458,  
+min class case bottom_diff[14*2+0]: -0.43889,  bottom_diff[14*2+1]: 0.43889,  
+bottom_diff[15*2+0]: 0.15661,  bottom_diff[15*2+1]: -0.15661,  
+min class case bottom_diff[16*2+0]: -0.461901,  bottom_diff[16*2+1]: 0.461901,  
+bottom_diff[17*2+0]: 0.0933083,  bottom_diff[17*2+1]: -0.0933083,  
+bottom_diff[18*2+0]: 0.0935414,  bottom_diff[18*2+1]: -0.0935414,  
+bottom_diff[19*2+0]: 0.0341573,  bottom_diff[19*2+1]: -0.0341573,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.0979127,  bottom_diff[0*2+1]: -0.0979127,  
-bottom_diff[1*2+0]: 0.0508158,  bottom_diff[1*2+1]: -0.0508158,  
-bottom_diff[2*2+0]: 0.103188,  bottom_diff[2*2+1]: -0.103188,  
-bottom_diff[3*2+0]: 0.0394051,  bottom_diff[3*2+1]: -0.0394051,  
-bottom_diff[4*2+0]: 0.021801,  bottom_diff[4*2+1]: -0.021801,  
-bottom_diff[5*2+0]: 0.0745977,  bottom_diff[5*2+1]: -0.0745977,  
-bottom_diff[6*2+0]: 0.0765087,  bottom_diff[6*2+1]: -0.0765087,  
-bottom_diff[7*2+0]: 0.095706,  bottom_diff[7*2+1]: -0.095706,  
-bottom_diff[8*2+0]: 0.142726,  bottom_diff[8*2+1]: -0.142726,  
-min class case bottom_diff[9*2+0]: -0.193227,  bottom_diff[9*2+1]: 0.193227,  
-bottom_diff[10*2+0]: 0.0151938,  bottom_diff[10*2+1]: -0.0151938,  
-bottom_diff[11*2+0]: 0.0398443,  bottom_diff[11*2+1]: -0.0398443,  
-bottom_diff[12*2+0]: 0.129524,  bottom_diff[12*2+1]: -0.129524,  
-min class case bottom_diff[13*2+0]: -0.241886,  bottom_diff[13*2+1]: 0.241886,  
-min class case bottom_diff[14*2+0]: -0.305288,  bottom_diff[14*2+1]: 0.305288,  
-bottom_diff[15*2+0]: 0.00414384,  bottom_diff[15*2+1]: -0.00414384,  
-min class case bottom_diff[16*2+0]: -0.172703,  bottom_diff[16*2+1]: 0.172703,  
-bottom_diff[17*2+0]: 0.0346388,  bottom_diff[17*2+1]: -0.0346388,  
-bottom_diff[18*2+0]: 0.055669,  bottom_diff[18*2+1]: -0.055669,  
-bottom_diff[19*2+0]: 0.0461577,  bottom_diff[19*2+1]: -0.0461577,  
+bottom_diff[0*2+0]: 0.0713398,  bottom_diff[0*2+1]: -0.0713398,  
+bottom_diff[1*2+0]: 0.0732925,  bottom_diff[1*2+1]: -0.0732925,  
+bottom_diff[2*2+0]: 0.0599979,  bottom_diff[2*2+1]: -0.0599979,  
+bottom_diff[3*2+0]: 0.0800883,  bottom_diff[3*2+1]: -0.0800883,  
+bottom_diff[4*2+0]: 0.0456698,  bottom_diff[4*2+1]: -0.0456698,  
+bottom_diff[5*2+0]: 0.131568,  bottom_diff[5*2+1]: -0.131568,  
+bottom_diff[6*2+0]: 0.0630369,  bottom_diff[6*2+1]: -0.0630369,  
+bottom_diff[7*2+0]: 0.100902,  bottom_diff[7*2+1]: -0.100902,  
+bottom_diff[8*2+0]: 0.0456354,  bottom_diff[8*2+1]: -0.0456354,  
+min class case bottom_diff[9*2+0]: -0.620869,  bottom_diff[9*2+1]: 0.620869,  
+bottom_diff[10*2+0]: 0.0133937,  bottom_diff[10*2+1]: -0.0133937,  
+bottom_diff[11*2+0]: 0.0850854,  bottom_diff[11*2+1]: -0.0850854,  
+bottom_diff[12*2+0]: 0.0202471,  bottom_diff[12*2+1]: -0.0202471,  
+min class case bottom_diff[13*2+0]: -0.483213,  bottom_diff[13*2+1]: 0.483213,  
+min class case bottom_diff[14*2+0]: -0.72023,  bottom_diff[14*2+1]: 0.72023,  
+bottom_diff[15*2+0]: 0.0461892,  bottom_diff[15*2+1]: -0.0461892,  
+min class case bottom_diff[16*2+0]: -0.757991,  bottom_diff[16*2+1]: 0.757991,  
+bottom_diff[17*2+0]: 0.0275195,  bottom_diff[17*2+1]: -0.0275195,  
+bottom_diff[18*2+0]: 0.0275882,  bottom_diff[18*2+1]: -0.0275882,  
+bottom_diff[19*2+0]: 0.0100741,  bottom_diff[19*2+1]: -0.0100741,  
 
-loss after net.hpp:Backward(): 0.861291
-I0822 00:46:47.421679 14017 solver.cpp:269] Iteration 1, lr = 0.0001
+loss after net.hpp:Backward(): 0.941054
+I0822 01:28:33.073513 16458 solver.cpp:269] Iteration 1, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
-0.000814233, -0.00144231, -0.0213643, -0.00209182, 0.00940381, 0.00332064, -0.00330586, 0.0214147, 0.00666013, -0.0109712, -0.00261546, 0.00139659, 0.0220972, 0.00447, 0.0143307, 0.00508605, 0.00742042, -0.00560514, -0.00687153, -0.00170484, 
+0.00292219, -0.00725465, -0.00477068, -0.0103371, -0.00894522, -0.0193926, -0.0248338, 0.000872519, -0.0124675, -0.00477373, 0.00116882, 0.00105679, 0.000181572, 0.0108888, -0.00816683, 0.00776717, 0.00669842, 0.00670546, -0.0116283, 0.000598198, 
 softmax 1: 
--0.00846567, 0.00924208, 0.0163357, -0.00127347, -0.0111825, 0.0224434, -0.0123265, 0.00778349, -0.00657874, 0.00377193, -0.00380078, 0.0116782, -0.00566685, 0.0101564, -0.00631377, 0.00107038, 0.00233337, -0.0119952, -0.0103748, -0.00687649, 
-diff: softmax 0: 
-0.00521916, 0.00316889, -0.000263737, -0.00488018, -0.000666277, -0.000794962, -0.00211023, 0.00149928, 0.00672251, 0.0050019, 0.0014803, -0.00179044, 0.00336877, -0.000249151, 0.000508008, 0.00178495, -0.00369395, 0.000604453, -2.93818e-05, -0.00480198, 
+0.0119979, 0.00698197, -0.00430647, -0.000244246, -0.0123877, 0.0330268, -0.00261837, 0.00911844, -0.0206981, 0.000812687, 0.00400293, -0.00305217, 0.00738263, 0.0121381, -0.00538304, -0.0100097, 0.0115312, -0.0209, 0.00374244, 0.000935451, 
 
+diff: 
+softmax 0: 
+0.00102515, 5.613e-05, -0.00418155, -0.00612508, -0.00355471, -0.00460835, 0.000501791, 0.0018661, -0.00482973, 0.00157988, -0.000623425, -0.00475233, -0.00188007, -0.0104289, -0.00600403, 0.000565996, -0.000386544, -0.00152908, -0.000989418, -0.0016815, 
 softmax 1: 
--0.00521916, -0.00316889, 0.000263736, 0.00488018, 0.000666277, 0.000794964, 0.00211023, -0.00149928, -0.00672251, -0.00500191, -0.0014803, 0.00179044, -0.00336877, 0.000249152, -0.000508007, -0.00178495, 0.00369395, -0.000604453, 2.93809e-05, 0.00480198, 
+-0.00102515, -5.61301e-05, 0.00418155, 0.00612508, 0.00355471, 0.00460835, -0.000501792, -0.0018661, 0.00482973, -0.00157988, 0.000623425, 0.00475233, 0.00188007, 0.0104289, 0.00600403, -0.000565996, 0.000386545, 0.00152908, 0.000989417, 0.0016815, 
 
 new params: 
 softmax 0: 
--0.00440493, -0.0046112, -0.0211005, 0.00278836, 0.0100701, 0.0041156, -0.00119563, 0.0199155, -6.23823e-05, -0.0159731, -0.00409576, 0.00318703, 0.0187285, 0.00471915, 0.0138227, 0.0033011, 0.0111144, -0.00620959, -0.00684215, 0.00309714, 
-
+0.00189704, -0.00731078, -0.000589128, -0.00421205, -0.00539051, -0.0147843, -0.0253356, -0.000993584, -0.00763773, -0.00635361, 0.00179225, 0.00580912, 0.00206164, 0.0213177, -0.0021628, 0.00720118, 0.00708497, 0.00823454, -0.0106389, 0.0022797, 
 softmax 1: 
--0.00324651, 0.012411, 0.016072, -0.00615365, -0.0118488, 0.0216484, -0.0144367, 0.00928277, 0.000143774, 0.00877384, -0.00232048, 0.00988772, -0.00229808, 0.0099072, -0.00580576, 0.00285533, -0.00136058, -0.0113907, -0.0104042, -0.0116785, 
+0.0130231, 0.0070381, -0.00848802, -0.00636933, -0.0159424, 0.0284184, -0.00211658, 0.0109845, -0.0255279, 0.00239257, 0.0033795, -0.0078045, 0.00550256, 0.00170923, -0.0113871, -0.00944369, 0.0111446, -0.0224291, 0.00275303, -0.000746048, 
 
-I0822 00:46:47.662485 14017 solver.cpp:117] Iteration 1, loss = 0.861291
+I0822 01:28:33.314399 16458 solver.cpp:117] Iteration 1, loss = 0.941054
+I0822 01:28:33.314414 16458 solver.cpp:136] Iteration 1, Testing net
 output probs:
-case 0: 0.00311967, 0.99688, 
-case 1: 0.000247166, 0.999753, 
-case 2: 1.44024e-05, 0.999986, 
-case 3: 0.00147962, 0.99852, 
-case 4: 5.59609e-05, 0.999944, 
-case 5: 0.000148465, 0.999851, 
-case 6: 0.0115828, 0.988417, 
-case 7: 5.7035e-07, 0.999999, 
-case 8: 0.0044212, 0.995579, 
-case 9: 0.00159397, 0.998406, 
-case 10: 4.39507e-05, 0.999956, 
-case 11: 0.00445228, 0.995548, 
-case 12: 0.00955196, 0.990448, 
-case 13: 0.000679152, 0.999321, 
-case 14: 0.012449, 0.987551, 
-case 15: 0.462162, 0.537838, 
-case 16: 0.00840816, 0.991592, 
-case 17: 0.000562467, 0.999438, 
-case 18: 2.66381e-06, 0.999997, 
-case 19: 0.00743367, 0.992566, 
-SBL loss: 0.840967
-SL loss: 0.805065
-loss after net.hpp:Forward(): 0.840967
-SL bottom_diff:
-bottom_diff[0*2+0]: 0.00155984,  bottom_diff[0*2+1]: -0.00155985,  
-bottom_diff[1*2+0]: 0.000123583,  bottom_diff[1*2+1]: -0.00012359,  
-bottom_diff[2*2+0]: 7.2012e-06,  bottom_diff[2*2+1]: -7.21216e-06,  
-bottom_diff[3*2+0]: 0.00073981,  bottom_diff[3*2+1]: -0.000739783,  
-bottom_diff[4*2+0]: 2.79804e-05,  bottom_diff[4*2+1]: -2.79546e-05,  
-bottom_diff[5*2+0]: 7.42324e-05,  bottom_diff[5*2+1]: -7.42674e-05,  
-bottom_diff[6*2+0]: 0.0057914,  bottom_diff[6*2+1]: -0.0057914,  
-bottom_diff[7*2+0]: 2.85175e-07,  bottom_diff[7*2+1]: -2.98023e-07,  
-bottom_diff[8*2+0]: 0.0022106,  bottom_diff[8*2+1]: -0.00221059,  
-bottom_diff[9*2+0]: 0.000796986,  bottom_diff[9*2+1]: -0.000797004,  
-bottom_diff[10*2+0]: 2.19754e-05,  bottom_diff[10*2+1]: -2.19941e-05,  
-bottom_diff[11*2+0]: 0.00222614,  bottom_diff[11*2+1]: -0.00222611,  
-min class case bottom_diff[12*2+0]: -0.495224,  bottom_diff[12*2+1]: 0.495224,  
-bottom_diff[13*2+0]: 0.000339576,  bottom_diff[13*2+1]: -0.000339568,  
-bottom_diff[14*2+0]: 0.0062245,  bottom_diff[14*2+1]: -0.00622448,  
-bottom_diff[15*2+0]: 0.231081,  bottom_diff[15*2+1]: -0.231081,  
-min class case bottom_diff[16*2+0]: -0.495796,  bottom_diff[16*2+1]: 0.495796,  
-bottom_diff[17*2+0]: 0.000281234,  bottom_diff[17*2+1]: -0.000281245,  
-bottom_diff[18*2+0]: 1.33191e-06,  bottom_diff[18*2+1]: -1.3113e-06,  
-bottom_diff[19*2+0]: 0.00371683,  bottom_diff[19*2+1]: -0.00371683,  
-
-SBL bottom_diff:
-bottom_diff[0*2+0]: 0.000230553,  bottom_diff[0*2+1]: -0.000230556,  
-bottom_diff[1*2+0]: 1.82663e-05,  bottom_diff[1*2+1]: -1.82674e-05,  
-bottom_diff[2*2+0]: 1.06438e-06,  bottom_diff[2*2+1]: -1.066e-06,  
-bottom_diff[3*2+0]: 0.000109348,  bottom_diff[3*2+1]: -0.000109344,  
-bottom_diff[4*2+0]: 4.13568e-06,  bottom_diff[4*2+1]: -4.13185e-06,  
-bottom_diff[5*2+0]: 1.0972e-05,  bottom_diff[5*2+1]: -1.09772e-05,  
-bottom_diff[6*2+0]: 0.000856004,  bottom_diff[6*2+1]: -0.000856003,  
-bottom_diff[7*2+0]: 4.21506e-08,  bottom_diff[7*2+1]: -4.40496e-08,  
-bottom_diff[8*2+0]: 0.00032674,  bottom_diff[8*2+1]: -0.000326738,  
-bottom_diff[9*2+0]: 0.000117799,  bottom_diff[9*2+1]: -0.000117802,  
-bottom_diff[10*2+0]: 3.24809e-06,  bottom_diff[10*2+1]: -3.25086e-06,  
-bottom_diff[11*2+0]: 0.000329037,  bottom_diff[11*2+1]: -0.000329033,  
-min class case bottom_diff[12*2+0]: -0.401194,  bottom_diff[12*2+1]: 0.401194,  
-bottom_diff[13*2+0]: 5.01914e-05,  bottom_diff[13*2+1]: -5.01901e-05,  
-bottom_diff[14*2+0]: 0.000920018,  bottom_diff[14*2+1]: -0.000920016,  
-bottom_diff[15*2+0]: 0.0341552,  bottom_diff[15*2+1]: -0.0341552,  
-min class case bottom_diff[16*2+0]: -0.401657,  bottom_diff[16*2+1]: 0.401657,  
-bottom_diff[17*2+0]: 4.1568e-05,  bottom_diff[17*2+1]: -4.15696e-05,  
-bottom_diff[18*2+0]: 1.96864e-07,  bottom_diff[18*2+1]: -1.93818e-07,  
-bottom_diff[19*2+0]: 0.00054937,  bottom_diff[19*2+1]: -0.000549369,  
-
-loss after net.hpp:Backward(): 0.840967
-I0822 00:46:48.095968 14017 solver.cpp:269] Iteration 2, lr = 0.0001
-perform computation on GPU
-current params: 
-softmax 0: 
--0.00440493, -0.0046112, -0.0211005, 0.00278836, 0.0100701, 0.0041156, -0.00119563, 0.0199155, -6.23823e-05, -0.0159731, -0.00409576, 0.00318703, 0.0187285, 0.00471915, 0.0138227, 0.0033011, 0.0111144, -0.00620959, -0.00684215, 0.00309714, 
-softmax 1: 
--0.00324651, 0.012411, 0.016072, -0.00615365, -0.0118488, 0.0216484, -0.0144367, 0.00928277, 0.000143774, 0.00877384, -0.00232048, 0.00988772, -0.00229808, 0.0099072, -0.00580576, 0.00285533, -0.00136058, -0.0113907, -0.0104042, -0.0116785, 
-diff: softmax 0: 
--0.00290218, -0.000991619, -0.00347424, -0.00205953, -0.0121268, -0.00327049, -0.000358237, -0.00188138, -0.000688644, -0.00166238, -0.00211656, -0.00257637, 0.000637295, -0.00408677, -0.0022776, 1.82539e-05, -0.00146172, -0.0011027, -0.000781375, 4.67967e-05, 
-
-softmax 1: 
-0.00290218, 0.00099162, 0.00347424, 0.00205953, 0.0121268, 0.0032705, 0.000358236, 0.00188138, 0.000688644, 0.00166238, 0.00211656, 0.00257637, -0.000637294, 0.00408677, 0.0022776, -1.82536e-05, 0.00146172, 0.0011027, 0.000781374, -4.67971e-05, 
-
-new params: 
-softmax 0: 
--0.00150275, -0.00361958, -0.0176263, 0.00484789, 0.0221968, 0.00738609, -0.000837395, 0.0217968, 0.000626262, -0.0143107, -0.0019792, 0.0057634, 0.0180912, 0.00880592, 0.0161003, 0.00328284, 0.0125761, -0.00510689, -0.00606077, 0.00305034, 
-
-softmax 1: 
--0.00614868, 0.0114193, 0.0125977, -0.00821318, -0.0239755, 0.0183779, -0.0147949, 0.00740139, -0.00054487, 0.00711145, -0.00443704, 0.00731135, -0.00166078, 0.00582043, -0.00808337, 0.00287359, -0.0028223, -0.0124934, -0.0111856, -0.0116317, 
-
-I0822 00:46:48.334903 14017 solver.cpp:117] Iteration 2, loss = 0.840967
+case 0: 1, 4.46209e-14, 
+case 1: 1, 1.87288e-13, 
+case 2: 1, 1.0481e-14, 
+case 3: 1, 2.91624e-14, 
+case 4: 1, 3.60827e-15, 
+case 5: 1, 5.73539e-14, 
+case 6: 1, 3.01639e-13, 
+case 7: 1, 1.22285e-13, 
+case 8: 1, 1.43159e-14, 
+case 9: 1, 2.85713e-14, 
+case 10: 1, 1.89117e-15, 
+case 11: 1, 3.8566e-14, 
+case 12: 1, 8.1496e-16, 
+case 13: 1, 3.58922e-14, 
+case 14: 1, 3.4174e-14, 
+case 15: 1, 1.21736e-14, 
+case 16: 1, 2.59262e-14, 
+case 17: 1, 2.41444e-14, 
+case 18: 1, 2.69087e-14, 
+case 19: 1, 5.69978e-14, 
+I0822 01:28:33.747395 16458 solver.cpp:172] Test score #0: 0.5
+I0822 01:28:33.747411 16458 solver.cpp:172] Test score #1: 25.474
 output probs:
-case 0: 1, 1.49404e-12, 
-case 1: 1, 5.21334e-27, 
-case 2: 1, 1.98034e-15, 
-case 3: 1, 9.21844e-16, 
-case 4: 1, 3.75598e-32, 
-case 5: 1, 2.43507e-23, 
-case 6: 1, 8.1901e-34, 
-case 7: 1, 5.51877e-17, 
-case 8: 1, 3.48681e-21, 
-case 9: 1, 3.80604e-17, 
-case 10: 1, 1.44524e-26, 
-case 11: 1, 2.70954e-10, 
-case 12: 1, 5.05502e-27, 
-case 13: 1, 1.34525e-43, 
-case 14: 1, 1.10753e-22, 
-case 15: 1, 4.20235e-28, 
-case 16: 1, 2.17982e-12, 
-case 17: 1, 1.20038e-07, 
-case 18: 1, 1.24524e-18, 
-case 19: 1, 9.76108e-25, 
-SBL loss: 4.61442
-SL loss: 39.0063
-loss after net.hpp:Forward(): 4.61442
+case 0: 1, 1.18535e-11, 
+case 1: 1, 9.53711e-17, 
+case 2: 1, 5.38731e-11, 
+case 3: 1, 3.55151e-16, 
+case 4: 1, 9.32891e-10, 
+case 5: 1, 2.01792e-19, 
+case 6: 1, 8.49782e-09, 
+case 7: 1, 8.26871e-08, 
+case 8: 0.999997, 2.99704e-06, 
+case 9: 1, 8.63321e-16, 
+case 10: 1, 1.43599e-07, 
+case 11: 1, 1.48587e-12, 
+min class case 12: 1, 2.07068e-10, 
+case 13: 1, 5.4731e-12, 
+case 14: 1, 5.55361e-20, 
+case 15: 1, 3.95265e-16, 
+min class case 16: 0.999998, 2.18234e-06, 
+case 17: 1, 1.35846e-12, 
+case 18: 1, 1.43017e-09, 
+case 19: 1, 6.89811e-23, 
+SBL loss: 4.79068
+SL loss: 24.3277
+loss after net.hpp:Forward(): 4.79068
 SL bottom_diff:
 bottom_diff[0*2+0]: 0.5,  bottom_diff[0*2+1]: -0.5,  
 bottom_diff[1*2+0]: 0.5,  bottom_diff[1*2+1]: -0.5,  
 bottom_diff[2*2+0]: 0.5,  bottom_diff[2*2+1]: -0.5,  
 bottom_diff[3*2+0]: 0.5,  bottom_diff[3*2+1]: -0.5,  
-min class case bottom_diff[4*2+0]: 0,  bottom_diff[4*2+1]: 1.87799e-32,  
+bottom_diff[4*2+0]: 0.5,  bottom_diff[4*2+1]: -0.5,  
 bottom_diff[5*2+0]: 0.5,  bottom_diff[5*2+1]: -0.5,  
 bottom_diff[6*2+0]: 0.5,  bottom_diff[6*2+1]: -0.5,  
 bottom_diff[7*2+0]: 0.5,  bottom_diff[7*2+1]: -0.5,  
-bottom_diff[8*2+0]: 0.5,  bottom_diff[8*2+1]: -0.5,  
+bottom_diff[8*2+0]: 0.499999,  bottom_diff[8*2+1]: -0.499999,  
 bottom_diff[9*2+0]: 0.5,  bottom_diff[9*2+1]: -0.5,  
 bottom_diff[10*2+0]: 0.5,  bottom_diff[10*2+1]: -0.5,  
 bottom_diff[11*2+0]: 0.5,  bottom_diff[11*2+1]: -0.5,  
-min class case bottom_diff[12*2+0]: 0,  bottom_diff[12*2+1]: 2.52751e-27,  
+min class case bottom_diff[12*2+0]: 0,  bottom_diff[12*2+1]: 1.03534e-10,  
 bottom_diff[13*2+0]: 0.5,  bottom_diff[13*2+1]: -0.5,  
 bottom_diff[14*2+0]: 0.5,  bottom_diff[14*2+1]: -0.5,  
 bottom_diff[15*2+0]: 0.5,  bottom_diff[15*2+1]: -0.5,  
-bottom_diff[16*2+0]: 0.5,  bottom_diff[16*2+1]: -0.5,  
+min class case bottom_diff[16*2+0]: -1.07288e-06,  bottom_diff[16*2+1]: 1.09117e-06,  
 bottom_diff[17*2+0]: 0.5,  bottom_diff[17*2+1]: -0.5,  
-min class case bottom_diff[18*2+0]: 0,  bottom_diff[18*2+1]: 6.2262e-19,  
+bottom_diff[18*2+0]: 0.5,  bottom_diff[18*2+1]: -0.5,  
 bottom_diff[19*2+0]: 0.5,  bottom_diff[19*2+1]: -0.5,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.0493066,  bottom_diff[0*2+1]: -0.0493066,  
-bottom_diff[1*2+0]: 0.0493066,  bottom_diff[1*2+1]: -0.0493066,  
-bottom_diff[2*2+0]: 0.0493066,  bottom_diff[2*2+1]: -0.0493066,  
-bottom_diff[3*2+0]: 0.0493066,  bottom_diff[3*2+1]: -0.0493066,  
-min class case bottom_diff[4*2+0]: 0,  bottom_diff[4*2+1]: 1.01001e-32,  
-bottom_diff[5*2+0]: 0.0493066,  bottom_diff[5*2+1]: -0.0493066,  
-bottom_diff[6*2+0]: 0.0493066,  bottom_diff[6*2+1]: -0.0493066,  
-bottom_diff[7*2+0]: 0.0493066,  bottom_diff[7*2+1]: -0.0493066,  
-bottom_diff[8*2+0]: 0.0493066,  bottom_diff[8*2+1]: -0.0493066,  
-bottom_diff[9*2+0]: 0.0493066,  bottom_diff[9*2+1]: -0.0493066,  
-bottom_diff[10*2+0]: 0.0493066,  bottom_diff[10*2+1]: -0.0493066,  
-bottom_diff[11*2+0]: 0.0493066,  bottom_diff[11*2+1]: -0.0493066,  
-min class case bottom_diff[12*2+0]: 0,  bottom_diff[12*2+1]: 1.35933e-27,  
-bottom_diff[13*2+0]: 0.0493066,  bottom_diff[13*2+1]: -0.0493066,  
-bottom_diff[14*2+0]: 0.0493066,  bottom_diff[14*2+1]: -0.0493066,  
-bottom_diff[15*2+0]: 0.0493066,  bottom_diff[15*2+1]: -0.0493066,  
-bottom_diff[16*2+0]: 0.0493066,  bottom_diff[16*2+1]: -0.0493066,  
-bottom_diff[17*2+0]: 0.0493066,  bottom_diff[17*2+1]: -0.0493066,  
-min class case bottom_diff[18*2+0]: 0,  bottom_diff[18*2+1]: 3.34854e-19,  
-bottom_diff[19*2+0]: 0.0493066,  bottom_diff[19*2+1]: -0.0493066,  
+bottom_diff[0*2+0]: 0.073903,  bottom_diff[0*2+1]: -0.073903,  
+bottom_diff[1*2+0]: 0.073903,  bottom_diff[1*2+1]: -0.073903,  
+bottom_diff[2*2+0]: 0.073903,  bottom_diff[2*2+1]: -0.073903,  
+bottom_diff[3*2+0]: 0.073903,  bottom_diff[3*2+1]: -0.073903,  
+bottom_diff[4*2+0]: 0.073903,  bottom_diff[4*2+1]: -0.073903,  
+bottom_diff[5*2+0]: 0.073903,  bottom_diff[5*2+1]: -0.073903,  
+bottom_diff[6*2+0]: 0.073903,  bottom_diff[6*2+1]: -0.073903,  
+bottom_diff[7*2+0]: 0.073903,  bottom_diff[7*2+1]: -0.073903,  
+bottom_diff[8*2+0]: 0.0739028,  bottom_diff[8*2+1]: -0.0739028,  
+bottom_diff[9*2+0]: 0.073903,  bottom_diff[9*2+1]: -0.073903,  
+bottom_diff[10*2+0]: 0.073903,  bottom_diff[10*2+1]: -0.073903,  
+bottom_diff[11*2+0]: 0.073903,  bottom_diff[11*2+1]: -0.073903,  
+min class case bottom_diff[12*2+0]: 0,  bottom_diff[12*2+1]: 8.38757e-11,  
+bottom_diff[13*2+0]: 0.073903,  bottom_diff[13*2+1]: -0.073903,  
+bottom_diff[14*2+0]: 0.073903,  bottom_diff[14*2+1]: -0.073903,  
+bottom_diff[15*2+0]: 0.073903,  bottom_diff[15*2+1]: -0.073903,  
+min class case bottom_diff[16*2+0]: -8.69172e-07,  bottom_diff[16*2+1]: 8.83984e-07,  
+bottom_diff[17*2+0]: 0.073903,  bottom_diff[17*2+1]: -0.073903,  
+bottom_diff[18*2+0]: 0.073903,  bottom_diff[18*2+1]: -0.073903,  
+bottom_diff[19*2+0]: 0.073903,  bottom_diff[19*2+1]: -0.073903,  
 
-loss after net.hpp:Backward(): 4.61442
-I0822 00:46:48.767988 14017 solver.cpp:269] Iteration 3, lr = 0.0001
+loss after net.hpp:Backward(): 4.79068
+I0822 01:28:34.181180 16458 solver.cpp:269] Iteration 2, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.00150275, -0.00361958, -0.0176263, 0.00484789, 0.0221968, 0.00738609, -0.000837395, 0.0217968, 0.000626262, -0.0143107, -0.0019792, 0.0057634, 0.0180912, 0.00880592, 0.0161003, 0.00328284, 0.0125761, -0.00510689, -0.00606077, 0.00305034, 
+0.00189704, -0.00731078, -0.000589128, -0.00421205, -0.00539051, -0.0147843, -0.0253356, -0.000993584, -0.00763773, -0.00635361, 0.00179225, 0.00580912, 0.00206164, 0.0213177, -0.0021628, 0.00720118, 0.00708497, 0.00823454, -0.0106389, 0.0022797, 
 softmax 1: 
--0.00614868, 0.0114193, 0.0125977, -0.00821318, -0.0239755, 0.0183779, -0.0147949, 0.00740139, -0.00054487, 0.00711145, -0.00443704, 0.00731135, -0.00166078, 0.00582043, -0.00808337, 0.00287359, -0.0028223, -0.0124934, -0.0111856, -0.0116317, 
-diff: softmax 0: 
-0.000144967, 0.000282453, -1.79063e-05, 0.000335246, 0.0195378, 0.000482605, 0.000125433, 6.60412e-05, 0.000527488, 0.000251135, 3.08342e-05, 0.00313276, 0.000388929, 0.000776333, 0.000564847, 0.00116149, 0.00019496, 0.000116986, 0.000210016, 0.000230954, 
+0.0130231, 0.0070381, -0.00848802, -0.00636933, -0.0159424, 0.0284184, -0.00211658, 0.0109845, -0.0255279, 0.00239257, 0.0033795, -0.0078045, 0.00550256, 0.00170923, -0.0113871, -0.00944369, 0.0111446, -0.0224291, 0.00275303, -0.000746048, 
 
+diff: 
+softmax 0: 
+0.00275157, 0.0031058, 0.00253805, 0.000822132, 0.00758588, 0.00326729, 0.00171036, 0.00327385, 0.00748835, 0.00374125, 6.69337e-05, 0.0016759, 0.00334362, 0.00404307, 0.00187683, 0.00212407, 0.000390339, 0.000386386, 0.000939713, 0.000348267, 
 softmax 1: 
--0.000144967, -0.000282452, 1.7906e-05, -0.000335246, -0.0195378, -0.000482604, -0.000125434, -6.60398e-05, -0.000527488, -0.000251136, -3.08345e-05, -0.00313276, -0.000388928, -0.000776332, -0.000564847, -0.00116149, -0.000194959, -0.000116987, -0.000210017, -0.000230955, 
+-0.00275156, -0.0031058, -0.00253805, -0.000822132, -0.00758588, -0.00326729, -0.00171036, -0.00327385, -0.00748836, -0.00374125, -6.69335e-05, -0.0016759, -0.00334362, -0.00404307, -0.00187683, -0.00212407, -0.000390338, -0.000386386, -0.000939713, -0.000348267, 
 
 new params: 
 softmax 0: 
--0.00164772, -0.00390203, -0.0176084, 0.00451264, 0.002659, 0.00690349, -0.000962828, 0.0217308, 9.87736e-05, -0.0145618, -0.00201003, 0.00263064, 0.0177022, 0.00802959, 0.0155355, 0.00212136, 0.0123811, -0.00522388, -0.00627079, 0.00281939, 
-
+-0.000854524, -0.0104166, -0.00312718, -0.00503418, -0.0129764, -0.0180516, -0.0270459, -0.00426744, -0.0151261, -0.0100949, 0.00172532, 0.00413322, -0.00128198, 0.0172746, -0.00403963, 0.00507711, 0.00669463, 0.00784816, -0.0115786, 0.00193143, 
 softmax 1: 
--0.00600372, 0.0117018, 0.0125798, -0.00787793, -0.00443767, 0.0188605, -0.0146695, 0.00746743, -1.73821e-05, 0.00736259, -0.0044062, 0.0104441, -0.00127186, 0.00659676, -0.00751852, 0.00403507, -0.00262734, -0.0123764, -0.0109756, -0.0114007, 
+0.0157746, 0.0101439, -0.00594997, -0.0055472, -0.00835651, 0.0316857, -0.000406219, 0.0142584, -0.0180395, 0.00613382, 0.00344644, -0.0061286, 0.00884618, 0.00575231, -0.00951024, -0.00731962, 0.011535, -0.0220427, 0.00369274, -0.000397781, 
 
-I0822 00:46:49.007035 14017 solver.cpp:117] Iteration 3, loss = 4.61442
+I0822 01:28:34.420217 16458 solver.cpp:117] Iteration 2, loss = 4.79068
+I0822 01:28:34.420230 16458 solver.cpp:136] Iteration 2, Testing net
 output probs:
-case 0: 0.406809, 0.59319, 
-case 1: 0.503569, 0.496431, 
-case 2: 0.314338, 0.685662, 
-case 3: 0.573176, 0.426824, 
-case 4: 0.422189, 0.577811, 
-case 5: 0.604696, 0.395304, 
-case 6: 0.409795, 0.590205, 
-case 7: 0.670281, 0.32972, 
-case 8: 0.639131, 0.360869, 
-case 9: 0.540143, 0.459857, 
-case 10: 0.456778, 0.543222, 
-case 11: 0.59925, 0.40075, 
-case 12: 0.458315, 0.541685, 
-case 13: 0.502357, 0.497643, 
-case 14: 0.508675, 0.491325, 
-case 15: 0.404509, 0.595491, 
-case 16: 0.524771, 0.475229, 
-case 17: 0.406552, 0.593448, 
-case 18: 0.481533, 0.518467, 
-case 19: 0.516815, 0.483185, 
-SBL loss: 0.110874
-SL loss: 0.701891
-loss after net.hpp:Forward(): 0.110874
+case 0: 6.71536e-13, 1, 
+case 1: 1.35044e-13, 1, 
+case 2: 4.5363e-13, 1, 
+case 3: 1.43816e-11, 1, 
+case 4: 8.33033e-13, 1, 
+case 5: 3.82784e-12, 1, 
+case 6: 1.67628e-12, 1, 
+min class case 7: 2.57715e-12, 1, 
+case 8: 5.12569e-12, 1, 
+case 9: 6.11023e-14, 1, 
+case 10: 1.06888e-12, 1, 
+case 11: 3.42099e-12, 1, 
+case 12: 5.39461e-13, 1, 
+case 13: 4.05384e-12, 1, 
+min class case 14: 3.6146e-13, 1, 
+case 15: 1.30927e-11, 1, 
+min class case 16: 1.14991e-13, 1, 
+case 17: 5.80931e-13, 1, 
+min class case 18: 1.3132e-13, 1, 
+min class case 19: 5.10964e-13, 1, 
+I0822 01:28:34.853090 16458 solver.cpp:172] Test score #0: 0.500002
+I0822 01:28:34.853104 16458 solver.cpp:172] Test score #1: 4.82062
+output probs:
+case 0: 0.0151999, 0.9848, 
+case 1: 0.159379, 0.84062, 
+case 2: 0.0122337, 0.987766, 
+case 3: 0.0517466, 0.948253, 
+min class case 4: 0.047887, 0.952113, 
+case 5: 0.0071856, 0.992814, 
+case 6: 0.000938743, 0.999061, 
+case 7: 0.012308, 0.987692, 
+case 8: 0.0875284, 0.912472, 
+case 9: 0.0538708, 0.946129, 
+case 10: 0.112584, 0.887416, 
+case 11: 0.00152609, 0.998474, 
+min class case 12: 0.011895, 0.988105, 
+case 13: 0.0288842, 0.971116, 
+case 14: 0.0597633, 0.940237, 
+case 15: 0.0551671, 0.944833, 
+case 16: 0.0191857, 0.980814, 
+case 17: 0.000351278, 0.999649, 
+min class case 18: 0.00933022, 0.99067, 
+case 19: 0.033835, 0.966165, 
+SBL loss: 0.479752
+SL loss: 0.762613
+loss after net.hpp:Forward(): 0.479752
 SL bottom_diff:
-bottom_diff[0*2+0]: 0.203405,  bottom_diff[0*2+1]: -0.203405,  
-bottom_diff[1*2+0]: 0.251784,  bottom_diff[1*2+1]: -0.251784,  
-bottom_diff[2*2+0]: 0.157169,  bottom_diff[2*2+1]: -0.157169,  
-bottom_diff[3*2+0]: 0.286588,  bottom_diff[3*2+1]: -0.286588,  
-bottom_diff[4*2+0]: 0.211095,  bottom_diff[4*2+1]: -0.211095,  
-bottom_diff[5*2+0]: 0.302348,  bottom_diff[5*2+1]: -0.302348,  
-bottom_diff[6*2+0]: 0.204897,  bottom_diff[6*2+1]: -0.204897,  
-min class case bottom_diff[7*2+0]: -0.16486,  bottom_diff[7*2+1]: 0.16486,  
-min class case bottom_diff[8*2+0]: -0.180434,  bottom_diff[8*2+1]: 0.180434,  
-min class case bottom_diff[9*2+0]: -0.229928,  bottom_diff[9*2+1]: 0.229928,  
-min class case bottom_diff[10*2+0]: -0.271611,  bottom_diff[10*2+1]: 0.271611,  
-bottom_diff[11*2+0]: 0.299625,  bottom_diff[11*2+1]: -0.299625,  
-bottom_diff[12*2+0]: 0.229158,  bottom_diff[12*2+1]: -0.229158,  
-bottom_diff[13*2+0]: 0.251179,  bottom_diff[13*2+1]: -0.251178,  
-bottom_diff[14*2+0]: 0.254338,  bottom_diff[14*2+1]: -0.254338,  
-bottom_diff[15*2+0]: 0.202254,  bottom_diff[15*2+1]: -0.202254,  
-bottom_diff[16*2+0]: 0.262386,  bottom_diff[16*2+1]: -0.262386,  
-bottom_diff[17*2+0]: 0.203276,  bottom_diff[17*2+1]: -0.203276,  
-bottom_diff[18*2+0]: 0.240766,  bottom_diff[18*2+1]: -0.240766,  
-bottom_diff[19*2+0]: 0.258408,  bottom_diff[19*2+1]: -0.258408,  
+bottom_diff[0*2+0]: 0.00759996,  bottom_diff[0*2+1]: -0.00759995,  
+bottom_diff[1*2+0]: 0.0796897,  bottom_diff[1*2+1]: -0.0796898,  
+bottom_diff[2*2+0]: 0.00611686,  bottom_diff[2*2+1]: -0.00611687,  
+bottom_diff[3*2+0]: 0.0258733,  bottom_diff[3*2+1]: -0.0258733,  
+min class case bottom_diff[4*2+0]: -0.476056,  bottom_diff[4*2+1]: 0.476057,  
+bottom_diff[5*2+0]: 0.0035928,  bottom_diff[5*2+1]: -0.00359276,  
+bottom_diff[6*2+0]: 0.000469371,  bottom_diff[6*2+1]: -0.000469357,  
+bottom_diff[7*2+0]: 0.00615402,  bottom_diff[7*2+1]: -0.00615403,  
+bottom_diff[8*2+0]: 0.0437642,  bottom_diff[8*2+1]: -0.0437642,  
+bottom_diff[9*2+0]: 0.0269354,  bottom_diff[9*2+1]: -0.0269354,  
+bottom_diff[10*2+0]: 0.0562922,  bottom_diff[10*2+1]: -0.0562921,  
+bottom_diff[11*2+0]: 0.000763046,  bottom_diff[11*2+1]: -0.000763029,  
+min class case bottom_diff[12*2+0]: -0.494052,  bottom_diff[12*2+1]: 0.494052,  
+bottom_diff[13*2+0]: 0.0144421,  bottom_diff[13*2+1]: -0.0144421,  
+bottom_diff[14*2+0]: 0.0298817,  bottom_diff[14*2+1]: -0.0298817,  
+bottom_diff[15*2+0]: 0.0275835,  bottom_diff[15*2+1]: -0.0275836,  
+bottom_diff[16*2+0]: 0.00959287,  bottom_diff[16*2+1]: -0.00959289,  
+bottom_diff[17*2+0]: 0.000175639,  bottom_diff[17*2+1]: -0.000175655,  
+min class case bottom_diff[18*2+0]: -0.495335,  bottom_diff[18*2+1]: 0.495335,  
+bottom_diff[19*2+0]: 0.0169175,  bottom_diff[19*2+1]: -0.0169175,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.0152972,  bottom_diff[0*2+1]: -0.0152972,  
-bottom_diff[1*2+0]: 0.0189356,  bottom_diff[1*2+1]: -0.0189356,  
-bottom_diff[2*2+0]: 0.01182,  bottom_diff[2*2+1]: -0.01182,  
-bottom_diff[3*2+0]: 0.021553,  bottom_diff[3*2+1]: -0.021553,  
-bottom_diff[4*2+0]: 0.0158755,  bottom_diff[4*2+1]: -0.0158755,  
-bottom_diff[5*2+0]: 0.0227383,  bottom_diff[5*2+1]: -0.0227383,  
-bottom_diff[6*2+0]: 0.0154094,  bottom_diff[6*2+1]: -0.0154094,  
-min class case bottom_diff[7*2+0]: -0.0609886,  bottom_diff[7*2+1]: 0.0609886,  
-min class case bottom_diff[8*2+0]: -0.0667503,  bottom_diff[8*2+1]: 0.0667503,  
-min class case bottom_diff[9*2+0]: -0.0850602,  bottom_diff[9*2+1]: 0.0850602,  
-min class case bottom_diff[10*2+0]: -0.10048,  bottom_diff[10*2+1]: 0.10048,  
-bottom_diff[11*2+0]: 0.0225335,  bottom_diff[11*2+1]: -0.0225335,  
-bottom_diff[12*2+0]: 0.0172339,  bottom_diff[12*2+1]: -0.0172339,  
-bottom_diff[13*2+0]: 0.01889,  bottom_diff[13*2+1]: -0.01889,  
-bottom_diff[14*2+0]: 0.0191276,  bottom_diff[14*2+1]: -0.0191276,  
-bottom_diff[15*2+0]: 0.0152107,  bottom_diff[15*2+1]: -0.0152107,  
-bottom_diff[16*2+0]: 0.0197329,  bottom_diff[16*2+1]: -0.0197329,  
-bottom_diff[17*2+0]: 0.0152875,  bottom_diff[17*2+1]: -0.0152875,  
-bottom_diff[18*2+0]: 0.018107,  bottom_diff[18*2+1]: -0.018107,  
-bottom_diff[19*2+0]: 0.0194337,  bottom_diff[19*2+1]: -0.0194337,  
+bottom_diff[0*2+0]: 0.000749457,  bottom_diff[0*2+1]: -0.000749456,  
+bottom_diff[1*2+0]: 0.00785847,  bottom_diff[1*2+1]: -0.00785847,  
+bottom_diff[2*2+0]: 0.000603203,  bottom_diff[2*2+1]: -0.000603204,  
+bottom_diff[3*2+0]: 0.00255145,  bottom_diff[3*2+1]: -0.00255145,  
+min class case bottom_diff[4*2+0]: -0.25603,  bottom_diff[4*2+1]: 0.25603,  
+bottom_diff[5*2+0]: 0.000354298,  bottom_diff[5*2+1]: -0.000354294,  
+bottom_diff[6*2+0]: 4.62862e-05,  bottom_diff[6*2+1]: -4.62848e-05,  
+bottom_diff[7*2+0]: 0.000606868,  bottom_diff[7*2+1]: -0.000606869,  
+bottom_diff[8*2+0]: 0.00431573,  bottom_diff[8*2+1]: -0.00431573,  
+bottom_diff[9*2+0]: 0.00265619,  bottom_diff[9*2+1]: -0.00265619,  
+bottom_diff[10*2+0]: 0.00555115,  bottom_diff[10*2+1]: -0.00555115,  
+bottom_diff[11*2+0]: 7.52464e-05,  bottom_diff[11*2+1]: -7.52448e-05,  
+min class case bottom_diff[12*2+0]: -0.265709,  bottom_diff[12*2+1]: 0.265709,  
+bottom_diff[13*2+0]: 0.00142418,  bottom_diff[13*2+1]: -0.00142418,  
+bottom_diff[14*2+0]: 0.00294673,  bottom_diff[14*2+1]: -0.00294673,  
+bottom_diff[15*2+0]: 0.0027201,  bottom_diff[15*2+1]: -0.00272011,  
+bottom_diff[16*2+0]: 0.000945984,  bottom_diff[16*2+1]: -0.000945986,  
+bottom_diff[17*2+0]: 1.73203e-05,  bottom_diff[17*2+1]: -1.73219e-05,  
+min class case bottom_diff[18*2+0]: -0.266399,  bottom_diff[18*2+1]: 0.266399,  
+bottom_diff[19*2+0]: 0.00166829,  bottom_diff[19*2+1]: -0.00166829,  
 
-loss after net.hpp:Backward(): 0.110874
-I0822 00:46:49.440732 14017 solver.cpp:269] Iteration 4, lr = 0.0001
+loss after net.hpp:Backward(): 0.479752
+I0822 01:28:35.286900 16458 solver.cpp:269] Iteration 3, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.00164772, -0.00390203, -0.0176084, 0.00451264, 0.002659, 0.00690349, -0.000962828, 0.0217308, 9.87736e-05, -0.0145618, -0.00201003, 0.00263064, 0.0177022, 0.00802959, 0.0155355, 0.00212136, 0.0123811, -0.00522388, -0.00627079, 0.00281939, 
+-0.000854524, -0.0104166, -0.00312718, -0.00503418, -0.0129764, -0.0180516, -0.0270459, -0.00426744, -0.0151261, -0.0100949, 0.00172532, 0.00413322, -0.00128198, 0.0172746, -0.00403963, 0.00507711, 0.00669463, 0.00784816, -0.0115786, 0.00193143, 
 softmax 1: 
--0.00600372, 0.0117018, 0.0125798, -0.00787793, -0.00443767, 0.0188605, -0.0146695, 0.00746743, -1.73821e-05, 0.00736259, -0.0044062, 0.0104441, -0.00127186, 0.00659676, -0.00751852, 0.00403507, -0.00262734, -0.0123764, -0.0109756, -0.0114007, 
-diff: softmax 0: 
-7.47042e-07, 0.000172167, 9.03383e-05, -0.000171827, 0.000100694, 2.70438e-06, -1.07642e-06, 3.41448e-07, 3.03244e-05, 5.32805e-05, 1.58812e-07, 9.58606e-05, 2.00533e-06, -0.000796165, 8.64589e-06, 0.00119793, 1.0054e-06, 6.02657e-07, 6.29242e-05, 2.61122e-05, 
+0.0157746, 0.0101439, -0.00594997, -0.0055472, -0.00835651, 0.0316857, -0.000406219, 0.0142584, -0.0180395, 0.00613382, 0.00344644, -0.0061286, 0.00884618, 0.00575231, -0.00951024, -0.00731962, 0.011535, -0.0220427, 0.00369274, -0.000397781, 
 
+diff: 
+softmax 0: 
+-0.00124541, 2.9442e-05, 1.30804e-05, 4.23682e-06, 4.16953e-05, 1.68379e-05, 1.27347e-05, 1.68725e-05, 4.08832e-05, -0.00175704, 3.45047e-07, 1.10901e-05, 1.72322e-05, 2.09158e-05, -0.00098099, -0.00853061, 2.01205e-06, 1.99173e-06, -0.000533147, 1.81182e-06, 
 softmax 1: 
--7.47427e-07, -0.000172166, -9.03385e-05, 0.000171827, -0.000100694, -2.70309e-06, 1.07563e-06, -3.3998e-07, -3.03244e-05, -5.32809e-05, -1.59134e-07, -9.58599e-05, -2.00451e-06, 0.000796166, -8.64548e-06, -0.00119793, -1.00491e-06, -6.03541e-07, -6.2925e-05, -2.61126e-05, 
+0.00124541, -2.9442e-05, -1.30808e-05, -4.23736e-06, -4.16964e-05, -1.68373e-05, -1.27361e-05, -1.6872e-05, -4.08849e-05, 0.00175704, -3.44787e-07, -1.10902e-05, -1.72318e-05, -2.09146e-05, 0.00098099, 0.00853061, -2.01113e-06, -1.99245e-06, 0.000533147, -1.81175e-06, 
 
 new params: 
 softmax 0: 
--0.00164847, -0.0040742, -0.0176987, 0.00468447, 0.0025583, 0.00690078, -0.000961752, 0.0217305, 6.84492e-05, -0.0146151, -0.00201019, 0.00253478, 0.0177002, 0.00882575, 0.0155268, 0.000923423, 0.0123801, -0.00522448, -0.00633371, 0.00279327, 
-
+0.000390885, -0.010446, -0.00314026, -0.00503842, -0.0130181, -0.0180684, -0.0270587, -0.00428431, -0.015167, -0.00833782, 0.00172497, 0.00412213, -0.00129921, 0.0172537, -0.00305864, 0.0136077, 0.00669262, 0.00784616, -0.0110454, 0.00192962, 
 softmax 1: 
--0.00600297, 0.011874, 0.0126702, -0.00804976, -0.00433698, 0.0188632, -0.0146706, 0.00746777, 1.29422e-05, 0.00741587, -0.00440604, 0.01054, -0.00126985, 0.0058006, -0.00750988, 0.00523301, -0.00262633, -0.0123758, -0.0109127, -0.0113746, 
+0.0145292, 0.0101733, -0.00593689, -0.00554296, -0.00831481, 0.0317025, -0.000393483, 0.0142753, -0.0179986, 0.00437678, 0.00344678, -0.00611751, 0.00886341, 0.00577322, -0.0104912, -0.0158502, 0.011537, -0.0220407, 0.00315959, -0.00039597, 
 
-I0822 00:46:49.679775 14017 solver.cpp:117] Iteration 4, loss = 0.110874
+I0822 01:28:35.525746 16458 solver.cpp:117] Iteration 3, loss = 0.479752
+I0822 01:28:35.525759 16458 solver.cpp:136] Iteration 3, Testing net
 output probs:
-case 0: 0.428988, 0.571012, 
-case 1: 0.68019, 0.31981, 
-case 2: 0.556732, 0.443268, 
-case 3: 0.458307, 0.541692, 
-case 4: 0.404998, 0.595002, 
-case 5: 0.472154, 0.527846, 
-case 6: 0.692817, 0.307183, 
-case 7: 0.582353, 0.417647, 
-case 8: 0.565391, 0.434609, 
-case 9: 0.424711, 0.575289, 
-case 10: 0.335318, 0.664682, 
-case 11: 0.667655, 0.332345, 
-case 12: 0.63704, 0.36296, 
-case 13: 0.612867, 0.387133, 
-case 14: 0.417781, 0.582219, 
-case 15: 0.59507, 0.404931, 
-case 16: 0.67605, 0.32395, 
-case 17: 0.530531, 0.469469, 
-case 18: 0.624761, 0.375239, 
-case 19: 0.604638, 0.395362, 
-SBL loss: 0.0796637
-SL loss: 0.750746
-loss after net.hpp:Forward(): 0.0796637
+case 0: 2.26032e-10, 1, 
+case 1: 7.04294e-09, 1, 
+case 2: 2.36462e-09, 1, 
+min class case 3: 2.98608e-10, 1, 
+min class case 4: 3.36619e-12, 1, 
+case 5: 2.02497e-09, 1, 
+min class case 6: 8.00128e-10, 1, 
+case 7: 4.70544e-10, 1, 
+min class case 8: 1.25761e-09, 1, 
+min class case 9: 9.15885e-09, 1, 
+case 10: 1.18003e-08, 1, 
+min class case 11: 3.02879e-10, 1, 
+case 12: 1.63528e-10, 1, 
+case 13: 1.29134e-08, 1, 
+case 14: 1.83958e-08, 1, 
+min class case 15: 5.04882e-10, 1, 
+min class case 16: 5.53376e-10, 1, 
+case 17: 1.89812e-09, 1, 
+case 18: 7.21026e-10, 1, 
+case 19: 1.71434e-10, 1, 
+I0822 01:28:35.958356 16458 solver.cpp:172] Test score #0: 0.500001
+I0822 01:28:35.958371 16458 solver.cpp:172] Test score #1: 3.67912
+output probs:
+case 0: 0.619018, 0.380982, 
+case 1: 0.672378, 0.327622, 
+case 2: 0.335302, 0.664698, 
+case 3: 0.619989, 0.380011, 
+case 4: 0.758777, 0.241223, 
+case 5: 0.616993, 0.383007, 
+case 6: 0.295294, 0.704706, 
+min class case 7: 0.717656, 0.282344, 
+min class case 8: 0.65279, 0.34721, 
+min class case 9: 0.635173, 0.364827, 
+min class case 10: 0.618885, 0.381115, 
+case 11: 0.760792, 0.239208, 
+case 12: 0.458174, 0.541826, 
+case 13: 0.637781, 0.362219, 
+case 14: 0.481801, 0.518199, 
+case 15: 0.581651, 0.418349, 
+case 16: 0.70275, 0.29725, 
+case 17: 0.612446, 0.387554, 
+case 18: 0.535378, 0.464622, 
+case 19: 0.773638, 0.226362, 
+SBL loss: 0.107785
+SL loss: 0.865478
+loss after net.hpp:Forward(): 0.107785
 SL bottom_diff:
-bottom_diff[0*2+0]: 0.214494,  bottom_diff[0*2+1]: -0.214494,  
-bottom_diff[1*2+0]: 0.340095,  bottom_diff[1*2+1]: -0.340095,  
-bottom_diff[2*2+0]: 0.278366,  bottom_diff[2*2+1]: -0.278366,  
-bottom_diff[3*2+0]: 0.229154,  bottom_diff[3*2+1]: -0.229154,  
-min class case bottom_diff[4*2+0]: -0.297501,  bottom_diff[4*2+1]: 0.297501,  
-bottom_diff[5*2+0]: 0.236077,  bottom_diff[5*2+1]: -0.236077,  
-bottom_diff[6*2+0]: 0.346408,  bottom_diff[6*2+1]: -0.346408,  
-bottom_diff[7*2+0]: 0.291177,  bottom_diff[7*2+1]: -0.291177,  
-min class case bottom_diff[8*2+0]: -0.217304,  bottom_diff[8*2+1]: 0.217305,  
-bottom_diff[9*2+0]: 0.212355,  bottom_diff[9*2+1]: -0.212355,  
-bottom_diff[10*2+0]: 0.167659,  bottom_diff[10*2+1]: -0.167659,  
-bottom_diff[11*2+0]: 0.333827,  bottom_diff[11*2+1]: -0.333827,  
-min class case bottom_diff[12*2+0]: -0.18148,  bottom_diff[12*2+1]: 0.18148,  
-bottom_diff[13*2+0]: 0.306433,  bottom_diff[13*2+1]: -0.306433,  
-bottom_diff[14*2+0]: 0.208891,  bottom_diff[14*2+1]: -0.208891,  
-bottom_diff[15*2+0]: 0.297535,  bottom_diff[15*2+1]: -0.297535,  
-bottom_diff[16*2+0]: 0.338025,  bottom_diff[16*2+1]: -0.338025,  
-bottom_diff[17*2+0]: 0.265266,  bottom_diff[17*2+1]: -0.265266,  
-min class case bottom_diff[18*2+0]: -0.18762,  bottom_diff[18*2+1]: 0.18762,  
-min class case bottom_diff[19*2+0]: -0.197681,  bottom_diff[19*2+1]: 0.197681,  
+bottom_diff[0*2+0]: 0.309509,  bottom_diff[0*2+1]: -0.309509,  
+bottom_diff[1*2+0]: 0.336189,  bottom_diff[1*2+1]: -0.336189,  
+bottom_diff[2*2+0]: 0.167651,  bottom_diff[2*2+1]: -0.167651,  
+bottom_diff[3*2+0]: 0.309994,  bottom_diff[3*2+1]: -0.309994,  
+bottom_diff[4*2+0]: 0.379389,  bottom_diff[4*2+1]: -0.379389,  
+bottom_diff[5*2+0]: 0.308496,  bottom_diff[5*2+1]: -0.308496,  
+bottom_diff[6*2+0]: 0.147647,  bottom_diff[6*2+1]: -0.147647,  
+min class case bottom_diff[7*2+0]: -0.141172,  bottom_diff[7*2+1]: 0.141172,  
+min class case bottom_diff[8*2+0]: -0.173605,  bottom_diff[8*2+1]: 0.173605,  
+min class case bottom_diff[9*2+0]: -0.182414,  bottom_diff[9*2+1]: 0.182414,  
+min class case bottom_diff[10*2+0]: -0.190558,  bottom_diff[10*2+1]: 0.190558,  
+bottom_diff[11*2+0]: 0.380396,  bottom_diff[11*2+1]: -0.380396,  
+bottom_diff[12*2+0]: 0.229087,  bottom_diff[12*2+1]: -0.229087,  
+bottom_diff[13*2+0]: 0.31889,  bottom_diff[13*2+1]: -0.31889,  
+bottom_diff[14*2+0]: 0.2409,  bottom_diff[14*2+1]: -0.2409,  
+bottom_diff[15*2+0]: 0.290826,  bottom_diff[15*2+1]: -0.290826,  
+bottom_diff[16*2+0]: 0.351375,  bottom_diff[16*2+1]: -0.351375,  
+bottom_diff[17*2+0]: 0.306223,  bottom_diff[17*2+1]: -0.306223,  
+bottom_diff[18*2+0]: 0.267689,  bottom_diff[18*2+1]: -0.267689,  
+bottom_diff[19*2+0]: 0.386819,  bottom_diff[19*2+1]: -0.386819,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.0129262,  bottom_diff[0*2+1]: -0.0129262,  
-bottom_diff[1*2+0]: 0.0204954,  bottom_diff[1*2+1]: -0.0204954,  
-bottom_diff[2*2+0]: 0.0167753,  bottom_diff[2*2+1]: -0.0167753,  
-bottom_diff[3*2+0]: 0.0138096,  bottom_diff[3*2+1]: -0.0138096,  
-min class case bottom_diff[4*2+0]: -0.0873397,  bottom_diff[4*2+1]: 0.0873397,  
-bottom_diff[5*2+0]: 0.0142269,  bottom_diff[5*2+1]: -0.0142269,  
-bottom_diff[6*2+0]: 0.0208758,  bottom_diff[6*2+1]: -0.0208758,  
-bottom_diff[7*2+0]: 0.0175474,  bottom_diff[7*2+1]: -0.0175474,  
-min class case bottom_diff[8*2+0]: -0.0637958,  bottom_diff[8*2+1]: 0.0637958,  
-bottom_diff[9*2+0]: 0.0127973,  bottom_diff[9*2+1]: -0.0127973,  
-bottom_diff[10*2+0]: 0.0101038,  bottom_diff[10*2+1]: -0.0101038,  
-bottom_diff[11*2+0]: 0.0201177,  bottom_diff[11*2+1]: -0.0201177,  
-min class case bottom_diff[12*2+0]: -0.0532786,  bottom_diff[12*2+1]: 0.0532786,  
-bottom_diff[13*2+0]: 0.0184668,  bottom_diff[13*2+1]: -0.0184668,  
-bottom_diff[14*2+0]: 0.0125885,  bottom_diff[14*2+1]: -0.0125885,  
-bottom_diff[15*2+0]: 0.0179305,  bottom_diff[15*2+1]: -0.0179305,  
-bottom_diff[16*2+0]: 0.0203706,  bottom_diff[16*2+1]: -0.0203706,  
-bottom_diff[17*2+0]: 0.0159859,  bottom_diff[17*2+1]: -0.0159859,  
-min class case bottom_diff[18*2+0]: -0.055081,  bottom_diff[18*2+1]: 0.055081,  
-min class case bottom_diff[19*2+0]: -0.0580349,  bottom_diff[19*2+1]: 0.0580349,  
+bottom_diff[0*2+0]: 0.0232768,  bottom_diff[0*2+1]: -0.0232768,  
+bottom_diff[1*2+0]: 0.0252833,  bottom_diff[1*2+1]: -0.0252833,  
+bottom_diff[2*2+0]: 0.0126083,  bottom_diff[2*2+1]: -0.0126083,  
+bottom_diff[3*2+0]: 0.0233133,  bottom_diff[3*2+1]: -0.0233133,  
+bottom_diff[4*2+0]: 0.0285322,  bottom_diff[4*2+1]: -0.0285322,  
+bottom_diff[5*2+0]: 0.0232007,  bottom_diff[5*2+1]: -0.0232007,  
+bottom_diff[6*2+0]: 0.0111039,  bottom_diff[6*2+1]: -0.0111039,  
+min class case bottom_diff[7*2+0]: -0.0522254,  bottom_diff[7*2+1]: 0.0522254,  
+min class case bottom_diff[8*2+0]: -0.0642238,  bottom_diff[8*2+1]: 0.0642238,  
+min class case bottom_diff[9*2+0]: -0.0674825,  bottom_diff[9*2+1]: 0.0674825,  
+min class case bottom_diff[10*2+0]: -0.0704953,  bottom_diff[10*2+1]: 0.0704953,  
+bottom_diff[11*2+0]: 0.0286079,  bottom_diff[11*2+1]: -0.0286079,  
+bottom_diff[12*2+0]: 0.0172286,  bottom_diff[12*2+1]: -0.0172286,  
+bottom_diff[13*2+0]: 0.0239824,  bottom_diff[13*2+1]: -0.0239824,  
+bottom_diff[14*2+0]: 0.0181171,  bottom_diff[14*2+1]: -0.0181171,  
+bottom_diff[15*2+0]: 0.0218717,  bottom_diff[15*2+1]: -0.0218717,  
+bottom_diff[16*2+0]: 0.0264254,  bottom_diff[16*2+1]: -0.0264254,  
+bottom_diff[17*2+0]: 0.0230297,  bottom_diff[17*2+1]: -0.0230297,  
+bottom_diff[18*2+0]: 0.0201317,  bottom_diff[18*2+1]: -0.0201317,  
+bottom_diff[19*2+0]: 0.029091,  bottom_diff[19*2+1]: -0.029091,  
 
-loss after net.hpp:Backward(): 0.0796637
-I0822 00:46:50.113796 14017 solver.cpp:269] Iteration 5, lr = 0.0001
+loss after net.hpp:Backward(): 0.107785
+I0822 01:28:36.391942 16458 solver.cpp:269] Iteration 4, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.00164847, -0.0040742, -0.0176987, 0.00468447, 0.0025583, 0.00690078, -0.000961752, 0.0217305, 6.84492e-05, -0.0146151, -0.00201019, 0.00253478, 0.0177002, 0.00882575, 0.0155268, 0.000923423, 0.0123801, -0.00522448, -0.00633371, 0.00279327, 
+0.000390885, -0.010446, -0.00314026, -0.00503842, -0.0130181, -0.0180684, -0.0270587, -0.00428431, -0.015167, -0.00833782, 0.00172497, 0.00412213, -0.00129921, 0.0172537, -0.00305864, 0.0136077, 0.00669262, 0.00784616, -0.0110454, 0.00192962, 
 softmax 1: 
--0.00600297, 0.011874, 0.0126702, -0.00804976, -0.00433698, 0.0188632, -0.0146706, 0.00746777, 1.29422e-05, 0.00741587, -0.00440604, 0.01054, -0.00126985, 0.0058006, -0.00750988, 0.00523301, -0.00262633, -0.0123758, -0.0109127, -0.0113746, 
-diff: softmax 0: 
-1.51923e-05, -0.000171661, 4.64697e-07, -8.85322e-07, 5.1908e-07, 5.98479e-05, 5.58749e-05, -0.000161478, 5.17876e-06, 0.000312574, 7.17969e-10, -1.85485e-05, 2.32554e-05, -0.000109152, 0.000105397, 0.000641669, 5.80058e-09, 2.81169e-05, 0.000465208, 1.34716e-07, 
+0.0145292, 0.0101733, -0.00593689, -0.00554296, -0.00831481, 0.0317025, -0.000393483, 0.0142753, -0.0179986, 0.00437678, 0.00344678, -0.00611751, 0.00886341, 0.00577322, -0.0104912, -0.0158502, 0.011537, -0.0220407, 0.00315959, -0.00039597, 
 
+diff: 
+softmax 0: 
+5.71003e-05, 3.78556e-05, 6.72562e-08, 2.15837e-08, -0.0004862, 3.34797e-06, 3.94664e-06, 2.13017e-05, 2.09944e-07, 0.000213717, 1.86454e-09, 5.73618e-08, 8.87458e-08, 0.000117048, 8.29692e-05, 0.00700286, 1.07043e-08, 1.06573e-08, -2.74827e-06, 9.43419e-09, 
 softmax 1: 
--1.51927e-05, 0.000171661, -4.6495e-07, 8.85154e-07, -5.19169e-07, -5.98467e-05, -5.58756e-05, 0.00016148, -5.17875e-06, -0.000312574, -1.04044e-09, 1.85492e-05, -2.32546e-05, 0.000109153, -0.000105396, -0.000641668, -5.31037e-09, -2.81178e-05, -0.000465209, -1.35147e-07, 
+-5.70996e-05, -3.78556e-05, -6.77124e-08, -2.21155e-08, 0.000486199, -3.34729e-06, -3.94802e-06, -2.13012e-05, -2.11611e-07, -0.000213717, -1.60462e-09, -5.74621e-08, -8.83656e-08, -0.000117047, -8.29699e-05, -0.00700286, -9.78807e-09, -1.13706e-08, 2.74787e-06, -9.35715e-09, 
 
 new params: 
 softmax 0: 
--0.00166366, -0.00390254, -0.0176992, 0.00468535, 0.00255778, 0.00684094, -0.00101763, 0.0218919, 6.32705e-05, -0.0149277, -0.00201019, 0.00255333, 0.017677, 0.00893491, 0.0154214, 0.000281754, 0.0123801, -0.0052526, -0.00679892, 0.00279314, 
-
+0.000333785, -0.0104839, -0.00314033, -0.00503844, -0.0125319, -0.0180718, -0.0270626, -0.00430561, -0.0151672, -0.00855153, 0.00172497, 0.00412207, -0.0012993, 0.0171366, -0.00314161, 0.00660486, 0.00669261, 0.00784615, -0.0110427, 0.00192961, 
 softmax 1: 
--0.00598778, 0.0117023, 0.0126706, -0.00805065, -0.00433646, 0.0189231, -0.0146147, 0.00730629, 1.8121e-05, 0.00772845, -0.00440604, 0.0105214, -0.0012466, 0.00569144, -0.00740448, 0.00587468, -0.00262633, -0.0123477, -0.0104474, -0.0113745, 
+0.0145863, 0.0102112, -0.00593682, -0.00554294, -0.00880101, 0.0317059, -0.000389535, 0.0142966, -0.0179984, 0.00459049, 0.00344678, -0.00611745, 0.0088635, 0.00589027, -0.0104083, -0.00884737, 0.011537, -0.0220407, 0.00315684, -0.00039596, 
 
-I0822 00:46:50.353040 14017 solver.cpp:117] Iteration 5, loss = 0.0796637
+I0822 01:28:36.630848 16458 solver.cpp:117] Iteration 4, loss = 0.107785
+I0822 01:28:36.630861 16458 solver.cpp:136] Iteration 4, Testing net
 output probs:
-case 0: 0.490942, 0.509058, 
-case 1: 0.61565, 0.38435, 
-case 2: 0.496339, 0.503661, 
-case 3: 0.481739, 0.518261, 
-case 4: 0.493694, 0.506306, 
-case 5: 0.459574, 0.540426, 
-case 6: 0.592228, 0.407772, 
-case 7: 0.405079, 0.594921, 
-case 8: 0.487562, 0.512438, 
-case 9: 0.561347, 0.438653, 
-case 10: 0.538157, 0.461843, 
-case 11: 0.460886, 0.539114, 
-case 12: 0.485995, 0.514005, 
-case 13: 0.638537, 0.361463, 
-case 14: 0.609874, 0.390126, 
-case 15: 0.573337, 0.426663, 
-case 16: 0.126478, 0.873522, 
-case 17: 0.489333, 0.510666, 
-case 18: 0.422198, 0.577802, 
-case 19: 0.470677, 0.529323, 
-SBL loss: 0.0658317
-SL loss: 0.698419
-loss after net.hpp:Forward(): 0.0658317
+case 0: 7.72114e-11, 1, 
+case 1: 5.2106e-11, 1, 
+case 2: 4.43329e-10, 1, 
+case 3: 1.83017e-11, 1, 
+case 4: 4.02959e-09, 1, 
+case 5: 3.11057e-11, 1, 
+case 6: 1.36696e-08, 1, 
+case 7: 1.74161e-10, 1, 
+case 8: 1.29769e-08, 1, 
+min class case 9: 2.01457e-10, 1, 
+case 10: 5.33443e-10, 1, 
+case 11: 9.52367e-11, 1, 
+case 12: 1.57456e-10, 1, 
+case 13: 1.55212e-08, 1, 
+case 14: 1.89651e-10, 1, 
+case 15: 1.07096e-09, 1, 
+case 16: 3.88006e-11, 1, 
+case 17: 1.69925e-08, 1, 
+case 18: 2.03071e-11, 1, 
+case 19: 9.17515e-08, 1, 
+I0822 01:28:37.063967 16458 solver.cpp:172] Test score #0: 0.499999
+I0822 01:28:37.063982 16458 solver.cpp:172] Test score #1: 4.20275
+output probs:
+case 0: 0.484742, 0.515258, 
+case 1: 0.640475, 0.359525, 
+case 2: 0.748296, 0.251704, 
+case 3: 0.617443, 0.382557, 
+min class case 4: 0.546885, 0.453115, 
+case 5: 0.549578, 0.450422, 
+case 6: 0.286282, 0.713718, 
+case 7: 0.651148, 0.348852, 
+min class case 8: 0.557552, 0.442448, 
+case 9: 0.584146, 0.415854, 
+case 10: 0.453218, 0.546782, 
+case 11: 0.528565, 0.471435, 
+min class case 12: 0.405408, 0.594592, 
+case 13: 0.574157, 0.425843, 
+case 14: 0.702581, 0.297419, 
+case 15: 0.561008, 0.438992, 
+case 16: 0.603372, 0.396628, 
+case 17: 0.561135, 0.438865, 
+min class case 18: 0.652815, 0.347185, 
+min class case 19: 0.539989, 0.460011, 
+SBL loss: 0.0763648
+SL loss: 0.704676
+loss after net.hpp:Forward(): 0.0763648
 SL bottom_diff:
-bottom_diff[0*2+0]: 0.245471,  bottom_diff[0*2+1]: -0.245471,  
-bottom_diff[1*2+0]: 0.307825,  bottom_diff[1*2+1]: -0.307825,  
-bottom_diff[2*2+0]: 0.248169,  bottom_diff[2*2+1]: -0.248169,  
-bottom_diff[3*2+0]: 0.24087,  bottom_diff[3*2+1]: -0.24087,  
-bottom_diff[4*2+0]: 0.246847,  bottom_diff[4*2+1]: -0.246847,  
-bottom_diff[5*2+0]: 0.229787,  bottom_diff[5*2+1]: -0.229787,  
-bottom_diff[6*2+0]: 0.296114,  bottom_diff[6*2+1]: -0.296114,  
-bottom_diff[7*2+0]: 0.202539,  bottom_diff[7*2+1]: -0.202539,  
-bottom_diff[8*2+0]: 0.243781,  bottom_diff[8*2+1]: -0.243781,  
-bottom_diff[9*2+0]: 0.280673,  bottom_diff[9*2+1]: -0.280674,  
-min class case bottom_diff[10*2+0]: -0.230922,  bottom_diff[10*2+1]: 0.230922,  
-bottom_diff[11*2+0]: 0.230443,  bottom_diff[11*2+1]: -0.230443,  
-bottom_diff[12*2+0]: 0.242998,  bottom_diff[12*2+1]: -0.242998,  
-bottom_diff[13*2+0]: 0.319268,  bottom_diff[13*2+1]: -0.319268,  
-min class case bottom_diff[14*2+0]: -0.195063,  bottom_diff[14*2+1]: 0.195063,  
-bottom_diff[15*2+0]: 0.286669,  bottom_diff[15*2+1]: -0.286669,  
-bottom_diff[16*2+0]: 0.0632389,  bottom_diff[16*2+1]: -0.0632388,  
-min class case bottom_diff[17*2+0]: -0.255333,  bottom_diff[17*2+1]: 0.255333,  
-bottom_diff[18*2+0]: 0.211099,  bottom_diff[18*2+1]: -0.211099,  
-bottom_diff[19*2+0]: 0.235338,  bottom_diff[19*2+1]: -0.235338,  
+bottom_diff[0*2+0]: 0.242371,  bottom_diff[0*2+1]: -0.242371,  
+bottom_diff[1*2+0]: 0.320238,  bottom_diff[1*2+1]: -0.320238,  
+bottom_diff[2*2+0]: 0.374148,  bottom_diff[2*2+1]: -0.374148,  
+bottom_diff[3*2+0]: 0.308721,  bottom_diff[3*2+1]: -0.308721,  
+min class case bottom_diff[4*2+0]: -0.226557,  bottom_diff[4*2+1]: 0.226557,  
+bottom_diff[5*2+0]: 0.274789,  bottom_diff[5*2+1]: -0.274789,  
+bottom_diff[6*2+0]: 0.143141,  bottom_diff[6*2+1]: -0.143141,  
+bottom_diff[7*2+0]: 0.325574,  bottom_diff[7*2+1]: -0.325574,  
+min class case bottom_diff[8*2+0]: -0.221224,  bottom_diff[8*2+1]: 0.221224,  
+bottom_diff[9*2+0]: 0.292073,  bottom_diff[9*2+1]: -0.292073,  
+bottom_diff[10*2+0]: 0.226609,  bottom_diff[10*2+1]: -0.226609,  
+bottom_diff[11*2+0]: 0.264282,  bottom_diff[11*2+1]: -0.264282,  
+min class case bottom_diff[12*2+0]: -0.297296,  bottom_diff[12*2+1]: 0.297296,  
+bottom_diff[13*2+0]: 0.287079,  bottom_diff[13*2+1]: -0.287079,  
+bottom_diff[14*2+0]: 0.351291,  bottom_diff[14*2+1]: -0.351291,  
+bottom_diff[15*2+0]: 0.280504,  bottom_diff[15*2+1]: -0.280504,  
+bottom_diff[16*2+0]: 0.301686,  bottom_diff[16*2+1]: -0.301686,  
+bottom_diff[17*2+0]: 0.280568,  bottom_diff[17*2+1]: -0.280568,  
+min class case bottom_diff[18*2+0]: -0.173593,  bottom_diff[18*2+1]: 0.173593,  
+min class case bottom_diff[19*2+0]: -0.230006,  bottom_diff[19*2+1]: 0.230005,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.0123799,  bottom_diff[0*2+1]: -0.0123799,  
-bottom_diff[1*2+0]: 0.0155247,  bottom_diff[1*2+1]: -0.0155247,  
-bottom_diff[2*2+0]: 0.012516,  bottom_diff[2*2+1]: -0.012516,  
-bottom_diff[3*2+0]: 0.0121479,  bottom_diff[3*2+1]: -0.0121479,  
-bottom_diff[4*2+0]: 0.0124493,  bottom_diff[4*2+1]: -0.0124493,  
-bottom_diff[5*2+0]: 0.0115889,  bottom_diff[5*2+1]: -0.0115889,  
-bottom_diff[6*2+0]: 0.014934,  bottom_diff[6*2+1]: -0.014934,  
-bottom_diff[7*2+0]: 0.0102148,  bottom_diff[7*2+1]: -0.0102148,  
-bottom_diff[8*2+0]: 0.0122947,  bottom_diff[8*2+1]: -0.0122947,  
-bottom_diff[9*2+0]: 0.0141553,  bottom_diff[9*2+1]: -0.0141553,  
-min class case bottom_diff[10*2+0]: -0.055352,  bottom_diff[10*2+1]: 0.055352,  
-bottom_diff[11*2+0]: 0.011622,  bottom_diff[11*2+1]: -0.011622,  
-bottom_diff[12*2+0]: 0.0122552,  bottom_diff[12*2+1]: -0.0122552,  
-bottom_diff[13*2+0]: 0.0161018,  bottom_diff[13*2+1]: -0.0161018,  
-min class case bottom_diff[14*2+0]: -0.0467566,  bottom_diff[14*2+1]: 0.0467566,  
-bottom_diff[15*2+0]: 0.0144577,  bottom_diff[15*2+1]: -0.0144577,  
-bottom_diff[16*2+0]: 0.00318935,  bottom_diff[16*2+1]: -0.00318935,  
-min class case bottom_diff[17*2+0]: -0.0612035,  bottom_diff[17*2+1]: 0.0612035,  
-bottom_diff[18*2+0]: 0.0106465,  bottom_diff[18*2+1]: -0.0106465,  
-bottom_diff[19*2+0]: 0.0118689,  bottom_diff[19*2+1]: -0.0118689,  
+bottom_diff[0*2+0]: 0.0146062,  bottom_diff[0*2+1]: -0.0146062,  
+bottom_diff[1*2+0]: 0.0192987,  bottom_diff[1*2+1]: -0.0192987,  
+bottom_diff[2*2+0]: 0.0225475,  bottom_diff[2*2+1]: -0.0225475,  
+bottom_diff[3*2+0]: 0.0186047,  bottom_diff[3*2+1]: -0.0186047,  
+min class case bottom_diff[4*2+0]: -0.0665122,  bottom_diff[4*2+1]: 0.0665122,  
+bottom_diff[5*2+0]: 0.0165598,  bottom_diff[5*2+1]: -0.0165598,  
+bottom_diff[6*2+0]: 0.00862619,  bottom_diff[6*2+1]: -0.00862619,  
+bottom_diff[7*2+0]: 0.0196203,  bottom_diff[7*2+1]: -0.0196203,  
+min class case bottom_diff[8*2+0]: -0.0649466,  bottom_diff[8*2+1]: 0.0649466,  
+bottom_diff[9*2+0]: 0.0176014,  bottom_diff[9*2+1]: -0.0176014,  
+bottom_diff[10*2+0]: 0.0136563,  bottom_diff[10*2+1]: -0.0136563,  
+bottom_diff[11*2+0]: 0.0159266,  bottom_diff[11*2+1]: -0.0159266,  
+min class case bottom_diff[12*2+0]: -0.0872795,  bottom_diff[12*2+1]: 0.0872795,  
+bottom_diff[13*2+0]: 0.0173004,  bottom_diff[13*2+1]: -0.0173004,  
+bottom_diff[14*2+0]: 0.02117,  bottom_diff[14*2+1]: -0.02117,  
+bottom_diff[15*2+0]: 0.0169042,  bottom_diff[15*2+1]: -0.0169042,  
+bottom_diff[16*2+0]: 0.0181807,  bottom_diff[16*2+1]: -0.0181807,  
+bottom_diff[17*2+0]: 0.016908,  bottom_diff[17*2+1]: -0.016908,  
+min class case bottom_diff[18*2+0]: -0.050963,  bottom_diff[18*2+1]: 0.050963,  
+min class case bottom_diff[19*2+0]: -0.0675246,  bottom_diff[19*2+1]: 0.0675245,  
 
-loss after net.hpp:Backward(): 0.0658317
-I0822 00:46:50.786620 14017 solver.cpp:269] Iteration 6, lr = 0.0001
+loss after net.hpp:Backward(): 0.0763648
+I0822 01:28:37.497211 16458 solver.cpp:269] Iteration 5, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.00166366, -0.00390254, -0.0176992, 0.00468535, 0.00255778, 0.00684094, -0.00101763, 0.0218919, 6.32705e-05, -0.0149277, -0.00201019, 0.00255333, 0.017677, 0.00893491, 0.0154214, 0.000281754, 0.0123801, -0.0052526, -0.00679892, 0.00279314, 
+0.000333785, -0.0104839, -0.00314033, -0.00503844, -0.0125319, -0.0180718, -0.0270626, -0.00430561, -0.0151672, -0.00855153, 0.00172497, 0.00412207, -0.0012993, 0.0171366, -0.00314161, 0.00660486, 0.00669261, 0.00784615, -0.0110427, 0.00192961, 
 softmax 1: 
--0.00598778, 0.0117023, 0.0126706, -0.00805065, -0.00433646, 0.0189231, -0.0146147, 0.00730629, 1.8121e-05, 0.00772845, -0.00440604, 0.0105214, -0.0012466, 0.00569144, -0.00740448, 0.00587468, -0.00262633, -0.0123477, -0.0104474, -0.0113745, 
-diff: softmax 0: 
-7.82144e-08, 1.33589e-05, -0.000294594, -4.32848e-09, 2.80311e-09, 2.67308e-05, 1.18648e-05, -8.31127e-07, 2.66933e-08, 0.000107872, -9.68093e-11, -9.54672e-08, 1.20737e-07, 0.000354031, 0.000145644, 0.000820264, 6.48901e-10, 1.44645e-07, -8.31646e-06, 8.33952e-10, 
+0.0145863, 0.0102112, -0.00593682, -0.00554294, -0.00880101, 0.0317059, -0.000389535, 0.0142966, -0.0179984, 0.00459049, 0.00344678, -0.00611745, 0.0088635, 0.00589027, -0.0104083, -0.00884737, 0.011537, -0.0220407, 0.00315684, -0.00039596, 
 
+diff: 
+softmax 0: 
+-4.62779e-05, 1.94575e-07, 1.89606e-10, -1.40685e-10, 5.86594e-05, 3.35154e-06, 1.89869e-08, 7.78311e-06, 3.23645e-10, 1.74708e-05, 9.58578e-11, 5.01733e-10, 3.9241e-10, 0.000256689, 1.95751e-05, 3.30971e-05, 3.89798e-10, 4.47233e-10, 2.96177e-06, 1.45102e-10, 
 softmax 1: 
--7.8599e-08, -1.33585e-05, 0.000294594, 4.15935e-09, -2.8925e-09, -2.67295e-05, -1.18656e-05, 8.32594e-07, -2.66892e-08, -0.000107872, -2.25664e-10, 9.61243e-08, -1.19911e-07, -0.00035403, -0.000145643, -0.000820263, -1.58685e-10, -1.4553e-07, 8.3156e-06, -1.26524e-09, 
+4.62786e-05, -1.94588e-07, -6.45815e-10, -3.91125e-10, -5.86604e-05, -3.35085e-06, -2.03667e-08, -7.78261e-06, -1.99052e-09, -1.7471e-05, 1.64069e-10, -6.02019e-10, -1.22407e-11, -0.000256688, -1.95758e-05, -3.30971e-05, 5.26403e-10, -1.16064e-09, -2.96216e-06, -6.80226e-11, 
 
 new params: 
 softmax 0: 
--0.00166374, -0.0039159, -0.0174046, 0.00468536, 0.00255778, 0.00681421, -0.00102949, 0.0218928, 6.32438e-05, -0.0150356, -0.00201019, 0.00255342, 0.0176769, 0.00858087, 0.0152758, -0.00053851, 0.0123801, -0.00525274, -0.00679061, 0.00279314, 
-
+0.000380063, -0.0104841, -0.00314033, -0.00503844, -0.0125905, -0.0180751, -0.0270626, -0.00431339, -0.0151672, -0.008569, 0.00172497, 0.00412207, -0.0012993, 0.0168799, -0.00316118, 0.00657176, 0.00669261, 0.00784615, -0.0110457, 0.00192961, 
 softmax 1: 
--0.0059877, 0.0117157, 0.012376, -0.00805065, -0.00433645, 0.0189498, -0.0146028, 0.00730546, 1.81477e-05, 0.00783632, -0.00440604, 0.0105213, -0.00124648, 0.00604548, -0.00725884, 0.00669494, -0.00262633, -0.0123476, -0.0104558, -0.0113745, 
+0.01454, 0.0102114, -0.00593682, -0.00554294, -0.00874235, 0.0317092, -0.000389514, 0.0143044, -0.0179984, 0.00460796, 0.00344678, -0.00611745, 0.0088635, 0.00614696, -0.0103887, -0.00881427, 0.011537, -0.0220407, 0.00315981, -0.00039596, 
 
-I0822 00:46:51.025560 14017 solver.cpp:117] Iteration 6, loss = 0.0658317
+I0822 01:28:37.736102 16458 solver.cpp:117] Iteration 5, loss = 0.0763648
+I0822 01:28:37.736114 16458 solver.cpp:136] Iteration 5, Testing net
 output probs:
-case 0: 0.437315, 0.562685, 
-case 1: 0.498116, 0.501884, 
-case 2: 0.460363, 0.539637, 
-case 3: 0.447186, 0.552814, 
-case 4: 0.617264, 0.382736, 
-case 5: 0.719004, 0.280996, 
-case 6: 0.567766, 0.432234, 
-case 7: 0.51768, 0.48232, 
-case 8: 0.691582, 0.308418, 
-case 9: 0.386184, 0.613816, 
-case 10: 0.515853, 0.484147, 
-case 11: 0.594901, 0.405099, 
-case 12: 0.651972, 0.348028, 
-case 13: 0.619711, 0.380289, 
-case 14: 0.526621, 0.473379, 
-case 15: 0.631741, 0.368259, 
-case 16: 0.447646, 0.552354, 
-case 17: 0.766039, 0.233961, 
-case 18: 0.40393, 0.59607, 
-case 19: 0.15018, 0.84982, 
-SBL loss: 0.0589489
-SL loss: 0.739199
-loss after net.hpp:Forward(): 0.0589489
+case 0: 1.65051e-10, 1, 
+case 1: 4.62991e-10, 1, 
+case 2: 4.55732e-09, 1, 
+case 3: 1.18907e-10, 1, 
+case 4: 3.3503e-10, 1, 
+case 5: 8.76594e-10, 1, 
+case 6: 1.69118e-10, 1, 
+case 7: 8.02453e-10, 1, 
+case 8: 3.63318e-09, 1, 
+min class case 9: 1.24602e-10, 1, 
+case 10: 4.18247e-10, 1, 
+case 11: 2.53237e-10, 1, 
+case 12: 9.3407e-10, 1, 
+min class case 13: 2.66137e-10, 1, 
+min class case 14: 1.32782e-10, 1, 
+case 15: 2.21724e-09, 1, 
+min class case 16: 1.9659e-10, 1, 
+case 17: 9.06837e-11, 1, 
+case 18: 4.71659e-10, 1, 
+case 19: 5.16437e-11, 1, 
+I0822 01:28:38.168773 16458 solver.cpp:172] Test score #0: 0.500001
+I0822 01:28:38.168788 16458 solver.cpp:172] Test score #1: 4.1381
+output probs:
+case 0: 0.1473, 0.8527, 
+case 1: 0.636608, 0.363392, 
+case 2: 0.710072, 0.289928, 
+case 3: 0.614469, 0.385531, 
+case 4: 0.28481, 0.71519, 
+case 5: 0.493256, 0.506744, 
+case 6: 0.489895, 0.510105, 
+case 7: 0.257669, 0.742331, 
+case 8: 0.606903, 0.393097, 
+case 9: 0.343204, 0.656796, 
+min class case 10: 0.385531, 0.614469, 
+case 11: 0.539525, 0.460475, 
+case 12: 0.556898, 0.443102, 
+case 13: 0.491876, 0.508124, 
+min class case 14: 0.487799, 0.512201, 
+case 15: 0.577795, 0.422205, 
+case 16: 0.277322, 0.722678, 
+min class case 17: 0.587426, 0.412574, 
+case 18: 0.738978, 0.261022, 
+case 19: 0.552654, 0.447346, 
+SBL loss: 0.0675617
+SL loss: 0.706487
+loss after net.hpp:Forward(): 0.0675617
 SL bottom_diff:
-bottom_diff[0*2+0]: 0.218658,  bottom_diff[0*2+1]: -0.218658,  
-bottom_diff[1*2+0]: 0.249058,  bottom_diff[1*2+1]: -0.249058,  
-bottom_diff[2*2+0]: 0.230182,  bottom_diff[2*2+1]: -0.230182,  
-bottom_diff[3*2+0]: 0.223593,  bottom_diff[3*2+1]: -0.223593,  
-bottom_diff[4*2+0]: 0.308632,  bottom_diff[4*2+1]: -0.308632,  
-bottom_diff[5*2+0]: 0.359502,  bottom_diff[5*2+1]: -0.359502,  
-bottom_diff[6*2+0]: 0.283883,  bottom_diff[6*2+1]: -0.283883,  
-bottom_diff[7*2+0]: 0.25884,  bottom_diff[7*2+1]: -0.25884,  
-bottom_diff[8*2+0]: 0.345791,  bottom_diff[8*2+1]: -0.345791,  
-bottom_diff[9*2+0]: 0.193092,  bottom_diff[9*2+1]: -0.193092,  
-min class case bottom_diff[10*2+0]: -0.242073,  bottom_diff[10*2+1]: 0.242073,  
-min class case bottom_diff[11*2+0]: -0.202549,  bottom_diff[11*2+1]: 0.202549,  
-min class case bottom_diff[12*2+0]: -0.174014,  bottom_diff[12*2+1]: 0.174014,  
-bottom_diff[13*2+0]: 0.309856,  bottom_diff[13*2+1]: -0.309856,  
-bottom_diff[14*2+0]: 0.263311,  bottom_diff[14*2+1]: -0.263311,  
-bottom_diff[15*2+0]: 0.315871,  bottom_diff[15*2+1]: -0.315871,  
-bottom_diff[16*2+0]: 0.223823,  bottom_diff[16*2+1]: -0.223823,  
-bottom_diff[17*2+0]: 0.38302,  bottom_diff[17*2+1]: -0.38302,  
-min class case bottom_diff[18*2+0]: -0.298035,  bottom_diff[18*2+1]: 0.298035,  
-bottom_diff[19*2+0]: 0.0750899,  bottom_diff[19*2+1]: -0.0750899,  
+bottom_diff[0*2+0]: 0.07365,  bottom_diff[0*2+1]: -0.0736499,  
+bottom_diff[1*2+0]: 0.318304,  bottom_diff[1*2+1]: -0.318304,  
+bottom_diff[2*2+0]: 0.355036,  bottom_diff[2*2+1]: -0.355036,  
+bottom_diff[3*2+0]: 0.307235,  bottom_diff[3*2+1]: -0.307235,  
+bottom_diff[4*2+0]: 0.142405,  bottom_diff[4*2+1]: -0.142405,  
+bottom_diff[5*2+0]: 0.246628,  bottom_diff[5*2+1]: -0.246628,  
+bottom_diff[6*2+0]: 0.244947,  bottom_diff[6*2+1]: -0.244947,  
+bottom_diff[7*2+0]: 0.128835,  bottom_diff[7*2+1]: -0.128835,  
+bottom_diff[8*2+0]: 0.303451,  bottom_diff[8*2+1]: -0.303451,  
+bottom_diff[9*2+0]: 0.171602,  bottom_diff[9*2+1]: -0.171602,  
+min class case bottom_diff[10*2+0]: -0.307234,  bottom_diff[10*2+1]: 0.307234,  
+bottom_diff[11*2+0]: 0.269763,  bottom_diff[11*2+1]: -0.269763,  
+bottom_diff[12*2+0]: 0.278449,  bottom_diff[12*2+1]: -0.278449,  
+bottom_diff[13*2+0]: 0.245938,  bottom_diff[13*2+1]: -0.245938,  
+min class case bottom_diff[14*2+0]: -0.2561,  bottom_diff[14*2+1]: 0.2561,  
+bottom_diff[15*2+0]: 0.288898,  bottom_diff[15*2+1]: -0.288898,  
+bottom_diff[16*2+0]: 0.138661,  bottom_diff[16*2+1]: -0.138661,  
+min class case bottom_diff[17*2+0]: -0.206287,  bottom_diff[17*2+1]: 0.206287,  
+bottom_diff[18*2+0]: 0.369489,  bottom_diff[18*2+1]: -0.369489,  
+bottom_diff[19*2+0]: 0.276327,  bottom_diff[19*2+1]: -0.276327,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.00951332,  bottom_diff[0*2+1]: -0.00951332,  
-bottom_diff[1*2+0]: 0.010836,  bottom_diff[1*2+1]: -0.010836,  
-bottom_diff[2*2+0]: 0.0100147,  bottom_diff[2*2+1]: -0.0100147,  
-bottom_diff[3*2+0]: 0.00972805,  bottom_diff[3*2+1]: -0.00972805,  
-bottom_diff[4*2+0]: 0.0134279,  bottom_diff[4*2+1]: -0.0134279,  
-bottom_diff[5*2+0]: 0.0156411,  bottom_diff[5*2+1]: -0.0156411,  
-bottom_diff[6*2+0]: 0.0123511,  bottom_diff[6*2+1]: -0.0123511,  
-bottom_diff[7*2+0]: 0.0112616,  bottom_diff[7*2+1]: -0.0112616,  
-bottom_diff[8*2+0]: 0.0150446,  bottom_diff[8*2+1]: -0.0150446,  
-bottom_diff[9*2+0]: 0.00840102,  bottom_diff[9*2+1]: -0.00840102,  
-min class case bottom_diff[10*2+0]: -0.0482639,  bottom_diff[10*2+1]: 0.0482639,  
-min class case bottom_diff[11*2+0]: -0.0403837,  bottom_diff[11*2+1]: 0.0403837,  
-min class case bottom_diff[12*2+0]: -0.0346944,  bottom_diff[12*2+1]: 0.0346944,  
-bottom_diff[13*2+0]: 0.0134811,  bottom_diff[13*2+1]: -0.0134811,  
-bottom_diff[14*2+0]: 0.0114561,  bottom_diff[14*2+1]: -0.0114561,  
-bottom_diff[15*2+0]: 0.0137428,  bottom_diff[15*2+1]: -0.0137428,  
-bottom_diff[16*2+0]: 0.00973805,  bottom_diff[16*2+1]: -0.00973805,  
-bottom_diff[17*2+0]: 0.0166643,  bottom_diff[17*2+1]: -0.0166643,  
-min class case bottom_diff[18*2+0]: -0.0594213,  bottom_diff[18*2+1]: 0.0594213,  
-bottom_diff[19*2+0]: 0.003267,  bottom_diff[19*2+1]: -0.003267,  
+bottom_diff[0*2+0]: 0.00371442,  bottom_diff[0*2+1]: -0.00371442,  
+bottom_diff[1*2+0]: 0.0160531,  bottom_diff[1*2+1]: -0.0160531,  
+bottom_diff[2*2+0]: 0.0179057,  bottom_diff[2*2+1]: -0.0179057,  
+bottom_diff[3*2+0]: 0.0154949,  bottom_diff[3*2+1]: -0.0154949,  
+bottom_diff[4*2+0]: 0.00718197,  bottom_diff[4*2+1]: -0.00718197,  
+bottom_diff[5*2+0]: 0.0124383,  bottom_diff[5*2+1]: -0.0124383,  
+bottom_diff[6*2+0]: 0.0123535,  bottom_diff[6*2+1]: -0.0123535,  
+bottom_diff[7*2+0]: 0.00649757,  bottom_diff[7*2+1]: -0.00649757,  
+bottom_diff[8*2+0]: 0.0153041,  bottom_diff[8*2+1]: -0.0153041,  
+bottom_diff[9*2+0]: 0.00865448,  bottom_diff[9*2+1]: -0.00865448,  
+min class case bottom_diff[10*2+0]: -0.0736442,  bottom_diff[10*2+1]: 0.0736442,  
+bottom_diff[11*2+0]: 0.013605,  bottom_diff[11*2+1]: -0.013605,  
+bottom_diff[12*2+0]: 0.0140431,  bottom_diff[12*2+1]: -0.0140431,  
+bottom_diff[13*2+0]: 0.0124035,  bottom_diff[13*2+1]: -0.0124035,  
+min class case bottom_diff[14*2+0]: -0.0613874,  bottom_diff[14*2+1]: 0.0613874,  
+bottom_diff[15*2+0]: 0.0145701,  bottom_diff[15*2+1]: -0.0145701,  
+bottom_diff[16*2+0]: 0.00699315,  bottom_diff[16*2+1]: -0.00699315,  
+min class case bottom_diff[17*2+0]: -0.0494471,  bottom_diff[17*2+1]: 0.0494471,  
+bottom_diff[18*2+0]: 0.0186346,  bottom_diff[18*2+1]: -0.0186346,  
+bottom_diff[19*2+0]: 0.0139361,  bottom_diff[19*2+1]: -0.0139361,  
 
-loss after net.hpp:Backward(): 0.0589489
-I0822 00:46:51.459280 14017 solver.cpp:269] Iteration 7, lr = 0.0001
+loss after net.hpp:Backward(): 0.0675617
+I0822 01:28:38.602020 16458 solver.cpp:269] Iteration 6, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.00166374, -0.0039159, -0.0174046, 0.00468536, 0.00255778, 0.00681421, -0.00102949, 0.0218928, 6.32438e-05, -0.0150356, -0.00201019, 0.00255342, 0.0176769, 0.00858087, 0.0152758, -0.00053851, 0.0123801, -0.00525274, -0.00679061, 0.00279314, 
+0.000380063, -0.0104841, -0.00314033, -0.00503844, -0.0125905, -0.0180751, -0.0270626, -0.00431339, -0.0151672, -0.008569, 0.00172497, 0.00412207, -0.0012993, 0.0168799, -0.00316118, 0.00657176, 0.00669261, 0.00784615, -0.0110457, 0.00192961, 
 softmax 1: 
--0.0059877, 0.0117157, 0.012376, -0.00805065, -0.00433645, 0.0189498, -0.0146028, 0.00730546, 1.81477e-05, 0.00783632, -0.00440604, 0.0105213, -0.00124648, 0.00604548, -0.00725884, 0.00669494, -0.00262633, -0.0123476, -0.0104558, -0.0113745, 
-diff: softmax 0: 
-3.19912e-10, -9.45805e-05, -1.51914e-06, 1.14221e-05, 1.42336e-10, 1.38105e-07, -0.000266523, -3.1888e-09, 1.40733e-10, 4.28466e-05, -1.01009e-10, 2.17643e-05, 1.50609e-09, -0.000505529, 1.43928e-05, 1.88622e-05, 6.2235e-10, 8.49192e-06, 6.91992e-05, 1.90592e-05, 
+0.01454, 0.0102114, -0.00593682, -0.00554294, -0.00874235, 0.0317092, -0.000389514, 0.0143044, -0.0179984, 0.00460796, 0.00344678, -0.00611745, 0.0088635, 0.00614696, -0.0103887, -0.00881427, 0.011537, -0.0220407, 0.00315981, -0.00039596, 
 
+diff: 
+softmax 0: 
+3.23002e-05, 6.18451e-05, 5.35389e-06, -2.52647e-10, 3.84775e-06, 1.63693e-08, -1.25528e-09, 3.98967e-08, 2.76891e-07, 7.57933e-05, 8.67424e-11, 5.6551e-06, -6.29426e-11, 3.30043e-05, 3.71197e-06, 0.00125476, 3.36639e-10, 3.94613e-10, 7.41202e-06, 9.72283e-11, 
 softmax 1: 
--7.04466e-10, 9.45809e-05, 1.51889e-06, -1.14223e-05, -2.3173e-10, -1.3681e-07, 0.000266523, 4.65627e-09, -1.36643e-10, -4.2847e-05, -2.21465e-10, -2.17636e-05, -6.80317e-10, 0.000505529, -1.43924e-05, -1.88619e-05, -1.32134e-10, -8.4928e-06, -6.92001e-05, -1.90596e-05, 
+-3.22994e-05, -6.18451e-05, -5.35434e-06, -2.79163e-10, -3.84883e-06, -1.5684e-08, -1.24441e-10, -3.93945e-08, -2.78558e-07, -7.57935e-05, 1.73185e-10, -5.6552e-06, 4.43112e-10, -3.30032e-05, -3.71266e-06, -0.00125476, 5.79562e-10, -1.10802e-09, -7.41241e-06, -2.01486e-11, 
 
 new params: 
 softmax 0: 
--0.00166374, -0.00382131, -0.0174031, 0.00467394, 0.00255778, 0.00681407, -0.000762968, 0.0218928, 6.32436e-05, -0.0150784, -0.00201019, 0.00253166, 0.0176769, 0.0090864, 0.0152614, -0.000557372, 0.0123801, -0.00526123, -0.0068598, 0.00277408, 
-
+0.000347762, -0.0105459, -0.00314568, -0.00503844, -0.0125944, -0.0180751, -0.0270626, -0.00431343, -0.0151675, -0.0086448, 0.00172497, 0.00411642, -0.0012993, 0.0168469, -0.0031649, 0.005317, 0.00669261, 0.00784615, -0.0110531, 0.00192961, 
 softmax 1: 
--0.0059877, 0.0116211, 0.0123745, -0.00803923, -0.00433645, 0.0189499, -0.0148694, 0.00730545, 1.81478e-05, 0.00787917, -0.00440604, 0.0105431, -0.00124648, 0.00553995, -0.00724444, 0.0067138, -0.00262633, -0.0123391, -0.0103866, -0.0113554, 
+0.0145723, 0.0102732, -0.00593147, -0.00554294, -0.0087385, 0.0317093, -0.000389514, 0.0143044, -0.0179981, 0.00468376, 0.00344678, -0.0061118, 0.0088635, 0.00617996, -0.010385, -0.00755951, 0.011537, -0.0220407, 0.00316722, -0.00039596, 
 
-I0822 00:46:51.698180 14017 solver.cpp:117] Iteration 7, loss = 0.0589489
+I0822 01:28:38.840971 16458 solver.cpp:117] Iteration 6, loss = 0.0675617
+I0822 01:28:38.840984 16458 solver.cpp:136] Iteration 6, Testing net
 output probs:
-case 0: 0.541347, 0.458653, 
-case 1: 0.322103, 0.677897, 
-case 2: 0.68404, 0.31596, 
-case 3: 0.348054, 0.651946, 
-case 4: 0.529125, 0.470875, 
-case 5: 0.538857, 0.461143, 
-case 6: 0.539766, 0.460234, 
-case 7: 0.362356, 0.637644, 
-case 8: 0.547092, 0.452908, 
-case 9: 0.536792, 0.463208, 
-case 10: 0.199082, 0.800918, 
-case 11: 0.373051, 0.626949, 
-case 12: 0.522571, 0.477429, 
-case 13: 0.244119, 0.755881, 
-case 14: 0.659095, 0.340905, 
-case 15: 0.592189, 0.407811, 
-case 16: 0.313849, 0.686151, 
-case 17: 0.620764, 0.379236, 
-case 18: 0.575934, 0.424066, 
-case 19: 0.514208, 0.485792, 
-SBL loss: 0.0460512
-SL loss: 0.732352
-loss after net.hpp:Forward(): 0.0460512
+case 0: 3.80323e-10, 1, 
+min class case 1: 5.35172e-09, 1, 
+case 2: 3.452e-11, 1, 
+case 3: 5.75503e-09, 1, 
+case 4: 1.42235e-10, 1, 
+min class case 5: 2.79859e-10, 1, 
+min class case 6: 1.00304e-10, 1, 
+case 7: 2.12e-09, 1, 
+case 8: 1.6492e-11, 1, 
+case 9: 1.08612e-10, 1, 
+case 10: 1.8269e-10, 1, 
+case 11: 3.56873e-10, 1, 
+case 12: 1.85945e-10, 1, 
+case 13: 1.10225e-10, 1, 
+min class case 14: 1.92063e-09, 1, 
+case 15: 8.58249e-10, 1, 
+case 16: 1.15703e-09, 1, 
+case 17: 2.18884e-09, 1, 
+min class case 18: 9.35279e-10, 1, 
+case 19: 9.63143e-12, 1, 
+I0822 01:28:39.274243 16458 solver.cpp:172] Test score #0: 0.500001
+I0822 01:28:39.274260 16458 solver.cpp:172] Test score #1: 4.16037
+output probs:
+case 0: 0.474818, 0.525182, 
+case 1: 0.39664, 0.60336, 
+case 2: 0.524305, 0.475695, 
+case 3: 0.446297, 0.553703, 
+case 4: 0.547842, 0.452158, 
+case 5: 0.442222, 0.557778, 
+case 6: 0.649129, 0.350871, 
+case 7: 0.550699, 0.449301, 
+case 8: 0.517728, 0.482272, 
+case 9: 0.448698, 0.551302, 
+min class case 10: 0.464247, 0.535754, 
+min class case 11: 0.417868, 0.582132, 
+min class case 12: 0.58566, 0.41434, 
+case 13: 0.520427, 0.479573, 
+case 14: 0.521102, 0.478898, 
+case 15: 0.475833, 0.524167, 
+case 16: 0.420917, 0.579083, 
+case 17: 0.571616, 0.428384, 
+min class case 18: 0.531866, 0.468134, 
+case 19: 0.173151, 0.826849, 
+SBL loss: 0.0548437
+SL loss: 0.679954
+loss after net.hpp:Forward(): 0.0548437
 SL bottom_diff:
-bottom_diff[0*2+0]: 0.270673,  bottom_diff[0*2+1]: -0.270673,  
-bottom_diff[1*2+0]: 0.161052,  bottom_diff[1*2+1]: -0.161052,  
-bottom_diff[2*2+0]: 0.34202,  bottom_diff[2*2+1]: -0.34202,  
-bottom_diff[3*2+0]: 0.174027,  bottom_diff[3*2+1]: -0.174027,  
-bottom_diff[4*2+0]: 0.264562,  bottom_diff[4*2+1]: -0.264562,  
-bottom_diff[5*2+0]: 0.269428,  bottom_diff[5*2+1]: -0.269428,  
-bottom_diff[6*2+0]: 0.269883,  bottom_diff[6*2+1]: -0.269883,  
-bottom_diff[7*2+0]: 0.181178,  bottom_diff[7*2+1]: -0.181178,  
-bottom_diff[8*2+0]: 0.273546,  bottom_diff[8*2+1]: -0.273546,  
-min class case bottom_diff[9*2+0]: -0.231604,  bottom_diff[9*2+1]: 0.231604,  
-bottom_diff[10*2+0]: 0.0995408,  bottom_diff[10*2+1]: -0.0995408,  
-bottom_diff[11*2+0]: 0.186525,  bottom_diff[11*2+1]: -0.186525,  
-bottom_diff[12*2+0]: 0.261286,  bottom_diff[12*2+1]: -0.261286,  
-bottom_diff[13*2+0]: 0.122059,  bottom_diff[13*2+1]: -0.122059,  
-bottom_diff[14*2+0]: 0.329547,  bottom_diff[14*2+1]: -0.329548,  
-bottom_diff[15*2+0]: 0.296095,  bottom_diff[15*2+1]: -0.296095,  
-bottom_diff[16*2+0]: 0.156925,  bottom_diff[16*2+1]: -0.156925,  
-min class case bottom_diff[17*2+0]: -0.189618,  bottom_diff[17*2+1]: 0.189618,  
-bottom_diff[18*2+0]: 0.287967,  bottom_diff[18*2+1]: -0.287967,  
-bottom_diff[19*2+0]: 0.257104,  bottom_diff[19*2+1]: -0.257104,  
+bottom_diff[0*2+0]: 0.237409,  bottom_diff[0*2+1]: -0.237409,  
+bottom_diff[1*2+0]: 0.19832,  bottom_diff[1*2+1]: -0.19832,  
+bottom_diff[2*2+0]: 0.262152,  bottom_diff[2*2+1]: -0.262152,  
+bottom_diff[3*2+0]: 0.223149,  bottom_diff[3*2+1]: -0.223149,  
+bottom_diff[4*2+0]: 0.273921,  bottom_diff[4*2+1]: -0.273921,  
+bottom_diff[5*2+0]: 0.221111,  bottom_diff[5*2+1]: -0.221111,  
+bottom_diff[6*2+0]: 0.324564,  bottom_diff[6*2+1]: -0.324564,  
+bottom_diff[7*2+0]: 0.275349,  bottom_diff[7*2+1]: -0.275349,  
+bottom_diff[8*2+0]: 0.258864,  bottom_diff[8*2+1]: -0.258864,  
+bottom_diff[9*2+0]: 0.224349,  bottom_diff[9*2+1]: -0.224349,  
+min class case bottom_diff[10*2+0]: -0.267877,  bottom_diff[10*2+1]: 0.267877,  
+min class case bottom_diff[11*2+0]: -0.291066,  bottom_diff[11*2+1]: 0.291066,  
+min class case bottom_diff[12*2+0]: -0.20717,  bottom_diff[12*2+1]: 0.20717,  
+bottom_diff[13*2+0]: 0.260214,  bottom_diff[13*2+1]: -0.260214,  
+bottom_diff[14*2+0]: 0.260551,  bottom_diff[14*2+1]: -0.260551,  
+bottom_diff[15*2+0]: 0.237917,  bottom_diff[15*2+1]: -0.237917,  
+bottom_diff[16*2+0]: 0.210458,  bottom_diff[16*2+1]: -0.210458,  
+bottom_diff[17*2+0]: 0.285808,  bottom_diff[17*2+1]: -0.285808,  
+min class case bottom_diff[18*2+0]: -0.234067,  bottom_diff[18*2+1]: 0.234067,  
+bottom_diff[19*2+0]: 0.0865757,  bottom_diff[19*2+1]: -0.0865757,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.010293,  bottom_diff[0*2+1]: -0.010293,  
-bottom_diff[1*2+0]: 0.00612436,  bottom_diff[1*2+1]: -0.00612436,  
-bottom_diff[2*2+0]: 0.0130061,  bottom_diff[2*2+1]: -0.0130061,  
-bottom_diff[3*2+0]: 0.00661778,  bottom_diff[3*2+1]: -0.00661778,  
-bottom_diff[4*2+0]: 0.0100606,  bottom_diff[4*2+1]: -0.0100606,  
-bottom_diff[5*2+0]: 0.0102456,  bottom_diff[5*2+1]: -0.0102456,  
-bottom_diff[6*2+0]: 0.0102629,  bottom_diff[6*2+1]: -0.0102629,  
-bottom_diff[7*2+0]: 0.00688972,  bottom_diff[7*2+1]: -0.00688972,  
-bottom_diff[8*2+0]: 0.0104022,  bottom_diff[8*2+1]: -0.0104022,  
-min class case bottom_diff[9*2+0]: -0.04061,  bottom_diff[9*2+1]: 0.04061,  
-bottom_diff[10*2+0]: 0.00378527,  bottom_diff[10*2+1]: -0.00378527,  
-bottom_diff[11*2+0]: 0.00709306,  bottom_diff[11*2+1]: -0.00709306,  
-bottom_diff[12*2+0]: 0.009936,  bottom_diff[12*2+1]: -0.009936,  
-bottom_diff[13*2+0]: 0.00464159,  bottom_diff[13*2+1]: -0.00464159,  
-bottom_diff[14*2+0]: 0.0125318,  bottom_diff[14*2+1]: -0.0125318,  
-bottom_diff[15*2+0]: 0.0112597,  bottom_diff[15*2+1]: -0.0112597,  
-bottom_diff[16*2+0]: 0.00596742,  bottom_diff[16*2+1]: -0.00596742,  
-min class case bottom_diff[17*2+0]: -0.0332481,  bottom_diff[17*2+1]: 0.0332481,  
-bottom_diff[18*2+0]: 0.0109506,  bottom_diff[18*2+1]: -0.0109506,  
-bottom_diff[19*2+0]: 0.00977698,  bottom_diff[19*2+1]: -0.00977698,  
+bottom_diff[0*2+0]: 0.0103291,  bottom_diff[0*2+1]: -0.0103291,  
+bottom_diff[1*2+0]: 0.00862847,  bottom_diff[1*2+1]: -0.00862847,  
+bottom_diff[2*2+0]: 0.0114057,  bottom_diff[2*2+1]: -0.0114057,  
+bottom_diff[3*2+0]: 0.00970871,  bottom_diff[3*2+1]: -0.00970871,  
+bottom_diff[4*2+0]: 0.0119177,  bottom_diff[4*2+1]: -0.0119177,  
+bottom_diff[5*2+0]: 0.00962006,  bottom_diff[5*2+1]: -0.00962006,  
+bottom_diff[6*2+0]: 0.0141211,  bottom_diff[6*2+1]: -0.0141211,  
+bottom_diff[7*2+0]: 0.0119798,  bottom_diff[7*2+1]: -0.0119799,  
+bottom_diff[8*2+0]: 0.0112626,  bottom_diff[8*2+1]: -0.0112626,  
+bottom_diff[9*2+0]: 0.00976094,  bottom_diff[9*2+1]: -0.00976094,  
+min class case bottom_diff[10*2+0]: -0.0534084,  bottom_diff[10*2+1]: 0.0534085,  
+min class case bottom_diff[11*2+0]: -0.0580319,  bottom_diff[11*2+1]: 0.0580319,  
+min class case bottom_diff[12*2+0]: -0.0413049,  bottom_diff[12*2+1]: 0.0413049,  
+bottom_diff[13*2+0]: 0.0113213,  bottom_diff[13*2+1]: -0.0113213,  
+bottom_diff[14*2+0]: 0.011336,  bottom_diff[14*2+1]: -0.011336,  
+bottom_diff[15*2+0]: 0.0103512,  bottom_diff[15*2+1]: -0.0103512,  
+bottom_diff[16*2+0]: 0.00915659,  bottom_diff[16*2+1]: -0.00915659,  
+bottom_diff[17*2+0]: 0.0124349,  bottom_diff[17*2+1]: -0.0124349,  
+min class case bottom_diff[18*2+0]: -0.0466676,  bottom_diff[18*2+1]: 0.0466676,  
+bottom_diff[19*2+0]: 0.00376672,  bottom_diff[19*2+1]: -0.00376672,  
 
-loss after net.hpp:Backward(): 0.0460512
-I0822 00:46:52.131863 14017 solver.cpp:269] Iteration 8, lr = 0.0001
+loss after net.hpp:Backward(): 0.0548437
+I0822 01:28:39.707762 16458 solver.cpp:269] Iteration 7, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.00166374, -0.00382131, -0.0174031, 0.00467394, 0.00255778, 0.00681407, -0.000762968, 0.0218928, 6.32436e-05, -0.0150784, -0.00201019, 0.00253166, 0.0176769, 0.0090864, 0.0152614, -0.000557372, 0.0123801, -0.00526123, -0.0068598, 0.00277408, 
+0.000347762, -0.0105459, -0.00314568, -0.00503844, -0.0125944, -0.0180751, -0.0270626, -0.00431343, -0.0151675, -0.0086448, 0.00172497, 0.00411642, -0.0012993, 0.0168469, -0.0031649, 0.005317, 0.00669261, 0.00784615, -0.0110531, 0.00192961, 
 softmax 1: 
--0.0059877, 0.0116211, 0.0123745, -0.00803923, -0.00433645, 0.0189499, -0.0148694, 0.00730545, 1.81478e-05, 0.00787917, -0.00440604, 0.0105431, -0.00124648, 0.00553995, -0.00724444, 0.0067138, -0.00262633, -0.0123391, -0.0103866, -0.0113554, 
-diff: softmax 0: 
--8.15381e-11, 3.92949e-05, 6.64822e-05, 5.91006e-08, 1.28623e-10, 1.05246e-09, 0.000162362, 5.19765e-05, 3.88749e-12, 0.000302687, -1.0103e-10, 1.12295e-07, 8.91605e-10, 0.000156646, -7.63071e-06, 0.00039358, 6.22213e-10, 4.35023e-08, 0.000218151, 9.83654e-08, 
+0.0145723, 0.0102732, -0.00593147, -0.00554294, -0.0087385, 0.0317093, -0.000389514, 0.0143044, -0.0179981, 0.00468376, 0.00344678, -0.0061118, 0.0088635, 0.00617996, -0.010385, -0.00755951, 0.011537, -0.0220407, 0.00316722, -0.00039596, 
 
+diff: 
+softmax 0: 
+5.84366e-06, 6.36944e-06, 2.74354e-08, -2.53224e-10, 1.92007e-08, -8.19392e-10, 5.71619e-06, 7.57907e-06, 6.68659e-10, 8.33839e-05, 8.66955e-11, 2.93509e-08, -6.52893e-11, 0.000214404, 5.86565e-06, 0.0002052, 3.36365e-10, 3.94341e-10, 3.76472e-08, 9.69815e-11, 
 softmax 1: 
--3.03016e-10, -3.92945e-05, -6.64825e-05, -5.92698e-08, -2.18017e-10, 2.42408e-10, -0.000162363, -5.1975e-05, 2.03167e-13, -0.000302687, -2.21444e-10, -1.11638e-07, -6.583e-11, -0.000156645, 7.63111e-06, -0.00039358, -1.31997e-10, -4.43869e-08, -0.000218152, -9.87967e-08, 
+-5.84292e-06, -6.36945e-06, -2.78916e-08, -2.78586e-10, -2.02729e-08, 1.50463e-09, -5.71757e-06, -7.57857e-06, -2.33553e-09, -8.33841e-05, 1.73232e-10, -2.94512e-08, 4.45459e-10, -0.000214402, -5.86634e-06, -0.0002052, 5.79836e-10, -1.10775e-09, -3.80435e-08, -1.99019e-11, 
 
 new params: 
 softmax 0: 
--0.00166374, -0.00386061, -0.0174695, 0.00467388, 0.00255778, 0.00681407, -0.00092533, 0.0218408, 6.32436e-05, -0.0153811, -0.00201019, 0.00253155, 0.0176769, 0.00892976, 0.015269, -0.000950952, 0.0123801, -0.00526128, -0.00707796, 0.00277398, 
-
+0.000341919, -0.0105523, -0.00314571, -0.00503844, -0.0125944, -0.0180751, -0.0270683, -0.00432101, -0.0151675, -0.00872818, 0.00172497, 0.00411639, -0.0012993, 0.0166325, -0.00317076, 0.0051118, 0.00669261, 0.00784615, -0.0110531, 0.00192961, 
 softmax 1: 
--0.0059877, 0.0116604, 0.012441, -0.00803917, -0.00433645, 0.0189499, -0.014707, 0.00735743, 1.81478e-05, 0.00818185, -0.00440604, 0.0105432, -0.00124648, 0.00569659, -0.00725208, 0.00710738, -0.00262633, -0.012339, -0.0101684, -0.0113553, 
+0.0145782, 0.0102796, -0.00593144, -0.00554294, -0.00873848, 0.0317093, -0.000383796, 0.014312, -0.0179981, 0.00476714, 0.00344678, -0.00611177, 0.0088635, 0.00639436, -0.0103791, -0.00735431, 0.011537, -0.0220407, 0.00316726, -0.00039596, 
 
-I0822 00:46:52.370873 14017 solver.cpp:117] Iteration 8, loss = 0.0460512
+I0822 01:28:39.946801 16458 solver.cpp:117] Iteration 7, loss = 0.0548437
+I0822 01:28:39.946816 16458 solver.cpp:136] Iteration 7, Testing net
 output probs:
-case 0: 0.549669, 0.450331, 
-case 1: 0.492472, 0.507528, 
-case 2: 0.656758, 0.343242, 
-case 3: 0.383118, 0.616882, 
-case 4: 0.163883, 0.836117, 
-case 5: 0.405464, 0.594536, 
-case 6: 0.81253, 0.18747, 
-case 7: 0.452595, 0.547405, 
-case 8: 0.409542, 0.590458, 
-case 9: 0.534833, 0.465167, 
-case 10: 0.505131, 0.494869, 
-case 11: 0.61199, 0.38801, 
-case 12: 0.525723, 0.474277, 
-case 13: 0.786381, 0.213619, 
-case 14: 0.461982, 0.538018, 
-case 15: 0.788727, 0.211273, 
-case 16: 0.705965, 0.294035, 
-case 17: 0.47284, 0.52716, 
-case 18: 0.366881, 0.633119, 
-case 19: 0.483061, 0.516939, 
-SBL loss: 0.0351897
-SL loss: 0.665756
-loss after net.hpp:Forward(): 0.0351897
+case 0: 2.58244e-09, 1, 
+case 1: 9.55614e-10, 1, 
+case 2: 1.20847e-09, 1, 
+case 3: 3.51883e-10, 1, 
+case 4: 3.32864e-10, 1, 
+case 5: 1.45952e-10, 1, 
+min class case 6: 2.61524e-10, 1, 
+case 7: 8.14105e-10, 1, 
+case 8: 2.42585e-10, 1, 
+case 9: 8.22041e-09, 1, 
+case 10: 1.13654e-10, 1, 
+case 11: 2.25974e-10, 1, 
+case 12: 9.0499e-11, 1, 
+case 13: 2.69356e-11, 1, 
+case 14: 5.0627e-11, 1, 
+case 15: 2.98988e-10, 1, 
+case 16: 2.37513e-08, 1, 
+case 17: 5.34127e-10, 1, 
+case 18: 7.51646e-11, 1, 
+case 19: 6.00792e-09, 1, 
+I0822 01:28:40.379945 16458 solver.cpp:172] Test score #0: 0.500001
+I0822 01:28:40.379961 16458 solver.cpp:172] Test score #1: 3.46193
+output probs:
+case 0: 0.519152, 0.480848, 
+case 1: 0.583364, 0.416636, 
+case 2: 0.603106, 0.396895, 
+case 3: 0.0151188, 0.984881, 
+case 4: 0.748491, 0.251509, 
+case 5: 0.55339, 0.44661, 
+case 6: 0.445175, 0.554825, 
+case 7: 0.490431, 0.509569, 
+case 8: 0.547375, 0.452625, 
+min class case 9: 0.443796, 0.556204, 
+case 10: 0.347508, 0.652492, 
+case 11: 0.587926, 0.412074, 
+case 12: 0.535532, 0.464468, 
+case 13: 0.25095, 0.74905, 
+case 14: 0.66478, 0.33522, 
+case 15: 0.581547, 0.418453, 
+case 16: 0.428737, 0.571263, 
+min class case 17: 0.407128, 0.592872, 
+case 18: 0.555071, 0.444929, 
+case 19: 0.51696, 0.48304, 
+SBL loss: 0.0467188
+SL loss: 0.719175
+loss after net.hpp:Forward(): 0.0467188
 SL bottom_diff:
-bottom_diff[0*2+0]: 0.274835,  bottom_diff[0*2+1]: -0.274835,  
-bottom_diff[1*2+0]: 0.246236,  bottom_diff[1*2+1]: -0.246236,  
-min class case bottom_diff[2*2+0]: -0.171621,  bottom_diff[2*2+1]: 0.171621,  
-bottom_diff[3*2+0]: 0.191559,  bottom_diff[3*2+1]: -0.191559,  
-bottom_diff[4*2+0]: 0.0819414,  bottom_diff[4*2+1]: -0.0819414,  
-bottom_diff[5*2+0]: 0.202732,  bottom_diff[5*2+1]: -0.202732,  
-min class case bottom_diff[6*2+0]: -0.093735,  bottom_diff[6*2+1]: 0.093735,  
-min class case bottom_diff[7*2+0]: -0.273703,  bottom_diff[7*2+1]: 0.273703,  
-bottom_diff[8*2+0]: 0.204771,  bottom_diff[8*2+1]: -0.204771,  
-bottom_diff[9*2+0]: 0.267416,  bottom_diff[9*2+1]: -0.267416,  
-bottom_diff[10*2+0]: 0.252566,  bottom_diff[10*2+1]: -0.252566,  
-bottom_diff[11*2+0]: 0.305995,  bottom_diff[11*2+1]: -0.305995,  
-bottom_diff[12*2+0]: 0.262862,  bottom_diff[12*2+1]: -0.262862,  
-min class case bottom_diff[13*2+0]: -0.106809,  bottom_diff[13*2+1]: 0.106809,  
-bottom_diff[14*2+0]: 0.230991,  bottom_diff[14*2+1]: -0.230991,  
-bottom_diff[15*2+0]: 0.394363,  bottom_diff[15*2+1]: -0.394363,  
-bottom_diff[16*2+0]: 0.352982,  bottom_diff[16*2+1]: -0.352982,  
-bottom_diff[17*2+0]: 0.23642,  bottom_diff[17*2+1]: -0.23642,  
-bottom_diff[18*2+0]: 0.18344,  bottom_diff[18*2+1]: -0.18344,  
-bottom_diff[19*2+0]: 0.24153,  bottom_diff[19*2+1]: -0.24153,  
+bottom_diff[0*2+0]: 0.259576,  bottom_diff[0*2+1]: -0.259576,  
+bottom_diff[1*2+0]: 0.291682,  bottom_diff[1*2+1]: -0.291682,  
+bottom_diff[2*2+0]: 0.301553,  bottom_diff[2*2+1]: -0.301553,  
+bottom_diff[3*2+0]: 0.00755941,  bottom_diff[3*2+1]: -0.00755942,  
+bottom_diff[4*2+0]: 0.374245,  bottom_diff[4*2+1]: -0.374245,  
+bottom_diff[5*2+0]: 0.276695,  bottom_diff[5*2+1]: -0.276695,  
+bottom_diff[6*2+0]: 0.222587,  bottom_diff[6*2+1]: -0.222587,  
+bottom_diff[7*2+0]: 0.245216,  bottom_diff[7*2+1]: -0.245216,  
+bottom_diff[8*2+0]: 0.273687,  bottom_diff[8*2+1]: -0.273687,  
+min class case bottom_diff[9*2+0]: -0.278102,  bottom_diff[9*2+1]: 0.278102,  
+bottom_diff[10*2+0]: 0.173754,  bottom_diff[10*2+1]: -0.173754,  
+bottom_diff[11*2+0]: 0.293963,  bottom_diff[11*2+1]: -0.293963,  
+bottom_diff[12*2+0]: 0.267766,  bottom_diff[12*2+1]: -0.267766,  
+bottom_diff[13*2+0]: 0.125475,  bottom_diff[13*2+1]: -0.125475,  
+bottom_diff[14*2+0]: 0.33239,  bottom_diff[14*2+1]: -0.33239,  
+bottom_diff[15*2+0]: 0.290773,  bottom_diff[15*2+1]: -0.290773,  
+bottom_diff[16*2+0]: 0.214368,  bottom_diff[16*2+1]: -0.214368,  
+min class case bottom_diff[17*2+0]: -0.296436,  bottom_diff[17*2+1]: 0.296436,  
+bottom_diff[18*2+0]: 0.277536,  bottom_diff[18*2+1]: -0.277536,  
+bottom_diff[19*2+0]: 0.25848,  bottom_diff[19*2+1]: -0.25848,  
 
 SBL bottom_diff:
-bottom_diff[0*2+0]: 0.00925272,  bottom_diff[0*2+1]: -0.00925272,  
-bottom_diff[1*2+0]: 0.0082899,  bottom_diff[1*2+1]: -0.0082899,  
-min class case bottom_diff[2*2+0]: -0.027255,  bottom_diff[2*2+1]: 0.027255,  
-bottom_diff[3*2+0]: 0.00644912,  bottom_diff[3*2+1]: -0.00644912,  
-bottom_diff[4*2+0]: 0.00275868,  bottom_diff[4*2+1]: -0.00275868,  
-bottom_diff[5*2+0]: 0.00682528,  bottom_diff[5*2+1]: -0.00682528,  
-min class case bottom_diff[6*2+0]: -0.014886,  bottom_diff[6*2+1]: 0.014886,  
-min class case bottom_diff[7*2+0]: -0.0434664,  bottom_diff[7*2+1]: 0.0434664,  
-bottom_diff[8*2+0]: 0.00689393,  bottom_diff[8*2+1]: -0.00689393,  
-bottom_diff[9*2+0]: 0.00900297,  bottom_diff[9*2+1]: -0.00900297,  
-bottom_diff[10*2+0]: 0.008503,  bottom_diff[10*2+1]: -0.008503,  
-bottom_diff[11*2+0]: 0.0103018,  bottom_diff[11*2+1]: -0.0103018,  
-bottom_diff[12*2+0]: 0.00884963,  bottom_diff[12*2+1]: -0.00884963,  
-min class case bottom_diff[13*2+0]: -0.0169623,  bottom_diff[13*2+1]: 0.0169623,  
-bottom_diff[14*2+0]: 0.00777666,  bottom_diff[14*2+1]: -0.00777666,  
-bottom_diff[15*2+0]: 0.0132768,  bottom_diff[15*2+1]: -0.0132768,  
-bottom_diff[16*2+0]: 0.0118837,  bottom_diff[16*2+1]: -0.0118837,  
-bottom_diff[17*2+0]: 0.00795944,  bottom_diff[17*2+1]: -0.00795944,  
-bottom_diff[18*2+0]: 0.00617579,  bottom_diff[18*2+1]: -0.00617579,  
-bottom_diff[19*2+0]: 0.00813148,  bottom_diff[19*2+1]: -0.00813148,  
+bottom_diff[0*2+0]: 0.00987098,  bottom_diff[0*2+1]: -0.00987098,  
+bottom_diff[1*2+0]: 0.0110919,  bottom_diff[1*2+1]: -0.0110919,  
+bottom_diff[2*2+0]: 0.0114672,  bottom_diff[2*2+1]: -0.0114672,  
+bottom_diff[3*2+0]: 0.000287464,  bottom_diff[3*2+1]: -0.000287465,  
+bottom_diff[4*2+0]: 0.0142315,  bottom_diff[4*2+1]: -0.0142316,  
+bottom_diff[5*2+0]: 0.010522,  bottom_diff[5*2+1]: -0.010522,  
+bottom_diff[6*2+0]: 0.0084644,  bottom_diff[6*2+1]: -0.0084644,  
+bottom_diff[7*2+0]: 0.00932489,  bottom_diff[7*2+1]: -0.00932489,  
+bottom_diff[8*2+0]: 0.0104076,  bottom_diff[8*2+1]: -0.0104076,  
+min class case bottom_diff[9*2+0]: -0.0487631,  bottom_diff[9*2+1]: 0.0487631,  
+bottom_diff[10*2+0]: 0.00660741,  bottom_diff[10*2+1]: -0.00660741,  
+bottom_diff[11*2+0]: 0.0111786,  bottom_diff[11*2+1]: -0.0111786,  
+bottom_diff[12*2+0]: 0.0101824,  bottom_diff[12*2+1]: -0.0101824,  
+bottom_diff[13*2+0]: 0.00477149,  bottom_diff[13*2+1]: -0.00477149,  
+bottom_diff[14*2+0]: 0.0126399,  bottom_diff[14*2+1]: -0.0126399,  
+bottom_diff[15*2+0]: 0.0110573,  bottom_diff[15*2+1]: -0.0110573,  
+bottom_diff[16*2+0]: 0.00815186,  bottom_diff[16*2+1]: -0.00815185,  
+min class case bottom_diff[17*2+0]: -0.0519778,  bottom_diff[17*2+1]: 0.0519778,  
+bottom_diff[18*2+0]: 0.0105539,  bottom_diff[18*2+1]: -0.0105539,  
+bottom_diff[19*2+0]: 0.0098293,  bottom_diff[19*2+1]: -0.0098293,  
 
-loss after net.hpp:Backward(): 0.0351897
-I0822 00:46:52.804203 14017 solver.cpp:269] Iteration 9, lr = 0.0001
+loss after net.hpp:Backward(): 0.0467188
+I0822 01:28:40.814065 16458 solver.cpp:269] Iteration 8, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.00166374, -0.00386061, -0.0174695, 0.00467388, 0.00255778, 0.00681407, -0.00092533, 0.0218408, 6.32436e-05, -0.0153811, -0.00201019, 0.00253155, 0.0176769, 0.00892976, 0.015269, -0.000950952, 0.0123801, -0.00526128, -0.00707796, 0.00277398, 
+0.000341919, -0.0105523, -0.00314571, -0.00503844, -0.0125944, -0.0180751, -0.0270683, -0.00432101, -0.0151675, -0.00872818, 0.00172497, 0.00411639, -0.0012993, 0.0166325, -0.00317076, 0.0051118, 0.00669261, 0.00784615, -0.0110531, 0.00192961, 
 softmax 1: 
--0.0059877, 0.0116604, 0.012441, -0.00803917, -0.00433645, 0.0189499, -0.014707, 0.00735743, 1.81478e-05, 0.00818185, -0.00440604, 0.0105432, -0.00124648, 0.00569659, -0.00725208, 0.00710738, -0.00262633, -0.012339, -0.0101684, -0.0113553, 
-diff: softmax 0: 
-9.95812e-06, 1.93556e-05, 2.04829e-05, 3.18631e-07, 1.28552e-10, 3.46127e-10, 7.19185e-05, 5.42953e-06, 3.18222e-12, 0.000117473, -1.0103e-10, 1.60087e-06, 8.88438e-10, -0.000240346, 3.23009e-05, 0.000242078, 6.22213e-10, -3.8863e-11, 5.05693e-06, 6.45652e-10, 
+0.0145782, 0.0102796, -0.00593144, -0.00554294, -0.00873848, 0.0317093, -0.000383796, 0.014312, -0.0179981, 0.00476714, 0.00344678, -0.00611177, 0.0088635, 0.00639436, -0.0103791, -0.00735431, 0.011537, -0.0220407, 0.00316726, -0.00039596, 
 
+diff: 
+softmax 0: 
+3.0134e-08, 3.2299e-08, -1.58896e-11, -2.53227e-10, -5.30764e-10, -9.07979e-10, 2.32092e-06, 3.9909e-05, -7.54927e-10, 2.62179e-05, 8.66952e-11, 3.57087e-10, -6.53014e-11, -0.000208407, 3.12694e-06, 0.000201585, 3.36364e-10, 3.9434e-10, -3.58631e-10, 9.69803e-11, 
 softmax 1: 
--9.9585e-06, -1.93552e-05, -2.04832e-05, -3.188e-07, -2.17946e-10, 9.48745e-10, -7.19192e-05, -5.42806e-06, 9.08438e-13, -0.000117474, -2.21443e-10, -1.60022e-06, -6.2663e-11, 0.000240347, -3.23005e-05, -0.000242078, -1.31997e-10, -8.45711e-10, -5.05778e-06, -1.07694e-09, 
+-2.93841e-08, -3.23127e-08, -4.40319e-10, -2.78583e-10, -5.41406e-10, 1.59322e-09, -2.3223e-06, -3.99085e-05, -9.11944e-10, -2.62181e-05, 1.73232e-10, -4.57373e-10, 4.45471e-10, 0.000208408, -3.12762e-06, -0.000201585, 5.79837e-10, -1.10774e-09, -3.77045e-11, -1.99006e-11, 
 
 new params: 
 softmax 0: 
--0.0016737, -0.00387997, -0.01749, 0.00467356, 0.00255778, 0.00681407, -0.000997248, 0.0218354, 6.32436e-05, -0.0154986, -0.00201019, 0.00252994, 0.0176769, 0.0091701, 0.0152367, -0.00119303, 0.0123801, -0.00526128, -0.00708301, 0.00277398, 
-
+0.000341889, -0.0105523, -0.00314571, -0.00503844, -0.0125944, -0.0180751, -0.0270707, -0.00436092, -0.0151675, -0.0087544, 0.00172497, 0.00411639, -0.0012993, 0.0168409, -0.00317389, 0.00491021, 0.00669261, 0.00784615, -0.0110531, 0.00192961, 
 softmax 1: 
--0.00597774, 0.0116797, 0.0124615, -0.00803885, -0.00433645, 0.0189499, -0.0146351, 0.00736286, 1.81478e-05, 0.00829933, -0.00440604, 0.0105448, -0.00124648, 0.00545624, -0.00721978, 0.00734946, -0.00262633, -0.012339, -0.0101634, -0.0113553, 
+0.0145782, 0.0102796, -0.00593144, -0.00554294, -0.00873848, 0.0317093, -0.000381474, 0.0143519, -0.0179981, 0.00479336, 0.00344678, -0.00611177, 0.0088635, 0.00618595, -0.010376, -0.00715272, 0.011537, -0.0220407, 0.00316726, -0.00039596, 
 
-I0822 00:46:53.043207 14017 solver.cpp:117] Iteration 9, loss = 0.0351897
+I0822 01:28:41.053042 16458 solver.cpp:117] Iteration 8, loss = 0.0467188
+I0822 01:28:41.053057 16458 solver.cpp:136] Iteration 8, Testing net
 output probs:
-case 0: 0.41989, 0.58011, 
-case 1: 0.581776, 0.418224, 
-case 2: 0.388597, 0.611403, 
-case 3: 0.417113, 0.582887, 
-case 4: 0.562382, 0.437618, 
-case 5: 0.302024, 0.697976, 
-case 6: 0.202597, 0.797403, 
-case 7: 0.461544, 0.538456, 
-case 8: 0.676888, 0.323112, 
-case 9: 0.271403, 0.728597, 
-case 10: 0.478949, 0.521051, 
-case 11: 0.237805, 0.762195, 
-case 12: 0.558074, 0.441926, 
-case 13: 0.466637, 0.533363, 
-case 14: 0.436745, 0.563255, 
-case 15: 0.404996, 0.595004, 
-case 16: 0.446303, 0.553697, 
-case 17: 0.560784, 0.439216, 
-case 18: 0.446168, 0.553832, 
-case 19: 0.144701, 0.855299, 
-SBL loss: 0.0400813
-SL loss: 0.632098
-loss after net.hpp:Forward(): 0.0400813
+case 0: 6.825e-10, 1, 
+min class case 1: 6.9531e-11, 1, 
+min class case 2: 3.08897e-10, 1, 
+case 3: 1.27036e-09, 1, 
+case 4: 5.09372e-10, 1, 
+case 5: 3.61812e-08, 1, 
+case 6: 6.01306e-09, 1, 
+case 7: 7.92055e-09, 1, 
+case 8: 1.51994e-09, 1, 
+case 9: 8.72315e-09, 1, 
+min class case 10: 7.1354e-12, 1, 
+case 11: 1.62381e-10, 1, 
+min class case 12: 1.7791e-10, 1, 
+case 13: 2.15917e-09, 1, 
+case 14: 6.58189e-11, 1, 
+case 15: 6.45403e-10, 1, 
+case 16: 1.85648e-10, 1, 
+min class case 17: 6.98162e-11, 1, 
+case 18: 1.99017e-09, 1, 
+min class case 19: 6.88716e-11, 1, 
+I0822 01:28:41.485834 16458 solver.cpp:172] Test score #0: 0.499999
+I0822 01:28:41.485852 16458 solver.cpp:172] Test score #1: 4.21992
+output probs:
+case 0: 0.567977, 0.432023, 
+case 1: 0.575499, 0.424501, 
+min class case 2: 0.491569, 0.508431, 
+case 3: 0.547616, 0.452384, 
+case 4: 0.361546, 0.638454, 
+case 5: 0.574446, 0.425554, 
+min class case 6: 0.440049, 0.559951, 
+min class case 7: 0.203801, 0.796199, 
+case 8: 0.511396, 0.488604, 
+case 9: 0.553491, 0.446509, 
+case 10: 0.44749, 0.55251, 
+case 11: 0.60502, 0.39498, 
+case 12: 0.488036, 0.511964, 
+min class case 13: 0.314805, 0.685195, 
+case 14: 0.487848, 0.512152, 
+case 15: 0.471898, 0.528102, 
+case 16: 0.475893, 0.524107, 
+case 17: 0.647713, 0.352287, 
+case 18: 0.674987, 0.325013, 
+case 19: 0.481425, 0.518575, 
+SBL loss: 0.0374141
+SL loss: 0.661474
+loss after net.hpp:Forward(): 0.0374141
 SL bottom_diff:
-min class case bottom_diff[0*2+0]: -0.290055,  bottom_diff[0*2+1]: 0.290055,  
-bottom_diff[1*2+0]: 0.290888,  bottom_diff[1*2+1]: -0.290888,  
-bottom_diff[2*2+0]: 0.194299,  bottom_diff[2*2+1]: -0.194299,  
-bottom_diff[3*2+0]: 0.208556,  bottom_diff[3*2+1]: -0.208556,  
-bottom_diff[4*2+0]: 0.281191,  bottom_diff[4*2+1]: -0.281191,  
-bottom_diff[5*2+0]: 0.151012,  bottom_diff[5*2+1]: -0.151012,  
-bottom_diff[6*2+0]: 0.101299,  bottom_diff[6*2+1]: -0.101299,  
-min class case bottom_diff[7*2+0]: -0.269228,  bottom_diff[7*2+1]: 0.269228,  
-bottom_diff[8*2+0]: 0.338444,  bottom_diff[8*2+1]: -0.338444,  
-bottom_diff[9*2+0]: 0.135702,  bottom_diff[9*2+1]: -0.135702,  
-bottom_diff[10*2+0]: 0.239474,  bottom_diff[10*2+1]: -0.239474,  
-bottom_diff[11*2+0]: 0.118903,  bottom_diff[11*2+1]: -0.118903,  
-bottom_diff[12*2+0]: 0.279037,  bottom_diff[12*2+1]: -0.279037,  
-bottom_diff[13*2+0]: 0.233318,  bottom_diff[13*2+1]: -0.233318,  
-bottom_diff[14*2+0]: 0.218372,  bottom_diff[14*2+1]: -0.218372,  
-bottom_diff[15*2+0]: 0.202498,  bottom_diff[15*2+1]: -0.202498,  
-min class case bottom_diff[16*2+0]: -0.276848,  bottom_diff[16*2+1]: 0.276848,  
-bottom_diff[17*2+0]: 0.280392,  bottom_diff[17*2+1]: -0.280392,  
-bottom_diff[18*2+0]: 0.223084,  bottom_diff[18*2+1]: -0.223084,  
-bottom_diff[19*2+0]: 0.0723507,  bottom_diff[19*2+1]: -0.0723507,  
+bottom_diff[0*2+0]: 0.283988,  bottom_diff[0*2+1]: -0.283988,  
+bottom_diff[1*2+0]: 0.28775,  bottom_diff[1*2+1]: -0.28775,  
+min class case bottom_diff[2*2+0]: -0.254216,  bottom_diff[2*2+1]: 0.254216,  
+bottom_diff[3*2+0]: 0.273808,  bottom_diff[3*2+1]: -0.273808,  
+bottom_diff[4*2+0]: 0.180773,  bottom_diff[4*2+1]: -0.180773,  
+bottom_diff[5*2+0]: 0.287223,  bottom_diff[5*2+1]: -0.287223,  
+min class case bottom_diff[6*2+0]: -0.279975,  bottom_diff[6*2+1]: 0.279975,  
+min class case bottom_diff[7*2+0]: -0.3981,  bottom_diff[7*2+1]: 0.3981,  
+bottom_diff[8*2+0]: 0.255698,  bottom_diff[8*2+1]: -0.255698,  
+bottom_diff[9*2+0]: 0.276746,  bottom_diff[9*2+1]: -0.276746,  
+bottom_diff[10*2+0]: 0.223745,  bottom_diff[10*2+1]: -0.223745,  
+bottom_diff[11*2+0]: 0.30251,  bottom_diff[11*2+1]: -0.30251,  
+bottom_diff[12*2+0]: 0.244018,  bottom_diff[12*2+1]: -0.244018,  
+min class case bottom_diff[13*2+0]: -0.342598,  bottom_diff[13*2+1]: 0.342598,  
+bottom_diff[14*2+0]: 0.243924,  bottom_diff[14*2+1]: -0.243924,  
+bottom_diff[15*2+0]: 0.235949,  bottom_diff[15*2+1]: -0.235949,  
+bottom_diff[16*2+0]: 0.237946,  bottom_diff[16*2+1]: -0.237946,  
+bottom_diff[17*2+0]: 0.323856,  bottom_diff[17*2+1]: -0.323856,  
+bottom_diff[18*2+0]: 0.337493,  bottom_diff[18*2+1]: -0.337493,  
+bottom_diff[19*2+0]: 0.240713,  bottom_diff[19*2+1]: -0.240713,  
 
 SBL bottom_diff:
-min class case bottom_diff[0*2+0]: -0.0401808,  bottom_diff[0*2+1]: 0.0401808,  
-bottom_diff[1*2+0]: 0.0088736,  bottom_diff[1*2+1]: -0.0088736,  
-bottom_diff[2*2+0]: 0.00592713,  bottom_diff[2*2+1]: -0.00592713,  
-bottom_diff[3*2+0]: 0.00636206,  bottom_diff[3*2+1]: -0.00636206,  
-bottom_diff[4*2+0]: 0.0085778,  bottom_diff[4*2+1]: -0.0085778,  
-bottom_diff[5*2+0]: 0.00460666,  bottom_diff[5*2+1]: -0.00460666,  
-bottom_diff[6*2+0]: 0.00309014,  bottom_diff[6*2+1]: -0.00309014,  
-min class case bottom_diff[7*2+0]: -0.0372956,  bottom_diff[7*2+1]: 0.0372956,  
-bottom_diff[8*2+0]: 0.0103243,  bottom_diff[8*2+1]: -0.0103243,  
-bottom_diff[9*2+0]: 0.00413961,  bottom_diff[9*2+1]: -0.00413961,  
-bottom_diff[10*2+0]: 0.00730523,  bottom_diff[10*2+1]: -0.00730523,  
-bottom_diff[11*2+0]: 0.00362716,  bottom_diff[11*2+1]: -0.00362716,  
-bottom_diff[12*2+0]: 0.00851209,  bottom_diff[12*2+1]: -0.0085121,  
-bottom_diff[13*2+0]: 0.00711743,  bottom_diff[13*2+1]: -0.00711743,  
-bottom_diff[14*2+0]: 0.0066615,  bottom_diff[14*2+1]: -0.0066615,  
-bottom_diff[15*2+0]: 0.00617725,  bottom_diff[15*2+1]: -0.00617725,  
-min class case bottom_diff[16*2+0]: -0.0383513,  bottom_diff[16*2+1]: 0.0383513,  
-bottom_diff[17*2+0]: 0.00855343,  bottom_diff[17*2+1]: -0.00855343,  
-bottom_diff[18*2+0]: 0.00680523,  bottom_diff[18*2+1]: -0.00680523,  
-bottom_diff[19*2+0]: 0.00220708,  bottom_diff[19*2+1]: -0.00220708,  
+bottom_diff[0*2+0]: 0.00956089,  bottom_diff[0*2+1]: -0.00956089,  
+bottom_diff[1*2+0]: 0.00968752,  bottom_diff[1*2+1]: -0.00968752,  
+min class case bottom_diff[2*2+0]: -0.0403717,  bottom_diff[2*2+1]: 0.0403717,  
+bottom_diff[3*2+0]: 0.00921815,  bottom_diff[3*2+1]: -0.00921815,  
+bottom_diff[4*2+0]: 0.00608599,  bottom_diff[4*2+1]: -0.00608599,  
+bottom_diff[5*2+0]: 0.00966979,  bottom_diff[5*2+1]: -0.00966979,  
+min class case bottom_diff[6*2+0]: -0.0444626,  bottom_diff[6*2+1]: 0.0444626,  
+min class case bottom_diff[7*2+0]: -0.0632218,  bottom_diff[7*2+1]: 0.0632218,  
+bottom_diff[8*2+0]: 0.00860846,  bottom_diff[8*2+1]: -0.00860846,  
+bottom_diff[9*2+0]: 0.00931706,  bottom_diff[9*2+1]: -0.00931706,  
+bottom_diff[10*2+0]: 0.00753271,  bottom_diff[10*2+1]: -0.00753271,  
+bottom_diff[11*2+0]: 0.0101844,  bottom_diff[11*2+1]: -0.0101844,  
+bottom_diff[12*2+0]: 0.00821523,  bottom_diff[12*2+1]: -0.00821523,  
+min class case bottom_diff[13*2+0]: -0.0544076,  bottom_diff[13*2+1]: 0.0544076,  
+bottom_diff[14*2+0]: 0.00821207,  bottom_diff[14*2+1]: -0.00821207,  
+bottom_diff[15*2+0]: 0.00794358,  bottom_diff[15*2+1]: -0.00794358,  
+bottom_diff[16*2+0]: 0.00801082,  bottom_diff[16*2+1]: -0.00801082,  
+bottom_diff[17*2+0]: 0.0109031,  bottom_diff[17*2+1]: -0.0109031,  
+bottom_diff[18*2+0]: 0.0113622,  bottom_diff[18*2+1]: -0.0113622,  
+bottom_diff[19*2+0]: 0.00810395,  bottom_diff[19*2+1]: -0.00810395,  
 
-loss after net.hpp:Backward(): 0.0400813
-I0822 00:46:53.476518 14017 solver.cpp:269] Iteration 10, lr = 0.0001
+loss after net.hpp:Backward(): 0.0374141
+I0822 01:28:41.919441 16458 solver.cpp:269] Iteration 9, lr = 0.0001
 perform computation on GPU
+
 current params: 
 softmax 0: 
--0.0016737, -0.00387997, -0.01749, 0.00467356, 0.00255778, 0.00681407, -0.000997248, 0.0218354, 6.32436e-05, -0.0154986, -0.00201019, 0.00252994, 0.0176769, 0.0091701, 0.0152367, -0.00119303, 0.0123801, -0.00526128, -0.00708301, 0.00277398, 
+0.000341889, -0.0105523, -0.00314571, -0.00503844, -0.0125944, -0.0180751, -0.0270707, -0.00436092, -0.0151675, -0.0087544, 0.00172497, 0.00411639, -0.0012993, 0.0168409, -0.00317389, 0.00491021, 0.00669261, 0.00784615, -0.0110531, 0.00192961, 
 softmax 1: 
--0.00597774, 0.0116797, 0.0124615, -0.00803885, -0.00433645, 0.0189499, -0.0146351, 0.00736286, 1.81478e-05, 0.00829933, -0.00440604, 0.0105448, -0.00124648, 0.00545624, -0.00721978, 0.00734946, -0.00262633, -0.012339, -0.0101634, -0.0113553, 
-diff: softmax 0: 
-3.27265e-06, 3.60272e-06, 1.0469e-07, 2.51573e-05, 3.878e-06, 3.42487e-10, 7.14028e-06, 2.0389e-05, 1.67841e-05, -1.06731e-05, 8.24642e-07, 7.75e-05, 8.88422e-10, 7.2939e-05, 1.67233e-07, -0.000663528, 6.22213e-10, -2.63264e-10, -1.92503e-05, 1.42027e-10, 
+0.0145782, 0.0102796, -0.00593144, -0.00554294, -0.00873848, 0.0317093, -0.000381474, 0.0143519, -0.0179981, 0.00479336, 0.00344678, -0.00611177, 0.0088635, 0.00618595, -0.010376, -0.00715272, 0.011537, -0.0220407, 0.00316726, -0.00039596, 
 
+diff: 
+softmax 0: 
+1.72398e-10, -3.61154e-10, 1.78078e-05, -2.53227e-10, -0.000165925, -9.08435e-10, 7.35714e-07, 2.05464e-07, -7.62264e-10, 2.06555e-05, 8.66952e-11, 3.18118e-06, -6.53015e-11, 5.88083e-05, 1.59569e-08, -0.000381292, 3.36364e-10, 3.9434e-10, -5.54504e-10, 9.69803e-11, 
 softmax 1: 
--3.27304e-06, -3.60233e-06, -1.04942e-07, -2.51575e-05, -3.87809e-06, 9.52385e-10, -7.14106e-06, -2.03876e-05, -1.67841e-05, 1.06727e-05, -8.24965e-07, -7.74993e-05, -6.26467e-11, -7.29382e-05, -1.6683e-07, 0.000663529, -1.31997e-10, -6.21309e-10, 1.92494e-05, -5.73316e-10, 
+5.77472e-10, 3.4745e-10, -1.78082e-05, -2.78583e-10, 0.000165924, 1.59367e-09, -7.37094e-07, -2.04962e-07, -9.04607e-10, -2.06557e-05, 1.73232e-10, -3.18128e-06, 4.45471e-10, -5.88072e-05, -1.66378e-08, 0.000381292, 5.79837e-10, -1.10774e-09, 1.58169e-10, -1.99006e-11, 
 
 new params: 
 softmax 0: 
--0.00167697, -0.00388357, -0.0174901, 0.0046484, 0.0025539, 0.00681406, -0.00100439, 0.021815, 4.64596e-05, -0.0154879, -0.00201102, 0.00245244, 0.0176769, 0.00909716, 0.0152365, -0.000529502, 0.0123801, -0.00526128, -0.00706376, 0.00277398, 
-
+0.000341888, -0.0105523, -0.00316352, -0.00503844, -0.0124285, -0.0180751, -0.0270714, -0.00436113, -0.0151675, -0.00877505, 0.00172497, 0.00411321, -0.0012993, 0.0167821, -0.0031739, 0.0052915, 0.0066926, 0.00784615, -0.0110531, 0.00192961, 
 softmax 1: 
--0.00597447, 0.0116833, 0.0124616, -0.00801369, -0.00433258, 0.0189499, -0.0146279, 0.00738324, 3.49319e-05, 0.00828865, -0.00440522, 0.0106223, -0.00124648, 0.00552918, -0.00721961, 0.00668593, -0.00262633, -0.012339, -0.0101826, -0.0113553, 
+0.0145782, 0.0102796, -0.00591363, -0.00554294, -0.0089044, 0.0317093, -0.000380737, 0.0143521, -0.0179981, 0.00481402, 0.00344678, -0.00610858, 0.0088635, 0.00624476, -0.010376, -0.00753402, 0.011537, -0.0220407, 0.00316726, -0.00039596, 
 
-I0822 00:46:53.715752 14017 solver.cpp:117] Iteration 10, loss = 0.0400813
-I0822 00:46:53.715770 14017 solver.cpp:136] Iteration 10, Testing net
-I0822 00:46:55.445020 14017 solver.cpp:172] Test score #0: 0.5
-I0822 00:46:55.445055 14017 solver.cpp:172] Test score #1: 12.547
-I0822 00:46:55.874958 14017 solver.cpp:189] Snapshotting to scrape_zones_fine_train_iter_10
-I0822 00:46:56.776849 14017 solver.cpp:196] Snapshotting solver state to scrape_zones_fine_train_iter_10.solverstate
-I0822 00:46:57.185348 14017 solver.cpp:130] Optimization Done.
-I0822 00:46:57.185375 14017 finetune_net.cpp:30] Optimization Done.
+I0822 01:28:42.158344 16458 solver.cpp:117] Iteration 9, loss = 0.0374141
+I0822 01:28:42.158357 16458 solver.cpp:136] Iteration 9, Testing net
+output probs:
+case 0: 2.12095e-10, 1, 
+case 1: 4.3062e-09, 1, 
+case 2: 1.10718e-12, 1, 
+case 3: 7.35528e-09, 1, 
+case 4: 2.11582e-09, 1, 
+min class case 5: 7.36526e-09, 1, 
+min class case 6: 9.83113e-10, 1, 
+case 7: 4.18287e-10, 1, 
+case 8: 8.34836e-11, 1, 
+case 9: 5.78896e-10, 1, 
+case 10: 1.04464e-08, 1, 
+case 11: 3.13386e-10, 1, 
+case 12: 6.41705e-09, 1, 
+case 13: 4.78086e-10, 1, 
+case 14: 8.44148e-11, 1, 
+case 15: 3.13224e-09, 1, 
+case 16: 2.95856e-10, 1, 
+case 17: 1.02067e-11, 1, 
+case 18: 7.04334e-10, 1, 
+case 19: 1.90033e-11, 1, 
+I0822 01:28:42.591452 16458 solver.cpp:172] Test score #0: 0.500001
+I0822 01:28:42.591470 16458 solver.cpp:172] Test score #1: 4.0608
+output probs:
+min class case 0: 0.407623, 0.592377, 
+case 1: 0.516607, 0.483393, 
+case 2: 0.441472, 0.558528, 
+case 3: 0.547344, 0.452656, 
+case 4: 0.486456, 0.513544, 
+case 5: 0.526179, 0.473821, 
+case 6: 0.461981, 0.538019, 
+min class case 7: 0.502701, 0.497299, 
+case 8: 0.675224, 0.324776, 
+case 9: 0.162967, 0.837033, 
+case 10: 0.528258, 0.471742, 
+case 11: 0.333777, 0.666223, 
+case 12: 0.391241, 0.60876, 
+case 13: 0.478901, 0.521099, 
+case 14: 0.414106, 0.585894, 
+case 15: 0.274163, 0.725837, 
+min class case 16: 0.538799, 0.461201, 
+case 17: 0.588875, 0.411125, 
+case 18: 0.326369, 0.673631, 
+case 19: 0.512752, 0.487247, 
+SBL loss: 0.0391802
+SL loss: 0.649089
+loss after net.hpp:Forward(): 0.0391802
+SL bottom_diff:
+min class case bottom_diff[0*2+0]: -0.296189,  bottom_diff[0*2+1]: 0.296189,  
+bottom_diff[1*2+0]: 0.258303,  bottom_diff[1*2+1]: -0.258303,  
+bottom_diff[2*2+0]: 0.220736,  bottom_diff[2*2+1]: -0.220736,  
+bottom_diff[3*2+0]: 0.273672,  bottom_diff[3*2+1]: -0.273672,  
+bottom_diff[4*2+0]: 0.243228,  bottom_diff[4*2+1]: -0.243228,  
+bottom_diff[5*2+0]: 0.26309,  bottom_diff[5*2+1]: -0.263089,  
+bottom_diff[6*2+0]: 0.23099,  bottom_diff[6*2+1]: -0.23099,  
+min class case bottom_diff[7*2+0]: -0.248649,  bottom_diff[7*2+1]: 0.248649,  
+bottom_diff[8*2+0]: 0.337612,  bottom_diff[8*2+1]: -0.337612,  
+bottom_diff[9*2+0]: 0.0814837,  bottom_diff[9*2+1]: -0.0814837,  
+bottom_diff[10*2+0]: 0.264129,  bottom_diff[10*2+1]: -0.264129,  
+bottom_diff[11*2+0]: 0.166889,  bottom_diff[11*2+1]: -0.166889,  
+bottom_diff[12*2+0]: 0.19562,  bottom_diff[12*2+1]: -0.19562,  
+bottom_diff[13*2+0]: 0.23945,  bottom_diff[13*2+1]: -0.23945,  
+bottom_diff[14*2+0]: 0.207053,  bottom_diff[14*2+1]: -0.207053,  
+bottom_diff[15*2+0]: 0.137081,  bottom_diff[15*2+1]: -0.137081,  
+min class case bottom_diff[16*2+0]: -0.230601,  bottom_diff[16*2+1]: 0.230601,  
+bottom_diff[17*2+0]: 0.294437,  bottom_diff[17*2+1]: -0.294437,  
+bottom_diff[18*2+0]: 0.163184,  bottom_diff[18*2+1]: -0.163184,  
+bottom_diff[19*2+0]: 0.256376,  bottom_diff[19*2+1]: -0.256376,  
+
+SBL bottom_diff:
+min class case bottom_diff[0*2+0]: -0.0410305,  bottom_diff[0*2+1]: 0.0410305,  
+bottom_diff[1*2+0]: 0.00787961,  bottom_diff[1*2+1]: -0.00787961,  
+bottom_diff[2*2+0]: 0.0067336,  bottom_diff[2*2+1]: -0.0067336,  
+bottom_diff[3*2+0]: 0.00834844,  bottom_diff[3*2+1]: -0.00834844,  
+bottom_diff[4*2+0]: 0.00741973,  bottom_diff[4*2+1]: -0.00741973,  
+bottom_diff[5*2+0]: 0.00802561,  bottom_diff[5*2+1]: -0.00802561,  
+bottom_diff[6*2+0]: 0.00704642,  bottom_diff[6*2+1]: -0.00704642,  
+min class case bottom_diff[7*2+0]: -0.0344449,  bottom_diff[7*2+1]: 0.0344449,  
+bottom_diff[8*2+0]: 0.0102989,  bottom_diff[8*2+1]: -0.0102989,  
+bottom_diff[9*2+0]: 0.00248568,  bottom_diff[9*2+1]: -0.00248568,  
+bottom_diff[10*2+0]: 0.00805732,  bottom_diff[10*2+1]: -0.00805732,  
+bottom_diff[11*2+0]: 0.00509098,  bottom_diff[11*2+1]: -0.00509098,  
+bottom_diff[12*2+0]: 0.00596744,  bottom_diff[12*2+1]: -0.00596744,  
+bottom_diff[13*2+0]: 0.00730449,  bottom_diff[13*2+1]: -0.00730449,  
+bottom_diff[14*2+0]: 0.0063162,  bottom_diff[14*2+1]: -0.0063162,  
+bottom_diff[15*2+0]: 0.0041817,  bottom_diff[15*2+1]: -0.0041817,  
+min class case bottom_diff[16*2+0]: -0.0319447,  bottom_diff[16*2+1]: 0.0319447,  
+bottom_diff[17*2+0]: 0.00898189,  bottom_diff[17*2+1]: -0.00898189,  
+bottom_diff[18*2+0]: 0.00497798,  bottom_diff[18*2+1]: -0.00497798,  
+bottom_diff[19*2+0]: 0.00782082,  bottom_diff[19*2+1]: -0.00782082,  
+
+loss after net.hpp:Backward(): 0.0391802
+I0822 01:28:43.025223 16458 solver.cpp:269] Iteration 10, lr = 0.0001
+perform computation on GPU
+
+current params: 
+softmax 0: 
+0.000341888, -0.0105523, -0.00316352, -0.00503844, -0.0124285, -0.0180751, -0.0270714, -0.00436113, -0.0151675, -0.00877505, 0.00172497, 0.00411321, -0.0012993, 0.0167821, -0.0031739, 0.0052915, 0.0066926, 0.00784615, -0.0110531, 0.00192961, 
+softmax 1: 
+0.0145782, 0.0102796, -0.00591363, -0.00554294, -0.0089044, 0.0317093, -0.000380737, 0.0143521, -0.0179981, 0.00481402, 0.00344678, -0.00610858, 0.0088635, 0.00624476, -0.010376, -0.00753402, 0.011537, -0.0220407, 0.00316726, -0.00039596, 
+
+diff: 
+softmax 0: 
+-2.4947e-05, 9.54427e-06, 9.1619e-08, -2.53227e-10, 6.89671e-06, -9.08438e-10, 1.73077e-05, 6.90755e-06, -7.62301e-10, 6.8792e-05, 8.66952e-11, 1.66007e-08, -6.53015e-11, 0.000102646, -7.64573e-11, -0.000204041, 3.36364e-10, 3.9434e-10, -5.55513e-10, 9.69802e-11, 
+softmax 1: 
+2.49477e-05, -9.54429e-06, -9.20753e-08, -2.78583e-10, -6.89778e-06, 1.59368e-09, -1.73091e-05, -6.90705e-06, -9.04569e-10, -6.87922e-05, 1.73232e-10, -1.6701e-08, 4.45471e-10, -0.000102645, -6.04546e-10, 0.000204041, 5.79837e-10, -1.10774e-09, 1.59178e-10, -1.99006e-11, 
+
+new params: 
+softmax 0: 
+0.000366835, -0.0105619, -0.00316361, -0.00503844, -0.0124354, -0.0180751, -0.0270887, -0.00436803, -0.0151675, -0.00884385, 0.00172497, 0.00411319, -0.0012993, 0.0166795, -0.0031739, 0.00549555, 0.0066926, 0.00784615, -0.0110531, 0.00192961, 
+softmax 1: 
+0.0145533, 0.0102892, -0.00591354, -0.00554293, -0.00889751, 0.0317093, -0.000363428, 0.014359, -0.0179981, 0.00488281, 0.00344678, -0.00610857, 0.0088635, 0.00634741, -0.010376, -0.00773806, 0.011537, -0.0220407, 0.00316726, -0.00039596, 
+
+I0822 01:28:43.264147 16458 solver.cpp:117] Iteration 10, loss = 0.0391802
+I0822 01:28:43.264160 16458 solver.cpp:136] Iteration 10, Testing net
+output probs:
+case 0: 1.94474e-09, 1, 
+min class case 1: 9.70586e-11, 1, 
+case 2: 1.25952e-10, 1, 
+min class case 3: 2.11588e-11, 1, 
+case 4: 1.32399e-10, 1, 
+case 5: 9.70009e-11, 1, 
+min class case 6: 3.10604e-10, 1, 
+min class case 7: 3.92212e-09, 1, 
+min class case 8: 6.12695e-11, 1, 
+min class case 9: 1.313e-09, 1, 
+case 10: 6.72767e-09, 1, 
+case 11: 1.21202e-11, 1, 
+case 12: 3.45555e-09, 1, 
+case 13: 2.81694e-10, 1, 
+case 14: 3.26187e-10, 1, 
+case 15: 1.35969e-09, 1, 
+min class case 16: 1.2673e-10, 1, 
+case 17: 9.22167e-11, 1, 
+case 18: 2.61034e-10, 1, 
+case 19: 6.82658e-11, 1, 
+I0822 01:28:43.697285 16458 solver.cpp:172] Test score #0: 0.499999
+I0822 01:28:43.697302 16458 solver.cpp:172] Test score #1: 4.11832
+I0822 01:28:44.130749 16458 solver.cpp:189] Snapshotting to scrape_zones_fine_train_iter_10
+I0822 01:28:46.849756 16458 solver.cpp:196] Snapshotting solver state to scrape_zones_fine_train_iter_10.solverstate
+I0822 01:28:48.006103 16458 solver.cpp:130] Optimization Done.
+I0822 01:28:48.006131 16458 finetune_net.cpp:30] Optimization Done.
 Done.

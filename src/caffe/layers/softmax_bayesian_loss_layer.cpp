@@ -52,6 +52,7 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   //std::cout << std::endl;
   //caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
 
+  std::cout << std::endl << "SBL layer" << std::endl;
   std::cout << "output probs:" << std::endl;
   for (int i=0; i<20; i++) {
     if (static_cast<int>(label[i]) == 0)

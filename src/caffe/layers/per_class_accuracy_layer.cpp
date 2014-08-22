@@ -56,6 +56,7 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
 
   // const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
+  std::cout << std::endl << "per class accuracy layer" << std::endl;
   std::cout << "output probs:" << std::endl;
   for (int i=0; i<20; i++) {
     if (static_cast<int>(label[i]) == 0)
