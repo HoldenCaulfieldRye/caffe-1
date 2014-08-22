@@ -6,7 +6,7 @@ layers {
   top: "label"
   data_param {
     source: "ground_sheet_fine_train_leveldb"
-    mean_file: "../../data/controlpoint/ground_sheet/ground_sheet_fine_mean.binaryproto"
+    mean_file: "../../data/ground_sheet/ground_sheet_fine_mean.binaryproto"
     batch_size: 128
     crop_size: 227
     mirror: true
@@ -310,7 +310,7 @@ layers {
 }
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
+  type: SOFTMAX_BAYESIAN_LOSS
   bottom: "fc8_aero"
   bottom: "label"
 }

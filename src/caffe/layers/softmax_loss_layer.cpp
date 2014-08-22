@@ -36,13 +36,24 @@ Dtype SoftmaxWithLossLayer<Dtype>::Forward_cpu(
   int num = prob_.num();
   int dim = prob_.count() / num;
   Dtype loss = 0;
+
+  std::cout << std::endl << "SL layer" << std::endl;
+  std::cout << "output probs:" << std::endl;
+  for (int i=0; i<20; i++) {
+    if (static_cast<int>(label[i]) == 0)
+      std::cout << "min class ";
+   std::cout << "case " << i << ": ";
+    for (int neur = 0; neur < dim; neur++)
+      std::cout << prob_data[i*dim + neur] << ", ";
+    std::cout << std::endl;
+  }
+  
   for (int i = 0; i < num; ++i) {
     //taking from prob_data the outputted probability of the correct label
     //FLT_MIN is smallest nonzero float (don't want to give 0 to log)
     loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])],
                      Dtype(FLT_MIN)));
   }
-  std::cout << "SL, loss: " << loss << std::endl;
   return loss / num;
 }
 
