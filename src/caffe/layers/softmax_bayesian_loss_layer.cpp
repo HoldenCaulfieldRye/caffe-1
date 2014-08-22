@@ -35,11 +35,28 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   softmax_bottom_vec_[0] = bottom[0];
   softmax_layer_->Forward(softmax_bottom_vec_, &softmax_top_vec_);
   const Dtype* prob_data = prob_.cpu_data();
+  const Dtype* bottom_data = bottom[0].cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
   int dim = prob_.count() / num;
   // int label_count = bottom[1]->count();
+
+  std::cout << "prob_data dimensions:" << std::endl;
+  std::cout << "num: " << prob_data->num() << std::endl;
+  std::cout << "channels: " << prob_data->channels() << std::endl;
+  std::cout << "height: " << prob_data->height() << std::endl;
+  std::cout << "width: " << prob_data->width() << std::endl;
+  std::cout << "count: " << prob_data->count() << std::endl;
+
+  std::cout << std::endl;
   
+  std::cout << "bottom[0] dimensions:" << std::endl;
+  std::cout << "num: " << bottom[0]->num() << std::endl;
+  std::cout << "channels: " << bottom[0]->channels() << std::endl;
+  std::cout << "height: " << bottom[0]->height() << std::endl;
+  std::cout << "width: " << bottom[0]->width() << std::endl;
+  std::cout << "count: " << bottom[0]->count() << std::endl;
+
   Dtype* prior = labels_.mutable_cpu_data();
   //std::cout << "labels for this batch: ";
   for (int i = 0; i < num; ++i) {
@@ -58,9 +75,13 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   for (int i=0; i<n; i++) {
     if (static_cast<int>(label[i]) == 0)
       std::cout << "min class ";
-   std::cout << "case " << i << ": ";
+    std::cout << "case " << i << ": " << std::endl;
+   std::cout << "prob_data: ";
     for (int neur = 0; neur < dim; neur++)
       std::cout << prob_data[i*dim + neur] << ", ";
+   std::cout << "   bottom_data: ";
+    for (int neur = 0; neur < dim; neur++)
+      std::cout << bottom_data[i*dim + neur] << ", ";
     std::cout << std::endl;
   }
   

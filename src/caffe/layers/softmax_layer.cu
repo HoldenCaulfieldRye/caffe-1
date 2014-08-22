@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cfloat>
 #include <vector>
+#include <iostream>
 
 #include "thrust/device_vector.h"
 
@@ -50,6 +51,7 @@ Dtype SoftmaxLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
   Dtype* scale_data = scale_.mutable_gpu_data();
   int num = bottom[0]->num();
   int dim = bottom[0]->count() / bottom[0]->num();
+
   CUDA_CHECK(cudaMemcpy(top_data, bottom_data,
       sizeof(Dtype) * bottom[0]->count(), cudaMemcpyDeviceToDevice));
   // we need to subtract the max to avoid numerical issues, compute the exp,
@@ -73,6 +75,18 @@ Dtype SoftmaxLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
   kernel_softmax_div<Dtype><<<CAFFE_GET_BLOCKS(num * dim),
                               CAFFE_CUDA_NUM_THREADS>>>(
       num, dim, scale_data, top_data);
+
+  // std::cout << std::endl << "Softmax layer" << std::endl;
+  // std::cout << "output probs:" << std::endl;
+  // int n = std::min(20,num);
+  // for (int i=0; i<n; i++) {
+  //  std::cout << "case " << i << ": ";
+  //   for (int neur = 0; neur < dim; neur++)
+  //     std::cout << scale_data[i*dim + neur] << ", ";
+  //     std::cout << top_data[i*dim + neur] << ", ";
+  //   std::cout << std::endl;
+  // }
+
   return Dtype(0);
 }
 
