@@ -79,6 +79,17 @@ labels_.count()             |
 bottom_diff[case*dimensionality+neuron]
 ---------------------------------------------------------
 
+the main functions from which net is trained:
+":Solve("  	       in src/caffe/solver.cpp
+":Forward("            in src/caffe/net.cpp
+":Backward("           in src/caffe/net.cpp
+":Backward(const"      in src/caffe/layer.hpp
+":ComputeUpdateValue(" in src/caffe/solver.cpp
+":Update(" 	       in src/caffe/
+":Update("             in src/caffe/blob.cpp     (crux)
+"void caffe_cpu_axpby(" in src/caffe/util/math_functions.cpp
+
+
 # conv1
 params_[0] dimensions:
 num: 96
@@ -273,6 +284,28 @@ so:
 -> after 1 iteration, net only outputs 1s or 0s!
    -> so z = <x,w> + b can easily = 0 ? how?
 
+-> ok, cost function seems to be working now. no nans or infs,
+   and trianing error gets minimised.
+
+
+   
+STEP 3
+======
+
+Why is accuracy so weird?
+-> find out whether same net loaded in by printing out param values
+
+Examine outputs
+-> is this harsh error preventing the net from learning anything?
+   -> ie all outputs are around 0.5, it's very confused
+   -> find out by comparing benchmarks
+      -> ground sheet outputs
+      -> uh oh, forgot to get SL to print them out
+      -> 23-08-2014 has them, 22-08-2014 doesnt
+      -> 22-08-2014 is from old build, you can compare train time
+      	 series with 23* to make sure new build isn't doing
+	 anything different or wrong
+      
 
 
 
@@ -280,23 +313,5 @@ IDENTIFIED PROBS & SOLS:
 -> what if prior is (1,0)
 -> at bottom diff iteration 0, SBL consistently less than
    SL. should this be?
-   
-    
-	   EF CONF CALL THIS AFTERNOON
-	   SET UP REMINDERS
-	   TELL DAD ETC
-	   
-		 
-the main functions from which net is trained:
-":Solve("  	       in src/caffe/solver.cpp
-":Forward("            in src/caffe/net.cpp
-":Backward("           in src/caffe/net.cpp
-":Backward(const"      in src/caffe/layer.hpp
-":ComputeUpdateValue(" in src/caffe/solver.cpp
-":Update(" 	       in src/caffe/
-":Update("             in src/caffe/blob.cpp     (crux)
-"void caffe_cpu_axpby(" in src/caffe/util/math_functions.cpp
-
-
-
-
+-> must implement under- and over-sampling as well
+   shit that will be hard
