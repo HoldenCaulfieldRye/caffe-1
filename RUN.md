@@ -190,17 +190,16 @@ see TROUBLESHOOT.md
 CURRENTLY
 =========
 
-figure out who is making cpu_diff() explode/vanish 
-
 downloading metadata:
 wget graphic07
 
 training:
 - 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13(new)
       scrape_zones_sbl
-- 07: freeze5.5/14
-- 08: freeze5.5, freeze5/14(alexnet), CUDA_OUT_OF_MEM
-- 09: hatch_markings/18, freeze5.5/15, scrape_zones(sbl benchmark)
+- 07: freeze5.5/14, contamination_sbl
+- 08: freeze5.5, freeze5/14(alexnet), CUDA_OUT_OF_MEM, ground_sheet_sbl
+- 09: hatch_markings/18, freeze5.5/15, scrape_zones(sbl benchmark),
+      ground_sheet
 - 10:
 
 wait_list: hatch/17, hatch/18
@@ -216,8 +215,8 @@ wait_list: hatch/17, hatch/18
 	      
 
 ready_to_analyse: 
-- 06: freeze5/13(new)     - fuck! exp lr
-- 07: freeze5.5/14
+- 06: freeze5/13(new) - fuck! exp lr; _scrape*/22
+- 07: freeze5.5/14; contamination/22
 - 08: freeze5/14(alexnet) - fuck! exp lr
 - 09: freeze5.5/15
 
