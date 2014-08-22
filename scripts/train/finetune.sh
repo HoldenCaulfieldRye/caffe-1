@@ -12,7 +12,7 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=joint_misaligned
+BASE_NAME=contamination
 FULL_NAME=$BASE_NAME_bsl
 
 # with 4, bad minimum provides 80% classification accuracy
@@ -108,9 +108,8 @@ cd ../$BASE_NAME
 for file in *clampdet*;
 do mv $file ${file/clampdet/$BASE_NAME};
 done
-mkdir logs
 # modify contents of files
-sed -i 's/clampdet/'$BASE_NAME'/g' *
+for file in *; do sed -i 's/clampdet/'$BASE_NAME'/g' $file; done
 './create_'$BASE_NAME'.sh'
 
 
@@ -138,6 +137,7 @@ sed -i $BASE_NAME'_solver.prototxt' -e '10s/20000/'$MAX_ITER'/' -e '13s/2000/'$S
 
 # 9. go!
 chmod 755 ./fine_"$BASE_NAME".sh
+mkdir logs
 echo "you're ready!"
 echo "cd ../../models/"$BASE_NAME""
 echo "nohup ./fine_"$BASE_NAME".sh >> train_output.txt 2>&1 &"
