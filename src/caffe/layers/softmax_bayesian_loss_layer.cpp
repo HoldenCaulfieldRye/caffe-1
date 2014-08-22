@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cfloat>
 #include <vector>
-#include<iostream>
+#include <iostream>
 
 #include "caffe/layer.hpp"
 #include "caffe/vision_layers.hpp"
@@ -54,7 +54,8 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
 
   std::cout << std::endl << "SBL layer" << std::endl;
   std::cout << "output probs:" << std::endl;
-  for (int i=0; i<20; i++) {
+  int n = std::min(20,num);
+  for (int i=0; i<n; i++) {
     if (static_cast<int>(label[i]) == 0)
       std::cout << "min class ";
    std::cout << "case " << i << ": ";
@@ -117,8 +118,9 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   // multiply the 1st prob_.count() elements of bottom_diff by 1/dim
   caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
 
+  int n = std::min(20,min);
   std::cout << "SL bottom_diff:" << std::endl;
-  for (int i = 0; i < 20; ++i)  {
+  for (int i = 0; i < n; ++i)  {
     if (static_cast<int>(label[i]) == 0)
       std::cout << "min class case ";
     for (int j = 0; j < dim; ++j) 
@@ -142,7 +144,7 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   }
   
   std::cout << "SBL bottom_diff:" << std::endl;
-  for (int i = 0; i < 20; ++i)  {
+  for (int i = 0; i < n; ++i)  {
     if (static_cast<int>(label[i]) == 0)
       std::cout << "min class case ";
     for (int j = 0; j < dim; ++j) 
