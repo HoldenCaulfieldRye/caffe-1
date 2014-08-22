@@ -118,7 +118,7 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   // multiply the 1st prob_.count() elements of bottom_diff by 1/dim
   caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
 
-  int n = std::min(20,min);
+  int n = std::min(20,num);
   std::cout << "SL bottom_diff:" << std::endl;
   for (int i = 0; i < n; ++i)  {
     if (static_cast<int>(label[i]) == 0)
