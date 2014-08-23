@@ -194,10 +194,10 @@ downloading metadata:
 wget graphic07
 
 training:
-- 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13(new)
+- 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13,
       scrape_zones_sbl
 - 07: freeze5.5/14, contamination_sbl
-- 08: freeze5.5, freeze5/14(alexnet), CUDA_OUT_OF_MEM, ground_sheet_sbl
+- 08: freeze5.5, freeze5/14(alexnet), ground_sheet_sbl
 - 09: hatch_markings/18, freeze5.5/15, scrape_zones(sbl benchmark),
       ground_sheet
 - 10:

@@ -294,24 +294,45 @@ STEP 3
 
 Why is accuracy so weird?
 -> find out whether same net loaded in by printing out param values
+   -> have identical train and val files with just 128 cases
+      compare output probs
 
 Examine outputs
 -> is this harsh error preventing the net from learning anything?
    -> ie all outputs are around 0.5, it's very confused
    -> find out by comparing benchmarks
       -> ground sheet outputs
-      -> uh oh, forgot to get SL to print them out
-      -> 23-08-2014 has them, 22-08-2014 doesnt
-      -> 22-08-2014 is from old build, you can compare train time
-      	 series with 23* to make sure new build isn't doing
-	 anything different or wrong
-      
+      	 -> min class is 1, so other way around
+      	 -> uh oh, forgot to get SL to print them out
+      	 -> 23-08-2014 has them, 22-08-2014 doesnt
+      	 -> 22-08-2014 is from old build, you can compare train time
+      	    series with 23* to make sure new build isn't doing
+	    anything different or wrong
+      -> scrape zones outputs
+      	 -> min class is 0
+   -> if so, make it less harsh?
+      -> less extreme renormalisation
+      -> only penalise if output <=0.5 ie introduce kink in cost
+      	 function
+	 -> formula?
+   -> implement under-sampling like the paper says
 
+   
+Test if correctly implemented:
+-> graphic06: on a dataset of 6 images, perfectly balanced, batchsize 6, 
+   train and val sets the same
+   -> prob outputs not same for val as for train
+      -> calling bottom[0] in one, prob_ in the other
+         is one of them wrong?
+	 maybe SBL is wrong, hence bad results below?
+   -> loss same for sbl and sl at iter_1, but not afterwards
+   -> bottom_diff not same for sbl as for sl
+   -> CAREFUL! after debugging, get back data/ground_sheet/temp
+
+Read the paper threshold paper properly!   
 
 
 IDENTIFIED PROBS & SOLS:
 -> what if prior is (1,0)
--> at bottom diff iteration 0, SBL consistently less than
-   SL. should this be?
 -> must implement under- and over-sampling as well
    shit that will be hard
