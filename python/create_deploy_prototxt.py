@@ -26,7 +26,7 @@ def write_content_to_deploy_file(model_dir, content):
   deploy_file.close()
 
 if __name__ == '__main__':
-  model_dir = os.abspath(sys.argv[2])
+  model_dir = os.path.abspath(sys.argv[2])
   train_file = get_train_file(model_dir)
 
   content = train_file.readlines()
