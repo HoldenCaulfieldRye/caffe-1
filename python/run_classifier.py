@@ -3,15 +3,44 @@ import matplotlib.pyplot as plt
 #%matplotlib inline
 import os, sys
 import caffe
+# from caffe import io
 from os.path import join as ojoin
 from subprocess import call
 
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
-# python run_classifier.py classifier-dir=.. images=..
+# python run_classifier.py classifier-dir=.. train-iter=.. images=..
+
+def get_pretrained_model(classifier_dir):
+  suggest = os.listdir(classifier_dir)
+  suggest = [fname in suggest if 'iter' in suggest]
+  for elem in enumerate(suggest): print elem
+  idx = int(raw_input("\nName class numbers from above, separated by ' ': "))
+  return ojoin(classifier_dir,suggest[idx])
+
+#  ojoin(, 'caffe_reference_imagenet_model')
 
 
+def get_np_mean_fname(data_dir):
+  for fname in os.listdir(data_dir):
+    if fname.endswith('mean.npy'): return ojoin(data_dir,fname)
+  proto_img_fname = ''
+  for fname in os.listdir(data_dir):
+    if fname.endswith('mean.binaryproto'):
+      proto_img_fname = fname
+      break
+  if proto_img_fname == '':
+    print 'ERROR: no *mean.npy nor *mean.binaryproto found in %s'%(data_dir)
+    sys.exit()
+  npy_mean = caffe.io.blobproto_to_array(ojoin(data_dir,
+                                               proto_img_fname))
+  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('-fine')[0]
+  npy_mean_file = open(ojoin(data_dir,npy_mean_fname),'w')
+  np.save(npy_mean_file, npy_mean)
+  return ojoin(data_dir, npy_mean_fname)
+
+          
 if __name__ == '__main__':
   # Make sure that caffe is on the python path:
   caffe_root = '../'  # this file is expected to be in {caffe_root}/examples
@@ -23,12 +52,14 @@ if __name__ == '__main__':
       classifier_name = classifier_dir.split('/')[-1]
     elif "images=" in arg:
       images = os.path.abspath(arg.split('=')[-1])
+    elif "train-iter=" in arg:
+      train_iter = os.path.abspath(arg.split('=')[-1])
   
   # Set the right path to your model definition file, pretrained model 
   # weights, and the image you would like to classify
   MODEL_FILE = ojoin(classifier_dir, classifier_name+'_deploy.prototxt')
-  PRETRAINED = ojoin(classifier_dir, 'caffe_reference_imagenet_model')
-  MEAN_FILE = ojoin(caffe_root, 'python/caffe/imagenet/ilsvrc_2012_mean.npy')
+  PRETRAINED = get_pretrained_model(classifier_dir)
+  MEAN_FILE = get_np_mean_fname(ojoin(caffe_root, 'data', classifier_name))
   IMAGE_FILE = ojoin(caffe_root, 'examples/images/cat.jpg')
 
 
