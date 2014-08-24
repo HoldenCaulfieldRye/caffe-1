@@ -30,6 +30,7 @@
 *.npy
 *iter_*
 *caffe_alexnet_model
+*caffe_reference_imagenet_model
 
 # Batching DBs
 *_leveldb
@@ -67,7 +68,7 @@ Makefile.config
 # 1. reference, and not casually committed
 # 2. custom, and live on their own unless they're deliberated contributed
 data/*
-examples/*
+# examples/*
 
 # Generated documentation
 docs/_site
@@ -79,3 +80,68 @@ _site
 
 logServer.sh
 
+./.git/objects/pack/pack-e9a445c0f4da20794d629306295d412509a016d2.pack
+./.git/objects/67/86647666f5fda82823e58ba17f0956059a8d5d
+./.git/objects/2a/8251593a2f792792d593f7164c4efdfb0d9a1e
+./models/alexnet/caffe_alexnet_model
+./models/hatch_markings_3501/logs/13-08-2014/train_output.log
+./models/thresh_freeze_backprop5.5/logs/12-08-2014/train_output.log
+./models/thresh_freeze_backprop5.5/logs/13-08-2014/train_output.log
+./models/thresh_freeze_backprop5/logs/13-08-2014/train_output.log
+./models/thresh_freeze_backprop5/logs/14-08-2014/train_output.log
+./models/clampdet/train_output.log
+./models/joint_misaligned/joint_misaligned_train_leveldb/000005.sst
+./models/joint_misaligned/joint_misaligned_train_leveldb/000007.sst
+./models/joint_misaligned/joint_misaligned_train_leveldb/000009.sst
+./models/joint_misaligned/joint_misaligned_train_leveldb/000011.sst
+./models/joint_misaligned/joint_misaligned_train_leveldb/000013.sst
+./models/joint_misaligned/joint_misaligned_train_leveldb/000014.sst
+./models/joint_misaligned/joint_misaligned_train_leveldb/000015.sst
+./models/joint_misaligned/joint_misaligned_val_leveldb/000005.sst
+./models/joint_misaligned/joint_misaligned_test_leveldb/000003.log
+./models/joint_misaligned_sbl/joint_misaligned_train_leveldb/000005.sst
+./models/joint_misaligned_sbl/joint_misaligned_train_leveldb/000007.sst
+./models/joint_misaligned_sbl/joint_misaligned_train_leveldb/000009.sst
+./models/joint_misaligned_sbl/joint_misaligned_train_leveldb/000011.sst
+./models/joint_misaligned_sbl/joint_misaligned_train_leveldb/000013.sst
+./models/joint_misaligned_sbl/joint_misaligned_train_leveldb/000014.sst
+./models/joint_misaligned_sbl/joint_misaligned_train_leveldb/000015.sst
+./models/joint_misaligned_sbl/joint_misaligned_val_leveldb/000005.sst
+./models/joint_misaligned_sbl/joint_misaligned_test_leveldb/000003.log
+./models/scrape_zones_sbl/scrape_zones_fine_train_leveldb/000005.sst
+./models/scrape_zones_sbl/scrape_zones_fine_train_leveldb/000007.sst
+./models/scrape_zones_sbl/scrape_zones_fine_train_leveldb/000009.sst
+./models/scrape_zones_sbl/scrape_zones_fine_train_leveldb/000011.sst
+./models/scrape_zones_sbl/scrape_zones_fine_train_leveldb/000013.sst
+./models/scrape_zones_sbl/scrape_zones_fine_train_leveldb/000014.sst
+./models/scrape_zones_sbl/scrape_zones_fine_train_leveldb/000015.sst
+./models/scrape_zones_sbl/scrape_zones_fine_val_leveldb/000005.sst
+./models/scrape_zones_sbl/scrape_zones_fine_test_leveldb/000003.log
+./models/scrape_zones_sbl/scrape_zones_fine_train_iter_10000
+./models/scrape_zones_sbl/scrape_zones_fine_train_iter_10000.solverstate
+./models/scrape_zones_sbl/scrape_zones_fine_train_iter_20000
+./models/scrape_zones_sbl/scrape_zones_fine_train_iter_20000.solverstate
+./models/scrape_zones_sbl/scrape_zones_fine_train_iter_1
+./models/scrape_zones_sbl/scrape_zones_fine_train_iter_1.solverstate
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_test_leveldb/000003.log
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_leveldb/000005.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_leveldb/000007.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_leveldb/000009.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_leveldb/000011.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_leveldb/000013.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_leveldb/000014.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_leveldb/000015.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_val_leveldb/000005.sst
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_iter_2
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_iter_2.solverstate
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_iter_1
+./models/scrape_zones_sbl_benchmark/scrape_zones_fine_train_iter_1.solverstate
+./models/contamination/contamination_train_leveldb/000005.sst
+./models/contamination/contamination_train_leveldb/000007.sst
+./models/contamination/contamination_train_leveldb/000008.sst
+./models/contamination/contamination_val_leveldb/000005.sst
+./models/contamination/contamination_test_leveldb/000003.log
+./models/contamination/contamination_fine_train_iter_10000
+./models/contamination/contamination_fine_train_iter_10000.solverstate
+./python/venv/lib/python2.7/site-packages/pandas/algos.so
+./examples/imagenet/caffe_reference_imagenet_model
