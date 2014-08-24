@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import skimage.io
 import skimage.transform
@@ -15,6 +16,8 @@ def load_image(filename):
     Give
     image: an image of size (H x W x 3) with RGB channels of type uint8.
     """
+    if os.path.islink(filename):
+      filename = os.readlink(filename)
     img = skimage.img_as_float(skimage.io.imread(filename)).astype(np.float32)
     if img.ndim == 2:
         img = np.tile(img[:, :, np.newaxis], (1, 1, 3))
