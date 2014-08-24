@@ -31,6 +31,24 @@ void PerClassAccuracyLayer<Dtype>::SetUp(
   CHECK_EQ(bottom[1]->width(), 1);
   (*top)[0]->Reshape(1, 2, 1, 1);
 
+  std::cout << "PER CLASS ACCURACY LAYER:" << std::endl;
+
+  std::cout << "bottom[0] dimensions:" << std::endl;
+  std::cout << "num: " << bottom[0]->num() << std::endl;
+  std::cout << "channels: " << bottom[0]->channels() << std::endl;
+  std::cout << "height: " << bottom[0]->height() << std::endl;
+  std::cout << "width: " << bottom[0]->width() << std::endl;
+  std::cout << "count: " << bottom[0]->count() << std::endl;
+
+  std::cout << std::endl;
+  
+  std::cout << "top dimensions:" << std::endl;
+  std::cout << "num: " << (*top)[0]->num() << std::endl;
+  std::cout << "channels: " << (*top)[0]->channels() << std::endl;
+  std::cout << "height: " << (*top)[0]->height() << std::endl;
+  std::cout << "width: " << (*top)[0]->width() << std::endl;
+  std::cout << "count: " << (*top)[0]->count() << std::endl;  
+
   labels_.Reshape(bottom[1]->num(), 1, 1, 1);
 }
 
@@ -48,16 +66,17 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
   
   Dtype* labels_count = labels_.mutable_cpu_data();
   caffe_set(labels_.count(), Dtype(FLT_MIN), labels_count);
-  ////std::cout << "label_count" << labels_.count();
+  //std::cout << "label_count" << labels_.count();
   for (int i = 0; i < label_count; ++i) {
     labels_count[static_cast<int>(bottom_label[i])] += 1.0;
-    ////std::cout << "bottom_label" << i << " " << bottom_label[i];
+    //std::cout << "bottom_label" << i << " " << bottom_label[i];
   } 
 
+  
   // const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
   std::cout << std::endl << "per class accuracy layer" << std::endl;
-  std::cout << "output probs:" << std::endl;
+  std::cout << "output probs (bottom_data):" << std::endl;
   int n = std::min(20,num);
   for (int i=0; i<n; i++) {
     if (static_cast<int>(label[i]) == 0)

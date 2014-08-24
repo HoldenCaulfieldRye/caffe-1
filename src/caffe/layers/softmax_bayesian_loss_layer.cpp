@@ -41,6 +41,8 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   int dim = prob_.count() / num;
   // int label_count = bottom[1]->count();
 
+  std::cout << "SOFTMAX BAYESIAN LAYER:" << std::endl;
+
   std::cout << "prob_ dimensions:" << std::endl;
   std::cout << "num: " << prob_.num() << std::endl;
   std::cout << "channels: " << prob_.channels() << std::endl;
@@ -56,6 +58,15 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   std::cout << "height: " << bottom[0]->height() << std::endl;
   std::cout << "width: " << bottom[0]->width() << std::endl;
   std::cout << "count: " << bottom[0]->count() << std::endl;
+
+  std::cout << std::endl;
+  
+  std::cout << "top[0] dimensions:" << std::endl;
+  std::cout << "num: " << (*top)[0]->num() << std::endl;
+  std::cout << "channels: " << (*top)[0]->channels() << std::endl;
+  std::cout << "height: " << (*top)[0]->height() << std::endl;
+  std::cout << "width: " << (*top)[0]->width() << std::endl;
+  std::cout << "count: " << (*top)[0]->count() << std::endl;
 
   Dtype* prior = labels_.mutable_cpu_data();
   //std::cout << "labels for this batch: ";

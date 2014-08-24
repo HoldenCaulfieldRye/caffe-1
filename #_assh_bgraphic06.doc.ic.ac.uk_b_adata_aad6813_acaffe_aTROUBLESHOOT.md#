@@ -62,11 +62,6 @@ Iteration 1, loss = nan
 stuff in build/src/caffe/proto/caffe.pb.cc ?
 
 
-# ImportError: No module named _caffe
-cd /data/add6813/caffe
-make pycaffe
-
-
 # DEVELOPMENT
 
 attrib                      |  varname       |  meaning
