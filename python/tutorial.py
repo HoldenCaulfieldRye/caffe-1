@@ -50,7 +50,7 @@ prediction = net.predict([input_image])
 # plt.plot(prediction[0])
 
 # print top 5 classes
-print 'predicted classes:'
+print 'predicted class:'
 class_ = prediction[0].argmax()
 print class_#, prediction[class_]
 
