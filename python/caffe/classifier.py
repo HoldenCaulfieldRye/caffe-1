@@ -13,8 +13,11 @@ class Classifier(caffe.Net):
     Classifier extends Net for image class prediction
     by scaling, center cropping, or oversampling.
     """
-    def __init__(self, model_file, pretrained_file, image_dims=None,
-                 gpu=False, mean_file=None, input_scale=None, channel_swap=None):
+    # input_scale aka raw_scale
+    def __init__(self, model_file, pretrained_file,
+                 image_dims=None, input_scale=None, 
+                 mean_file=None, channel_swap=None,
+                 gpu=False):
         """
         Take
         image_dims: dimensions to scale input for cropping/sampling.

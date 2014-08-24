@@ -16,7 +16,9 @@ import caffe
 # and the image you would like to classify.
 MODEL_FILE = ojoin(imagenet_dir,'imagenet_deploy.prototxt')
 PRETRAINED = ojoin(imagenet_dir, 'caffe_reference_imagenet_model')
+MEAN_FILE = ojoin(caffe_root,'python/caffe/imagenet/ilsvrc_2012_mean.npy')
 IMAGE_FILE = 'images/cat.jpg'
+
 
 # get PRETRAINED
 # if not os.path.isfile(PRETRAINED):
@@ -24,7 +26,9 @@ IMAGE_FILE = 'images/cat.jpg'
   
 # load network
 print os.getcwd()
-net = caffe.Classifier(MODEL_FILE, PRETRAINED, mean_file=np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy'), channel_swap=(2,1,0), input_scale=255, image_dims=(256, 256))
+net = caffe.Classifier(MODEL_FILE, PRETRAINED,
+                       image_dims=(256, 256), input_scale=255,
+                       mean_file=MEAN_FILE, channel_swap=(2,1,0))
 
 # set phase to test since we are doing testing
 net.set_phase_test()
