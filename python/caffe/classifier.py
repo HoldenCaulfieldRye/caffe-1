@@ -60,14 +60,11 @@ class Classifier(caffe.Net):
                  for N images and C classes.
     """
     # Scale to standardize input dimensions.
-    print 'a'
     inputs = np.asarray([caffe.io.resize_image(im, self.image_dims)
                          for im in inputs])
 
-    print 'b'
     if oversample:
       # Generate center, corner, and mirrored crops.
-      print 'c'
       inputs = caffe.io.oversample(inputs, self.crop_dims)
     else:
       # Take center crop.

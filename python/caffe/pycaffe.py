@@ -63,9 +63,7 @@ def _Net_forward(self, blobs=None, **kwargs):
                 raise Exception('{} blob is not 4-d'.format(in_))
             self.blobs[in_].data[...] = blob
 
-    print 'e.1.1'
     self._forward()
-    print 'e.1.2'
 
     # Unpack blobs to extract
     outs = {out: self.blobs[out].data for out in set(self.outputs + blobs)}
@@ -120,24 +118,18 @@ def _Net_forward_all(self, blobs=None, **kwargs):
     """
     # Collect outputs from batches
     all_outs = {out: [] for out in set(self.outputs + (blobs or []))}
-    print 'e.1'
     for batch in self._batch(kwargs):
         outs = self.forward(blobs=blobs, **batch)
-        print 'e.2'
         for out, out_blob in outs.iteritems():
             all_outs[out].extend(out_blob.copy())
     # Package in ndarray.
-    print 'e.3'
     for out in all_outs:
-        print 'e.4'
         all_outs[out] = np.asarray(all_outs[out])
     # Discard padding.
     pad = len(all_outs.itervalues().next()) - len(kwargs.itervalues().next())
-    print 'e.5'
     if pad:
         for out in all_outs:
             all_outs[out] = all_outs[out][:-pad]
-    print 'e.6'
     return all_outs
 
 
