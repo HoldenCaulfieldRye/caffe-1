@@ -17,7 +17,7 @@ import caffe
 MODEL_FILE = ojoin(imagenet_dir,'imagenet_deploy.prototxt')
 PRETRAINED = ojoin(imagenet_dir, 'caffe_reference_imagenet_model')
 MEAN_FILE = ojoin(caffe_root,'python/caffe/imagenet/ilsvrc_2012_mean.npy')
-IMAGE_FILE = 'images/cat.jpg'
+IMAGE_FILE = ojoin(caffe_root,'examples/images/cat.jpg')
 
 
 # get PRETRAINED
@@ -42,6 +42,7 @@ input_image = caffe.io.load_image(IMAGE_FILE)
 # plt.imshow(input_image)
 
 # classify image
+# this prints out a ton of numbers, why?
 prediction = net.predict([input_image])
 
 # print prediction bar chart
@@ -50,9 +51,8 @@ prediction = net.predict([input_image])
 
 # print top 5 classes
 print 'predicted classes:'
-for i in range(5):
-  class_ = prediction[i].argmax()
-  print class_, prediction[class_]
+class_ = prediction[0].argmax()
+print class_#, prediction[class_]
 
   
 # for faster prediction, turn off oversampling
