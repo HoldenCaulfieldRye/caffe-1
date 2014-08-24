@@ -1,13 +1,11 @@
 TROUBLESHOOT
 ============
 
-
 # during make all:
 /usr/bin/ld: cannot find -lcblas
 /usr/bin/ld: cannot find -latlas
 # solution:
 scp graphic06.doc.ic.ac.uk:/etc/alternatives/lib*las* ~/.local/lib
-
 
 # create image mean:
 Check failed: proto.SerializeToOStream(&output)
@@ -15,7 +13,6 @@ Check failed: proto.SerializeToOStream(&output)
 use a sufficiently similar, previously computed image mean
 # solution:
 paths specified in make_*_image_mean.sh do not exist, fix
-
 
 # threshold layer:
 Check failed: (*top)[0]->num() == (*top)[1]->num() (0 vs. 50) The data and label should have the same number.
@@ -63,6 +60,7 @@ stuff in build/src/caffe/proto/caffe.pb.cc ?
 
 
 # ImportError: No module named _caffe
+# _<module> usually stands for <module>.so written in C(++)!
 cd /data/add6813/caffe
 make pycaffe
 
