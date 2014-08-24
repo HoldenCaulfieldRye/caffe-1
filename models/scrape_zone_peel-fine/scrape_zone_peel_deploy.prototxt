@@ -1,17 +1,9 @@
 name: "scrape_zone_peelFineNet"
-layers {
-  name: "data"
-  type: DATA
-  top: "data"
-  top: "label"
-  data_param {
-    source: "scrape_zone_peel_fine_train_leveldb"
-    mean_file: "../../data/scrape_zone_peel/scrape_zone_peel_fine_mean.binaryproto"
-    batch_size: 50
-    crop_size: 227
-    mirror: true
-  }
-}
+input: "data"
+input_dim: 17930
+input_dim: 3
+input_dim: 227
+input_dim: 227
 layers {
   name: "conv1"
   type: CONVOLUTION
@@ -21,7 +13,6 @@ layers {
     num_output: 96
     kernel_size: 11
     stride: 4
-    }
   }
 }
 layers {
@@ -62,7 +53,6 @@ layers {
     pad: 2
     kernel_size: 5
     group: 2
-    }
   }
 }
 layers {
@@ -102,7 +92,6 @@ layers {
     num_output: 384
     pad: 1
     kernel_size: 3
-    }
   }
 }
 layers {
@@ -121,7 +110,6 @@ layers {
     pad: 1
     kernel_size: 3
     group: 2
-    }
   }
 }
 layers {
@@ -140,7 +128,6 @@ layers {
     pad: 1
     kernel_size: 3
     group: 2
-    }
   }
 }
 layers {
@@ -167,7 +154,6 @@ layers {
   top: "fc6"
   inner_product_param {
     num_output: 4096
-    }
   }
 }
 layers {
@@ -192,7 +178,6 @@ layers {
   top: "fc7"
   inner_product_param {
     num_output: 4096
-    }
   }
 }
 layers {
@@ -217,7 +202,6 @@ layers {
   top: "fc8_aero"
   inner_product_param {
     num_output: 2
-    }
   }
 }
 layers {

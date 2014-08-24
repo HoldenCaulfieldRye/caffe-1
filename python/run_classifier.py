@@ -6,8 +6,9 @@ import caffe
 from caffe.proto import caffe_pb2
 from os.path import join as ojoin
 from subprocess import call
+from create_deploy_prototxt import *
 
-caffe_root = '../'  # this file is expected to be in {caffe_root}/examples
+caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
@@ -19,7 +20,8 @@ sys.path.insert(0, caffe_root + 'python')
 def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
   print suggest
-  suggest = [fname for fname in suggest if 'iter' in fname]
+  suggest = [fname for fname in suggest
+             if 'iter' in fname and 'solverstate' not in fname]
   for elem in enumerate(suggest): print elem
   idx = int(raw_input("\nWhich model? "))
   return ojoin(classifier_dir,suggest[idx])
@@ -69,7 +71,14 @@ if __name__ == '__main__':
       data_dir = os.path.abspath(arg.split('=')[-1])
     # elif "train-iter=" in arg:
     #   train_iter = os.path.abspath(arg.split('=')[-1])
-  
+
+  # create deploy prototxt
+  train_file = get_train_file(classifier_dir)
+  num_imgs = len(os.listdir(ojoin(data_dir,'test')))
+  content = train_file.readlines()
+  content = edit_train_content_for_deploy(content, num_imgs)
+  write_content_to_deploy_file(classifier_dir, content)
+    
   # Set the right path to your model definition file, pretrained model 
   # weights, and the image you would like to classify
   MODEL_FILE = ojoin(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
@@ -82,9 +91,11 @@ if __name__ == '__main__':
   #   call(['./get_caffe_reference_imagenet_model.sh'])
 
   # load network
+  print 'loading network...'
   net = caffe.Classifier(MODEL_FILE, PRETRAINED,
                          image_dims=(256, 256), input_scale=255,
                          mean_file=MEAN_FILE, channel_swap=(2,1,0))
+  print 'network loaded successfully'
 
   # set phase to test since we are doing testing
   net.set_phase_test()
@@ -119,9 +130,10 @@ if __name__ == '__main__':
   
 
 
-  # for faster prediction, turn off oversampling
-  # for even faster prediciton, use GPU mode
-
+  # for faster prediction, turn off oversampling BUT!
+  # you need to set oversampling in edit_train_content_for_deploy to
+  # False... so you should probs merge the script into this one
+  
   # Not as fast as you expected? Indeed, in this python demo you are seeing only 4 times speedup. But remember - the GPU code is actually very fast, and the data loading, transformation and interfacing actually start to take more time than the actual conv. net computation itself!
 
   # To fully utilize the power of GPUs, you really want to:

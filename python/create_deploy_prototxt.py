@@ -14,17 +14,18 @@ def get_train_file(model_dir):
   print 'no train prototxt found'
   sys.exit()
 
-def edit_train_content_for_deploy(content, num_imgs):
+def edit_train_content_for_deploy(content, num_imgs, oversample=True):
+  if oversample: mult = 10
+  else: mult = 1
   idx = 0
-  del content[]
   while idx < len(content):
     if 'name: "data"' in content[idx]:
-      content[idx-1] = 'input: "data"'
-      content[idx] = 'input_dim: %i'%(num_imgs*10)
-      content[idx-1] = 'input: "data"'
-      content[idx-1] = 'input: "data"'
-      
-      del content[idx-1:idx+7]
+      content[idx-1] = 'input: "data"\n'
+      content[idx] = 'input_dim: %i\n'%(num_imgs*mult)
+      content[idx+1] = 'input_dim: 3\n'
+      content[idx+2] = 'input_dim: 227\n'
+      content[idx+3] = 'input_dim: 227\n'
+      del content[idx+4:idx+12]
       idx += 7
     elif 'blobs_lr' in content[idx]:
       del content[idx]
@@ -33,7 +34,7 @@ def edit_train_content_for_deploy(content, num_imgs):
       del content[idx]
       # idx += 1
     elif 'weight_filler' in content[idx]:
-      del content[idx:idx+7]
+      del content[idx:idx+8]
       idx += 7
     elif 'accuracy' in content[idx]:
       del content[idx-1:idx+5]
@@ -42,7 +43,7 @@ def edit_train_content_for_deploy(content, num_imgs):
       idx += 1
   return content
 
-def write_content_to_deploy_file(model_dir, data_dir, content):
+def write_content_to_deploy_file(model_dir, content):
   model_name = model_dir.split('/')[-1]
   model_name = model_name.split('-fine')[0]
   fname = ojoin(model_dir,model_name+'_deploy.prototxt')
@@ -60,14 +61,10 @@ if __name__ == '__main__':
       data_dir = os.path.abspath(arg.split('=')[-1])
   
   train_file = get_train_file(model_dir)
-
-  content = train_file.readlines()
-
-  content = edit_train_content_for_deploy(content)
-
   num_imgs = len(os.listdir(ojoin(data_dir,'test')))
-  
-  write_content_to_deploy_file(model_dir, num_imgs, content)
+  content = train_file.readlines()
+  content = edit_train_content_for_deploy(content, num_imgs)
+  write_content_to_deploy_file(model_dir, content)
     
 
 
