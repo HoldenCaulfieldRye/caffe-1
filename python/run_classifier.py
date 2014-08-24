@@ -3,20 +3,25 @@ import matplotlib.pyplot as plt
 #%matplotlib inline
 import os, sys
 import caffe
+from caffe.proto import caffe_pb2
 from os.path import join as ojoin
 from subprocess import call
 
+caffe_root = '../'  # this file is expected to be in {caffe_root}/examples
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
-# python run_classifier.py classifier-dir=.. train-iter=.. images-dir=..
+# python run_classifier.py classifier-dir=.. data-dir=..
+
+# Note! data-dir should be data/<name>, not data/<name>/test
 
 
 def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
-  suggest = [fname in suggest if 'iter' in suggest]
+  print suggest
+  suggest = [fname for fname in suggest if 'iter' in fname]
   for elem in enumerate(suggest): print elem
-  idx = int(raw_input("\nName class numbers from above, separated by ' ': "))
+  idx = int(raw_input("\nWhich model? "))
   return ojoin(classifier_dir,suggest[idx])
 
 #  ojoin(, 'caffe_reference_imagenet_model')
@@ -33,42 +38,43 @@ def get_np_mean_fname(data_dir):
   if proto_img_fname == '':
     print 'ERROR: no *mean.npy nor *mean.binaryproto found in %s'%(data_dir)
     sys.exit()
-  npy_mean = caffe.io.blobproto_to_array(ojoin(data_dir,
-                                               proto_img_fname))
+
+  # er wait how does it know where the proto img file is?
+  blob_img = caffe_pb2.BlobProto() # ojoin(data_dir,proto_img_fname))
+  npy_mean = caffe.io.blobproto_to_array(blob_img)
   npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('-fine')[0]
   npy_mean_file = open(ojoin(data_dir,npy_mean_fname),'w')
   np.save(npy_mean_file, npy_mean)
   return ojoin(data_dir, npy_mean_fname)
 
           
-def load_all_images_from_dir(images_dir):
+def load_all_images_from_dir(test_dir):
   batch = []
-  img_fnames = os.listdir(images_dir)
+  img_fnames = os.listdir(test_dir)
   for fname in img_fnames:
-    batch.append(caffe.io.load_image(ojoin(images_dir,fname)))
+    batch.append(caffe.io.load_image(ojoin(test_dir,fname)))
   return batch, img_fnames
     
 
 
 if __name__ == '__main__':
-  # Make sure that caffe is on the python path:
-  caffe_root = '../'  # this file is expected to be in {caffe_root}/examples
+  print 'Warning: make sure that caffe is on the python path!'
 
   classifier_dir, images = None, None
   for arg in sys.argv:
     if "classifier-dir=" in arg:
-      classifier_dir = os.abspath(arg.split('=')[-1])
+      classifier_dir = os.path.abspath(arg.split('=')[-1])
       classifier_name = classifier_dir.split('/')[-1]
-    elif "images-dir=" in arg:
-      images_dir = os.path.abspath(arg.split('=')[-1])
-    elif "train-iter=" in arg:
-      train_iter = os.path.abspath(arg.split('=')[-1])
+    elif "data-dir=" in arg:
+      data_dir = os.path.abspath(arg.split('=')[-1])
+    # elif "train-iter=" in arg:
+    #   train_iter = os.path.abspath(arg.split('=')[-1])
   
   # Set the right path to your model definition file, pretrained model 
   # weights, and the image you would like to classify
-  MODEL_FILE = ojoin(classifier_dir, classifier_name+'_deploy.prototxt')
+  MODEL_FILE = ojoin(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   PRETRAINED = get_pretrained_model(classifier_dir)
-  MEAN_FILE = get_np_mean_fname(ojoin(caffe_root, 'data', classifier_name))
+  MEAN_FILE = get_np_mean_fname(data_dir)
 
 
   # get PRETRAINED
@@ -97,7 +103,7 @@ if __name__ == '__main__':
 
   # load images
   # parallelise this? use cudaconvnet code
-  img_batch, img_fnames = load_all_images_from_dir(images_dir)
+  img_batch,img_fnames = load_all_images_from_dir(ojoin(data_dir,test))
 
   # classify images
   prediction = net.predict(img_batch)
