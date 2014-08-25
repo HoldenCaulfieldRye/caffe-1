@@ -64,6 +64,19 @@ stuff in build/src/caffe/proto/caffe.pb.cc ?
 cd /data/add6813/caffe
 make pycaffe
 
+# pycaffe::_Net_set_mean()
+# ValueError: axes don't match array
+when it works:
+shape of data blob (10, 3, 227, 227)
+shape of mean file:  (3, 256, 256)
+but for some reason we want mean to have shape:  (3, 227, 227)
+when it doesn't:
+shape of data blob (10, 3, 227, 227)
+shape of mean file:  (1, 3, 256, 256)
+but for some reason we want mean to have shape:  (3, 227, 227)
+# solution:
+mean_f = mean_f[0]
+
 
 # DEVELOPMENT
 

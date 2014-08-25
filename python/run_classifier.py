@@ -24,9 +24,8 @@ def get_flag_and_thresh(data_info):
   rl = [l.split() for l in rl]
   for l in rl[2:]:
     if l == ['1','flag_val']: flag_val = 1
-    elif l[1] == 'threshold': thresh = float(l[0])
-      
-  return int(raw_input('1 or 0 corresponds to flag? '))
+    elif l[1] == 'threshold': thresh = float(l[0])      
+  return flag_val, thresh
 
 def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
@@ -83,6 +82,9 @@ def load_all_images_from_dir(test_dir):
     
 
 def fill_dict(d, data_info, sig_level, flag_val):
+  # this comes early because flag_val prompts user
+  flag_val, threshold = get_flag_and_thresh(data_info)
+
   # get data_info test file
   label_data = open(oj(data_info,'test.txt'),'r').readlines()
   label_data = [line.split() for line in label_data]
@@ -117,9 +119,6 @@ if __name__ == '__main__':
   # # you could set it up as a command line arg if turn out useful
   # sig_level = 0.1
 
-  # this comes early because flag_val prompts user
-  flag_val, threshold = get_flag_and_thresh(data_info)
-  
   classifier_dir, images = None, None
   for arg in sys.argv:
     if "classifier-dir=" in arg:
@@ -187,7 +186,6 @@ if __name__ == '__main__':
     pred = np.append(pred, net.predict(imgs[i*N:(i+1)*N]),axis=0)
   pred=np.append(pred, net.predict(imgs[-(len(imgs)%N):]),axis=0)
 
-  
   # print pred bar chart
   # print 'pred shape:', pred[0].shape
   # plt.plot(pred[0])
