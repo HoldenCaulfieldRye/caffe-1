@@ -36,7 +36,6 @@ def main(classifier_dir, data_dir, data_info):
   MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   MEAN_FILE = get_np_mean_fname(data_dir)
 
-
   # get PRETRAINED
   # if not os.path.isfile(PRETRAINED):
   #   call(['./get_caffe_reference_imagenet_model.sh'])
@@ -79,17 +78,16 @@ def main(classifier_dir, data_dir, data_info):
   pred=np.append(pred, net.predict(imgs[-(len(imgs)%N):]),axis=0)
 
   assert len(pred) == num_imgs
-  # save predictions to data_info
-  # HEY! move this to bottom once fully operational
+
   d = {'fname': img_fnames,
        'pred': pred,
        'label': [],
        'pred_lab': [],
        'pot_mislab': np.zeros(num_imgs,int)}
   
-  d_f = open(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'),'w')
-  np.save(d_f, d)
-  d_f.close()
+  # save predictions to data_info
+  # HEY! move this to bottom once fully operational
+  np.savez(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npz'), d)
 
   # print pred bar chart
   # print 'pred shape:', pred[0].shape
@@ -99,7 +97,7 @@ def main(classifier_dir, data_dir, data_info):
 
 
 def get_flag_and_thresh(data_info):
-  flag_val = 0
+  flag_val, thresh = 0, 0.5
   rl = open(oj(data_info,'read.txt'),'r').readlines()
   rl = [l.split() for l in rl]
   for l in rl[2:]:
@@ -169,7 +167,10 @@ def fill_dict(d, data_info):
   # get data_info test file
   label_data = open(oj(data_info,'test.txt'),'r').readlines()
   label_data = [line.split() for line in label_data]
-  assert label_data[:,0] == d['fnames']
+  print 'label_data[] is like', label_data[:3]
+  print 'label_data[:,0] is like', label_data[:3][0]
+  print 'd[\'fnames\'] is like', d['fname'][:3]
+  assert label_data[:][0] == d['fname']
   num_imgs = len(label_data)
 
   # fill with true labels
@@ -198,6 +199,7 @@ def fill_dict(d, data_info):
       else: num_neg += 1
 
   # compute accuracies
+  print 'num_pos:', num_pos
   d['accuracy'] = {'total': float((false_neg+false_pos)/num_imgs),
                    'pos': float(false_neg/num_pos),
                    'neg': float(false_pos/num_neg)}
@@ -205,7 +207,26 @@ def fill_dict(d, data_info):
 
 
 def compute_kpi(d):
-  # 
+  num_imgs = len(d['fname'])
+  flag = get_flag_and_thresh(data_info)[0]
+  # create array (idx,prob(pos)) of all positives
+  pos = [(idx,d['pred'][flag]) for idx in range(num_imgs)
+         if d['label'][idx] == flag]
+  print 'check same with above! num_pos:', len(pos)
+  
+  # sort array descending prob(pos)
+  sorted(pos, key=lambda x: x[1])
+  
+  # Sig_level is prob(pos) for i-th entry where float(i/len) = 0.95
+  Sig_level = pos[0.95*num_imgs][1]
+  
+  # pct_auto is, for all imgs:
+  # (num imgs with prob(pos) < Sig_level) / (num imgs)
+  automated = [idx for idx in range(num_imgs)
+               if d['pred'][idx] < Sig_level]
+
+  return Sig_level, float(len(automated)/num_imgs)
+
 
 
 if __name__ == '__main__':
@@ -228,18 +249,17 @@ if __name__ == '__main__':
     #   train_iter = os.path.abspath(arg.split('=')[-1])
 
   PRETRAINED = get_pretrained_model(classifier_dir)
-  already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy')
-  if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N)'%(already_pred)) != 'N':
-    # HEY! part in main() where saving needs move to bottom
-    # just uncomment below and delete be-below
-    # d = main(classifier_dir, data_dir, data_info)
-    d_f = open(already_pred, 'w') 
+  already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npz')
+  if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = np.load(already_pred)
   else:
     d = main(classifier_dir, data_dir, data_info)
 
+  # HEY! this should go in main as well
   # get true labels, assign predicted labels, get metrics
   d = fill_dict(d, data_info)
+
+  # accuracies
   print 'with threshold at test only:'
   print 'accuracy overall: ', d['accuracy']['total']
   print 'accuracy on positives: ', d['accuracy']['pos']
