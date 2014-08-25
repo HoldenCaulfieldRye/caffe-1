@@ -14,7 +14,7 @@ def get_train_file(model_dir):
   print 'no train prototxt found'
   sys.exit()
 
-def edit_train_content_for_deploy(content, num_imgs, oversample=True):
+def edit_train_content_for_deploy(content, oversample=True):
   if oversample: mult = 10
   else: mult = 1
   idx = 0
@@ -24,7 +24,7 @@ def edit_train_content_for_deploy(content, num_imgs, oversample=True):
       idx += 1
     if 'name: "data"' in content[idx]:
       content[idx-1] = 'input: "data"\n'
-      content[idx] = 'input_dim: %i\n'%(num_imgs*mult)
+      content[idx] = 'input_dim: %i\n'%(10) 
       content[idx+1] = 'input_dim: 3\n'
       content[idx+2] = 'input_dim: 227\n'
       content[idx+3] = 'input_dim: 227\n'
@@ -67,9 +67,9 @@ if __name__ == '__main__':
       data_dir = os.path.abspath(arg.split('=')[-1])
   
   train_file = get_train_file(model_dir)
-  num_imgs = len(os.listdir(ojoin(data_dir,'test')))
+  # num_imgs = len(os.listdir(ojoin(data_dir,'test')))
   content = train_file.readlines()
-  content = edit_train_content_for_deploy(content, num_imgs)
+  content = edit_train_content_for_deploy(content)
   write_content_to_deploy_file(model_dir, content)
     
 

@@ -75,9 +75,9 @@ if __name__ == '__main__':
 
   # create deploy prototxt
   train_file = get_train_file(classifier_dir)
-  num_imgs = len(os.listdir(ojoin(data_dir,'test')))
+  # num_imgs = len(os.listdir(ojoin(data_dir,'test')))
   content = train_file.readlines()
-  content = edit_train_content_for_deploy(content, num_imgs)
+  content = edit_train_content_for_deploy(content)
   write_content_to_deploy_file(classifier_dir, content)
     
   # Set the right path to your model definition file, pretrained model 

@@ -190,8 +190,14 @@ def _Net_set_mean(self, input_, mean_f, mode='elementwise'):
         self.mean = {}
     if input_ not in self.inputs:
         raise Exception('Input not in {}'.format(self.inputs))
-    in_shape = self.blobs[input_].data.shape
+    print 'b.1'
+    print 
+    in_shape = self.blobs[input_].data.shape # bug here, input_ == 'data'
+    # it's the data blob! it should contain data but it doesn't
+    # maybe because not following symlinks
+    print 'b.2'
     mean = np.load(mean_f)
+    print 'b.3'
     if mode == 'elementwise':
         if mean.shape != in_shape[1:]:
             # Resize mean (which requires H x W x K input in range [0,1]).
