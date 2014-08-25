@@ -53,7 +53,7 @@ def write_content_to_deploy_file(model_dir, content):
   model_name = model_dir.split('/')[-1]
   model_name = model_name.split('-fine')[0]
   fname = ojoin(model_dir,model_name+'_deploy.prototxt')
-  print "fname: %s"%(fname)
+  # print "fname: %s"%(fname)
   deploy_file = open(fname,'w')
   deploy_file.writelines(content)
   deploy_file.close()

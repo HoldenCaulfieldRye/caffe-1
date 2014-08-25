@@ -354,6 +354,8 @@ currently:
 & threshold
 -> debugging run_classifier.py
    -> run:
+	  cd python
+	  source venv/bin/activate
           python run_classifier.py classifier-dir=../models/scrape_zone_peel-fine/ data-dir=../data/scrape_zone_peel/
 
       and take it from there  

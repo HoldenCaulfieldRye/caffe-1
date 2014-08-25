@@ -20,7 +20,6 @@ sys.path.insert(0, caffe_root + 'python')
 
 def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
-  print suggest
   suggest = [fname for fname in suggest
              if 'iter' in fname and 'solverstate' not in fname]
   for elem in enumerate(suggest): print elem
@@ -31,11 +30,12 @@ def get_pretrained_model(classifier_dir):
 
 
 def get_np_mean_fname(data_dir):
-  for fname in os.listdir(data_dir):
-    if fname.endswith('mean.npy'): return ojoin(data_dir,fname)
+  # for fname in os.listdir(data_dir):
+    # if fname.endswith('mean.npy'): return ojoin(data_dir,fname)
   proto_img_fname = ''
   for fname in os.listdir(data_dir):
     if fname.endswith('mean.binaryproto'):
+      print 'found binaryproto: %s'%(fname)
       proto_img_fname = fname
       break
   if proto_img_fname == '':
@@ -43,11 +43,22 @@ def get_np_mean_fname(data_dir):
     sys.exit()
 
   # er wait how does it know where the proto img file is?
-  blob_img = caffe_pb2.BlobProto() # ojoin(data_dir,proto_img_fname))
-  npy_mean = caffe.io.blobproto_to_array(blob_img)
-  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('-fine')[0]
-  npy_mean_file = open(ojoin(data_dir,npy_mean_fname),'w')
-  np.save(npy_mean_file, npy_mean)
+  blob = caffe_pb2.BlobProto()
+  data = open(ojoin(data_dir,proto_img_fname), "rb").read()
+  blob.ParseFromString(data)
+  nparray = caffe.io.blobproto_to_array(blob)
+  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean2.npy'
+  npy_mean_file = file(ojoin(data_dir,npy_mean_fname),"wb")
+  np.save(npy_mean_file, nparray)
+  npy_mean_file.close()
+  
+  # blob_img = caffe_pb2.BlobProto() # ojoin(data_dir,proto_img_fname))
+  # npy_mean = caffe.io.blobproto_to_array(blob_img)
+  # npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean.npy'
+  # npy_mean_file = open(,'w')
+  # np.save(npy_mean_file, npy_mean)
+  # npy_mean_file.close()
+  # print 'closed file %s'%(npy_mean_fname)
   return ojoin(data_dir, npy_mean_fname)
 
           
