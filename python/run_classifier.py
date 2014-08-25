@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os, sys
 import caffe
 from caffe.proto import caffe_pb2
-from os.path import join as ojoin
+from os.path import join as oj
 from subprocess import call
 from create_deploy_prototxt import *
 
@@ -26,14 +26,14 @@ def main(classifier_dir, data_dir, data_info):
   
   # create deploy prototxt
   train_file = get_train_file(classifier_dir)
-  # num_imgs = len(os.listdir(ojoin(data_dir,'test')))
+  # num_imgs = len(os.listdir(oj(data_dir,'test')))
   content = train_file.readlines()
   content = edit_train_content_for_deploy(content)
   write_content_to_deploy_file(classifier_dir, content)
     
   # Set the right path to your model definition file, pretrained model 
   # weights, and the image you would like to classify
-  MODEL_FILE = ojoin(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
+  MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   MEAN_FILE = get_np_mean_fname(data_dir)
 
 
@@ -68,7 +68,7 @@ def main(classifier_dir, data_dir, data_info):
 
   # load images
   # parallelise this? use cudaconvnet code
-  imgs,img_fnames = load_all_images_from_dir(ojoin(data_dir,'test'))
+  imgs,img_fnames = load_all_images_from_dir(oj(data_dir,'test'))
 
   # classify images
   num_imgs = len(imgs)
@@ -78,21 +78,24 @@ def main(classifier_dir, data_dir, data_info):
     pred = np.append(pred, net.predict(imgs[i*N:(i+1)*N]),axis=0)
   pred=np.append(pred, net.predict(imgs[-(len(imgs)%N):]),axis=0)
 
+  assert len(pred) == num_imgs
   # save predictions to data_info
   # HEY! move this to bottom once fully operational
-  pred_f = open(oj(data_info, PTRETRAINED+'_pred.npy'),'w') 
-  np.save(pred_f, pred)
-  pred_f.close()
+  d = {'fname': img_fnames,
+       'pred': pred,
+       'label': [],
+       'pred_lab': [],
+       'pot_mislab': np.zeros(num_imgs,int)}
+  
+  d_f = open(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'),'w')
+  np.save(d_f, d)
+  d_f.close()
 
   # print pred bar chart
   # print 'pred shape:', pred[0].shape
   # plt.plot(pred[0])
 
-  # print top 5 classes
-  assert len(pred) == num_imgs
-  # for idx,img_name in enumerate(img_fnames):
-  #   print '%s: %s'(img_fnames[idx], pred[idx])
-  return pred
+  return d
 
 
 def get_flag_and_thresh(data_info):
@@ -111,14 +114,14 @@ def get_pretrained_model(classifier_dir):
              if 'iter' in fname and 'solverstate' not in fname]
   for elem in enumerate(suggest): print elem
   idx = int(raw_input("\nWhich model? "))
-  return ojoin(classifier_dir,suggest[idx])
+  return oj(classifier_dir,suggest[idx])
 
-#  ojoin(, 'caffe_reference_imagenet_model')
+#  oj(, 'caffe_reference_imagenet_model')
 
 
 def get_np_mean_fname(data_dir):
   # for fname in os.listdir(data_dir):
-    # if fname.endswith('mean.npy'): return ojoin(data_dir,fname)
+    # if fname.endswith('mean.npy'): return oj(data_dir,fname)
   proto_img_fname = ''
   for fname in os.listdir(data_dir):
     if fname.endswith('mean.binaryproto'):
@@ -131,22 +134,22 @@ def get_np_mean_fname(data_dir):
 
   # er wait how does it know where the proto img file is?
   blob = caffe_pb2.BlobProto()
-  data = open(ojoin(data_dir,proto_img_fname), "rb").read()
+  data = open(oj(data_dir,proto_img_fname), "rb").read()
   blob.ParseFromString(data)
   nparray = caffe.io.blobproto_to_array(blob)[0]
   npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean2.npy'
-  npy_mean_file = file(ojoin(data_dir,npy_mean_fname),"wb")
+  npy_mean_file = file(oj(data_dir,npy_mean_fname),"wb")
   np.save(npy_mean_file, nparray)
   npy_mean_file.close()
   
-  # blob_img = caffe_pb2.BlobProto() # ojoin(data_dir,proto_img_fname))
+  # blob_img = caffe_pb2.BlobProto() # oj(data_dir,proto_img_fname))
   # npy_mean = caffe.io.blobproto_to_array(blob_img)
   # npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean.npy'
   # npy_mean_file = open(,'w')
   # np.save(npy_mean_file, npy_mean)
   # npy_mean_file.close()
   # print 'closed file %s'%(npy_mean_fname)
-  return ojoin(data_dir, npy_mean_fname)
+  return oj(data_dir, npy_mean_fname)
 
           
 def load_all_images_from_dir(test_dir):
@@ -154,7 +157,7 @@ def load_all_images_from_dir(test_dir):
   img_fnames = os.listdir(test_dir)
   print 'loading images...'
   for fname in img_fnames:
-    batch.append(caffe.io.load_image(ojoin(test_dir,fname)))
+    batch.append(caffe.io.load_image(oj(test_dir,fname)))
   print 'finished loading images.'
   return batch, img_fnames
     
@@ -175,24 +178,34 @@ def fill_dict(d, data_info):
   threshold = float()
 
   # fill in predicted labels and flag if potentially mislab
-  accuracy = 0
+  false_pos, num_pos, false_neg, num_neg = 0, 0, 0, 0
   for idx in range(num_imgs):
-    if d['label'][idx] == argmax
-    if d['pred'][idx][d['label'][idx]] <= 0.2:
-      d['pot_mislab'][idx] = 1       # potentially mislabeled
-      
     # assign predicted label
     if d['pred'][idx][flag_val] >= threshold:
       d['pred_lab'].append(flag_val) 
+    else: d['pred_lab'].append(-(flag_val-1))
+
+    # correct classification or not 
+    if d['pred_lab'][idx] != d['label'][idx]:
+      if d['label'][idx] == flag_val:
+        false_neg += 1
+        num_pos += 1
+      else:
+        false_pos += 1
+        num_neg += 1
     else:
-      d['pred_lab'].append(-(flag_val-1)) # assign predicted label
-      
+      if d['label'][idx] == flag_val: num_pos += 1
+      else: num_neg += 1
 
-  # compute accuracy
-  
-  d['accuracy'] = 
-
+  # compute accuracies
+  d['accuracy'] = {'total': float((false_neg+false_pos)/num_imgs),
+                   'pos': float(false_neg/num_pos),
+                   'neg': float(false_pos/num_neg)}
   return d
+
+
+def compute_kpi(d):
+  # 
 
 
 if __name__ == '__main__':
@@ -215,25 +228,22 @@ if __name__ == '__main__':
     #   train_iter = os.path.abspath(arg.split('=')[-1])
 
   PRETRAINED = get_pretrained_model(classifier_dir)
-  already_pred = oj(data_info, PTRETRAINED+'_pred.npy')
-  if os.path.isfile(already_pred) and
-  raw_input('found %s; use? ([Y]/N)'%(already_pred)) != 'N':
+  already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy')
+  if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N)'%(already_pred)) != 'N':
     # HEY! part in main() where saving needs move to bottom
     # just uncomment below and delete be-below
     # d = main(classifier_dir, data_dir, data_info)
-    pred_f = open(already_pred, 'w') 
-    pred = np.load(already_pred)
+    d_f = open(already_pred, 'w') 
+    d = np.load(already_pred)
   else:
-    pred = main(classifier_dir, data_dir, data_info)
-
-  d = {'fname': img_fnames,
-       'pred': pred,
-       'label': [],
-       'pred_lab': [],
-       'pot_mislab': np.zeros(num_imgs,int)}
+    d = main(classifier_dir, data_dir, data_info)
 
   # get true labels, assign predicted labels, get metrics
   d = fill_dict(d, data_info)
+  print 'with threshold at test only:'
+  print 'accuracy overall: ', d['accuracy']['total']
+  print 'accuracy on positives: ', d['accuracy']['pos']
+  print 'overall on negatives: ', d['accuracy']['neg']
 
   # find highest sig_level that raises >=95% of true positives,
   # and compute % workload that is automated
