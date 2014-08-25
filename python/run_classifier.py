@@ -92,31 +92,8 @@ def main(classifier_dir, data_dir, data_info):
   assert len(pred) == num_imgs
   # for idx,img_name in enumerate(img_fnames):
   #   print '%s: %s'(img_fnames[idx], pred[idx])
-  d = {'fname': img_fnames,
-       'pred': pred,
-       'label': [],
-       'pred_lab': [],
-       'pot_mislab': np.zeros(num_imgs,int)}
+  return pred
 
-  # get true labels, assign predicted labels, get metrics
-  d = fill_dict(d, data_info)
-
-  # find highest sig_level that raises >=95% of true positives,
-  # and compute % workload that is automated
-  Sig_level, pct_auto = compute_kpi(d)
-
-  # for faster prediction, turn off oversampling BUT!
-  # you need to set oversampling in edit_train_content_for_deploy to
-  # False... so you should probs merge the script into this one
-  
-  # Not as fast as you expected? Indeed, in this python demo you are seeing only 4 times speedup. But remember - the GPU code is actually very fast, and the data loading, transformation and interfacing actually start to take more time than the actual conv. net computation itself!
-
-  # To fully utilize the power of GPUs, you really want to:
-
-  # Use larger batches, and minimize python call and data transfer overheads.
-  # Pipeline data load operations, like using a subprocess.
-  # Code in C++. A little inconvenient, but maybe worth it if your dataset is really, really large.
-  
 
 def get_flag_and_thresh(data_info):
   flag_val = 0
@@ -239,12 +216,39 @@ if __name__ == '__main__':
 
   PRETRAINED = get_pretrained_model(classifier_dir)
   already_pred = oj(data_info, PTRETRAINED+'_pred.npy')
-  if os.path.isfile(already_pred):
-    if raw_input('found %s; use? ([Y]/N)'%(already_pred)) == 'N':
-      # HEY! part in main() where saving needs move to bottom
-      d = main(classifier_dir, data_dir, data_info)
-    else:
-      pred_f = open(already_pred, 'w') 
-      d = np.load(already_pred)
+  if os.path.isfile(already_pred) and
+  raw_input('found %s; use? ([Y]/N)'%(already_pred)) != 'N':
+    # HEY! part in main() where saving needs move to bottom
+    # just uncomment below and delete be-below
+    # d = main(classifier_dir, data_dir, data_info)
+    pred_f = open(already_pred, 'w') 
+    pred = np.load(already_pred)
+  else:
+    pred = main(classifier_dir, data_dir, data_info)
 
+  d = {'fname': img_fnames,
+       'pred': pred,
+       'label': [],
+       'pred_lab': [],
+       'pot_mislab': np.zeros(num_imgs,int)}
+
+  # get true labels, assign predicted labels, get metrics
+  d = fill_dict(d, data_info)
+
+  # find highest sig_level that raises >=95% of true positives,
+  # and compute % workload that is automated
+  Sig_level, pct_auto = compute_kpi(d)
+
+  # for faster prediction, turn off oversampling BUT!
+  # you need to set oversampling in edit_train_content_for_deploy to
+  # False... so you should probs merge the script into this one
+  
+  # Not as fast as you expected? Indeed, in this python demo you are seeing only 4 times speedup. But remember - the GPU code is actually very fast, and the data loading, transformation and interfacing actually start to take more time than the actual conv. net computation itself!
+
+  # To fully utilize the power of GPUs, you really want to:
+
+  # Use larger batches, and minimize python call and data transfer overheads.
+  # Pipeline data load operations, like using a subprocess.
+  # Code in C++. A little inconvenient, but maybe worth it if your dataset is really, really large.
+  
 
