@@ -55,11 +55,29 @@ def get_np_mean_fname(data_dir):
 
           
 def initialise_img_dict(test_dir):
-  img_dict = {'fnames': os.listdir(test_dir)}
-  data = np.array([caffe.io.load_image(oj(test_dir,fname)) for fname in img_dict['fnames']])
-  
-  print 'batching images...'
+  d = {'fnames': os.listdir(test_dir), 'data': []}
+  print 'loading images...'
   print '(this is slow, runs on a single core, could be paralellised, or even run on a GPU, it\'s just matrix operations)'
+  print 'batching up images...'
+
+  for i in range(len(d['fnames'])/128):
+    print 'batch %i:'%(i)
+    print d['fnames'][i*128:(i+1)*128]
+  print 'last batch:'
+  print d['fnames'][-(len(d['fnames'])%128):]
+  
+  for i in range(len(d['fnames'])/128):
+    d['data'].append(np.array([caffe.io.load_image(oj(test_dir,d['fnames'][idx])) for idx in range(i*128,(i+1)*128)]))
+    
+  d['data'].append(np.array([caffe.io.load_image(oj(test_dir,d['fnames'][-1*(len(d['fnames'])%128):]))]))
+  return d
+  
+  # data = np.array([caffe.io.load_image(oj(test_dir,fname)) for fname in d['fnames']])
+  # print 'batching up images...'
+  # for i in range(data.size%128):
+  #   d['data'].append([data[i*128:(i+1)*128]])
+  # d['data'].append([data[(data.size%128)*128:]])
+  # return d
 
   # # noccn code
   # print 'Generating data_batch_%i'%(batch_num)
@@ -67,18 +85,18 @@ def initialise_img_dict(test_dir):
   #   delayed(_process_item)(self, name, symlink)
   #   for name, label in names_and_labels)
 
-  batch_idx, img_idx = 0, 0
-  while img_idx < len(img_dict['fnames']):
-    np.append(img_dict['data'], np.array([]))
-    while img_idx < 128:
-      np.append(img_dict['data'][batch_idx],caffe.io.load_image(oj(test_dir,img_dict['fnames'][img_idx])))
-      # img_dict['data'][batch_idx].append(caffe.io.load_image(oj(test_dir,img_dict['fnames'][img_idx])))
-      img_idx += 1
-    batch_idx += 1      
-  # for fname in img_fnames:
-  #   img_dict['data'][i].append(caffe.io.load_image(oj(test_dir,fname)))
-  print '%i batches of 128 imgs made to test data'%(len(img_dict['data']))
-  return img_dict
+  # batch_idx, img_idx = 0, 0
+  # while img_idx < len(d['fnames']):
+  #   np.append(d['data'], np.array([]))
+  #   while img_idx < 128:
+  #     np.append(d['data'][batch_idx],caffe.io.load_image(oj(test_dir,d['fnames'][img_idx])))
+  #     # d['data'][batch_idx].append(caffe.io.load_image(oj(test_dir,d['fnames'][img_idx])))
+  #     img_idx += 1
+  #   batch_idx += 1      
+  # # for fname in img_fnames:
+  # #   d['data'][i].append(caffe.io.load_image(oj(test_dir,fname)))
+  # print '%i batches of 128 imgs made to test data'%(len(d['data']))
+  # return d
     
 
 def get_predictions(net, img_dict):
