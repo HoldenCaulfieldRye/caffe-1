@@ -167,6 +167,7 @@ def fill_dict(d, data_info):
   # get data_info test file
   label_data = open(oj(data_info,'test.txt'),'r').readlines()
   label_data = [line.split() for line in label_data]
+  label_data = sorted(label_data, key= lambda x:x[0])
   print 'label_data[] is like', label_data[:3]
   print 'label_data[:,0] is like', label_data[:3][0]
   print 'd[\'fnames\'] is like', d['fname'][:3]
@@ -215,7 +216,7 @@ def compute_kpi(d):
   print 'check same with above! num_pos:', len(pos)
   
   # sort array descending prob(pos)
-  sorted(pos, key=lambda x: x[1])
+  pos = sorted(pos, key=lambda x: x[1])
   
   # Sig_level is prob(pos) for i-th entry where float(i/len) = 0.95
   Sig_level = pos[0.95*num_imgs][1]
