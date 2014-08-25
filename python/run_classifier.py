@@ -12,6 +12,7 @@ caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
+# python run_classifier.py classifier-dir=../models/scrape_zone_peel-fine/ data-dir=../data/scrape_zone_peel/
 # python run_classifier.py classifier-dir=.. data-dir=..
 
 # Note! data-dir should be data/<name>, not data/<name>/test
@@ -95,6 +96,9 @@ if __name__ == '__main__':
   net = caffe.Classifier(MODEL_FILE, PRETRAINED,
                          image_dims=(256, 256), input_scale=255,
                          mean_file=MEAN_FILE, channel_swap=(2,1,0))
+  # flow of control:
+  #   classifier::__init__(
+  #   classifier::caffe.Net.__init__()
   print 'network loaded successfully'
 
   # set phase to test since we are doing testing

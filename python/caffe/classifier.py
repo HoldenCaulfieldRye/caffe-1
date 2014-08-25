@@ -25,7 +25,9 @@ class Classifier(caffe.Net):
     gpu, mean_file, input_scale, channel_swap: convenience params for
         setting mode, mean, input scale, and channel order.
     """
+    # calling __init__ on the superclass
     caffe.Net.__init__(self, model_file, pretrained_file)
+    print 'caffe.Net.__init__() successful'
     self.set_phase_test()
 
     if gpu:

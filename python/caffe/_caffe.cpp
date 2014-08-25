@@ -13,6 +13,7 @@
 #include <string>  // NOLINT(build/include_order)
 #include <vector>  // NOLINT(build/include_order)
 #include <fstream>  // NOLINT
+#include <iostream>
 
 #include "caffe/caffe.hpp"
 
@@ -37,12 +38,17 @@ using boost::python::vector_indexing_suite;
 // later if the input files are disturbed before they are actually used, but
 // this saves frustration in most cases)
 static void CheckFile(const string& filename) {
-    std::ifstream f(filename.c_str());
-    if (!f.good()) {
-      f.close();
-      throw std::runtime_error("Could not open file " + filename);
-    }
+  std::cout << "just about to go in" << std::endl;
+  std::ifstream f(filename.c_str());
+  if (!f.good()) {
+    std::cout << "_caffe.cpp::CheckFile says " << filename << " NOT a good file!" << std::endl;
     f.close();
+    throw std::runtime_error("Could not open file " + filename);
+  }
+  else {
+    std::cout << "_caffe.cpp::CheckFile says " << filename << " is a good file :)" << std::endl;
+  }
+  f.close();
 }
 
 // wrap shared_ptr<Blob<float> > in a class that we construct in C++ and pass
@@ -143,7 +149,9 @@ struct CaffeNet {
 
   CaffeNet(string param_file, string pretrained_param_file) {
     Init(param_file);
+    std::cout << "_caffe.cpp::CaffeNet::Init completed succesfully" << std::endl;
     CheckFile(pretrained_param_file);
+    std::cout << "_caffe.cpp::CaffeNet::CheckFile(" << pretrained_param_file << ") completed succesfully" << std::endl;
     net_->CopyTrainedLayersFrom(pretrained_param_file);
   }
 
@@ -152,7 +160,9 @@ struct CaffeNet {
 
   void Init(string param_file) {
     CheckFile(param_file);
+    std::cout << "_caffe.cpp::CaffeNet::Init::CheckFile(" << param_file << ") completed succesfully" << std::endl;
     net_.reset(new Net<float>(param_file));
+    std::cout << "_caffe.cpp::CaffeNet::Init::net_::reset(" << param_file << ") completed succesfully" << std::endl;
   }
 
 

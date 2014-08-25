@@ -1,4 +1,4 @@
-name: "scrape_zone_peelFineNet"
+name: "CaffeNet"
 input: "data"
 input_dim: 17930
 input_dim: 3
@@ -199,14 +199,14 @@ layers {
   name: "fc8_clamp"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_aero"
+  top: "fc8_clamp"
   inner_product_param {
     num_output: 2
   }
 }
 layers {
-  name: "loss"
-  type: SOFTMAX_LOSS
-  bottom: "fc8_aero"
-  bottom: "label"
+  name: "prob"
+  type: SOFTMAX
+  bottom: "fc8_clamp"
+  top: "prob"
 }

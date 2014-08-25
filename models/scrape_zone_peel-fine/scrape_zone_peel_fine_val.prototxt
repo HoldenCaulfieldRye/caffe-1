@@ -1,4 +1,4 @@
-name: "scrape_zone_peelFineNet"
+name: "CaffeNet"
 layers {
   name: "data"
   type: DATA
@@ -291,7 +291,7 @@ layers {
   name: "fc8_clamp"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_aero"
+  top: "fc8_clamp"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -311,7 +311,7 @@ layers {
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_aero"
+  bottom: "fc8_clamp"
   top: "prob"
 }
 layers {

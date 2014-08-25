@@ -19,6 +19,9 @@ def edit_train_content_for_deploy(content, num_imgs, oversample=True):
   else: mult = 1
   idx = 0
   while idx < len(content):
+    if 'name: ' in content[idx] and 'FineNet' in content[idx]:
+      content[idx] = 'name: "CaffeNet"\n'
+      idx += 1
     if 'name: "data"' in content[idx]:
       content[idx-1] = 'input: "data"\n'
       content[idx] = 'input_dim: %i\n'%(num_imgs*mult)
@@ -26,7 +29,7 @@ def edit_train_content_for_deploy(content, num_imgs, oversample=True):
       content[idx+2] = 'input_dim: 227\n'
       content[idx+3] = 'input_dim: 227\n'
       del content[idx+4:idx+12]
-      idx += 7
+      idx += 4
     elif 'blobs_lr' in content[idx]:
       del content[idx]
       # idx += 1
@@ -35,10 +38,13 @@ def edit_train_content_for_deploy(content, num_imgs, oversample=True):
       # idx += 1
     elif 'weight_filler' in content[idx]:
       del content[idx:idx+8]
-      idx += 7
     elif 'accuracy' in content[idx]:
       del content[idx-1:idx+5]
-      idx += 5
+    elif 'name: "loss"' in content[idx]:
+      content[idx] =   '  name: "prob"\n'
+      content[idx+1] = '  type: SOFTMAX\n'
+      content[idx+3] = '  top: "prob"\n'
+      break
     else:
       idx += 1
   return content
