@@ -17,8 +17,15 @@ sys.path.insert(0, caffe_root + 'python')
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 
-def get_flag_value(data_info):
-  print open(oj(data_info,'read.txt'),'r').readlines())
+def get_flag_and_thresh(data_info):
+  flag_val = 0
+  thresh = 0.5
+  rl = open(oj(data_info,'read.txt'),'r').readlines()
+  rl = [l.split() for l in rl]
+  for l in rl[2:]:
+    if l == ['1','flag_val']: flag_val = 1
+    elif l[1] == 'threshold': thresh = float(l[0])
+      
   return int(raw_input('1 or 0 corresponds to flag? '))
 
 def get_pretrained_model(classifier_dir):
@@ -75,14 +82,27 @@ def load_all_images_from_dir(test_dir):
   return batch, img_fnames
     
 
-def assign_flags(d, data_info, sig_level, flag_val):
+def fill_dict(d, data_info, sig_level, flag_val):
   # get data_info test file
   label_data = open(oj(data_info,'test.txt'),'r').readlines()
+  label_data = [line.split() for line in label_data]
   assert label_data[:,0] == d['fnames']
+
+  # fill with true labels
   d['label'] = label_f.readlines()[:,1]
+  # get threshold
+  threshold = float()
+
+  # fill in predicted labels and flag if potentially mislab
   for idx in range(len(label_data)):
-    if d['pred'][idx][flag_val] >= sig_level:
-      d['flags'].append(flag_val)
+    if d['pred'][idx][d['label'][idx]] <= 0.2:
+      d['pot_mislab'][idx] = 1       # potentially mislabeled
+    if d['pred'][idx][flag_val] >= threshold:
+      d['pred_lab'].append(flag_val) # assign predicted label
+
+  # compute accuracy
+
+  return d
 
 
 if __name__ == '__main__':
@@ -92,11 +112,13 @@ if __name__ == '__main__':
   # you could set it up as a command line arg if turn out useful
   N = 96
 
-  # this is the sig level
-  # you could set it up as a command line arg if turn out useful
-  sig_level = 0.1
+  # don't need sig_level, using class imbalance threshold
+  # # this is the sig level
+  # # you could set it up as a command line arg if turn out useful
+  # sig_level = 0.1
 
-  flag_val = get_flag_value(data_info)
+  # this comes early because flag_val prompts user
+  flag_val, threshold = get_flag_and_thresh(data_info)
   
   classifier_dir, images = None, None
   for arg in sys.argv:
@@ -155,14 +177,15 @@ if __name__ == '__main__':
 
   # load images
   # parallelise this? use cudaconvnet code
-  img_batch,img_fnames = load_all_images_from_dir(ojoin(data_dir,'test'))
+  imgs,img_fnames = load_all_images_from_dir(ojoin(data_dir,'test'))
 
   # classify images
-  pred = net.predict(img_batch[:N])
+  num_imgs = len(imgs)
+  pred = net.predict(imgs[:N])
   # print pred
-  for i in range(1,len(img_batch)/N):
-    pred = np.append(pred, net.predict(img_batch[i*N:(i+1)*N]),axis=0)
-  pred=np.append(pred, net.predict(img_batch[-(len(img_batch)%N):]),axis=0)
+  for i in range(1,num_imgs/N):
+    pred = np.append(pred, net.predict(imgs[i*N:(i+1)*N]),axis=0)
+  pred=np.append(pred, net.predict(imgs[-(len(imgs)%N):]),axis=0)
 
   
   # print pred bar chart
@@ -170,14 +193,16 @@ if __name__ == '__main__':
   # plt.plot(pred[0])
 
   # print top 5 classes
-  assert len(preds) == len(img_batch)
+  assert len(preds) == num_imgs
   # for idx,img_name in enumerate(img_fnames):
   #   print '%s: %s'(img_fnames[idx], pred[idx])
   d = {'fname': img_fnames,
        'pred': pred,
        'label': [],
-       'flag': [],}
-  assign_flags(d,data_info, sig_level, flag_val)
+       'pred_lab': [],
+       'pot_mislab': np.zeros(num_imgs,int)}
+
+  fill_dict(d, data_info, sig_level, flag_val)
 
   # for faster prediction, turn off oversampling BUT!
   # you need to set oversampling in edit_train_content_for_deploy to
