@@ -88,8 +88,10 @@ class Classifier(caffe.Net):
       inputs = inputs[:, crop[0]:crop[2], crop[1]:crop[3], :]
 
     # Classify
+    print 'classifier::predict: preprocessing images...'
     caffe_in = np.asarray([self.preprocess(self.inputs[0], in_)
                            for in_ in inputs])
+    print 'finished preprocessing images.'
     out = self.forward_all(**{self.inputs[0]: caffe_in})
     predictions = out[self.outputs[0]].squeeze(axis=(2,3))
 

@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
   # load images
   # parallelise this? use cudaconvnet code
-  img_dict = initialise_img_dict(oj(data_dir,'test'))
+  img_batch,img_fnames = load_all_images_from_dir(ojoin(data_dir,'test'))
 
   # use GPU for the computation
   # so you can run on entire test set
@@ -146,9 +146,9 @@ if __name__ == '__main__':
   # plt.plot(prediction[0])
 
   # print top 5 classes
-  print 'predictions:'
-  for idx,img in enumerate(img_fnames):
-    print '%s: %s'(img, prediction[idx])
+  print 'predictions:', prediction
+  # for idx,img_name in enumerate(img_fnames):
+  #   print '%s: %s'(img_fnames[idx], prediction[idx])
   
     
 
