@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os, sys
 import caffe
 from caffe.proto import caffe_pb2
-from os.path import join as oj
+from os.path import join as ojoin
 from subprocess import call
 from create_deploy_prototxt import *
 
@@ -24,14 +24,14 @@ def get_pretrained_model(classifier_dir):
              if 'iter' in fname and 'solverstate' not in fname]
   for elem in enumerate(suggest): print elem
   idx = int(raw_input("\nWhich model? "))
-  return oj(classifier_dir,suggest[idx])
+  return ojoin(classifier_dir,suggest[idx])
 
-#  oj(, 'caffe_reference_imagenet_model')
+#  ojoin(, 'caffe_reference_imagenet_model')
 
 
 def get_np_mean_fname(data_dir):
   # for fname in os.listdir(data_dir):
-  #   if fname.endswith('mean.npy'): return oj(data_dir,fname)
+    # if fname.endswith('mean.npy'): return ojoin(data_dir,fname)
   proto_img_fname = ''
   for fname in os.listdir(data_dir):
     if fname.endswith('mean.binaryproto'):
@@ -44,63 +44,32 @@ def get_np_mean_fname(data_dir):
 
   # er wait how does it know where the proto img file is?
   blob = caffe_pb2.BlobProto()
-  data = open(oj(data_dir,proto_img_fname), "rb").read()
+  data = open(ojoin(data_dir,proto_img_fname), "rb").read()
   blob.ParseFromString(data)
   nparray = caffe.io.blobproto_to_array(blob)[0]
-  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean.npy'
-  npy_mean_file = file(oj(data_dir,npy_mean_fname),"wb")
+  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean2.npy'
+  npy_mean_file = file(ojoin(data_dir,npy_mean_fname),"wb")
   np.save(npy_mean_file, nparray)
   npy_mean_file.close()
-  return oj(data_dir, npy_mean_fname)
+  
+  # blob_img = caffe_pb2.BlobProto() # ojoin(data_dir,proto_img_fname))
+  # npy_mean = caffe.io.blobproto_to_array(blob_img)
+  # npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean.npy'
+  # npy_mean_file = open(,'w')
+  # np.save(npy_mean_file, npy_mean)
+  # npy_mean_file.close()
+  # print 'closed file %s'%(npy_mean_fname)
+  return ojoin(data_dir, npy_mean_fname)
 
           
-def initialise_img_dict(test_dir):
-  d = {'fnames': os.listdir(test_dir), 'data': []}
-  print 'loading images...'
-  print '(this is slow, runs on a single core, could be paralellised, or even run on a GPU, it\'s just matrix operations)'
-  print 'batching up images...'
-
-  for i in range(len(d['fnames'])/128):
-    print 'batch %i:'%(i)
-    print d['fnames'][i*128:(i+1)*128]
-  print 'last batch:'
-  print d['fnames'][-(len(d['fnames'])%128):]
-  
-  for i in range(len(d['fnames'])/128):
-    d['data'].append(np.array([caffe.io.load_image(oj(test_dir,d['fnames'][idx])) for idx in range(i*128,(i+1)*128)]))
-    
-  d['data'].append(np.array([caffe.io.load_image(oj(test_dir,d['fnames'][-1*(len(d['fnames'])%128):]))]))
-  return d
-  
-  # data = np.array([caffe.io.load_image(oj(test_dir,fname)) for fname in d['fnames']])
-  # print 'batching up images...'
-  # for i in range(data.size%128):
-  #   d['data'].append([data[i*128:(i+1)*128]])
-  # d['data'].append([data[(data.size%128)*128:]])
-  # return d
-
-  # # noccn code
-  # print 'Generating data_batch_%i'%(batch_num)
-  # rows = Parallel(n_jobs=self.n_jobs)(
-  #   delayed(_process_item)(self, name, symlink)
-  #   for name, label in names_and_labels)
-
-  # batch_idx, img_idx = 0, 0
-  # while img_idx < len(d['fnames']):
-  #   np.append(d['data'], np.array([]))
-  #   while img_idx < 128:
-  #     np.append(d['data'][batch_idx],caffe.io.load_image(oj(test_dir,d['fnames'][img_idx])))
-  #     # d['data'][batch_idx].append(caffe.io.load_image(oj(test_dir,d['fnames'][img_idx])))
-  #     img_idx += 1
-  #   batch_idx += 1      
-  # # for fname in img_fnames:
-  # #   d['data'][i].append(caffe.io.load_image(oj(test_dir,fname)))
-  # print '%i batches of 128 imgs made to test data'%(len(d['data']))
-  # return d
+def load_all_images_from_dir(test_dir):
+  batch = []
+  img_fnames = os.listdir(test_dir)
+  for fname in img_fnames:
+    batch.append(caffe.io.load_image(ojoin(test_dir,fname)))
+  return batch, img_fnames
     
 
-def get_predictions(net, img_dict):
-  net.predict(batch)
 
 if __name__ == '__main__':
   print 'Warning: make sure that caffe is on the python path!'
@@ -117,14 +86,14 @@ if __name__ == '__main__':
 
   # create deploy prototxt
   train_file = get_train_file(classifier_dir)
-  # num_imgs = len(os.listdir(oj(data_dir,'test')))
+  # num_imgs = len(os.listdir(ojoin(data_dir,'test')))
   content = train_file.readlines()
   content = edit_train_content_for_deploy(content)
   write_content_to_deploy_file(classifier_dir, content)
     
   # Set the right path to your model definition file, pretrained model 
   # weights, and the image you would like to classify
-  MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
+  MODEL_FILE = ojoin(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   PRETRAINED = get_pretrained_model(classifier_dir)
   MEAN_FILE = get_np_mean_fname(data_dir)
 
@@ -150,33 +119,31 @@ if __name__ == '__main__':
   # so you can run this on your laptop!
   # net.set_mode_cpu()
 
+  # use GPU for the computation
+  # so you can run on entire test set
+  net.set_mode_gpu()
+  
   # load image
   # input_image = caffe.io.load_image(images)
   # plt.imshow(input_image)
 
   # load images
   # parallelise this? use cudaconvnet code
-  img_dict = initialise_img_dict(oj(data_dir,'test'))
+  img_batch,img_fnames = load_all_images_from_dir(ojoin(data_dir,'test'))
 
-  # use GPU for the computation
-  # so you can run on entire test set
-  net.set_mode_gpu()
-  print 'Warning: in GPU mode; if your GPU is not CUDA-enabled, this will not work!'
-  
   # classify images
-  print 'computing predictions...'
-  preds = get_predictions(net, img_dict)
+  prediction = net.predict(img_batch)
 
   # print prediction bar chart
   # print 'prediction shape:', prediction[0].shape
   # plt.plot(prediction[0])
 
   # print top 5 classes
-  print 'predictions:'
-  for idx,img in enumerate(img_fnames):
-    print '%s: %s'(img, prediction[idx])
+  print 'predictions:', prediction
+  # for idx,img_name in enumerate(img_fnames):
+  #   print '%s: %s'(img_fnames[idx], prediction[idx])
   
-    
+
 
   # for faster prediction, turn off oversampling BUT!
   # you need to set oversampling in edit_train_content_for_deploy to
