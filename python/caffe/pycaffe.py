@@ -193,23 +193,27 @@ def _Net_set_mean(self, input_, mean_f, mode='elementwise'):
     print 'b.1'
     print 
     in_shape = self.blobs[input_].data.shape # bug here, input_ == 'data'
-    # it's the data blob! it should contain data but it doesn't
+    # it's the data blob!
+    # it should contain stuff but it doesn't, hence segfault?
     # maybe because not following symlinks
     print 'b.2'
     mean = np.load(mean_f)
     print 'b.3'
     if mode == 'elementwise':
-        if mean.shape != in_shape[1:]:
-            # Resize mean (which requires H x W x K input in range [0,1]).
-            m_min, m_max = mean.min(), mean.max()
-            normal_mean = (mean - m_min) / (m_max - m_min)
-            mean = caffe.io.resize_image(normal_mean.transpose((1,2,0)),
-                    in_shape[2:]).transpose((2,0,1)) * (m_max - m_min) + m_min
+      print 'b.4'
+      if mean.shape != in_shape[1:]:
+        # Resize mean (which requires H x W x K input in range [0,1]).
+        m_min, m_max = mean.min(), mean.max()
+        normal_mean = (mean - m_min) / (m_max - m_min)
+        mean = caffe.io.resize_image(normal_mean.transpose((1,2,0)),
+                                     in_shape[2:]).transpose((2,0,1))*(m_max - m_min) + m_min
         self.mean[input_] = mean
     elif mode == 'channel':
-        self.mean[input_] = mean.mean(1).mean(1).reshape((in_shape[1], 1, 1))
+      print 'b.5'
+      self.mean[input_] = mean.mean(1).mean(1).reshape((in_shape[1], 1, 1))
     else:
-        raise Exception('Mode not in {}'.format(['elementwise', 'channel']))
+      print 'b.6'
+      raise Exception('Mode not in {}'.format(['elementwise', 'channel']))
 
 
 
