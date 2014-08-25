@@ -38,7 +38,9 @@ class Classifier(caffe.Net):
 
     print 'b'
     if mean_file:
-      print 'self.inputs: %s'%(self.inputs)
+      print 'self.inputs[0]: %s'%(self.inputs[0])
+      # self.inputs is array of blob names from the net that we want
+      # in current case, just data, ie first blob
       self.set_mean(self.inputs[0], mean_file) # bug here; wtf is self.inputs ??
       print 'c'
       if input_scale:

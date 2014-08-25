@@ -339,3 +339,21 @@ IDENTIFIED PROBS & SOLS:
 -> what if prior is (1,0)
 -> must implement under- and over-sampling as well
    shit that will be hard
+
+
+
+=====
+
+
+Fuck it, that is too hard. And it might not even work. Threshold
+works, is easier to implement, and probably has more powerful results.
+
+currently:
+-> graphic07 writing python wrappers for running the net
+-> idea is to get the prediction probs, and assign flags based on them
+& threshold
+-> debugging run_classifier.py
+   -> run:
+          python run_classifier.py classifier-dir=../models/scrape_zone_peel-fine/ data-dir=../data/scrape_zone_peel/
+
+      and take it from there  
