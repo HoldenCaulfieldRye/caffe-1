@@ -12,11 +12,14 @@ caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
-# python run_classifier.py classifier-dir=../models/scrape_zone_peel-fine/ data-dir=../data/scrape_zone_peel/
-# python run_classifier.py classifier-dir=.. data-dir=..
+# python run_classifier.py classifier-dir=../models/scrape_zone_peel-fine/ data-dir=../data/scrape_zone_peel/ data-info=../data_info/scrape_zone_peel/
+# python run_classifier.py classifier-dir=.. data-dir=.. data-info=..
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 
+def get_flag_value(data_info):
+  print open(oj(data_info,'read.txt'),'r').readlines())
+  return int(raw_input('1 or 0 corresponds to flag? '))
 
 def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
@@ -65,15 +68,36 @@ def get_np_mean_fname(data_dir):
 def load_all_images_from_dir(test_dir):
   batch = []
   img_fnames = os.listdir(test_dir)
+  print 'loading images...'
   for fname in img_fnames:
     batch.append(caffe.io.load_image(ojoin(test_dir,fname)))
+  print 'finished loading images.'
   return batch, img_fnames
     
+
+def assign_flags(d, data_info, sig_level, flag_val):
+  # get data_info test file
+  label_data = open(oj(data_info,'test.txt'),'r').readlines()
+  assert label_data[:,0] == d['fnames']
+  d['label'] = label_f.readlines()[:,1]
+  for idx in range(len(label_data)):
+    if d['pred'][idx][flag_val] >= sig_level:
+      d['flags'].append(flag_val)
 
 
 if __name__ == '__main__':
   print 'Warning: make sure that caffe is on the python path!'
 
+  # this is the test batch size
+  # you could set it up as a command line arg if turn out useful
+  N = 96
+
+  # this is the sig level
+  # you could set it up as a command line arg if turn out useful
+  sig_level = 0.1
+
+  flag_val = get_flag_value(data_info)
+  
   classifier_dir, images = None, None
   for arg in sys.argv:
     if "classifier-dir=" in arg:
@@ -81,6 +105,8 @@ if __name__ == '__main__':
       classifier_name = classifier_dir.split('/')[-1]
     elif "data-dir=" in arg:
       data_dir = os.path.abspath(arg.split('=')[-1])
+    elif "data-info=" in arg:
+      data_info = os.path.abspath(arg.split('=')[-1])
     # elif "train-iter=" in arg:
     #   train_iter = os.path.abspath(arg.split('=')[-1])
 
@@ -132,18 +158,26 @@ if __name__ == '__main__':
   img_batch,img_fnames = load_all_images_from_dir(ojoin(data_dir,'test'))
 
   # classify images
-  prediction = net.predict(img_batch)
+  pred = net.predict(img_batch[:N])
+  # print pred
+  for i in range(1,len(img_batch)/N):
+    pred = np.append(pred, net.predict(img_batch[i*N:(i+1)*N]),axis=0)
+  pred=np.append(pred, net.predict(img_batch[-(len(img_batch)%N):]),axis=0)
 
-  # print prediction bar chart
-  # print 'prediction shape:', prediction[0].shape
-  # plt.plot(prediction[0])
+  
+  # print pred bar chart
+  # print 'pred shape:', pred[0].shape
+  # plt.plot(pred[0])
 
   # print top 5 classes
-  print 'predictions:', prediction
+  assert len(preds) == len(img_batch)
   # for idx,img_name in enumerate(img_fnames):
-  #   print '%s: %s'(img_fnames[idx], prediction[idx])
-  
-
+  #   print '%s: %s'(img_fnames[idx], pred[idx])
+  d = {'fname': img_fnames,
+       'pred': pred,
+       'label': [],
+       'flag': [],}
+  assign_flags(d,data_info, sig_level, flag_val)
 
   # for faster prediction, turn off oversampling BUT!
   # you need to set oversampling in edit_train_content_for_deploy to
