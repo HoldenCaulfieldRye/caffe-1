@@ -29,30 +29,30 @@ class Classifier(caffe.Net):
     caffe.Net.__init__(self, model_file, pretrained_file)
     print 'caffe.Net.__init__() successful'
     self.set_phase_test()
-    print 'a'
+    # print 'a'
     
     if gpu:
       self.set_mode_gpu()
     else:
       self.set_mode_cpu()
 
-    print 'b'
+    # print 'b'
     if mean_file:
-      print 'self.inputs[0]: %s'%(self.inputs[0])
+      # print 'self.inputs[0]: %s'%(self.inputs[0])
       # self.inputs is array of blob names from the net that we want
       # in current case, just data, ie first blob
       self.set_mean(self.inputs[0], mean_file) # bug here; wtf is self.inputs ??
-      print 'c'
+      # print 'c'
       if input_scale:
-        print 'd'
+        # print 'd'
         self.set_input_scale(self.inputs[0], input_scale)
         if channel_swap:
-          print 'e'
+          # print 'e'
           self.set_channel_swap(self.inputs[0], channel_swap)
 
-    print 'f'
+    # print 'f'
     self.crop_dims = np.array(self.blobs[self.inputs[0]].data.shape[2:])
-    print 'g'
+    # print 'g'
     if not image_dims:
       image_dims = self.crop_dims
     self.image_dims = image_dims

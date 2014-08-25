@@ -129,7 +129,7 @@ if __name__ == '__main__':
 
   # load images
   # parallelise this? use cudaconvnet code
-  img_batch,img_fnames = load_all_images_from_dir(ojoin(data_dir,test))
+  img_batch,img_fnames = load_all_images_from_dir(ojoin(data_dir,'test'))
 
   # classify images
   prediction = net.predict(img_batch)
