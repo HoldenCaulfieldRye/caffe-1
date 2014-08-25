@@ -1,2 +1,4 @@
 0 NoContaminationRisk
 1 ContaminationRisk
+0.80 threshold
+1 flag_val
