@@ -31,7 +31,7 @@ def get_pretrained_model(classifier_dir):
 
 def get_np_mean_fname(data_dir):
   # for fname in os.listdir(data_dir):
-    # if fname.endswith('mean.npy'): return ojoin(data_dir,fname)
+  #   if fname.endswith('mean.npy'): return ojoin(data_dir,fname)
   proto_img_fname = ''
   for fname in os.listdir(data_dir):
     if fname.endswith('mean.binaryproto'):
@@ -46,8 +46,8 @@ def get_np_mean_fname(data_dir):
   blob = caffe_pb2.BlobProto()
   data = open(ojoin(data_dir,proto_img_fname), "rb").read()
   blob.ParseFromString(data)
-  nparray = caffe.io.blobproto_to_array(blob)
-  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean2.npy'
+  nparray = caffe.io.blobproto_to_array(blob)[0]
+  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean.npy'
   npy_mean_file = file(ojoin(data_dir,npy_mean_fname),"wb")
   np.save(npy_mean_file, nparray)
   npy_mean_file.close()
