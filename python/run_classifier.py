@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 #%matplotlib inline
-import os, sys
+import os, sys, shutil
 import caffe
 import check
 import yaml
@@ -194,7 +194,7 @@ def fill_dict(d, data_info):
     # correct classification or not 
     if d['pred_lab'][idx] != d['label'][idx]:
       # print '%i != %i so wrong classification'%(d['pred_lab'][idx],d['label'][idx])
-      d['pot_mislab'].append(d['fname'][idx])
+      d['pot_mislab'].append(idx)
       if d['label'][idx] == flag_val:
         false_neg += 1
         num_pos += 1
@@ -233,17 +233,27 @@ def compute_kpi(d):
   print 'check same with above! num_pos:', len(pos)
   
   # sort array descending prob(pos)
-  pos = sorted(pos, key=lambda x: x[1])
+  pos = sorted(pos, key=lambda x: x[1], reverse=True)
   
   # Sig_level is prob(pos) for i-th entry where float(i/len) = 0.95
-  Sig_level = pos[int(0.95*len(pos))][1]
+  print 'sig levels required for following accuracy on positives:'
+  print '70\%:',pos[int(0.7*len(pos))][1]
+  print '80\%:',pos[int(0.8*len(pos))][1]
+  print '90\%:',pos[int(0.9*len(pos))][1]
+  print '95\%:',pos[int(0.95*len(pos))][1]
+  Sig_level = float(pos[int(0.95*len(pos))][1])
   
   # pct_auto is, for all imgs:
   # (num imgs with prob(pos) < Sig_level) / (num imgs)
+  # for idx in range(num_imgs):
+  #   if d['pred'][idx][flag] < Sig_level:
+  #     automated.append(idx)
+  #   else:
+  #     print d['pred'][idx][flag], 'is too high, would get flagged'
   automated = [idx for idx in range(num_imgs)
-               if d['pred'][idx][flag] < Sig_level]
+               if float(d['pred'][idx][flag]) < Sig_level]
 
-  return Sig_level, float(len(automated)/num_imgs)
+  return Sig_level, len(automated)/float(num_imgs)
 
 
 
@@ -282,7 +292,14 @@ if __name__ == '__main__':
   d = fill_dict(d, data_info)
 
   # potential mislabels
-  
+  try:
+    os.mkdir(oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1]))
+  except:
+    shutil.rmtree(oj(data_info,'potential_mislabels'+PRETRAINED.split('/')[-1]))
+    os.mkdir(oj(data_info,'potential_mislabels'))
+  for idx in d['pot_mislab']:
+    shutil.copy(oj(data_dir,'test',d['fname'][idx]),
+                oj(oj(data_info,'potential_mislabels')))
 
   # accuracies
   print 'with threshold at test only:'
