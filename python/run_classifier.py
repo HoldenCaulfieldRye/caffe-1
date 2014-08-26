@@ -227,7 +227,8 @@ def compute_kpi(d):
   num_imgs = len(d['fname'])
   flag = get_flag_and_thresh(data_info)[0]
   # create array (idx,prob(pos)) of all positives
-  pos = [(idx,d['pred'][flag]) for idx in range(num_imgs)
+  pos = [(idx,float(d['pred'][idx][flag]))
+         for idx in range(num_imgs)
          if d['label'][idx] == flag]
   print 'check same with above! num_pos:', len(pos)
   
@@ -235,12 +236,12 @@ def compute_kpi(d):
   pos = sorted(pos, key=lambda x: x[1])
   
   # Sig_level is prob(pos) for i-th entry where float(i/len) = 0.95
-  Sig_level = pos[0.95*num_imgs][1]
+  Sig_level = pos[int(0.95*len(pos))][1]
   
   # pct_auto is, for all imgs:
   # (num imgs with prob(pos) < Sig_level) / (num imgs)
   automated = [idx for idx in range(num_imgs)
-               if d['pred'][idx] < Sig_level]
+               if d['pred'][idx][flag] < Sig_level]
 
   return Sig_level, float(len(automated)/num_imgs)
 
@@ -280,6 +281,9 @@ if __name__ == '__main__':
   # get true labels, assign predicted labels, get metrics
   d = fill_dict(d, data_info)
 
+  # potential mislabels
+  
+
   # accuracies
   print 'with threshold at test only:'
   print 'accuracy overall: ', d['accuracy']['total']
@@ -289,6 +293,10 @@ if __name__ == '__main__':
   # find highest sig_level that raises >=95% of true positives,
   # and compute % workload that is automated
   Sig_level, pct_auto = compute_kpi(d)
+  print 'sig level required for 95% accuracy on positives:', Sig_level
+  print 'this enables', pct_auto, 'automation'
+
+  
 
   # for faster prediction, turn off oversampling BUT!
   # you need to set oversampling in edit_train_content_for_deploy to
