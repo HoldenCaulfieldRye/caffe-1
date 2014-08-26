@@ -9,7 +9,9 @@ from subprocess import call
 # Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
 
 def get_test_interval(model_dir):
-  return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines())
+  test = open(oj(model_dir,'train_output.log.test'),'r').readlines()
+  return int(test[2].split()[0])
+  # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
 
 
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
@@ -35,6 +37,9 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   ytest_acc = np.array([el[1] for el in val_acc[start:end]])
   ytest_loss = np.array([el[1] for el in val_loss[start:end]])
   plt.plot(x, ytrain, label='training loss')
+  if len(x) != len(ytest_acc):
+    print 'len(x) %i != %i len(ytrain)'%(len(x),len(ytest_acc))
+    sys.exit()
   plt.plot(x, ytest_acc, label='validation accuracy')
   plt.plot(x, ytest_loss, label='validation loss')
   plt.legend(loc='upper left')
@@ -83,7 +88,20 @@ def get_caffe_errors(model_dir, typ, idx):
   content = [' '.join(line.split()).split(' ') for line in content
              if not line.startswith('#')]
   print 'raw content looked like %s and %s'%(content[0], content[-1])
+
+  for i in range(len(content)):
+    if len(content[i]) <= idx:
+      print 'line[%i] is messed up: %s'%(i,content[i])
+      sys.exit()
   content = [(line[0],line[idx]) for line in content]
+  # end = len(content)
+  # while True:
+  #   try:
+  #     content = [(line[0],line[idx]) for line in content[:end]]
+  #     break
+  #   except:
+  #     end -= 1
+    
   print 'selected content looks like %s and %s'%(content[0], content[-1])
   return content
 
@@ -120,16 +138,9 @@ if __name__ == '__main__':
     if arg.startswith("end-iter="):
       end = int(arg.split('=')[-1])
 
-  test_interval = get_test_interval(model_dir) - 2
-  train = get_caffe_train_errors(model_dir)
-  while True:
-    try:
-      test_interval += 1
-      val_acc, val_loss = get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
-      print 'train looks like %s and %s'%(train[0], train[-1])
-      matplot(model_dir, train, val_acc, val_loss, start, end)
-      break
-    except:
-      pass
+  test_interval = get_test_interval(model_dir)
+  train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
+  print 'train looks like %s and %s'%(train[0], train[-1])
+  matplot(model_dir, train, val_acc, val_loss, start, end)
 
   # ideal would be get layer names from cfg, and prompt for which ones
