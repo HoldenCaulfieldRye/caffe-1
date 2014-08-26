@@ -3,10 +3,14 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from os.path import join as ojoin
+from os.path import join as oj
 from subprocess import call
 
 # Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
+
+def get_test_interval(model_dir):
+  return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
+
 
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   
@@ -38,7 +42,7 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   plt.ylabel('TrainingLoss')
   # plt.title('Go on choose one')
   plt.grid(True)
-  plt.savefig(ojoin(model_dir,'plot_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'.png'))
+  plt.savefig(oj(model_dir,'plot_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'.png'))
   # plt.show()
 
 
@@ -74,7 +78,7 @@ def get_caffe_errors(model_dir, typ, idx):
   if len(data_files) != 1:
     print 'there is not exactly 1 filename otf \'*train_output*.log.%s\' in given directory'%(typ)
     sys.exit()
-  content = open(ojoin(model_dir,data_files[0]),'r').readlines()
+  content = open(oj(model_dir,data_files[0]),'r').readlines()
   legit_length = len(content[1])
   content = [' '.join(line.split()).split(' ') for line in content
              if not line.startswith('#')]
@@ -87,7 +91,7 @@ def get_caffe_errors(model_dir, typ, idx):
 
 if __name__ == '__main__':
 
-  print('Usage: python plot.py path/to/model test-inter=.. [start-epoch=..] [end-epoch==..]')
+  print('Usage: python plot.py path/to/model [start-epoch=..] [end-epoch==..]')
 
   try: 
     os.environ['DISPLAY']
@@ -97,17 +101,17 @@ if __name__ == '__main__':
 
   model_dir = os.path.abspath(sys.argv[1])
 
-  # command = "./parselog.sh %s"%(ojoin(model_dir,'train_output.log'))
-  # print os.path.isfile(ojoin(model_dir,'train_output.log'))
+  # command = "./parselog.sh %s"%(oj(model_dir,'train_output.log'))
+  # print os.path.isfile(oj(model_dir,'train_output.log'))
   # print 'command:', command
   # call(command)
     
-  test_interval = [int(arg.split('=')[-1]) for arg in sys.argv
-                   if arg.startswith('test-inter=')]
-  if len(test_interval) != 1:
-      print 'ERROR: test-inter not properly given'
-      sys.exit()
-  else: test_interval = test_interval[0]
+  # test_interval = [int(arg.split('=')[-1]) for arg in sys.argv
+  #                  if arg.startswith('test-inter=')]
+  # if len(test_interval) != 1:
+  #     print 'ERROR: test-inter not properly given'
+  #     sys.exit()
+  # else: test_interval = test_interval[0]
   
   start,end = -1,-1
   for arg in sys.argv:
@@ -115,7 +119,8 @@ if __name__ == '__main__':
       start = int(arg.split('=')[-1])
     if arg.startswith("end-iter="):
       end = int(arg.split('=')[-1])
-      
+
+  test_interval = get_test_interval(model_dir)
   train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
   print 'train looks like %s and %s'%(train[0], train[-1])
   matplot(model_dir, train, val_acc, val_loss, start, end)
