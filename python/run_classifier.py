@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import os, sys
 import caffe
 import check
+import yaml
 from caffe.proto import caffe_pb2
 from os.path import join as oj
 from subprocess import call
@@ -88,7 +89,7 @@ def main(classifier_dir, data_dir, data_info):
   
   # save predictions to data_info
   # HEY! move this to bottom once fully operational
-  np.savez(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npz'), d)
+  np.save(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'), d)
 
   # print pred bar chart
   # print 'pred shape:', pred[0].shape
@@ -168,16 +169,19 @@ def fill_dict(d, data_info):
   label_data = open(oj(data_info,'test.txt'),'r').readlines()
   label_data = [line.split() for line in label_data]
   label_data = sorted(label_data, key= lambda x:x[0])
-  print 'label_data[] is like', label_data[:3]
-  print 'label_data[:,0] is like', label_data[:3][0]
-  print 'd[\'fnames\'] is like', d['fname'][:3]
-  assert label_data[:][0] == d['fname']
+  # print 'label_data[] is like', label_data[:10]
+  # print 'label_data[:][0] is like', label_data[:3][0]
+  # print 'd[\'fnames\'] is like', d['fname'][:3]
+  assert d['fname'] == [el[0] for el in label_data]
   num_imgs = len(label_data)
 
   # fill with true labels
-  d['label'] = label_f.readlines()[:,1]
-  # get threshold
-  threshold = float()
+  d['label'] = [int(el[1]) for el in label_data]
+
+  # everything ok?
+  # for key in d.keys():
+  #   print "d['%s'] is like %s"%(key,str(d[key][:3]))
+  # print 'flag_val:', flag_val
 
   # fill in predicted labels and flag if potentially mislab
   false_pos, num_pos, false_neg, num_neg = 0, 0, 0, 0
@@ -189,6 +193,7 @@ def fill_dict(d, data_info):
 
     # correct classification or not 
     if d['pred_lab'][idx] != d['label'][idx]:
+      # print '%i != %i so wrong classification'%(d['pred_lab'][idx],d['label'][idx])
       d['pot_mislab'].append(d['fname'][idx])
       if d['label'][idx] == flag_val:
         false_neg += 1
@@ -197,14 +202,24 @@ def fill_dict(d, data_info):
         false_pos += 1
         num_neg += 1
     else:
+      # print '%i == %i so correct classification'%(d['pred_lab'][idx],d['label'][idx])
       if d['label'][idx] == flag_val: num_pos += 1
       else: num_neg += 1
 
+  # everything ok?
+  # for key in d.keys():
+  #   print "d['%s'] is like %s"%(key,str(d[key][:8]))
+  # print 'flag_val:', flag_val
+  print 'false_neg: %i, false_pos: %i, num_neg: %i, num_pos: %i'%(false_neg,false_pos,num_neg,num_pos)
+
   # compute accuracies
   print 'num_pos:', num_pos
-  d['accuracy'] = {'total': float((false_neg+false_pos)/num_imgs),
-                   'pos': float(false_neg/num_pos),
-                   'neg': float(false_pos/num_neg)}
+  d['accuracy']= {}
+  d['accuracy']['total'] = 1-(false_neg+false_pos)/float(num_imgs)
+  d['accuracy']['pos'] = 1-false_neg/float(num_pos)
+  d['accuracy']['neg'] = 1-false_pos/float(num_neg)
+  print "d['accuracy']", d['accuracy']
+  print 'false_neg: %i, false_pos: %i, num_neg: %i, num_pos: %i'%(false_neg,false_pos,num_neg,num_pos)
   return d
 
 
@@ -255,9 +270,9 @@ if __name__ == '__main__':
     sys.exit()
 
   PRETRAINED = get_pretrained_model(classifier_dir)
-  already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npz')
+  already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy')
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
-    d = np.load(already_pred)
+    d = (np.load(already_pred)).item()
   else:
     d = main(classifier_dir, data_dir, data_info)
 
@@ -269,7 +284,7 @@ if __name__ == '__main__':
   print 'with threshold at test only:'
   print 'accuracy overall: ', d['accuracy']['total']
   print 'accuracy on positives: ', d['accuracy']['pos']
-  print 'overall on negatives: ', d['accuracy']['neg']
+  print 'accuracy on negatives: ', d['accuracy']['neg']
 
   # find highest sig_level that raises >=95% of true positives,
   # and compute % workload that is automated

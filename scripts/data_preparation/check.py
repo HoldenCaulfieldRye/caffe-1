@@ -14,12 +14,14 @@ def check(data_dir, data_info):
     print 'not even same number of files'
 
   count = 0
-  for f in d: if f not in di: count += 1
+  for f in d:
+    if f not in di: count += 1
 
   count_2 = 0
-  for f in di: if f not in d: count_2 += 1
+  for f in di:
+    if f not in d: count_2 += 1
 
-  return count, count_2
+  return [count,count_2]
 
 
 if __name__ == '__main__':
