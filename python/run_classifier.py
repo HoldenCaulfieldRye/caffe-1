@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 #%matplotlib inline
 import os, sys
 import caffe
+import check
 from caffe.proto import caffe_pb2
 from os.path import join as oj
 from subprocess import call
@@ -12,7 +13,7 @@ caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
-# python run_classifier.py classifier-dir=../models/scrape_zone_peel-fine/ data-dir=../data/scrape_zone_peel/ data-info=../data_info/scrape_zone_peel/
+# python run_classifier.py classifier-dir=../models/ground_sheet-fine data-dir=../data/ground_sheet_3501 data-info=../data_info/ground_sheet_3501
 # python run_classifier.py classifier-dir=.. data-dir=.. data-info=..
 
 # Note! data-dir should be data/<name>, not data/<name>/test
@@ -248,6 +249,10 @@ if __name__ == '__main__':
       data_info = os.path.abspath(arg.split('=')[-1])
     # elif "train-iter=" in arg:
     #   train_iter = os.path.abspath(arg.split('=')[-1])
+
+  if check.check(data_dir, data_info) != [0,0]:
+    print 'ERROR: mismatch between test files in data_dir and data_info'
+    sys.exit()
 
   PRETRAINED = get_pretrained_model(classifier_dir)
   already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npz')
