@@ -83,7 +83,7 @@ def main(classifier_dir, data_dir, data_info):
        'pred': pred,
        'label': [],
        'pred_lab': [],
-       'pot_mislab': np.zeros(num_imgs,int)}
+       'pot_mislab': []}
   
   # save predictions to data_info
   # HEY! move this to bottom once fully operational
@@ -92,7 +92,6 @@ def main(classifier_dir, data_dir, data_info):
   # print pred bar chart
   # print 'pred shape:', pred[0].shape
   # plt.plot(pred[0])
-
   return d
 
 
@@ -189,6 +188,7 @@ def fill_dict(d, data_info):
 
     # correct classification or not 
     if d['pred_lab'][idx] != d['label'][idx]:
+      d['pot_mislab'].append(d['fname'][idx])
       if d['label'][idx] == flag_val:
         false_neg += 1
         num_pos += 1
