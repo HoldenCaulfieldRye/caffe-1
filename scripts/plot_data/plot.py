@@ -9,7 +9,7 @@ from subprocess import call
 # Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
 
 def get_test_interval(model_dir):
-  return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
+  return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines())
 
 
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
@@ -120,9 +120,16 @@ if __name__ == '__main__':
     if arg.startswith("end-iter="):
       end = int(arg.split('=')[-1])
 
-  test_interval = get_test_interval(model_dir)
-  train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
-  print 'train looks like %s and %s'%(train[0], train[-1])
-  matplot(model_dir, train, val_acc, val_loss, start, end)
+  test_interval = get_test_interval(model_dir) - 2
+  train = get_caffe_train_errors(model_dir)
+  while True:
+    try:
+      test_interval += 1
+      val_acc, val_loss = get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
+      print 'train looks like %s and %s'%(train[0], train[-1])
+      matplot(model_dir, train, val_acc, val_loss, start, end)
+      break
+    except:
+      pass
 
   # ideal would be get layer names from cfg, and prompt for which ones
