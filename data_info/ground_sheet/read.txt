@@ -1,2 +1,2 @@
-0.50 threshold
 1 flag_val
+0.50 threshold

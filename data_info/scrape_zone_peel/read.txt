@@ -1,4 +1,4 @@
 0 BadScrape
 1 GoodScrape
-threshold .29
 flag_val 0
+0.29 threshold

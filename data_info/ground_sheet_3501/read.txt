@@ -1,4 +1,4 @@
 0 GroundSheet
 1 NoGroundSheet
-0.59 threshold
 1 flag_val
+0.41 threshold
