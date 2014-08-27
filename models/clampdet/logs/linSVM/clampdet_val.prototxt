@@ -309,15 +309,9 @@ layers {
   }
 }
 layers {
-  name: "prob"
-  type: ELTWISE_PRODUCT
-  bottom: "fc8_new"
-  top: "prob"
-}
-layers {
   name: "accuracy"
   type: PER_CLASS_ACCURACY
-  bottom: "prob"
+  bottom: "fc8_new"
   bottom: "label"
   top: "accuracy"
 }
