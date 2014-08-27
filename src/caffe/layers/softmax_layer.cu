@@ -76,15 +76,15 @@ Dtype SoftmaxLayer<Dtype>::Forward_gpu(const vector<Blob<Dtype>*>& bottom,
                               CAFFE_CUDA_NUM_THREADS>>>(
       num, dim, scale_data, top_data);
 
-  // std::cout << std::endl << "Softmax layer" << std::endl;
-  // std::cout << "output probs:" << std::endl;
+  // //std::cout << std::endl << "Softmax layer" << std::endl;
+  // //std::cout << "output probs:" << std::endl;
   // int n = std::min(20,num);
   // for (int i=0; i<n; i++) {
-  //  std::cout << "case " << i << ": ";
+  //  //std::cout << "case " << i << ": ";
   //   for (int neur = 0; neur < dim; neur++)
-  //     std::cout << scale_data[i*dim + neur] << ", ";
-  //     std::cout << top_data[i*dim + neur] << ", ";
-  //   std::cout << std::endl;
+  //     //std::cout << scale_data[i*dim + neur] << ", ";
+  //     //std::cout << top_data[i*dim + neur] << ", ";
+  //   //std::cout << std::endl;
   // }
 
   return Dtype(0);

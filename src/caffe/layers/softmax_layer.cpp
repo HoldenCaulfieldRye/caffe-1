@@ -38,14 +38,14 @@ Dtype SoftmaxLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
   int dim = bottom[0]->count() / bottom[0]->num();
   memcpy(top_data, bottom_data, sizeof(Dtype) * bottom[0]->count());
 
-  // std::cout << std::endl << "Softmax layer" << std::endl;
-  // std::cout << "output probs:" << std::endl;
+  // //std::cout << std::endl << "Softmax layer" << std::endl;
+  // //std::cout << "output probs:" << std::endl;
   // int n = std::min(20,num);
   // for (int i=0; i<n; i++) {
-  //  std::cout << "case " << i << ": ";
+  //  //std::cout << "case " << i << ": ";
   //   for (int neur = 0; neur < dim; neur++)
-  //     std::cout << top_data[i*dim + neur] << ", ";
-  //   std::cout << std::endl;
+  //     //std::cout << top_data[i*dim + neur] << ", ";
+  //   //std::cout << std::endl;
   // }
 
   // we need to subtract the max to avoid numerical issues, compute the exp,

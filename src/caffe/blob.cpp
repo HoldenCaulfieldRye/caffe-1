@@ -116,24 +116,24 @@ void Blob<Dtype>::Update() {
   case SyncedMemory::HEAD_AT_CPU:
     // perform computation on CPU
 
-    //std::cout << "perform computation on CPU" << std::endl;
-    //std::cout << "current params: " << std::endl;
+    ////std::cout << "perform computation on CPU" << std::endl;
+    ////std::cout << "current params: " << std::endl;
     for (int i=0; i<100; i++)
-      //std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ",\t";
-    //std::cout  << std::endl ;
-    //std::cout << "diff: ";
+      ////std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ",\t";
+    ////std::cout  << std::endl ;
+    ////std::cout << "diff: ";
     for (int i=0; i<100; i++)
-      //std::cout << reinterpret_cast<const Dtype*>(diff_->cpu_data())[i] << ",\t";
-    //std::cout  << std::endl << std::endl;
+      ////std::cout << reinterpret_cast<const Dtype*>(diff_->cpu_data())[i] << ",\t";
+    ////std::cout  << std::endl << std::endl;
 
     caffe_axpy<Dtype>(count_, Dtype(-1),
         reinterpret_cast<const Dtype*>(diff_->cpu_data()),
         reinterpret_cast<Dtype*>(data_->mutable_cpu_data()));
 
-    //std::cout << "new params: " << std::endl;
+    ////std::cout << "new params: " << std::endl;
     for (int i=0; i<100; i++)
-      //std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ",\t";
-    //std::cout << std::endl << std::endl;
+      ////std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ",\t";
+    ////std::cout << std::endl << std::endl;
     break;
 
   case SyncedMemory::HEAD_AT_GPU:
@@ -141,28 +141,28 @@ void Blob<Dtype>::Update() {
 
     // perform computation on GPU
     if (count() == 8192) { //only softmax layer has this count
-      std::cout << "perform computation on GPU" << std::endl << std::endl;      
-      std::cout << "current params: " << std::endl;
-      std::cout << "softmax 0: " << std::endl;
+      //std::cout << "perform computation on GPU" << std::endl << std::endl;      
+      //std::cout << "current params: " << std::endl;
+      //std::cout << "softmax 0: " << std::endl;
       for (int i=0; i<20; i++)
-	std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
-      std::cout  << std::endl ;
+	//std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
+      //std::cout  << std::endl ;
       
-      std::cout << "softmax 1: " << std::endl;
+      //std::cout << "softmax 1: " << std::endl;
       for (int i=4096; i<4116; i++)
-	std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
-      std::cout  << std::endl << std::endl;
+	//std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
+      //std::cout  << std::endl << std::endl;
       
-      std::cout << "diff: " << std::endl;
-      std::cout << "softmax 0: " << std::endl;
+      //std::cout << "diff: " << std::endl;
+      //std::cout << "softmax 0: " << std::endl;
       for (int i=0; i<20; i++)
-	std::cout << reinterpret_cast<const Dtype*>(diff_->cpu_data())[i] << ", ";
-      std::cout  << std::endl;
+	//std::cout << reinterpret_cast<const Dtype*>(diff_->cpu_data())[i] << ", ";
+      //std::cout  << std::endl;
 
-      std::cout << "softmax 1: " << std::endl;
+      //std::cout << "softmax 1: " << std::endl;
       for (int i=4096; i<4116; i++)
-	std::cout << reinterpret_cast<const Dtype*>(diff_->cpu_data())[i] << ", ";
-      std::cout  << std::endl << std::endl;
+	//std::cout << reinterpret_cast<const Dtype*>(diff_->cpu_data())[i] << ", ";
+      //std::cout  << std::endl << std::endl;
     }
     
     caffe_gpu_axpy<Dtype>(count_, Dtype(-1),
@@ -170,17 +170,17 @@ void Blob<Dtype>::Update() {
         reinterpret_cast<Dtype*>(data_->mutable_gpu_data()));
 
     if (count() == 8192) { //only softmax layer has this count
-      std::cout << "new params: " << std::endl;
+      //std::cout << "new params: " << std::endl;
 
-      std::cout << "softmax 0: " << std::endl;
+      //std::cout << "softmax 0: " << std::endl;
       for (int i=0; i<20; i++)
-	std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
-      std::cout << std::endl;
+	//std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
+      //std::cout << std::endl;
 
-      std::cout << "softmax 1: " << std::endl;
+      //std::cout << "softmax 1: " << std::endl;
       for (int i=4096; i<4116; i++)
-	std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
-      std::cout << std::endl << std::endl;
+	//std::cout << reinterpret_cast<Dtype*>(data_->mutable_cpu_data())[i] << ", ";
+      //std::cout << std::endl << std::endl;
     }
     
     break;

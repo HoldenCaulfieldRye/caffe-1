@@ -37,16 +37,16 @@ Dtype SoftmaxWithLossLayer<Dtype>::Forward_cpu(
   int dim = prob_.count() / num;
   Dtype loss = 0;
 
-  // std::cout << std::endl << "SL layer" << std::endl;
-  // std::cout << "output probs:" << std::endl;
+  // //std::cout << std::endl << "SL layer" << std::endl;
+  // //std::cout << "output probs:" << std::endl;
   // int n = std::min(20,num);
   // for (int i=0; i<n; i++) {
   //   if (static_cast<int>(label[i]) == 0)
-  //     std::cout << "min class ";
-  //  std::cout << "case " << i << ": ";
+  //     //std::cout << "min class ";
+  //  //std::cout << "case " << i << ": ";
   //   for (int neur = 0; neur < dim; neur++)
-  //     std::cout << prob_data[i*dim + neur] << ", ";
-  //   std::cout << std::endl;
+  //     //std::cout << prob_data[i*dim + neur] << ", ";
+  //   //std::cout << std::endl;
   // }
   
   for (int i = 0; i < num; ++i) {
