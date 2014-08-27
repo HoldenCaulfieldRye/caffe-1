@@ -48,9 +48,9 @@ class Net {
   Dtype ForwardBackward(const vector<Blob<Dtype>* > & bottom) {
     Dtype loss;
     Forward(bottom, &loss);
-    std::cout << "loss after net.hpp:Forward(): " << loss << std::endl;
+    // std::cout << "loss after net.hpp:Forward(): " << loss << std::endl;
     Backward();
-    std::cout << "loss after net.hpp:Backward(): " << loss << std::endl;
+    // std::cout << "loss after net.hpp:Backward(): " << loss << std::endl;
     return loss;
   }
 
