@@ -85,7 +85,7 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
     for (int neur = 0; neur < dim; neur++)
       //std::cout << bottom_data[i*dim + neur] << ", ";
     //std::cout << std::endl;
-  }  
+  // }  
   
   for (int i = 0; i < num; ++i) {
     // Accuracy
