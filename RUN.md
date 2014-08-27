@@ -191,20 +191,20 @@ CURRENTLY
 =========
 
 training:
-- 05: clamdpet/conv4
-- 06: clampdet/tl_wout
+- 05: 
+- 06: clampdet_us/tl_wout
+- 07: clampdet/fc6
+- 08: clampdet/linSVM
+- 09: fitting_proximity/test_run
+
+queued: 
+
+finished:
+- 05: clampdet_us/none
+- 06: 
 - 07: clamdpet/conv1
 - 08: clamdpet/conv2
 - 09: clamdpet/conv3
-
-queued: clamdpet/conv5, thresh_freeze5/14, linear_SVM
-
-finished:
-- 05:
-- 06: 
-- 07: 
-- 08: 
-- 09: 
 
 
 classifiers:
