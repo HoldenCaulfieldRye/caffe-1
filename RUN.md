@@ -190,35 +190,21 @@ see TROUBLESHOOT.md
 CURRENTLY
 =========
 
-downloading metadata:
-wget graphic07
-
 training:
-- 06: soil_risk, scrape_zone_*, thresh, scrape_zones, freeze5/13,
-      scrape_zones_sbl
-- 07: freeze5.5/14, contamination_sbl
-- 08: freeze5.5, freeze5/14(alexnet), ground_sheet_sbl
-- 09: hatch_markings/18, freeze5.5/15, scrape_zones(sbl benchmark),
-      ground_sheet
-- 10:
+- 05: clamdpet/conv4
+- 06: clampdet/tl_wout
+- 07: clamdpet/conv1
+- 08: clamdpet/conv2
+- 09: clamdpet/conv3
 
-wait_list: hatch/17, hatch/18
-           redo because terrible data destruction:
-	   -> scrape_zones
-	   -> hatch_markings
-	   -> ground_sheet
-	     prev moved to *_3501, do modify data_info and data
-	     for these guys with setup.py
-	   evaluate bayesian softmax loss
-	   -> joint_misaligned_bayesian_loss
-	   -> joint_misaligned
-	      
+queued: clamdpet/conv5, thresh_freeze5/14, linear_SVM
 
-ready_to_analyse: 
-- 06: freeze5/13(new) - fuck! exp lr; _scrape*/22
-- 07: freeze5.5/14; contamination/22
-- 08: freeze5/14(alexnet) - fuck! exp lr
-- 09: freeze5.5/15
+finished:
+- 05:
+- 06: 
+- 07: 
+- 08: 
+- 09: 
 
 
 classifiers:
