@@ -12,19 +12,19 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=contamination
-FULL_NAME=$BASE_NAME_bsl
+BASE_NAME=fitting_proximity
+FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
 # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
 BAD_MIN=N
 
 # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet) "
-MAX_ITER=20000
+MAX_ITER=1000
 
 # delete this one once you have cuda-convnet style snapshotting
 # read -p "Network snapshot frequency? (2000) "
-SNAPSHOT=10000
+SNAPSHOT=1000
 
 NUM_OUTPUT=2 #temp fix
 
@@ -84,7 +84,7 @@ then
     rm -rf $BASE_NAME
     mkdir $BASE_NAME
     cd clampdet
-    NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh clampdet_test.prototxt fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
+    NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
     for file in $NEEDED_FILES;
     do
 	if [ ! -f $file ]
@@ -124,7 +124,7 @@ fi
 
 # 7. network definition
 # keeping batchsize 50
-for TYPE in train val test;
+for TYPE in train val;
 do
     # change net name and num neurons in output layers
     sed -i $BASE_NAME'_'$TYPE'.prototxt' -e '1s/Clamp/'$BASE_NAME'/' -e '300s/2/'$NUM_OUTPUT'/';
