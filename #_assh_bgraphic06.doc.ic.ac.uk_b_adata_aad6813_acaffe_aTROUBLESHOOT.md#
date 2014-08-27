@@ -444,7 +444,7 @@ What nets do I still need to train?
 - Transfer Learning
   -> test run
      -> with:  clampdet/08                                
-     -> w/out:                                TODO tl_wout
+     -> w/out:                                TRAINING tl_wout
   -> clampdet, freeze backprop on:
      -> none:  clampdet/08
      -> conv1:                                TODO 
