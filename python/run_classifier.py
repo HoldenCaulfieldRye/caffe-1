@@ -300,6 +300,7 @@ if __name__ == '__main__':
   for idx in d['pot_mislab']:
     shutil.copy(oj(data_dir,'test',d['fname'][idx]),
                 oj(oj(data_info,'potential_mislabels')))
+  print "saving potential mislabels to %s"%(oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1]))
 
   # accuracies
   print 'with threshold at test only:'
