@@ -78,11 +78,11 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
   //std::cout << std::endl << "per class accuracy layer" << std::endl;
   //std::cout << "output probs (bottom_data):" << std::endl;
   int n = std::min(20,num);
-  for (int i=0; i<n; i++) {
-    if (static_cast<int>(label[i]) == 0)
+  // for (int i=0; i<n; i++) {
+  //   if (static_cast<int>(label[i]) == 0)
       //std::cout << "min class ";
    //std::cout << "case " << i << ": ";
-    for (int neur = 0; neur < dim; neur++)
+    // for (int neur = 0; neur < dim; neur++)
       //std::cout << bottom_data[i*dim + neur] << ", ";
     //std::cout << std::endl;
   // }  
