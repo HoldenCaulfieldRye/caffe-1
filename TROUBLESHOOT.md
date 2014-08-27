@@ -527,7 +527,9 @@ Just realised:
   -> how was it trained??
      -> under-sampling
 
-Retrain all clampdets, with undersampling     
+Retrain all clampdets, with undersampling
+
+clampdet_train clampdet/ clampdet_mean clampdet_val
 
 
 
