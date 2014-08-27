@@ -12,19 +12,31 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
+<<<<<<< HEAD
 BASE_NAME=fitting_proximity
+=======
+BASE_NAME=clampdet_us
+>>>>>>> b21dd32078f09c93993e05744707c1c7c6386f55
 FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
 # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
-BAD_MIN=N
+BAD_MIN=0.5
 
 # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet) "
+<<<<<<< HEAD
 MAX_ITER=1000
 
 # delete this one once you have cuda-convnet style snapshotting
 # read -p "Network snapshot frequency? (2000) "
 SNAPSHOT=1000
+=======
+MAX_ITER=500
+
+# delete this one once you have cuda-convnet style snapshotting
+# read -p "Network snapshot frequency? (2000) "
+SNAPSHOT=500
+>>>>>>> b21dd32078f09c93993e05744707c1c7c6386f55
 
 NUM_OUTPUT=2 #temp fix
 
