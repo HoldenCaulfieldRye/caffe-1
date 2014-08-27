@@ -444,17 +444,17 @@ What nets do I still need to train?
 - Transfer Learning
   -> test run
      -> with:  clampdet/08                                
-     -> w/out:                                TODO
+     -> w/out:                                TRAINING tl_wout
   -> clampdet, freeze backprop on:
      -> none:  clampdet/08
-     -> conv1:                                TODO 
-     -> conv2:                                TODO 
-     -> conv3:                                TODO 
+     -> conv1:                                TRAINING
+     -> conv2:                                TRAINING  
+     -> conv3:                                TRAINING 
      -> conv4:                                TODO 
      -> conv5:                                TODO 
      -> fc6:   thresh_freeze5/14, fix solver, TODO
-     -> fc7:   thresh_freeze6/11
-     -> fc8:   thresh_freeze7/11
+     -> fc7:   thresh_freeze6/11              TODO? weight_decay
+     -> fc8:   thresh_freeze7/11              TODO? weight_decay
   -> weight initialisation?
      -> reinit best net from above            TODO
   -> parametric vs non parametric
@@ -494,6 +494,23 @@ What do I still need to write (from scratch)?
   
 - Transfer Learning:
   -> conv vs fc, intriguing properties
+
+
+  
+
+NEXT:
+- determine what other nets to train
+- linear_SVM:
+  -> check emails for caffe help
+  -> write up (early stopping? would be cool)
+- finished nets:
+  -> run_classifier.py on them
+  -> plots
+  -> write up:
+     -> comments
+     -> plot
+     -> table from run_classifier
+     
 
 
   
