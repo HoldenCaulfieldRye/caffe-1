@@ -5,9 +5,9 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_fine_leveldb"
+    source: "clampdet_val_leveldb"
     mean_file: "../../data/clampdet/clampdet_mean.binaryproto"
-    batch_size: 256
+    batch_size: 128
     crop_size: 227
     mirror: false
   }
@@ -288,10 +288,10 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8_new"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_aero"
+  top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -311,12 +311,12 @@ layers {
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_aero"
+  bottom: "fc8_new"
   top: "prob"
 }
 layers {
   name: "accuracy"
-  type: ACCURACY
+  type: PER_CLASS_ACCURACY
   bottom: "prob"
   bottom: "label"
   top: "accuracy"
