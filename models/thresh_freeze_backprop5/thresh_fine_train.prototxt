@@ -19,7 +19,7 @@ layers {
   top: "conv1"
   blobs_lr: 0
   blobs_lr: 0
-  weight_decay: 1
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 96
@@ -70,7 +70,7 @@ layers {
   top: "conv2"
   blobs_lr: 0
   blobs_lr: 0
-  weight_decay: 1
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -122,7 +122,7 @@ layers {
   top: "conv3"
   blobs_lr: 0
   blobs_lr: 0
-  weight_decay: 1
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -151,7 +151,7 @@ layers {
   top: "conv4"
   blobs_lr: 0
   blobs_lr: 0
-  weight_decay: 1
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -181,7 +181,7 @@ layers {
   top: "conv5"
   blobs_lr: 0
   blobs_lr: 0
-  weight_decay: 1
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
