@@ -5,8 +5,8 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_train_leveldb"
-    mean_file: "../../data/clampdet/clampdet_mean.binaryproto"
+    source: "clampdet_us_train_leveldb"
+    mean_file: "../../data/clampdet_us/clampdet_us_mean.binaryproto"
     batch_size: 128
     crop_size: 227
     mirror: true

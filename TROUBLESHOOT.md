@@ -440,34 +440,39 @@ What nets do I still need to train?
 - Generic Clamp:
   -> mis-labelling, how to show?
 
-  
 - Transfer Learning
   -> test run
      -> with:  clampdet/08                                
      -> w/out:                                TRAINING tl_wout
   -> clampdet, freeze backprop on:
      -> none:  clampdet/08
-     -> conv1:                                TRAINING
-     -> conv2:                                TRAINING  
-     -> conv3:                                TRAINING 
-     -> conv4:                                TODO 
-     -> conv5:                                TODO 
-     -> fc6:   thresh_freeze5/14, fix solver, TODO
+     -> conv1:                                
+     -> conv2:                                
+     -> conv3:                                
+     -> conv4:                                
+     -> conv5:                                TRAINING 
+     -> fc6:                                  TRAINING
      -> fc7:   thresh_freeze6/11              TODO? weight_decay
      -> fc8:   thresh_freeze7/11              TODO? weight_decay
   -> weight initialisation?
      -> reinit best net from above            TODO
+     -> PROPER best net from above            TODO
   -> parametric vs non parametric
-     -> linear SVM                            TODO
+     -> linear SVM			      TRAINING
      -> best net from above
   
 - Class Imbalance
-  -> under-sampling?
-  -> within-net threshold?
-  -> SBL?
-  -> test-time threshold?
+  fitting proximity
+  -> test run                                 TRAINING
+  -> under-sampling                           TODO need diff leveldb
+  -> over-sampling                            TODO need diff leveldb 
+  -> within-net threshold                     TODO             
+  -> SBL                                      TODO
+  -> test-time threshold                      TODO          
+  
 
 - Final Results
+  what is the best arch?
   -> clampdet
   -> ground sheet
   -> hatch markings
@@ -481,16 +486,18 @@ What nets do I still need to train?
   
 What do I still need to write (from scratch)?
 - Background:
-  why neural nets so good?
-  because they generalise so well
-  why do we care about generalising well?
-  because of curse of dimensionality
-  bit.ly/1pEOuYV
-  how does neural net generalise so well?
-  with distributed representation
-  ie hierarchical representation
-  ie compositionality of parameters
-  ie exponential compactness
+  -> why neural nets so good?
+     because they generalise so well
+     why do we care about generalising well?
+     because of curse of dimensionality
+     bit.ly/1pEOuYV
+     how does neural net generalise so well?
+     with distributed representation
+     ie hierarchical representation
+     ie compositionality of parameters
+     ie exponential compactness
+     
+  -> AlexNet in detail, Rob Fergus tutorial
   
 - Transfer Learning:
   -> conv vs fc, intriguing properties
@@ -499,10 +506,9 @@ What do I still need to write (from scratch)?
   
 
 NEXT:
-- determine what other nets to train
-- linear_SVM:
-  -> check emails for caffe help
-  -> write up (early stopping? would be cool)
+- other nets to train:
+  -> write class imbalance fitting proximity prototxts & leveldbs
+  
 - finished nets:
   -> run_classifier.py on them
   -> plots
@@ -513,4 +519,18 @@ NEXT:
      
 
 
-  
+=====
+
+Just realised:
+- all recent clampdets in bad min
+- clampdet/08 got 94% accuracy
+  -> how was it trained??
+     -> under-sampling
+
+Retrain all clampdets, with undersampling
+
+clampdet_train clampdet/ clampdet_mean clampdet_val
+
+
+
+
