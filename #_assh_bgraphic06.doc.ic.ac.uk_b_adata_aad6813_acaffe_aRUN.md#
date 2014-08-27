@@ -191,7 +191,7 @@ CURRENTLY
 =========
 
 training:
-- 06: 
+- 06: clampdet/tl_wout
 - 07: 
 - 08: 
 - 09:
