@@ -1,0 +1,3 @@
+nohup: ignoring input
+./train_clampdet.sh: 5: ./train_clampdet.sh: ../../build/tools/caffe: not found
+Done.

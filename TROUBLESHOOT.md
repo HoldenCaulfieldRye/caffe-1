@@ -357,7 +357,6 @@ IDENTIFIED PROBS & SOLS:
 
 =====
 
-
 Fuck it, that is too hard. And it might not even work. Threshold
 works, is easier to implement, and probably has more powerful results.
 
@@ -366,9 +365,135 @@ currently:
 -> idea is to get the prediction probs, and assign flags based on them
 & threshold
 -> debugging run_classifier.py
-   -> run:
-	  cd python
-	  source venv/bin/activate
-          python run_classifier.py classifier-dir=../models/scrape_zone_peel-fine/ data-dir=../data/scrape_zone_peel/
+   -> done
 
-      and take it from there  
+=====
+
+
+Need to:
+- train nets
+  -> use optimal backprop freeze
+- use Redbox data
+  -> script to use Redbox data from a certain date
+     -> graphic07 meta.zip
+  -> try multiple threshold dates
+  -> use best performing network so far
+     -> clampdet 94%, what arch was that?
+     	-> clampdet                           0.2 
+	-> no_thresh-fine                     0.12
+	-> thresh                             0.12
+	-> thresh_freeze_backprop5/13         0.7
+	-> thresh_freeze_backprop5/14         0.7
+	-> thresh_freeze_backprop5.5/11       0.15
+	-> thresh_freeze_backprop5.5/12       0.15
+	-> thresh_freeze_backprop5.5/13       0.39
+	-> thresh_freeze_backprop5.5/14       0.4     
+	-> thresh_freeze_backprop5.5/15       0.18
+	-> thresh_freeze_backprop6/11         0.17   
+	-> thresh_freeze_backprop6/13         0.4   
+	-> thresh_freeze_backprop7/11         0.17
+     ok seems perf driven by:
+     - expressiveness 
+     - whether lr_policy fucked up
+     still space for optimising both
+	
+     -> better than optimal backprop freeze?
+- write up threshold
+- write up sbl
+
+
+=====
+
+
+screw the Redbox data. focus on running experiments
+from below.
+
+
+-> ReLU maths
+   -> neat writeup
+   
+-> Early stopping maths
+   -> draft
+   -> neat writeup
+   
+-> Generic clamp
+   -> restructure
+   -> neat writeup
+
+-> Transfer learning
+   -> freezing backprop
+   -> initialising weights
+
+-> Class imbalance
+   -> under-sampling
+   -> in-net threshold
+   -> SBL
+   -> test-time threshold
+
+-> Final Results
+
+
+=====
+
+What nets do I still need to train?
+
+- Generic Clamp:
+  -> mis-labelling, how to show?
+
+  
+- Transfer Learning
+  -> test run
+     -> with:  clampdet/08                                
+     -> w/out:                                TODO
+  -> clampdet, freeze backprop on:
+     -> none:  clampdet/08
+     -> conv1:                                TODO 
+     -> conv2:                                TODO 
+     -> conv3:                                TODO 
+     -> conv4:                                TODO 
+     -> conv5:                                TODO 
+     -> fc6:   thresh_freeze5/14, fix solver, TODO
+     -> fc7:   thresh_freeze6/11
+     -> fc8:   thresh_freeze7/11
+  -> weight initialisation?
+     -> reinit best net from above            TODO
+  -> parametric vs non parametric
+     -> linear SVM                            TODO
+     -> best net from above
+  
+- Class Imbalance
+  -> under-sampling?
+  -> within-net threshold?
+  -> SBL?
+  -> test-time threshold?
+
+- Final Results
+  -> clampdet
+  -> ground sheet
+  -> hatch markings
+  -> insertion depth markings
+  -> scrape zones
+  -> joint misaligned
+  -> contamination
+  -> fitting proximity
+  -> scraping peeling
+
+  
+What do I still need to write (from scratch)?
+- Background:
+  why neural nets so good?
+  because they generalise so well
+  why do we care about generalising well?
+  because of curse of dimensionality
+  bit.ly/1pEOuYV
+  how does neural net generalise so well?
+  with distributed representation
+  ie hierarchical representation
+  ie compositionality of parameters
+  ie exponential compactness
+  
+- Transfer Learning:
+  -> conv vs fc, intriguing properties
+
+
+  
