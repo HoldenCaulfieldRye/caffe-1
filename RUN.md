@@ -191,7 +191,7 @@ CURRENTLY
 =========
 
 training:
-- 05: 
+- 05: clampdet_us/none
 - 06: clampdet_us/tl_wout
 - 07: clampdet/fc6
 - 08: clampdet/linSVM
@@ -200,7 +200,7 @@ training:
 queued: 
 
 finished:
-- 05: clampdet_us/none
+- 05: 
 - 06: 
 - 07: clamdpet/conv1
 - 08: clamdpet/conv2
