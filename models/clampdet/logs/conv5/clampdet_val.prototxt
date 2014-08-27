@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "clampdet_val_leveldb"
     mean_file: "../../data/clampdet/clampdet_mean.binaryproto"
-    batch_size: 256
+    batch_size: 128
     crop_size: 227
     mirror: false
   }
@@ -311,7 +311,7 @@ layers {
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_new_thresh"
+  bottom: "fc8_new"
   top: "prob"
 }
 layers {
