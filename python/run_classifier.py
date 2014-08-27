@@ -292,15 +292,14 @@ if __name__ == '__main__':
   d = fill_dict(d, data_info)
 
   # potential mislabels
-  try:
-    os.mkdir(oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1]))
+  mislab_dir = oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1])
+  try: os.mkdir(mislab_dir)
   except:
-    shutil.rmtree(oj(data_info,'potential_mislabels'+PRETRAINED.split('/')[-1]))
-    os.mkdir(oj(data_info,'potential_mislabels'))
+    shutil.rmtree(mislab_dir)
+    os.mkdir(mislab_dir)
   for idx in d['pot_mislab']:
-    shutil.copy(oj(data_dir,'test',d['fname'][idx]),
-                oj(oj(data_info,'potential_mislabels')))
-  print "saving potential mislabels to %s"%(oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1]))
+    shutil.copy(oj(data_dir,'test',d['fname'][idx]), mislab_dir)
+  print "saving potential mislabels to %s"%(mislab_dir)
 
   # accuracies
   print 'with threshold at test only:'
