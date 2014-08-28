@@ -445,28 +445,28 @@ What nets do I still need to train?
      -> with:  clampdet/08                                
      -> w/out:                                TRAINING tl_wout
   -> clampdet, freeze backprop on:
-     -> none:  clampdet/08
-     -> conv1:                                
-     -> conv2:                                
-     -> conv3:                                
-     -> conv4:                                
-     -> conv5:                                TRAINING 
-     -> fc6:                                  TRAINING
-     -> fc7:   thresh_freeze6/11              TODO? weight_decay
-     -> fc8:   thresh_freeze7/11              TODO? weight_decay
+     -> none:  clampdet_us/none               
+     -> conv1: clampdet_us/                   TODO
+     -> conv2: clampdet_us/                   TODO
+     -> conv3: clampdet_us/                   TODO
+     -> conv4: clampdet_us/                   TODO
+     -> conv5: clampdet_us/                   TODO
+     -> fc6:   clampdet_us/                   TODO
+     -> fc7:   clampdet_us/                   TODO
+     -> fc8:   clampdet_us/                   TODO
   -> weight initialisation?
-     -> reinit best net from above            TODO
-     -> PROPER best net from above            TODO
+     -> reinit: clampdet_us/none_reinit       TRAINING
+     -> ¬reinit: clampdet_us/none             TRAINING
   -> parametric vs non parametric
-     -> linear SVM			      TRAINING
-     -> best net from above
+     -> linear SVM			      
+     -> best net fr above: clampdet_us/none?
   
 - Class Imbalance
   fitting proximity
-  -> test run                                 TRAINING
-  -> under-sampling                           TODO need diff leveldb
-  -> over-sampling                            TODO need diff leveldb 
-  -> within-net threshold                     TODO             
+  -> test run: clampdet/none_reinit           TRAINING
+  -> under-sampling: clampdet_us/none         TRAINING
+  -> over-sampling: clampdet_os/none_reinit   TRAINING
+  -> within-net threshold: clampdet/thresh    TODO             
   -> SBL                                      TODO
   -> test-time threshold                      TODO          
   
@@ -498,6 +498,8 @@ What do I still need to write (from scratch)?
      ie exponential compactness
      
   -> AlexNet in detail, Rob Fergus tutorial
+
+- Justify independent binary classifiers
   
 - Transfer Learning:
   -> conv vs fc, intriguing properties
