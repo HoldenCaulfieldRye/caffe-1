@@ -73,3 +73,30 @@ def rebalance_oversample(Keep, total_num_images, target_bad_min):
         total_num_images == len(Keep[key])
       assert len(Keep[maxc])/float(total_num_imgs) == target_bad_min
   return Keep
+
+
+if __name__ == '__main__':
+  import sys
+  
+  target_bad_min, data_dir, data_info = None, None, None
+  for arg in sys.argv:
+    if "bad-min=" in arg:
+      target_bad_min = arg.split('=')[-1]
+      print "target bad min: %s" %(target_bad_min)
+    elif "data-dir=" in arg:
+      data_dir = os.path.abspath(arg.split('=')[-1])
+    elif "to-dir=" in arg:
+      to_dir = os.path.abspath(arg.split('=')[-1])
+    elif "data-info=" in arg:
+      data_info = os.path.abspath(arg.split('=')[-1])
+
+  # data_dir = /data/ad6813/pipe-data/Bluebox/raw_data/dump
+  # data_info = /data/ad6813/caffe/data_info
+  if data_dir is None:
+    print "\nERROR: data_dir not given"
+    exit
+      
+  num_output,dump = main(data_dir, data_info, to_dir, target_bad_min)
+  print "\nIt's going to say 'An exception has occured etc'"
+  print "but don't worry, that's num_output info for the training shell script to use\n"
+  sys.exit(num_output)
