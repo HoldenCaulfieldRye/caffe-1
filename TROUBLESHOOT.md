@@ -78,6 +78,45 @@ but for some reason we want mean to have shape:  (3, 227, 227)
 mean_f = mean_f[0]
 
 
+# badmin all over the place on clampdet at some point
+ok, just realised:
+- clampdet/conv1 bad min (conv2,3 also)
+- clampdet/none_reinit no bad min
+
+what the hell? I thought without US, impossible to get no bad min
+so what is the magic trick?
+-> H1 enable backprop on conv1?
+-> H2 re-initialise fc6? 
+-> H3 STUPID MISTAKE?
+   -> conv1 has train fc7_new, val fc7
+      
+clampdet/none trains on graphic09
+-> no reinit, so if it works, H2 wrong
+-> but batchsize 96 might create bad min
+-> compare with clampdet/none_reinit as well, just interesting
+-> compare with clampdet/tl_wout for Transfer Learning test run
+      
+looks like it was stupid mistake.
+-> so can revert to studying all of transfer learning without under
+   sampling
+-> so stupid mistake made val error nonsensical, and yet we were
+   getting consistent 0.5 pca.
+   -> this accuracy layer is still confusing
+      need to understand what's going on (?)
+
+clampdet_os/none_reinit:  badmin
+-> very confusing. badmin with osampling, not with normal??
+-> once again, maybe not badmin, just mistake in oversampling
+
+clampdet/conv1 trained again
+-> if works well now, shows stupid mistake last time
+-> if so, need to pick more challenging bad min for task 3
+   -> show that transfer learning helps tackle imbalance
+
+##
+
+
+
 # DEVELOPMENT
 
 attrib                      |  varname       |  meaning
@@ -442,34 +481,37 @@ What nets do I still need to train?
 
 - Transfer Learning
   -> test run
-     -> with:  clampdet/08                                
-     -> w/out:                                TRAINING tl_wout
+     -> with:                                 DONE
+     -> w/out:                                DONE
   -> clampdet, freeze backprop on:
-     -> none:  clampdet_us/none               
-     -> conv1: clampdet_us/                   TODO
-     -> conv2: clampdet_us/                   TODO
-     -> conv3: clampdet_us/                   TODO
-     -> conv4: clampdet_us/                   TODO
-     -> conv5: clampdet_us/                   TODO
-     -> fc6:   clampdet_us/                   TODO
-     -> fc7:   clampdet_us/                   TODO
-     -> fc8:   clampdet_us/                   TODO
+     -> none:  clampdet/none                  TRAINING
+     -> conv1: clampdet/                      DONE
+     -> conv2: clampdet/                      TRAINING
+     -> conv3: clampdet/                      TRAINING
+     -> conv4: clampdet/                      TODO
+     -> conv5: clampdet/                      TODO
+     -> fc6:   clampdet/                      TODO?
+     -> fc7:   clampdet/                      TODO?
+     -> fc8:   clampdet/                      TRAINING
   -> weight initialisation
-     -> reinit: clampdet_us/none_reinit       TRAINING
-     -> ¬reinit: clampdet_us/none             TRAINING
+     -> reinit: clampdet/none_reinit          RETRAINING
+     -> ¬reinit: clampdet/none                RETRAINING
   -> parametric vs non parametric
-     -> linear SVM: clampdet_us/linSVM        TODO
-     -> best net fr above: clampdet_us/none?
+     -> linear SVM: clampdet/linSVM           DONE
+     -> best net fr above: clampdet/none?
   
 - Class Imbalance
-  fitting proximity
-  -> test run: clampdet/none_reinit           TRAINING
-  -> under-sampling: clampdet_us/none_reinit  TRAINING
-  -> over-sampling: clampdet_os/none_reinit   TRAINING
-  -> within-net threshold: clampdet/thresh    TODO             
+                 SHORT TRAIN ITER!
+  -> test run: fitting proximity/             TODO
+  -> under-sampling: fitting proximity/       TODO
+  -> over-sampling: fitting proximity/        TODO
+  -> within-net threshold: fitting proximity/ TODO
   -> weight initialisation
-     -> reinit: clampdet/none_reinit          TODO
-     -> ¬reinit: clampdet/none                TRAINING
+     -> reinit: fitting_prox/none_reinit      TODO
+     -> ¬reinit: fitting_prox/none            TODO
+  -> parametric vs non parametric
+     -> linear SVM: fittin_prox/linSVM        TODO
+     -> best net fr above: 
   -> SBL                                      TODO
   -> test-time threshold                      TODO          
   
@@ -477,7 +519,6 @@ What nets do I still need to train?
 - Final Results
   what is the best arch?
   -> do NOT reinit (not enough data, at least not with UnderSampling)
-
   
   -> clampdet
   -> ground sheet
@@ -489,7 +530,10 @@ What nets do I still need to train?
   -> fitting proximity
   -> scraping peeling
 
-  
+=====
+
+WRITE
+
 What do I still need to write (from scratch)?
 - Background:
   -> why neural nets so good?
@@ -502,21 +546,19 @@ What do I still need to write (from scratch)?
      ie hierarchical representation
      ie compositionality of parameters
      ie exponential compactness
+
+  -> grad descent polynomial approximation
      
   -> AlexNet in detail, Rob Fergus tutorial
 
 - Justify independent binary classifiers
   
-- Transfer Learning:
-  -> conv vs fc, intriguing properties
+- SBL
 
+=====
 
-  
 
 NEXT:
-- other nets to train:
-  -> write class imbalance fitting proximity prototxts & leveldbs
-  
 - finished nets:
   -> run_classifier.py on them
   -> plots
@@ -526,90 +568,93 @@ NEXT:
      -> table from run_classifier
      
 
-
-=====
-
-Just realised:
-- all recent clampdets in bad min
-- clampdet/08 got 94% accuracy
-  -> how was it trained??
-     -> under-sampling
-
-Retrain all clampdets, with undersampling
-
-clampdet_train clampdet/ clampdet_mean clampdet_val
-
 =====
 
 ANALYSE:
+DONE when final plots & rough comments present
+TODO otherwise
 
-clampdet_us/none:
-- Transfer Learning: - freeze backprop, full backprop    TODO
-                     - reinit weights                    DONE
-- (not class imb, cos not reinit)
+Transfer Learning:
+-> Test Run                                       TODO
+-> Freeze Backprop                                TODO
+     clampdet/conv1
+     clampdet/conv2
+     clampdet/conv3
+     clampdet/conv4
+     clampdet/conv5
+     clampdet/fc6
+     clampdet/fc7
+-> Reinit Weights                                 TODO
+     clampdet/none_reinit
+     clampdet/none
+-> Parametric vs Non-Parametric                   TODO
+     clampdet/linSVM
+     clampdet/none ? (best so far)
 
-clampdet_us/none_reinit:
-- Transfer Learning: weight reinitialisation, with       TODO
-- Class Imbalance: undersampling                         TODO
-- (not tl cos reinit  
+Class Imbalance:
+-> Test Run / Under-Sampling
+     fit_prox/tl_wout                             
+     fit_prox_us/tl_wout                             
+     ---
+     plot_clampdet_none                             
+     plot_clapdet_us_none                             
+-> Transfer Learning
+     clampdet/tl_wout                             
+     clampdet/none                             
+     ---
+     fit_prox_us0.5/none                             
+     ---
+     : us{Best}
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox_usAbove/none                             
+     fit_prox_usBelow/none                             
+     ---
+     if fail: {freezeBest}
+     (fit_prox_usAbove/fc{6or7}?)                             
+     (fit_prox_usBelow/fc{6or7}?)                             
+     ---
+     if fail:
+     (soil_contam_us0.5/none?)                             
+     (soil_contam_usAbove/none?)                             
+     (soil_contam_usBelow/none?)                             
+-> Bayesian Cross Entropy
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox{best_from_above}
+     fit_prox{best_from_above}/sbl
+-> Over-Sampling
+     with clampdet you didnt try no reinit, do so now:
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox{best_from_above}
+     fit_prox_os/none
+-> Test time Threshold
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox{best_from_above}/thresh at target_min
 
-clampdet/linSVM:
-- Transfer Learning: non parametric                      TODO
-- (not imbalance cos clampdet not dangerous enough)
-
-clampdet/none_reinit:
-- Transfer Learning: reinit weights                      TODO
-
-(clampdet_us/tl_wout:
-(- Transfer Learning: test run?)
-(  forget it if bad min turns out to be fr stupid mistake)
-
-clampdet/tl_wout:
-- Transfer Learning: test run
-
-clampdet/none:
-- Transfer Learning: test run
-  this is the simplest implementation of transf learning
-
-
-=====
-
-ok, just realised:
-- clampdet/conv1 bad min (conv2,3 also)
-- clampdet/none_reinit no bad min
-
-what the hell? I thought without US, impossible to get no bad min
-so what is the magic trick?
--> H1 enable backprop on conv1?
--> H2 re-initialise fc6? 
--> H3 STUPID MISTAKE?
-   -> conv1 has train fc7_new, val fc7
-      
-clampdet/none trains on graphic09
--> no reinit, so if it works, H2 wrong
--> but batchsize 96 might create bad min
--> compare with clampdet/none_reinit as well, just interesting
--> compare with clampdet/tl_wout for Transfer Learning test run
-      
-looks like it was stupid mistake.
--> so can revert to studying all of transfer learning without under
-   sampling
--> so stupid mistake made val error nonsensical, and yet we were
-   getting consistent 0.5 pca.
-   -> this accuracy layer is still confusing
-      need to understand what's going on (?)
+======
 
 
-====
+Next:
 
-clampdet_os/none_reinit:  badmin
--> very confusing. badmin with osampling, not with normal??
--> once again, maybe not badmin, just mistake in oversampling
+-> add one clampdet to train on graphic09
+-> then stop checking training
+-> queue up all clampdets left
+-> prepare all fitting proximity prototxts
 
-====
+- break -
 
-clampdet/conv1 trained again
--> if works well now, shows stupid mistake last time
--> if so, need to pick more challenging bad min for task 3
-   -> show that transfer learning helps tackle imbalance
+-> check what has finished training
+-> save solverstates in directories!
+-> DONT do any plots
+-> start training fitting proximities
+-> then stop checking training
+-> plot recent clampdets and write up analysis
+
+- break -
+
+-> check what has finished training
+-> save solverstates in directories!
+-> plot recent fitting_proximities and write up analysis
+
+
+
 
