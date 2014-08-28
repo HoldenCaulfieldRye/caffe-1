@@ -10,6 +10,7 @@ import copy
 import json, yaml, random
 import setup_data
 
+# Warning! duplicates will be created in val and test as well, you don't want that
 
 def main(data_dir, data_info, to_dir, target_bad_min):
   ''' This is the master function. 
@@ -29,7 +30,7 @@ def main(data_dir, data_info, to_dir, target_bad_min):
   print 'finished rebalancing'
   Keep = setup_data.within_class_shuffle(Keep)
   print 'finished shuffling'
-  dump = setup_data.symlink_dataset(Keep, data_dir, to_dir)
+  dump = symlink_dataset_oversample(Keep, data_dir, to_dir)
   if data_info is not None:
     setup_data.dump_to_files(Keep, dump, data_info)
   return num_output, dump
@@ -80,8 +81,43 @@ def rebalance_oversample(Keep, total_num_images, target_bad_min):
   return Keep
 
 
+def symlink_dataset_oversample(Keep, from_dir, to_dir):
+  dump = []
+  part = [0, 0.8, 0.87, 1] # partition into train val test
+  if os.path.isdir(to_dir): rmtree(to_dir)
+  os.mkdir(to_dir)
+  for i in xrange(3):
+    dump.append([])
+    for [num,key] in enumerate(Keep.keys()):
+      l = len(Keep[key])
+      dump[i] += [[f,num] for f in
+                  Keep[key][int(part[i]*l):int(part[i+1]*l)]]
+    random.shuffle(dump[i])
+  
+  # cross_val = [np.array(d, dtype=[('x',object),('y',int)])
+  #              for d in dump]
+  for d,dname in zip(dump,['train','val','test']):
+    data_dst_dir = ojoin(to_dir,dname)
+    os.mkdir(data_dst_dir)
+    for i in xrange(len(d)):
+      if os.path.islink(ojoin(data_dst_dir,d[i][0])) and dname == 'train':
+        old = d[i][0]
+        while os.path.islink(ojoin(data_dst_dir,d[i][0])):
+          print '%s symlinked already, creating duplicate'%(d[i][0])
+          d[i][0] = d[i][0].split('.')[0]+'_.jpg'
+        os.symlink(ojoin(from_dir,old),
+                   ojoin(data_dst_dir,d[i][0]))
+        dump
+      else: os.symlink(ojoin(from_dir,d[i][0]),
+                       ojoin(data_dst_dir,d[i][0]))
+  return dump
+
+
+
 if __name__ == '__main__':
   import sys
+
+  print "Warning! duplicates will be created in val and test as well, you don't want that"
   
   target_bad_min, data_dir, data_info = None, None, None
   for arg in sys.argv:
