@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "clampdet_train_leveldb"
     mean_file: "../../data/clampdet/clampdet_mean.binaryproto"
-    batch_size: 128
+    batch_size: 96
     crop_size: 227
     mirror: true
   }
@@ -17,9 +17,9 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 96
@@ -68,9 +68,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -120,9 +120,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
