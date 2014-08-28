@@ -191,20 +191,20 @@ CURRENTLY
 =========
 
 training:
-- 05: clampdet_us/none
+- 05: 
 - 06: clampdet_us/tl_wout
-- 07: 
+- 07: clampdet/none
 - 08: clampdet_os/none_reinit
-- 09: clampdet_us/none_reinit # batchSize 96
+- 09: 
 
 queued: 
 
-finished:
-- 05: 
-- 06: 
-- 07: clampdet/none_reinit # note! this is test run for imbalance
-- 08: clampdet/linSVM
-- 09: 
+finished / analyse:
+- 05: clampdet_us/none
+- 06: (clampdet_us/tl_wout)
+- 07: clampdet/none_reinit # test run for imbalance
+- 08: clampdet/linSVM, clampdet_os/none_reinit
+- 09: clampdet_us/none_reinit 
 
 
 classifiers:
