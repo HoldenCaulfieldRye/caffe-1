@@ -53,20 +53,23 @@ def rebalance_oversample(Keep, total_num_images, target_bad_min):
   minc, len_minc = ascending_classes[0][0], ascending_classes[0][1]
   # print ascending_classes
   # print "\ntotal num images: %i"%(total_num_images)
-  maxc_proportion = float(len_maxc)/total_num_images
+  minc_proportion = float(len_minc)/total_num_images
   if target_bad_min is None:
     target_bad_min = raw_input("\nmax class currently takes up %.2f, what's your target? [num/N] "%(maxc_proportion))
   if target_bad_min is not 'N':
     target_bad_min = float(target_bad_min)
-    print 'maxc_proportion: %.2f, target_bad_min: %.2f'%(maxc_proportion, target_bad_min)
+    print 'minc_proportion: %.2f, target_bad_min: %.2f'%(minc_proportion, target_bad_min)
     if maxc_proportion > target_bad_min:
-      copy_size = len_maxc - len_minc
+      copy_size = ( target_bad_min*(total_num_images) - len_minc ) / (1 - target)
       random.shuffle(Keep[minc])
-      print '%s has %i images so %i will be randomly removed'%(maxc, len_maxc, delete_size)
+      print '%s has %i images so %i copies will be made'%(minc, len_maxc,copy_size)
       copy = Keep[minc].copy()
       for i in range((copy_size/len_minc)-1):
         Keep[minc].append(copy)
       Keep[minc].append(copy[:(copy_size % len_minc)]])
       random.shuffle(Keep[minc])
-      assert len(Keep[maxc]) == len(Keep[minc])
+      total_num_images = 0
+      for key in Keep.keys():
+        total_num_images == len(Keep[key])
+      assert len(Keep[maxc])/float(total_num_imgs) == target_bad_min
   return Keep
