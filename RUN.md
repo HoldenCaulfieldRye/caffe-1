@@ -193,18 +193,18 @@ CURRENTLY
 training:
 - 05: clampdet_us/none
 - 06: clampdet_us/tl_wout
-- 07: clampdet/fc6
-- 08: clampdet/linSVM
-- 09: fitting_proximity/test_run
+- 07: 
+- 08: 
+- 09: clampdet_us/none_reinit # batchSize 96
 
 queued: 
 
 finished:
 - 05: 
 - 06: 
-- 07: clamdpet/conv1
-- 08: clamdpet/conv2
-- 09: clamdpet/conv3
+- 07: clampdet/none_reinit # note! this is test run for imbalance
+- 08: clampdet/linSVM
+- 09: 
 
 
 classifiers:
