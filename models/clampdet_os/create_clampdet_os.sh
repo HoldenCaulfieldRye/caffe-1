@@ -3,8 +3,8 @@
 # n.B. set the path to the imagenet train + val data dirs
 CAFFE=/data/ad6813/caffe
 TOOLS=$CAFFE/build/tools
-DATA=$CAFFE/data/clampdet
-DATA_INFO=$CAFFE/data_info/clampdet
+DATA=$CAFFE/data/clampdet_os
+DATA_INFO=$CAFFE/data_info/clampdet_os
 
 for TYPE in train val;
 do
@@ -29,11 +29,11 @@ echo "Creating leveldb..."
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/train/ \
     $DATA_INFO/train.txt \
-    clampdet_train_leveldb 1
+    clampdet_os_train_leveldb 1
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/val/ \
     $DATA_INFO/val.txt \
-    clampdet_val_leveldb 1
+    clampdet_os_val_leveldb 1
 
 echo "Done."

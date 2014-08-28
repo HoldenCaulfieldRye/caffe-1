@@ -10,6 +10,7 @@ import copy
 import json, yaml, random
 import setup_data
 
+# Warning! duplicates will be created in val and test as well, you don't want that
 
 def main(data_dir, data_info, to_dir, target_bad_min):
   ''' This is the master function. 
@@ -25,17 +26,76 @@ def main(data_dir, data_info, to_dir, target_bad_min):
   Keep, num_output = setup_data.merge_classes(Keep)
   Keep, num_output = setup_data.check_mutual_exclusion(Keep, num_output)
   print "target bad min: %s" %(target_bad_min)
-  Keep = rebalance_oversample(Keep, total_num_images, target_bad_min)
+  for key in Keep.keys():
+    assert len(Keep[key]) == len(set(Keep[key]))
+
+  D = split_dict_for_cross_val(Keep)
+
+  for key in D['train'].keys():
+    assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+
+  # only train gets images copies
+  D['train'] = rebalance_oversample(D['train'], target_bad_min)
   print 'finished rebalancing'
-  Keep = setup_data.within_class_shuffle(Keep)
-  print 'finished shuffling'
-  dump = setup_data.symlink_dataset(Keep, data_dir, to_dir)
+
+  # for subdict in D.keys():
+  #   for key in D[subdict].keys():
+  #     D[subdict][key] = copy.copy(D[subdict][key])
+
+  # for key in D['train'].keys():
+  #   assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+
+  # for smth in ['train','val','test']:
+  #   D[smth] = setup_data.within_class_shuffle(Keep)
+  # print 'finished shuffling'
+
+  # for subdict in D.keys():
+  #   for key in D[subdict].keys():
+  #     D[subdict][key] = copy.copy(D[subdict][key])
+
+  for key in D['train'].keys():
+    assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+
+  Dump = symlink_dataset_oversample(D, data_dir, to_dir)
+
+  assert len([el for el in Dump['train'] if el in Dump['val']]) == 0
+
   if data_info is not None:
-    setup_data.dump_to_files(Keep, dump, data_info)
-  return num_output, dump
+    dump_to_files_oversample(Keep, Dump, data_info)
+  return num_output, Dump
 
 
-def rebalance_oversample(Keep, total_num_images, target_bad_min):
+def split_dict_for_cross_val(Keep):
+  D = {'train':{}, 'val':{}, 'test':{}}
+  part = [0, 0.8, 0.87, 1] # partition into train val test
+  for i,smth in enumerate(['train','val','test']):
+    for key in Keep.keys():
+      #assert len(Keep[key]) == len(set(Keep[key]))
+      print 'Keep[%s] has no duplicates'%(key)
+      l = len(Keep[key])
+      print 'D[%s][%s] gets elements %i to %i'%(smth,key,int(part[i]*l),int(part[i+1]*l))
+      print 'Keep[%s] starts with'%(key), Keep[key][:3]
+      D[smth][key] = copy.copy(Keep[key][int(part[i]*l):int(part[i+1]*l)])
+      if smth != 'train':
+        a = [el for el in D[smth][key] if el in D['train'][key]]
+        print "%i els in D['val'][%s] are also in D['train'][%s]"%(len(a),key,key)
+        #assert len(a) == 0
+      # random.shuffle(D[smth][key])
+      print ''
+  for smth in ['train','val','test']:
+    for key in D[smth].keys():
+      #assert len(D[smth][key]) == len(set(D[smth][key]))
+      print 'D[%s][%s] has no duplicates'%(smth,key)
+      # print 'D[%s][%s] has %i elements'%(smth,key,len(D[smth][key]))
+    print ''
+  for key in D['val'].keys():
+    a = [el for el in D['val'][key] if el in D['train'][key]]
+    print "%i els in D['val'][%s] are also in D['train'][%s]"%(len(a),key,key)
+    #assert len(a) == 0
+  return D
+
+
+def rebalance_oversample(Keep, target_bad_min):
   '''if target_bad_min not given, prompts user for one; 
   and implements it. Note that with >2 classes, this can be 
   implemented either by downsizing all non-minority classes by the
@@ -52,6 +112,7 @@ def rebalance_oversample(Keep, total_num_images, target_bad_min):
                              key=lambda x:x[1])
   maxc, len_maxc = ascending_classes[-1][0], ascending_classes[-1][1]
   minc, len_minc = ascending_classes[0][0], ascending_classes[0][1]
+  total_num_images = sum([len(Keep[key]) for key in Keep.keys()])
   # print ascending_classes
   # print "\ntotal num images: %i"%(total_num_images)
   minc_proportion = float(len_minc)/total_num_images
@@ -80,8 +141,52 @@ def rebalance_oversample(Keep, total_num_images, target_bad_min):
   return Keep
 
 
+def symlink_dataset_oversample(D, from_dir, to_dir):
+  Dump = {}
+  if os.path.isdir(to_dir): rmtree(to_dir)
+  os.mkdir(to_dir)
+  for dname in ['train','val','test']:
+    Dump[dname] = []
+    for [num,key] in enumerate(D[dname].keys()):
+      Dump[dname] += [[f,num] for f in D[dname][key]]
+    random.shuffle(Dump[dname])
+    data_dst_dir = ojoin(to_dir,dname)
+    os.mkdir(data_dst_dir)
+    for i in xrange(len(Dump[dname])):
+      if os.path.islink(ojoin(data_dst_dir,Dump[dname][i][0])): 
+        if dname == 'train':
+          old = Dump[dname][i][0]
+          while os.path.islink(ojoin(data_dst_dir,Dump[dname][i][0])):
+            Dump[dname][i][0]=Dump[dname][i][0].split('.')[0]+'_.jpg'
+          os.symlink(ojoin(from_dir,old),
+                     ojoin(data_dst_dir,Dump[dname][i][0]))
+        else: continue
+      else: os.symlink(ojoin(from_dir,Dump[dname][i][0]),
+                       ojoin(data_dst_dir,Dump[dname][i][0]))
+  return Dump
+
+
+def dump_to_files_oversample(Keep, Dump, data_info):
+  if os.path.exists(data_info): rmtree(data_info)
+  os.mkdir(data_info)
+  assert len([el for el in Dump['train'] if el in Dump['val']]) == 0
+  for key in Dump.keys():
+    dfile = open(ojoin(data_info,key+'.txt'),'w')
+    dfile.writelines(["%s %i\n"%(f,num) for (f,num) in Dump[key]])
+    dfile.close()
+    
+  # write to read file how to interpret values as classes      
+  read_file = open(ojoin(data_info,'read.txt'), 'w')    
+  read_file.writelines(["%i %s\n" % (num,label) for (num, label)
+                         in enumerate(Keep.keys())])
+  read_file.close()
+
+
+
 if __name__ == '__main__':
   import sys
+
+  print "Warning! duplicates will be created in val and test as well, you don't want that"
   
   target_bad_min, data_dir, data_info = None, None, None
   for arg in sys.argv:
@@ -101,7 +206,8 @@ if __name__ == '__main__':
     print "\nERROR: data_dir not given"
     exit
       
-  num_output,dump = main(data_dir, data_info, to_dir, target_bad_min)
+  # careful, unlike setup.py Dump is a dict
+  num_output, Dump = main(data_dir, data_info, to_dir, target_bad_min)
   print "\nIt's going to say 'An exception has occured etc'"
   print "but don't worry, that's num_output info for the training shell script to use\n"
   sys.exit(num_output)
