@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 nohup: ignoring input
 I0828 18:23:16.993662 18740 finetune_net.cpp:25] Starting Optimization
 I0828 18:23:16.993759 18740 solver.cpp:42] Creating training net.
@@ -40598,4 +40599,3 @@ I0828 23:08:34.416352 18740 solver.cpp:189] Snapshotting to clampdet_fine_train_
 I0828 23:08:36.146766 18740 solver.cpp:196] Snapshotting solver state to clampdet_fine_train_iter_20000.solverstate
 I0828 23:08:37.506091 18740 solver.cpp:130] Optimization Done.
 I0828 23:08:37.506120 18740 finetune_net.cpp:30] Optimization Done.
-Done.

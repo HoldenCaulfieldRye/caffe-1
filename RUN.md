@@ -191,20 +191,25 @@ CURRENTLY
 =========
 
 training:
-- 05: clampdet_us/none
-- 06: clampdet_us/tl_wout
-- 07: 
-- 08: clampdet_os/none_reinit
-- 09: clampdet_us/none_reinit # batchSize 96
+- 05: clampdet/conv3
+- 06: clampdet/conv2
+- 07: clampdet/none
+- 08: clampdet/none_reinit
+- 09: clampdet/fc7
 
-queued: 
+queued:
+-> clampdet/tl_wout 50k, clampdet/conv4, clampdet/conv5
+-> clamdpet/fc6? clampdet/fc7?
+-> clampdet/linSVM for 5k iter again cos need solverstate!!
+-> TL where bad min deeper than good min
 
-finished:
+
+finished / analyse:
 - 05: 
-- 06: 
-- 07: clampdet/none_reinit # note! this is test run for imbalance
-- 08: clampdet/linSVM
-- 09: 
+- 06: (clampdet_us/tl_wout)
+- 07: clampdet/none_reinit, clampdet/conv1
+- 08: clampdet/linSVM, 
+- 09: clampdet_us/none_reinit 
 
 
 classifiers:
