@@ -1,0 +1,2 @@
+0 FittingProximity
+1 GoodFittingProximity
