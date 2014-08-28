@@ -28,17 +28,30 @@ def main(data_dir, data_info, to_dir, target_bad_min):
   print "target bad min: %s" %(target_bad_min)
   for key in Keep.keys():
     assert len(Keep[key]) == len(set(Keep[key]))
+
   D = split_dict_for_cross_val(Keep)
+
   for key in D['train'].keys():
-    assert len([el for el in D['train'][key] if el not in D['val'][key]]) == 0
+    assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+
   # only train gets images copies
-  D['train'] = rebalance_oversample(Keep, total_num_images, target_bad_min)
+  D['train'] = rebalance_oversample(D['train'], target_bad_min)
   print 'finished rebalancing'
+
+  for key in D['train'].keys():
+    assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+
   for smth in ['train','val','test']:
     D[smth] = setup_data.within_class_shuffle(Keep)
   print 'finished shuffling'
+
+  for key in D['train'].keys():
+    assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+
   Dump = symlink_dataset_oversample(D, data_dir, to_dir)
-  assert len([el for el in Dump['train'] if el not in Dump['val']]) == 0
+
+  assert len([el for el in Dump['train'] if el in Dump['val']]) == 0
+
   if data_info is not None:
     dump_to_files_oversample(Keep, Dump, data_info)
   return num_output, Dump
@@ -49,32 +62,32 @@ def split_dict_for_cross_val(Keep):
   part = [0, 0.8, 0.87, 1] # partition into train val test
   for i,smth in enumerate(['train','val','test']):
     for key in Keep.keys():
-      assert len(Keep[key]) == len(set(Keep[key]))
+      #assert len(Keep[key]) == len(set(Keep[key]))
       print 'Keep[%s] has no duplicates'%(key)
       l = len(Keep[key])
       print 'D[%s][%s] gets elements %i to %i'%(smth,key,int(part[i]*l),int(part[i+1]*l))
       print 'Keep[%s] starts with'%(key), Keep[key][:3]
       D[smth][key] = copy.copy(Keep[key][int(part[i]*l):int(part[i+1]*l)])
       if smth != 'train':
-        a = [el for el in D[smth][key] if el not in D['train'][key]]
+        a = [el for el in D[smth][key] if el in D['train'][key]]
         print "%i els in D['val'][%s] are also in D['train'][%s]"%(len(a),key,key)
-        assert len(a) == 0
+        #assert len(a) == 0
       # random.shuffle(D[smth][key])
       print ''
   for smth in ['train','val','test']:
     for key in D[smth].keys():
-      assert len(D[smth][key]) == len(set(D[smth][key]))
+      #assert len(D[smth][key]) == len(set(D[smth][key]))
       print 'D[%s][%s] has no duplicates'%(smth,key)
       # print 'D[%s][%s] has %i elements'%(smth,key,len(D[smth][key]))
     print ''
   for key in D['val'].keys():
-    a = [el for el in D['val'][key] if el not in D['train'][key]]
+    a = [el for el in D['val'][key] if el in D['train'][key]]
     print "%i els in D['val'][%s] are also in D['train'][%s]"%(len(a),key,key)
-    assert len(a) == 0
+    #assert len(a) == 0
   return D
 
 
-def rebalance_oversample(Keep, total_num_images, target_bad_min):
+def rebalance_oversample(Keep, target_bad_min):
   '''if target_bad_min not given, prompts user for one; 
   and implements it. Note that with >2 classes, this can be 
   implemented either by downsizing all non-minority classes by the
@@ -91,6 +104,7 @@ def rebalance_oversample(Keep, total_num_images, target_bad_min):
                              key=lambda x:x[1])
   maxc, len_maxc = ascending_classes[-1][0], ascending_classes[-1][1]
   minc, len_minc = ascending_classes[0][0], ascending_classes[0][1]
+  total_num_images = sum([len(Keep[key]) for key in Keep.keys()])
   # print ascending_classes
   # print "\ntotal num images: %i"%(total_num_images)
   minc_proportion = float(len_minc)/total_num_images
@@ -147,7 +161,7 @@ def symlink_dataset_oversample(D, from_dir, to_dir):
 def dump_to_files_oversample(Keep, Dump, data_info):
   if os.path.exists(data_info): rmtree(data_info)
   os.mkdir(data_info)
-  assert len([el for el in Dump['train'] if el not in Dump['val']]) == 0
+  assert len([el for el in Dump['train'] if el in Dump['val']]) == 0
   for key in Dump.keys():
     dfile = open(ojoin(data_info,key+'.txt'),'w')
     dfile.writelines(["%s %i\n"%(f,num) for (f,num) in Dump[key]])
