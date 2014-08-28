@@ -191,16 +191,20 @@ CURRENTLY
 =========
 
 training:
-- 05: 
-- 06: clampdet_us/tl_wout
-- 07: clampdet/none
+- 05: clampdet/conv2
+- 06: 
+- 07: clampdet/none, clampdet/conv1
 - 08: clampdet_os/none_reinit
-- 09: 
+- 09: clampdet/none
 
-queued: 
+queued:
+-> TL where bad min deeper than good min,
+-> clampdet/none_reinit for longer \
+   clamdpet/none        for longer /need same solver! 20k iter
+->    
 
 finished / analyse:
-- 05: clampdet_us/none
+- 05: 
 - 06: (clampdet_us/tl_wout)
 - 07: clampdet/none_reinit # test run for imbalance
 - 08: clampdet/linSVM, clampdet_os/none_reinit

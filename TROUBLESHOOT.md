@@ -550,15 +550,15 @@ clampdet_us/none:
 
 clampdet_us/none_reinit:
 - Transfer Learning: weight reinitialisation, with       TODO
-- Class Imbalance: undersampling
+- Class Imbalance: undersampling                         TODO
 - (not tl cos reinit  
 
 clampdet/linSVM:
-- Class Imbalance: non parametric
-- (not tl cos not us)
+- Transfer Learning: non parametric                      TODO
+- (not imbalance cos clampdet not dangerous enough)
 
 clampdet/none_reinit:
-- Class Imbalance: test run
+- Transfer Learning: reinit weights                      TODO
 
 (clampdet_us/tl_wout:
 (- Transfer Learning: test run?)
@@ -582,7 +582,7 @@ what the hell? I thought without US, impossible to get no bad min
 so what is the magic trick?
 -> H1 enable backprop on conv1?
 -> H2 re-initialise fc6? 
--> H3 stupid mistake?
+-> H3 STUPID MISTAKE?
    -> conv1 has train fc7_new, val fc7
       
 clampdet/none trains on graphic09
@@ -591,3 +591,25 @@ clampdet/none trains on graphic09
 -> compare with clampdet/none_reinit as well, just interesting
 -> compare with clampdet/tl_wout for Transfer Learning test run
       
+looks like it was stupid mistake.
+-> so can revert to studying all of transfer learning without under
+   sampling
+-> so stupid mistake made val error nonsensical, and yet we were
+   getting consistent 0.5 pca.
+   -> this accuracy layer is still confusing
+      need to understand what's going on (?)
+
+
+====
+
+clampdet_os/none_reinit:  badmin
+-> very confusing. badmin with osampling, not with normal??
+-> once again, maybe not badmin, just mistake in oversampling
+
+====
+
+clampdet/conv1 trained again
+-> if works well now, shows stupid mistake last time
+-> if so, need to pick more challenging bad min for task 3
+   -> show that transfer learning helps tackle imbalance
+
