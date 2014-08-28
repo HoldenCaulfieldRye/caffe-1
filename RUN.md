@@ -194,7 +194,7 @@ training:
 - 05: clampdet_us/none
 - 06: clampdet_us/tl_wout
 - 07: 
-- 08: 
+- 08: clampdet_os/none_reinit
 - 09: clampdet_us/none_reinit # batchSize 96
 
 queued: 
