@@ -494,13 +494,14 @@ What nets do I still need to train?
      -> fc7:   clampdet/                      TODO?
      -> fc8:   clampdet/                      TRAINING
   -> weight initialisation
-     -> reinit: clampdet_us/none_reinit       DONE
-     -> ¬reinit: clampdet_us/none             DONE
+     -> reinit: clampdet/none_reinit          RETRAINING
+     -> ¬reinit: clampdet/none                RETRAINING
   -> parametric vs non parametric
      -> linear SVM: clampdet/linSVM           DONE
      -> best net fr above: clampdet/none?
   
 - Class Imbalance
+                 SHORT TRAIN ITER!
   -> test run: fitting proximity/             TODO
   -> under-sampling: fitting proximity/       TODO
   -> over-sampling: fitting proximity/        TODO
@@ -529,7 +530,10 @@ What nets do I still need to train?
   -> fitting proximity
   -> scraping peeling
 
-  
+=====
+
+WRITE
+
 What do I still need to write (from scratch)?
 - Background:
   -> why neural nets so good?
@@ -549,16 +553,12 @@ What do I still need to write (from scratch)?
 
 - Justify independent binary classifiers
   
-- Transfer Learning:
-  -> conv vs fc, intriguing properties
+- SBL
 
+=====
 
-  
 
 NEXT:
-- other nets to train:
-  -> write class imbalance fitting proximity prototxts & leveldbs
-  
 - finished nets:
   -> run_classifier.py on them
   -> plots
@@ -571,37 +571,64 @@ NEXT:
 =====
 
 ANALYSE:
+DONE when final plots & rough comments present
+TODO otherwise
 
-clampdet_us/none:
-- Transfer Learning: - freeze backprop, full backprop    TODO
-  (not class imb, cos not reinit)
+Transfer Learning:
+-> Test Run                                       TODO
+-> Freeze Backprop                                TODO
+     clampdet/conv1
+     clampdet/conv2
+     clampdet/conv3
+     clampdet/conv4
+     clampdet/conv5
+     clampdet/fc6
+     clampdet/fc7
+-> Reinit Weights                                 TODO
+     clampdet/none_reinit
+     clampdet/none
+-> Parametric vs Non-Parametric                   TODO
+     clampdet/linSVM
+     clampdet/none ? (best so far)
 
-clampdet_us/none_reinit:
-- Class Imbalance: undersampling                         DONE
- (not tl cos reinit) 
-
-clampdet/linSVM:
-- Transfer Learning: non parametric                      TODO
-  compare with best clampdet
-  (not imbalance cos clampdet)
-
-clampdet/none_reinit:
-- Transfer Learning: reinit weights                      TRAINING
-
-clampdet/tl_wout:
-- Transfer Learning: test run                            DONE
-- class imbalance                                        DONE
-
-clampdet/none:
-- Transfer Learning: test run                            DONE
-
-clampdet_os/none_reinit:
-- class imbalance:                                       DONE
-
-clamdpet/fc7:
-- transfer learning: freeze backprop                     TRAINING
-- if looks just like thresh_freeze7:
-  use thresh_freeze{6,5} as results for fc{6,7} resp 
+Class Imbalance:
+-> Test Run / Under-Sampling
+     fit_prox/tl_wout                             
+     fit_prox_us/tl_wout                             
+     ---
+     plot_clampdet_none                             
+     plot_clapdet_us_none                             
+-> Transfer Learning
+     clampdet/tl_wout                             
+     clampdet/none                             
+     ---
+     fit_prox_us0.5/none                             
+     ---
+     : us{Best}
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox_usAbove/none                             
+     fit_prox_usBelow/none                             
+     ---
+     if fail: {freezeBest}
+     (fit_prox_usAbove/fc{6or7}?)                             
+     (fit_prox_usBelow/fc{6or7}?)                             
+     ---
+     if fail:
+     (soil_contam_us0.5/none?)                             
+     (soil_contam_usAbove/none?)                             
+     (soil_contam_usBelow/none?)                             
+-> Bayesian Cross Entropy
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox{best_from_above}
+     fit_prox{best_from_above}/sbl
+-> Over-Sampling
+     with clampdet you didnt try no reinit, do so now:
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox{best_from_above}
+     fit_prox_os/none
+-> Test time Threshold
+     fit_prox/tl_wout       - benchmark                       
+     fit_prox{best_from_above}/thresh at target_min
 
 ======
 
