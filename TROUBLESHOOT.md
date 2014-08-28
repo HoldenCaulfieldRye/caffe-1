@@ -455,16 +455,16 @@ What nets do I still need to train?
      -> fc7:   thresh_freeze6/11              TODO? weight_decay
      -> fc8:   thresh_freeze7/11              TODO? weight_decay
   -> weight initialisation?
-     -> reinit best net from above            TODO
-     -> PROPER best net from above            TODO
+     -> reinit: clampdet_us/none_reinit       TRAINING
+     -> ¬reinit: clampdet_us/none             TRAINING
   -> parametric vs non parametric
      -> linear SVM			      TRAINING
      -> best net from above
   
 - Class Imbalance
   fitting proximity
-  -> test run                                 TRAINING
-  -> under-sampling                           TODO need diff leveldb
+  -> test run: clampdet/none_reinit           TRAINING
+  -> under-sampling: clampdet_us/none         TRAINING
   -> over-sampling                            TODO need diff leveldb 
   -> within-net threshold                     TODO             
   -> SBL                                      TODO
@@ -498,6 +498,8 @@ What do I still need to write (from scratch)?
      ie exponential compactness
      
   -> AlexNet in detail, Rob Fergus tutorial
+
+- Justify independent binary classifiers
   
 - Transfer Learning:
   -> conv vs fc, intriguing properties
