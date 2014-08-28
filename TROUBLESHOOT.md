@@ -78,6 +78,45 @@ but for some reason we want mean to have shape:  (3, 227, 227)
 mean_f = mean_f[0]
 
 
+# badmin all over the place on clampdet at some point
+ok, just realised:
+- clampdet/conv1 bad min (conv2,3 also)
+- clampdet/none_reinit no bad min
+
+what the hell? I thought without US, impossible to get no bad min
+so what is the magic trick?
+-> H1 enable backprop on conv1?
+-> H2 re-initialise fc6? 
+-> H3 STUPID MISTAKE?
+   -> conv1 has train fc7_new, val fc7
+      
+clampdet/none trains on graphic09
+-> no reinit, so if it works, H2 wrong
+-> but batchsize 96 might create bad min
+-> compare with clampdet/none_reinit as well, just interesting
+-> compare with clampdet/tl_wout for Transfer Learning test run
+      
+looks like it was stupid mistake.
+-> so can revert to studying all of transfer learning without under
+   sampling
+-> so stupid mistake made val error nonsensical, and yet we were
+   getting consistent 0.5 pca.
+   -> this accuracy layer is still confusing
+      need to understand what's going on (?)
+
+clampdet_os/none_reinit:  badmin
+-> very confusing. badmin with osampling, not with normal??
+-> once again, maybe not badmin, just mistake in oversampling
+
+clampdet/conv1 trained again
+-> if works well now, shows stupid mistake last time
+-> if so, need to pick more challenging bad min for task 3
+   -> show that transfer learning helps tackle imbalance
+
+##
+
+
+
 # DEVELOPMENT
 
 attrib                      |  varname       |  meaning
@@ -442,34 +481,36 @@ What nets do I still need to train?
 
 - Transfer Learning
   -> test run
-     -> with:  clampdet/08                                
-     -> w/out:                                TRAINING tl_wout
+     -> with:                                 DONE
+     -> w/out:                                DONE
   -> clampdet, freeze backprop on:
-     -> none:  clampdet_us/none               
-     -> conv1: clampdet_us/                   TODO
-     -> conv2: clampdet_us/                   TODO
-     -> conv3: clampdet_us/                   TODO
-     -> conv4: clampdet_us/                   TODO
-     -> conv5: clampdet_us/                   TODO
-     -> fc6:   clampdet_us/                   TODO
-     -> fc7:   clampdet_us/                   TODO
-     -> fc8:   clampdet_us/                   TODO
+     -> none:  clampdet/none                  TRAINING
+     -> conv1: clampdet/                      DONE
+     -> conv2: clampdet/                      TRAINING
+     -> conv3: clampdet/                      TRAINING
+     -> conv4: clampdet/                      TODO
+     -> conv5: clampdet/                      TODO
+     -> fc6:   clampdet/                      TODO?
+     -> fc7:   clampdet/                      TODO?
+     -> fc8:   clampdet/                      TRAINING
   -> weight initialisation
-     -> reinit: clampdet_us/none_reinit       TRAINING
-     -> ¬reinit: clampdet_us/none             TRAINING
+     -> reinit: clampdet_us/none_reinit       DONE
+     -> ¬reinit: clampdet_us/none             DONE
   -> parametric vs non parametric
-     -> linear SVM: clampdet_us/linSVM        TODO
-     -> best net fr above: clampdet_us/none?
+     -> linear SVM: clampdet/linSVM           DONE
+     -> best net fr above: clampdet/none?
   
 - Class Imbalance
-  fitting proximity
-  -> test run: clampdet/none_reinit           TRAINING
-  -> under-sampling: clampdet_us/none_reinit  TRAINING
-  -> over-sampling: clampdet_os/none_reinit   TRAINING
-  -> within-net threshold: clampdet/thresh    TODO             
+  -> test run: fitting proximity/             TODO
+  -> under-sampling: fitting proximity/       TODO
+  -> over-sampling: fitting proximity/        TODO
+  -> within-net threshold: fitting proximity/ TODO
   -> weight initialisation
-     -> reinit: clampdet/none_reinit          TODO
-     -> ¬reinit: clampdet/none                TRAINING
+     -> reinit: fitting_prox/none_reinit      TODO
+     -> ¬reinit: fitting_prox/none            TODO
+  -> parametric vs non parametric
+     -> linear SVM: fittin_prox/linSVM        TODO
+     -> best net fr above: 
   -> SBL                                      TODO
   -> test-time threshold                      TODO          
   
@@ -477,7 +518,6 @@ What nets do I still need to train?
 - Final Results
   what is the best arch?
   -> do NOT reinit (not enough data, at least not with UnderSampling)
-
   
   -> clampdet
   -> ground sheet
@@ -502,6 +542,8 @@ What do I still need to write (from scratch)?
      ie hierarchical representation
      ie compositionality of parameters
      ie exponential compactness
+
+  -> grad descent polynomial approximation
      
   -> AlexNet in detail, Rob Fergus tutorial
 
@@ -526,90 +568,66 @@ NEXT:
      -> table from run_classifier
      
 
-
-=====
-
-Just realised:
-- all recent clampdets in bad min
-- clampdet/08 got 94% accuracy
-  -> how was it trained??
-     -> under-sampling
-
-Retrain all clampdets, with undersampling
-
-clampdet_train clampdet/ clampdet_mean clampdet_val
-
 =====
 
 ANALYSE:
 
 clampdet_us/none:
 - Transfer Learning: - freeze backprop, full backprop    TODO
-                     - reinit weights                    DONE
-- (not class imb, cos not reinit)
+  (not class imb, cos not reinit)
 
 clampdet_us/none_reinit:
-- Transfer Learning: weight reinitialisation, with       TODO
-- Class Imbalance: undersampling                         TODO
-- (not tl cos reinit  
+- Class Imbalance: undersampling                         DONE
+ (not tl cos reinit) 
 
 clampdet/linSVM:
 - Transfer Learning: non parametric                      TODO
-- (not imbalance cos clampdet not dangerous enough)
+  compare with best clampdet
+  (not imbalance cos clampdet)
 
 clampdet/none_reinit:
-- Transfer Learning: reinit weights                      TODO
-
-(clampdet_us/tl_wout:
-(- Transfer Learning: test run?)
-(  forget it if bad min turns out to be fr stupid mistake)
+- Transfer Learning: reinit weights                      TRAINING
 
 clampdet/tl_wout:
-- Transfer Learning: test run
+- Transfer Learning: test run                            DONE
+- class imbalance                                        DONE
 
 clampdet/none:
-- Transfer Learning: test run
-  this is the simplest implementation of transf learning
+- Transfer Learning: test run                            DONE
+
+clampdet_os/none_reinit:
+- class imbalance:                                       DONE
+
+clamdpet/fc7:
+- transfer learning: freeze backprop                     TRAINING
+- if looks just like thresh_freeze7:
+  use thresh_freeze{6,5} as results for fc{6,7} resp 
+
+======
 
 
-=====
+Next:
 
-ok, just realised:
-- clampdet/conv1 bad min (conv2,3 also)
-- clampdet/none_reinit no bad min
+-> add one clampdet to train on graphic09
+-> then stop checking training
+-> queue up all clampdets left
+-> prepare all fitting proximity prototxts
 
-what the hell? I thought without US, impossible to get no bad min
-so what is the magic trick?
--> H1 enable backprop on conv1?
--> H2 re-initialise fc6? 
--> H3 STUPID MISTAKE?
-   -> conv1 has train fc7_new, val fc7
-      
-clampdet/none trains on graphic09
--> no reinit, so if it works, H2 wrong
--> but batchsize 96 might create bad min
--> compare with clampdet/none_reinit as well, just interesting
--> compare with clampdet/tl_wout for Transfer Learning test run
-      
-looks like it was stupid mistake.
--> so can revert to studying all of transfer learning without under
-   sampling
--> so stupid mistake made val error nonsensical, and yet we were
-   getting consistent 0.5 pca.
-   -> this accuracy layer is still confusing
-      need to understand what's going on (?)
+- break -
+
+-> check what has finished training
+-> save solverstates in directories!
+-> DONT do any plots
+-> start training fitting proximities
+-> then stop checking training
+-> plot recent clampdets and write up analysis
+
+- break -
+
+-> check what has finished training
+-> save solverstates in directories!
+-> plot recent fitting_proximities and write up analysis
 
 
-====
 
-clampdet_os/none_reinit:  badmin
--> very confusing. badmin with osampling, not with normal??
--> once again, maybe not badmin, just mistake in oversampling
-
-====
-
-clampdet/conv1 trained again
--> if works well now, shows stupid mistake last time
--> if so, need to pick more challenging bad min for task 3
-   -> show that transfer learning helps tackle imbalance
 
