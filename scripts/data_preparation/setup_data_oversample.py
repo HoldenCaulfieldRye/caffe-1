@@ -141,6 +141,10 @@ def rebalance_oversample(Keep, target_bad_min):
   return Keep
 
 
+<<<<<<< HEAD
+if __name__ == '__main__':
+  import sys
+=======
 def symlink_dataset_oversample(D, from_dir, to_dir):
   Dump = {}
   if os.path.isdir(to_dir): rmtree(to_dir)
@@ -211,4 +215,3 @@ if __name__ == '__main__':
   print "\nIt's going to say 'An exception has occured etc'"
   print "but don't worry, that's num_output info for the training shell script to use\n"
   sys.exit(num_output)
-
