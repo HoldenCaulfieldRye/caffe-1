@@ -1,6 +1,6 @@
-train_net: "clampdet_us_train.prototxt"
-test_net: "clampdet_us_val.prototxt"
-test_iter: 3
+train_net: "clampdet_os_train.prototxt"
+test_net: "clampdet_os_val.prototxt"
+test_iter: 8
 test_interval: 200
 base_lr: 0.0001
 lr_policy: "fixed"
@@ -9,5 +9,5 @@ max_iter: 20000
 momentum: 0.9
 weight_decay: 0.0005
 snapshot: 20000
-snapshot_prefix: "clampdet_us_fine_train"
+snapshot_prefix: "clampdet_os_fine_train"
 solver_mode: GPU

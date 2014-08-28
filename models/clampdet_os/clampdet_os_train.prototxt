@@ -1,13 +1,13 @@
-name: "ClampFineNet"
+name: "clampdet_osFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_us_train_leveldb"
-    mean_file: "../../data/clampdet_us/clampdet_us_mean.binaryproto"
-    batch_size: 96
+    source: "clampdet_os_train_leveldb"
+    mean_file: "../../data/clampdet_os/clampdet_os_mean.binaryproto"
+    batch_size: 128
     crop_size: 227
     mirror: true
   }

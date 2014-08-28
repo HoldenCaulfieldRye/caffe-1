@@ -6,7 +6,7 @@ TOOLS=$CAFFE/build/tools
 DATA=$CAFFE/data/clampdet
 DATA_INFO=$CAFFE/data_info/clampdet
 
-for TYPE in train val;
+for TYPE in train val test;
 do
     if [ ! -f $DATA_INFO'/'$TYPE'.txt' ]
     then
@@ -35,5 +35,10 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/val/ \
     $DATA_INFO/val.txt \
     clampdet_val_leveldb 1
+
+GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
+    $DATA/test/ \
+    $DATA_INFO/test.txt \
+    clampdet_test_leveldb 1
 
 echo "Done."

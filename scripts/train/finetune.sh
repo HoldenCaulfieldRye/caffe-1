@@ -12,7 +12,7 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=clampdet_us
+BASE_NAME=clampdet_os
 FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
@@ -84,7 +84,7 @@ then
     rm -rf $BASE_NAME
     mkdir $BASE_NAME
     cd clampdet
-    NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh clampdet_test.prototxt fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
+    NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
     for file in $NEEDED_FILES;
     do
 	if [ ! -f $file ]
@@ -124,7 +124,7 @@ fi
 
 # 7. network definition
 # keeping batchsize 50
-for TYPE in train val test;
+for TYPE in train val;
 do
     # change net name and num neurons in output layers
     sed -i $BASE_NAME'_'$TYPE'.prototxt' -e '1s/Clamp/'$BASE_NAME'/' -e '300s/2/'$NUM_OUTPUT'/';
