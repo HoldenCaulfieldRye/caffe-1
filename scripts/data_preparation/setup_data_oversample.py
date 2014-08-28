@@ -38,12 +38,20 @@ def main(data_dir, data_info, to_dir, target_bad_min):
   D['train'] = rebalance_oversample(D['train'], target_bad_min)
   print 'finished rebalancing'
 
-  for key in D['train'].keys():
-    assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+  # for subdict in D.keys():
+  #   for key in D[subdict].keys():
+  #     D[subdict][key] = copy.copy(D[subdict][key])
 
-  for smth in ['train','val','test']:
-    D[smth] = setup_data.within_class_shuffle(Keep)
-  print 'finished shuffling'
+  # for key in D['train'].keys():
+  #   assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0
+
+  # for smth in ['train','val','test']:
+  #   D[smth] = setup_data.within_class_shuffle(Keep)
+  # print 'finished shuffling'
+
+  # for subdict in D.keys():
+  #   for key in D[subdict].keys():
+  #     D[subdict][key] = copy.copy(D[subdict][key])
 
   for key in D['train'].keys():
     assert len([el for el in D['train'][key] if el in D['val'][key]]) == 0

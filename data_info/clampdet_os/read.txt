@@ -1,2 +1,2 @@
-0 Clamp
-1 NoClamp
+0 
+1 PhotoDoesNotShowEnoughOfScrapeZones
