@@ -20,19 +20,11 @@ FULL_NAME=$BASE_NAME
 BAD_MIN=0.5
 
 # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet) "
-<<<<<<< HEAD
-MAX_ITER=1000
-
-# delete this one once you have cuda-convnet style snapshotting
-# read -p "Network snapshot frequency? (2000) "
-SNAPSHOT=1000
-=======
 MAX_ITER=500
 
 # delete this one once you have cuda-convnet style snapshotting
 # read -p "Network snapshot frequency? (2000) "
 SNAPSHOT=500
->>>>>>> b21dd32078f09c93993e05744707c1c7c6386f55
 
 NUM_OUTPUT=2 #temp fix
 
