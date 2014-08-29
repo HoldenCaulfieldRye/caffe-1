@@ -191,14 +191,14 @@ CURRENTLY
 =========
 
 training:
-- 05: clampdet/tl_wout 50k
-- 06: clampdet/conv4, clampdetCI/none
-- 07: clampdet/conv5, clampdetCI98
-- 08: clampdet/linSVM for 20k iter again cos need solverstates!!
-- 09: clamdpet/fc6
+- 05: clampdet/tl_wout 100k
+- 06: clampdet/conv4, clampdetCI/none, clampdetCI98/tl_wout, special_transfer_part2
+- 07: clampdet/conv5, clampdetCI98/none, clampdetCI98/none_reinit_bs128_lr4
+- 08: clampdet/linSVM, clampdetCI98/none_bs128_lr4
+- 09: clamdpet/fc6, special_transfer_part1
 
 queued:
--> 
+-> clampdetCI98/none_bs256_lr4
 -> 
 -> 
 -> TL where bad min deeper than good min

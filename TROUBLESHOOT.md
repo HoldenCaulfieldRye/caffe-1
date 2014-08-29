@@ -499,9 +499,53 @@ TRAIN
      -> linear SVM: clampdet/linSVM           TODO
      -> best net fr above: clampdet/none?
 
-
 Class Imbalance:
--> Test Run / Under-Sampling
+-> Test Run without TL
+     clampdet/tl_wout                         TRAINING
+     clampdetCI98/tl_wout                     TRAINING
+-> Transfer Learning
+     clampdetCI98/tl_wout                     TRAINING
+     clampdetCI98/none_reinit_bs128_lr4       TRAINING
+     clampdetCI98/none_bs128_lr4              TRAINING
+-> Batch Size
+     clampdetCI98/none_bs128_lr4              TRAINING
+     clampdetCI98/none_bs256_lr4              TODO         
+-> Learning Rate
+     clampdetCI98/none_bs256_lr4              TODO         
+     clampdetCI98/none(_bs256_lr5)            DONE           
+-> Examine Impact with run_classifier
+     clampdet/none                            DONE
+     clampdetCI(97)/none(_bs256_lr5)          DONE             
+     clampdetCI98/none(_bs256_lr5)            DONE           
+
+Final Results:
+-> transfer top notch clampdet net instead?
+     clampdet/none for 4k iters               TODO
+     resume clampdet/none for 6k iters:
+     -> snapshot every 500
+     -> lr5
+     -> bs256
+-> what is the best arch?
+  -> do NOT reinit (not enough data, at least not with UnderSampling)
+  -> clampdet
+  -> ground sheet
+  -> hatch markings
+  -> insertion depth markings
+  -> scrape zones
+  -> joint misaligned
+  -> contamination
+  -> fitting proximity
+  -> scraping peeling
+
+=====
+
+TRAIN OLD Class Imbalance:
+-> Examine Impact:
+   
+-> Test Run 
+     clampdetCI/BULLSHIT                      DONE
+     clampdetCI/none                          TRAINING
+-> Under-Sampling
      clampdetCI/tl_wout                       TODO    
      clampdetCI_us/tl_wout                    TODO       
      clampdet/none                            TRAINING
@@ -523,19 +567,6 @@ Class Imbalance:
 -> Test time Threshold
      clampdetCI{best_from_above}/thresh at target_min
 
-     
-- Final Results
-  what is the best arch?
-  -> do NOT reinit (not enough data, at least not with UnderSampling)
-  -> clampdet
-  -> ground sheet
-  -> hatch markings
-  -> insertion depth markings
-  -> scrape zones
-  -> joint misaligned
-  -> contamination
-  -> fitting proximity
-  -> scraping peeling
 
 =====
 
@@ -595,6 +626,41 @@ Transfer Learning:
      clampdet/none ? (best so far)
 
 Class Imbalance:
+-> Test Run without TL
+     clampdet/tl_wout
+     clampdetCI98/tl_wout
+-> Transfer Learning
+     clampdetCI98/tl_wout
+     clampdetCI98/none_reinit_bs128_lr4
+     clampdetCI98/none_bs128_lr4
+-> Batch Size
+     clampdetCI98/none_bs128_lr4
+     clampdetCI98/none_bs256_lr4
+-> Learning Rate
+     clampdetCI98/none_bs256_lr4
+     clampdetCI98/none(_bs256_lr5)
+-> Examine Impact with run_classifier
+     clampdet/none
+     clampdetCI(97)/none(_bs256_lr5)
+     clampdetCI98/none(_bs256_lr5)
+     
+Maybe:     
+-> Under-Sampling
+-> Transfer Learning
+-> Bayesian Cross Entropy
+-> Over-Sampling
+-> Test time Threshold
+     clampdetCI/tl_wout       - benchmark                       
+     clampdetCI{best_from_above}/thresh at target_min
+
+Final Results:
+-> transfer top notch clampdet instead?
+     clampdet_fine_train_iter_{best}
+     
+======
+
+ANALYSE OLD class imbalance
+
 -> Test Run / batchSize                           TODO
      clampdetCI/BULLSHIT
      clampdetCI/none
@@ -640,25 +706,10 @@ Class Imbalance:
 Next:
 
 -> prepare all class imbalance prototxts
-   -> need clampdetCI_us
-      -> 
--> check on:
-   -> clampdetCI
-   -> clampdetCI98
-   remember objective is to find suitable class imbalance for
-   all other approaches
-   maybe use run_classifier.py to confirm badmin
--> CAREFUL!   
-   all new prototxts saved under clampdetCI so if data/clampdetCI
-   imbalance not the one you want, save the prototxts somewhere
-   else, because ./finetune.sh will erase them
-   
-- break -
+-> run them
+-> update TRAIN status
 
--> DONT do any plots
--> start training class imbalance nets
--> update TRAIN statuses
--> then don't check training
+-> transfer 
 -> ANALYSE transfer learning TODOs
 
 - break -
@@ -669,5 +720,18 @@ Next:
 -> ANALYSE class imbalance TODOs
 
 
+====
 
+Ok, just realised even CI98 doesn't get bad min
+- but maybe that's thanks to tl, no reinit, large batch, small lr
+
+new path:
+- examine impact of class imbalance
+  -> different imbalance rates with nest arch until now
+     -> batchsize 128
+     -> lr 0.0001
+  
+- cure class imbalance:
+     
+  
 
