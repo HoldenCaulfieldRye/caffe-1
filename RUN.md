@@ -192,7 +192,7 @@ CURRENTLY
 
 training:
 - 05: clampdet/tl_wout 50k
-- 06: clampdet/conv4, clampdetCI96
+- 06: clampdet/conv4, clampdetCI/none
 - 07: clampdet/conv5, clampdetCI98
 - 08: clampdet/linSVM for 20k iter again cos need solverstates!!
 - 09: clamdpet/fc6
