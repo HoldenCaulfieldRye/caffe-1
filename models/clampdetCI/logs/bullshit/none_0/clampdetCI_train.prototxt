@@ -1,12 +1,12 @@
-name: "ClampFineNet"
+name: "clampdetCIFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "clampdet_train_leveldb"
-    mean_file: "../../data/clampdet/clampdet_mean.binaryproto"
+    source: "clampdetCI_train_leveldb"
+    mean_file: "../../data/clampdetCI/clampdetCI_mean.binaryproto"
     batch_size: 128
     crop_size: 227
     mirror: true
@@ -17,9 +17,9 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 96
@@ -68,9 +68,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -120,9 +120,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -149,9 +149,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -179,9 +179,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv4"
   top: "conv5"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -220,21 +220,9 @@ layers {
   type: INNER_PRODUCT
   bottom: "pool5"
   top: "fc6"
-<<<<<<< HEAD
-<<<<<<< HEAD
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
-=======
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
->>>>>>> 0b2e9b3ac9ab76d1a513be28df4f7dc9626209e3
-=======
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
->>>>>>> aef232d1b59cfcfd892e8a76459d8b3db5e53b32
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -268,21 +256,9 @@ layers {
   type: INNER_PRODUCT
   bottom: "fc6"
   top: "fc7"
-<<<<<<< HEAD
-<<<<<<< HEAD
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
-=======
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
->>>>>>> 0b2e9b3ac9ab76d1a513be28df4f7dc9626209e3
-=======
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
->>>>>>> aef232d1b59cfcfd892e8a76459d8b3db5e53b32
   weight_decay: 0
   inner_product_param {
     num_output: 4096
