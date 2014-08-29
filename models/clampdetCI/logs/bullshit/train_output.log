@@ -5977,3 +5977,83 @@ I0829 06:17:01.363801 15446 solver.cpp:269] Iteration 2186, lr = 5e-06
 I0829 06:17:01.610946 15446 solver.cpp:117] Iteration 2186, loss = 0.177524
 I0829 06:17:03.051513 15446 solver.cpp:269] Iteration 2187, lr = 5e-06
 I0829 06:17:03.280702 15446 solver.cpp:117] Iteration 2187, loss = 0.0721215
+I0829 06:17:04.761106 15446 solver.cpp:269] Iteration 2188, lr = 5e-06
+I0829 06:17:04.951539 15446 solver.cpp:117] Iteration 2188, loss = 0.21569
+I0829 06:17:06.412946 15446 solver.cpp:269] Iteration 2189, lr = 5e-06
+I0829 06:17:06.658947 15446 solver.cpp:117] Iteration 2189, loss = 0.14449
+I0829 06:17:08.087448 15446 solver.cpp:269] Iteration 2190, lr = 5e-06
+I0829 06:17:08.315688 15446 solver.cpp:117] Iteration 2190, loss = 0.136011
+I0829 06:17:08.315703 15446 solver.cpp:136] Iteration 2190, Testing net
+I0829 06:17:09.844660 15446 solver.cpp:172] Test score #0: 0.499999
+I0829 06:17:09.844682 15446 solver.cpp:172] Test score #1: 0.147129
+I0829 06:17:10.869410 15446 solver.cpp:269] Iteration 2191, lr = 5e-06
+I0829 06:17:11.056433 15446 solver.cpp:117] Iteration 2191, loss = 0.0866998
+I0829 06:17:12.512120 15446 solver.cpp:269] Iteration 2192, lr = 5e-06
+I0829 06:17:12.758138 15446 solver.cpp:117] Iteration 2192, loss = 0.0505971
+I0829 06:17:14.182167 15446 solver.cpp:269] Iteration 2193, lr = 5e-06
+I0829 06:17:14.409333 15446 solver.cpp:117] Iteration 2193, loss = 0.0516768
+I0829 06:17:15.894114 15446 solver.cpp:269] Iteration 2194, lr = 5e-06
+I0829 06:17:16.086439 15446 solver.cpp:117] Iteration 2194, loss = 0.228423
+I0829 06:17:17.528592 15446 solver.cpp:269] Iteration 2195, lr = 5e-06
+I0829 06:17:17.769992 15446 solver.cpp:117] Iteration 2195, loss = 0.129238
+I0829 06:17:17.770006 15446 solver.cpp:136] Iteration 2195, Testing net
+I0829 06:17:19.216192 15446 solver.cpp:172] Test score #0: 0.555556
+I0829 06:17:19.216229 15446 solver.cpp:172] Test score #1: 0.113662
+I0829 06:17:20.249326 15446 solver.cpp:269] Iteration 2196, lr = 5e-06
+I0829 06:17:20.478409 15446 solver.cpp:117] Iteration 2196, loss = 0.0515131
+I0829 06:17:21.955343 15446 solver.cpp:269] Iteration 2197, lr = 5e-06
+I0829 06:17:22.151418 15446 solver.cpp:117] Iteration 2197, loss = 0.136504
+I0829 06:17:23.588366 15446 solver.cpp:269] Iteration 2198, lr = 5e-06
+I0829 06:17:23.822505 15446 solver.cpp:117] Iteration 2198, loss = 0.0584968
+I0829 06:17:25.262430 15446 solver.cpp:269] Iteration 2199, lr = 5e-06
+I0829 06:17:25.489729 15446 solver.cpp:117] Iteration 2199, loss = 0.192803
+I0829 06:17:26.954840 15446 solver.cpp:269] Iteration 2200, lr = 5e-06
+I0829 06:17:27.200755 15446 solver.cpp:117] Iteration 2200, loss = 0.203978
+I0829 06:17:27.200770 15446 solver.cpp:136] Iteration 2200, Testing net
+I0829 06:17:28.632658 15446 solver.cpp:172] Test score #0: 0.499999
+I0829 06:17:28.632690 15446 solver.cpp:172] Test score #1: 0.108085
+I0829 06:17:29.657817 15446 solver.cpp:269] Iteration 2201, lr = 5e-06
+I0829 06:17:29.894461 15446 solver.cpp:117] Iteration 2201, loss = 0.0714718
+I0829 06:17:31.335387 15446 solver.cpp:269] Iteration 2202, lr = 5e-06
+I0829 06:17:31.562533 15446 solver.cpp:117] Iteration 2202, loss = 0.116847
+I0829 06:17:33.003301 15446 solver.cpp:269] Iteration 2203, lr = 5e-06
+I0829 06:17:33.251576 15446 solver.cpp:117] Iteration 2203, loss = 0.162299
+I0829 06:17:34.686584 15446 solver.cpp:269] Iteration 2204, lr = 5e-06
+I0829 06:17:34.920212 15446 solver.cpp:117] Iteration 2204, loss = 0.107488
+I0829 06:17:36.399647 15446 solver.cpp:269] Iteration 2205, lr = 5e-06
+I0829 06:17:36.612591 15446 solver.cpp:117] Iteration 2205, loss = 0.155245
+I0829 06:17:36.612622 15446 solver.cpp:136] Iteration 2205, Testing net
+I0829 06:17:38.090020 15446 solver.cpp:172] Test score #0: 0.499999
+I0829 06:17:38.090044 15446 solver.cpp:172] Test score #1: 0.148378
+I0829 06:17:39.119249 15446 solver.cpp:269] Iteration 2206, lr = 5e-06
+I0829 06:17:39.366078 15446 solver.cpp:117] Iteration 2206, loss = 0.0872922
+I0829 06:17:40.784276 15446 solver.cpp:269] Iteration 2207, lr = 5e-06
+I0829 06:17:41.016199 15446 solver.cpp:117] Iteration 2207, loss = 0.105127
+I0829 06:17:42.498610 15446 solver.cpp:269] Iteration 2208, lr = 5e-06
+I0829 06:17:42.705255 15446 solver.cpp:117] Iteration 2208, loss = 0.0635383
+I0829 06:17:44.152901 15446 solver.cpp:269] Iteration 2209, lr = 5e-06
+I0829 06:17:44.403872 15446 solver.cpp:117] Iteration 2209, loss = 0.111702
+I0829 06:17:45.822940 15446 solver.cpp:269] Iteration 2210, lr = 5e-06
+I0829 06:17:46.057278 15446 solver.cpp:117] Iteration 2210, loss = 0.262245
+I0829 06:17:46.057293 15446 solver.cpp:136] Iteration 2210, Testing net
+I0829 06:17:47.584471 15446 solver.cpp:172] Test score #0: 0.555556
+I0829 06:17:47.584514 15446 solver.cpp:172] Test score #1: 0.115102
+I0829 06:17:48.609272 15446 solver.cpp:269] Iteration 2211, lr = 5e-06
+I0829 06:17:48.835713 15446 solver.cpp:117] Iteration 2211, loss = 0.0883358
+I0829 06:17:50.288116 15446 solver.cpp:269] Iteration 2212, lr = 5e-06
+I0829 06:17:50.536221 15446 solver.cpp:117] Iteration 2212, loss = 0.0922218
+I0829 06:17:51.938087 15446 solver.cpp:269] Iteration 2213, lr = 5e-06
+I0829 06:17:52.170992 15446 solver.cpp:117] Iteration 2213, loss = 0.0477861
+I0829 06:17:53.656334 15446 solver.cpp:269] Iteration 2214, lr = 5e-06
+I0829 06:17:53.843667 15446 solver.cpp:117] Iteration 2214, loss = 0.199161
+I0829 06:17:55.297152 15446 solver.cpp:269] Iteration 2215, lr = 5e-06
+I0829 06:17:55.548122 15446 solver.cpp:117] Iteration 2215, loss = 0.126796
+I0829 06:17:55.548141 15446 solver.cpp:136] Iteration 2215, Testing net
+I0829 06:17:57.009982 15446 solver.cpp:172] Test score #0: 0.500001
+I0829 06:17:57.010018 15446 solver.cpp:172] Test score #1: 0.117786
+I0829 06:17:58.041889 15446 solver.cpp:269] Iteration 2216, lr = 5e-06
+I0829 06:17:58.275619 15446 solver.cpp:117] Iteration 2216, loss = 0.124649
+I0829 06:17:59.751971 15446 solver.cpp:269] Iteration 2217, lr = 5e-06
+I0829 06:17:59.968775 15446 solver.cpp:117] Iteration 2217, loss = 0.252016
+I0829 06:18:01.394798 15446 solver.cpp:269] Iteration 2218, lr = 5e-06
+I0829 06:18:01.645282 15446 solver.cpp:117] Iteration 2218, loss = 0.0618079
