@@ -1,25 +1,13 @@
 train_net: "clampdet_train.prototxt"
 test_net: "clampdet_val.prototxt"
-test_iter: 1
-test_interval: 5
+test_iter: 8
+test_interval: 400
 base_lr: 0.0001
 lr_policy: "fixed"
 display: 1
-<<<<<<< HEAD
-max_iter: 20000
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-max_iter: 50000
-=======
-max_iter: 100000
->>>>>>> 0b2e9b3ac9ab76d1a513be28df4f7dc9626209e3
-=======
-max_iter: 20000
->>>>>>> aef232d1b59cfcfd892e8a76459d8b3db5e53b32
->>>>>>> b31a8f7a6677ca08876c0ca85a3208783bb76728
+max_iter: 4000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 20000
+snapshot: 4000
 snapshot_prefix: "clampdet_fine_train"
 solver_mode: GPU
