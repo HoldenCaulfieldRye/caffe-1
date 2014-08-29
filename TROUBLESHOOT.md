@@ -556,28 +556,24 @@ What do I still need to write (from scratch)?
 
   -> grad descent polynomial approximation
      
-  -> AlexNet in detail, Rob Fergus tutorial
+  -> AlexNet in detail: stoch pooling paper
+     not Rob Fergus tutorial! too long
 
 - Justify independent binary classifiers
   
 - SBL
 
+
 =====
 
-
-NEXT:
-- finished nets:
+ANALYSE:
   -> run_classifier.py on them
   -> plots
   -> write up:
      -> comments
      -> plot
      -> table from run_classifier
-     
 
-=====
-
-ANALYSE:
 DONE when final plots & rough comments present
 TODO otherwise
 
@@ -599,7 +595,10 @@ Transfer Learning:
      clampdet/none ? (best so far)
 
 Class Imbalance:
--> Test Run / Under-Sampling
+-> Test Run / batchSize                           TODO
+     clampdetCI/BULLSHIT
+     clampdetCI/none
+-> Under-Sampling
      clampdetCI/tl_wout                             
      clampdetCI_us/tl_wout                             
      ---
@@ -640,10 +639,20 @@ Class Imbalance:
 
 Next:
 
--> train queued nets
--> write script to increase imbalance
 -> prepare all class imbalance prototxts
-
+   -> need clampdetCI_us
+      -> 
+-> check on:
+   -> clampdetCI
+   -> clampdetCI98
+   remember objective is to find suitable class imbalance for
+   all other approaches
+   maybe use run_classifier.py to confirm badmin
+-> CAREFUL!   
+   all new prototxts saved under clampdetCI so if data/clampdetCI
+   imbalance not the one you want, save the prototxts somewhere
+   else, because ./finetune.sh will erase them
+   
 - break -
 
 -> DONT do any plots
