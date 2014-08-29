@@ -640,9 +640,14 @@ Class Imbalance:
 
 Next:
 
--> train queued nets
--> write script to increase imbalance
 -> prepare all class imbalance prototxts
+-> check on:
+   -> clampdetCI96 (think its actually 97%) none{,_0,_1}
+   -> clampdetCI98
+   remember objective is to find suitable class imbalance for
+   all other approaches
+   maybe use run_classifier.py to determine whether the oscillating
+   one really does train ie perform or not
 
 - break -
 
