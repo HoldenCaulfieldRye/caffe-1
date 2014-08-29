@@ -499,23 +499,32 @@ What nets do I still need to train?
   -> parametric vs non parametric
      -> linear SVM: clampdet/linSVM           DONE
      -> best net fr above: clampdet/none?
-  
-- Class Imbalance
-                 SHORT TRAIN ITER!
-  -> test run: fitting proximity/             TODO
-  -> under-sampling: fitting proximity/       TODO
-  -> over-sampling: fitting proximity/        TODO
-  -> within-net threshold: fitting proximity/ TODO
-  -> weight initialisation
-     -> reinit: fitting_prox/none_reinit      TODO
-     -> ¬reinit: fitting_prox/none            TODO
-  -> parametric vs non parametric
-     -> linear SVM: fittin_prox/linSVM        TODO
-     -> best net fr above: 
-  -> SBL                                      TODO
-  -> test-time threshold                      TODO          
-  
 
+
+Class Imbalance:
+-> Test Run / Under-Sampling
+     fit_prox/tl_wout                         TODO    
+     fit_prox_us/tl_wout                      TODO       
+     clampdet/none                            TRAINING
+     clampdet_us/none                         DONE
+-> Transfer Learning
+     clampdet/tl_wout                         QUEUED    
+     clampdet/none                            TRAINING 
+     fit_prox_us0.5/none     (*)              TODO       
+     fit_prox_usAbove/none   (a)              TODO - need (*)
+     fit_prox_usBelow/none   (b)              TODO - need (*)
+     ---
+     if fail: {freezeBest}
+     (fit_prox_usAbove/fc{6or7}?)             TODO? - dep (a,b)
+     (fit_prox_usBelow/fc{6or7}?)             TODO? - dep (a,b)
+-> Bayesian Cross Entropy
+     fit_prox{best_from_above}/sbl            TODO - dep trans l
+-> Over-Sampling
+     fit_prox_os/none                         TODO
+-> Test time Threshold
+     fit_prox{best_from_above}/thresh at target_min
+
+     
 - Final Results
   what is the best arch?
   -> do NOT reinit (not enough data, at least not with UnderSampling)
@@ -612,11 +621,6 @@ Class Imbalance:
      if fail: {freezeBest}
      (fit_prox_usAbove/fc{6or7}?)                             
      (fit_prox_usBelow/fc{6or7}?)                             
-     ---
-     if fail:
-     (soil_contam_us0.5/none?)                             
-     (soil_contam_usAbove/none?)                             
-     (soil_contam_usBelow/none?)                             
 -> Bayesian Cross Entropy
      fit_prox/tl_wout       - benchmark                       
      fit_prox{best_from_above}
@@ -626,6 +630,9 @@ Class Imbalance:
      fit_prox/tl_wout       - benchmark                       
      fit_prox{best_from_above}
      fit_prox_os/none
+     ---
+     if fit_prox_os/none better than fit_prox_us0.5/none:
+     fit_prox_os/{freezeBest} ADD TO TODO LIST!
 -> Test time Threshold
      fit_prox/tl_wout       - benchmark                       
      fit_prox{best_from_above}/thresh at target_min
