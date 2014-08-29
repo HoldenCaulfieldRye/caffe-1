@@ -474,7 +474,7 @@ from below.
 
 =====
 
-What nets do I still need to train?
+TRAIN
 
 - Generic Clamp:
   -> mis-labelling, how to show?
@@ -484,51 +484,49 @@ What nets do I still need to train?
      -> with:                                 DONE
      -> w/out:                                DONE
   -> clampdet, freeze backprop on:
-     -> none:  clampdet/none                  TRAINING
+     -> none:  clampdet/none                  DONE
      -> conv1: clampdet/                      DONE
-     -> conv2: clampdet/                      TRAINING
-     -> conv3: clampdet/                      TRAINING
+     -> conv2: clampdet/                      DONE
+     -> conv3: clampdet/                      DONE
      -> conv4: clampdet/                      TODO
      -> conv5: clampdet/                      TODO
      -> fc6:   clampdet/                      TODO?
-     -> fc7:   clampdet/                      TODO?
-     -> fc8:   clampdet/                      TRAINING
+     -> fc7:   clampdet/                      DONE
   -> weight initialisation
-     -> reinit: clampdet/none_reinit          RETRAINING
-     -> ¬reinit: clampdet/none                RETRAINING
+     -> reinit: clampdet/none_reinit          DONE
+     -> ¬reinit: clampdet/none                DONE
   -> parametric vs non parametric
-     -> linear SVM: clampdet/linSVM           DONE
+     -> linear SVM: clampdet/linSVM           TODO
      -> best net fr above: clampdet/none?
 
 
 Class Imbalance:
 -> Test Run / Under-Sampling
-     fit_prox/tl_wout                         TODO    
-     fit_prox_us/tl_wout                      TODO       
+     clampdetCI/tl_wout                       TODO    
+     clampdetCI_us/tl_wout                    TODO       
      clampdet/none                            TRAINING
      clampdet_us/none                         DONE
 -> Transfer Learning
      clampdet/tl_wout                         QUEUED    
      clampdet/none                            TRAINING 
-     fit_prox_us0.5/none     (*)              TODO       
-     fit_prox_usAbove/none   (a)              TODO - need (*)
-     fit_prox_usBelow/none   (b)              TODO - need (*)
+     clampdetCI_us0.5/none     (*)            TODO       
+     clampdetCI_usAbove/none   (a)            TODO - need (*)
+     clampdetCI_usBelow/none   (b)            TODO - need (*)
      ---
      if fail: {freezeBest}
-     (fit_prox_usAbove/fc{6or7}?)             TODO? - dep (a,b)
-     (fit_prox_usBelow/fc{6or7}?)             TODO? - dep (a,b)
+     (clampdetCI_usAbove/fc{6or7}?)           TODO? - dep (a,b)
+     (clampdetCI_usBelow/fc{6or7}?)           TODO? - dep (a,b)
 -> Bayesian Cross Entropy
-     fit_prox{best_from_above}/sbl            TODO - dep trans l
+     clampdetCI{best_from_above}/sbl          TODO - dep trans l
 -> Over-Sampling
-     fit_prox_os/none                         TODO
+     clampdetCI_os/none                       TODO
 -> Test time Threshold
-     fit_prox{best_from_above}/thresh at target_min
+     clampdetCI{best_from_above}/thresh at target_min
 
      
 - Final Results
   what is the best arch?
   -> do NOT reinit (not enough data, at least not with UnderSampling)
-  
   -> clampdet
   -> ground sheet
   -> hatch markings
@@ -602,65 +600,64 @@ Transfer Learning:
 
 Class Imbalance:
 -> Test Run / Under-Sampling
-     fit_prox/tl_wout                             
-     fit_prox_us/tl_wout                             
+     clampdetCI/tl_wout                             
+     clampdetCI_us/tl_wout                             
      ---
      plot_clampdet_none                             
      plot_clapdet_us_none                             
 -> Transfer Learning
-     clampdet/tl_wout                             
-     clampdet/none                             
+     clampdetCI/tl_wout                             
+     clampdetCI/none                             
      ---
-     fit_prox_us0.5/none                             
+     clampdetCI_us0.5/none                             
      ---
      : us{Best}
-     fit_prox/tl_wout       - benchmark                       
-     fit_prox_usAbove/none                             
-     fit_prox_usBelow/none                             
+     clampdetCI/tl_wout       - benchmark                       
+     clampdetCI_usAbove/none                             
+     clampdetCI_usBelow/none                             
      ---
      if fail: {freezeBest}
-     (fit_prox_usAbove/fc{6or7}?)                             
-     (fit_prox_usBelow/fc{6or7}?)                             
+     (clampdetCI_usAbove/fc{6or7}?)                             
+     (clampdetCI_usBelow/fc{6or7}?)                             
 -> Bayesian Cross Entropy
-     fit_prox/tl_wout       - benchmark                       
-     fit_prox{best_from_above}
-     fit_prox{best_from_above}/sbl
+     clampdetCI/tl_wout       - benchmark                       
+     clampdetCI{best_from_above}
+     clampdetCI{best_from_above}/sbl
 -> Over-Sampling
      with clampdet you didnt try no reinit, do so now:
-     fit_prox/tl_wout       - benchmark                       
-     fit_prox{best_from_above}
-     fit_prox_os/none
+     clampdetCI/tl_wout       - benchmark                       
+     clampdetCI{best_from_above}
+     clampdetCI_os/none
      ---
-     if fit_prox_os/none better than fit_prox_us0.5/none:
-     fit_prox_os/{freezeBest} ADD TO TODO LIST!
+     if clampdetCI_os/none better than clampdetCI_us0.5/none:
+     clampdetCI_os/{freezeBest} ADD TO TODO LIST!
 -> Test time Threshold
-     fit_prox/tl_wout       - benchmark                       
-     fit_prox{best_from_above}/thresh at target_min
+     clampdetCI/tl_wout       - benchmark                       
+     clampdetCI{best_from_above}/thresh at target_min
 
 ======
 
 
 Next:
 
--> add one clampdet to train on graphic09
--> then stop checking training
--> queue up all clampdets left
--> prepare all fitting proximity prototxts
+-> train queued nets
+-> write script to increase imbalance
+-> prepare all class imbalance prototxts
 
 - break -
 
--> check what has finished training
--> save solverstates in directories!
 -> DONT do any plots
--> start training fitting proximities
--> then stop checking training
--> plot recent clampdets and write up analysis
+-> start training class imbalance nets
+-> update TRAIN statuses
+-> then don't check training
+-> ANALYSE transfer learning TODOs
 
 - break -
 
 -> check what has finished training
 -> save solverstates in directories!
--> plot recent fitting_proximities and write up analysis
+-> update TRAIN statuses
+-> ANALYSE class imbalance TODOs
 
 
 
