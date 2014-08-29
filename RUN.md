@@ -198,10 +198,14 @@ training:
 - 09: clampdet/fc7
 
 queued:
--> clampdet/tl_wout 50k, clampdet/conv4, clampdet/conv5
--> clamdpet/fc6? clampdet/fc7?
--> clampdet/linSVM for 5k iter again cos need solverstate!!
+-> clampdet/tl_wout 50k
+-> clampdet/conv4
+-> clampdet/conv5
 -> TL where bad min deeper than good min
+-> clampdet/linSVM for 5k iter again cos need solverstate!!
+
+-> clamdpet/fc6?
+
 
 
 finished / analyse:
