@@ -499,9 +499,35 @@ TRAIN
      -> linear SVM: clampdet/linSVM           TODO
      -> best net fr above: clampdet/none?
 
-
 Class Imbalance:
--> Test Run / Under-Sampling
+-> Test Run without TL
+     clampdet/tl_wout                         DONE  
+     clampdetCI98/tl_wout                     TODO 
+-> Transfer Learning
+     clampdetCI98/tl_wout                     TODO  
+     clampdetCI98/none_reinit_bs128_lr4       TODO
+     clampdetCI98/none_bs128_lr4              TODO         
+-> Batch Size
+     clampdetCI98/none_bs128_lr4              TODO         
+     clampdetCI98/none_bs256_lr4              TODO         
+-> Learning Rate
+     clampdetCI98/none_bs256_lr4              TODO         
+     clampdetCI98/none(_bs256_lr5)            DONE           
+-> Examine Impact with run_classifier
+     clampdet/none                            DONE
+     clampdetCI(97)/none(_bs256_lr5)          DONE             
+     clampdetCI98/none(_bs256_lr5)            DONE           
+
+
+=====
+
+TRAIN OLD Class Imbalance:
+-> Examine Impact:
+   
+-> Test Run 
+     clampdetCI/BULLSHIT                      DONE
+     clampdetCI/none                          TRAINING
+-> Under-Sampling
      clampdetCI/tl_wout                       TODO    
      clampdetCI_us/tl_wout                    TODO       
      clampdet/none                            TRAINING
@@ -536,6 +562,37 @@ Class Imbalance:
   -> contamination
   -> fitting proximity
   -> scraping peeling
+
+=====
+
+TRAIN class imbalance previous strategy
+
+Class Imbalance:
+-> Test Run batch size
+     clampdetCI/BULLSHIT                      DONE
+     clampdetCI/none                          TRAINING
+-> Under-Sampling
+     clampdetCI/tl_wout                       TODO    
+     clampdetCI_us/tl_wout                    TODO       
+     clampdet/none                            TRAINING
+     clampdet_us/none                         DONE
+-> Transfer Learning
+     clampdet/tl_wout                         QUEUED    
+     clampdet/none                            TRAINING 
+     clampdetCI_us0.5/none     (*)            TODO       
+     clampdetCI_usAbove/none   (a)            TODO - need (*)
+     clampdetCI_usBelow/none   (b)            TODO - need (*)
+     ---
+     if fail: {freezeBest}
+     (clampdetCI_usAbove/fc{6or7}?)           TODO? - dep (a,b)
+     (clampdetCI_usBelow/fc{6or7}?)           TODO? - dep (a,b)
+-> Bayesian Cross Entropy
+     clampdetCI{best_from_above}/sbl          TODO - dep trans l
+-> Over-Sampling
+     clampdetCI_os/none                       TODO
+-> Test time Threshold
+     clampdetCI{best_from_above}/thresh at target_min
+
 
 =====
 
@@ -595,6 +652,38 @@ Transfer Learning:
      clampdet/none ? (best so far)
 
 Class Imbalance:
+-> Test Run without TL
+     clampdet/tl_wout
+     clampdetCI98/tl_wout
+-> Transfer Learning
+     clampdetCI98/tl_wout
+     clampdetCI98/none_reinit_bs128_lr4
+     clampdetCI98/none_bs128_lr4
+-> Batch Size
+     clampdetCI98/none_bs128_lr4
+     clampdetCI98/none_bs256_lr4
+-> Learning Rate
+     clampdetCI98/none_bs256_lr4
+     clampdetCI98/none(_bs256_lr5)
+-> Examine Impact with run_classifier
+     clampdet/none
+     clampdetCI(97)/none(_bs256_lr5)
+     clampdetCI98/none(_bs256_lr5)
+     
+Maybe:     
+-> Under-Sampling
+-> Transfer Learning
+-> Bayesian Cross Entropy
+-> Over-Sampling
+-> Test time Threshold
+     clampdetCI/tl_wout       - benchmark                       
+     clampdetCI{best_from_above}/thresh at target_min
+
+     
+======
+
+ANALYSE OLD class imbalance
+
 -> Test Run / batchSize                           TODO
      clampdetCI/BULLSHIT
      clampdetCI/none
@@ -641,7 +730,7 @@ Next:
 
 -> prepare all class imbalance prototxts
    -> need clampdetCI_us
-      -> 
+      -> compare clampdetCI/none with clampdetCI98/none
 -> check on:
    -> clampdetCI
    -> clampdetCI98
@@ -669,5 +758,18 @@ Next:
 -> ANALYSE class imbalance TODOs
 
 
+====
 
+Ok, just realised even CI98 doesn't get bad min
+- but maybe that's thanks to tl, no reinit, large batch, small lr
+
+new path:
+- examine impact of class imbalance
+  -> different imbalance rates with nest arch until now
+     -> batchsize 128
+     -> lr 0.0001
+  
+- cure class imbalance:
+     
+  
 
