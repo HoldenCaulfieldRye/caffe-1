@@ -76,6 +76,7 @@ def rebalance(Keep, total_num_images, target_bad_min):
                               for key in Keep.keys()],
                              key=lambda x:x[1])
   maxc, len_maxc = ascending_classes[-1][0], ascending_classes[-1][1]
+  minc, len_minc = ascending_classes[0][0], ascending_classes[0][1]
   # print ascending_classes
   # print "\ntotal num images: %i"%(total_num_images)
   maxc_proportion = float(len_maxc)/total_num_images
@@ -89,6 +90,13 @@ def rebalance(Keep, total_num_images, target_bad_min):
       random.shuffle(Keep[maxc])
       print '%s has %i images so %i will be randomly removed'%(maxc, len_maxc, delete_size)
       del Keep[maxc][:delete_size]
+    elif maxc_proportion < target_bad_min:
+      print 'woah, you want to INCREASE class imbalance!'
+      delete_size = int(total_num_images - (len_maxc/float(target_bad_min)))
+      random.shuffle(Keep[minc])
+      print '%s has %i images so %i will be randomly removed'%(minc, len_minc, delete_size)
+      del Keep[minc][:delete_size]
+  assert target_bad_min == round(float(len(Keep[maxc])) / (len(Keep[maxc])+len(Keep[minc])), 2)
   return Keep
 
 
