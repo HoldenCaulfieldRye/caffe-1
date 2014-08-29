@@ -76,7 +76,7 @@ def rebalance(Keep, total_num_images, target_bad_min):
                               for key in Keep.keys()],
                              key=lambda x:x[1])
   maxc, len_maxc = ascending_classes[-1][0], ascending_classes[-1][1]
-  minc = ascending_classes[0][0]
+  minc, len_minc = ascending_classes[0][0], ascending_classes[0][1]
   # print ascending_classes
   # print "\ntotal num images: %i"%(total_num_images)
   maxc_proportion = float(len_maxc)/total_num_images
