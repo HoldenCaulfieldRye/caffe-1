@@ -707,7 +707,6 @@ Next:
 
 -> prepare all class imbalance prototxts
 -> run them
--> update TRAIN status
 
 -> transfer 
 -> ANALYSE transfer learning TODOs
