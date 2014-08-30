@@ -230,7 +230,7 @@ SUPERCLEAN_EXTS := .so .a .o .bin .testbin .pb.cc .pb.h _pb2.py .cuo
 	py mat py$(PROJECT) mat$(PROJECT) proto runtest \
 	superclean supercleanlist supercleanfiles
 
-all: $(NAME) $(STATIC_NAME) tools examples pycaffe
+all: $(NAME) $(STATIC_NAME) tools examples # pycaffe
 
 linecount: clean
 	cloc --read-lang-def=$(PROJECT).cloc src/$(PROJECT)/
