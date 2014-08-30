@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "ground_sheet_fine_val_leveldb"
     mean_file: "../../data/ground_sheet/ground_sheet_fine_mean.binaryproto"
-    batch_size: 128
+    batch_size: 6
     crop_size: 227
     mirror: false
   }
@@ -316,7 +316,7 @@ layers {
 }
 layers {
   name: "accuracy"
-  type: PER_CLASS_BAYESIAN_ACCURACY
+  type: PER_CLASS_ACCURACY
   bottom: "prob"
   bottom: "label"
   top: "accuracy"

@@ -84,7 +84,8 @@ def main(classifier_dir, data_dir, data_info):
   d = {'fname': img_fnames,
        'pred': pred,
        'label': [],
-       'pred_lab': [],
+       'pred_lab_thresh': [],
+       'pred_lab_std': [],
        'pot_mislab': []}
   
   # save predictions to data_info
@@ -96,10 +97,25 @@ def main(classifier_dir, data_dir, data_info):
   # plt.plot(pred[0])
   return d
 
-
+def augment_read(data_info):
+  here = os.getcwd()
+  # os.chdir('/data/ad6813/caffe/python')
+  # shutil.copy('augment_read.sh', data_info)
+  os.chdir(data_info)
+  # os.chmod('augment_read.sh', 755)
+  call(['./augment_read.sh'])
+  # shutil.remove('augment_read.sh')
+  os.chdir(here)
+  
 def get_flag_and_thresh(data_info):
   flag_val, thresh = 0, 0.5
   rl = open(oj(data_info,'read.txt'),'r').readlines()
+  
+  if len([l for l in rl if 'flag_val' in l]) == 0:
+    # set up read.txt to contain flag val and threshold
+    augment_read(data_info)
+    rl = open(oj(data_info,'read.txt'),'r').readlines()
+    
   rl = [l.split() for l in rl]
   for l in rl[2:]:
     if l == ['1','flag_val']: flag_val = 1
@@ -186,40 +202,54 @@ def fill_dict(d, data_info):
   # fill in predicted labels and flag if potentially mislab
   false_pos, num_pos, false_neg, num_neg = 0, 0, 0, 0
   for idx in range(num_imgs):
-    # assign predicted label
+    
+    # assign predicted label wrt threshold
     if d['pred'][idx][flag_val] >= threshold:
-      d['pred_lab'].append(flag_val) 
-    else: d['pred_lab'].append(-(flag_val-1))
+      d['pred_lab_thresh'].append(flag_val) 
+    else: d['pred_lab_thresh'].append(-(flag_val-1))
 
-    # correct classification or not 
-    if d['pred_lab'][idx] != d['label'][idx]:
+    # assign predicted label in std way
+    if d['pred'][idx][flag_val] >= 0.5:
+      d['pred_lab_std'].append(flag_val) 
+    else: d['pred_lab_std'].append(-(flag_val-1))
+
+    # correct thresh classification or not 
+    if d['pred_lab_thresh'][idx] != d['label'][idx]:
       # print '%i != %i so wrong classification'%(d['pred_lab'][idx],d['label'][idx])
-      d['pot_mislab'].append(idx)
       if d['label'][idx] == flag_val:
-        false_neg += 1
+        false_neg_thresh += 1
         num_pos += 1
       else:
-        false_pos += 1
+        false_pos_thresh += 1
         num_neg += 1
     else:
       # print '%i == %i so correct classification'%(d['pred_lab'][idx],d['label'][idx])
       if d['label'][idx] == flag_val: num_pos += 1
       else: num_neg += 1
 
+    # correct std classification or not 
+    if d['pred_lab_std'][idx] != d['label'][idx]:
+      d['pot_mislab'].append(idx)
+      if d['label'][idx] == flag_val: false_neg_std += 1
+      else: false_pos_std += 1
+
   # everything ok?
   # for key in d.keys():
   #   print "d['%s'] is like %s"%(key,str(d[key][:8]))
   # print 'flag_val:', flag_val
-  print 'false_neg: %i, false_pos: %i, num_neg: %i, num_pos: %i'%(false_neg,false_pos,num_neg,num_pos)
+  print 'false_neg_thresh: %i, false_pos_thresh: %i'%(false_neg_thresh,false_pos_thresh)
+  print 'false_neg_std: %i, false_pos_std: %i'%(false_neg_std,false_pos_std)
+  print 'num_neg: %i, num_pos: %i'%(num_neg,num_pos)
 
   # compute accuracies
-  print 'num_pos:', num_pos
   d['accuracy']= {}
-  d['accuracy']['total'] = 1-(false_neg+false_pos)/float(num_imgs)
-  d['accuracy']['pos'] = 1-false_neg/float(num_pos)
-  d['accuracy']['neg'] = 1-false_pos/float(num_neg)
+  d['accuracy']['total_thresh'] = 1-(false_neg_thresh+false_pos_thresh)/float(num_imgs)
+  d['accuracy']['pos_thresh'] = 1-false_neg_thresh/float(num_pos)
+  d['accuracy']['neg_thresh'] = 1-false_pos_thresh/float(num_neg)
+  d['accuracy']['total_std'] = 1-(false_neg_std+false_pos_std)/float(num_imgs)
+  d['accuracy']['pos_std'] = 1-false_neg_std/float(num_pos)
+  d['accuracy']['neg_std'] = 1-false_pos_std/float(num_neg)
   print "d['accuracy']", d['accuracy']
-  print 'false_neg: %i, false_pos: %i, num_neg: %i, num_pos: %i'%(false_neg,false_pos,num_neg,num_pos)
   return d
 
 

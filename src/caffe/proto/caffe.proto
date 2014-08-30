@@ -140,6 +140,7 @@ message LayerParameter {
     MEMORY_DATA = 29;
     MULTINOMIAL_LOGISTIC_LOSS = 16;
     PER_CLASS_ACCURACY = 31;
+    PER_CLASS_BAYESIAN_ACCURACY = 33;
     POOLING = 17;
     POWER = 26;
     RELU = 18;

@@ -5,9 +5,9 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "ground_sheet_fine_val_leveldb"
-    mean_file: "../../data/ground_sheet/ground_sheet_fine_mean.binaryproto"
-    batch_size: 128
+    source: "ground_sheet_fine_test_leveldb"
+    mean_file: "../../data/controlpoint/ground_sheet/ground_sheet_fine_mean.binaryproto"
+    batch_size: 256
     crop_size: 227
     mirror: false
   }
@@ -17,9 +17,9 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 96
@@ -68,9 +68,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -120,9 +120,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -149,9 +149,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -179,9 +179,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv4"
   top: "conv5"
-  blobs_lr: 0
-  blobs_lr: 0
-  weight_decay: 0
+  blobs_lr: 1
+  blobs_lr: 2
+  weight_decay: 1
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -298,7 +298,7 @@ layers {
   weight_decay: 0
   inner_product_param {
     num_output: 2
-    weight_filler {
+	weight_filler {
       type: "gaussian"
       std: 0.01
     }
@@ -316,9 +316,8 @@ layers {
 }
 layers {
   name: "accuracy"
-  type: PER_CLASS_BAYESIAN_ACCURACY
+  type: ACCURACY
   bottom: "prob"
   bottom: "label"
   top: "accuracy"
 }
-
