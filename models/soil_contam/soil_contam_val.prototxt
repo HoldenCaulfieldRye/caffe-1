@@ -1,13 +1,13 @@
-name: "clampdetCI98FineNet"
+name: "soil_contamFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "clampdetCI98_val_leveldb"
-    mean_file: "../../data/clampdetCI98/clampdetCI98_mean.binaryproto"
-    batch_size: 212
+    source: "soil_contam_val_leveldb"
+    mean_file: "../../data/soil_contam/soil_contam_mean.binaryproto"
+    batch_size: 128
     crop_size: 227
     mirror: false
   }
