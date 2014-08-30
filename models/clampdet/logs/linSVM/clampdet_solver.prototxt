@@ -8,6 +8,6 @@ display: 1
 max_iter: 20000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 20000
+snapshot: 5000
 snapshot_prefix: "clampdet_fine_train"
 solver_mode: GPU
