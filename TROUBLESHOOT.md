@@ -522,6 +522,7 @@ Class Imbalance:
      clampdetCI98/none_bs256_lr4_sbl          TRAINING
      clampdetCI98/none_bs256_lr5_sbl          RETRAINING
      clampdetCI98/conv5_bs256_lr5_sbl         TRAINING
+     clampdetCI98/fc7_bs256_lr5_sbl           DONE
       
      
 Final Results:
@@ -769,7 +770,9 @@ SHORT TERM
       when to early stop cos inadequate val err)
    -> run_classifier to see whether perf on positives better
 
-   
+-> benchmark SBL:
+   -> run_classifier threshold that maximises pca
+   -> under sampling
 
 
    
