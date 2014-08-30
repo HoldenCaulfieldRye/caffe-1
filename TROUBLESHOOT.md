@@ -505,10 +505,10 @@ Class Imbalance:
      clampdetCI98/tl_wout                     DONE
 -> Transfer Learning
      clampdetCI98/tl_wout                     DONE
-     clampdetCI98/none_reinit_bs128_lr4       TODO
-     clampdetCI98/none_bs128_lr4              TRAINING
+     clampdetCI98/none_reinit_bs128_lr4        TODO
+     clampdetCI98/none_bs128_lr4              DONE
 -> Batch Size
-     clampdetCI98/none_bs128_lr4              TRAINING
+     clampdetCI98/none_bs128_lr4              DONE
      clampdetCI98/none_bs256_lr4              TRAINING
 -> Learning Rate
      clampdetCI98/none_bs256_lr4              TRAINING
@@ -518,6 +518,8 @@ Class Imbalance:
      clampdetCI(97)/none(_bs256_lr5)          DONE             
      clampdetCI98/none(_bs256_lr5)            DONE           
 -> SBL
+     clampdetCI98/none(_bs256_lr5)            DONE           
+     clampdetCI98/none_bs256_lr5_sbl           TODO
      
      
 Final Results:
