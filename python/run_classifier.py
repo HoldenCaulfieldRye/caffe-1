@@ -333,10 +333,15 @@ if __name__ == '__main__':
 
   # accuracies
   print 'with threshold at test only:'
-  print 'accuracy overall: ', d['accuracy']['total']
-  print 'accuracy on positives: ', d['accuracy']['pos']
-  print 'accuracy on negatives: ', d['accuracy']['neg']
+  print 'accuracy overall: ', d['accuracy']['total_thresh']
+  print 'accuracy on positives: ', d['accuracy']['pos_thresh']
+  print 'accuracy on negatives: ', d['accuracy']['neg_thresh']
 
+  print 'with standard 0.5 classification:'
+  print 'accuracy overall: ', d['accuracy']['total_std']
+  print 'accuracy on positives: ', d['accuracy']['pos_std']
+  print 'accuracy on negatives: ', d['accuracy']['neg_std']
+  
   # find highest sig_level that raises >=95% of true positives,
   # and compute % workload that is automated
   Sig_level, pct_auto = compute_kpi(d)
