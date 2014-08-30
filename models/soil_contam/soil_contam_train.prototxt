@@ -291,11 +291,7 @@ layers {
   name: "fc8_new"
   type: INNER_PRODUCT
   bottom: "fc7"
-<<<<<<< HEAD
-  top: "fc8_soil"
-=======
   top: "fc8_new"
->>>>>>> e77b39279485a83d95945442dfb1696e1ce85c80
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -314,7 +310,7 @@ layers {
 }
 layers {
   name: "loss"
-  type: SOFTMAX_BAYESIAN_LOSS
+  type: SOFTMAX_LOSS
   bottom: "fc8_new"
   bottom: "label"
 }
