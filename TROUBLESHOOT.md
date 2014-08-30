@@ -505,14 +505,14 @@ Class Imbalance:
      clampdetCI98/tl_wout                     DONE
 -> Transfer Learning
      clampdetCI98/tl_wout                     DONE
-     clampdetCI98/none_reinit_bs128_lr4        TODO
+     clampdetCI98/none_reinit_bs128_lr4       DONE
      clampdetCI98/none_bs128_lr4              DONE
 -> Batch Size
      clampdetCI98/none_bs128_lr4              DONE
-     clampdetCI98/none_bs256_lr4              TRAINING
+     clampdetCI98/none_bs256_lr4              DONE
 -> Learning Rate
-     clampdetCI98/none_bs256_lr4              TRAINING
-     clampdetCI98/none_bs256_lr5              DONE
+     clampdetCI98/none_bs256_lr4              DONE
+     clampdetCI98/none_bs256_lr5              TRAINING
 -> Examine Impact with run_classifier
      clampdet/none                            DONE
      clampdetCI(97)/none(_bs256_lr5)          DONE             
@@ -520,16 +520,20 @@ Class Imbalance:
 -> SBL
      clampdetCI98/none_bs256_lr4              DONE           
      clampdetCI98/none_bs256_lr4_sbl          TRAINING
-     
+     clampdetCI98/none_bs256_lr5_sbl          RETRAINING
+     clampdetCI98/conv5_bs256_lr5_sbl         TRAINING
+     clampdetCI98/fc7_bs256_lr5_sbl           DONE
+      
      
 Final Results:
 -> transfer top notch clampdet net instead?
-     clampdet/none for 4k iters               TODO
-     resume clampdet/none for 6k iters:
-     -> snapshot every 500
-     -> lr5
-     -> bs256
-     cherry picking stats: python/choose_clampdet.txt
+     clampdet/none_best                       DONE
+     soil_contam/noneC                        DONE
+     hatch_markings/noneC                     DONE
+     hatch_markings/none                      TODO
+-> pooling loses spatial informations
+     soil_contam/poolless                     TODO
+   
 -> what is the best arch?
   -> do NOT reinit (not enough data, at least not with UnderSampling)
   -> clampdet
@@ -665,6 +669,14 @@ Maybe:
 Final Results:
 -> transfer top notch clampdet instead?
      clampdet_fine_train_iter_{best}
+-> transfer top notch clampdet net instead?
+     clampdet/none_best                       TODO
+     soil_contam/noneC                        TODO
+     hatch_markings/noneC                     TODO
+     hatch_markings/none                      TODO
+-> pooling loses spatial information
+     soil_contam/poolless                     TODO
+   
      
 ======
 
@@ -758,7 +770,12 @@ SHORT TERM
       when to early stop cos inadequate val err)
    -> run_classifier to see whether perf on positives better
 
-   
+-> benchmark SBL:
+   -> run_classifier threshold that maximises pca
+   -> under sampling:
+      need to remove min class to get target imbalance
+      and then under smaple to get target bad min
 
-
+-> contam poolless      
+   that's for another time
    

@@ -1,13 +1,13 @@
-name: "soil_contamFineNet"
+name: "clampdetCI98FineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "soil_contam_val_leveldb"
-    mean_file: "../../data/soil_contam/soil_contam_mean.binaryproto"
-    batch_size: 128
+    source: "clampdetCI98_val_leveldb"
+    mean_file: "../../data/clampdetCI98/clampdetCI98_mean.binaryproto"
+    batch_size: 212
     crop_size: 227
     mirror: false
   }
@@ -17,9 +17,9 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 96
@@ -68,9 +68,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -120,9 +120,9 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -149,9 +149,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -179,9 +179,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv4"
   top: "conv5"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 256
@@ -205,13 +205,24 @@ layers {
   top: "conv5"
 }
 layers {
-  name: "fc6_new"
-  type: INNER_PRODUCT
+  name: "pool5"
+  type: POOLING
   bottom: "conv5"
-  top: "fc6_new"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  top: "pool5"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+layers {
+  name: "fc6"
+  type: INNER_PRODUCT
+  bottom: "pool5"
+  top: "fc6"
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -228,26 +239,26 @@ layers {
 layers {
   name: "relu6"
   type: RELU
-  bottom: "fc6_new"
-  top: "fc6_new"
+  bottom: "fc6"
+  top: "fc6"
 }
 layers {
   name: "drop6"
   type: DROPOUT
-  bottom: "fc6_new"
-  top: "fc6_new"
+  bottom: "fc6"
+  top: "fc6"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 layers {
-  name: "fc7_new"
+  name: "fc7"
   type: INNER_PRODUCT
-  bottom: "fc6_new"
-  top: "fc7_new"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  bottom: "fc6"
+  top: "fc7"
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   inner_product_param {
     num_output: 4096
@@ -264,23 +275,23 @@ layers {
 layers {
   name: "relu7"
   type: RELU
-  bottom: "fc7_new"
-  top: "fc7_new"
+  bottom: "fc7"
+  top: "fc7"
 }
 layers {
   name: "drop7"
   type: DROPOUT
-  bottom: "fc7_new"
-  top: "fc7_new"
+  bottom: "fc7"
+  top: "fc7"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 layers {
-  name: "fc8_soil"
+  name: "fc8_new"
   type: INNER_PRODUCT
-  bottom: "fc7_new"
-  top: "fc8_soil"
+  bottom: "fc7"
+  top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -300,12 +311,12 @@ layers {
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_soil"
+  bottom: "fc8_new"
   top: "prob"
 }
 layers {
   name: "accuracy"
-  type: PER_CLASS_ACCURACY
+  type: PER_CLASS_BAYESIAN_ACCURACY
   bottom: "prob"
   bottom: "label"
   top: "accuracy"
