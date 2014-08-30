@@ -39,78 +39,22 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   const Dtype* label = bottom[1]->cpu_data();
   int num = prob_.num();
   int dim = prob_.count() / num;
-  // int label_count = bottom[1]->count();
 
-  //std::cout << "SOFTMAX BAYESIAN LAYER:" << std::endl;
-
-  //std::cout << "prob_ dimensions:" << std::endl;
-  //std::cout << "num: " << prob_.num() << std::endl;
-  //std::cout << "channels: " << prob_.channels() << std::endl;
-  //std::cout << "height: " << prob_.height() << std::endl;
-  //std::cout << "width: " << prob_.width() << std::endl;
-  //std::cout << "count: " << prob_.count() << std::endl;
-
-  //std::cout << std::endl;
-  
-  //std::cout << "bottom[0] dimensions:" << std::endl;
-  //std::cout << "num: " << bottom[0]->num() << std::endl;
-  //std::cout << "channels: " << bottom[0]->channels() << std::endl;
-  //std::cout << "height: " << bottom[0]->height() << std::endl;
-  //std::cout << "width: " << bottom[0]->width() << std::endl;
-  //std::cout << "count: " << bottom[0]->count() << std::endl;
-
-  //std::cout << std::endl;
-  
-  //std::cout << "top[0] dimensions:" << std::endl;
-  //std::cout << "num: " << (*top)[0]->num() << std::endl;
-  //std::cout << "channels: " << (*top)[0]->channels() << std::endl;
-  //std::cout << "height: " << (*top)[0]->height() << std::endl;
-  //std::cout << "width: " << (*top)[0]->width() << std::endl;
-  //std::cout << "count: " << (*top)[0]->count() << std::endl;
-
-  Dtype* prior = labels_.mutable_cpu_data();
-  ////std::cout << "labels for this batch: ";
-  for (int i = 0; i < num; ++i) {
+  float prior[2];
+  prior[0] = 0;
+  prior[1] = 0;  
+  for (int i = 0; i < num; ++i)
     prior[static_cast<int>(label[i])] += 1.0 / num;
-    ////std::cout << label[i] << " ";
-  } 
-  ////std::cout << std::endl << std::endl << "prior for this batch is: ";
-  // for (int i = 0; i < dim; ++i)
-    ////std::cout << prior[i] << ", ";
-  ////std::cout << std::endl;
-  //caffe_set(labels_.count(), Dtype(FLT_MIN), prior);
-
-  //std::cout << std::endl << "SBL layer" << std::endl;
-  //std::cout << "output probs:" << std::endl;
-  // int n = std::min(20,num);
-  // for (int i=0; i<n; i++) {
-  //   if (static_cast<int>(label[i]) == 0)
-  //     //std::cout << "min class ";
-  //   //std::cout << "case " << i << ": " << std::endl;
-  //  //std::cout << "prob_data: ";
-  //   for (int neur = 0; neur < dim; neur++)
-  //     //std::cout << prob_data[i*dim + neur] << ", ";
-  //  //std::cout << "   bottom_data: ";
-  //   for (int neur = 0; neur < dim; neur++)
-  //     //std::cout << bottom_data[i*dim + neur] << ", ";
-  //   //std::cout << std::endl;
-  // }
   
   Dtype loss = 0;
-  Dtype loss_nb = 0;
-  ////std::cout << "loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / prior[static_cast<int>(label[i])]" << std::endl;
+  // std::cout << "loss: ";
   for (int i = 0; i < num; ++i) {
-    //taking from prob_data the outputted probability of the correct label
-    //FLT_MIN is smallest nonzero float (don't want to give 0 to log)
-    ////std::cout << "max(" << prob_data[i * dim + static_cast<int>(label[i])] << ", " << Dtype(FLT_MIN) << ")) / " << static_cast<float>(prior[static_cast<int>(label[i])]) << std::endl;//",    ";
-    loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])], Dtype(FLT_MIN))) / prior[static_cast<int>(label[i])];
-    loss_nb += -log(max(prob_data[i * dim + static_cast<int>(label[i])],
-			Dtype(FLT_MIN)));
+    loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])],
+		     Dtype(FLT_MIN))) / (dim*prior[static_cast<int>(label[i])]);
+    // std::cout << loss << ", ";
   }
-  ////std::cout << "SBL, loss before scale down: " << loss << std::endl;
-  //std::cout << "SBL loss: " << loss/ (dim*num) << std::endl;
-  //std::cout << "SL loss: " << loss_nb / num << std::endl;
-  return loss / (dim*num);
+  // std::cout << std::endl;
+  return loss / num;
 }
 
 template <typename Dtype>
@@ -122,68 +66,29 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   // Compute the diff
   Dtype* bottom_diff = (*bottom)[0]->mutable_cpu_diff();
   const Dtype* prob_data = prob_.cpu_data();
-  //bottom_diff starts off as the outputted probabilities, not the loss!
-  //loss actually never backpropped... wtf
-  //I guess proper backprop takes place wherever weights are updated, and 
-  //bottom_diffs found at various layers are multiplied together (along with 
-  //weight or unit output values)
   memcpy(bottom_diff, prob_data, sizeof(Dtype) * prob_.count());
   const Dtype* label = (*bottom)[1]->cpu_data();
   int num = prob_.num();         //batchSize, num imgs
   int dim = prob_.count() / num; //num neurons, dimensionality
   
-  // ////std::cout << "bottom_diff before backward_pass is the outputted probabilities:" << std::endl;
-  //for some reason, computing a gradient for each case; I guess they get averaged in the code
-  //for weight update
-  // for (int i = 0; i < 5; ++i)  {
-  //   for (int j = 0; j < dim; ++j) 
-  //     ////std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-  //   ////std::cout << std::endl;
-  // }
-  // ////std::cout << std::endl;
-  
-  for (int i = 0; i < num; ++i) {
-    // softmax gradient: bit.ly/1tmehE9
-    bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
-  }
-  // Scale down gradient
-  // multiply the 1st prob_.count() elements of bottom_diff by 1/dim
-  caffe_scal(prob_.count(), Dtype(1) / dim, bottom_diff);
-
-  // int n = std::min(20,num);
-  // //std::cout << "SL bottom_diff:" << std::endl;
-  // for (int i = 0; i < n; ++i)  {
-  //   if (static_cast<int>(label[i]) == 0)
-  //     //std::cout << "min class case ";
-  //   for (int j = 0; j < dim; ++j) 
-  //     //std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << bottom_diff[i*dim+j]<< ",  ";
-  //   //std::cout << std::endl;
-  // }
-  //std::cout << std::endl;
-
-  Dtype* prior = labels_.mutable_cpu_data();
+  float prior[2] = {0,0};
   for (int i = 0; i < num; ++i)
     prior[static_cast<int>(label[i])] += 1.0 / num;
 
-  // ////std::cout << std::endl << std::endl << "prior for this batch is: ";
-  // for (int i = 0; i < dim; ++i)
-  //   ////std::cout << prior[i] << ", ";
-  // ////std::cout << std::endl;
-
-  for (int i = 0; i < num; ++i)  {
-    for (int j = 0; j < dim; ++j) 
-      bottom_diff[i * dim + j] /= static_cast<float>(prior[static_cast<int>(label[i])])*dim;
+  for (int i = 0; i < num; ++i) {
+    bottom_diff[i * dim + static_cast<int>(label[i])] -= 1 / (static_cast<float>(prior[static_cast<int>(label[i])])*dim) ;
   }
+  // Scale down gradient
+  caffe_scal(prob_.count(), Dtype(1) / num, bottom_diff);
   
-  //std::cout << "SBL bottom_diff:" << std::endl;
-  // for (int i = 0; i < n; ++i)  {
-  //   if (static_cast<int>(label[i]) == 0)
-  //     //std::cout << "min class case ";
-  //   for (int j = 0; j < dim; ++j) 
-  //     //std::cout << "bottom_diff[" << i << "*" << dim << "+" <<j << "]: " << (*bottom)[0]->mutable_cpu_diff()[i*dim+j]<< ",  ";
-  //   //std::cout << std::endl;
+  // std::cout << "Jacobian:" << std::endl;
+  // for (int j = 0; j < dim; ++j) {
+  //   for (int i = 0; i < num; ++i) {
+  //     std::cout << bottom_diff[i * dim + j] << ", ";
+  //   }
+  //   std::cout << std::endl;
   // }
-  // //std::cout << std::endl;
+  // std::cout << std::endl;
 }
 /*
 template <typename Dtype>

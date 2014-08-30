@@ -37,24 +37,13 @@ Dtype SoftmaxWithLossLayer<Dtype>::Forward_cpu(
   int dim = prob_.count() / num;
   Dtype loss = 0;
 
-  // //std::cout << std::endl << "SL layer" << std::endl;
-  // //std::cout << "output probs:" << std::endl;
-  // int n = std::min(20,num);
-  // for (int i=0; i<n; i++) {
-  //   if (static_cast<int>(label[i]) == 0)
-  //     //std::cout << "min class ";
-  //  //std::cout << "case " << i << ": ";
-  //   for (int neur = 0; neur < dim; neur++)
-  //     //std::cout << prob_data[i*dim + neur] << ", ";
-  //   //std::cout << std::endl;
-  // }
-  
+  std::cout << "loss: ";
   for (int i = 0; i < num; ++i) {
-    //taking from prob_data the outputted probability of the correct label
-    //FLT_MIN is smallest nonzero float (don't want to give 0 to log)
     loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])],
                      Dtype(FLT_MIN)));
+    std::cout << loss << ", ";
   }
+  std::cout << std::endl;
   return loss / num;
 }
 
@@ -71,9 +60,18 @@ void SoftmaxWithLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
   int dim = prob_.count() / num;
   for (int i = 0; i < num; ++i) {
     bottom_diff[i * dim + static_cast<int>(label[i])] -= 1;
-  }
+  }  
   // Scale down gradient
   caffe_scal(prob_.count(), Dtype(1) / num, bottom_diff);
+  
+  // std::cout << "Jacobian:" << std::endl;
+  // for (int j = 0; j < dim; ++j) {
+  //   for (int i = 0; i < num; ++i) {
+  //     std::cout << bottom_diff[i * dim + j] << ", ";
+  //   }
+  //   std::cout << std::endl;
+  // }
+  // std::cout << std::endl;
 }
 
 
