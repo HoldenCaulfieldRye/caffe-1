@@ -20,7 +20,7 @@ namespace caffe {
   //SetUp and Forward_cpu
   
 template <typename Dtype>
-void PerClassAccuracyLayer<Dtype>::SetUp(
+void PerClassBayesianAccuracyLayer<Dtype>::SetUp(
   const vector<Blob<Dtype>*>& bottom, vector<Blob<Dtype>*>* top) {
   CHECK_EQ(bottom.size(), 2) << "Accuracy Layer takes two blobs as input.";
   CHECK_EQ(top->size(), 1) << "Accuracy Layer takes 1 output.";
@@ -53,7 +53,7 @@ void PerClassAccuracyLayer<Dtype>::SetUp(
 }
 
 template <typename Dtype>
-Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+Dtype PerClassBayesianAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bottom,
     vector<Blob<Dtype>*>* top) {
   Dtype accuracy = 0;
   Dtype logprob = 0;
@@ -77,7 +77,7 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
   prior[1] = 0;
   ////std::cout << "labels for this batch: ";
   for (int i = 0; i < num; ++i) {
-    prior[static_cast<int>(label[i])] += 1.0 / num;
+    prior[static_cast<int>(bottom_label[i])] += 1.0 / num;
     ////std::cout << label[i] << " ";
   } 
   
@@ -111,7 +111,7 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
     }
     Dtype prob = max(bottom_data[i * dim + static_cast<int>(bottom_label[i])],
                      Dtype(kLOG_THRESHOLD));
-    logprob -= log(prob) / prior[static_cast<int>(label[i])];
+    logprob -= log(prob) / prior[static_cast<int>(bottom_label[i])];
   }
   //////std::cout << "accF " << accuracy << "\n";
   // LOG(INFO) << "Accuracy: " << labels_accuracy; //is << defined for Dtype?
@@ -122,6 +122,6 @@ Dtype PerClassAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>*>& bott
   return Dtype(0);
 }
 
-INSTANTIATE_CLASS(PerClassAccuracyLayer);
+INSTANTIATE_CLASS(PerClassBayesianAccuracyLayer);
 
 }  // namespace caffe
