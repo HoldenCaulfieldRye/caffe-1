@@ -69,6 +69,8 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   //std::cout << "count: " << (*top)[0]->count() << std::endl;
 
   Dtype* prior = labels_.mutable_cpu_data();
+  prior[0] = 0;
+  prior[1] = 0;  
   ////std::cout << "labels for this batch: ";
   for (int i = 0; i < num; ++i) {
     prior[static_cast<int>(label[i])] += 1.0 / num;
@@ -162,6 +164,8 @@ void SoftmaxWithBayesianLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*
   //std::cout << std::endl;
 
   Dtype* prior = labels_.mutable_cpu_data();
+  prior[0] = 0;
+  prior[1] = 0;  
   for (int i = 0; i < num; ++i)
     prior[static_cast<int>(label[i])] += 1.0 / num;
 
