@@ -27,11 +27,13 @@ def main(classifier_dir, data_dir, data_info):
   classifier_name = classifier_dir.split('/')[-1]
   
   # create deploy prototxt
-  train_file = get_train_file(classifier_dir)
-  # num_imgs = len(os.listdir(oj(data_dir,'test')))
-  content = train_file.readlines()
-  content = edit_train_content_for_deploy(content)
-  write_content_to_deploy_file(classifier_dir, content)
+  if len([fname for fname in os.listdir(classifier_dir) 
+          if fname == classifier_name.split('-fine')[0]+'_deploy.prototxt']) == 0:
+    train_file = get_train_file(classifier_dir)
+    # num_imgs = len(os.listdir(oj(data_dir,'test')))
+    content = train_file.readlines()
+    content = edit_train_content_for_deploy(content)
+    write_content_to_deploy_file(classifier_dir, content)
     
   # Set the right path to your model definition file, pretrained model 
   # weights, and the image you would like to classify
