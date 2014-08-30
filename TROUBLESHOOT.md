@@ -524,7 +524,17 @@ Class Imbalance:
      clampdetCI98/conv5_bs256_lr5_sbl         TRAINING
      clampdetCI98/fc7_bs256_lr5_sbl           DONE
       
+Conserving Spatial Information:
+-> Test Run
+     soil_contam/tl_wout
+     soil_contam/noneC_lr5_sbl
+     note bs128 saturates gpu mem
+-> Remove pooling and an fc layer
+     soil_contam/nopool_sl
+-> SBL
+     soil_contam/nopool
      
+
 Final Results:
 -> transfer top notch clampdet net instead?
      clampdet/none_best                       DONE
