@@ -17,8 +17,8 @@ layers {
   type: CONVOLUTION
   bottom: "data"
   top: "conv1"
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -68,8 +68,8 @@ layers {
   type: CONVOLUTION
   bottom: "norm1"
   top: "conv2"
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -120,8 +120,8 @@ layers {
   type: CONVOLUTION
   bottom: "norm2"
   top: "conv3"
-  blobs_lr: 0
-  blobs_lr: 0
+  blobs_lr: 1
+  blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   convolution_param {
@@ -216,10 +216,10 @@ layers {
   }
 }
 layers {
-  name: "fc6_new"
+  name: "fc6"
   type: INNER_PRODUCT
   bottom: "pool5"
-  top: "fc6_new"
+  top: "fc6"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -239,23 +239,23 @@ layers {
 layers {
   name: "relu6"
   type: RELU
-  bottom: "fc6_new"
-  top: "fc6_new"
+  bottom: "fc6"
+  top: "fc6"
 }
 layers {
   name: "drop6"
   type: DROPOUT
-  bottom: "fc6_new"
-  top: "fc6_new"
+  bottom: "fc6"
+  top: "fc6"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 layers {
-  name: "fc7_new"
+  name: "fc7"
   type: INNER_PRODUCT
-  bottom: "fc6_new"
-  top: "fc7_new"
+  bottom: "fc6"
+  top: "fc7"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -275,23 +275,23 @@ layers {
 layers {
   name: "relu7"
   type: RELU
-  bottom: "fc7_new"
-  top: "fc7_new"
+  bottom: "fc7"
+  top: "fc7"
 }
 layers {
   name: "drop7"
   type: DROPOUT
-  bottom: "fc7_new"
-  top: "fc7_new"
+  bottom: "fc7"
+  top: "fc7"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 layers {
-  name: "fc8_new"
+  name: "fc8_hatch"
   type: INNER_PRODUCT
-  bottom: "fc7_new"
-  top: "fc8_new"
+  bottom: "fc7"
+  top: "fc8_hatch"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -311,14 +311,14 @@ layers {
 layers {
   name: "threshold"
   type: THRESHOLD
-  bottom: "fc8_new"
+  bottom: "fc8_hatch"
   bottom: "label"
-  top: "fc8_new_thresh"
+  top: "fc8_hatch_thresh"
   top: "label"
 }
 layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc8_new_thresh"
+  bottom: "fc8_hatch_thresh"
   bottom: "label"
 }
