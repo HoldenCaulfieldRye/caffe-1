@@ -501,8 +501,8 @@ TRAIN
 
 Class Imbalance:
 -> Test Run without TL
-     clampdet/tl_wout                         TRAINING
-     clampdetCI98/tl_wout                     TRAINING
+     clampdet/tl_wout                         DONE
+     clampdetCI98/tl_wout                     DONE
 -> Transfer Learning
      clampdetCI98/tl_wout                     TRAINING
      clampdetCI98/none_reinit_bs128_lr4       TRAINING
@@ -551,7 +551,7 @@ TRAIN OLD Class Imbalance:
      clampdet/none                            TRAINING
      clampdet_us/none                         DONE
 -> Transfer Learning
-     clampdet/tl_wout                         QUEUED    
+     clampdet/tl_wout                         DONE
      clampdet/none                            TRAINING 
      clampdetCI_us0.5/none     (*)            TODO       
      clampdetCI_usAbove/none   (a)            TODO - need (*)
@@ -707,7 +707,6 @@ Next:
 
 -> prepare all class imbalance prototxts
 -> run them
--> update TRAIN status
 
 -> transfer 
 -> ANALYSE transfer learning TODOs
@@ -734,4 +733,23 @@ new path:
 - cure class imbalance:
      
   
+=====
 
+SHORT TERM
+
+-> figure out which clampdet/none iter is best
+-> delete the others
+-> is best iter as alternative transfer model
+   -> soil_contam/none
+   -> soil_contam/none_c  # means transfer from clampdet task
+
+-> get evidence for sbl intuition
+   -> clampdetCI98/none_bs256_lr5 (already trained?)
+   -> clampdetCI98/none_bs256_lr5_sbl (multi snapshots cos dunno
+      when to early stop cos inadequate val err)
+   -> run_classifier to see whether perf on positives better
+
+   
+
+
+   
