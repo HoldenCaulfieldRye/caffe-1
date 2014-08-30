@@ -64,7 +64,9 @@ Dtype PerClassBayesianAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>
 
   int label_count = bottom[1]->count();
   
-  Dtype* labels_count = labels_.mutable_cpu_data();
+  Dtype labels_count[2];
+  labels_count[0] = 0;
+  labels_count[1] = 0;
   caffe_set(labels_.count(), Dtype(FLT_MIN), labels_count);
   ////std::cout << "label_count" << labels_.count();
   for (int i = 0; i < label_count; ++i) {
@@ -72,14 +74,19 @@ Dtype PerClassBayesianAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>
     ////std::cout << "bottom_label" << i << " " << bottom_label[i];
   } 
 
-  Dtype* prior = labels_.mutable_cpu_data();
+  std::cout << "labels_count: " << labels_count[0] << ", " << labels_count[1] << std::endl;
+  
+  
+  Dtype prior[2];
   prior[0] = 0;
   prior[1] = 0;
   ////std::cout << "labels for this batch: ";
   for (int i = 0; i < num; ++i) {
     prior[static_cast<int>(bottom_label[i])] += 1.0 / num;
     ////std::cout << label[i] << " ";
-  } 
+  }
+
+  std::cout << "prior: " << prior[0] << ", " << prior[1] << std::endl;
   
   // const Dtype* prob_data = prob_.cpu_data();
   const Dtype* label = bottom[1]->cpu_data();
@@ -106,17 +113,23 @@ Dtype PerClassBayesianAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>
       }
     }
     if (max_id == static_cast<int>(bottom_label[i])){
-      accuracy += 1.0/static_cast<float>(labels_count[max_id]);
+      std::cout << "accuracy: " << accuracy << ", ";
+      accuracy += 1.0 / static_cast<float>(labels_count[max_id]);
       //////std::cout << "acMF " << accuracy << " " << labels_count[max_id] << " " << num << "\n";
+    }
+    if (bottom_label[i] != 0 && bottom_label[i] != 1) {
+      std::cout << "bottom_label[i] = " << bottom_label[i] << "!!!";
+      std::exit(12);
     }
     Dtype prob = max(bottom_data[i * dim + static_cast<int>(bottom_label[i])],
                      Dtype(kLOG_THRESHOLD));
-    logprob -= log(prob) / prior[static_cast<int>(bottom_label[i])];
+    logprob -= log(prob) / dim*prior[static_cast<int>(bottom_label[i])];
   }
   //////std::cout << "accF " << accuracy << "\n";
   // LOG(INFO) << "Accuracy: " << labels_accuracy; //is << defined for Dtype?
   //////std::cout << dim << " " << bottom[0]->count();  
   (*top)[0]->mutable_cpu_data()[0] = accuracy / static_cast<float>(dim); //test score 0
+  std::cout << "accuracy: " << accuracy << std::endl;
   (*top)[0]->mutable_cpu_data()[1] = logprob / num;  //test score 1
   // Accuracy layer should not be used as a loss function.
   return Dtype(0);
