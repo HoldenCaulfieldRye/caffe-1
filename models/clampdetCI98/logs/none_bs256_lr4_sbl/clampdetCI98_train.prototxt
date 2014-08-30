@@ -1,15 +1,15 @@
-name: "ground_sheetFineNet"
+name: "clampdetCI98FineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "ground_sheet_fine_test_leveldb"
-    mean_file: "../../data/controlpoint/ground_sheet/ground_sheet_fine_mean.binaryproto"
+    source: "clampdetCI98_train_leveldb"
+    mean_file: "../../data/clampdetCI98/clampdetCI98_mean.binaryproto"
     batch_size: 256
     crop_size: 227
-    mirror: false
+    mirror: true
   }
 }
 layers {
@@ -288,17 +288,17 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8_new"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_aero"
+  top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
     num_output: 2
-	weight_filler {
+    weight_filler {
       type: "gaussian"
       std: 0.01
     }
@@ -309,15 +309,8 @@ layers {
   }
 }
 layers {
-  name: "prob"
-  type: SOFTMAX
-  bottom: "fc8_aero"
-  top: "prob"
-}
-layers {
-  name: "accuracy"
-  type: ACCURACY
-  bottom: "prob"
+  name: "loss"
+  type: SOFTMAX_BAYESIAN_LOSS
+  bottom: "fc8_new"
   bottom: "label"
-  top: "accuracy"
 }

@@ -5,9 +5,9 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "hatch_markings_fine_train_leveldb"
-    mean_file: "../../data/hatch_markings/hatch_markings_fine_mean.binaryproto"
-    batch_size: 256
+    source: "hatch_markings_train_leveldb"
+    mean_file: "../../data/hatch_markings/hatch_markings_mean.binaryproto"
+    batch_size: 128
     crop_size: 227
     mirror: false
   }
@@ -309,16 +309,8 @@ layers {
   }
 }
 layers {
-  name: "threshold"
-  type: THRESHOLD
-  bottom: "fc8_hatch"
-  bottom: "label"
-  top: "fc8_hatch_thresh"
-  top: "label"
-}
-layers {
   name: "loss"
   type: SOFTMAX_LOSS
-  bottom: "fc8_hatch_thresh"
+  bottom: "fc8_hatch"
   bottom: "label"
 }
