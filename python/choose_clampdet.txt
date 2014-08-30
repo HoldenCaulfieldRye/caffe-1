@@ -1,4 +1,4 @@
-KEEP 4500
+KEEP 6000
 
 4000:
 with threshold at test only:
@@ -78,4 +78,22 @@ this enables 0.559085841695 automation
 
 
 6000: 
+with threshold at test only:
+accuracy overall:  0.693422519509
+accuracy on positives:  0.944444444444
+accuracy on negatives:  0.659062103929
+with standard 0.5 classification:
+accuracy overall:  0.933110367893
+accuracy on positives:  0.731481481481
+accuracy on negatives:  0.960709759189
+check same with above! num_pos: 216
+sig levels required for following accuracy on positives:
+70\%: 0.562172889709
+80\%: 0.390211105347
+90\%: 0.212756484747
+95\%: 0.108857631683
+sig level required for 95% accuracy on positives: 0.108857631683
+this enables 0.566889632107 automation
+
+
 
