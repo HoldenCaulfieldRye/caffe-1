@@ -6,7 +6,7 @@ TOOLS=$CAFFE/build/tools
 DATA=$CAFFE/data/hatch_markings
 DATA_INFO=$CAFFE/data_info/hatch_markings
 
-for TYPE in train val;
+for TYPE in train val test;
 do
     if [ ! -f $DATA_INFO'/'$TYPE'.txt' ]
     then
@@ -35,5 +35,10 @@ GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/val/ \
     $DATA_INFO/val.txt \
     hatch_markings_val_leveldb 1
+
+GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
+    $DATA/test/ \
+    $DATA_INFO/test.txt \
+    hatch_markings_test_leveldb 1
 
 echo "Done."

@@ -3,7 +3,7 @@
 # N.B. this is available in data/ilsvrc12
 
 TOOLS=../../build/tools
-DATA=../../data/hatch_markings
+DATA=../../data/controlpoint/hatch_markings
 
 $TOOLS/compute_image_mean.bin hatch_markings_train_leveldb $DATA/hatch_markings_mean.binaryproto
 
