@@ -3,8 +3,8 @@
 # N.B. this is available in data/ilsvrc12
 
 TOOLS=../../build/tools
-DATA=../../data/ground_sheet
+DATA=../../data/hatch_markings
 
-$TOOLS/compute_image_mean.bin ground_sheet_fine_train_leveldb $DATA/ground_sheet_fine_mean.binaryproto
+$TOOLS/compute_image_mean.bin hatch_markings_train_leveldb $DATA/hatch_markings_mean.binaryproto
 
 echo "Done."

@@ -3,10 +3,10 @@
 # n.B. set the path to the imagenet train + val data dirs
 CAFFE=/data/ad6813/caffe
 TOOLS=$CAFFE/build/tools
-DATA=$CAFFE/data/ground_sheet
-DATA_INFO=$CAFFE/data_info/ground_sheet
+DATA=$CAFFE/data/hatch_markings
+DATA_INFO=$CAFFE/data_info/hatch_markings
 
-for TYPE in train val test;
+for TYPE in train val;
 do
     if [ ! -f $DATA_INFO'/'$TYPE'.txt' ]
     then
@@ -29,16 +29,11 @@ echo "Creating leveldb..."
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/train/ \
     $DATA_INFO/train.txt \
-    ground_sheet_fine_train_leveldb 1
+    hatch_markings_train_leveldb 1
 
 GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
     $DATA/val/ \
     $DATA_INFO/val.txt \
-    ground_sheet_fine_val_leveldb 1
-
-GLOG_logtostderr=1 $TOOLS/convert_imageset.bin \
-    $DATA/test/ \
-    $DATA_INFO/test.txt \
-    ground_sheet_fine_test_leveldb 1
+    hatch_markings_val_leveldb 1
 
 echo "Done."
