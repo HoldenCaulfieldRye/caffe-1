@@ -527,12 +527,12 @@ Class Imbalance:
 Conserving Spatial Information:
 -> Test Run
      soil_contam/tl_wout
-     soil_contam/noneC_lr5_sbl
+     soil_contam/noneC_lr5_sbl                TRAINING
      note bs128 saturates gpu mem
 -> Remove pooling and an fc layer
-     soil_contam/nopool_sl
+     soil_contam/nopool_sl                    TRAINING
 -> SBL
-     soil_contam/nopool
+     soil_contam/nopool                       TRAINING
      
 
 Final Results:
