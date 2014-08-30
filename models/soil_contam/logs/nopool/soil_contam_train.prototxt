@@ -207,7 +207,7 @@ layers {
 layers {
   name: "fc6_new"
   type: INNER_PRODUCT
-  bottom: "pool5"
+  bottom: "conv5"
   top: "fc6_new"
   blobs_lr: 1
   blobs_lr: 2
