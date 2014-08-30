@@ -772,7 +772,10 @@ SHORT TERM
 
 -> benchmark SBL:
    -> run_classifier threshold that maximises pca
-   -> under sampling
+   -> under sampling:
+      need to remove min class to get target imbalance
+      and then under smaple to get target bad min
 
-
+-> contam poolless      
+   that's for another time
    
