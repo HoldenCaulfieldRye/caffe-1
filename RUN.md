@@ -192,10 +192,10 @@ CURRENTLY
 
 training:
 - 05: 
-- 06: clampdetCI98/none_bs256_lr4_sbl
+- 06: clampdetCI98/none_bs256_lr5_sbl
 - 07: clampdetCI98/none_bs256_lr5
-- 08: hatch_markings/noneC
-- 09: soil_contam/noneC
+- 08: hatch_markings/none
+- 09: soil_contam/poolless
 
 queued:
 -> clampdetCI98/none_bs256_lr4
