@@ -501,14 +501,14 @@ TRAIN
 
 Class Imbalance:
 -> Test Run without TL
-     clampdet/tl_wout                         DONE  
-     clampdetCI98/tl_wout                     TODO 
+     clampdet/tl_wout                         TRAINING
+     clampdetCI98/tl_wout                     TRAINING
 -> Transfer Learning
-     clampdetCI98/tl_wout                     TODO  
-     clampdetCI98/none_reinit_bs128_lr4       TODO
-     clampdetCI98/none_bs128_lr4              TODO         
+     clampdetCI98/tl_wout                     TRAINING
+     clampdetCI98/none_reinit_bs128_lr4       TRAINING
+     clampdetCI98/none_bs128_lr4              TRAINING
 -> Batch Size
-     clampdetCI98/none_bs128_lr4              TODO         
+     clampdetCI98/none_bs128_lr4              TRAINING
      clampdetCI98/none_bs256_lr4              TODO         
 -> Learning Rate
      clampdetCI98/none_bs256_lr4              TODO         
@@ -518,40 +518,14 @@ Class Imbalance:
      clampdetCI(97)/none(_bs256_lr5)          DONE             
      clampdetCI98/none(_bs256_lr5)            DONE           
 
-
-=====
-
-TRAIN OLD Class Imbalance:
--> Examine Impact:
-   
--> Test Run 
-     clampdetCI/BULLSHIT                      DONE
-     clampdetCI/none                          TRAINING
--> Under-Sampling
-     clampdetCI/tl_wout                       TODO    
-     clampdetCI_us/tl_wout                    TODO       
-     clampdet/none                            TRAINING
-     clampdet_us/none                         DONE
--> Transfer Learning
-     clampdet/tl_wout                         QUEUED    
-     clampdet/none                            TRAINING 
-     clampdetCI_us0.5/none     (*)            TODO       
-     clampdetCI_usAbove/none   (a)            TODO - need (*)
-     clampdetCI_usBelow/none   (b)            TODO - need (*)
-     ---
-     if fail: {freezeBest}
-     (clampdetCI_usAbove/fc{6or7}?)           TODO? - dep (a,b)
-     (clampdetCI_usBelow/fc{6or7}?)           TODO? - dep (a,b)
--> Bayesian Cross Entropy
-     clampdetCI{best_from_above}/sbl          TODO - dep trans l
--> Over-Sampling
-     clampdetCI_os/none                       TODO
--> Test time Threshold
-     clampdetCI{best_from_above}/thresh at target_min
-
-     
-- Final Results
-  what is the best arch?
+Final Results:
+-> transfer top notch clampdet net instead?
+     clampdet/none for 4k iters               TODO
+     resume clampdet/none for 6k iters:
+     -> snapshot every 500
+     -> lr5
+     -> bs256
+-> what is the best arch?
   -> do NOT reinit (not enough data, at least not with UnderSampling)
   -> clampdet
   -> ground sheet
@@ -565,10 +539,10 @@ TRAIN OLD Class Imbalance:
 
 =====
 
-TRAIN class imbalance previous strategy
-
-Class Imbalance:
--> Test Run batch size
+TRAIN OLD Class Imbalance:
+-> Examine Impact:
+   
+-> Test Run 
      clampdetCI/BULLSHIT                      DONE
      clampdetCI/none                          TRAINING
 -> Under-Sampling
@@ -679,6 +653,9 @@ Maybe:
      clampdetCI/tl_wout       - benchmark                       
      clampdetCI{best_from_above}/thresh at target_min
 
+Final Results:
+-> transfer top notch clampdet instead?
+     clampdet_fine_train_iter_{best}
      
 ======
 
@@ -729,25 +706,10 @@ ANALYSE OLD class imbalance
 Next:
 
 -> prepare all class imbalance prototxts
-   -> need clampdetCI_us
-      -> compare clampdetCI/none with clampdetCI98/none
--> check on:
-   -> clampdetCI
-   -> clampdetCI98
-   remember objective is to find suitable class imbalance for
-   all other approaches
-   maybe use run_classifier.py to confirm badmin
--> CAREFUL!   
-   all new prototxts saved under clampdetCI so if data/clampdetCI
-   imbalance not the one you want, save the prototxts somewhere
-   else, because ./finetune.sh will erase them
-   
-- break -
+-> run them
+-> update TRAIN status
 
--> DONT do any plots
--> start training class imbalance nets
--> update TRAIN statuses
--> then don't check training
+-> transfer 
 -> ANALYSE transfer learning TODOs
 
 - break -
