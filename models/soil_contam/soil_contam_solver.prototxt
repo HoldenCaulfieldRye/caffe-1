@@ -8,6 +8,6 @@ display: 1
 max_iter: 500
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 100
+snapshot: 250
 snapshot_prefix: "soil_contam_fine_train"
 solver_mode: GPU
