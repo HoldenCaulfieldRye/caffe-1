@@ -5,11 +5,11 @@ layers {
   top: "data"
   top: "label"
   data_param {
-    source: "soil_contam_val_leveldb"
+    source: "soil_contam_train_leveldb"
     mean_file: "../../data/soil_contam/soil_contam_mean.binaryproto"
     batch_size: 128
     crop_size: 227
-    mirror: false
+    mirror: true
   }
 }
 layers {
@@ -207,7 +207,7 @@ layers {
 layers {
   name: "fc6_new"
   type: INNER_PRODUCT
-  bottom: "conv5"
+  bottom: "pool5"
   top: "fc6_new"
   blobs_lr: 1
   blobs_lr: 2
@@ -287,7 +287,7 @@ layers {
   weight_decay: 0
   inner_product_param {
     num_output: 2
-	weight_filler {
+    weight_filler {
       type: "gaussian"
       std: 0.01
     }
@@ -298,15 +298,8 @@ layers {
   }
 }
 layers {
-  name: "prob"
-  type: SOFTMAX
+  name: "loss"
+  type: SOFTMAX_LOSS
   bottom: "fc8_soil"
-  top: "prob"
-}
-layers {
-  name: "accuracy"
-  type: PER_CLASS_ACCURACY
-  bottom: "prob"
   bottom: "label"
-  top: "accuracy"
 }
