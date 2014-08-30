@@ -7,7 +7,7 @@ layers {
   data_param {
     source: "soil_contam_val_leveldb"
     mean_file: "../../data/soil_contam/soil_contam_mean.binaryproto"
-    batch_size: 128
+    batch_size: 96
     crop_size: 227
     mirror: false
   }
@@ -288,10 +288,14 @@ layers {
   }
 }
 layers {
-  name: "fc8_soil"
+  name: "fc8_new"
   type: INNER_PRODUCT
   bottom: "fc7"
+<<<<<<< HEAD
   top: "fc8_soil"
+=======
+  top: "fc8_new"
+>>>>>>> e77b39279485a83d95945442dfb1696e1ce85c80
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -311,12 +315,12 @@ layers {
 layers {
   name: "prob"
   type: SOFTMAX
-  bottom: "fc8_soil"
+  bottom: "fc8_new"
   top: "prob"
 }
 layers {
   name: "accuracy"
-  type: PER_CLASS_ACCURACY
+  type: PER_CLASS_BAYESIAN_ACCURACY
   bottom: "prob"
   bottom: "label"
   top: "accuracy"
