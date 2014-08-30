@@ -512,14 +512,14 @@ Class Imbalance:
      clampdetCI98/none_bs256_lr4              TRAINING
 -> Learning Rate
      clampdetCI98/none_bs256_lr4              TRAINING
-     clampdetCI98/none(_bs256_lr5)            RETRAINING       
+     clampdetCI98/none_bs256_lr5              DONE
 -> Examine Impact with run_classifier
      clampdet/none                            DONE
      clampdetCI(97)/none(_bs256_lr5)          DONE             
      clampdetCI98/none(_bs256_lr5)            DONE           
 -> SBL
-     clampdetCI98/none(_bs256_lr5)            DONE           
-     clampdetCI98/none_bs256_lr5_sbl           TODO
+     clampdetCI98/none_bs256_lr4              DONE           
+     clampdetCI98/none_bs256_lr4_sbl          TRAINING
      
      
 Final Results:
@@ -753,8 +753,8 @@ SHORT TERM
    -> soil_contam/noneC  # means transfer from clampdet task
 
 -> get evidence for sbl intuition
-   -> clampdetCI98/none_bs256_lr5 (already trained?)
-   -> clampdetCI98/none_bs256_lr5_sbl (multi snapshots cos dunno
+   -> clampdetCI98/none_bs256_lr4 (already trained?)
+   -> clampdetCI98/none_bs256_lr4_sbl (multi snapshots cos dunno
       when to early stop cos inadequate val err)
    -> run_classifier to see whether perf on positives better
 
