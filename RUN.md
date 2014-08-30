@@ -191,7 +191,7 @@ CURRENTLY
 =========
 
 training:
-- 05: ground_sheet_sbl with wide back_cpu
+- 05: 
 - 06: clampdetCI98/none_bs256_lr4_sbl
 - 07: clampdetCI98/none_bs256_lr5
 - 08: hatch_markings/noneC
