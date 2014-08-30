@@ -1,13 +1,13 @@
 train_net: "soil_contam_train.prototxt"
 test_net: "soil_contam_val.prototxt"
 test_iter: 8
-test_interval: 50
-base_lr: 0.0001
+test_interval: 10
+base_lr: 0.00001
 lr_policy: "fixed"
 display: 1
-max_iter: 2000
+max_iter: 500
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 2000
+snapshot: 250
 snapshot_prefix: "soil_contam_fine_train"
 solver_mode: GPU

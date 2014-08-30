@@ -1,15 +1,15 @@
-name: "soil_riskFineNet"
+name: "soil_contamFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "soil_risk_fine_val_leveldb"
-    mean_file: "../../data/controlpoint/soil_risk/soil_risk_fine_mean.binaryproto"
-    batch_size: 256
+    source: "soil_contam_train_leveldb"
+    mean_file: "../../data/soil_contam/soil_contam_mean.binaryproto"
+    batch_size: 96
     crop_size: 227
-    mirror: false
+    mirror: true
   }
 }
 layers {
@@ -205,21 +205,10 @@ layers {
   top: "conv5"
 }
 layers {
-  name: "pool5"
-  type: POOLING
-  bottom: "conv5"
-  top: "pool5"
-  pooling_param {
-    pool: MAX
-    kernel_size: 3
-    stride: 2
-  }
-}
-layers {
-  name: "fc6"
+  name: "fc6_new"
   type: INNER_PRODUCT
-  bottom: "pool5"
-  top: "fc6"
+  bottom: "conv5"
+  top: "fc6_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -228,7 +217,7 @@ layers {
     num_output: 4096
     weight_filler {
       type: "gaussian"
-      std: 0.005
+      std: 0.0025
     }
     bias_filler {
       type: "constant"
@@ -239,66 +228,30 @@ layers {
 layers {
   name: "relu6"
   type: RELU
-  bottom: "fc6"
-  top: "fc6"
+  bottom: "fc6_new"
+  top: "fc6_new"
 }
 layers {
   name: "drop6"
   type: DROPOUT
-  bottom: "fc6"
-  top: "fc6"
+  bottom: "fc6_new"
+  top: "fc6_new"
   dropout_param {
     dropout_ratio: 0.5
   }
 }
 layers {
-  name: "fc7"
+  name: "fc7_soil"
   type: INNER_PRODUCT
-  bottom: "fc6"
-  top: "fc7"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
-  weight_decay: 0
-  inner_product_param {
-    num_output: 4096
-    weight_filler {
-      type: "gaussian"
-      std: 0.005
-    }
-    bias_filler {
-      type: "constant"
-      value: 1
-    }
-  }
-}
-layers {
-  name: "relu7"
-  type: RELU
-  bottom: "fc7"
-  top: "fc7"
-}
-layers {
-  name: "drop7"
-  type: DROPOUT
-  bottom: "fc7"
-  top: "fc7"
-  dropout_param {
-    dropout_ratio: 0.5
-  }
-}
-layers {
-  name: "fc8_clamp"
-  type: INNER_PRODUCT
-  bottom: "fc7"
-  top: "fc8_aero"
+  bottom: "fc6_new"
+  top: "fc7_soil"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
     num_output: 2
-	weight_filler {
+    weight_filler {
       type: "gaussian"
       std: 0.01
     }
@@ -309,15 +262,8 @@ layers {
   }
 }
 layers {
-  name: "prob"
-  type: SOFTMAX
-  bottom: "fc8_aero"
-  top: "prob"
-}
-layers {
-  name: "accuracy"
-  type: ACCURACY
-  bottom: "prob"
+  name: "loss"
+  type: SOFTMAX_LOSS
+  bottom: "fc7_soil"
   bottom: "label"
-  top: "accuracy"
 }
