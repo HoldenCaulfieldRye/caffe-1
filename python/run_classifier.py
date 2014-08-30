@@ -200,7 +200,7 @@ def fill_dict(d, data_info):
   # print 'flag_val:', flag_val
 
   # fill in predicted labels and flag if potentially mislab
-  false_pos, num_pos, false_neg_thresh, num_neg_thresh, false_neg_std, num_neg_std = 0, 0, 0, 0, 0, 0
+  false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
   for idx in range(num_imgs):
     
     # assign predicted label wrt threshold
