@@ -50,11 +50,11 @@ Dtype SoftmaxWithBayesianLossLayer<Dtype>::Forward_cpu(
   // std::cout << "loss: ";
   for (int i = 0; i < num; ++i) {
     loss += -log(max(prob_data[i * dim + static_cast<int>(label[i])],
-		     Dtype(FLT_MIN))) / (dim*prior[static_cast<int>(label[i])]);
+		     Dtype(FLT_MIN))) / (dim*num*prior[static_cast<int>(label[i])]);
     // std::cout << loss << ", ";
   }
   // std::cout << std::endl;
-  return loss / num;
+  return loss;
 }
 
 template <typename Dtype>
