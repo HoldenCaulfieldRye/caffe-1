@@ -64,14 +64,14 @@ void SoftmaxWithLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
   // Scale down gradient
   caffe_scal(prob_.count(), Dtype(1) / num, bottom_diff);
   
-  std::cout << "Jacobian:" << std::endl;
-  for (int j = 0; j < dim; ++j) {
-    for (int i = 0; i < num; ++i) {
-      std::cout << bottom_diff[i * dim + j] << ", ";
-    }
-    std::cout << std::endl;
-  }
-  std::cout << std::endl;
+  // std::cout << "Jacobian:" << std::endl;
+  // for (int j = 0; j < dim; ++j) {
+  //   for (int i = 0; i < num; ++i) {
+  //     std::cout << bottom_diff[i * dim + j] << ", ";
+  //   }
+  //   std::cout << std::endl;
+  // }
+  // std::cout << std::endl;
 }
 
 

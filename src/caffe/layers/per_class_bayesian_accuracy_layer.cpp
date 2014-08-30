@@ -66,7 +66,7 @@ Dtype PerClassBayesianAccuracyLayer<Dtype>::Forward_cpu(const vector<Blob<Dtype>
     }
     Dtype prob = max(bottom_data[i * dim + static_cast<int>(bottom_label[i])],
                      Dtype(kLOG_THRESHOLD));
-    logprob -= log(prob);  /// (dim*prior[static_cast<int>(bottom_label[i])]);
+    logprob -= log(prob) / (dim*prior[static_cast<int>(bottom_label[i])]);
   }
   (*top)[0]->mutable_cpu_data()[0] = accuracy / static_cast<float>(dim); //test score 0
   (*top)[0]->mutable_cpu_data()[1] = logprob / num;  //test score 1
