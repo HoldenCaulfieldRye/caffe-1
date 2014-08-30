@@ -504,20 +504,22 @@ Class Imbalance:
      clampdet/tl_wout                         DONE
      clampdetCI98/tl_wout                     DONE
 -> Transfer Learning
-     clampdetCI98/tl_wout                     TRAINING
-     clampdetCI98/none_reinit_bs128_lr4       TRAINING
+     clampdetCI98/tl_wout                     DONE
+     clampdetCI98/none_reinit_bs128_lr4       TODO
      clampdetCI98/none_bs128_lr4              TRAINING
 -> Batch Size
      clampdetCI98/none_bs128_lr4              TRAINING
-     clampdetCI98/none_bs256_lr4              TODO         
+     clampdetCI98/none_bs256_lr4              TRAINING
 -> Learning Rate
-     clampdetCI98/none_bs256_lr4              TODO         
+     clampdetCI98/none_bs256_lr4              TRAINING
      clampdetCI98/none(_bs256_lr5)            DONE           
 -> Examine Impact with run_classifier
      clampdet/none                            DONE
      clampdetCI(97)/none(_bs256_lr5)          DONE             
      clampdetCI98/none(_bs256_lr5)            DONE           
-
+-> SBL
+     
+     
 Final Results:
 -> transfer top notch clampdet net instead?
      clampdet/none for 4k iters               TODO
@@ -525,6 +527,7 @@ Final Results:
      -> snapshot every 500
      -> lr5
      -> bs256
+     cherry picking stats: python/choose_clampdet.txt
 -> what is the best arch?
   -> do NOT reinit (not enough data, at least not with UnderSampling)
   -> clampdet
@@ -643,6 +646,10 @@ Class Imbalance:
      clampdet/none
      clampdetCI(97)/none(_bs256_lr5)
      clampdetCI98/none(_bs256_lr5)
+
+-> SBL
+     talk about choosing appropriate backprop
+     ground_sheet_sbl/logs/pcba/GettingThere has trace
      
 Maybe:     
 -> Under-Sampling

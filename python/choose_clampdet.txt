@@ -1,0 +1,64 @@
+4000:
+with threshold at test only:
+accuracy overall:  0.730769230769
+accuracy on positives:  0.935185185185
+accuracy on negatives:  0.70278833967
+with standard 0.5 classification:
+accuracy overall:  0.939799331104
+accuracy on positives:  0.699074074074
+accuracy on negatives:  0.972750316857
+check same with above! num_pos: 216
+sig levels required for following accuracy on positives:
+70\%: 0.498022168875
+80\%: 0.368339955807
+90\%: 0.194024085999
+95\%: 0.0931941047311
+sig level required for 95% accuracy on positives: 0.0931941047311
+this enables 0.566332218506 automation
+
+
+4500:
+with threshold at test only:
+accuracy overall:  0.695652173913
+accuracy on positives:  0.939814814815
+accuracy on negatives:  0.662230671736
+with standard 0.5 classification:
+accuracy overall:  0.935340022297
+accuracy on positives:  0.722222222222
+accuracy on negatives:  0.964512040558
+check same with above! num_pos: 216
+sig levels required for following accuracy on positives:
+70\%: 0.538532972336
+80\%: 0.393323749304
+90\%: 0.215029805899
+95\%: 0.107746325433
+sig level required for 95% accuracy on positives: 0.107746325433
+this enables 0.565774804905 automation
+
+
+5000:
+with threshold at test only:
+accuracy overall:  0.689520624303
+accuracy on positives:  0.944444444444
+accuracy on negatives:  0.654626108999
+with standard 0.5 classification:
+accuracy overall:  0.933667781494
+accuracy on positives:  0.731481481481
+accuracy on negatives:  0.96134347275
+check same with above! num_pos: 216
+sig levels required for following accuracy on positives:
+70\%: 0.548944592476
+80\%: 0.399511545897
+90\%: 0.216851428151
+95\%: 0.109054781497
+sig level required for 95% accuracy on positives: 0.109054781497
+this enables 0.564659977703 automation
+
+
+5500:
+
+
+
+
+6000: not working
+
