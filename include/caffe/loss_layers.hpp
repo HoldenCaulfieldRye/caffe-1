@@ -181,6 +181,25 @@ class PerClassAccuracyLayer: public Layer<Dtype> {
   Blob<Dtype> labels_;
 };
 
+template <typename Dtype>
+class PerClassBayesianAccuracyLayer: public Layer<Dtype> {
+ public:
+  explicit PerClassBayesianAccuracyLayer(const LayerParameter& param)
+      : Layer<Dtype>(param) {}
+  virtual void SetUp(const vector<Blob<Dtype>*>& bottom,
+      vector<Blob<Dtype>*>* top);
+
+ protected:
+  virtual Dtype Forward_cpu(const vector<Blob<Dtype>*>& bottom,
+      vector<Blob<Dtype>*>* top);
+  virtual void Backward_cpu(const vector<Blob<Dtype>*>& top,
+      const bool propagate_down, vector<Blob<Dtype>*>* bottom) {
+    NOT_IMPLEMENTED;
+  }
+  // intermediary blob to hold label counts
+  Blob<Dtype> labels_;
+};
+
 
 /* Also see
 - SoftmaxWithLossLayer in vision_layers.hpp
