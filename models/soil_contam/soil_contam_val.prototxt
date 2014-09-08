@@ -269,7 +269,7 @@ layers {
 }
 layers {
   name: "accuracy"
-  type: PER_CLASS_ACCURACY
+  type: PER_CLASS_BAYESIAN_ACCURACY
   bottom: "prob"
   bottom: "label"
   top: "accuracy"
