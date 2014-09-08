@@ -3,8 +3,8 @@
 # N.B. this is available in data/ilsvrc12
 
 TOOLS=../../build/tools
-DATA=../../data/contamination
+DATA=../../data/clampdetCI98_us
 
-$TOOLS/compute_image_mean.bin contamination_train_leveldb $DATA/contamination_mean.binaryproto
+$TOOLS/compute_image_mean.bin clampdetCI98_us_train_leveldb $DATA/clampdetCI98_us_mean.binaryproto
 
 echo "Done."

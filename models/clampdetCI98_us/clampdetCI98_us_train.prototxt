@@ -1,15 +1,15 @@
-name: "contaminationFineNet"
+name: "clampdetCI98_usFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "contamination_fine_leveldb"
-    mean_file: "../../data/contamination/contamination_mean.binaryproto"
-    batch_size: 256
+    source: "clampdetCI98_us_train_leveldb"
+    mean_file: "../../data/clampdetCI98_us/clampdetCI98_us_mean.binaryproto"
+    batch_size: 128
     crop_size: 227
-    mirror: false
+    mirror: true
   }
 }
 layers {
@@ -288,17 +288,17 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8_new"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_aero"
+  top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
     num_output: 2
-	weight_filler {
+    weight_filler {
       type: "gaussian"
       std: 0.01
     }
@@ -309,15 +309,8 @@ layers {
   }
 }
 layers {
-  name: "prob"
-  type: SOFTMAX
-  bottom: "fc8_aero"
-  top: "prob"
-}
-layers {
-  name: "accuracy"
-  type: ACCURACY
-  bottom: "prob"
+  name: "loss"
+  type: SOFTMAX_LOSS
+  bottom: "fc8_new"
   bottom: "label"
-  top: "accuracy"
 }

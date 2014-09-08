@@ -191,11 +191,11 @@ CURRENTLY
 =========
 
 training:
-- 05: 
-- 06: clampdetCI98/none_bs256_lr4 to get snapshot
-- 07: clampdetCI98/none_bs256_lr5, clampdetCI98/conv5_bs256_lr5_sbl
+- 05: soil_contam/noneC_lr5_sbl
+- 06: soil_contam/nopool
+- 07: soil_contam/nopool_sl
 - 08: hatch_markings/none
-- 09: soil_contam/poolless
+- 09: soil_contam/tl_wout
 
 queued:
 -> clampdetCI98/none_bs256_lr4
