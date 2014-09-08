@@ -1,13 +1,13 @@
-name: "soil_riskFineNet"
+name: "soil_contamFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "soil_risk_fine_train_leveldb"
-    mean_file: "../../data/controlpoint/soil_risk/soil_risk_fine_mean.binaryproto"
-    batch_size: 50
+    source: "soil_contam_train_leveldb"
+    mean_file: "../../data/soil_contam/soil_contam_mean.binaryproto"
+    batch_size: 96
     crop_size: 227
     mirror: true
   }
@@ -218,7 +218,7 @@ layers {
 layers {
   name: "fc6"
   type: INNER_PRODUCT
-  bottom: "pool5"
+  bottom: "conv5"
   top: "fc6"
   blobs_lr: 1
   blobs_lr: 2
@@ -288,10 +288,10 @@ layers {
   }
 }
 layers {
-  name: "fc8_clamp"
+  name: "fc8_new"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_aero"
+  top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
@@ -310,7 +310,7 @@ layers {
 }
 layers {
   name: "loss"
-  type: SOFTMAX_LOSS
-  bottom: "fc8_aero"
+  type: SOFTMAX_BAYESIAN_LOSS
+  bottom: "fc8_new"
   bottom: "label"
 }
