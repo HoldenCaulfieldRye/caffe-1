@@ -5,9 +5,9 @@ test_interval: 10
 base_lr: 0.00001
 lr_policy: "fixed"
 display: 1
-max_iter: 500
+max_iter: 2000
 momentum: 0.9
 weight_decay: 0.0005
-snapshot: 250
+snapshot: 500
 snapshot_prefix: "soil_contam_fine_train"
 solver_mode: GPU
