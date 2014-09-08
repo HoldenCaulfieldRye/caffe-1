@@ -31,17 +31,17 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   else:
     print 'plotting from iter %i to %i'%(start,end)
 
-  plt.ylim([0,2.4])
+  plt.ylim([0,1.5])
   x = np.array(range(len(train[start:end])))
   ytrain = np.array([float(el[1]) for el in train[start:end]])
   ytest_acc = np.array([float(el[1]) for el in val_acc[start:end]])
   ytest_loss = np.array([np.float(el[1]) for el in val_loss[start:end]])
-  plt.plot(x, ytrain, label='training loss')
+  plt.plot(x, ytrain, label='training loss', color='0.55')
   if len(x) != len(ytest_acc):
     print 'len(x) %i != %i len(ytrain)'%(len(x),len(ytest_acc))
     sys.exit()
-  plt.plot(x, ytest_acc, label='validation accuracy')
-  plt.plot(x, ytest_loss, label='validation loss')
+  plt.plot(x, ytest_acc, label='validation accuracy',color='g')
+  plt.plot(x, ytest_loss, label='validation loss',color='r')
   plt.legend(loc='upper left')
   plt.xlabel('Iters')
   plt.ylabel('TrainingLoss')
