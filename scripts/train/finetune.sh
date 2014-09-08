@@ -12,12 +12,12 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=soil_contam_us90
+BASE_NAME=clampdetCI98_us
 FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
 # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
-BAD_MIN=0.94
+BAD_MIN=0.88
 
 # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet) "
 MAX_ITER=500
