@@ -6118,8 +6118,6 @@ I0830 21:57:33.318341 15639 solver.cpp:189] Snapshotting to soil_contam_fine_tra
 I0830 21:57:36.846550 15639 solver.cpp:196] Snapshotting solver state to soil_contam_fine_train_iter_2000.solverstate
 I0830 21:57:38.776983 15639 solver.cpp:130] Optimization Done.
 I0830 21:57:38.777014 15639 train_net.cpp:34] Optimization Done.
-Done.
-nohup: ignoring input
 I0909 02:33:45.350735 19941 train_net.cpp:26] Starting Optimization
 I0909 02:33:45.350822 19941 solver.cpp:42] Creating training net.
 I0909 02:33:45.351326 19941 net.cpp:76] Creating Layer data
