@@ -1,0 +1,13 @@
+train_net: "insertion_markings_train.prototxt"
+test_net: "insertion_markings_val.prototxt"
+test_iter: 8
+test_interval: 20
+base_lr: 0.00001
+lr_policy: "fixed"
+display: 1
+max_iter: 20000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 5000
+snapshot_prefix: "insertion_markings_fine_train"
+solver_mode: GPU
