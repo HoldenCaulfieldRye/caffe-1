@@ -1,12 +1,12 @@
-name: "hatch_markingsFineNet"
+name: "insertion_markingsFineNet"
 layers {
   name: "data"
   type: DATA
   top: "data"
   top: "label"
   data_param {
-    source: "hatch_markings_train_leveldb"
-    mean_file: "../../data/hatch_markings/hatch_markings_mean.binaryproto"
+    source: "insertion_markings_val_leveldb"
+    mean_file: "../../data/insertion_markings/insertion_markings_mean.binaryproto"
     batch_size: 128
     crop_size: 227
     mirror: false
@@ -149,9 +149,9 @@ layers {
   type: CONVOLUTION
   bottom: "conv3"
   top: "conv4"
-  blobs_lr: 1
-  blobs_lr: 2
-  weight_decay: 1
+  blobs_lr: 0
+  blobs_lr: 0
+  weight_decay: 0
   weight_decay: 0
   convolution_param {
     num_output: 384
@@ -288,17 +288,17 @@ layers {
   }
 }
 layers {
-  name: "fc8_hatch"
+  name: "fc8_new"
   type: INNER_PRODUCT
   bottom: "fc7"
-  top: "fc8_hatch"
+  top: "fc8_new"
   blobs_lr: 1
   blobs_lr: 2
   weight_decay: 1
   weight_decay: 0
   inner_product_param {
     num_output: 2
-    weight_filler {
+	weight_filler {
       type: "gaussian"
       std: 0.01
     }
@@ -309,8 +309,15 @@ layers {
   }
 }
 layers {
-  name: "loss"
-  type: SOFTMAX_BAYESIAN_LOSS
-  bottom: "fc8_hatch"
+  name: "prob"
+  type: SOFTMAX
+  bottom: "fc8_new"
+  top: "prob"
+}
+layers {
+  name: "accuracy"
+  type: PER_CLASS_BAYESIAN_ACCURACY
+  bottom: "prob"
   bottom: "label"
+  top: "accuracy"
 }
