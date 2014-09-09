@@ -24618,3 +24618,533 @@ I0909 04:39:03.503685 31017 solver.cpp:269] Iteration 9772, lr = 1e-06
 I0909 04:39:03.609871 31017 solver.cpp:117] Iteration 9772, loss = 0.386472
 I0909 04:39:04.196377 31017 solver.cpp:269] Iteration 9773, lr = 1e-06
 I0909 04:39:04.302445 31017 solver.cpp:117] Iteration 9773, loss = 0.413096
+I0909 04:39:04.888613 31017 solver.cpp:269] Iteration 9774, lr = 1e-06
+I0909 04:39:04.994560 31017 solver.cpp:117] Iteration 9774, loss = 0.541028
+I0909 04:39:05.580029 31017 solver.cpp:269] Iteration 9775, lr = 1e-06
+I0909 04:39:05.686094 31017 solver.cpp:117] Iteration 9775, loss = 0.604869
+I0909 04:39:06.271659 31017 solver.cpp:269] Iteration 9776, lr = 1e-06
+I0909 04:39:06.377848 31017 solver.cpp:117] Iteration 9776, loss = 0.398033
+I0909 04:39:06.963675 31017 solver.cpp:269] Iteration 9777, lr = 1e-06
+I0909 04:39:07.069702 31017 solver.cpp:117] Iteration 9777, loss = 0.585321
+I0909 04:39:07.655107 31017 solver.cpp:269] Iteration 9778, lr = 1e-06
+I0909 04:39:07.761136 31017 solver.cpp:117] Iteration 9778, loss = 0.526414
+I0909 04:39:08.347003 31017 solver.cpp:269] Iteration 9779, lr = 1e-06
+I0909 04:39:08.453150 31017 solver.cpp:117] Iteration 9779, loss = 0.374308
+I0909 04:39:09.039245 31017 solver.cpp:269] Iteration 9780, lr = 1e-06
+I0909 04:39:09.145381 31017 solver.cpp:117] Iteration 9780, loss = 0.338004
+I0909 04:39:09.145395 31017 solver.cpp:136] Iteration 9780, Testing net
+I0909 04:39:10.768663 31017 solver.cpp:172] Test score #0: 0.655125
+I0909 04:39:10.768697 31017 solver.cpp:172] Test score #1: 0.643927
+I0909 04:39:11.131736 31017 solver.cpp:269] Iteration 9781, lr = 1e-06
+I0909 04:39:11.237902 31017 solver.cpp:117] Iteration 9781, loss = 0.448869
+I0909 04:39:11.823818 31017 solver.cpp:269] Iteration 9782, lr = 1e-06
+I0909 04:39:11.929973 31017 solver.cpp:117] Iteration 9782, loss = 0.630175
+I0909 04:39:12.515880 31017 solver.cpp:269] Iteration 9783, lr = 1e-06
+I0909 04:39:12.621816 31017 solver.cpp:117] Iteration 9783, loss = 0.28006
+I0909 04:39:13.207967 31017 solver.cpp:269] Iteration 9784, lr = 1e-06
+I0909 04:39:13.314157 31017 solver.cpp:117] Iteration 9784, loss = 0.517143
+I0909 04:39:13.900104 31017 solver.cpp:269] Iteration 9785, lr = 1e-06
+I0909 04:39:14.006235 31017 solver.cpp:117] Iteration 9785, loss = 0.623337
+I0909 04:39:14.591882 31017 solver.cpp:269] Iteration 9786, lr = 1e-06
+I0909 04:39:14.698036 31017 solver.cpp:117] Iteration 9786, loss = 0.303178
+I0909 04:39:15.283921 31017 solver.cpp:269] Iteration 9787, lr = 1e-06
+I0909 04:39:15.390045 31017 solver.cpp:117] Iteration 9787, loss = 0.657607
+I0909 04:39:15.976129 31017 solver.cpp:269] Iteration 9788, lr = 1e-06
+I0909 04:39:16.082242 31017 solver.cpp:117] Iteration 9788, loss = 0.345218
+I0909 04:39:16.667917 31017 solver.cpp:269] Iteration 9789, lr = 1e-06
+I0909 04:39:16.774049 31017 solver.cpp:117] Iteration 9789, loss = 0.80531
+I0909 04:39:17.359516 31017 solver.cpp:269] Iteration 9790, lr = 1e-06
+I0909 04:39:17.465472 31017 solver.cpp:117] Iteration 9790, loss = 0.262957
+I0909 04:39:17.465487 31017 solver.cpp:136] Iteration 9790, Testing net
+I0909 04:39:19.088264 31017 solver.cpp:172] Test score #0: 0.676604
+I0909 04:39:19.088299 31017 solver.cpp:172] Test score #1: 0.618098
+I0909 04:39:19.451452 31017 solver.cpp:269] Iteration 9791, lr = 1e-06
+I0909 04:39:19.557767 31017 solver.cpp:117] Iteration 9791, loss = 0.399562
+I0909 04:39:20.143944 31017 solver.cpp:269] Iteration 9792, lr = 1e-06
+I0909 04:39:20.249855 31017 solver.cpp:117] Iteration 9792, loss = 0.252772
+I0909 04:39:20.835345 31017 solver.cpp:269] Iteration 9793, lr = 1e-06
+I0909 04:39:20.941510 31017 solver.cpp:117] Iteration 9793, loss = 0.683063
+I0909 04:39:21.527705 31017 solver.cpp:269] Iteration 9794, lr = 1e-06
+I0909 04:39:21.633812 31017 solver.cpp:117] Iteration 9794, loss = 0.626124
+I0909 04:39:22.219827 31017 solver.cpp:269] Iteration 9795, lr = 1e-06
+I0909 04:39:22.325887 31017 solver.cpp:117] Iteration 9795, loss = 0.43871
+I0909 04:39:22.911880 31017 solver.cpp:269] Iteration 9796, lr = 1e-06
+I0909 04:39:23.018043 31017 solver.cpp:117] Iteration 9796, loss = 0.433472
+I0909 04:39:23.602991 31017 solver.cpp:269] Iteration 9797, lr = 1e-06
+I0909 04:39:23.709134 31017 solver.cpp:117] Iteration 9797, loss = 0.399352
+I0909 04:39:24.295861 31017 solver.cpp:269] Iteration 9798, lr = 1e-06
+I0909 04:39:24.401983 31017 solver.cpp:117] Iteration 9798, loss = 0.485503
+I0909 04:39:24.987771 31017 solver.cpp:269] Iteration 9799, lr = 1e-06
+I0909 04:39:25.093828 31017 solver.cpp:117] Iteration 9799, loss = 0.315916
+I0909 04:39:25.679927 31017 solver.cpp:269] Iteration 9800, lr = 1e-06
+I0909 04:39:25.785933 31017 solver.cpp:117] Iteration 9800, loss = 0.503772
+I0909 04:39:25.785949 31017 solver.cpp:136] Iteration 9800, Testing net
+I0909 04:39:27.408536 31017 solver.cpp:172] Test score #0: 0.675579
+I0909 04:39:27.408567 31017 solver.cpp:172] Test score #1: 0.607215
+I0909 04:39:27.771826 31017 solver.cpp:269] Iteration 9801, lr = 1e-06
+I0909 04:39:27.878044 31017 solver.cpp:117] Iteration 9801, loss = 0.39565
+I0909 04:39:28.463541 31017 solver.cpp:269] Iteration 9802, lr = 1e-06
+I0909 04:39:28.569653 31017 solver.cpp:117] Iteration 9802, loss = 0.354337
+I0909 04:39:29.155371 31017 solver.cpp:269] Iteration 9803, lr = 1e-06
+I0909 04:39:29.261490 31017 solver.cpp:117] Iteration 9803, loss = 0.301363
+I0909 04:39:29.847352 31017 solver.cpp:269] Iteration 9804, lr = 1e-06
+I0909 04:39:29.953333 31017 solver.cpp:117] Iteration 9804, loss = 0.580264
+I0909 04:39:30.539044 31017 solver.cpp:269] Iteration 9805, lr = 1e-06
+I0909 04:39:30.645000 31017 solver.cpp:117] Iteration 9805, loss = 0.435282
+I0909 04:39:31.229919 31017 solver.cpp:269] Iteration 9806, lr = 1e-06
+I0909 04:39:31.336159 31017 solver.cpp:117] Iteration 9806, loss = 0.384428
+I0909 04:39:31.922531 31017 solver.cpp:269] Iteration 9807, lr = 1e-06
+I0909 04:39:32.028687 31017 solver.cpp:117] Iteration 9807, loss = 0.282635
+I0909 04:39:32.614704 31017 solver.cpp:269] Iteration 9808, lr = 1e-06
+I0909 04:39:32.720921 31017 solver.cpp:117] Iteration 9808, loss = 0.510792
+I0909 04:39:33.306735 31017 solver.cpp:269] Iteration 9809, lr = 1e-06
+I0909 04:39:33.413028 31017 solver.cpp:117] Iteration 9809, loss = 0.3316
+I0909 04:39:33.999172 31017 solver.cpp:269] Iteration 9810, lr = 1e-06
+I0909 04:39:34.105288 31017 solver.cpp:117] Iteration 9810, loss = 0.488637
+I0909 04:39:34.105303 31017 solver.cpp:136] Iteration 9810, Testing net
+I0909 04:39:35.728936 31017 solver.cpp:172] Test score #0: 0.725527
+I0909 04:39:35.728974 31017 solver.cpp:172] Test score #1: 0.568711
+I0909 04:39:36.091971 31017 solver.cpp:269] Iteration 9811, lr = 1e-06
+I0909 04:39:36.198094 31017 solver.cpp:117] Iteration 9811, loss = 0.332283
+I0909 04:39:36.784636 31017 solver.cpp:269] Iteration 9812, lr = 1e-06
+I0909 04:39:36.890871 31017 solver.cpp:117] Iteration 9812, loss = 0.380707
+I0909 04:39:37.476891 31017 solver.cpp:269] Iteration 9813, lr = 1e-06
+I0909 04:39:37.583024 31017 solver.cpp:117] Iteration 9813, loss = 0.419209
+I0909 04:39:38.169497 31017 solver.cpp:269] Iteration 9814, lr = 1e-06
+I0909 04:39:38.275490 31017 solver.cpp:117] Iteration 9814, loss = 0.587539
+I0909 04:39:38.861650 31017 solver.cpp:269] Iteration 9815, lr = 1e-06
+I0909 04:39:38.968025 31017 solver.cpp:117] Iteration 9815, loss = 0.387389
+I0909 04:39:39.553838 31017 solver.cpp:269] Iteration 9816, lr = 1e-06
+I0909 04:39:39.660002 31017 solver.cpp:117] Iteration 9816, loss = 0.576419
+I0909 04:39:40.251405 31017 solver.cpp:269] Iteration 9817, lr = 1e-06
+I0909 04:39:40.359038 31017 solver.cpp:117] Iteration 9817, loss = 0.482631
+I0909 04:39:40.950688 31017 solver.cpp:269] Iteration 9818, lr = 1e-06
+I0909 04:39:41.058295 31017 solver.cpp:117] Iteration 9818, loss = 0.420791
+I0909 04:39:41.649262 31017 solver.cpp:269] Iteration 9819, lr = 1e-06
+I0909 04:39:41.756628 31017 solver.cpp:117] Iteration 9819, loss = 0.278023
+I0909 04:39:42.348536 31017 solver.cpp:269] Iteration 9820, lr = 1e-06
+I0909 04:39:42.456322 31017 solver.cpp:117] Iteration 9820, loss = 0.62785
+I0909 04:39:42.456337 31017 solver.cpp:136] Iteration 9820, Testing net
+I0909 04:39:44.100054 31017 solver.cpp:172] Test score #0: 0.71365
+I0909 04:39:44.100090 31017 solver.cpp:172] Test score #1: 0.589352
+I0909 04:39:44.468413 31017 solver.cpp:269] Iteration 9821, lr = 1e-06
+I0909 04:39:44.576009 31017 solver.cpp:117] Iteration 9821, loss = 0.557596
+I0909 04:39:45.167088 31017 solver.cpp:269] Iteration 9822, lr = 1e-06
+I0909 04:39:45.274567 31017 solver.cpp:117] Iteration 9822, loss = 0.602387
+I0909 04:39:45.866545 31017 solver.cpp:269] Iteration 9823, lr = 1e-06
+I0909 04:39:45.974086 31017 solver.cpp:117] Iteration 9823, loss = 0.440386
+I0909 04:39:46.565486 31017 solver.cpp:269] Iteration 9824, lr = 1e-06
+I0909 04:39:46.673060 31017 solver.cpp:117] Iteration 9824, loss = 0.233285
+I0909 04:39:47.264984 31017 solver.cpp:269] Iteration 9825, lr = 1e-06
+I0909 04:39:47.372563 31017 solver.cpp:117] Iteration 9825, loss = 0.40101
+I0909 04:39:47.964438 31017 solver.cpp:269] Iteration 9826, lr = 1e-06
+I0909 04:39:48.072056 31017 solver.cpp:117] Iteration 9826, loss = 0.567734
+I0909 04:39:48.664463 31017 solver.cpp:269] Iteration 9827, lr = 1e-06
+I0909 04:39:48.772126 31017 solver.cpp:117] Iteration 9827, loss = 0.452627
+I0909 04:39:49.363731 31017 solver.cpp:269] Iteration 9828, lr = 1e-06
+I0909 04:39:49.471402 31017 solver.cpp:117] Iteration 9828, loss = 0.564392
+I0909 04:39:50.063030 31017 solver.cpp:269] Iteration 9829, lr = 1e-06
+I0909 04:39:50.170615 31017 solver.cpp:117] Iteration 9829, loss = 0.541115
+I0909 04:39:50.762634 31017 solver.cpp:269] Iteration 9830, lr = 1e-06
+I0909 04:39:50.870231 31017 solver.cpp:117] Iteration 9830, loss = 0.695889
+I0909 04:39:50.870245 31017 solver.cpp:136] Iteration 9830, Testing net
+I0909 04:39:52.513669 31017 solver.cpp:172] Test score #0: 0.680364
+I0909 04:39:52.513702 31017 solver.cpp:172] Test score #1: 0.62468
+I0909 04:39:52.882007 31017 solver.cpp:269] Iteration 9831, lr = 1e-06
+I0909 04:39:52.989521 31017 solver.cpp:117] Iteration 9831, loss = 0.556012
+I0909 04:39:53.582505 31017 solver.cpp:269] Iteration 9832, lr = 1e-06
+I0909 04:39:53.690054 31017 solver.cpp:117] Iteration 9832, loss = 0.413958
+I0909 04:39:54.282095 31017 solver.cpp:269] Iteration 9833, lr = 1e-06
+I0909 04:39:54.389832 31017 solver.cpp:117] Iteration 9833, loss = 0.403269
+I0909 04:39:54.982193 31017 solver.cpp:269] Iteration 9834, lr = 1e-06
+I0909 04:39:55.089655 31017 solver.cpp:117] Iteration 9834, loss = 0.477833
+I0909 04:39:55.680891 31017 solver.cpp:269] Iteration 9835, lr = 1e-06
+I0909 04:39:55.788297 31017 solver.cpp:117] Iteration 9835, loss = 0.372498
+I0909 04:39:56.379470 31017 solver.cpp:269] Iteration 9836, lr = 1e-06
+I0909 04:39:56.487028 31017 solver.cpp:117] Iteration 9836, loss = 0.485204
+I0909 04:39:57.079280 31017 solver.cpp:269] Iteration 9837, lr = 1e-06
+I0909 04:39:57.186974 31017 solver.cpp:117] Iteration 9837, loss = 0.477153
+I0909 04:39:57.779139 31017 solver.cpp:269] Iteration 9838, lr = 1e-06
+I0909 04:39:57.886595 31017 solver.cpp:117] Iteration 9838, loss = 0.555698
+I0909 04:39:58.478880 31017 solver.cpp:269] Iteration 9839, lr = 1e-06
+I0909 04:39:58.586411 31017 solver.cpp:117] Iteration 9839, loss = 0.510988
+I0909 04:39:59.178010 31017 solver.cpp:269] Iteration 9840, lr = 1e-06
+I0909 04:39:59.285526 31017 solver.cpp:117] Iteration 9840, loss = 0.247539
+I0909 04:39:59.285542 31017 solver.cpp:136] Iteration 9840, Testing net
+I0909 04:40:00.928160 31017 solver.cpp:172] Test score #0: 0.696011
+I0909 04:40:00.928195 31017 solver.cpp:172] Test score #1: 0.614558
+I0909 04:40:01.295892 31017 solver.cpp:269] Iteration 9841, lr = 1e-06
+I0909 04:40:01.403471 31017 solver.cpp:117] Iteration 9841, loss = 0.540917
+I0909 04:40:01.995069 31017 solver.cpp:269] Iteration 9842, lr = 1e-06
+I0909 04:40:02.101181 31017 solver.cpp:117] Iteration 9842, loss = 0.2497
+I0909 04:40:02.687039 31017 solver.cpp:269] Iteration 9843, lr = 1e-06
+I0909 04:40:02.793293 31017 solver.cpp:117] Iteration 9843, loss = 0.303897
+I0909 04:40:03.379030 31017 solver.cpp:269] Iteration 9844, lr = 1e-06
+I0909 04:40:03.485105 31017 solver.cpp:117] Iteration 9844, loss = 0.536938
+I0909 04:40:04.071382 31017 solver.cpp:269] Iteration 9845, lr = 1e-06
+I0909 04:40:04.177372 31017 solver.cpp:117] Iteration 9845, loss = 0.664635
+I0909 04:40:04.762456 31017 solver.cpp:269] Iteration 9846, lr = 1e-06
+I0909 04:40:04.869668 31017 solver.cpp:117] Iteration 9846, loss = 0.356449
+I0909 04:40:05.455567 31017 solver.cpp:269] Iteration 9847, lr = 1e-06
+I0909 04:40:05.561592 31017 solver.cpp:117] Iteration 9847, loss = 0.447443
+I0909 04:40:06.147419 31017 solver.cpp:269] Iteration 9848, lr = 1e-06
+I0909 04:40:06.253528 31017 solver.cpp:117] Iteration 9848, loss = 0.387243
+I0909 04:40:06.839498 31017 solver.cpp:269] Iteration 9849, lr = 1e-06
+I0909 04:40:06.945740 31017 solver.cpp:117] Iteration 9849, loss = 0.772613
+I0909 04:40:07.531502 31017 solver.cpp:269] Iteration 9850, lr = 1e-06
+I0909 04:40:07.637557 31017 solver.cpp:117] Iteration 9850, loss = 0.600562
+I0909 04:40:07.637573 31017 solver.cpp:136] Iteration 9850, Testing net
+I0909 04:40:09.260503 31017 solver.cpp:172] Test score #0: 0.686555
+I0909 04:40:09.260540 31017 solver.cpp:172] Test score #1: 0.590288
+I0909 04:40:09.624049 31017 solver.cpp:269] Iteration 9851, lr = 1e-06
+I0909 04:40:09.730237 31017 solver.cpp:117] Iteration 9851, loss = 0.582183
+I0909 04:40:10.316153 31017 solver.cpp:269] Iteration 9852, lr = 1e-06
+I0909 04:40:10.422266 31017 solver.cpp:117] Iteration 9852, loss = 0.360937
+I0909 04:40:11.008245 31017 solver.cpp:269] Iteration 9853, lr = 1e-06
+I0909 04:40:11.114369 31017 solver.cpp:117] Iteration 9853, loss = 0.56888
+I0909 04:40:11.699795 31017 solver.cpp:269] Iteration 9854, lr = 1e-06
+I0909 04:40:11.805835 31017 solver.cpp:117] Iteration 9854, loss = 0.343304
+I0909 04:40:12.391675 31017 solver.cpp:269] Iteration 9855, lr = 1e-06
+I0909 04:40:12.497738 31017 solver.cpp:117] Iteration 9855, loss = 0.343525
+I0909 04:40:13.083540 31017 solver.cpp:269] Iteration 9856, lr = 1e-06
+I0909 04:40:13.189545 31017 solver.cpp:117] Iteration 9856, loss = 0.54186
+I0909 04:40:13.775045 31017 solver.cpp:269] Iteration 9857, lr = 1e-06
+I0909 04:40:13.881013 31017 solver.cpp:117] Iteration 9857, loss = 0.46468
+I0909 04:40:14.466711 31017 solver.cpp:269] Iteration 9858, lr = 1e-06
+I0909 04:40:14.572988 31017 solver.cpp:117] Iteration 9858, loss = 0.428089
+I0909 04:40:15.158021 31017 solver.cpp:269] Iteration 9859, lr = 1e-06
+I0909 04:40:15.264156 31017 solver.cpp:117] Iteration 9859, loss = 0.418735
+I0909 04:40:15.850337 31017 solver.cpp:269] Iteration 9860, lr = 1e-06
+I0909 04:40:15.956470 31017 solver.cpp:117] Iteration 9860, loss = 0.318535
+I0909 04:40:15.956485 31017 solver.cpp:136] Iteration 9860, Testing net
+I0909 04:40:17.578346 31017 solver.cpp:172] Test score #0: 0.696473
+I0909 04:40:17.578384 31017 solver.cpp:172] Test score #1: 0.574252
+I0909 04:40:17.941191 31017 solver.cpp:269] Iteration 9861, lr = 1e-06
+I0909 04:40:18.047227 31017 solver.cpp:117] Iteration 9861, loss = 0.389835
+I0909 04:40:18.633882 31017 solver.cpp:269] Iteration 9862, lr = 1e-06
+I0909 04:40:18.739827 31017 solver.cpp:117] Iteration 9862, loss = 0.456709
+I0909 04:40:19.325371 31017 solver.cpp:269] Iteration 9863, lr = 1e-06
+I0909 04:40:19.431444 31017 solver.cpp:117] Iteration 9863, loss = 0.480494
+I0909 04:40:20.017168 31017 solver.cpp:269] Iteration 9864, lr = 1e-06
+I0909 04:40:20.123371 31017 solver.cpp:117] Iteration 9864, loss = 0.549505
+I0909 04:40:20.709215 31017 solver.cpp:269] Iteration 9865, lr = 1e-06
+I0909 04:40:20.815273 31017 solver.cpp:117] Iteration 9865, loss = 0.496145
+I0909 04:40:21.401943 31017 solver.cpp:269] Iteration 9866, lr = 1e-06
+I0909 04:40:21.508117 31017 solver.cpp:117] Iteration 9866, loss = 0.354787
+I0909 04:40:22.093524 31017 solver.cpp:269] Iteration 9867, lr = 1e-06
+I0909 04:40:22.199735 31017 solver.cpp:117] Iteration 9867, loss = 0.372352
+I0909 04:40:22.786073 31017 solver.cpp:269] Iteration 9868, lr = 1e-06
+I0909 04:40:22.892325 31017 solver.cpp:117] Iteration 9868, loss = 0.487643
+I0909 04:40:23.478350 31017 solver.cpp:269] Iteration 9869, lr = 1e-06
+I0909 04:40:23.584573 31017 solver.cpp:117] Iteration 9869, loss = 0.450321
+I0909 04:40:24.170488 31017 solver.cpp:269] Iteration 9870, lr = 1e-06
+I0909 04:40:24.276552 31017 solver.cpp:117] Iteration 9870, loss = 0.18713
+I0909 04:40:24.276567 31017 solver.cpp:136] Iteration 9870, Testing net
+I0909 04:40:25.900293 31017 solver.cpp:172] Test score #0: 0.674955
+I0909 04:40:25.900329 31017 solver.cpp:172] Test score #1: 0.61342
+I0909 04:40:26.263296 31017 solver.cpp:269] Iteration 9871, lr = 1e-06
+I0909 04:40:26.369474 31017 solver.cpp:117] Iteration 9871, loss = 0.438854
+I0909 04:40:26.955771 31017 solver.cpp:269] Iteration 9872, lr = 1e-06
+I0909 04:40:27.061751 31017 solver.cpp:117] Iteration 9872, loss = 0.501605
+I0909 04:40:27.647393 31017 solver.cpp:269] Iteration 9873, lr = 1e-06
+I0909 04:40:27.753515 31017 solver.cpp:117] Iteration 9873, loss = 0.358052
+I0909 04:40:28.339212 31017 solver.cpp:269] Iteration 9874, lr = 1e-06
+I0909 04:40:28.445408 31017 solver.cpp:117] Iteration 9874, loss = 0.362332
+I0909 04:40:29.031093 31017 solver.cpp:269] Iteration 9875, lr = 1e-06
+I0909 04:40:29.137169 31017 solver.cpp:117] Iteration 9875, loss = 0.353658
+I0909 04:40:29.723091 31017 solver.cpp:269] Iteration 9876, lr = 1e-06
+I0909 04:40:29.829226 31017 solver.cpp:117] Iteration 9876, loss = 0.405305
+I0909 04:40:30.414747 31017 solver.cpp:269] Iteration 9877, lr = 1e-06
+I0909 04:40:30.520870 31017 solver.cpp:117] Iteration 9877, loss = 0.384917
+I0909 04:40:31.107149 31017 solver.cpp:269] Iteration 9878, lr = 1e-06
+I0909 04:40:31.213208 31017 solver.cpp:117] Iteration 9878, loss = 0.361845
+I0909 04:40:31.799623 31017 solver.cpp:269] Iteration 9879, lr = 1e-06
+I0909 04:40:31.905817 31017 solver.cpp:117] Iteration 9879, loss = 0.575963
+I0909 04:40:32.491327 31017 solver.cpp:269] Iteration 9880, lr = 1e-06
+I0909 04:40:32.597537 31017 solver.cpp:117] Iteration 9880, loss = 0.34367
+I0909 04:40:32.597551 31017 solver.cpp:136] Iteration 9880, Testing net
+I0909 04:40:34.219339 31017 solver.cpp:172] Test score #0: 0.697317
+I0909 04:40:34.219377 31017 solver.cpp:172] Test score #1: 0.602505
+I0909 04:40:34.583171 31017 solver.cpp:269] Iteration 9881, lr = 1e-06
+I0909 04:40:34.689402 31017 solver.cpp:117] Iteration 9881, loss = 0.298693
+I0909 04:40:35.276679 31017 solver.cpp:269] Iteration 9882, lr = 1e-06
+I0909 04:40:35.382833 31017 solver.cpp:117] Iteration 9882, loss = 0.458981
+I0909 04:40:35.968190 31017 solver.cpp:269] Iteration 9883, lr = 1e-06
+I0909 04:40:36.074273 31017 solver.cpp:117] Iteration 9883, loss = 0.602519
+I0909 04:40:36.660341 31017 solver.cpp:269] Iteration 9884, lr = 1e-06
+I0909 04:40:36.766346 31017 solver.cpp:117] Iteration 9884, loss = 0.368722
+I0909 04:40:37.352205 31017 solver.cpp:269] Iteration 9885, lr = 1e-06
+I0909 04:40:37.458264 31017 solver.cpp:117] Iteration 9885, loss = 0.498019
+I0909 04:40:38.044270 31017 solver.cpp:269] Iteration 9886, lr = 1e-06
+I0909 04:40:38.150336 31017 solver.cpp:117] Iteration 9886, loss = 0.401758
+I0909 04:40:38.736163 31017 solver.cpp:269] Iteration 9887, lr = 1e-06
+I0909 04:40:38.842416 31017 solver.cpp:117] Iteration 9887, loss = 0.488143
+I0909 04:40:39.427881 31017 solver.cpp:269] Iteration 9888, lr = 1e-06
+I0909 04:40:39.534036 31017 solver.cpp:117] Iteration 9888, loss = 0.532705
+I0909 04:40:40.120034 31017 solver.cpp:269] Iteration 9889, lr = 1e-06
+I0909 04:40:40.226435 31017 solver.cpp:117] Iteration 9889, loss = 0.432505
+I0909 04:40:40.812000 31017 solver.cpp:269] Iteration 9890, lr = 1e-06
+I0909 04:40:40.918110 31017 solver.cpp:117] Iteration 9890, loss = 0.471546
+I0909 04:40:40.918125 31017 solver.cpp:136] Iteration 9890, Testing net
+I0909 04:40:42.540345 31017 solver.cpp:172] Test score #0: 0.676015
+I0909 04:40:42.540382 31017 solver.cpp:172] Test score #1: 0.649203
+I0909 04:40:42.903360 31017 solver.cpp:269] Iteration 9891, lr = 1e-06
+I0909 04:40:43.009541 31017 solver.cpp:117] Iteration 9891, loss = 0.413488
+I0909 04:40:43.594553 31017 solver.cpp:269] Iteration 9892, lr = 1e-06
+I0909 04:40:43.700475 31017 solver.cpp:117] Iteration 9892, loss = 0.605342
+I0909 04:40:44.286486 31017 solver.cpp:269] Iteration 9893, lr = 1e-06
+I0909 04:40:44.392559 31017 solver.cpp:117] Iteration 9893, loss = 0.584371
+I0909 04:40:44.978487 31017 solver.cpp:269] Iteration 9894, lr = 1e-06
+I0909 04:40:45.084614 31017 solver.cpp:117] Iteration 9894, loss = 0.489617
+I0909 04:40:45.670024 31017 solver.cpp:269] Iteration 9895, lr = 1e-06
+I0909 04:40:45.776077 31017 solver.cpp:117] Iteration 9895, loss = 0.385901
+I0909 04:40:46.361920 31017 solver.cpp:269] Iteration 9896, lr = 1e-06
+I0909 04:40:46.467887 31017 solver.cpp:117] Iteration 9896, loss = 0.488153
+I0909 04:40:47.053946 31017 solver.cpp:269] Iteration 9897, lr = 1e-06
+I0909 04:40:47.160218 31017 solver.cpp:117] Iteration 9897, loss = 0.633207
+I0909 04:40:47.745671 31017 solver.cpp:269] Iteration 9898, lr = 1e-06
+I0909 04:40:47.851873 31017 solver.cpp:117] Iteration 9898, loss = 0.342549
+I0909 04:40:48.438045 31017 solver.cpp:269] Iteration 9899, lr = 1e-06
+I0909 04:40:48.544109 31017 solver.cpp:117] Iteration 9899, loss = 0.581767
+I0909 04:40:49.129528 31017 solver.cpp:269] Iteration 9900, lr = 1e-06
+I0909 04:40:49.235692 31017 solver.cpp:117] Iteration 9900, loss = 0.416029
+I0909 04:40:49.235707 31017 solver.cpp:136] Iteration 9900, Testing net
+I0909 04:40:50.876032 31017 solver.cpp:172] Test score #0: 0.709606
+I0909 04:40:50.876070 31017 solver.cpp:172] Test score #1: 0.587545
+I0909 04:40:51.243913 31017 solver.cpp:269] Iteration 9901, lr = 1e-06
+I0909 04:40:51.351363 31017 solver.cpp:117] Iteration 9901, loss = 0.405534
+I0909 04:40:51.943171 31017 solver.cpp:269] Iteration 9902, lr = 1e-06
+I0909 04:40:52.050613 31017 solver.cpp:117] Iteration 9902, loss = 0.541062
+I0909 04:40:52.643131 31017 solver.cpp:269] Iteration 9903, lr = 1e-06
+I0909 04:40:52.750804 31017 solver.cpp:117] Iteration 9903, loss = 0.343027
+I0909 04:40:53.342838 31017 solver.cpp:269] Iteration 9904, lr = 1e-06
+I0909 04:40:53.450454 31017 solver.cpp:117] Iteration 9904, loss = 0.321827
+I0909 04:40:54.042047 31017 solver.cpp:269] Iteration 9905, lr = 1e-06
+I0909 04:40:54.149518 31017 solver.cpp:117] Iteration 9905, loss = 0.412718
+I0909 04:40:54.741796 31017 solver.cpp:269] Iteration 9906, lr = 1e-06
+I0909 04:40:54.849463 31017 solver.cpp:117] Iteration 9906, loss = 0.445419
+I0909 04:40:55.441365 31017 solver.cpp:269] Iteration 9907, lr = 1e-06
+I0909 04:40:55.549075 31017 solver.cpp:117] Iteration 9907, loss = 0.334818
+I0909 04:40:56.140830 31017 solver.cpp:269] Iteration 9908, lr = 1e-06
+I0909 04:40:56.248389 31017 solver.cpp:117] Iteration 9908, loss = 0.707149
+I0909 04:40:56.839979 31017 solver.cpp:269] Iteration 9909, lr = 1e-06
+I0909 04:40:56.947695 31017 solver.cpp:117] Iteration 9909, loss = 0.652648
+I0909 04:40:57.539965 31017 solver.cpp:269] Iteration 9910, lr = 1e-06
+I0909 04:40:57.647564 31017 solver.cpp:117] Iteration 9910, loss = 0.395295
+I0909 04:40:57.647579 31017 solver.cpp:136] Iteration 9910, Testing net
+I0909 04:40:59.290814 31017 solver.cpp:172] Test score #0: 0.717688
+I0909 04:40:59.290851 31017 solver.cpp:172] Test score #1: 0.585412
+I0909 04:40:59.659088 31017 solver.cpp:269] Iteration 9911, lr = 1e-06
+I0909 04:40:59.766541 31017 solver.cpp:117] Iteration 9911, loss = 0.413364
+I0909 04:41:00.358752 31017 solver.cpp:269] Iteration 9912, lr = 1e-06
+I0909 04:41:00.466331 31017 solver.cpp:117] Iteration 9912, loss = 0.338706
+I0909 04:41:01.059054 31017 solver.cpp:269] Iteration 9913, lr = 1e-06
+I0909 04:41:01.166715 31017 solver.cpp:117] Iteration 9913, loss = 0.361173
+I0909 04:41:01.758380 31017 solver.cpp:269] Iteration 9914, lr = 1e-06
+I0909 04:41:01.866020 31017 solver.cpp:117] Iteration 9914, loss = 0.354605
+I0909 04:41:02.458011 31017 solver.cpp:269] Iteration 9915, lr = 1e-06
+I0909 04:41:02.565592 31017 solver.cpp:117] Iteration 9915, loss = 0.724301
+I0909 04:41:03.158035 31017 solver.cpp:269] Iteration 9916, lr = 1e-06
+I0909 04:41:03.265476 31017 solver.cpp:117] Iteration 9916, loss = 0.335741
+I0909 04:41:03.856919 31017 solver.cpp:269] Iteration 9917, lr = 1e-06
+I0909 04:41:03.964520 31017 solver.cpp:117] Iteration 9917, loss = 0.332138
+I0909 04:41:04.556270 31017 solver.cpp:269] Iteration 9918, lr = 1e-06
+I0909 04:41:04.663846 31017 solver.cpp:117] Iteration 9918, loss = 0.274711
+I0909 04:41:05.256814 31017 solver.cpp:269] Iteration 9919, lr = 1e-06
+I0909 04:41:05.364336 31017 solver.cpp:117] Iteration 9919, loss = 0.4175
+I0909 04:41:05.956373 31017 solver.cpp:269] Iteration 9920, lr = 1e-06
+I0909 04:41:06.064076 31017 solver.cpp:117] Iteration 9920, loss = 0.411894
+I0909 04:41:06.064092 31017 solver.cpp:136] Iteration 9920, Testing net
+I0909 04:41:07.706243 31017 solver.cpp:172] Test score #0: 0.700917
+I0909 04:41:07.706280 31017 solver.cpp:172] Test score #1: 0.608322
+I0909 04:41:08.073946 31017 solver.cpp:269] Iteration 9921, lr = 1e-06
+I0909 04:41:08.181736 31017 solver.cpp:117] Iteration 9921, loss = 0.345475
+I0909 04:41:08.773541 31017 solver.cpp:269] Iteration 9922, lr = 1e-06
+I0909 04:41:08.881173 31017 solver.cpp:117] Iteration 9922, loss = 0.607479
+I0909 04:41:09.473515 31017 solver.cpp:269] Iteration 9923, lr = 1e-06
+I0909 04:41:09.581135 31017 solver.cpp:117] Iteration 9923, loss = 0.558282
+I0909 04:41:10.173476 31017 solver.cpp:269] Iteration 9924, lr = 1e-06
+I0909 04:41:10.281103 31017 solver.cpp:117] Iteration 9924, loss = 0.432388
+I0909 04:41:10.873400 31017 solver.cpp:269] Iteration 9925, lr = 1e-06
+I0909 04:41:10.981032 31017 solver.cpp:117] Iteration 9925, loss = 0.418105
+I0909 04:41:11.573475 31017 solver.cpp:269] Iteration 9926, lr = 1e-06
+I0909 04:41:11.681000 31017 solver.cpp:117] Iteration 9926, loss = 0.577545
+I0909 04:41:12.272131 31017 solver.cpp:269] Iteration 9927, lr = 1e-06
+I0909 04:41:12.379711 31017 solver.cpp:117] Iteration 9927, loss = 0.318797
+I0909 04:41:12.969959 31017 solver.cpp:269] Iteration 9928, lr = 1e-06
+I0909 04:41:13.076169 31017 solver.cpp:117] Iteration 9928, loss = 0.484084
+I0909 04:41:13.661787 31017 solver.cpp:269] Iteration 9929, lr = 1e-06
+I0909 04:41:13.767871 31017 solver.cpp:117] Iteration 9929, loss = 0.440291
+I0909 04:41:14.354049 31017 solver.cpp:269] Iteration 9930, lr = 1e-06
+I0909 04:41:14.460162 31017 solver.cpp:117] Iteration 9930, loss = 0.605305
+I0909 04:41:14.460177 31017 solver.cpp:136] Iteration 9930, Testing net
+I0909 04:41:16.083209 31017 solver.cpp:172] Test score #0: 0.72035
+I0909 04:41:16.083245 31017 solver.cpp:172] Test score #1: 0.574807
+I0909 04:41:16.445915 31017 solver.cpp:269] Iteration 9931, lr = 1e-06
+I0909 04:41:16.552186 31017 solver.cpp:117] Iteration 9931, loss = 0.312331
+I0909 04:41:17.138299 31017 solver.cpp:269] Iteration 9932, lr = 1e-06
+I0909 04:41:17.244415 31017 solver.cpp:117] Iteration 9932, loss = 0.313996
+I0909 04:41:17.830670 31017 solver.cpp:269] Iteration 9933, lr = 1e-06
+I0909 04:41:17.936908 31017 solver.cpp:117] Iteration 9933, loss = 0.47261
+I0909 04:41:18.522238 31017 solver.cpp:269] Iteration 9934, lr = 1e-06
+I0909 04:41:18.628554 31017 solver.cpp:117] Iteration 9934, loss = 0.524236
+I0909 04:41:19.214452 31017 solver.cpp:269] Iteration 9935, lr = 1e-06
+I0909 04:41:19.320670 31017 solver.cpp:117] Iteration 9935, loss = 0.620951
+I0909 04:41:19.906513 31017 solver.cpp:269] Iteration 9936, lr = 1e-06
+I0909 04:41:20.012572 31017 solver.cpp:117] Iteration 9936, loss = 0.459626
+I0909 04:41:20.598844 31017 solver.cpp:269] Iteration 9937, lr = 1e-06
+I0909 04:41:20.704905 31017 solver.cpp:117] Iteration 9937, loss = 0.533531
+I0909 04:41:21.291535 31017 solver.cpp:269] Iteration 9938, lr = 1e-06
+I0909 04:41:21.397516 31017 solver.cpp:117] Iteration 9938, loss = 0.285504
+I0909 04:41:21.983542 31017 solver.cpp:269] Iteration 9939, lr = 1e-06
+I0909 04:41:22.089645 31017 solver.cpp:117] Iteration 9939, loss = 0.259675
+I0909 04:41:22.675468 31017 solver.cpp:269] Iteration 9940, lr = 1e-06
+I0909 04:41:22.781672 31017 solver.cpp:117] Iteration 9940, loss = 0.4542
+I0909 04:41:22.781687 31017 solver.cpp:136] Iteration 9940, Testing net
+I0909 04:41:24.397480 31017 solver.cpp:172] Test score #0: 0.661553
+I0909 04:41:24.397516 31017 solver.cpp:172] Test score #1: 0.627103
+I0909 04:41:24.756942 31017 solver.cpp:269] Iteration 9941, lr = 1e-06
+I0909 04:41:24.861801 31017 solver.cpp:117] Iteration 9941, loss = 0.514687
+I0909 04:41:25.442358 31017 solver.cpp:269] Iteration 9942, lr = 1e-06
+I0909 04:41:25.547243 31017 solver.cpp:117] Iteration 9942, loss = 0.66116
+I0909 04:41:26.128128 31017 solver.cpp:269] Iteration 9943, lr = 1e-06
+I0909 04:41:26.233052 31017 solver.cpp:117] Iteration 9943, loss = 0.470297
+I0909 04:41:26.814427 31017 solver.cpp:269] Iteration 9944, lr = 1e-06
+I0909 04:41:26.919414 31017 solver.cpp:117] Iteration 9944, loss = 0.424668
+I0909 04:41:27.500113 31017 solver.cpp:269] Iteration 9945, lr = 1e-06
+I0909 04:41:27.605178 31017 solver.cpp:117] Iteration 9945, loss = 0.433553
+I0909 04:41:28.186177 31017 solver.cpp:269] Iteration 9946, lr = 1e-06
+I0909 04:41:28.291199 31017 solver.cpp:117] Iteration 9946, loss = 0.656953
+I0909 04:41:28.872692 31017 solver.cpp:269] Iteration 9947, lr = 1e-06
+I0909 04:41:28.977613 31017 solver.cpp:117] Iteration 9947, loss = 0.421467
+I0909 04:41:29.558506 31017 solver.cpp:269] Iteration 9948, lr = 1e-06
+I0909 04:41:29.663281 31017 solver.cpp:117] Iteration 9948, loss = 0.470514
+I0909 04:41:30.244024 31017 solver.cpp:269] Iteration 9949, lr = 1e-06
+I0909 04:41:30.348987 31017 solver.cpp:117] Iteration 9949, loss = 0.31954
+I0909 04:41:30.930137 31017 solver.cpp:269] Iteration 9950, lr = 1e-06
+I0909 04:41:31.035104 31017 solver.cpp:117] Iteration 9950, loss = 0.582374
+I0909 04:41:31.035120 31017 solver.cpp:136] Iteration 9950, Testing net
+I0909 04:41:32.642523 31017 solver.cpp:172] Test score #0: 0.689373
+I0909 04:41:32.642560 31017 solver.cpp:172] Test score #1: 0.60045
+I0909 04:41:33.000849 31017 solver.cpp:269] Iteration 9951, lr = 1e-06
+I0909 04:41:33.105737 31017 solver.cpp:117] Iteration 9951, loss = 0.425096
+I0909 04:41:33.686110 31017 solver.cpp:269] Iteration 9952, lr = 1e-06
+I0909 04:41:33.790922 31017 solver.cpp:117] Iteration 9952, loss = 0.313021
+I0909 04:41:34.371549 31017 solver.cpp:269] Iteration 9953, lr = 1e-06
+I0909 04:41:34.476467 31017 solver.cpp:117] Iteration 9953, loss = 0.379671
+I0909 04:41:35.058596 31017 solver.cpp:269] Iteration 9954, lr = 1e-06
+I0909 04:41:35.163550 31017 solver.cpp:117] Iteration 9954, loss = 0.530105
+I0909 04:41:35.744532 31017 solver.cpp:269] Iteration 9955, lr = 1e-06
+I0909 04:41:35.849308 31017 solver.cpp:117] Iteration 9955, loss = 0.330789
+I0909 04:41:36.434726 31017 solver.cpp:269] Iteration 9956, lr = 1e-06
+I0909 04:41:36.540961 31017 solver.cpp:117] Iteration 9956, loss = 0.698505
+I0909 04:41:37.127348 31017 solver.cpp:269] Iteration 9957, lr = 1e-06
+I0909 04:41:37.233312 31017 solver.cpp:117] Iteration 9957, loss = 0.231637
+I0909 04:41:37.819613 31017 solver.cpp:269] Iteration 9958, lr = 1e-06
+I0909 04:41:37.925761 31017 solver.cpp:117] Iteration 9958, loss = 0.467994
+I0909 04:41:38.511354 31017 solver.cpp:269] Iteration 9959, lr = 1e-06
+I0909 04:41:38.617633 31017 solver.cpp:117] Iteration 9959, loss = 0.500237
+I0909 04:41:39.203531 31017 solver.cpp:269] Iteration 9960, lr = 1e-06
+I0909 04:41:39.309809 31017 solver.cpp:117] Iteration 9960, loss = 0.59953
+I0909 04:41:39.309824 31017 solver.cpp:136] Iteration 9960, Testing net
+I0909 04:41:40.933372 31017 solver.cpp:172] Test score #0: 0.714952
+I0909 04:41:40.933409 31017 solver.cpp:172] Test score #1: 0.585332
+I0909 04:41:41.296826 31017 solver.cpp:269] Iteration 9961, lr = 1e-06
+I0909 04:41:41.403035 31017 solver.cpp:117] Iteration 9961, loss = 0.477009
+I0909 04:41:41.988507 31017 solver.cpp:269] Iteration 9962, lr = 1e-06
+I0909 04:41:42.094565 31017 solver.cpp:117] Iteration 9962, loss = 0.476317
+I0909 04:41:42.681023 31017 solver.cpp:269] Iteration 9963, lr = 1e-06
+I0909 04:41:42.787241 31017 solver.cpp:117] Iteration 9963, loss = 0.475361
+I0909 04:41:43.373188 31017 solver.cpp:269] Iteration 9964, lr = 1e-06
+I0909 04:41:43.479207 31017 solver.cpp:117] Iteration 9964, loss = 0.615811
+I0909 04:41:44.064921 31017 solver.cpp:269] Iteration 9965, lr = 1e-06
+I0909 04:41:44.170989 31017 solver.cpp:117] Iteration 9965, loss = 0.565095
+I0909 04:41:44.756431 31017 solver.cpp:269] Iteration 9966, lr = 1e-06
+I0909 04:41:44.862835 31017 solver.cpp:117] Iteration 9966, loss = 0.711878
+I0909 04:41:45.453857 31017 solver.cpp:269] Iteration 9967, lr = 1e-06
+I0909 04:41:45.561616 31017 solver.cpp:117] Iteration 9967, loss = 0.305034
+I0909 04:41:46.153563 31017 solver.cpp:269] Iteration 9968, lr = 1e-06
+I0909 04:41:46.261133 31017 solver.cpp:117] Iteration 9968, loss = 0.468971
+I0909 04:41:46.853153 31017 solver.cpp:269] Iteration 9969, lr = 1e-06
+I0909 04:41:46.960825 31017 solver.cpp:117] Iteration 9969, loss = 0.263671
+I0909 04:41:47.552410 31017 solver.cpp:269] Iteration 9970, lr = 1e-06
+I0909 04:41:47.659831 31017 solver.cpp:117] Iteration 9970, loss = 0.419282
+I0909 04:41:47.659845 31017 solver.cpp:136] Iteration 9970, Testing net
+I0909 04:41:49.303180 31017 solver.cpp:172] Test score #0: 0.644743
+I0909 04:41:49.303218 31017 solver.cpp:172] Test score #1: 0.634156
+I0909 04:41:49.671159 31017 solver.cpp:269] Iteration 9971, lr = 1e-06
+I0909 04:41:49.778870 31017 solver.cpp:117] Iteration 9971, loss = 0.524031
+I0909 04:41:50.371165 31017 solver.cpp:269] Iteration 9972, lr = 1e-06
+I0909 04:41:50.478638 31017 solver.cpp:117] Iteration 9972, loss = 0.410397
+I0909 04:41:51.070806 31017 solver.cpp:269] Iteration 9973, lr = 1e-06
+I0909 04:41:51.178414 31017 solver.cpp:117] Iteration 9973, loss = 0.361861
+I0909 04:41:51.770827 31017 solver.cpp:269] Iteration 9974, lr = 1e-06
+I0909 04:41:51.878361 31017 solver.cpp:117] Iteration 9974, loss = 0.388244
+I0909 04:41:52.469715 31017 solver.cpp:269] Iteration 9975, lr = 1e-06
+I0909 04:41:52.577175 31017 solver.cpp:117] Iteration 9975, loss = 0.348408
+I0909 04:41:53.168812 31017 solver.cpp:269] Iteration 9976, lr = 1e-06
+I0909 04:41:53.276579 31017 solver.cpp:117] Iteration 9976, loss = 0.374549
+I0909 04:41:53.868263 31017 solver.cpp:269] Iteration 9977, lr = 1e-06
+I0909 04:41:53.976038 31017 solver.cpp:117] Iteration 9977, loss = 0.473355
+I0909 04:41:54.567353 31017 solver.cpp:269] Iteration 9978, lr = 1e-06
+I0909 04:41:54.675021 31017 solver.cpp:117] Iteration 9978, loss = 0.398248
+I0909 04:41:55.266767 31017 solver.cpp:269] Iteration 9979, lr = 1e-06
+I0909 04:41:55.374332 31017 solver.cpp:117] Iteration 9979, loss = 0.62805
+I0909 04:41:55.966367 31017 solver.cpp:269] Iteration 9980, lr = 1e-06
+I0909 04:41:56.073860 31017 solver.cpp:117] Iteration 9980, loss = 0.615827
+I0909 04:41:56.073875 31017 solver.cpp:136] Iteration 9980, Testing net
+I0909 04:41:57.716351 31017 solver.cpp:172] Test score #0: 0.687883
+I0909 04:41:57.716387 31017 solver.cpp:172] Test score #1: 0.6114
+I0909 04:41:58.084172 31017 solver.cpp:269] Iteration 9981, lr = 1e-06
+I0909 04:41:58.191841 31017 solver.cpp:117] Iteration 9981, loss = 0.430979
+I0909 04:41:58.783113 31017 solver.cpp:269] Iteration 9982, lr = 1e-06
+I0909 04:41:58.890565 31017 solver.cpp:117] Iteration 9982, loss = 0.362025
+I0909 04:41:59.482329 31017 solver.cpp:269] Iteration 9983, lr = 1e-06
+I0909 04:41:59.590193 31017 solver.cpp:117] Iteration 9983, loss = 0.412217
+I0909 04:42:00.181818 31017 solver.cpp:269] Iteration 9984, lr = 1e-06
+I0909 04:42:00.289470 31017 solver.cpp:117] Iteration 9984, loss = 0.474045
+I0909 04:42:00.880880 31017 solver.cpp:269] Iteration 9985, lr = 1e-06
+I0909 04:42:00.987017 31017 solver.cpp:117] Iteration 9985, loss = 0.204914
+I0909 04:42:01.573462 31017 solver.cpp:269] Iteration 9986, lr = 1e-06
+I0909 04:42:01.679543 31017 solver.cpp:117] Iteration 9986, loss = 0.484521
+I0909 04:42:02.265300 31017 solver.cpp:269] Iteration 9987, lr = 1e-06
+I0909 04:42:02.371445 31017 solver.cpp:117] Iteration 9987, loss = 0.409247
+I0909 04:42:02.957245 31017 solver.cpp:269] Iteration 9988, lr = 1e-06
+I0909 04:42:03.063416 31017 solver.cpp:117] Iteration 9988, loss = 0.270197
+I0909 04:42:03.649014 31017 solver.cpp:269] Iteration 9989, lr = 1e-06
+I0909 04:42:03.755172 31017 solver.cpp:117] Iteration 9989, loss = 0.272287
+I0909 04:42:04.341416 31017 solver.cpp:269] Iteration 9990, lr = 1e-06
+I0909 04:42:04.447437 31017 solver.cpp:117] Iteration 9990, loss = 0.343167
+I0909 04:42:04.447453 31017 solver.cpp:136] Iteration 9990, Testing net
+I0909 04:42:06.071130 31017 solver.cpp:172] Test score #0: 0.669267
+I0909 04:42:06.071167 31017 solver.cpp:172] Test score #1: 0.621285
+I0909 04:42:06.434556 31017 solver.cpp:269] Iteration 9991, lr = 1e-06
+I0909 04:42:06.540612 31017 solver.cpp:117] Iteration 9991, loss = 0.496389
+I0909 04:42:07.126246 31017 solver.cpp:269] Iteration 9992, lr = 1e-06
+I0909 04:42:07.232358 31017 solver.cpp:117] Iteration 9992, loss = 0.520453
+I0909 04:42:07.818034 31017 solver.cpp:269] Iteration 9993, lr = 1e-06
+I0909 04:42:07.924221 31017 solver.cpp:117] Iteration 9993, loss = 0.334706
+I0909 04:42:08.510139 31017 solver.cpp:269] Iteration 9994, lr = 1e-06
+I0909 04:42:08.616243 31017 solver.cpp:117] Iteration 9994, loss = 0.52113
+I0909 04:42:09.201993 31017 solver.cpp:269] Iteration 9995, lr = 1e-06
+I0909 04:42:09.307929 31017 solver.cpp:117] Iteration 9995, loss = 0.381391
+I0909 04:42:09.893208 31017 solver.cpp:269] Iteration 9996, lr = 1e-06
+I0909 04:42:09.999300 31017 solver.cpp:117] Iteration 9996, loss = 0.337066
+I0909 04:42:10.585695 31017 solver.cpp:269] Iteration 9997, lr = 1e-06
+I0909 04:42:10.691694 31017 solver.cpp:117] Iteration 9997, loss = 0.523117
+I0909 04:42:11.277065 31017 solver.cpp:269] Iteration 9998, lr = 1e-06
+I0909 04:42:11.383262 31017 solver.cpp:117] Iteration 9998, loss = 0.465664
+I0909 04:42:11.968402 31017 solver.cpp:269] Iteration 9999, lr = 1e-06
+I0909 04:42:12.074566 31017 solver.cpp:117] Iteration 9999, loss = 0.461234
+I0909 04:42:12.660538 31017 solver.cpp:269] Iteration 10000, lr = 1e-06
+I0909 04:42:12.766762 31017 solver.cpp:117] Iteration 10000, loss = 0.412919
+I0909 04:42:12.766777 31017 solver.cpp:136] Iteration 10000, Testing net
+I0909 04:42:14.390519 31017 solver.cpp:172] Test score #0: 0.689228
+I0909 04:42:14.390553 31017 solver.cpp:172] Test score #1: 0.595112
+I0909 04:42:14.773334 31017 solver.cpp:189] Snapshotting to soil_contam_fine_train_iter_10000
+I0909 04:42:15.488173 31017 solver.cpp:196] Snapshotting solver state to soil_contam_fine_train_iter_10000.solverstate
+I0909 04:42:16.187777 31017 solver.cpp:189] Snapshotting to soil_contam_fine_train_iter_10000
+I0909 04:42:17.696100 31017 solver.cpp:196] Snapshotting solver state to soil_contam_fine_train_iter_10000.solverstate
+I0909 04:42:19.331331 31017 solver.cpp:130] Optimization Done.
+I0909 04:42:19.331359 31017 train_net.cpp:34] Optimization Done.
+Done.
