@@ -12,7 +12,7 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=scraping_peeling
+BASE_NAME=bigger
 FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
@@ -53,14 +53,14 @@ USE_FIRST_LOCAL_DICT=Y
 
 # 3. resize images
 cd /data/ad6813/caffe/data/$BASE_NAME
-CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
-if [ $CMD != "256x256" ]
-then
-    echo "downsizing all images to 256x256..."
-    for name in */*.jpg; do convert -resize 256x256\! $name $name; done
-else
-    echo "images already downsized"
-fi
+# CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
+# if [ $CMD != "256x256" ]
+# then
+#     echo "downsizing all images to 256x256..."
+#     for name in */*.jpg; do convert -resize 256x256\! $name $name; done
+# else
+#     echo "images already downsized"
+# fi
 
 
 # 4. download alexnet
