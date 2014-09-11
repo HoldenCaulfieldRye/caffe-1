@@ -191,11 +191,11 @@ CURRENTLY
 =========
 
 training:
-- 05: soil_contam/noneC_lr5_sbl
-- 06: soil_contam/nopool
-- 07: soil_contam/nopool_sl
-- 08: hatch_markings/none
-- 09: soil_contam/tl_wout
+- 05: soil_contam/none_lr5_sbl, ground_sheet/conv4
+- 06: soil_contam/nopool, soil_contam/none_lr5_sbl
+- 07: soil_contam/nopool_sl, insertion_markings/conv4_sbl
+- 08: hatch_markings/none, hatch_markings/conv3_sbl
+- 09: soil_contam/tl_wout, scraping_peeling/conv3_bs256_sbl
 
 queued:
 -> clampdetCI98/none_bs256_lr4

@@ -1,0 +1,325 @@
+import numpy as np
+import matplotlib.pyplot as plt
+#%matplotlib inline
+import os, sys, shutil
+import caffe
+import check
+import yaml
+from caffe.proto import caffe_pb2
+from os.path import join as oj
+from subprocess import call
+from create_deploy_prototxt import *
+
+caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
+sys.path.insert(0, caffe_root + 'python')
+
+# usage:
+# python run_classifier.py classifier-dir=../models/ground_sheet-fine data-dir=../data/ground_sheet_3501 data-info=../data_info/ground_sheet_3501
+# python run_classifier.py classifier-dir=.. data-dir=.. data-info=..
+
+# Note! data-dir should be data/<name>, not data/<name>/test
+
+def main(classifier_dir, data_dir, data_info):
+  # this is the test batch size
+  # you could set it up as a command line arg if turn out useful
+  N = 96
+
+  classifier_name = classifier_dir.split('/')[-1]
+  
+  # create deploy prototxt
+  if len([fname for fname in os.listdir(classifier_dir) 
+          if fname == classifier_name.split('-fine')[0]+'_deploy.prototxt']) == 0:
+    train_file = get_train_file(classifier_dir)
+    # num_imgs = len(os.listdir(oj(data_dir,'test')))
+    content = train_file.readlines()
+    content = edit_train_content_for_deploy(content)
+    write_content_to_deploy_file(classifier_dir, content)
+    
+  # Set the right path to your model definition file, pretrained model 
+  # weights, and the image you would like to classify
+  MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
+  MEAN_FILE = get_np_mean_fname(data_dir)
+
+  # get PRETRAINED
+  # if not os.path.isfile(PRETRAINED):
+  #   call(['./get_caffe_reference_imagenet_model.sh'])
+
+  # load network
+  print 'loading network...'
+  net = caffe.Classifier(MODEL_FILE, PRETRAINED,
+                         image_dims=(256, 256), input_scale=255,
+                         mean_file=MEAN_FILE, channel_swap=(2,1,0))
+  # flow of control:
+  #   classifier::__init__(
+  #   classifier::caffe.Net.__init__()
+  print 'network loaded successfully'
+
+  # set phase to test since we are doing testing
+  net.set_phase_test()
+
+  # use CPU for the computation
+  # so you can run this on your laptop!
+  # net.set_mode_cpu()
+
+  # use GPU for the computation
+  # so you can run on entire test set
+  net.set_mode_gpu()
+  
+  # load image
+  # input_image = caffe.io.load_image(images)
+  # plt.imshow(input_image)
+  d = {'fname': [],
+       'pred': [],
+       'time': [],
+       'dude': [],
+       'label': [],
+       'pred_lab_thresh': [],
+       'pred_lab_std': [],
+       'pot_mislab': []}
+  
+  # load images
+  # parallelise this? use cudaconvnet code
+  imgs,d['fname'],d['time'],d['dude'] = load_alldef get_pretrained_model(classifier_dir):
+  suggest = os.listdir(classifier_dir)
+  suggest = [fname for fname in suggest
+             if 'iter' in fname and 'solverstate' not in fname]
+  for elem in enumerate(suggest): print elem
+  idx = int(raw_input("\nWhich model? "))
+  return oj(classifier_dir,suggest[idx])
+
+#  oj(, 'caffe_reference_imagenet_model')
+
+
+def get_np_mean_fname(data_dir):
+  # for fname in os.listdir(data_dir):
+    # if fname.endswith('mean.npy'): return oj(data_dir,fname)
+  proto_img_fname = ''
+  for fname in os.listdir(data_dir):
+    if fname.endswith('mean.binaryproto'):
+      print 'found binaryproto: %s'%(fname)
+      proto_img_fname = fname
+      break
+  if proto_img_fname == '':
+    print 'ERROR: no *mean.npy nor *mean.binaryproto found in %s'%(data_dir)
+    sys.exit()
+
+  # er wait how does it know where the proto img file is?
+  blob = caffe_pb2.BlobProto()
+  data = open(oj(data_dir,proto_img_fname), "rb").read()
+  blob.ParseFromString(data)
+  nparray = caffe.io.blobproto_to_array(blob)[0]
+  npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean2.npy'
+  npy_mean_file = file(oj(data_dir,npy_mean_fname),"wb")
+  np.save(npy_mean_file, nparray)
+  npy_mean_file.close()
+  
+  # blob_img = caffe_pb2.BlobProto() # oj(data_dir,proto_img_fname))
+  # npy_mean = caffe.io.blobproto_to_array(blob_img)
+  # npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean.npy'
+  # npy_mean_file = open(,'w')
+  # np.save(npy_mean_file, npy_mean)
+  # npy_mean_file.close()
+  # print 'closed file %s'%(npy_mean_fname)
+  return oj(data_dir, npy_mean_fname)
+
+          
+def load_all_images_from_dir(test_dir):
+  batch = []
+  times = []
+  dudes = []
+  img_fnames = os.listdir(test_dir)
+  print 'loading images...'
+  for fname in img_fnames:
+    full_fname = oj(test_dir, fname)
+    batch.append(caffe.io.load_image(full_fname))
+    times.append(os.path.getmtime(full_fname))
+  print 'finished loading images.'
+  return batch, img_fnames
+    
+
+def fill_dict(d, data_info):
+  # this comes early because flag_val prompts user
+  flag_val, threshold = get_flag_and_thresh(data_info)
+
+  # get data_info test file
+  label_data = open(oj(data_info,'test.txt'),'r').readlines()
+  label_data = [line.split() for line in label_data]
+  label_data = sorted(label_data, key= lambda x:x[0])
+  # print 'label_data[] is like', label_data[:10]
+  # print 'label_data[:][0] is like', label_data[:3][0]
+  # print 'd[\'fnames\'] is like', d['fname'][:3]
+  assert d['fname'] == [el[0] for el in label_data]
+  num_imgs = len(label_data)
+
+  # fill with true labels
+  d['label'] = [int(el[1]) for el in label_data]
+
+  # everything ok?
+  # for key in d.keys():
+  #   print "d['%s'] is like %s"%(key,str(d[key][:3]))
+  # print 'flag_val:', flag_val
+
+  # fill in predicted labels and flag if potentially mislab
+  false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
+  for idx in range(num_imgs):
+    
+    # assign predicted label wrt threshold
+    if d['pred'][idx][flag_val] >= threshold:
+      d['pred_lab_thresh'].append(flag_val) 
+    else: d['pred_lab_thresh'].append(-(flag_val-1))
+
+    # assign predicted label in std way
+    if d['pred'][idx][flag_val] >= 0.5:
+      d['pred_lab_std'].append(flag_val) 
+    else: d['pred_lab_std'].append(-(flag_val-1))
+
+    # correct thresh classification or not 
+    if d['pred_lab_thresh'][idx] != d['label'][idx]:
+      # print '%i != %i so wrong classification'%(d['pred_lab'][idx],d['label'][idx])
+      if d['label'][idx] == flag_val:
+        false_neg_thresh += 1
+        num_pos += 1
+      else:
+        false_pos_thresh += 1
+        num_neg += 1
+    else:
+      # print '%i == %i so correct classification'%(d['pred_lab'][idx],d['label'][idx])
+      if d['label'][idx] == flag_val: num_pos += 1
+      else: num_neg += 1
+
+    # correct std classification or not 
+    if d['pred_lab_std'][idx] != d['label'][idx]:
+      d['pot_mislab'].append(idx)
+      if d['label'][idx] == flag_val: false_neg_std += 1
+      else: false_pos_std += 1
+
+  # everything ok?
+  # for key in d.keys():
+  #   print "d['%s'] is like %s"%(key,str(d[key][:8]))
+  # print 'flag_val:', flag_val
+  print 'false_neg_thresh: %i, false_pos_thresh: %i'%(false_neg_thresh,false_pos_thresh)
+  print 'false_neg_std: %i, false_pos_std: %i'%(false_neg_std,false_pos_std)
+  print 'num_neg: %i, num_pos: %i'%(num_neg,num_pos)
+
+  # compute accuracies
+  d['accuracy']= {}
+  d['accuracy']['total_thresh'] = 1-(false_neg_thresh+false_pos_thresh)/float(num_imgs)
+  d['accuracy']['pos_thresh'] = 1-false_neg_thresh/float(num_pos)
+  d['accuracy']['neg_thresh'] = 1-false_pos_thresh/float(num_neg)
+  d['accuracy']['total_std'] = 1-(false_neg_std+false_pos_std)/float(num_imgs)
+  d['accuracy']['pos_std'] = 1-false_neg_std/float(num_pos)
+  d['accuracy']['neg_std'] = 1-false_pos_std/float(num_neg)
+  print "d['accuracy']", d['accuracy']
+  return d
+
+
+def compute_kpi(d):
+  num_imgs = len(d['fname'])
+  flag = get_flag_and_thresh(data_info)[0]
+  # create array (idx,prob(pos)) of all positives
+  pos = [(idx,float(d['pred'][idx][flag]))
+         for idx in range(num_imgs)
+         if d['label'][idx] == flag]
+  print 'check same with above! num_pos:', len(pos)
+  
+  # sort array descending prob(pos)
+  pos = sorted(pos, key=lambda x: x[1], reverse=True)
+  
+  # Sig_level is prob(pos) for i-th entry where float(i/len) = 0.95
+  print 'sig levels required for following accuracy on positives:'
+  print '70\%:',pos[int(0.7*len(pos))][1]
+  print '80\%:',pos[int(0.8*len(pos))][1]
+  print '90\%:',pos[int(0.9*len(pos))][1]
+  print '95\%:',pos[int(0.95*len(pos))][1]
+  Sig_level = float(pos[int(0.95*len(pos))][1])
+  
+  # pct_auto is, for all imgs:
+  # (num imgs with prob(pos) < Sig_level) / (num imgs)
+  # for idx in range(num_imgs):
+  #   if d['pred'][idx][flag] < Sig_level:
+  #     automated.append(idx)
+  #   else:
+  #     print d['pred'][idx][flag], 'is too high, would get flagged'
+  automated = [idx for idx in range(num_imgs)
+               if float(d['pred'][idx][flag]) < Sig_level]
+
+  return Sig_level, len(automated)/float(num_imgs)
+
+
+
+if __name__ == '__main__':
+  print 'Warning: make sure that caffe is on the python path!'
+
+  # don't need sig_level, using class imbalance threshold
+  # # this is the sig level
+  # # you could set it up as a command line arg if turn out useful
+  # sig_level = 0.1
+
+  # classifier_dir, images = None, None
+  for arg in sys.argv:
+    if "classifier-dir=" in arg:
+      classifier_dir = os.path.abspath(arg.split('=')[-1])
+    elif "data-dir=" in arg:
+      data_dir = os.path.abspath(arg.split('=')[-1])
+    elif "data-info=" in arg:
+      data_info = os.path.abspath(arg.split('=')[-1])
+    # elif "train-iter=" in arg:
+    #   train_iter = os.path.abspath(arg.split('=')[-1])
+
+  if check.check(data_dir, data_info) != [0,0]:
+    print 'ERROR: mismatch between test files in data_dir and data_info'
+    sys.exit()
+
+  PRETRAINED = get_pretrained_model(classifier_dir)
+  already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy')
+  if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
+    d = (np.load(already_pred)).item()
+  else:
+    d = main(classifier_dir, data_dir, data_info)
+
+  # HEY! this should go in main as well
+  # get true labels, assign predicted labels, get metrics
+  d = fill_dict(d, data_info)
+
+  # potential mislabels
+  mislab_dir = oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1])
+  try: os.mkdir(mislab_dir)
+  except:
+    shutil.rmtree(mislab_dir)
+    os.mkdir(mislab_dir)
+  for idx in d['pot_mislab']:
+    shutil.copy(oj(data_dir,'test',d['fname'][idx]), mislab_dir)
+  print "saving potential mislabels to %s"%(mislab_dir)
+
+  # accuracies
+  print 'with threshold at test only:'
+  print 'accuracy overall: ', d['accuracy']['total_thresh']
+  print 'accuracy on positives: ', d['accuracy']['pos_thresh']
+  print 'accuracy on negatives: ', d['accuracy']['neg_thresh']
+
+  print 'with standard 0.5 classification:'
+  print 'accuracy overall: ', d['accuracy']['total_std']
+  print 'accuracy on positives: ', d['accuracy']['pos_std']
+  print 'accuracy on negatives: ', d['accuracy']['neg_std']
+  
+  # find highest sig_level that raises >=95% of true positives,
+  # and compute % workload that is automated
+  Sig_level, pct_auto = compute_kpi(d)
+  print 'sig level required for 95% accuracy on positives:', Sig_level
+  print 'this enables', pct_auto, 'automation'
+
+  
+
+  # for faster prediction, turn off oversampling BUT!
+  # you need to set oversampling in edit_train_content_for_deploy to
+  # False... so you should probs merge the script into this one
+  
+  # Not as fast as you expected? Indeed, in this python demo you are seeing only 4 times speedup. But remember - the GPU code is actually very fast, and the data loading, transformation and interfacing actually start to take more time than the actual conv. net computation itself!
+
+  # To fully utilize the power of GPUs, you really want to:
+
+  # Use larger batches, and minimize python call and data transfer overheads.
+  # Pipeline data load operations, like using a subprocess.
+  # Code in C++. A little inconvenient, but maybe worth it if your dataset is really, really large.
+  
+

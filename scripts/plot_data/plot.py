@@ -31,12 +31,13 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   else:
     print 'plotting from iter %i to %i'%(start,end)
 
-  plt.ylim([0,1.5])
+  plt.ylim([0,1.2])
   x = np.array(range(len(train[start:end])))
   ytrain = np.array([float(el[1]) for el in train[start:end]])
   ytest_acc = np.array([float(el[1]) for el in val_acc[start:end]])
   ytest_loss = np.array([np.float(el[1]) for el in val_loss[start:end]])
   plt.plot(x, ytrain, label='training loss', color='0.55')
+  # plt.plot(x, ytrain, label='training loss')
   if len(x) != len(ytest_acc):
     print 'len(x) %i != %i len(ytrain)'%(len(x),len(ytest_acc))
     sys.exit()
