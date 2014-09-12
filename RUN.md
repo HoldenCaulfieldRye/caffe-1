@@ -191,10 +191,10 @@ CURRENTLY
 =========
 
 training:
-- 05: scrape_zones/conv4
+- 05: ERROR importing numpy
 - 06: clampdet/conv4
-- 07: soil_contam_us95/none_sbl
-- 08: 
+- 07: soil_contam_us/none_lr5_sbl (97%)
+- 08: scrape_zones/none_lr5_sbl (0.88)
 - 09: 
 
 queued:
@@ -261,7 +261,13 @@ next steps:
   -> just to show off improvement
   
 
-to see droplets and soil marks on joint
+=====
+
+NEXT:
+- to see droplets and soil marks on joint
+- train more nets, all graphic machines available
+
+
   
 
 
