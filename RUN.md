@@ -261,3 +261,22 @@ next steps:
 
 to see droplets and soil marks on joint
   
+
+
+Image preprocessing:
+- scraping peeling:
+  -> Colours, Colour Balance, Shadows, Magenta -100?
+  ->
+- water contamination:
+  -> Colours, Colour Balance: 
+     -> Midtones, Cyan 100
+     -> Highlights, Magenta 100
+  -> Hue-Saturation
+     -> Hue, -20
+  -> Colorise
+     -> Hue, 0
+     -> Saturation, 0
+     
+
+
+
