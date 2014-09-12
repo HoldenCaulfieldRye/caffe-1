@@ -1,1 +1,0 @@
-freeze backprop up to & including fc5, and freeze backprop on fc5's weights as well
