@@ -12,7 +12,7 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=clampdet
+BASE_NAME=soil_contam_us
 FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
