@@ -12,7 +12,7 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=clampdet
+BASE_NAME=soil_contam
 FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
@@ -75,37 +75,37 @@ fi
 cd /data/ad6813/caffe/models
 
 # first make sure exists reference dir from which to cp and sed
-# if [ -d clampdet ]
-# then
-#     rm -rf $BASE_NAME
-#     mkdir $BASE_NAME
-#     cd clampdet
-#     NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
-#     for file in $NEEDED_FILES;
-#     do
-# 	if [ ! -f $file ]
-# 	then
-# 	    echo "$file not found"
-# 	    echo "need it to create leveldb inputs for $BASE_NAME"
-# 	    exit
-# 	else
-# 	    cp $file '../'$BASE_NAME'/'
-# 	fi
-#     done
-# else
-#     echo "directory clampdet not found"
-#     echo "need it to create leveldb inputs for $BASE_NAME"
-#     exit
-# fi
+if [ -d clampdet ]
+then
+    rm -rf $BASE_NAME
+    mkdir $BASE_NAME
+    cd clampdet
+    NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
+    for file in $NEEDED_FILES;
+    do
+	if [ ! -f $file ]
+	then
+	    echo "$file not found"
+	    echo "need it to create leveldb inputs for $BASE_NAME"
+	    exit
+	else
+	    cp $file '../'$BASE_NAME'/'
+	fi
+    done
+else
+    echo "directory clampdet not found"
+    echo "need it to create leveldb inputs for $BASE_NAME"
+    exit
+fi
 
 # # now adapt files to taskname
-cd $BASE_NAME
-# # rename files
-# for file in *clampdet*;
-# do mv $file ${file/clampdet/$BASE_NAME};
-# done
-# # modify contents of files
-# for file in *; do sed -i 's/clampdet/'$BASE_NAME'/g' $file; done
+cd ../$BASE_NAME
+# rename files
+for file in *clampdet*;
+do mv $file ${file/clampdet/$BASE_NAME};
+done
+# modify contents of files
+for file in *; do sed -i 's/clampdet/'$BASE_NAME'/g' $file; done
 './create_'$BASE_NAME'.sh'
 
 
@@ -120,15 +120,15 @@ fi
 
 # 7. network definition
 # keeping batchsize 50
-# for TYPE in train val;
-# do
-#     # change net name and num neurons in output layers
-#     sed -i $BASE_NAME'_'$TYPE'.prototxt' -e '1s/Clamp/'$BASE_NAME'/' -e '300s/2/'$NUM_OUTPUT'/';
-# done
+for TYPE in train val;
+do
+    # change net name and num neurons in output layers
+    sed -i $BASE_NAME'_'$TYPE'.prototxt' -e '1s/Clamp/'$BASE_NAME'/' -e '300s/2/'$NUM_OUTPUT'/';
+done
 
 
-# # 8. solver
-# sed -i $BASE_NAME'_solver.prototxt' -e '10s/20000/'$MAX_ITER'/' -e '13s/2000/'$SNAPSHOT'/'
+# 8. solver
+sed -i $BASE_NAME'_solver.prototxt' -e '10s/20000/'$MAX_ITER'/' -e '13s/2000/'$SNAPSHOT'/'
 
 
 # 9. go!
