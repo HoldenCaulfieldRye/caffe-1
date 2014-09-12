@@ -261,7 +261,13 @@ next steps:
   -> just to show off improvement
   
 
-to see droplets and soil marks on joint
+=====
+
+NEXT:
+- to see droplets and soil marks on joint
+- train more nets, all graphic machines available
+
+
   
 
 

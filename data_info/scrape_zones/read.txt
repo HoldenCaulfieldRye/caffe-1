@@ -1,3 +1,4 @@
-0 PhotoDoesNotShowEnoughOfScrapeZones
-1 PhotoShowsScrapeZones
-0.18 threshold
+0 ScrapeZonesVisible
+1 PhotoDoesNotShowEnoughOfScrapeZones
+0.19 threshold
+1 flag_val
