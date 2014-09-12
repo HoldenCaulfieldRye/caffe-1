@@ -12,21 +12,17 @@ set -e
 SIZE="expr $(cat ../../data_info/$BASE_NAME/train.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/val.txt | wc -l) + $(cat ../../data_info/$BASE_NAME/test.txt | wc -l)"
 # echo $($SIZE)
 
-BASE_NAME=bigger
+BASE_NAME=scrape_zones
 FULL_NAME=$BASE_NAME
 
 # with 4, bad minimum provides 80% classification accuracy
 # read -p "Target bad min? (e.g. 0.8 for class imbalance such that 80% a bad/fake minimum yields 80% accuracy) "
-BAD_MIN=0.88
 
 # read -p "Max num minibatch passes for training? (20000, cos 10500 was optimal for clampdet) "
-MAX_ITER=500
 
 # delete this one once you have cuda-convnet style snapshotting
 # read -p "Network snapshot frequency? (2000) "
-SNAPSHOT=500
 
-NUM_OUTPUT=2 #temp fix
 
 # variables for setup.py
 USE_FIRST_LOCAL_DICT=Y
@@ -45,7 +41,7 @@ USE_FIRST_LOCAL_DICT=Y
 #     mkdir /data/ad6813/caffe/data/$BASE_NAME
 # fi
 
-# cd ../data_preparation
+cd ../data_preparation
 # echo "main and move_to_dirs..."
 # # NUM_OUTPUT is number of classes to learn
 # NUM_OUTPUT=$(python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/$TASK_NAME to-dir=/data/ad6813/caffe/data/$TASK_NAME bad-min=N)
@@ -53,14 +49,14 @@ USE_FIRST_LOCAL_DICT=Y
 
 # 3. resize images
 cd /data/ad6813/caffe/data/$BASE_NAME
-# CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
-# if [ $CMD != "256x256" ]
-# then
-#     echo "downsizing all images to 256x256..."
-#     for name in */*.jpg; do convert -resize 256x256\! $name $name; done
-# else
-#     echo "images already downsized"
-# fi
+CMD=$(convert train/$(ls train | tail -1) -print "%wx%h" /dev/null) 
+if [ $CMD != "256x256" ]
+then
+    echo "downsizing all images to 256x256..."
+    for name in */*.jpg; do convert -resize 256x256\! $name $name; done
+else
+    echo "images already downsized"
+fi
 
 
 # 4. download alexnet
@@ -102,7 +98,7 @@ else
     exit
 fi
 
-# now adapt files to taskname
+# # now adapt files to taskname
 cd ../$BASE_NAME
 # rename files
 for file in *clampdet*;

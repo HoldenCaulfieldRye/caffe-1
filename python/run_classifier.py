@@ -89,7 +89,7 @@ def main(classifier_dir, data_dir, data_info):
        'pred_lab_thresh': [],
        'pred_lab_std': [],
        'pot_mislab': []}
-  
+  print d 
   # save predictions to data_info
   # HEY! move this to bottom once fully operational
   np.save(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'), d)
@@ -173,6 +173,7 @@ def load_all_images_from_dir(test_dir):
   batch = []
   img_fnames = os.listdir(test_dir)
   print 'loading images...'
+  print test_dir
   for fname in img_fnames:
     batch.append(caffe.io.load_image(oj(test_dir,fname)))
   print 'finished loading images.'

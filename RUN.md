@@ -191,11 +191,11 @@ CURRENTLY
 =========
 
 training:
-- 05: soil_contam/none_lr5_sbl, ground_sheet/conv4
-- 06: soil_contam/nopool, soil_contam/none_lr5_sbl
-- 07: soil_contam/nopool_sl, insertion_markings/conv4_sbl
-- 08: hatch_markings/none, hatch_markings/conv3_sbl
-- 09: soil_contam/tl_wout, scraping_peeling/conv3_bs256_sbl
+- 05: scrape_zones/conv4
+- 06: clampdet/conv4
+- 07: soil_contam_us95/none_sbl
+- 08: 
+- 09: 
 
 queued:
 -> clampdetCI98/none_bs256_lr4
@@ -227,6 +227,8 @@ next steps:
   -> best date
   -> best guys
 - impose best possible class balance at every batch
+- new caffe with separate train val for higher batchsize with
+  higher res images
 - data augmentation: rotations & PCA
   -> McCormac's code
   -> bit.ly/UZ3p3E
@@ -267,3 +269,25 @@ NEXT:
 
 
   
+
+
+Image preprocessing:
+- scraping peeling:
+  -> Colours, Colour Balance, Shadows, Magenta -100?
+  ->
+- Water Contamination:
+  -> Colours, Colour Balance: 
+     -> Midtones, Cyan 100
+     -> Highlights, Magenta 100
+  -> Hue-Saturation
+     -> Hue, -20
+  -> Colorise
+     -> Hue, 0
+     -> Saturation, 0
+  -> Brightness-Contrast
+     -> Contrast, 10
+  -> 
+     
+
+
+

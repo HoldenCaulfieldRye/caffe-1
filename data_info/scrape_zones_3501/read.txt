@@ -1,3 +1,0 @@
-0 PhotoDoesNotShowEnoughOfScrapeZones
-1 ScrapeZones
-0.18 threshold

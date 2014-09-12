@@ -3,6 +3,6 @@
 TOOLS=../../build/tools
 
 GLOG_logtostderr=1 $TOOLS/train_net.bin \
-    scrape_zones_fine_solver.prototxt clampfine_train_iter_4900.solverstate
+    scrape_zones_solver.prototxt scrape_zones_fine_train_iter_4000.solverstate
 
 echo "Done."
