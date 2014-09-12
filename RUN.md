@@ -191,11 +191,11 @@ CURRENTLY
 =========
 
 training:
-- 05: soil_contam/noneC_lr5_sbl
-- 06: soil_contam/nopool
-- 07: soil_contam/nopool_sl
-- 08: hatch_markings/none
-- 09: soil_contam/tl_wout
+- 05: soil_contam/none_lr5_sbl, ground_sheet/conv4
+- 06: soil_contam/nopool, soil_contam/none_lr5_sbl
+- 07: soil_contam/nopool_sl, insertion_markings/conv4_sbl
+- 08: hatch_markings/none, hatch_markings/conv3_sbl
+- 09: soil_contam/tl_wout, scraping_peeling/conv3_bs256_sbl
 
 queued:
 -> clampdetCI98/none_bs256_lr4
@@ -208,78 +208,46 @@ queued:
 
 
 classifiers:
-- soil contamination risk
-  -> classes:   SoilContamination{Low,High,}Risk
-  -> trainsize: 2275
-  -> badmin:    0.8
-  -> val*:      0.83
-  -> iter:      100     (bad min?)
-- soil contamination risk
-  -> trainsize: 910
-  -> badmin:    0.5
-  -> val*:      0.66
-  -> iter:      3100
-- ground sheet
-  -> trainsize: 11031
-  -> badmin:    0.65    (natural)
-  -> val*:      0.87
-  -> iter:      15200
-- scrape_zone_peel
-  -> classes:   union CantSeeScrapeZones, UnsuitableScrapingPeeling, NoEvidenceScrapingPeeling
-  -> trainsize: 11031   (??groundsheet)
-  -> badmin:    0.71    
-  -> val*:      0.73    (bad min?)
-  -> val_100:   0.71
-  -> iter:      2100
-- (insertion depth) markings
-  -> trainsize: 3587
-  -> badmin:    0.8
-  -> val*:      0.89
-  -> val_100:   0.85    (wow! lower learning rate always?)
-  -> iter:      11200
-- hatch markings
-  -> trainsize: 6068
-  -> badmin:    0.5     (use more data, 0.5 maybe too strict)
-  -> val*:      0.78
-  -> val_100:   0.65
-  -> iter:      16500
+- soil contam       74.8
+- water contam      50.0
+- scraping peeling  67.3
+- clamp             89.2
+- scrape zones      74.7
+- joint misaligned  50.0
+- fitting proximity 50.0
+--
+- ground sheet      88.6
+- insertion mkings  78.1
+- hatch mkings      76.9
 
 
 next steps:
-- bayesian softmax loss
-- write up different approaches to dealing with imbalance
+- controlpoint extra metadata
 - Redbox data
   -> best date
   -> best guys
+- impose best possible class balance at every batch
 - data augmentation: rotations & PCA
   -> McCormac's code
   -> bit.ly/UZ3p3E
   -> scikit-image
   -> Razvan/preproc.py
-- t-SNE   
-- test error script
-- controlpoint extra metadata
+- multi-image query issue:
+  -> concatenate images, or
+  -> cross-image pooling after conv5
 - save net only if performance gain
   -> solver.cpp l.114 approx
-- impose best possible class balance at every batch
 - different batch contents at every epoch
 - preprocess: divide images by the image standard deviation and apply
   "subtractive/divisive normalization"
 - ensemble network, bagging
 - 'CNN features off-the-shelf', optimising CNN features for specific
   tasks: 29, 15, 51, 43, 41
-- import solverstate, larger minibatch
+- import solverstate shortly before val min
+  larger minibatch, smaller lr
 - partial re-initialisation of conv layer: bit.ly/1BfKVwL
-- stochastic pooling?
 - extract features with caffe
-- add RedBox data
-- sig level script
-- why the fuck does accuracy not go down with overfit
 - switch to OverFeat
-- embed qualitative understanding
-- multi-image query issue:
-  -> concatenate images, or
-  -> cross-image pooling after conv5
 - cropping component:
   -> can it be trained with backprop
      -> read LeNet StreetView papers
