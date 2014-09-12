@@ -1,0 +1,13 @@
+train_net: "soil_contam_us95_train.prototxt"
+test_net: "soil_contam_us95_val.prototxt"
+test_iter: 8
+test_interval: 100
+base_lr: 0.0001
+lr_policy: "fixed"
+display: 1
+max_iter: 20000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 5000
+snapshot_prefix: "soil_contam_us95_fine_train"
+solver_mode: GPU
