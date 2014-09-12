@@ -3,6 +3,9 @@
 # images inside the potenial mislabels dir
 *potential_mislabels*
 
+# visual inspect
+scripts/visual_inspect/*/*.jpg
+
 # Plots
 *plot*.png
 

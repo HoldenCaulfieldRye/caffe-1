@@ -132,7 +132,7 @@ def load_all_images_from_dir(test_dir):
   for fname in img_fnames:
     full_fname = oj(test_dir, fname)
     batch.append(caffe.io.load_image(full_fname))
-    times.append(os.path.getmtime(full_fname))
+    times.append(os,
   print 'finished loading images.'
   return batch, img_fnames
     
