@@ -191,9 +191,9 @@ CURRENTLY
 =========
 
 training:
-- 05: scrape_zones/conv4
+- 05: scrape_zones/conv4 ERROR importing numpy
 - 06: clampdet/conv4
-- 07: soil_contam_us95/none_sbl
+- 07: soil_contam_us95/none_sbl ERROR bus error ./create
 - 08: 
 - 09: 
 
