@@ -265,7 +265,13 @@ next steps:
 
 NEXT:
 - to see droplets and soil marks on joint
-- train more nets, all graphic machines available
+- why performance decreasing with more data?
+  -> resume training for longer
+  -> enable greater backprop
+  -> train only on 1st query in cases of multi-query
+  -> look at mis-classifications:
+     -> visually obvious outliers?
+     -> dense in a client, employee, time?
 
 
   
