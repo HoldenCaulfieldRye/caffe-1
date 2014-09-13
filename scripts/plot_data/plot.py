@@ -48,7 +48,7 @@ def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   plt.ylabel('TrainingLoss')
   # plt.title('Go on choose one')
   plt.grid(True)
-  plt.savefig(oj(model_dir,'plot_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'.png'))
+  plt.savefig(oj(model_dir,'plot_more_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'.png'))
   # plt.show()
 
 
