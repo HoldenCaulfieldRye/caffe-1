@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+#set -e
 # any subsequent command that fails will exit the script
 
 
@@ -55,8 +55,9 @@ set -e
 
 # BASE and FULL name in case 2 models share same data & labels
 
-BASE_NAME=scrape_zones
+BASE_NAME=clampdet
 FULL_NAME=$BASE_NAME
+NUM_OUTPUT=2
 
 cd ../data_preparation
 
@@ -88,11 +89,12 @@ fi
 cd /data/ad6813/caffe/models
 
 # first make sure exists reference dir from which to cp and sed
-if [ -d clampdet ]
+if [ -d clampdetBase ]
 then
     rm -rf $BASE_NAME
     mkdir $BASE_NAME
-    cd clampdet
+    cd clampdetBase
+
     NEEDED_FILES="clampdet_solver.prototxt create_clampdet.sh fine_clampdet.sh clampdet_train.prototxt make_clampdet_mean.sh clampdet_val.prototxt resume_training.sh"
     for file in $NEEDED_FILES;
     do

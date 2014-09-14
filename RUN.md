@@ -1,9 +1,9 @@
 
-1. move data (symlinks) to data/{train,val,test} dirs
+1. move data (symlinks) to data/<taskName>/{train,val,test} dirs
 =====================================================
 
 cd scripts/data_preparation
-python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/<taskName> to-dir=/data/ad6813/caffe/data/<taskName> bad-min=<under_sample_to_this_level_of_imbalance>
+python setup_data.py data-dir=/data/ad6813/pipe-data/Bluebox/raw_data/dump data-info=/data/ad6813/caffe/data_info/<taskName> to-dir=/data/ad6813/caffe/data/<taskName> bad-min=<under_sample_to_this_level_of_imbalance>(or N for no undersampling)
 
 
 2. get a script to do the rest
@@ -26,7 +26,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/homes/ad6813/.local/lib:/usr/local/cuda
 11.1 fine-tune
 =============
 
-cf mezN's answer: bit.ly/1siq8Wz
+cf mezNs answer: bit.ly/1siq8Wz
 
 # need a dedicated source, even if dataset same as non finetune,
 # because eg batchsize can be different, and resource can be locked
