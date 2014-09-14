@@ -2,3 +2,5 @@
 1 HtachMarkings
 0 flag_val
 0.27 threshold
+0.27 threshold
+0 flag_val
