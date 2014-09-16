@@ -9,6 +9,7 @@ from shutil import rmtree
 import json, yaml, random
 import subprocess
 
+# expected input: python setup_all.py <model_name> <{Bluebox,Redbox}> [<target_bad_min>]
 
 def main(data_dir, data_info, to_dir, target_bad_min):
   ''' This is the master function. 
