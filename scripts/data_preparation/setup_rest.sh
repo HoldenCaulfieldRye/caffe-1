@@ -55,9 +55,11 @@
 
 # BASE and FULL name in case 2 models share same data & labels
 
-BASE_NAME=clampdet
-FULL_NAME=$BASE_NAME
-NUM_OUTPUT=2
+BASE_NAME=$1
+NUM_OUTPUT=${2:-2}
+FULL_NAME=${3:-$BASE_NAME}
+
+echo "Running setup_rest with BASE_NAME:"$BASE_NAME" FULL_NAME:"$FULL_NAME" and NUM_OUTPUT:"$NUM_OUTPUT
 
 cd ../data_preparation
 
