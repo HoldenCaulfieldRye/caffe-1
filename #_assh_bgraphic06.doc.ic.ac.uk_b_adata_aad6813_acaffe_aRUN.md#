@@ -76,8 +76,9 @@ for more troubleshoots, see TROUBLESHOOT.md in current directory.
 
 ====================================================================
 
-clampdet_u: 9 17, 11 14
+clampdet_u: (9 17), (11 14), (.) (53 duplicates)
 
+clampdet: (9 11 14 17), (.)
 
 
 

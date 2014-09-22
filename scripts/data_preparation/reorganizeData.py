@@ -29,10 +29,12 @@ def getUnsuitableFlags(tdr, name):
         dat_f.write("UnsuitablePhoto")
 
 if __name__ == "__main__":
+  baseDir = sys.argv[1]
   tdr = baseDir + "/raw_data/dump"
   if os.path.isdir(tdr):
     jpgs = filter(lambda x: "jpg" in x, os.listdir(tdr))
     for jpg in jpgs:
+      name = jpg.split(".")[0]
       getUnsuitableFlags(tdr, name)
-  else: reorganize(sys.argv[1])
+  else: reorganize(baseDir)
 

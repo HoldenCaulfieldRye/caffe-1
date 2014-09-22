@@ -43,20 +43,25 @@ def get_label_dict(data_dir):
     else:
       if raw_input('\nfound %s; use as label_dict? ([Y]/N) '%(fname)) in ['','Y']:
         return yaml.load(open(fname,'r'))
-  d = {'Perfect': []}
+  d = {'Perfect': [], 'UnsuitablePhoto:': []}
   print 'generating dict of label:files from %s...'%(data_dir)
-  for filename in os.listdir(path):
-    if not filename.endswith('.dat'): continue
-    total_num_images += 1
-    fullname = os.path.join(path, filename)
-    with open(fullname) as f:
-      content = [line.strip() for line in f.readlines()] 
-      if content == []:
-        d['Perfect'].append(filename.split('.')[0]+'.jpg')
-      else:
-        for label in content:
-          if label not in d.keys(): d[label] = []
-          d[label].append(filename.split('.')[0]+'.jpg')
+  for filename in reversed(os.listdir(path)):
+    if filename.endswith('.met'): 
+      total_num_images += 1
+      fullname = os.path.join(path, filename)
+      with open(fullname) as f:
+        if any(['UnsuitablePhoto=True' in line for line in f.readlines()]):
+          d['UnsuitablePhoto'].append(filename.split('.')[0]+'.jpg')
+    elif filename.endswith('.dat'): 
+      fullname = os.path.join(path, filename)
+      with open(fullname) as f:
+        content = [line.strip() for line in f.readlines()] 
+        if content == [] and :
+          d['Perfect'].append(filename.split('.')[0]+'.jpg')
+        else:
+          for label in content:
+            if label not in d.keys(): d[label] = []
+            d[label].append(filename.split('.')[0]+'.jpg')
   d['total_num_images'] = total_num_images
   json.dump(d, open('label_dict_'+str(date.today()),'w'))
   return d
@@ -265,5 +270,5 @@ if __name__ == '__main__':
 
   num_output,dump = main(data_dir, data_info, to_dir, target_bad_min)
 
-  p = subprocess.Popen("./setup_rest.sh " + task.capitalize() + " " + str(num_output), shell=True)
+  p = subprocess.Popen("./setup_rest.sh " + task + " " + str(num_output), shell=True)
   p.wait()
