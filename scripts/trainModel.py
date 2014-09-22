@@ -95,3 +95,13 @@ if __name__ == "__main__":
       sys.stdout.flush()
       lastLine = out
  
+# val_batch_size = 96
+# test_iter = (val_set_size / val_batch_size) + 1
+
+
+
+
+
+
+
+

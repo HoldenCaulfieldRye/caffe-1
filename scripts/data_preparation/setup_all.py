@@ -9,6 +9,7 @@ from shutil import rmtree
 import json, yaml, random
 import subprocess
 
+# expected input: python setup_all.py <model_name> <{Bluebox,Redbox}> [<target_bad_min>]
 
 def main(data_dir, data_info, to_dir, target_bad_min):
   ''' This is the master function. 
@@ -264,5 +265,5 @@ if __name__ == '__main__':
 
   num_output,dump = main(data_dir, data_info, to_dir, target_bad_min)
 
-  p = subprocess.Popen("./setup_rest.sh " + task + " " + str(num_output), shell=True)
+  p = subprocess.Popen("./setup_rest.sh " + task.capitalize() + " " + str(num_output), shell=True)
   p.wait()

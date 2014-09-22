@@ -7,7 +7,9 @@ from itertools import chain
 from datetime import date
 from shutil import rmtree
 import json, yaml, random
+import subprocess
 
+# expected input: python setup_all.py <model_name> <{Bluebox,Redbox}> [<target_bad_min>]
 
 def main(data_dir, data_info, to_dir, target_bad_min):
   ''' This is the master function. 
@@ -41,20 +43,25 @@ def get_label_dict(data_dir):
     else:
       if raw_input('\nfound %s; use as label_dict? ([Y]/N) '%(fname)) in ['','Y']:
         return yaml.load(open(fname,'r'))
-  d = {'Perfect': []}
+  d = {'Perfect': [], 'UnsuitablePhoto:': []}
   print 'generating dict of label:files from %s...'%(data_dir)
-  for filename in os.listdir(path):
-    if not filename.endswith('.dat'): continue
-    total_num_images += 1
-    fullname = os.path.join(path, filename)
-    with open(fullname) as f:
-      content = [line.strip() for line in f.readlines()] 
-      if content == []:
-        d['Perfect'].append(filename.split('.')[0]+'.jpg')
-      else:
-        for label in content:
-          if label not in d.keys(): d[label] = []
-          d[label].append(filename.split('.')[0]+'.jpg')
+  for filename in reversed(os.listdir(path)):
+    if filename.endswith('.met'): 
+      total_num_images += 1
+      fullname = os.path.join(path, filename)
+      with open(fullname) as f:
+        if any(['UnsuitablePhoto=True' in line for line in f.readlines()]):
+          d['UnsuitablePhoto'].append(filename.split('.')[0]+'.jpg')
+    elif filename.endswith('.dat'): 
+      fullname = os.path.join(path, filename)
+      with open(fullname) as f:
+        content = [line.strip() for line in f.readlines()] 
+        if content == [] and :
+          d['Perfect'].append(filename.split('.')[0]+'.jpg')
+        else:
+          for label in content:
+            if label not in d.keys(): d[label] = []
+            d[label].append(filename.split('.')[0]+'.jpg')
   d['total_num_images'] = total_num_images
   json.dump(d, open('label_dict_'+str(date.today()),'w'))
   return d
@@ -251,25 +258,17 @@ def dump_to_files(Keep, dump, data_info):
 if __name__ == '__main__':
   import sys
   
-  target_bad_min, data_dir, data_info = None, None, None
-  for arg in sys.argv:
-    if "bad-min=" in arg:
-      target_bad_min = arg.split('=')[-1]
-      print "target bad min: %s" %(target_bad_min)
-    elif "data-dir=" in arg:
-      data_dir = os.path.abspath(arg.split('=')[-1])
-    elif "to-dir=" in arg:
-      to_dir = os.path.abspath(arg.split('=')[-1])
-    elif "data-info=" in arg:
-      data_info = os.path.abspath(arg.split('=')[-1])
+  target_bad_min, data, task= "N", None, None
+  task = sys.argv[1]
+  data = sys.argv[2]
+  if len(sys.argv) > 3:
+    target_bad_min = sys.argv[3]
 
-  # data_dir = /data/ad6813/pipe-data/Bluebox/raw_data/dump
-  # data_info = /data/ad6813/caffe/data_info
-  if data_dir is None:
-    print "\nERROR: data_dir not given"
-    exit
-      
+  data_dir = "/data/ad6813/pipe-data/" + data.capitalize() + "/raw_data/dump"
+  data_info = "/data/ad6813/caffe/data_info/" + task.capitalize()
+  to_dir = "/data/ad6813/caffe/data/" + task.capitalize()
+
   num_output,dump = main(data_dir, data_info, to_dir, target_bad_min)
-  print "\nIt's going to say 'An exception has occured etc'"
-  print "but don't worry, that's num_output info for the training shell script to use\n"
-  sys.exit(num_output)
+
+  p = subprocess.Popen("./setup_rest.sh " + task + " " + str(num_output), shell=True)
+  p.wait()
