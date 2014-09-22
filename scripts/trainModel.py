@@ -4,14 +4,21 @@ import os
 import getopt
 import copy
 
+# python trainModel.py --model=clampdet --submodel=conv4
+
+
 if __name__ == "__main__":
-  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["model=", "freq_snaps", "train_net=", "test_net=", "test_iter=", "test_interval=", "test_compute_loss=", "base_lr=", "display=", "max_iter=", "lr_policy=", "gamma=", "power=", "momentum=", "weight_decay=", "stepsize=", "snapshot=", "snapshot_prefix=", "snapshot_diff=", "solver_mode=", "device_id=", "random_seed="])
+  opts, extraparams = getopt.gnu_getopt(sys.argv[1:], "", ["model=", "submodel=", "freq_snaps", "train_net=", "test_net=", "test_iter=", "test_interval=", "test_compute_loss=", "base_lr=", "display=", "max_iter=", "lr_policy=", "gamma=", "power=", "momentum=", "weight_decay=", "stepsize=", "snapshot=", "snapshot_prefix=", "snapshot_diff=", "solver_mode=", "device_id=", "random_seed="])
   optDict = dict([(k[2:],v) for (k,v) in opts])
   print optDict
   if not "model" in optDict:
     raise Exception("Need to specify --model flag")
-  task = optDict["model"]
+  task = optDict["model"].capitalize()
+  if not "submodel" in optDict:
+    raise Exception("Need to specify --submodel flag")
+  submodel = optDict["submodel"]
   baseDir = os.path.abspath("../models/" + task) + "/"
+  logsDir = os.path.abspath(baseDir + "logs/" + submodel) + "/"
   solverFile = baseDir + task + "_solver.prototxt"
   curOpts = [] 
   if "snapshot" in optDict and "freq_snaps" in optDict:
@@ -42,7 +49,10 @@ if __name__ == "__main__":
     for k,v in curOpts:
       f.write(k + ": " + v + "\n")
   
-  cmd = "cd " + baseDir + "; nohup ./fine_" + task + ".sh 2>&1 | tee train_output.log" 
+  os.mkdir(logsDir)
+  for s in ['_train','_val','_solver']:
+    shutil.copy(baseDir + task + s + '.prototxt', logsDir)
+  cmd = "cd " + baseDir + "; nohup ./fine_" + task + ".sh 2>&1 | tee " logsDir + "train_output.log &"
   p = subprocess.Popen(cmd, shell=True, stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
 
   lastLine = None 
