@@ -2,6 +2,7 @@
 
 # images inside the potenial mislabels dir
 *potential_mislabels*
+visual_inspect/HD*
 
 # visual inspect
 scripts/visual_inspect/*/*.jpg

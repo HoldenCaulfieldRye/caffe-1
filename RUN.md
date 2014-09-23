@@ -134,8 +134,7 @@ next steps:
 - preprocess: divide images by the image standard deviation and apply
   "subtractive/divisive normalization"
 - ensemble network, bagging
-- 'CNN features off-the-shelf', optimising CNN features for specific
-  tasks: 29, 15, 51, 43, 41
+- 'Spatial Pyramid Pooling'
 - import solverstate shortly before val min
   larger minibatch, smaller lr
 - partial re-initialisation of conv layer: bit.ly/1BfKVwL
@@ -147,23 +146,22 @@ next steps:
   -> how does it learn where to crop
      -> localised clampdet
      -> crop conditional on clampdet location & joint type
-- MSE
-  -> Brebisson reports different predictions
-  -> just to show off improvement
+- crop at test time too
   
 
 =====
 
 NEXT:
-- to see droplets and soil marks on joint
 - why performance decreasing with more data?
-  -> resume training for longer
-  -> enable greater backprop
+  -> unsuitable images 
   -> train only on 1st query in cases of multi-query
   -> look at mis-classifications:
      -> visually obvious outliers?
      -> dense in a client, employee, time?
-
+- Redbox data which usable 
+- leveldb fixed mini batch proportions     
+- to see droplets and soil marks on joint
+- download ImageNet, store on terabyte drives
 
   
 
@@ -186,5 +184,5 @@ Image preprocessing:
   -> 
      
 
-
+Caffe vs Torch: github.com/BVLC/caffe/issues/642
 
