@@ -85,24 +85,24 @@ def load_all_images_from_dir(test_dir):
   batch, times, dudes = [], [], []
   img_fnames = os.listdir(test_dir)
   print 'loading images...'
-  # d_jname is a dict: fname -> joint_name
-  d_jname = create_d_jname()
+  # d_multJoints is a dict: fname -> joint_name
+  d_multJoints = create_dict_jname()
   for fname in img_fnames:
     full_fname = oj(test_dir, fname)
     batch.append(caffe.io.load_image(full_fname))
-    times.append(get_time(d_jname[fname]), fname)
+    times.append(get_time(d_multJoints[fname]), fname)
   print 'finished loading images.'
   return batch, img_fnames
 
   
-def get_d_jname():
-  file_d_jname = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
+def create_dict_jname():
+  file_multJoints = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
   data_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump'
-  d_jname = {}
-  for line in open(file_d_jname,'r').readlines():
+  multJoints = {}
+  for line in open(file_multJoints,'r').readlines():
     for img in line.split()[1:]:
-      d_jname[img+'.jpg'] = line.split()[0]
-  return d_jname
+      multJoints[img+'.jpg'] = line.split()[0]
+  return multJoints
 
   
 def get_time(jname):
