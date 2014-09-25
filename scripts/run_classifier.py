@@ -50,17 +50,13 @@ def main(classifier_dir, data_dir, data_info):
        'pred_lab_std': [],
        'pot_mislab': []}
   # load images
-  imgs,d['fname'],d['time'],d['dude'] = load_all_images_from_dir(oj(data_dir,'test'))
+  imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(data_dir,'test'))
   suggest = os.listdir(classifier_dir)
   suggest = [fname for fname in suggest
              if 'iter' in fname and 'solverstate' not in fname]
   for elem in enumerate(suggest): print elem
   idx = int(raw_input("\nWhich model? "))
-  
-  # !!! get model and do preds on oj(classifier_dir,suggest[idx])
-  # look at version in scripts
-  
-  return d
+  return oj(classifier_dir,suggest[idx])
 
 
 def get_np_mean_fname(data_dir):
@@ -94,11 +90,11 @@ def load_all_images_from_dir(test_dir):
   for fname in img_fnames:
     full_fname = oj(test_dir, fname)
     batch.append(caffe.io.load_image(full_fname))
-    time,dude = get_(fname,['InspectedTime','InspectedBy'])
+    time,dude = get_(fname,['CreatedTime','InspectedBy'])
     times.append(time)
     dudes.append(dude)
   print 'finished loading images.'
-  return batch, img_fnames, times, dudes
+  return batch, img_fnames
 
 def create_dict_jname():
   file_multJoints = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
