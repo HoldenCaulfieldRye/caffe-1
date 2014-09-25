@@ -18,7 +18,7 @@ sys.path.insert(0, caffe_root + 'python')
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 
-def main(classifier_dir, data_dir, data_info):
+def classify_data(classifier_dir, data_dir, data_info):
   N = 96
   classifier_name = classifier_dir.split('/')[-1]  
   if len([fname for fname in os.listdir(classifier_dir) 
@@ -30,6 +30,7 @@ def main(classifier_dir, data_dir, data_info):
     
   MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   MEAN_FILE = get_np_mean_fname(data_dir)
+  PRETRAINED = 
   print 'loading network...'
   net = caffe.Classifier(MODEL_FILE, PRETRAINED,
                          image_dims=(256, 256), input_scale=255,
@@ -56,7 +57,8 @@ def main(classifier_dir, data_dir, data_info):
              if 'iter' in fname and 'solverstate' not in fname]
   for elem in enumerate(suggest): print elem
   idx = int(raw_input("\nWhich model? "))
-  return oj(classifier_dir,suggest[idx])
+  # return oj(classifier_dir,suggest[idx])
+  return d
 
 
 def get_np_mean_fname(data_dir):
@@ -118,7 +120,7 @@ def get_(fname,what):
   return ret
   
                  
-def fill_dict(d, data_info):
+def compute_classification_stats(d, data_info):
   # this comes early because flag_val prompts user
   flag_val, threshold = get_flag_and_thresh(data_info)
 
@@ -215,11 +217,11 @@ if __name__ == '__main__':
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = (np.load(already_pred)).item()
   else:
-    d = main(classifier_dir, data_dir, data_info)
+    d = classify_data(classifier_dir, data_dir, data_info)
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
-  d = fill_dict(d, data_info)
+  d = compute_classification_stats(d, data_info)
 
   # potential mislabels
   mislab_dir = oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1])
