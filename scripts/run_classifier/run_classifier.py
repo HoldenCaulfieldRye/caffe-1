@@ -21,12 +21,8 @@ sys.path.insert(0, caffe_root + 'python')
 def classify_data(classifier_dir, data_dir, data_info):
   N = 96
   classifier_name = classifier_dir.split('/')[-1]  
-  if len([fname for fname in os.listdir(classifier_dir) 
-          if fname == classifier_name.split('-fine')[0]+'_deploy.prototxt']) == 0:
-    train_file = get_train_file(classifier_dir)
-    content = train_file.readlines()
-    content = edit_train_content_for_deploy(content)
-    write_content_to_deploy_file(classifier_dir, content)
+  if classifier_name.split('-fine')[0]+'_deploy.prototxt' not in os.listdir(classifier_dir):
+    create_deploy_file(classifier_dir)
     
   MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   MEAN_FILE = get_np_mean_fname(data_dir)
@@ -52,14 +48,36 @@ def classify_data(classifier_dir, data_dir, data_info):
        'pot_mislab': []}
   # load images
   imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(data_dir,'test'))
+
+  # classify images
+  num_imgs = len(imgs)
+  d['pred'] = net.predict(imgs[:N])
+  # print pred
+  for i in range(1,num_imgs/N):
+    d['pred'] = np.append(pred,net.predict(imgs[i*N:(i+1)*N]),axis=0)
+  d['pred']=np.append(pred,net.predict(imgs[-(len(imgs)%N):]),axis=0)
+
+  # save preds
+  assert len(d['pred']) == num_imgs
+  np.save(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'), d)
+  return d
+
+
+def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
   suggest = [fname for fname in suggest
              if 'iter' in fname and 'solverstate' not in fname]
   for elem in enumerate(suggest): print elem
   idx = int(raw_input("\nWhich model? "))
-  # return oj(classifier_dir,suggest[idx])
-  return d
+  return oj(classifier_dir,suggest[idx])
 
+
+def create_deploy_file(classifier_dir):
+  train_file = get_train_file(classifier_dir)
+  content = train_file.readlines()
+  content = edit_train_content_for_deploy(content)
+  write_content_to_deploy_file(classifier_dir, content)
+  
 
 def get_np_mean_fname(data_dir):
   proto_img_fname = ''
