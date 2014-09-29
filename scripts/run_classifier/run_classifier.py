@@ -16,6 +16,10 @@ sys.path.insert(0, caffe_root + 'python')
 # usage:
 # python run_classifier.py classifier-dir=../models/ground_sheet-fine data-dir=../data/ground_sheet_3501 data-info=../data_info/ground_sheet_3501
 
+# flags:
+  # --mislab
+  # --redbox
+
 # Note! data-dir should be data/<name>, not data/<name>/test
 
 def classify_data(classifier_dir, data_dir, data_info):
@@ -215,7 +219,33 @@ def compute_kpi(d):
                if float(d['pred'][idx][flag]) < Sig_level]
   return Sig_level, len(automated)/float(num_imgs)
 
+def save_mislabs(d, data_info, PRETRAINED):
+  mislab_dir = oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1])
+  try: os.mkdir(mislab_dir)
+  except:
+    shutil.rmtree(mislab_dir)
+    os.mkdir(mislab_dir)
+  for idx in d['pot_mislab']:
+    shutil.copy(oj(data_dir,'test',d['fname'][idx]), mislab_dir)
+  print "saving potential mislabels to %s"%(mislab_dir)
 
+
+def print_classification_stats(d):
+  print 'with threshold at test only:'
+  print 'accuracy overall: ', d['accuracy']['total_thresh']
+  print 'accuracy on positives: ', d['accuracy']['pos_thresh']
+  print 'accuracy on negatives: ', d['accuracy']['neg_thresh']
+  print 'with standard 0.5 classification:'
+  print 'accuracy overall: ', d['accuracy']['total_std']
+  print 'accuracy on positives: ', d['accuracy']['pos_std']
+  print 'accuracy on negatives: ', d['accuracy']['neg_std']
+  # find highest sig_level that raises >=95% of true positives,
+  # and compute % workload that is automated
+  Sig_level, pct_auto = compute_kpi(d)
+  print 'sig level required for 95% accuracy on positives:',Sig_level
+  print 'this enables', pct_auto, 'automation'
+
+  
 if __name__ == '__main__':
   print 'Warning: make sure that caffe is on the python path!'
   for arg in sys.argv:
@@ -240,34 +270,16 @@ if __name__ == '__main__':
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
   d = compute_classification_stats(d, data_info)
-
-  # potential mislabels
-  mislab_dir = oj(data_info,'potential_mislabels_'+PRETRAINED.split('/')[-1])
-  try: os.mkdir(mislab_dir)
-  except:
-    shutil.rmtree(mislab_dir)
-    os.mkdir(mislab_dir)
-  for idx in d['pot_mislab']:
-    shutil.copy(oj(data_dir,'test',d['fname'][idx]), mislab_dir)
-  print "saving potential mislabels to %s"%(mislab_dir)
-
-  # accuracies
-  print 'with threshold at test only:'
-  print 'accuracy overall: ', d['accuracy']['total_thresh']
-  print 'accuracy on positives: ', d['accuracy']['pos_thresh']
-  print 'accuracy on negatives: ', d['accuracy']['neg_thresh']
-
-  print 'with standard 0.5 classification:'
-  print 'accuracy overall: ', d['accuracy']['total_std']
-  print 'accuracy on positives: ', d['accuracy']['pos_std']
-  print 'accuracy on negatives: ', d['accuracy']['neg_std']
+  print_classification_stats(d)
   
-  # find highest sig_level that raises >=95% of true positives,
-  # and compute % workload that is automated
-  Sig_level, pct_auto = compute_kpi(d)
-  print 'sig level required for 95% accuracy on positives:', Sig_level
-  print 'this enables', pct_auto, 'automation'
+  # potential mislabels
+  if "--mislab" in sys.argv:
+    save_mislabs(d, data_info, PRETRAINED)
 
+  # redbox plots
+  if "--redbox" in sys.argv:
+    plot_for_redbox(d)
+    
   
   # for faster prediction, turn off oversampling BUT!
   # you need to set oversampling in edit_train_content_for_deploy to

@@ -14,6 +14,9 @@ def get_test_interval(model_dir):
   # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
 
 
+def matplot(X, Ys, save_dir, MODE, start=0, end=len(X)):
+  
+
 def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   
   if end == start == -1:
