@@ -26,7 +26,7 @@ def classify_data(classifier_dir, data_dir, data_info):
     
   MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   MEAN_FILE = get_np_mean_fname(data_dir)
-  PRETRAINED = 
+  PRETRAINED = get_pretrained_model(classifier_dir)
   print 'loading network...'
   net = caffe.Classifier(MODEL_FILE, PRETRAINED,
                          image_dims=(256, 256), input_scale=255,
@@ -230,7 +230,7 @@ if __name__ == '__main__':
     print 'ERROR: mismatch between test files in data_dir and data_info'
     sys.exit()
 
-  PRETRAINED = get_pretrained_model(classifier_dir)
+  # PRETRAINED = get_pretrained_model(classifier_dir)
   already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy')
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = (np.load(already_pred)).item()
