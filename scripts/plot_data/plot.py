@@ -4,7 +4,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from os.path import join as oj
-from subprocess import call
+import subprocess
 
 # Usage: python plot.py path/to/model test-inter=.. [start-iter=..] [end-iter==..]
 
@@ -14,11 +14,39 @@ def get_test_interval(model_dir):
   # return len(open(oj(model_dir,'train_output.log.train'),'r').readlines()) / len(open(oj(model_dir,'train_output.log.test'),'r').readlines()) + 1
 
 
-def matplot(X, Ys, save_dir, MODE, start=0, end=len(X)):
-  
+# MODE \in ['train','scatter']   
+def matplot(Ys, save_dir, MODE, start=0, end=len(Y[0])):
+  print 'data looks like %s and %s'%(Y[0][0], Y[0][-1])  
+  if start, end == 0, len(Y[0]):
+    print 'plotting entire data'
+  elif start == 0:
+    print 'plotting from beginning to %i'%(start,end)
+  elif end == len(X):
+    print 'plotting from iter %i to the end'%(start)
+  else:
+    print 'plotting from iter %i to %i'%(start,end)
+  plt.ylim([0,1.2])    
+  x = np.array(range(len(Y[0][start:end])))
 
-def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
+  if MODE == 'train':
+    ytrain = np.array([float(el[1]) for el in Y[0][start:end]]) #train
+    ytest_acc = np.array([float(el[1]) for el in Y[1][start:end]]) #val_acc
+    ytest_loss = np.array([np.float(el[1]) for el in Y[2][start:end]]) #val_loss
+    plt.plot(x, ytrain, label='training loss', color='0.55')
+    plt.plot(x, ytest_acc, label='validation accuracy',color='g')
+    plt.plot(x, ytest_loss, label='validation loss',color='r')
+    plt.legend(loc='upper left')
+    plt.xlabel('Iters')
+    plt.ylabel('TrainingLoss')
+    # plt.title('Go on choose one')
+    plt.grid(True)
+    plt.savefig(oj(save_dir,'plot_more_'+save_dir.split('/')[-3]+'_'+save_dir.split('/')[-1]+'.png'))
+
+  elif MODE == 'scatter':
+    pass
+
   
+def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
   if end == start == -1:
     start, end = 0, len(train)
     print 'plotting entire training data'
@@ -123,11 +151,6 @@ if __name__ == '__main__':
 
   model_dir = os.path.abspath(sys.argv[1])
 
-  # command = "./parselog.sh %s"%(oj(model_dir,'train_output.log'))
-  # print os.path.isfile(oj(model_dir,'train_output.log'))
-  # print 'command:', command
-  # call(command)
-    
   # test_interval = [int(arg.split('=')[-1]) for arg in sys.argv
   #                  if arg.startswith('test-inter=')]
   # if len(test_interval) != 1:
@@ -135,16 +158,19 @@ if __name__ == '__main__':
   #     sys.exit()
   # else: test_interval = test_interval[0]
   
-  start,end = -1,-1
   for arg in sys.argv:
     if arg.startswith("start-iter="):
       start = int(arg.split('=')[-1])
     if arg.startswith("end-iter="):
       end = int(arg.split('=')[-1])
 
-  test_interval = get_test_interval(model_dir)
-  train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
-  print 'train looks like %s and %s'%(train[0], train[-1])
-  matplot(model_dir, train, val_acc, val_loss, start, end)
-
-  # ideal would be get layer names from cfg, and prompt for which ones
+  if '--train' in sys.argv:
+    cmd = "./parselog.sh "+oj(model_dir,'train_output.log')
+    subprocess.Popen(cmd, shell=True, stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
+    test_interval = get_test_interval(model_dir)
+    train, val_acc, val_loss = get_caffe_train_errors(model_dir), get_caffe_val_acc(model_dir, test_interval), get_caffe_val_loss(model_dir, test_interval)
+    matplot([train,val_acc,val_loss], model_dir, 'train', start, end)    
+    
+  else:
+    print "ERROR: no [--train, --scatter] given"
+    exit

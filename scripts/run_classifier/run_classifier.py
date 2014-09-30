@@ -245,7 +245,10 @@ def print_classification_stats(d):
   print 'sig level required for 95% accuracy on positives:',Sig_level
   print 'this enables', pct_auto, 'automation'
 
-  
+
+def plot_for_redbox(d):
+  plot.matplot()
+
 if __name__ == '__main__':
   print 'Warning: make sure that caffe is on the python path!'
   for arg in sys.argv:
