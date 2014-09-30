@@ -46,43 +46,6 @@ def matplot(Ys, save_dir, MODE, start=0, end=len(Y[0])):
     pass
 
   
-def matplot(model_dir, train, val_acc, val_loss, start=-1, end=-1):
-  if end == start == -1:
-    start, end = 0, len(train)
-    print 'plotting entire training data'
-  
-  elif start == -1:
-    start = 0
-    print 'plotting from iter %i to %i'%(start,end)
-    
-  elif end == -1:
-    print 'plotting from iter %i to the end'%(start)
-    end = len(train)
-
-  else:
-    print 'plotting from iter %i to %i'%(start,end)
-
-  plt.ylim([0,1.2])
-  x = np.array(range(len(train[start:end])))
-  ytrain = np.array([float(el[1]) for el in train[start:end]])
-  ytest_acc = np.array([float(el[1]) for el in val_acc[start:end]])
-  ytest_loss = np.array([np.float(el[1]) for el in val_loss[start:end]])
-  plt.plot(x, ytrain, label='training loss', color='0.55')
-  # plt.plot(x, ytrain, label='training loss')
-  if len(x) != len(ytest_acc):
-    print 'len(x) %i != %i len(ytrain)'%(len(x),len(ytest_acc))
-    sys.exit()
-  plt.plot(x, ytest_acc, label='validation accuracy',color='g')
-  plt.plot(x, ytest_loss, label='validation loss',color='r')
-  plt.legend(loc='upper left')
-  plt.xlabel('Iters')
-  plt.ylabel('TrainingLoss')
-  # plt.title('Go on choose one')
-  plt.grid(True)
-  plt.savefig(oj(model_dir,'plot_more_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'.png'))
-  # plt.show()
-
-
 def get_caffe_train_errors(model_dir):
   return get_caffe_errors(model_dir,'train',2)
 
