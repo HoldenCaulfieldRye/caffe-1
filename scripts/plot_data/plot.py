@@ -15,7 +15,7 @@ def get_test_interval(model_dir):
 
 
 # MODE \in ['train','scatter']   
-def matplot(Ys, save_dir, MODE, start=0, end=len(Y[0])):
+def matplot(Ys, save_dir, MODE, start=0, end=len(Y[0]), fig_name=None):
   print 'data looks like %s and %s'%(Y[0][0], Y[0][-1])  
   if start, end == 0, len(Y[0]):
     print 'plotting entire data'
@@ -35,15 +35,17 @@ def matplot(Ys, save_dir, MODE, start=0, end=len(Y[0])):
     plt.plot(x, ytrain, label='training loss', color='0.55')
     plt.plot(x, ytest_acc, label='validation accuracy',color='g')
     plt.plot(x, ytest_loss, label='validation loss',color='r')
-    plt.legend(loc='upper left')
     plt.xlabel('Iters')
     plt.ylabel('TrainingLoss')
     # plt.title('Go on choose one')
-    plt.grid(True)
-    plt.savefig(oj(save_dir,'plot_more_'+save_dir.split('/')[-3]+'_'+save_dir.split('/')[-1]+'.png'))
-
+    fig_name = 'plot_more_'+save_dir.split('/')[-3]+'_'+save_dir.split('/')[-1]+'.png'
   elif MODE == 'scatter':
-    pass
+    
+    
+  plt.legend(loc='upper left')
+  plt.grid(True)
+  plt.savefig(oj(save_dir,fig_name))
+
 
   
 def get_caffe_train_errors(model_dir):

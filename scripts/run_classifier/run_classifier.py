@@ -5,6 +5,7 @@ import os, sys, shutil
 import caffe
 import check
 import yaml
+import '../plot/plot.py' as plot
 from caffe.proto import caffe_pb2
 from os.path import join as oj
 from subprocess import call
@@ -246,8 +247,9 @@ def print_classification_stats(d):
   print 'this enables', pct_auto, 'automation'
 
 
-def plot_for_redbox(d):
-  plot.matplot()
+def plot_for_redbox(d, save_dir):
+  plot.matplot([d['time'], abs(d['true']-d['preds'])], save_dir, 'scatter', 'plot_redbox_preds_time.jpg')
+  plot.matplot([d['dudes']], save_dir, 'scatter', 'plot_redbox_preds_dudes.jpg')
 
 if __name__ == '__main__':
   print 'Warning: make sure that caffe is on the python path!'
@@ -281,7 +283,7 @@ if __name__ == '__main__':
 
   # redbox plots
   if "--redbox" in sys.argv:
-    plot_for_redbox(d)
+    plot_for_redbox(d, data_info)
     
   
   # for faster prediction, turn off oversampling BUT!

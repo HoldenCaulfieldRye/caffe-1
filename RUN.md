@@ -168,8 +168,7 @@ NEXT:
      -> dense in a client, employee, time?
 
 
-  
-
+ 
 
 Image preprocessing:
 - scraping peeling:
@@ -190,4 +189,6 @@ Image preprocessing:
      
 
 
-
+Redbox:
+- make plot.py work on --train plots
+- then make it work from run_classifier.py
