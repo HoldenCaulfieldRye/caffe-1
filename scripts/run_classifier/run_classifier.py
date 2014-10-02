@@ -5,11 +5,12 @@ import os, sys, shutil
 import caffe
 import check
 import yaml
-import '../plot/plot.py' as plot
 from caffe.proto import caffe_pb2
 from os.path import join as oj
 from subprocess import call
 from create_deploy_prototxt import *
+sys.path.append(os.path.abspath('../plot_data'))
+import plot
 
 caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
@@ -116,6 +117,8 @@ def load_all_images_from_dir(test_dir):
     full_fname = oj(test_dir, fname)
     batch.append(caffe.io.load_image(full_fname))
     time,dude = get_(fname,['CreatedTime','InspectedBy'])
+    l_time = time.split('/')
+    time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
     times.append(time)
     dudes.append(dude)
   print 'finished loading images.'
@@ -249,7 +252,7 @@ def print_classification_stats(d):
 
 def plot_for_redbox(d, save_dir):
   plot.matplot([d['time'], abs(d['true']-d['preds'])], save_dir, 'scatter', 'plot_redbox_preds_time.jpg')
-  plot.matplot([d['dudes']], save_dir, 'scatter', 'plot_redbox_preds_dudes.jpg')
+  plot.matplot([d['dudes'], abs(d['true']-d['preds'])], save_dir, 'bar_chart', 'plot_redbox_preds_dudes.jpg')
 
 if __name__ == '__main__':
   print 'Warning: make sure that caffe is on the python path!'

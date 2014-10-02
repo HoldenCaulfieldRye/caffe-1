@@ -15,23 +15,26 @@ def get_test_interval(model_dir):
 
 
 # MODE \in ['train','scatter']   
-def matplot(Ys, save_dir, MODE, start=0, end=len(Y[0]), fig_name=None):
-  print 'data looks like %s and %s'%(Y[0][0], Y[0][-1])  
-  if start, end == 0, len(Y[0]):
+def matplot(Ys, save_dir, MODE, start=0, end=len(Ys[0]), fig_name=None):
+  print 'data looks like %s and %s'%(Ys[0][0], Ys[0][-1])  
+  if start, end == 0, len(Ys[0]):
     print 'plotting entire data'
   elif start == 0:
     print 'plotting from beginning to %i'%(start,end)
-  elif end == len(X):
+  elif end == len(Ys[0]):
     print 'plotting from iter %i to the end'%(start)
   else:
     print 'plotting from iter %i to %i'%(start,end)
-  plt.ylim([0,1.2])    
-  x = np.array(range(len(Y[0][start:end])))
+  plt.ylim([0,1.2])
 
   if MODE == 'train':
-    ytrain = np.array([float(el[1]) for el in Y[0][start:end]]) #train
-    ytest_acc = np.array([float(el[1]) for el in Y[1][start:end]]) #val_acc
-    ytest_loss = np.array([np.float(el[1]) for el in Y[2][start:end]]) #val_loss
+    x = np.array(range(len(Ys[0][start:end])))
+    #train
+    ytrain = np.array([float(el[1]) for el in Ys[0][start:end]])
+    #val_acc
+    ytest_acc = np.array([float(el[1]) for el in Ys[1][start:end]])
+    #val_loss
+    ytest_loss = np.array([np.float(el[1]) for el in Ys[2][start:end]])
     plt.plot(x, ytrain, label='training loss', color='0.55')
     plt.plot(x, ytest_acc, label='validation accuracy',color='g')
     plt.plot(x, ytest_loss, label='validation loss',color='r')
@@ -39,7 +42,15 @@ def matplot(Ys, save_dir, MODE, start=0, end=len(Y[0]), fig_name=None):
     plt.ylabel('TrainingLoss')
     # plt.title('Go on choose one')
     fig_name = 'plot_more_'+save_dir.split('/')[-3]+'_'+save_dir.split('/')[-1]+'.png'
+    
   elif MODE == 'scatter':
+    x = np.array([np.datetime64()])
+    y = np.array([float(el) for el in Ys[0][start:end]])
+    plt.plot(x,y)
+    plt.xlabel('Iters')
+    plt.ylabel('TrainingLoss')
+    
+  elif MODE == 'bar_chart':
     
     
   plt.legend(loc='upper left')
