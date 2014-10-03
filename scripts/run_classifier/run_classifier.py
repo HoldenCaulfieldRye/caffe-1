@@ -145,8 +145,9 @@ def create_dict_jname():
   file_multJoints = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
   data_dir = REDBOX_DIR
   multJoints = {}
-  if not os.path.isfile(file_multJoints):
-    cmd = 'scp -r graphic06.doc.ic.ac.uk:' + file_multJoints
+  if not os.path.exists(file_multJoints):
+    cmd = 'scp -r graphic06.doc.ic.ac.uk:'+file_multJoints+' '+file_multJoints
+    print 'about to run', cmd
     subprocess.Popen(cmd, shell=True, stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
   for line in open(file_multJoints,'r').readlines():
     for img in line.split()[1:]:
