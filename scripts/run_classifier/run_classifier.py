@@ -2,19 +2,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 #%matplotlib inline
 import os, sys, shutil
-import caffe
-import check
 import yaml
-from caffe.proto import caffe_pb2
 from os.path import join as oj
 from subprocess import call
-from create_deploy_prototxt import *
 sys.path.append(os.path.abspath('../plot_data'))
 import plot
 sys.path.append(os.path.abspath('../data_preparation'))
 import setup_all as sa
+sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath('../../python'))
+import caffe, check
+from caffe.proto import caffe_pb2
+from create_deploy_prototxt import *
 
-caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
+caffe_root = '../../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
@@ -324,7 +325,7 @@ def plot_dudes(d, save_dir):
   for s in set(d['dude']): data[s] = 0
   for idx in d['pot_mislab']:
     data[d['dude'][idx]] += 1
-  data = [[key, float(d[key])/num_imgs)] for key in data.keys()]
+  data = [[key, float(d[key])/num_imgs] for key in data.keys()]
   data = np.array(zip())
   fig = plt.figure()
   width = .35
@@ -348,11 +349,14 @@ if __name__ == '__main__':
     elif "data-info=" in arg:
       data_info = os.path.abspath(arg.split('=')[-1])
 
-  if check.check(data_dir, data_info) != [0,0]:
+  redbox = False
+  if '--redbox' in sys.argv: redbox = True
+  
+  if check.check(data_dir, data_info) != [0,0] and not redbox:
     print 'ERROR: mismatch between test files in data_dir and data_info'
     sys.exit()
 
-  if '--redbox' in sys.argv:
+  if redbox:
     create_redbox_data_info_etc(data_dir, data_info)
 
   # PRETRAINED = get_pretrained_model(classifier_dir)
@@ -360,7 +364,7 @@ if __name__ == '__main__':
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = (np.load(already_pred)).item()
   else:
-    if '--redbox' in sys.argv:
+    if redbox:
       d = classify_data(classifier_dir, data_dir, data_info, redbox=True)
     else: d = classify_data(classifier_dir, data_dir, data_info)
 

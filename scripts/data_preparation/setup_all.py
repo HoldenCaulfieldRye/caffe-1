@@ -183,8 +183,8 @@ def classes_to_learn(All):
   that is like All but with only required labels . '''
   Keep = {}
   print ''
-  for elem in enumerate(All.keys()): print elem
-  read_labels = [All.keys()[int(num)] for num in raw_input("\nNumbers of labels to learn, separated by ' ': ").split()]
+  for elem in enumerate(sorted(All.keys())): print elem
+  read_labels = [sorted(All.keys())[int(num)] for num in raw_input("\nNumbers of labels to learn, separated by ' ': ").split()]
   # if 'Perfect' in All.keys():
   #   Keep['Perfect'] = All['Perfect']
   for label in read_labels:
