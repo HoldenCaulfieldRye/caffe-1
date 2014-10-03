@@ -29,16 +29,18 @@ sys.path.insert(0, caffe_root + 'python')
 #   data-info needs a 'redbox' dir of classifications for all RB imgs
 #   data-dir needs a 'redbox' dir of symlinks to all rdbox images
 
+REDBOX_DIR = '/data/ad6813/pipe-data/small' # Redbox/raw_data/dump'
+
 # Note! data-dir should be data/<name>, not data/<name>/test
 
-def classify_data(classifier_dir, data_dir, data_info, redbox=False):
+def classify_data(classifier_dir, symlink_dir, data_info,redbox=False):
   N = 96
   classifier_name = classifier_dir.split('/')[-1]  
   if classifier_name.split('-fine')[0]+'_deploy.prototxt' not in os.listdir(classifier_dir):
     create_deploy_file(classifier_dir)
     
   MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
-  MEAN_FILE = get_np_mean_fname(data_dir)
+  MEAN_FILE = get_np_mean_fname(symlink_dir)
   PRETRAINED = get_pretrained_model(classifier_dir)
   print 'loading network...'
   net = caffe.Classifier(MODEL_FILE, PRETRAINED,
@@ -61,9 +63,9 @@ def classify_data(classifier_dir, data_dir, data_info, redbox=False):
        'pot_mislab': []}
   # load images
   if redbox:
-    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(data_dir,'redbox'))
+    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(symlink_dir,'redbox'))
   else:
-    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(data_dir,'test'))
+    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(symlink_dir,'test'))
 
   # classify images
   num_imgs = len(imgs)
@@ -95,26 +97,26 @@ def create_deploy_file(classifier_dir):
   write_content_to_deploy_file(classifier_dir, content)
   
 
-def get_np_mean_fname(data_dir):
+def get_np_mean_fname(symlink_dir):
   proto_img_fname = ''
-  for fname in os.listdir(data_dir):
+  for fname in os.listdir(symlink_dir):
     if fname.endswith('mean.binaryproto'):
       print 'found binaryproto: %s'%(fname)
       proto_img_fname = fname
       break
   if proto_img_fname == '':
-    print 'ERROR: no *mean.npy nor *mean.binaryproto found in %s'%(data_dir)
+    print 'ERROR: no *mean.npy nor *mean.binaryproto found in %s'%(symlink_dir)
     sys.exit()
   # er wait how does it know where the proto img file is?
   blob = caffe_pb2.BlobProto()
-  data = open(oj(data_dir,proto_img_fname), "rb").read()
+  data = open(oj(symlink_dir,proto_img_fname), "rb").read()
   blob.ParseFromString(data)
   nparray = caffe.io.blobproto_to_array(blob)[0]
   npy_mean_fname = (proto_img_fname.split('_mean.binaryproto')[0]).split('_fine')[0]+'_mean2.npy'
-  npy_mean_file = file(oj(data_dir,npy_mean_fname),"wb")
+  npy_mean_file = file(oj(symlink_dir,npy_mean_fname),"wb")
   np.save(npy_mean_file, nparray)
   npy_mean_file.close()  
-  return oj(data_dir, npy_mean_fname)
+  return oj(symlink_dir, npy_mean_fname)
 
           
 def load_all_images_from_dir(test_dir):
@@ -136,7 +138,7 @@ def load_all_images_from_dir(test_dir):
 
 def create_dict_jname():
   file_multJoints = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
-  data_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump'
+  data_dir = REDBOX_DIR
   multJoints = {}
   for line in open(file_multJoints,'r').readlines():
     for img in line.split()[1:]:
@@ -146,7 +148,7 @@ def create_dict_jname():
 def get_(fname,what):
   ret = []
   meta_name = fname.split('.')[0] + '.met'
-  data_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump'
+  data_dir = REDBOX_DIR
   for f in os.listdir(data_dir):
     if f == meta_name:
       for line in open(f,'r').readlines():
@@ -259,9 +261,9 @@ def print_classification_stats(d):
   print 'sig level required for 95% accuracy on positives:',Sig_level
   print 'this enables', pct_auto, 'automation'
 
-def create_redbox_data_info_etc(data_dir, data_info):
-  to_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump'
-  All = sa.get_label_dict(to_dir)
+def create_redbox_data_info_etc(symlink_dir, data_info):
+  data_dir = REDBOX_DIR
+  All = sa.get_label_dict(data_dir)
   total_num_images = All.pop('total_num_images')
   Keep = sa.classes_to_learn(All)
   # merge_classes only after default label entry created
@@ -271,11 +273,11 @@ def create_redbox_data_info_etc(data_dir, data_info):
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
   Keep, num_output = sa.merge_classes(Keep)
   Keep, num_output = sa.check_mutual_exclusion(Keep, num_output)
-  dump = symlink_redbox_dataset(Keep, data_dir, oj(to_dir,'redbox'))
+  dump = symlink_redbox_dataset(Keep,data_dir,oj(symlink_dir,'redbox'))
   dump_redbox_to_files(Keep, dump, data_info)
 
 def symlink_redbox_dataset(Keep, from_dir, to_dir):
-  if os.path.isdir(to_dir): rmtree(to_dir)
+  if os.path.isdir(to_dir): shutil.rmtree(to_dir)
   os.mkdir(to_dir)
   dump = []
   for [num,key] in enumerate(Keep.keys()):
@@ -344,29 +346,29 @@ if __name__ == '__main__':
   for arg in sys.argv:
     if "classifier-dir=" in arg:
       classifier_dir = os.path.abspath(arg.split('=')[-1])
-    elif "data-dir=" in arg:
-      data_dir = os.path.abspath(arg.split('=')[-1])
+    elif "symlink-dir=" in arg:
+      symlink_dir = os.path.abspath(arg.split('=')[-1])
     elif "data-info=" in arg:
       data_info = os.path.abspath(arg.split('=')[-1])
 
   redbox = False
   if '--redbox' in sys.argv: redbox = True
   
-  if check.check(data_dir, data_info) != [0,0] and not redbox:
+  if check.check(symlink_dir, data_info) != [0,0] and not redbox:
     print 'ERROR: mismatch between test files in data_dir and data_info'
     sys.exit()
 
   if redbox:
-    create_redbox_data_info_etc(data_dir, data_info)
+    create_redbox_data_info_etc(symlink_dir, data_info)
 
-  # PRETRAINED = get_pretrained_model(classifier_dir)
+  PRETRAINED = get_pretrained_model(classifier_dir)
   already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy')
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = (np.load(already_pred)).item()
   else:
     if redbox:
-      d = classify_data(classifier_dir, data_dir, data_info, redbox=True)
-    else: d = classify_data(classifier_dir, data_dir, data_info)
+      d = classify_data(classifier_dir, symlink_dir, data_info, redbox=True)
+    else: d = classify_data(classifier_dir, symlink_dir, data_info)
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
