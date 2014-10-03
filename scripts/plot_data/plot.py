@@ -15,7 +15,7 @@ def get_test_interval(model_dir):
 
 
 # MODE \in ['train','scatter']   
-def matplot(Ys, save_dir, MODE, start=0, end=len(Ys[0]), fig_name=None):
+def matplot(Ys, save_dir, MODE, start=0, end=len(Ys[0]), fig_name=None, labels=None):
   print 'data looks like %s and %s'%(Ys[0][0], Ys[0][-1])  
   if start, end == 0, len(Ys[0]):
     print 'plotting entire data'
@@ -44,11 +44,11 @@ def matplot(Ys, save_dir, MODE, start=0, end=len(Ys[0]), fig_name=None):
     fig_name = 'plot_more_'+save_dir.split('/')[-3]+'_'+save_dir.split('/')[-1]+'.png'
     
   elif MODE == 'scatter':
-    x = np.array([np.datetime64()])
-    y = np.array([float(el) for el in Ys[0][start:end]])
+    x = np.array([np.datetime64(el) for el in Ys[0]])
+    y = np.array([float(el) for el in Ys[1]])
     plt.plot(x,y)
-    plt.xlabel('Iters')
-    plt.ylabel('TrainingLoss')
+    plt.xlabel(labels[0])
+    plt.ylabel(labels[1])
     
   elif MODE == 'bar_chart':
     

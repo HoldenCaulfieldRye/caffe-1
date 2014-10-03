@@ -116,7 +116,7 @@ def load_all_images_from_dir(test_dir):
   for fname in img_fnames:
     full_fname = oj(test_dir, fname)
     batch.append(caffe.io.load_image(full_fname))
-    time,dude = get_(fname,['CreatedTime','InspectedBy'])
+    time,dude = get_(fname,['InspectedTime','InspectedBy'])
     l_time = time.split('/')
     time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
     times.append(time)
@@ -251,8 +251,10 @@ def print_classification_stats(d):
 
 
 def plot_for_redbox(d, save_dir):
-  plot.matplot([d['time'], abs(d['true']-d['preds'])], save_dir, 'scatter', 'plot_redbox_preds_time.jpg')
-  plot.matplot([d['dudes'], abs(d['true']-d['preds'])], save_dir, 'bar_chart', 'plot_redbox_preds_dudes.jpg')
+  plot.matplot([d['time'], abs(d['true']-d['preds'])], save_dir, 'scatter', 'plot_redbox_preds_time.jpg', labels=['Inspected Time','Classifier Error Distance'])
+  plot.matplot([d['dudes'], abs(d['true']-d['preds'])], save_dir, 'bar_chart', 'plot_redbox_preds_dudes.jpg', labels=['Inspected By','Classifier Error Distance'])
+
+
 
 if __name__ == '__main__':
   print 'Warning: make sure that caffe is on the python path!'
