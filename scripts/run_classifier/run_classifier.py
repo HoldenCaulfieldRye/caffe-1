@@ -134,7 +134,8 @@ def load_all_images_from_dir(test_dir, redbox=False):
     full_fname = oj(test_dir, fname)
     batch.append(caffe.io.load_image(full_fname))
     if redbox:
-      time,dude = get_(data_dir,fname,['InspectedTime','InspectedBy'])
+      [dude,time] = get_(REDBOX_DIR,fname,['InspectedTime','InspectedBy'])
+      print 'time, dude:', time, dude
       l_time = time.split('/')
       time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
       times.append(time)
@@ -159,10 +160,10 @@ def get_(data_dir, fname, what):
   ret = []
   meta_name = fname.split('.')[0] + '.met'
   data_dir = REDBOX_DIR
-  for line in open(oj(test_dir,meta_name),'r').readlines():
+  for line in open(oj(data_dir,meta_name),'r').readlines():
     for field in what:
       if line.startswith(field):
-        ret.append(line.split(field+'=')[-1].split()[0])
+        ret.append(line.split(field+'=')[-1].split()[0][:10])
   return ret
   
                  
@@ -286,7 +287,6 @@ def create_redbox_data_info_etc(symlink_dir, data_info):
   Keep, num_output = sa.merge_classes(Keep)
   Keep, num_output = sa.check_mutual_exclusion(Keep, num_output)
   dump = symlink_redbox_dataset(Keep,data_dir,oj(symlink_dir,'redbox'))
-  print 'symlinking:', dump
   dump_redbox_to_files(Keep, dump, data_info)
 
 def symlink_redbox_dataset(Keep, from_dir, to_dir):
