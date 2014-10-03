@@ -120,7 +120,7 @@ def load_all_images_from_dir(test_dir):
     l_time = time.split('/')
     time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
     times.append(time)
-    dudes.append(dude)
+    dudes.append(dude[:6])
   print 'finished loading images.'
   return batch, img_fnames
 
@@ -251,8 +251,46 @@ def print_classification_stats(d):
 
 
 def plot_for_redbox(d, save_dir):
-  plot.matplot([d['time'], abs(d['true']-d['preds'])], save_dir, 'scatter', 'plot_redbox_preds_time.jpg', labels=['Inspected Time','Classifier Error Distance'])
-  plot.matplot([d['dudes'], abs(d['true']-d['preds'])], save_dir, 'bar_chart', 'plot_redbox_preds_dudes.jpg', labels=['Inspected By','Classifier Error Distance'])
+  
+  plot_time(d, save_dir)
+  plot_dudes(d, save_dir)
+
+def plot_time(d, save_dir):
+  if len(d['time']) != len(d['error']):
+    print "len(d['time']) %i != %i len(d['error'])"%(len(d['time']),len(d['error']))
+    sys.exit()
+  # order by time
+  data = np.array(zip(d['time'],d['error']), dtype=object)
+  data = numpy.sort(data, axis=0)
+  plt.ylim([0,1.2])
+  x, y = data[:,0], data[:,1]
+  plt.plot(x, y)
+  plt.legend(loc='upper left')
+  plt.xlabel('Inspected Time')
+  plt.ylabel('Classification Error')
+  # plt.title('Go on choose one')
+  plt.grid(True)
+  plt.savefig(oj(save_dir,'plot_redbox_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'_time.png'))
+  
+
+def plot_dudes(d, save_dir):
+  # get a 2d array of dudes of freq pot mislab
+  data = {}
+  num_imgs = len(d['dude'])
+  for s in set(d['dude']): data[s] = 0
+  for idx in d['pot_mislab']:
+    data[d['dude'][idx]] += 1
+  data = [[key, float(d[key])/num_imgs)] for key in data.keys()]
+  data = np.array(zip())
+  fig = plt.figure()
+  width = .35
+  ind = np.arange(len(data))
+  plt.bar(ind, data[:,1])
+  plt.xticks(ind + width / 2, data[:,0])
+  fig.autofmt_xdate()
+  plt.xlabel('Inspected By')
+  plt.ylabel('% mis-classifications')
+  plt.savefig(oj(save_dir,'plot_redbox_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'_dude.png'))
 
 
 
