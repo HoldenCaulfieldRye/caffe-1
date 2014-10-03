@@ -19,7 +19,7 @@ caffe_root = '../../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
-# python run_classifier.py classifier-dir=/homes/ad6813/net-saves/clampdet/none data-dir=../../data/clampdet data-info=../../data_info/clampdet
+# python run_classifier.py classifier-dir=/homes/ad6813/net-saves/clampdet/none symlink-dir=../../data/clampdet data-info=../../data_info/clampdet
 
 # flags:
   # --mislab
@@ -61,18 +61,19 @@ def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=Fal
        'pred_lab_std': [],
        'pot_mislab': []}
   # load images
-  if redbox:
-    imgs,d['fname'],d['time'],d['dude'] = load_all_images_from_dir(oj(symlink_dir,'redbox'), redbox)
-  else:
-    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(symlink_dir,'test'))
+  # if redbox:
+  imgs, d = load_all_images_from_dir(d, oj(symlink_dir,'redbox'), redbox)
+  # else:
+  #   imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(symlink_dir,'test'))
 
   # classify images
-  num_imgs = len(imgs)
+  num_imgs = len(d['fname'])
   d['pred'] = net.predict(imgs[:N])
   # print pred
-  for i in range(1,num_imgs/N):
-    d['pred'] = np.append(pred,net.predict(imgs[i*N:(i+1)*N]),axis=0)
-  d['pred']=np.append(pred,net.predict(imgs[-(len(imgs)%N):]),axis=0)
+  if num_imgs > N:
+    for i in range(1,num_imgs/N):
+      d['pred'] = np.append(d['pred'],net.predict(imgs[i*N:(i+1)*N]),axis=0)
+    d['pred']=np.append(d['pred'],net.predict(imgs[-(len(imgs)%N):]),axis=0)
 
   # save preds
   assert len(d['pred']) == num_imgs
@@ -124,33 +125,32 @@ def get_np_mean_fname(symlink_dir):
   return oj(symlink_dir, npy_mean_fname)
 
           
-def load_all_images_from_dir(test_dir, redbox=False):
-  batch, times, dudes = [], [], []
-  img_fnames = os.listdir(test_dir)
+def load_all_images_from_dir(d, test_dir, redbox=False):
+  imgs = []
+  d['fname'] = os.listdir(test_dir)
   print 'loading images...'
   # d_multJoints is a dict: fname -> joint_name
-  d_multJoints = create_dict_jname()
-  for fname in img_fnames:
+  d_multJoints = create_dict_jname(REDBOX_DIR)
+  for fname in d['fname']:
     full_fname = oj(test_dir, fname)
-    batch.append(caffe.io.load_image(full_fname))
+    imgs.append(caffe.io.load_image(full_fname))
     if redbox:
       [dude,time] = get_(REDBOX_DIR,fname,['InspectedTime','InspectedBy'])
       print 'time, dude:', time, dude
       l_time = time.split('/')
       time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
-      times.append(time)
-      dudes.append(dude[:6])
+      d['time'].append(time)
+      d['dude'].append(dude)
   print 'finished loading images.'
-  return batch, img_fnames
+  return imgs, d
 
-def create_dict_jname():
+def create_dict_jname(data_dir):
   file_multJoints = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
-  data_dir = REDBOX_DIR
   multJoints = {}
   if not os.path.exists(file_multJoints):
-    cmd = 'scp -r graphic06.doc.ic.ac.uk:'+file_multJoints+' '+file_multJoints
+    cmd = "sshpass -p '9northerncighT!' scp graphic06.doc.ic.ac.uk:"+file_multJoints+' '+file_multJoints
     print 'about to run', cmd
-    subprocess.Popen(cmd, shell=True, stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
+    subprocess.call(cmd, shell=True, stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
   for line in open(file_multJoints,'r').readlines():
     for img in line.split()[1:]:
       multJoints[img+'.jpg'] = line.split()[0]
