@@ -62,7 +62,7 @@ def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=Fal
        'pot_mislab': []}
   # load images
   if redbox:
-    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(symlink_dir,'redbox'))
+    imgs,d['fname'],d['time'],d['dude'] = load_all_images_from_dir(oj(symlink_dir,'redbox'), redbox)
   else:
     imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(symlink_dir,'test'))
 
@@ -124,7 +124,7 @@ def get_np_mean_fname(symlink_dir):
   return oj(symlink_dir, npy_mean_fname)
 
           
-def load_all_images_from_dir(test_dir):
+def load_all_images_from_dir(test_dir, redbox=False):
   batch, times, dudes = [], [], []
   img_fnames = os.listdir(test_dir)
   print 'loading images...'
@@ -133,11 +133,12 @@ def load_all_images_from_dir(test_dir):
   for fname in img_fnames:
     full_fname = oj(test_dir, fname)
     batch.append(caffe.io.load_image(full_fname))
-    time,dude = get_(fname,['InspectedTime','InspectedBy'])
-    l_time = time.split('/')
-    time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
-    times.append(time)
-    dudes.append(dude[:6])
+    if redbox:
+      time,dude = get_(data_dir,fname,['InspectedTime','InspectedBy'])
+      l_time = time.split('/')
+      time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
+      times.append(time)
+      dudes.append(dude[:6])
   print 'finished loading images.'
   return batch, img_fnames
 
@@ -154,30 +155,32 @@ def create_dict_jname():
       multJoints[img+'.jpg'] = line.split()[0]
   return multJoints
   
-def get_(fname,what):
+def get_(data_dir, fname, what):
   ret = []
   meta_name = fname.split('.')[0] + '.met'
   data_dir = REDBOX_DIR
-  for f in os.listdir(data_dir):
-    if f == meta_name:
-      for line in open(f,'r').readlines():
-        for field in what:
-          if line.startswith(field):
-            ret.append(line.split(field+'=')[-1].split()[0])
+  for line in open(oj(test_dir,meta_name),'r').readlines():
+    for field in what:
+      if line.startswith(field):
+        ret.append(line.split(field+'=')[-1].split()[0])
   return ret
   
                  
-def compute_classification_stats(d, data_info):
+def compute_classification_stats(d, data_info, redbox=False):
   # this comes early because flag_val prompts user
   flag_val, threshold = get_flag_and_thresh(data_info)
 
   # get data_info test file
-  label_data = open(oj(data_info,'test.txt'),'r').readlines()
+  if not redbox:
+    label_data = open(oj(data_info,'test.txt'),'r').readlines()
+  else:
+    label_data = open(oj(data_info,'redbox.txt'),'r').readlines()
   label_data = [line.split() for line in label_data]
   label_data = sorted(label_data, key= lambda x:x[0])
   assert d['fname'] == [el[0] for el in label_data]
   num_imgs = len(label_data)
   # fill with true labels
+  print 'label_data:', label_data
   d['label'] = [int(el[1]) for el in label_data]
   # fill in predicted labels and flag if potentially mislab
   false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
@@ -283,6 +286,7 @@ def create_redbox_data_info_etc(symlink_dir, data_info):
   Keep, num_output = sa.merge_classes(Keep)
   Keep, num_output = sa.check_mutual_exclusion(Keep, num_output)
   dump = symlink_redbox_dataset(Keep,data_dir,oj(symlink_dir,'redbox'))
+  print 'symlinking:', dump
   dump_redbox_to_files(Keep, dump, data_info)
 
 def symlink_redbox_dataset(Keep, from_dir, to_dir):
@@ -381,7 +385,7 @@ if __name__ == '__main__':
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
-  d = compute_classification_stats(d, data_info)
+  d = compute_classification_stats(d, data_info, redbox)
   print_classification_stats(d)
   
   # potential mislabels
