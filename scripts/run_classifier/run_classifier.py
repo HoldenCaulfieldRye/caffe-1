@@ -82,12 +82,11 @@ def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=Fal
 
 def augment_read(data_info):
   here = os.getcwd()
-  # os.chdir('/data/ad6813/caffe/python')
-  # shutil.copy('augment_read.sh', data_info)
+  shutil.copy('/data/ad6813/caffe/scripts/run_classifier/augment_read.sh', data_info)
   os.chdir(data_info)
-  # os.chmod('augment_read.sh', 755)
-  subprocess.call(['./augment_read.sh'])
-  # shutil.remove('augment_read.sh')
+  subprocess.call('chmod +x augment_read.sh', shell=True)
+  subprocess.call('./augment_read.sh', shell=True)
+  os.remove('augment_read.sh')
   os.chdir(here)
   
 def get_flag_and_thresh(data_info):

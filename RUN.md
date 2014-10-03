@@ -192,3 +192,4 @@ Image preprocessing:
 Redbox:
 - make plot.py work on --train plots
 - then make it work from run_classifier.py
+- need to change data_info/clampdet/read.txt because it has 3 classes
