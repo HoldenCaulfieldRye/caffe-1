@@ -11,20 +11,26 @@ from subprocess import call
 from create_deploy_prototxt import *
 sys.path.append(os.path.abspath('../plot_data'))
 import plot
+sys.path.append(os.path.abspath('../data_preparation'))
+import setup_all as sa
 
 caffe_root = '../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
-# python run_classifier.py classifier-dir=../models/ground_sheet-fine data-dir=../data/ground_sheet_3501 data-info=../data_info/ground_sheet_3501
+# python run_classifier.py classifier-dir=/homes/ad6813/net-saves/clampdet/none data-dir=../../data/clampdet data-info=../../data_info/clampdet
 
 # flags:
   # --mislab
   # --redbox
 
+# for redbox mode:
+#   data-info needs a 'redbox' dir of classifications for all RB imgs
+#   data-dir needs a 'redbox' dir of symlinks to all rdbox images
+
 # Note! data-dir should be data/<name>, not data/<name>/test
 
-def classify_data(classifier_dir, data_dir, data_info):
+def classify_data(classifier_dir, data_dir, data_info, redbox=False):
   N = 96
   classifier_name = classifier_dir.split('/')[-1]  
   if classifier_name.split('-fine')[0]+'_deploy.prototxt' not in os.listdir(classifier_dir):
@@ -53,7 +59,10 @@ def classify_data(classifier_dir, data_dir, data_info):
        'pred_lab_std': [],
        'pot_mislab': []}
   # load images
-  imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(data_dir,'test'))
+  if redbox:
+    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(data_dir,'redbox'))
+  else:
+    imgs,d['fname'],d['time'],d['dude'] =  load_all_images_from_dir(oj(data_dir,'test'))
 
   # classify images
   num_imgs = len(imgs)
@@ -230,7 +239,7 @@ def save_mislabs(d, data_info, PRETRAINED):
     shutil.rmtree(mislab_dir)
     os.mkdir(mislab_dir)
   for idx in d['pot_mislab']:
-    shutil.copy(oj(data_dir,'test',d['fname'][idx]), mislab_dir)
+    shutil.copy(oj(data_info,'test',d['fname'][idx]), mislab_dir)
   print "saving potential mislabels to %s"%(mislab_dir)
 
 
@@ -249,9 +258,45 @@ def print_classification_stats(d):
   print 'sig level required for 95% accuracy on positives:',Sig_level
   print 'this enables', pct_auto, 'automation'
 
+def create_redbox_data_info_etc(data_dir, data_info):
+  to_dir = '/data/ad6813/pipe-data/Redbox/raw_data/dump'
+  All = sa.get_label_dict(to_dir)
+  total_num_images = All.pop('total_num_images')
+  Keep = sa.classes_to_learn(All)
+  # merge_classes only after default label entry created
+  Keep = sa.default_class(All, Keep)
+  total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
+  if total_num_images != total_num_check:
+    print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
+  Keep, num_output = sa.merge_classes(Keep)
+  Keep, num_output = sa.check_mutual_exclusion(Keep, num_output)
+  dump = symlink_redbox_dataset(Keep, data_dir, oj(to_dir,'redbox'))
+  dump_redbox_to_files(Keep, dump, data_info)
+
+def symlink_redbox_dataset(Keep, from_dir, to_dir):
+  if os.path.isdir(to_dir): rmtree(to_dir)
+  os.mkdir(to_dir)
+  dump = []
+  for [num,key] in enumerate(Keep.keys()):
+    dump += [[f,num] for f in Keep[key]]
+  for i in xrange(len(dump)):
+    if os.path.islink(ojoin(to_dir,dump[i][0])):
+      old = dump[i][0]
+      while os.path.islink(ojoin(to_dir,dump[i][0])):
+        print '%s symlinked already, creating duplicate'%(dump[i][0])
+        dump[i][0] = dump[i][0].split('.')[0]+'_.jpg'
+      os.symlink(ojoin(from_dir,old),
+                 ojoin(to_dir,dump[i][0]))
+    else: os.symlink(ojoin(from_dir,dump[i][0]),
+                     ojoin(to_dir,dump[i][0]))
+  return dump
+                           
+def dump_redbox_to_files(Keep, dump, data_info):
+  dfile = open(ojoin(data_info,'redbox.txt'),'w')
+  dfile.writelines(["%s %i\n" % (f,num) for (f,num) in dump])
+  dfile.close()
 
 def plot_for_redbox(d, save_dir):
-  
   plot_time(d, save_dir)
   plot_dudes(d, save_dir)
 
@@ -270,9 +315,8 @@ def plot_time(d, save_dir):
   plt.ylabel('Classification Error')
   # plt.title('Go on choose one')
   plt.grid(True)
-  plt.savefig(oj(save_dir,'plot_redbox_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'_time.png'))
+  plt.savefig(oj(save_dir,'plot_redbox_'+save_dir.split('/')[-3]+'_'+save_dir.split('/')[-1]+'_time.png'))
   
-
 def plot_dudes(d, save_dir):
   # get a 2d array of dudes of freq pot mislab
   data = {}
@@ -290,7 +334,7 @@ def plot_dudes(d, save_dir):
   fig.autofmt_xdate()
   plt.xlabel('Inspected By')
   plt.ylabel('% mis-classifications')
-  plt.savefig(oj(save_dir,'plot_redbox_'+model_dir.split('/')[-3]+'_'+model_dir.split('/')[-1]+'_dude.png'))
+  plt.savefig(oj(save_dir,'plot_redbox_'+save_dir.split('/')[-3]+'_'+save_dir.split('/')[-1]+'_dude.png'))
 
 
 
@@ -308,12 +352,17 @@ if __name__ == '__main__':
     print 'ERROR: mismatch between test files in data_dir and data_info'
     sys.exit()
 
+  if '--redbox' in sys.argv:
+    create_redbox_data_info_etc(data_dir, data_info)
+
   # PRETRAINED = get_pretrained_model(classifier_dir)
   already_pred = oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy')
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = (np.load(already_pred)).item()
   else:
-    d = classify_data(classifier_dir, data_dir, data_info)
+    if '--redbox' in sys.argv:
+      d = classify_data(classifier_dir, data_dir, data_info, redbox=True)
+    else: d = classify_data(classifier_dir, data_dir, data_info)
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics

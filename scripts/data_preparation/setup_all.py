@@ -228,7 +228,6 @@ def symlink_dataset(Keep, from_dir, to_dir):
           d[i][0] = d[i][0].split('.')[0]+'_.jpg'
         os.symlink(ojoin(from_dir,old),
                    ojoin(data_dst_dir,d[i][0]))
-        dump
       else: os.symlink(ojoin(from_dir,d[i][0]),
                        ojoin(data_dst_dir,d[i][0]))
   return dump
