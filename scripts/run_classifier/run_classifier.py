@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os, sys, shutil
 import yaml
 from os.path import join as oj
-from subprocess import call
+import subprocess
 sys.path.append(os.path.abspath('../plot_data'))
 import plot
 sys.path.append(os.path.abspath('../data_preparation'))
@@ -33,7 +33,7 @@ REDBOX_DIR = '/data/ad6813/pipe-data/small' # Redbox/raw_data/dump'
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 
-def classify_data(classifier_dir, symlink_dir, data_info,redbox=False):
+def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=False):
   N = 96
   classifier_name = classifier_dir.split('/')[-1]  
   if classifier_name.split('-fine')[0]+'_deploy.prototxt' not in os.listdir(classifier_dir):
@@ -41,7 +41,6 @@ def classify_data(classifier_dir, symlink_dir, data_info,redbox=False):
     
   MODEL_FILE = oj(classifier_dir, classifier_name.split('-fine')[0]+'_deploy.prototxt')
   MEAN_FILE = get_np_mean_fname(symlink_dir)
-  PRETRAINED = get_pretrained_model(classifier_dir)
   print 'loading network...'
   net = caffe.Classifier(MODEL_FILE, PRETRAINED,
                          image_dims=(256, 256), input_scale=255,
@@ -85,9 +84,15 @@ def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
   suggest = [fname for fname in suggest
              if 'iter' in fname and 'solverstate' not in fname]
-  for elem in enumerate(suggest): print elem
-  idx = int(raw_input("\nWhich model? "))
-  return oj(classifier_dir,suggest[idx])
+  if len(suggest) > 1:
+    for elem in enumerate(suggest): print elem
+    idx = int(raw_input("\nWhich model? "))
+    return oj(classifier_dir,suggest[idx])
+  elif len(suggest) == 1:
+    return oj(classifier_dir,suggest[0])
+  else:
+    print "ERROR: no model found in", classifier_dir
+    exit()
 
 
 def create_deploy_file(classifier_dir):
@@ -140,6 +145,9 @@ def create_dict_jname():
   file_multJoints = '/data/ad6813/pipe-data/Redbox/multJoints.txt'
   data_dir = REDBOX_DIR
   multJoints = {}
+  if not os.path.isfile(file_multJoints):
+    cmd = 'scp -r graphic06.doc.ic.ac.uk:' + file_multJoints
+    subprocess.Popen(cmd, shell=True, stdout = subprocess.PIPE, stderr=subprocess.STDOUT)
   for line in open(file_multJoints,'r').readlines():
     for img in line.split()[1:]:
       multJoints[img+'.jpg'] = line.split()[0]
@@ -367,8 +375,8 @@ if __name__ == '__main__':
     d = (np.load(already_pred)).item()
   else:
     if redbox:
-      d = classify_data(classifier_dir, symlink_dir, data_info, redbox=True)
-    else: d = classify_data(classifier_dir, symlink_dir, data_info)
+      d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=True)
+    else: d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED)
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
