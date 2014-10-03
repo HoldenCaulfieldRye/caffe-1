@@ -80,6 +80,31 @@ def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=Fal
   np.save(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'), d)
   return d
 
+def augment_read(data_info):
+  here = os.getcwd()
+  # os.chdir('/data/ad6813/caffe/python')
+  # shutil.copy('augment_read.sh', data_info)
+  os.chdir(data_info)
+  # os.chmod('augment_read.sh', 755)
+  subprocess.call(['./augment_read.sh'])
+  # shutil.remove('augment_read.sh')
+  os.chdir(here)
+  
+def get_flag_and_thresh(data_info):
+  flag_val, thresh = 0, 0.5
+  rl = open(oj(data_info,'read.txt'),'r').readlines()
+  
+  if len([l for l in rl if 'flag_val' in l]) == 0:
+    # set up read.txt to contain flag val and threshold
+    augment_read(data_info)
+    rl = open(oj(data_info,'read.txt'),'r').readlines()
+    
+  rl = [l.split() for l in rl]
+  for l in rl[2:]:
+    if l == ['1','flag_val']: flag_val = 1
+    elif l[1] == 'threshold': thresh = float(l[0])
+  # if got no thresh to return, means read.txt needs be filled in
+  return flag_val, thresh
 
 def get_pretrained_model(classifier_dir):
   suggest = os.listdir(classifier_dir)
@@ -167,10 +192,9 @@ def get_(data_dir, fname, what):
   return ret
   
                  
-def compute_classification_stats(d, data_info, redbox=False):
+def compute_classification_stats(d, data_info):
   # this comes early because flag_val prompts user
   flag_val, threshold = get_flag_and_thresh(data_info)
-
   # get data_info test file
   if not redbox:
     label_data = open(oj(data_info,'test.txt'),'r').readlines()
@@ -380,12 +404,12 @@ if __name__ == '__main__':
     d = (np.load(already_pred)).item()
   else:
     if redbox:
-      d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=True)
+      d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox)
     else: d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED)
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
-  d = compute_classification_stats(d, data_info, redbox)
+  d = compute_classification_stats(d, data_info)
   print_classification_stats(d)
   
   # potential mislabels
@@ -393,7 +417,7 @@ if __name__ == '__main__':
     save_mislabs(d, data_info, PRETRAINED)
 
   # redbox plots
-  if "--redbox" in sys.argv:
+  if redbox:
     plot_for_redbox(d, data_info)
     
   
