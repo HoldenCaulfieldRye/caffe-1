@@ -74,7 +74,13 @@ should load a snapshot, eg caffe_imagenet_train_1000.solverstate.
 
 for more troubleshoots, see TROUBLESHOOT.md in current directory.
 
-=======================================================================
+==========
+
+clampdet_u: (9 17), (11 14), (.) (53 duplicates)
+
+clampdet: (9 11 14 17), (.)
+
+
 
 
 
@@ -146,7 +152,10 @@ next steps:
   -> how does it learn where to crop
      -> localised clampdet
      -> crop conditional on clampdet location & joint type
+<<<<<<< HEAD
 - crop at test time too
+=======
+>>>>>>> c3db24c936d6992862600fa7d0f0c3130539c3df
   
 
 =====
