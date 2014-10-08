@@ -199,6 +199,7 @@ def compute_classification_stats(d, data_info, redbox=False):
   flag_val, threshold = get_flag_and_thresh(data_info)
   # get data_info test file
   if not redbox:
+    print 'opening redbox file'
     label_data = open(oj(data_info,'test.txt'),'r').readlines()
   else:
     label_data = open(oj(data_info,'redbox.txt'),'r').readlines()
