@@ -1,3 +1,4 @@
+#!/bin/bash
 numer=$(cat train.txt | grep '0$' | wc -l);
 denom=$(cat train.txt | wc -l);
 thresh=$(echo "scale=2; $numer/$denom" | bc);

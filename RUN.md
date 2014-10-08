@@ -117,47 +117,7 @@ classifiers:
 - insertion mkings  78.1
 - hatch mkings      76.9
 
-
-next steps:
-- controlpoint extra metadata
-- Redbox data
-  -> best date
-  -> best guys
-- impose best possible class balance at every batch
-- new caffe with separate train val for higher batchsize with
-  higher res images
-- data augmentation: rotations & PCA
-  -> McCormac's code
-  -> bit.ly/UZ3p3E
-  -> scikit-image
-  -> Razvan/preproc.py
-- multi-image query issue:
-  -> concatenate images, or
-  -> cross-image pooling after conv5
-- save net only if performance gain
-  -> solver.cpp l.114 approx
-- different batch contents at every epoch
-- preprocess: divide images by the image standard deviation and apply
-  "subtractive/divisive normalization"
-- ensemble network, bagging
-- 'Spatial Pyramid Pooling'
-- import solverstate shortly before val min
-  larger minibatch, smaller lr
-- partial re-initialisation of conv layer: bit.ly/1BfKVwL
-- extract features with caffe
-- switch to OverFeat
-- cropping component:
-  -> can it be trained with backprop
-     -> read LeNet StreetView papers
-  -> how does it learn where to crop
-     -> localised clampdet
-     -> crop conditional on clampdet location & joint type
-<<<<<<< HEAD
-- crop at test time too
-=======
->>>>>>> c3db24c936d6992862600fa7d0f0c3130539c3df
   
-
 =====
 
 NEXT:
@@ -172,8 +132,7 @@ NEXT:
 - to see droplets and soil marks on joint
 - download ImageNet, store on terabyte drives
 
-  
-
+ 
 
 Image preprocessing:
 - scraping peeling:
@@ -195,3 +154,9 @@ Image preprocessing:
 
 Caffe vs Torch: github.com/BVLC/caffe/issues/642
 
+=======
+
+Redbox:
+- make plot.py work on --train plots
+- then make it work from run_classifier.py
+- need to change data_info/clampdet/read.txt because it has 3 classes
