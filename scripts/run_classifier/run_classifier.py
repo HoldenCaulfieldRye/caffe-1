@@ -197,19 +197,24 @@ def get_(data_dir, fname, what):
 def compute_classification_stats(d, data_info, redbox=False):
   # this comes early because flag_val prompts user
   flag_val, threshold = get_flag_and_thresh(data_info)
+  num_imgs = len(d['fname'])
   # get data_info test file
-  if not redbox:
-    print 'opening redbox file'
-    label_data = open(oj(data_info,'test.txt'),'r').readlines()
+  if redbox:
+    print 'opening redbox data info'
+    lines = open(oj(data_info,'redbox.txt'),'r').readlines()
   else:
-    label_data = open(oj(data_info,'redbox.txt'),'r').readlines()
-  label_data = [line.split() for line in label_data]
-  label_data = sorted(label_data, key= lambda x:x[0])
-  assert d['fname'] == [el[0] for el in label_data]
-  num_imgs = len(label_data)
+    lines = open(oj(data_info,'test.txt'),'r').readlines()
+  _class = {}
+  for line in lines: _class[line.split()[0]] = line.split()[1]
+  # print "lines:", lines
+  try:
+    assert set(d['fname']) == set(_class.keys())
+  except:
+    print "don't match: d['fname']", d['fname']
+    print "and _class.keys()", _class.keys()
+    exit
   # fill with true labels
-  print 'label_data:', label_data
-  d['label'] = [int(el[1]) for el in label_data]
+  d['label'] = [_class[el] for el in d['fname']]
   # fill in predicted labels and flag if potentially mislab
   false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
   for idx in range(num_imgs):
@@ -406,9 +411,7 @@ if __name__ == '__main__':
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = (np.load(already_pred)).item()
   else:
-    if redbox:
-      d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox)
-    else: d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED)
+    d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox)
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
