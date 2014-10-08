@@ -19,6 +19,9 @@ caffe_root = '../../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
+
+# python run_classifier.py classifier-dir=/homes/ad6813/net-saves/clampdet/none symlink-dir=../../data/clampdet data-info=../../data_info/clampdet --redbox 
+
 # python run_classifier.py classifier-dir=/homes/ad6813/net-saves/clampdet/none symlink-dir=../../data/clampdet data-info=../../data_info/clampdet
 
 # flags:
@@ -160,9 +163,9 @@ def load_all_images_from_dir(d, test_dir, redbox=False):
     imgs.append(caffe.io.load_image(full_fname))
     if redbox:
       [dude,time] = get_(REDBOX_DIR,fname,['InspectedTime','InspectedBy'])
-      print 'time, dude:', time, dude
       l_time = time.split('/')
       time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
+      print 'fname: %s, time: %s, dude: %s' % (fname, time, dude) 
       d['time'].append(time)
       d['dude'].append(dude)
   print 'finished loading images.'
@@ -191,7 +194,7 @@ def get_(data_dir, fname, what):
   return ret
   
                  
-def compute_classification_stats(d, data_info):
+def compute_classification_stats(d, data_info, redbox=False):
   # this comes early because flag_val prompts user
   flag_val, threshold = get_flag_and_thresh(data_info)
   # get data_info test file
@@ -408,7 +411,7 @@ if __name__ == '__main__':
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
-  d = compute_classification_stats(d, data_info)
+  d = compute_classification_stats(d, data_info, redbox)
   print_classification_stats(d)
   
   # potential mislabels
