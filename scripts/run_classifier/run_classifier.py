@@ -78,6 +78,9 @@ def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=Fal
       d['pred'] = np.append(d['pred'],net.predict(imgs[i*N:(i+1)*N]),axis=0)
     d['pred']=np.append(d['pred'],net.predict(imgs[-(len(imgs)%N):]),axis=0)
 
+  print "preds look like: "
+  print d['pred'][:10]
+  print d['pred'][-10:]
   # save preds
   assert len(d['pred']) == num_imgs
   np.save(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'), d)
@@ -312,7 +315,6 @@ def create_redbox_data_info_etc(symlink_dir, data_info):
   All = sa.get_label_dict(data_dir)
   total_num_images = All.pop('total_num_images')
   Keep = sa.classes_to_learn(All)
-  # merge_classes only after default label entry created
   Keep = sa.default_class(All, Keep)
   total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
   if total_num_images != total_num_check:

@@ -132,7 +132,7 @@ def default_class(All, Keep):
 
 def merge_classes(Keep):
   more = 'Y'
-  while more == 'Y':
+  while len(Keep.keys()) > 2 and more == 'Y':
     print '%s' % (', '.join(map(str,Keep.keys())))
     if raw_input('\nMerge (more) classes? (Y/N) ') == 'Y':
       merge = [10000]
