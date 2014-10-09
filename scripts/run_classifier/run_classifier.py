@@ -19,6 +19,9 @@ caffe_root = '../../'  # this file is expected to be in {caffe_root}/exampless
 sys.path.insert(0, caffe_root + 'python')
 
 # usage:
+
+# python run_classifier.py classifier-dir=/homes/ad6813/net-saves/clampdet/none symlink-dir=../../data/clampdet data-info=../../data_info/clampdet --redbox 
+
 # python run_classifier.py classifier-dir=/homes/ad6813/net-saves/clampdet/none symlink-dir=../../data/clampdet data-info=../../data_info/clampdet
 
 # flags:
@@ -29,7 +32,7 @@ sys.path.insert(0, caffe_root + 'python')
 #   data-info needs a 'redbox' dir of classifications for all RB imgs
 #   data-dir needs a 'redbox' dir of symlinks to all rdbox images
 
-REDBOX_DIR = '/data/ad6813/pipe-data/small' # Redbox/raw_data/dump'
+REDBOX_DIR = '/data/ad6813/pipe-data/Redbox/raw_data/dump'
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 
@@ -90,6 +93,8 @@ def augment_read(data_info):
   os.chdir(here)
   
 def get_flag_and_thresh(data_info):
+  ''' flag_val is the number in data_info/[model]/read.txt which indexes
+  the class corresponding to when flag is present. ''' 
   flag_val, thresh = 0, 0.5
   rl = open(oj(data_info,'read.txt'),'r').readlines()
   
@@ -160,7 +165,6 @@ def load_all_images_from_dir(d, test_dir, redbox=False):
     imgs.append(caffe.io.load_image(full_fname))
     if redbox:
       [dude,time] = get_(REDBOX_DIR,fname,['InspectedTime','InspectedBy'])
-      print 'time, dude:', time, dude
       l_time = time.split('/')
       time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
       d['time'].append(time)
@@ -191,44 +195,52 @@ def get_(data_dir, fname, what):
   return ret
   
                  
-def compute_classification_stats(d, data_info):
+def compute_classification_stats(d, data_info, redbox=False):
   # this comes early because flag_val prompts user
   flag_val, threshold = get_flag_and_thresh(data_info)
+  num_imgs = len(d['fname'])
   # get data_info test file
-  if not redbox:
-    label_data = open(oj(data_info,'test.txt'),'r').readlines()
+  if redbox:
+    print 'opening redbox data info'
+    lines = open(oj(data_info,'redbox.txt'),'r').readlines()
   else:
-    label_data = open(oj(data_info,'redbox.txt'),'r').readlines()
-  label_data = [line.split() for line in label_data]
-  label_data = sorted(label_data, key= lambda x:x[0])
-  assert d['fname'] == [el[0] for el in label_data]
-  num_imgs = len(label_data)
+    lines = open(oj(data_info,'test.txt'),'r').readlines()
+  _class = {}
+  for line in lines: _class[line.split()[0]] = line.split()[1]
+  # print "lines:", lines
+  try:
+    assert set(d['fname']) == set(_class.keys())
+  except:
+    print "don't match: d['fname']", d['fname']
+    print "and _class.keys()", _class.keys()
+    exit
   # fill with true labels
-  print 'label_data:', label_data
-  d['label'] = [int(el[1]) for el in label_data]
+  d['label'] = [int(_class[el]) for el in d['fname']]
   # fill in predicted labels and flag if potentially mislab
+  # *_thresh is with classification boundary according to threshold
+  # *_std is with classification boundary at 0.5
   false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
   for idx in range(num_imgs):
+    if d['label'][idx] == flag_val: num_pos += 1
+    else: num_neg += 1
     # assign predicted label wrt threshold
     if d['pred'][idx][flag_val] >= threshold:
       d['pred_lab_thresh'].append(flag_val) 
-    else: d['pred_lab_thresh'].append(-(flag_val-1))
+      # print "thresh thinks no clamp! appending", flag_val
+    else:
+      d['pred_lab_thresh'].append((flag_val+1)%2)
+      # print "thresh thinks clamp! appending", (flag_val+1)%2
     # assign predicted label in std way
     if d['pred'][idx][flag_val] >= 0.5:
       d['pred_lab_std'].append(flag_val) 
-    else: d['pred_lab_std'].append(-(flag_val-1))
+      # print "std thinks no clamp! appending", flag_val, "\n"
+    else:
+      d['pred_lab_std'].append((flag_val+1)%2)
+      # print "std thinks clamp! appending", (flag_val+1)%2, "\n"
     # correct thresh classification or not 
     if d['pred_lab_thresh'][idx] != d['label'][idx]:
-      if d['label'][idx] == flag_val:
-        false_neg_thresh += 1
-        num_pos += 1
-      else:
-        false_pos_thresh += 1
-        num_neg += 1
-    else:
-      if d['label'][idx] == flag_val: num_pos += 1
-      else: num_neg += 1
-
+      if d['label'][idx] == flag_val: false_neg_thresh += 1
+      else: false_pos_thresh += 1
     # correct std classification or not 
     if d['pred_lab_std'][idx] != d['label'][idx]:
       d['pot_mislab'].append(idx)
@@ -302,13 +314,13 @@ def create_redbox_data_info_etc(symlink_dir, data_info):
   All = sa.get_label_dict(data_dir)
   total_num_images = All.pop('total_num_images')
   Keep = sa.classes_to_learn(All)
-  # merge_classes only after default label entry created
   Keep = sa.default_class(All, Keep)
   total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
   if total_num_images != total_num_check:
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
-  Keep, num_output = sa.merge_classes(Keep)
-  Keep, num_output = sa.check_mutual_exclusion(Keep, num_output)
+  if len(Keep.keys()) > 2:
+    Keep,num_output = sa.merge_classes(Keep)
+    Keep,num_output = sa.check_mutual_exclusion(Keep, num_output)
   dump = symlink_redbox_dataset(Keep,data_dir,oj(symlink_dir,'redbox'))
   dump_redbox_to_files(Keep, dump, data_info)
 
@@ -402,13 +414,11 @@ if __name__ == '__main__':
   if os.path.isfile(already_pred) and raw_input('found %s; use? ([Y]/N) '%(already_pred)) != 'N':
     d = (np.load(already_pred)).item()
   else:
-    if redbox:
-      d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox)
-    else: d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED)
+    d = classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox)
 
   # this should go in main as well?
   # get true labels, assign predicted labels, get metrics
-  d = compute_classification_stats(d, data_info)
+  d = compute_classification_stats(d, data_info, redbox)
   print_classification_stats(d)
   
   # potential mislabels

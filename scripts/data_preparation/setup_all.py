@@ -22,8 +22,10 @@ def main(data_dir, data_info, to_dir, target_bad_min):
   total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
   if total_num_images != total_num_check:
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
-  Keep, num_output = merge_classes(Keep)
-  Keep, num_output = check_mutual_exclusion(Keep, num_output)
+  print "keeping %i classes" % len(Keep.keys())
+  if len(Keep.keys()) > 2:
+    Keep, num_output = merge_classes(Keep)
+    Keep, num_output = check_mutual_exclusion(Keep, num_output)
   print "target bad min: %s" %(target_bad_min)
   Keep = rebalance(Keep, total_num_images, target_bad_min)
   print 'finished rebalancing'
@@ -104,7 +106,7 @@ def rebalance(Keep, total_num_images, target_bad_min):
 
 def default_class(All, Keep):
   ''' all images without retained labels go to default class. '''
-  label_default = raw_input("\nDefault label for all images not containing any of given labels? (name/N) ")
+  label_default = "Default" #raw_input("\nDefault label for all images not containing any of given labels? (name/N) ")
   if label_default is not 'N':
     Keep[label_default] = All['Perfect']
     # no need to check for overlap between Perfect and Keep's other
@@ -130,7 +132,7 @@ def default_class(All, Keep):
 
 def merge_classes(Keep):
   more = 'Y'
-  while more == 'Y':
+  while len(Keep.keys()) > 2 and more == 'Y':
     print '%s' % (', '.join(map(str,Keep.keys())))
     if raw_input('\nMerge (more) classes? (Y/N) ') == 'Y':
       merge = [10000]
@@ -139,7 +141,7 @@ def merge_classes(Keep):
         merge = [int(elem) for elem in raw_input("\nName class numbers from above, separated by ' ': ").split()]
       merge.sort()
       merge = [Keep.keys()[i] for i in merge]
-      merge_label = raw_input("\nName of merged class: ")
+      merge_label = '+'.join(merge)
       Keep[merge_label] = [f for key in merge
                            for f in Keep.pop(key)]
 #[Keep.pop(m) for m in merge]
