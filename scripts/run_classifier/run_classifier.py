@@ -96,6 +96,8 @@ def augment_read(data_info):
   os.chdir(here)
   
 def get_flag_and_thresh(data_info):
+  ''' flag_val is the number in data_info/[model]/read.txt which indexes
+  the class corresponding to when flag is present. ''' 
   flag_val, thresh = 0, 0.5
   rl = open(oj(data_info,'read.txt'),'r').readlines()
   
@@ -217,19 +219,27 @@ def compute_classification_stats(d, data_info, redbox=False):
     exit
   # fill with true labels
   d['label'] = [_class[el] for el in d['fname']]
+  print "d['label']", d['label']
   # fill in predicted labels and flag if potentially mislab
   # *_thresh is with classification boundary according to threshold
   # *_std is with classification boundary at 0.5
   false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
+  print "THRESHOLD IS", threshold
   for idx in range(num_imgs):
     # assign predicted label wrt threshold
     if d['pred'][idx][flag_val] >= threshold:
+      print "thresh thinks no clamp! appending", flag_val
       d['pred_lab_thresh'].append(flag_val) 
-    else: d['pred_lab_thresh'].append(-(flag_val-1))
+    else:
+      d['pred_lab_thresh'].append((flag_val+1)%2)
+      print "thresh thinks clamp! appending", (flag_val+1)%2
     # assign predicted label in std way
     if d['pred'][idx][flag_val] >= 0.5:
+      print "std thinks no clamp! appending", flag_val, "\n"
       d['pred_lab_std'].append(flag_val) 
-    else: d['pred_lab_std'].append(-(flag_val-1))
+    else:
+      d['pred_lab_std'].append((flag_val+1)%2)
+      print "std thinks clamp! appending", (flag_val+1)%2, "\n"
     # correct thresh classification or not 
     if d['pred_lab_thresh'][idx] != d['label'][idx]:
       if d['label'][idx] == flag_val:
