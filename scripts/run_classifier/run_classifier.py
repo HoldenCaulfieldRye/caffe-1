@@ -32,7 +32,7 @@ sys.path.insert(0, caffe_root + 'python')
 #   data-info needs a 'redbox' dir of classifications for all RB imgs
 #   data-dir needs a 'redbox' dir of symlinks to all rdbox images
 
-REDBOX_DIR = '/data/ad6813/pipe-data/small' # Redbox/raw_data/dump'
+REDBOX_DIR = '/data/ad6813/pipe-data/Redbox/raw_data/dump'
 
 # Note! data-dir should be data/<name>, not data/<name>/test
 
@@ -78,9 +78,6 @@ def classify_data(classifier_dir, symlink_dir, data_info, PRETRAINED, redbox=Fal
       d['pred'] = np.append(d['pred'],net.predict(imgs[i*N:(i+1)*N]),axis=0)
     d['pred']=np.append(d['pred'],net.predict(imgs[-(len(imgs)%N):]),axis=0)
 
-  print "preds look like: "
-  print d['pred'][:10]
-  print d['pred'][-10:]
   # save preds
   assert len(d['pred']) == num_imgs
   np.save(oj(data_info, PRETRAINED.split('/')[-1]+'_pred.npy'), d)
@@ -218,40 +215,32 @@ def compute_classification_stats(d, data_info, redbox=False):
     print "and _class.keys()", _class.keys()
     exit
   # fill with true labels
-  d['label'] = [_class[el] for el in d['fname']]
-  print "d['label']", d['label']
+  d['label'] = [int(_class[el]) for el in d['fname']]
   # fill in predicted labels and flag if potentially mislab
   # *_thresh is with classification boundary according to threshold
   # *_std is with classification boundary at 0.5
   false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
-  print "THRESHOLD IS", threshold
   for idx in range(num_imgs):
+    if d['label'][idx] == flag_val: num_pos += 1
+    else: num_neg += 1
     # assign predicted label wrt threshold
     if d['pred'][idx][flag_val] >= threshold:
-      print "thresh thinks no clamp! appending", flag_val
       d['pred_lab_thresh'].append(flag_val) 
+      # print "thresh thinks no clamp! appending", flag_val
     else:
       d['pred_lab_thresh'].append((flag_val+1)%2)
-      print "thresh thinks clamp! appending", (flag_val+1)%2
+      # print "thresh thinks clamp! appending", (flag_val+1)%2
     # assign predicted label in std way
     if d['pred'][idx][flag_val] >= 0.5:
-      print "std thinks no clamp! appending", flag_val, "\n"
       d['pred_lab_std'].append(flag_val) 
+      # print "std thinks no clamp! appending", flag_val, "\n"
     else:
       d['pred_lab_std'].append((flag_val+1)%2)
-      print "std thinks clamp! appending", (flag_val+1)%2, "\n"
+      # print "std thinks clamp! appending", (flag_val+1)%2, "\n"
     # correct thresh classification or not 
     if d['pred_lab_thresh'][idx] != d['label'][idx]:
-      if d['label'][idx] == flag_val:
-        false_neg_thresh += 1
-        num_pos += 1
-      else:
-        false_pos_thresh += 1
-        num_neg += 1
-    else:
-      if d['label'][idx] == flag_val: num_pos += 1
-      else: num_neg += 1
-
+      if d['label'][idx] == flag_val: false_neg_thresh += 1
+      else: false_pos_thresh += 1
     # correct std classification or not 
     if d['pred_lab_std'][idx] != d['label'][idx]:
       d['pot_mislab'].append(idx)
