@@ -165,7 +165,6 @@ def load_all_images_from_dir(d, test_dir, redbox=False):
       [dude,time] = get_(REDBOX_DIR,fname,['InspectedTime','InspectedBy'])
       l_time = time.split('/')
       time = l_time[2] + '-' + l_time[1] + '-' + l_time[0]
-      print 'fname: %s, time: %s, dude: %s' % (fname, time, dude) 
       d['time'].append(time)
       d['dude'].append(dude)
   print 'finished loading images.'
@@ -216,6 +215,8 @@ def compute_classification_stats(d, data_info, redbox=False):
   # fill with true labels
   d['label'] = [_class[el] for el in d['fname']]
   # fill in predicted labels and flag if potentially mislab
+  # *_thresh is with classification boundary according to threshold
+  # *_std is with classification boundary at 0.5
   false_pos_thresh, num_pos, false_neg_thresh, num_neg, false_neg_std, false_pos_std = 0, 0, 0, 0, 0, 0
   for idx in range(num_imgs):
     # assign predicted label wrt threshold
