@@ -22,6 +22,7 @@ def main(data_dir, data_info, to_dir, target_bad_min):
   total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
   if total_num_images != total_num_check:
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
+  print "keeping %i classes" % len(Keep.keys())
   if len(Keep.keys()) > 2:
     Keep, num_output = merge_classes(Keep)
     Keep, num_output = check_mutual_exclusion(Keep, num_output)

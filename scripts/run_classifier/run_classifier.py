@@ -317,8 +317,9 @@ def create_redbox_data_info_etc(symlink_dir, data_info):
   total_num_check = sum([len(Keep[key]) for key in Keep.keys()])
   if total_num_images != total_num_check:
     print "\nWARNING! started off with %i images, now have %i distinct training cases"%(total_num_images, total_num_check)
-  Keep, num_output = sa.merge_classes(Keep)
-  Keep, num_output = sa.check_mutual_exclusion(Keep, num_output)
+  if len(Keep.keys()) > 2:
+    Keep,num_output = sa.merge_classes(Keep)
+    Keep,num_output = sa.check_mutual_exclusion(Keep, num_output)
   dump = symlink_redbox_dataset(Keep,data_dir,oj(symlink_dir,'redbox'))
   dump_redbox_to_files(Keep, dump, data_info)
 
